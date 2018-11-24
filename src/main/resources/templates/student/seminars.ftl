@@ -58,15 +58,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
+                <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/student/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -76,19 +72,19 @@
 
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>OOAD</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>OOAD</a>
         </div>
     </div>
 <div class="distance3">
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>J2EE</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>J2EE</a>
         </div>
     </div>
     <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
+<p class="center center-text"><a href="/student/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
 
 
     <div class="decoration"></div>

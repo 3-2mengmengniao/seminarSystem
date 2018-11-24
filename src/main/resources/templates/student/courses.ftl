@@ -46,7 +46,7 @@
 
 <div class="content">
 	<div class="header">
-    	<a href="/teacher/homepage" class="homepage-logo">
+    	<a href="/student/homepage" class="homepage-logo">
         	<img src="/images/misc/logo3.png" alt="img">
         </a>
         <a href="#" class="go-menu"></a>
@@ -58,15 +58,11 @@
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
+                <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/student/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -82,12 +78,8 @@
             <div class="submenu-navigation">
                 <a href="#" class="submenu-nav-deploy">OOAD</a>
                 <div class="submenu-nav-items">
-                    <a class="text-white" href="#">学生成绩</a>
-                    <a class="text-white" href="/teacher/teams">学生组队</a>
-                    <a class="text-white" href="/teacher/course-info">课程信息</a>
-					<a class="text-white" href="/teacher/class-info">班级信息</a>
-                    <a class="text-white" href="/teacher/course-seminar">讨论课轮次</a>
-                    <a class="text-white" href="#">共享设置</a>
+                    <a class="text-white" href="/student/group-score">我的成绩</a>
+                    <a class="text-white" href="/student/teams">我的组队</a>
                 </div>
             </div>
         </div>
@@ -97,21 +89,13 @@
             <div class="submenu-navigation">
                 <a href="#" class="submenu-nav-deploy">J2EE</a>
                 <div class="submenu-nav-items">
-                    <a class="text-white" href="/teacher/group-score">学生成绩</a>
-                    <a class="text-white" href="/teacher/teams">学生组队</a>
-                    <a class="text-white" href="/teacher/course-info">课程信息</a>
-					<a class="text-white" href="/teacher/class-info">班级信息</a>
-                    <a class="text-white" href="/teacher/course-seminar">讨论课轮次</a>
-                    <a class="text-white" href="#">共享设置</a>
+                    <a class="text-white" href="#">我的成绩</a>
+                    <a class="text-white" href="/student/teams">我的组队</a>
                 </div>
             </div>
         </div>
       </div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" onclick="window.location.href='/teacher/create-course'">新建课程</a>
-        </div>
-    </div>
+
 <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance"></div>
