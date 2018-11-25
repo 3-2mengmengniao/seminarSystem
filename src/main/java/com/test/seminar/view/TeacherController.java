@@ -71,4 +71,13 @@ public class TeacherController {
         return "teacher/seminar_info_begin";
     }
 
+    @RequestMapping(value="/report_download")
+    public String report_download(Model model) {
+        return "teacher/report_download";
+    }
+
+    @RequestMapping(value="/report_score")
+    public String report_score(Model model) {
+        return "teacher/report_score";
+    }
 }

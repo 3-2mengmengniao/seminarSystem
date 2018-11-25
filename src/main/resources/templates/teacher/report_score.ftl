@@ -45,7 +45,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">OOAD讨论课</h1>
-            <a href="/teacher/course-seminar" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/teacher/seminar_info_end" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -76,24 +76,30 @@
         <div class="container no-bottom">
             <table cellspacing='0' class="table">
                 <tr>
-                    <td> 主题：业务流程分析</td>
+                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
                 </tr>
                 <tr class='even'>
-                    <td> 课次序号：1</td>
+                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
                 </tr>
                 <tr>
-                    <td> 要求：界面导航图和所有界面原型设计</td>
+                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
                 </tr>
                 <tr class='even'>
-                    <td>课程情况：已完成   <a href="#" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span> </td>
+                </tr>
+                <tr>
+                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+                <tr class='even'>
+                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
                 </tr>
             </table>
         </div>
 
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">书面报告</a></p>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">查看成绩</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
         <div class="distance"></div>
         <div class="decoration"></div>
         <div class="footer">

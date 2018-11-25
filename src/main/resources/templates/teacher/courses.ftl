@@ -109,7 +109,7 @@
       </div>
     <div class="container">
         <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" onclick="window.location.href='/teacher/create-course'">新建课程</a>
+            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-course'>新建课程</a>
         </div>
     </div>
 <div class="distance2"></div>
