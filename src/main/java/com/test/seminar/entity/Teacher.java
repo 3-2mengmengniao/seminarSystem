@@ -2,7 +2,7 @@ package com.test.seminar.entity;
 
 import java.math.BigInteger;
 
-public class Student extends User{
+public class Teacher extends User{
     private BigInteger id;
     private String account;
     private String password;
