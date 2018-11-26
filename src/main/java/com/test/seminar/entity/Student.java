@@ -6,34 +6,10 @@ public class Student {
     private BigInteger id;
     private String account;
     private String password;
-    private int isActive;
+    private int active;
     private String name;
     private String email;
     private int emailReceiveInterval;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getEmailReceiveInterval() {
-        return emailReceiveInterval;
-    }
-
-    public void setEmailReceiveInterval(int emailReceiveInterval) {
-        this.emailReceiveInterval = emailReceiveInterval;
-    }
 
     public BigInteger getId() {
         return id;
@@ -59,15 +35,35 @@ public class Student {
         this.password = password;
     }
 
-    public int getIsActive() {
-        return isActive;
+    public int getActive() {
+        return active;
     }
 
-    public void setIsActive(int isActive) {
-        this.isActive = isActive;
+    public void setActive(int active) {
+        this.active = active;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getEmailReceiveInterval() {
+        return emailReceiveInterval;
+    }
+
+    public void setEmailReceiveInterval(int emailReceiveInterval) {
+        this.emailReceiveInterval = emailReceiveInterval;
+    }
 }
