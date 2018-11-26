@@ -8,25 +8,25 @@
 
 <title>课程</title>
 
-    <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
-    <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="../../static/styles/style.css"     		rel="stylesheet" type="text/css">
+    <link href="../../static/styles/framework.css" 		rel="stylesheet" type="text/css">
+    <link href="../../static/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
+    <link href="../../static/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
+    <link href="../../static/styles/swipebox.css"		 rel="stylesheet" type="text/css">
+    <link href="../../static/styles/colorbox.css"		 rel="stylesheet" type="text/css">
+    <link href="../../static/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
-    <script type="text/javascript" src="/scripts/colorbox.js"></script>
-    <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
-    <script type="text/javascript" src="/scripts/framework.js"></script>
-    <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../../static/scripts/jquery.js"></script>
+    <script type="text/javascript" src="../../static/scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="../../static/scripts/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="../../static/scripts/jquery.swipebox.js"></script>
+    <script type="text/javascript" src="../../static/scripts/colorbox.js"></script>
+    <script type="text/javascript" src="../../static/scripts/snap.js"></script>
+    <script type="text/javascript" src="../../static/scripts/login.js"></script>
+    <script type="text/javascript" src="../../static/scripts/custom.js"></script>
+    <script type="text/javascript" src="../../static/scripts/framework.js"></script>
+    <script type="text/javascript" src="../../static/scripts/framework.launcher.js"></script>
+    <script type="text/javascript" src="../../static/scripts/bootstrap-3.1.1.min.js"></script>
 
 
 
@@ -47,7 +47,7 @@
 <div class="content">
 	<div class="header">
     	<a href="/teacher/homepage" class="homepage-logo">
-        	<img src="/images/misc/logo3.png" alt="img">
+        	<img src="../../static/images/misc/logo3.png" alt="img">
         </a>
         <a href="#" class="go-menu"></a>
         <a href="#" class="go-back"></a>

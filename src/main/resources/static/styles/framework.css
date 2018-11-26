@@ -356,6 +356,43 @@ h1.navigation-back{
 
 .formFieldWrap{
 	padding-bottom:10px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.formTextareaWrap{
+    padding-bottom:10px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+@media screen and (min-width:768px){
+	.formFieldWrap{
+		padding-bottom:10px;
+		width: 50%;
+		margin: 0 auto;
+	}
+
+    .formTextareaWrap{
+        padding-bottom:10px;
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width:1024px){
+	.formFieldWrap{
+		padding-bottom:10px;
+		width: 40%;
+		margin: 0 auto;
+	}
+
+    .formTextareaWrap{
+        padding-bottom:10px;
+        width: 40%;
+        margin: 0 auto;
+    }
 }
 
 .clear {
@@ -1897,7 +1934,7 @@ table tr:hover td{
 	height:36px!important;
 	margin-right:4px;
 	font-size: 16px;
-	width:43%;
+	/*width:43%;*/
 }
 
 .contact-form{
@@ -1955,7 +1992,6 @@ table tr:hover td{
 .buttonWrap{
 	line-height:20px;
 	padding-bottom:24px;
-	min-width:43%;
 	display:inline-block;
 	margin-left: auto; 
 	margin-right: auto;
