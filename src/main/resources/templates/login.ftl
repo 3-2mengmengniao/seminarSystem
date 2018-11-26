@@ -55,7 +55,7 @@
                         <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
                     </div>
                 </div>
-				<form action="" method="post" class="contactForm" id="contactForm">
+				<form action="/login" method="post" class="contactForm" id="contactForm">
                     <fieldset>
                         <div class="formValidationError" id="contactNameFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
@@ -77,10 +77,13 @@
                             <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
                         </div>
                     </fieldset>
-				</form>
+                    <div class="distance4"></div>
+                    <div align="center">
+                        <input class="center center-text button-big button-dark" type="submit" value="登录" style="line-height: 25px;">
+				    </div>
+                </form>
 
 </div>
-<p class="center center-text"><a href="/teacher/homepage" class="button-big button-dark">登录</a></p>
 
 <div class="page_footer">
     <div class="decoration"></div>
