@@ -10,6 +10,14 @@ h1{
 	line-height:30px;
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */    color:    #d4d4d4; }
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */   color:    #d4d4d4; }
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */   color:    #d4d4d4; }
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */   color:   #d4d4d4; }
+
 body{
 	background-image:url(../images/misc/body-bg.png);
 	background-size:100px 100px;
@@ -340,7 +348,6 @@ and (min-device-height: 801px){
 	text-align:center;
 	font-size:12px;
 	margin-top:10px;
-	margin-bottom:5%;
 }
 
 
