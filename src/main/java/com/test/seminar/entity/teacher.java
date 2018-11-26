@@ -7,6 +7,9 @@ public class teacher {
     private String account;
     private String password;
     private int isActive;
+    private String name;
+    private String email;
+    private int emailReceiveInterval;
 
     public BigInteger getId() {
         return id;
@@ -64,7 +67,5 @@ public class teacher {
         this.emailReceiveInterval = emailReceiveInterval;
     }
 
-    private String name;
-    private String email;
-    private int emailReceiveInterval;
+
 }
