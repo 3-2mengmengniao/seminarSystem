@@ -15,12 +15,12 @@ public class HomeController {
     }
 
     @RequestMapping(value="/vali_psw",method = GET)
-    public String vali_psw(Model model) {
+    public String valiPsw(Model model) {
         return "vali_psw";
     }
 
     @RequestMapping(value="/email-modify",method = GET)
-    public String email_modify(Model model) {
+    public String emailModify(Model model) {
         return "email-modify";
     }
 }

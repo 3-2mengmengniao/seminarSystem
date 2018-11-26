@@ -32,7 +32,7 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course-seminar")
-    public String course_seminar(Model model) {
+    public String courseSeminar(Model model) {
         return "student/course-seminar";
     }
 
@@ -42,17 +42,17 @@ public class StudentController {
     }
 
     @RequestMapping(value="/group-score")
-    public String group_score(Model model) {
+    public String groupScore(Model model) {
         return "student/group-score";
     }
 
     @RequestMapping(value="/seminar_info_end")
-    public String seminar_info_end(Model model) {
+    public String seminarInfoEnd(Model model) {
         return "student/seminar_info_end";
     }
 
     @RequestMapping(value="/seminar_info_begin")
-    public String seminar_info_begin(Model model) {
+    public String seminarInfoBegin(Model model) {
         return "student/seminar_info_begin";
     }
 }

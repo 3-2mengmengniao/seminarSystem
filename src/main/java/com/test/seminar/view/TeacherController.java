@@ -27,22 +27,22 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/class-info")
-    public String class_info(Model model) {
+    public String classInfo(Model model) {
         return "teacher/class-info";
     }
 
     @RequestMapping(value="/course-info")
-    public String course_info(Model model) {
+    public String courseInfo(Model model) {
         return "teacher/course-info";
     }
 
     @RequestMapping(value="/create-course")
-    public String create_course(Model model) {
+    public String createCourse(Model model) {
         return "teacher/create-course";
     }
 
     @RequestMapping(value="/group-score")
-    public String group_score(Model model) {
+    public String groupScore(Model model) {
         return "teacher/group-score";
     }
 
@@ -52,7 +52,7 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course-seminar")
-    public String course_seminar(Model model) {
+    public String courseSeminar(Model model) {
         return "teacher/course-seminar";
     }
 
@@ -62,22 +62,22 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/seminar_info_end")
-    public String seminar_info_end(Model model) {
+    public String seminarInfoEnd(Model model) {
         return "teacher/seminar_info_end";
     }
 
     @RequestMapping(value="/seminar_info_begin")
-    public String seminar_info_begin(Model model) {
+    public String seminarInfoBegin(Model model) {
         return "teacher/seminar_info_begin";
     }
 
     @RequestMapping(value="/report_download")
-    public String report_download(Model model) {
+    public String reportDownload(Model model) {
         return "teacher/report_download";
     }
 
     @RequestMapping(value="/report_score")
-    public String report_score(Model model) {
+    public String reportScore(Model model) {
         return "teacher/report_score";
     }
 }
