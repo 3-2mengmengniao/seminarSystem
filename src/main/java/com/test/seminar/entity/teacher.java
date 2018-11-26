@@ -2,11 +2,11 @@ package com.test.seminar.entity;
 
 import java.math.BigInteger;
 
-public class teacher {
+public class Teacher{
     private BigInteger id;
     private String account;
     private String password;
-    private int isActive;
+    private int active;
     private String name;
     private String email;
     private int emailReceiveInterval;
@@ -35,12 +35,12 @@ public class teacher {
         this.password = password;
     }
 
-    public int getIsActive() {
-        return isActive;
+    public int getActive() {
+        return active;
     }
 
-    public void setIsActive(int isActive) {
-        this.isActive = isActive;
+    public void setActive(int active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -66,6 +66,4 @@ public class teacher {
     public void setEmailReceiveInterval(int emailReceiveInterval) {
         this.emailReceiveInterval = emailReceiveInterval;
     }
-
-
 }
