@@ -67,23 +67,36 @@
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="center-text uppercase">请填写密码!</p>
                 </div>
-            </div>
 
-            <div class="formFieldWrap">
-                <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:</label>
-                <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="请输入账号"/>
-            </div>
-            <div class="formFieldWrap">
-                <label class="field-title contactEmailField" for="contactEmailField">密码: </label>
-                <img id="demo_img" onclick="hideShowPsw()" src="../static/images/icons/showPasswd.png">
-                <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
-            </div>
-        </fieldset>
-    </form>
+				<form action="/login" method="post" class="contactForm" id="contactForm">
+                    <fieldset>
+                        <div class="formValidationError" id="contactNameFieldError">
+                            <div class="static-notification-red tap-dismiss-notification">
+                                <p class="center-text uppercase">请填写教工号/学号!</p>
+                            </div>
+                        </div>             
+                        <div class="formValidationError" id="contactEmailFieldError">
+                            <div class="static-notification-red tap-dismiss-notification">
+                                <p class="center-text uppercase">请填写密码!</p>
+                            </div>
+                        </div> 
+                        <div class="formFieldWrap">
+                            <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
+                            <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="请输入账号"/>
+                        </div>
+                        <div class="formFieldWrap">
+                            <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
+							<img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
+                            <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+                        </div>
+                    </fieldset>
+                    <div class="distance4"></div>
+                    <div align="center">
+                        <input class="center center-text button-big button-dark" type="submit" value="登录" style="line-height: 25px;">
+				    </div>
+                </form>
 
 </div>
-<div class="distance4"></div>
-<p class="center center-text"><a href="/teacher/homepage" class="button-big button-dark">登录</a></p>
 
 <div class="page_footer">
     <div class="decoration"></div>
