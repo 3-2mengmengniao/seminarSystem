@@ -7,25 +7,25 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title>登录</title>
-    <link href="../static/styles/style.css"     		rel="stylesheet" type="text/css">
-    <link href="../static/styles/framework.css" 		rel="stylesheet" type="text/css">
-    <link href="../static/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
-    <link href="../static/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="../static/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="../static/styles/colorbox.css"		 rel="stylesheet" type="text/css">
-    <link href="../static/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
+    <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
+    <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
+    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="../static/scripts/jquery.js"></script>
-    <script type="text/javascript" src="../static/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="../static/scripts/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/jquery.swipebox.js"></script>
-    <script type="text/javascript" src="../static/scripts/colorbox.js"></script>
-    <script type="text/javascript" src="../static/scripts/snap.js"></script>
-    <script type="text/javascript" src="../static/scripts/login.js"></script>
-    <script type="text/javascript" src="../static/scripts/custom.js"></script>
-    <script type="text/javascript" src="../static/scripts/framework.js"></script>
-    <script type="text/javascript" src="../static/scripts/framework.launcher.js"></script>
-    <script type="text/javascript" src="../static/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
+    <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
+    <script type="text/javascript" src="/scripts/colorbox.js"></script>
+    <script type="text/javascript" src="/scripts/snap.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/framework.js"></script>
+    <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
 
 
 </head>
@@ -47,7 +47,6 @@
     </div>
     <div class="decoration"></div>
 </div>
-<div class="distance4"></div>
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="big-notification green-notification">
@@ -56,7 +55,7 @@
             <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="" method="post" class="contactForm" id="contactForm">
+    <form action="/login" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -68,22 +67,23 @@
                     <p class="center-text uppercase">请填写密码!</p>
                 </div>
             </div>
-
             <div class="formFieldWrap">
-                <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:</label>
+                <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
                 <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="请输入账号"/>
             </div>
             <div class="formFieldWrap">
-                <label class="field-title contactEmailField" for="contactEmailField">密码: </label>
-                <img id="demo_img" onclick="hideShowPsw()" src="../static/images/icons/showPasswd.png">
+                <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
+                <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
                 <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
             </div>
         </fieldset>
+        <div class="distance4"></div>
+        <div align="center">
+            <input class="center center-text button-big button-dark" type="submit" value="登录" style="line-height: 25px;">
+        </div>
     </form>
 
 </div>
-<div class="distance4"></div>
-<p class="center center-text"><a href="/teacher/homepage" class="button-big button-dark">登录</a></p>
 
 <div class="page_footer">
     <div class="decoration"></div>
@@ -107,10 +107,10 @@
 
         if (demoInput.type == "text") {
             demoInput.type = "password";
-            demo_img.src = "../static/images/icons/hidePasswd.png";
+            demo_img.src = "/images/icons/hidePasswd.png";
         }else {
             demoInput.type = "text";
-            demo_img.src = "../static/images/icons/showPasswd.png";
+            demo_img.src = "/images/icons/showPasswd.png";
         }
     }
 
