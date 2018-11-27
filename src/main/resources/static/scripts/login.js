@@ -54,7 +54,7 @@ jQuery(document).ready(function($) {
 
         });
         if(formSubmitted == 'false' && count==2){
-            submitData(currentForm, formType);
+            return true;
         };
 
     };
@@ -63,6 +63,8 @@ jQuery(document).ready(function($) {
     // contact button function starts
     $('#contactSubmitButton').click(function() {
         var flag2=validateForm($(this).attr('data-formId'));
+        if(flag2==true)
+            return true;
         return false;
     });
     // contact button function ends
