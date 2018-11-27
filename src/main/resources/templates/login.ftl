@@ -1,19 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title>登录</title>
-    <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
-    <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/style.css" rel="stylesheet" type="text/css">
+    <link href="/styles/framework.css" rel="stylesheet" type="text/css">
+    <link href="/styles/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="/styles/owl.theme.css" rel="stylesheet" type="text/css">
+    <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
+    <link href="/styles/colorbox.css" rel="stylesheet" type="text/css">
+    <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -69,17 +69,20 @@
             </div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
-                <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="请输入账号"/>
+                <input type="text" name="contactNameField" value="" class="contactField requiredField"
+                       id="contactNameField" placeholder="请输入账号"/>
             </div>
             <div class="formFieldWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
                 <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
-                <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+                <input type="text" name="contactEmailField" value="" class="contactField requiredField"
+                       id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
             </div>
         </fieldset>
         <div class="distance4"></div>
         <div align="center">
-            <input class="center center-text button-big button-dark" type="submit" value="登录" style="line-height: 25px;">
+            <input class="center center-text button-big button-dark" type="submit" value="登录"
+                   style="line-height: 25px;">
         </div>
     </form>
 
@@ -100,15 +103,22 @@
 
 </body>
 <script>
+    <#if message??>
+        window.onload = function () {
+            alert("${message}")
+        };
+    </#if>
+
     //隐藏text block，显示password block
     var demoImg = document.getElementById("demo_img");
     var demoInput = document.getElementById("contactEmailField");
-    function hideShowPsw(){
+
+    function hideShowPsw() {
 
         if (demoInput.type == "text") {
             demoInput.type = "password";
             demo_img.src = "/images/icons/hidePasswd.png";
-        }else {
+        } else {
             demoInput.type = "text";
             demo_img.src = "/images/icons/showPasswd.png";
         }
