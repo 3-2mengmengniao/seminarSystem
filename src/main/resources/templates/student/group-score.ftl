@@ -45,7 +45,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">OOAD</h1>
-            <a href="/teacher/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -56,15 +56,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
+                <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">讨论课</a>
+                <a href="/student/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -77,8 +73,17 @@
             <div class="submenu-navigation">
                 <a href="#" class="submenu-nav-deploy">第一轮</a>
                 <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">用例分析</a>
-                    <a href="#" class="submenu-nav-deploy text-white">界面原型</a>
+                    <a href="#" class="submenu-nav-deploy text-white">用例分析
+                    </a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">本轮成绩： &nbsp&nbsp&nbsp5分</a>
+                    </div>
+                    <a href="#" class="submenu-nav-deploy text-white">领域模型设计</a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">本轮成绩： &nbsp&nbsp&nbsp5分</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,45 +93,27 @@
             <div class="submenu-navigation">
                 <a href="#" class="submenu-nav-deploy">第二轮</a>
                 <div class="submenu-nav-items">
-                    <a class="my-deploy-toggle-3 text-white" style="cursor:pointer" onclick="window.location.href='#'">该轮轮次设置</a>
                     <a href="#" class="submenu-nav-deploy text-white">用例分析
                     </a>
                     <div class="submenu-nav-items">
-                        <a href="/teacher/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">&nbsp;2016-1</a>
-                        <a href="/teacher/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">&nbsp;2016-2</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">本轮成绩： &nbsp&nbsp&nbsp5分</a>
                     </div>
-                    <a href="#" class="submenu-nav-deploy text-white">界面原型</a>
+                    <a href="#" class="submenu-nav-deploy text-white">领域模型设计</a>
                     <div class="submenu-nav-items">
-                        <a href="/teacher/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">&nbsp;2016-1</a>
-                        <a href="/teacher/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">&nbsp;2016-2</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">本轮成绩： &nbsp&nbsp&nbsp5分</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">第三轮</a>
-                <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">领域模型</a>
-                    <a href="#" class="submenu-nav-deploy text-white">controller</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-round'>新建轮次</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-seminar'>新建讨论课</a>
         </div>
     </div>
     <div class="distance2"> </div>
-    <div class="distance"> </div>
+    <div class="distance2"> </div>
+    <p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
+    <div class="distance2"> </div>
+
+    <div class="distance4"> </div>
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>

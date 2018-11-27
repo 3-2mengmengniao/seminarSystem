@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace用来指定该xml文件对应的interface  -->
+<!-- 默认idea对于该xml文件是几乎没有任何提示的，需要装一个叫 mybatis free plugins 的插件 -->
+<mapper namespace="com.test.seminar.mapper.LoginMapper">
+
+    <!-- id 就是方法名称 -->
+    <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
+    <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
+    <resultMap id="studentLoginResultMap" type="com.test.seminar.entity.Student">
+        <id property="id" column="student_id" />
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="active" column="is_active"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="emailReceiveInterval" column="email_receive_interval"/>
+    </resultMap>
+
+    <resultMap id="teacherLoginResultMap" type="com.test.seminar.entity.Teacher">
+        <id property="id" column="student_id" />
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="active" column="is_active"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="emailReceiveInterval" column="email_receive_interval"/>
+    </resultMap>
+
+    <select id="studentLogin" resultMap="studentLoginResultMap">
+        SELECT student_id,account,password,is_active,name,email,email_receive_interval
+        FROM student
+        WHERE account=#{account} AND password=#{password}
+    </select>
+
+    <select id="teacherLogin" resultMap="teacherLoginResultMap">
+        SELECT teacher_id,account,password,is_active,name,email,email_receive_interval
+        FROM teacher
+        WHERE account=#{account} AND password=#{password}
+    </select>
+
+</mapper>

@@ -14,6 +14,8 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,7 +28,10 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/scripts/jquery-1.8.3.min.js" ></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.fr.js"></script>
 
 
 </head>
@@ -137,20 +142,10 @@
                     <li class="bootstrap"><a href="#">&emsp;3人&emsp;</a></li>
                 </ul>
             </div>
-            <div class="distance4"></div>
-            <!--作为组件使用
-            <div class="input-append date" id="datetimepicker1" data-date="31-07-2017" data-date-format="dd-mm-yyyy">
-                <input size="16" type="text" value="31-07-2017" readonly>
-                <span class="add-on"><i data-date-icon="icon-calendar" class="icon-calendar"></i></span>
-            </div>
 
-            <!--作为组件使用
-            <div class="input-append date" id="datetimepicker2" data-date="31-07-2017" data-date-format="dd-mm-yyyy">
-                <input size="16" type="text" value="31-07-2017" readonly>
-                <span class="add-on"><i data-date-icon="icon-calendar" class="icon-calendar"></i></span>
-            </div>
-        </div>
-        -->
+            <input type="date" style="margin-bottom: 5px;">
+            <input type="date">
+            <div class="distance4"></div>
 
         </div>
         <div class="distance4"></div>
@@ -168,14 +163,7 @@
 
 <div class="bottom-deco"></div>
 <script>
-    $('#datetimepicker1').datetimepicker();
-    $('#datetimepicker1').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',      /*����������ʾ˳�򣬻�����ʾ˳����mm-dd-yyyy*/
-    });
-    $('#datetimepicker2').datetimepicker();
-    $('#datetimepicker2').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',      /*����������ʾ˳�򣬻�����ʾ˳����mm-dd-yyyy*/
-    });
+
 </script>
 
 </body>

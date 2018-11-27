@@ -1225,10 +1225,14 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
+
   margin-right: auto;
   margin-left: auto;
+}
+
+.container td{
+  line-height: 20px;
+  font-size: 15px;
 }
 @media (min-width: 768px) {
   .container {
@@ -1915,7 +1919,7 @@ th {
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
   padding: 8px;
-  line-height: 1.42857143;
+  line-height: 2.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
 }

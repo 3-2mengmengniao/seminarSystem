@@ -44,7 +44,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">账户与设置</h1>
+            <h1 class="navigation-back">OOAD</h1>
             <a href="/teacher/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -77,12 +77,17 @@
             <div class="submenu-navigation">
                 <a href="#" class="submenu-nav-deploy">第一轮</a>
                 <div class="submenu-nav-items">
-                    <a href="#" class="sub-menu-text submenu-nav-deploy">1-1&emsp;&emsp;5.0分</a>
-                    <a href="/teacher/teams" class="submenu-nav-deploy">学生组队</a>
-                    <a href="/teacher/course-info" class="submenu-nav-deploy">课程信息</a>
-                    <a href="/teacher/class-info" class="submenu-nav-deploy">班级信息</a>
-                    <a href="#" class="submenu-nav-deploy">讨论课轮次</a>
-                    <a href="#" class="submenu-nav-deploy">共享设置</a>
+                    <a href="#" class="submenu-nav-deploy text-white">1-1&nbsp&nbsp&nbsp 5分
+                    </a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                    </div>
+                    <a href="#" class="submenu-nav-deploy text-white">1-2&nbsp&nbsp&nbsp 5分</a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,19 +95,28 @@
     <div class="one-half-responsive">
         <div class="container">
             <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">J2EE</a>
+                <a href="#" class="submenu-nav-deploy">第二轮</a>
                 <div class="submenu-nav-items">
-                    <a href="#">学生成绩</a>
-                    <a href="/teacher/teams">学生组队</a>
-                    <a href="/teacher/course-info">课程信息</a>
-                    <a href="/teacher/class-info">班级信息</a>
-                    <a href="#">讨论课轮次</a>
-                    <a href="#">共享设置</a>
+                    <a href="#" class="submenu-nav-deploy text-white">1-1&nbsp&nbsp&nbsp 5分
+                    </a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                    </div>
+                    <a href="#" class="submenu-nav-deploy text-white">1-2&nbsp&nbsp&nbsp 5分</a>
+                    <div class="submenu-nav-items">
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
+    <div class="distance2"> </div>
+    <div class="distance2"> </div>
+    <p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
+
+    <div class="distance2"> </div>
     <div class="distance4"> </div>
     <div class="decoration"></div>
     <div class="footer">

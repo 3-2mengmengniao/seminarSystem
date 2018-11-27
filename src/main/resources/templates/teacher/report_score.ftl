@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-
-    <title>讨论课管理系统</title>
+    <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
@@ -29,7 +28,6 @@
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
 
 
-
 </head>
 <body>
 
@@ -42,12 +40,12 @@
     </div>
 </div>
 
-
 <div class="top-deco"></div>
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">讨论课</h1>
+            <h1 class="navigation-back">OOAD讨论课</h1>
+            <a href="/teacher/seminar_info_end" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -66,41 +64,56 @@
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/teacher/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
     </div>
 </div>
 
-
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>OOAD</a>
+<div class="content">
+    <div class="container no-bottom text-list">
+        <div class="container no-bottom">
+            <table cellspacing='0' class="table">
+                <tr>
+                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+                <tr class='even'>
+                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+                <tr>
+                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+                <tr class='even'>
+                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span> </td>
+                </tr>
+                <tr>
+                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+                <tr class='even'>
+                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                </tr>
+            </table>
         </div>
-    </div>
-<div class="distance3">
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>J2EE</a>
+
+        <div class="distance4"></div>
+        <div class="distance"></div>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
+        <div class="distance"></div>
+        <div class="decoration"></div>
+        <div class="footer">
+            <div class="clear"></div>
+            <p class="copyright">
+                Copyright @2018 developed by Group 3-2.<br>
+                All Rights Reserved
+            </p>
         </div>
-    </div>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
-
-
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
     </div>
 </div>
+
 <div class="bottom-deco"></div>
+
 
 </body>
 </html>
