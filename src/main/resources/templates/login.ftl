@@ -52,7 +52,7 @@
         <div class="big-notification green-notification">
             <h3 class="uppercase">Message Sent </h3>
             <a href="#" class="close-big-notification">x</a>
-            <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
+            <p>账号密码错误！请再次尝试</p>
         </div>
     </div>
     <form action="/login" method="post" class="contactForm" id="contactForm">
@@ -85,7 +85,6 @@
                    style="line-height: 25px;">
         </div>
     </form>
-
 </div>
 
 <div class="page_footer">
