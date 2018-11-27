@@ -19,40 +19,40 @@ import java.io.IOException;
  * @date 2018/11/24
  *
  */
-@Configuration
-public class WebSecurityConfig extends WebMvcConfigurationSupport {
-
-
-    @Bean
-    public SecurityInterceptor getSecurityInterceptor(){
-        return  new SecurityInterceptor();
-    }
-
-    @Override
-    public  void addInterceptors(InterceptorRegistry registry){
-        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
-
-        //排除配置,不会拦截的界面
-        addInterceptor.excludePathPatterns("/login","/");
-
-        //拦截配置,会拦截的界面
-        addInterceptor.addPathPatterns("/**");
-    }
-
-    private class SecurityInterceptor extends HandlerInterceptorAdapter {
-        @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws IOException {
-            HttpSession session = request.getSession();
-
-            //判断是否已有该用户登录的session
-            if(session.getAttribute("account") !=null){
-                return  true;
-            }
-            //跳转到登录页
-            String url = "/";
-            response.sendRedirect(url);
-            return false;
-        }
-    }
-
-}
+//@Configuration
+//public class WebSecurityConfig extends WebMvcConfigurationSupport {
+//
+//
+//    @Bean
+//    public SecurityInterceptor getSecurityInterceptor(){
+//        return  new SecurityInterceptor();
+//    }
+//
+//    @Override
+//    public  void addInterceptors(InterceptorRegistry registry){
+//        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
+//
+//        //排除配置,不会拦截的界面
+//        addInterceptor.excludePathPatterns("/login","/");
+//
+//        //拦截配置,会拦截的界面
+//        addInterceptor.addPathPatterns("/**");
+//    }
+//
+//    private class SecurityInterceptor extends HandlerInterceptorAdapter {
+//        @Override
+//        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws IOException {
+//            HttpSession session = request.getSession();
+//
+//            //判断是否已有该用户登录的session
+//            if(session.getAttribute("account") !=null){
+//                return  true;
+//            }
+//            //跳转到登录页
+//            String url = "/";
+//            response.sendRedirect(url);
+//            return false;
+//        }
+//    }
+//
+//}
