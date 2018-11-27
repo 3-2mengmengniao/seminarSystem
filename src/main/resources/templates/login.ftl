@@ -52,36 +52,41 @@
         <div class="big-notification green-notification">
             <h3 class="uppercase">Message Sent </h3>
             <a href="#" class="close-big-notification">x</a>
-            <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
+            <p>账号密码错误！请再次尝试</p>
         </div>
     </div>
     <form action="/login" method="post" class="contactForm" id="contactForm">
         <fieldset>
-            <div class="formValidationError" id="contactNameFieldError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写教工号/学号!</p>
-                </div>
-            </div>
-            <div class="formValidationError" id="contactEmailFieldError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写密码!</p>
-                </div>
-            </div>
-            <div class="formFieldWrap">
-                <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
-                <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="请输入账号"/>
-            </div>
-            <div class="formFieldWrap">
-                <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
-                <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
-                <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
-            </div>
-        </fieldset>
-        <div class="distance4"></div>
-        <div align="center">
-            <input class="center center-text button-big button-dark" type="submit" value="登录" style="line-height: 25px;">
-        </div>
-    </form>
+            <p>
+                <div class="formValidationError" id="contactNameFieldError">
+                    <div class="static-notification-red tap-dismiss-notification">
+            <p class="center-text uppercase">请填写教工号/学号!</p>
+</div>
+</div>
+<div class="formValidationError" id="contactEmailFieldError">
+    <div class="static-notification-red tap-dismiss-notification">
+        <p class="center-text uppercase">请填写密码!</p>
+    </div>
+</div>
+
+<div class="formFieldWrap">
+    <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
+    <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
+</div>
+<div class="formFieldWrap">
+    <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
+    <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
+    <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+</div>
+<div class="distance2"></div>
+<div class="formSubmitButtonErrorsWrap">
+    <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="登录" data-formId="contactForm"/>
+    </p>
+</div>
+</p>
+</fieldset>
+</form>
+
 
 </div>
 
