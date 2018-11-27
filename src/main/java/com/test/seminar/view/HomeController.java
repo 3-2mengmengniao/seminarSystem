@@ -11,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.sound.midi.Soundbank;
+
 
 @Controller
 public class HomeController {
@@ -18,28 +22,35 @@ public class HomeController {
     LoginService loginService;
 
     @RequestMapping(value = "/", method = GET)
-    public String login(Model model) {
+    public String login(Model model, String status) {
+        if (status == null) {
+        } else if (status.equals("401")) {
+            model.addAttribute("message", "账号或密码错误");
+        }
         return "login";
     }
 
     @RequestMapping(value = "/login", method = POST)
-    public String loginPost(@RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
+    public String loginPost(HttpServletRequest request,@RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
+        //获得session
+        HttpSession session = request.getSession();
+        //登陆验证
         Student student = loginService.studentLogin(account, password);
         if (student == null) {
             Teacher teacher = loginService.teacherLogin(account, password);
             if (teacher == null) {
-                model.addAttribute("message", "账号或密码错误");
-                System.out.println("账号或密码错误");  //界面弄好注释
-                return "login";
+                return "redirect:/?status=401";
             } else {
-                model.addAttribute("teacher", teacher);
-                System.out.println(teacher.getName());  //界面弄好注释
-                return "/teacher/homepage";
+                session.setAttribute("usertype","teacher");
+                session.setAttribute("account",teacher.getAccount());
+                session.setAttribute("name",teacher.getName());
+                return "redirect:/teacher/homepage";
             }
         } else {
-            System.out.println(student.getName());  //界面弄好注释
-            model.addAttribute("student", student);
-            return "/student/homepage";
+            session.setAttribute("usertype","student");
+            session.setAttribute("account",student.getAccount());
+            session.setAttribute("name",student.getName());
+            return "redirect:/student/homepage";
         }
     }
 
