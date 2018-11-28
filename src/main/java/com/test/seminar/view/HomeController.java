@@ -29,7 +29,7 @@ public class HomeController {
         if (status == null) {
 
         } else if (status.equals("401")) {
-            model.addAttribute("message", "账号或密码错误");
+            model.addAttribute("message", "账号或密码错误，请重新输入");
             session.setAttribute("status", null);
         } else {
 

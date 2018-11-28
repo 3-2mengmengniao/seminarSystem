@@ -48,7 +48,7 @@ body{
 }
 
 .top-deco{
-	background-color:#59606D;
+	background-color:#009688;
 	height:5px;
 	width:100%;
 	display:block;
@@ -56,7 +56,7 @@ body{
 }
 
 .bottom-deco{
-	background-color:#59606D;
+	background-color:#009688;
 	height:5px;
 	display:block;
 	width:100%;
@@ -409,8 +409,8 @@ and (min-device-height: 801px){
 	display:none;
 	overflow:visible!important;
 	background-color:#FFFFFF;
-	border-bottom:solid 3px #59606d;
-	border-top:solid 3px #59606d;
+	border-bottom:solid 3px #009688;
+	border-top:solid 3px #009688;
 	position:absolute;
 	width:100%;
 	z-index:999999;
@@ -455,8 +455,8 @@ and (min-device-height: 801px){
 		display:none;
 		overflow:visible!important;
 		background-color:#FFFFFF;
-		border-bottom:solid 3px #59606d;
-		border-top:solid 3px #59606d;
+		border-bottom:solid 3px #009688;
+		border-top:solid 3px #009688;
 		position:absolute;
 		right:5%;
 		width:100%;
@@ -502,8 +502,8 @@ and (min-device-height: 801px){
 		display:none;
 		overflow:visible!important;
 		background-color:#FFFFFF;
-		border-bottom:solid 3px #59606d;
-		border-top:solid 3px #59606d;
+		border-bottom:solid 3px #009688;
+		border-top:solid 3px #009688;
 		position:absolute;
 		right:4%;
 		width:100%;

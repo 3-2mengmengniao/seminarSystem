@@ -698,8 +698,8 @@ h1.navigation-back{
 .button-magenta{			 background-color:#8e44ad;	}
 .button-magenta:active{	  background-color:#61267a;	}
 
-.button-dark{				background-color:#2c3e50;	}
-.button-dark:active{		 background-color:#0b1621;	}
+.button-dark{				background-color:#009688;	}
+.button-dark:active{		 background-color:#5FB878;	}
 
 .button-yellow{			  background-color:#f1c40f;	}
 .button-yellow:active{	   background-color:#c3a321;	}
@@ -1428,15 +1428,35 @@ table tr:hover td{
 
 .static-notification-red{
 	overflow:hidden;
-	background-color:#c0392b;
-	color:#FFFFFF;
+	color:#c9302c;
 	margin-bottom:20px;
 }
 
 .static-notification-red p{
-	margin-top:10px;
+	font-size:14px;
+	margin-top:-10px;
 	margin-bottom:10px;
+	margin-left:7%;
 }
+
+@media screen and (min-width:768px){
+	.static-notification-red p{
+		font-size:14px;
+		margin-top:-10px;
+		margin-bottom:10px;
+		margin-left:31%;
+	}
+}
+
+@media screen and (min-width:1024px){
+	.static-notification-red p{
+		font-size:14px;
+		margin-top:-10px;
+		margin-bottom:10px;
+		margin-left:31%;
+	}
+}
+
 
 .static-notification-green{
 	overflow:hidden;
@@ -2164,7 +2184,21 @@ select:-webkit-autofill {
 	-webkit-box-shadow: 0 0 0 1000px white inset;
 }
 
+@media screen and (min-width:768px ){
+	.forget-password{
+		font-size:15px;
+		color:#009688;
+		margin-left:63%;
+	}
+}
 
+@media screen and (max-width:768px ){
+	.forget-password{
+		font-size:15px;
+		color:#009688;
+		margin-left:68%;
+	}
+}
 
 
 
