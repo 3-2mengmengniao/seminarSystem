@@ -85,7 +85,7 @@
     <div class="clear"></div>
     <div class="landing-navigation-tablet-bottom-adjustment"></div>
 </div>
-
+<!--
 <div class="page_footer">
     <div class="decoration"></div>
 
@@ -98,7 +98,7 @@
     </div>
     <div class="bottom-deco"></div>
 </div>
-
+-->
 
 
 </body>

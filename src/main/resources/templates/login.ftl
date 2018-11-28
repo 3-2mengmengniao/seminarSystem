@@ -88,6 +88,7 @@
 </form>
 </div>
 
+<!--
 <div class="page_footer">
     <div class="decoration"></div>
     <div class="footer">
@@ -99,7 +100,7 @@
     </div>
     <div class="bottom-deco"></div>
 </div>
-
+-->
 
 </body>
 <script>

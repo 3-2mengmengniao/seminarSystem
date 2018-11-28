@@ -103,7 +103,7 @@
 <div class="distance2"></div>
 <p class="center center-text"><a href="/teacher/homepage" class="button-big button-dark">确认提交</a></p>
 <div class="distance3"></div>
-
+<!--
 <div class="page_footer">
     <div class="decoration"></div>
     <div class="footer">
@@ -115,7 +115,7 @@
     </div>
     <div class="bottom-deco"></div>
 </div>
-
+ -->
 
 <script>
     function validate()

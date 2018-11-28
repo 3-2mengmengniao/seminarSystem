@@ -123,7 +123,7 @@
 <!-- </div> -->
 
 
-
+<!--
 <div class="decoration"></div>
 
     <div class="footer">
@@ -136,7 +136,7 @@
 </div>
 
     <div class="bottom-deco"></div>
-
+-->
 <script>
 	 function validate()
     {
