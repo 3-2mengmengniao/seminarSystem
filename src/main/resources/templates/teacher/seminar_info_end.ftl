@@ -95,6 +95,7 @@
         <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">书面报告</a></p>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">查看成绩</a></p>
         <div class="distance"></div>
+        <!--
         <div class="decoration"></div>
         <div class="footer">
             <div class="clear"></div>
@@ -103,10 +104,11 @@
                 All Rights Reserved
             </p>
         </div>
+            -->
     </div>
 </div>
 
-<div class="bottom-deco"></div>
+<!--<div class="bottom-deco"></div>-->
 
 
 </body>

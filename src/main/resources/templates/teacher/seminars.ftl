@@ -90,7 +90,7 @@
     <div class="distance2"></div>
 <p class="center center-text"><a href="/teacher/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
 
-
+    <!--
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>
@@ -101,6 +101,6 @@
     </div>
 </div>
 <div class="bottom-deco"></div>
-
+-->
 </body>
 </html>

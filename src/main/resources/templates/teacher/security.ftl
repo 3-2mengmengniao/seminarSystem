@@ -94,6 +94,7 @@
         <div class="distance"></div>
         <div class="distance"></div>
         <p class="center center-text"><a href="/" class="button-big button-red">退出登录</a></p>
+        <!--
         <div class="decoration"></div>
         <div class="footer">
             <div class="clear"></div>
@@ -102,6 +103,7 @@
                 All Rights Reserved
             </p>
         </div>
+        -->
     </div>
 </div>
 
@@ -122,8 +124,7 @@
         </ul>
     </div>
 
-<div class="bottom-deco"></div>
-
+<!--<div class="bottom-deco"></div>-->
 
 </body>
 </html>

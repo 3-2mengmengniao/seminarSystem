@@ -90,6 +90,7 @@
         <div class="distance"></div>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">进入讨论课</a></p>
         <div class="distance"></div>
+        <!--
         <div class="decoration"></div>
         <div class="footer">
             <div class="clear"></div>
@@ -98,10 +99,11 @@
                 All Rights Reserved
             </p>
         </div>
+        -->
     </div>
 </div>
 
-<div class="bottom-deco"></div>
+<!--<div class="bottom-deco"></div>-->
 
 
 </body>

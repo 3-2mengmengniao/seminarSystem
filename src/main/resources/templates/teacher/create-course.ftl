@@ -150,7 +150,7 @@
         </div>
         <div class="distance4"></div>
         <p class="center center-text"><a href="/teacher/courses" class="button-big button-dark">创建课程</a></p>
-
+<!--
         <div class="decoration"></div>
         <div class="footer">
             <div class="clear"></div>
@@ -159,9 +159,10 @@
                 All Rights Reserved
             </p>
         </div>
+        -->
     </div>
-
-<div class="bottom-deco"></div>
+</div>
+    <!--<div class="bottom-deco"></div>-->
 <script>
 
 </script>

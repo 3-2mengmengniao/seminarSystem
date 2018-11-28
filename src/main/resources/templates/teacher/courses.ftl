@@ -115,7 +115,7 @@
 <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance"></div>
-
+<!--
 <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>
@@ -125,7 +125,8 @@
         </p>
     </div>
 </div>
-<div class="bottom-deco"></div>
+-->
+<!--<div class="bottom-deco"></div>-->
 
 </body>
 </html>
