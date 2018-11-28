@@ -45,6 +45,7 @@
     <div class="login-header">
         <h1 class="login-logo">讨论课管理系统登录</h1>
     </div>
+    <div class="distance5"></div>
     <div class="decoration"></div>
 </div>
 <div class="content">
@@ -68,17 +69,17 @@
                 <p class="center-text uppercase">请填写密码!</p>
             </div>
         </div>
-
+        <div class="distance4"></div>
         <div class="formFieldWrap">
             <label class="field-title contactNameField" for="contactNameField">学号/教工号/管理员账号:<span>(required)</span></label>
-            <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
+            <input autocomplete=”off” type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
         </div>
         <div class="formFieldWrap">
             <label class="field-title contactEmailField" for="contactEmailField">密码: <span>(required)</span></label>
             <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
-            <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+            <input autocomplete=”off” type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
         </div>
-        <div class="distance2"></div>
+        <div class="distance"></div>
         <div class="formSubmitButtonErrorsWrap">
             <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="登录" data-formId="contactForm"/>
             </p>
