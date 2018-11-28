@@ -70,6 +70,7 @@
         </p>
         <p class="center center-text "><a href="/teacher/create-course" class="button-big button-red">删除班级</a></p>
     </div>
+    <!--
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>
@@ -78,9 +79,10 @@
             All Rights Reserved
         </p>
     </div>
+    -->
 </div>
 
-<div class="bottom-deco"></div>
+<!--<div class="bottom-deco"></div>-->
 
 
 </body>

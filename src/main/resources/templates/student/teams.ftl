@@ -131,7 +131,7 @@
     <a href="/student/course-seminar" class="button-return button-dark">返回</a>
 </div>
 
-
+<!--
 <div class="decoration"></div>
 
     <div class="footer">
@@ -143,7 +143,7 @@
     </div> 
 	<div class="bottom-deco"></div>
 </div>    
-
+-->
 
 
 </body>

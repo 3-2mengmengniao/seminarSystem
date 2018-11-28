@@ -116,7 +116,7 @@
     <a href="/teacher/course-seminar" class="button-return button-dark">返回</a>
 </div>
 
-
+<!--
 <div class="decoration"></div>
 
     <div class="footer">
@@ -127,8 +127,8 @@
         </p>
     </div> 
 	<div class="bottom-deco"></div>
-</div>    
-
+</div>
+-->
 
 
 </body>

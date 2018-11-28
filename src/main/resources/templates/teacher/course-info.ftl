@@ -71,7 +71,7 @@
         <div class="distance"></div>
         <p class="center center-text"><a href="/teacher/courses" class="button-big button-red">删除课程</a></p>
     </div>
-
+<!--
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>
@@ -80,9 +80,10 @@
             All Rights Reserved
         </p>
     </div>
+    -->
 </div>
 
-<div class="bottom-deco"></div>
+<!--<div class="bottom-deco"></div>-->
 
 
 </body>
