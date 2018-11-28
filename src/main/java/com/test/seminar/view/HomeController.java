@@ -22,16 +22,23 @@ public class HomeController {
     LoginService loginService;
 
     @RequestMapping(value = "/", method = GET)
-    public String login(Model model, String status) {
+    public String login(HttpServletRequest request, Model model) {
+        //获得session
+        HttpSession session = request.getSession();
+        String status = (String) session.getAttribute("status");
         if (status == null) {
+
         } else if (status.equals("401")) {
             model.addAttribute("message", "账号或密码错误");
+            session.setAttribute("status", null);
+        } else {
+
         }
         return "login";
     }
 
     @RequestMapping(value = "/login", method = POST)
-    public String loginPost(HttpServletRequest request,@RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
+    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
         //获得session
         HttpSession session = request.getSession();
         //登陆验证
@@ -39,17 +46,22 @@ public class HomeController {
         if (student == null) {
             Teacher teacher = loginService.teacherLogin(account, password);
             if (teacher == null) {
-                return "redirect:/?status=401";
+                session.setAttribute("status", "401");
+                return "redirect:/";
             } else {
-                session.setAttribute("usertype","teacher");
-                session.setAttribute("account",teacher.getAccount());
-                session.setAttribute("name",teacher.getName());
+                session.setAttribute("usertype", "teacher");
+                session.setAttribute("account", teacher.getAccount());
+                session.setAttribute("name", teacher.getName());
+                model.addAttribute("account",teacher.getAccount());
+                model.addAttribute("name",teacher.getName());
                 return "redirect:/teacher/homepage";
             }
         } else {
-            session.setAttribute("usertype","student");
-            session.setAttribute("account",student.getAccount());
-            session.setAttribute("name",student.getName());
+            session.setAttribute("usertype", "student");
+            session.setAttribute("account", student.getAccount());
+            session.setAttribute("name", student.getName());
+            model.addAttribute("account",student.getAccount());
+            model.addAttribute("name",student.getName());
             return "redirect:/student/homepage";
         }
     }
