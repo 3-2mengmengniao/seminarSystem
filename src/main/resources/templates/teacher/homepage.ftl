@@ -72,8 +72,9 @@
     </div>
 </div>
 
-
-
+<div class="distance4"></div>
+<div class="distance4"></div>
+<h1 style="text-align: center;">${account}&nbsp;&nbsp;&nbsp;${name}</h1>
 
 <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div>
