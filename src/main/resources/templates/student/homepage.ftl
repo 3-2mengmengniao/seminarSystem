@@ -67,10 +67,10 @@
         </div>
     </div>
 </div>
+<div class="distance5"></div>
+<a class="text-center welcome">${name},${account}</a>
+<a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
 
-<div class="distance4"></div>
-<div class="distance4"></div>
-<h1 style="text-align: center;">${account}&nbsp;&nbsp;&nbsp;${name}</h1>
 
 <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div>
@@ -83,6 +83,7 @@
         <img class="nav-image" src="/images/icons/设置2.png" alt="img">
         <nobr><em>账户与设置</em></nobr>
     </a>
+    <div class="distance2"></div>
     <div class="clear"></div>
     <div class="landing-navigation-tablet-bottom-adjustment"></div>
 </div>

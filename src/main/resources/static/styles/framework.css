@@ -75,7 +75,10 @@ div.distance3{
 }
 
 div.distance4{
-	padding-bottom:40px;
+	 padding-bottom:40px;
+ }
+div.distance5{
+	padding-bottom:10px;
 }
 
 fieldset{
@@ -631,6 +634,19 @@ h1.navigation-back{
     border-radius:5px;
 }
 
+@media screen and (min-width: 768px){
+	.button-big{
+		text-align:center;
+		color:#FFFFFF;
+		padding:8px 30px;
+		display:inline-block;
+		margin-bottom:13px;
+		font-size: 15px;
+		width:20%;
+		border-radius:5px;
+	}
+}
+
 .button-return{
 	text-align:center;
 	color:#FFFFFF;
@@ -832,11 +848,11 @@ h1.navigation-back{
 .clock-list{
 	background-image:url(../images/lists/clock_48.png);
 }
-
+/*
 .delete-list{
 	background-image:url(../images/lists/delete_48.png);
 }
-
+*/
 .diagram-list{
 	background-image:url(../images/lists/diagram_48.png);
 }
@@ -1670,9 +1686,11 @@ table tr:hover td{
 	background-position:15px 15px;
 }
 
+/*
 .toggle-2-active{
 	background-image:url(../images/lists/delete_48.png);
 }
+*/
 
 .deploy-toggle-3{
 	padding:15px;
@@ -2140,7 +2158,11 @@ table tr:hover td{
 	z-index: 990;
 }
 
-
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+}
 
 
 
