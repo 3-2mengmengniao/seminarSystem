@@ -27,9 +27,12 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data){
-                alert("提交成功！");
-
-            window.location.href='/teacher/homepage';
+                if(data=="200")
+                    window.location.href="/teacher/homepage";
+                else if(data=="204")
+                    window.location.href="/student/homepage";
+                else if(data=="401")
+                    $('#formSuccessMessageWrap').fadeIn(500);
         });
         //window.location.href='1vali_psw.html';
     };
@@ -54,7 +57,7 @@ jQuery(document).ready(function($) {
 
         });
         if(formSubmitted == 'false' && count==2){
-            return true;
+            submitData(currentForm, formType);
         };
 
     };

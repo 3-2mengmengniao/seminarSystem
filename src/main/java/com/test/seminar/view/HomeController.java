@@ -22,19 +22,18 @@ public class HomeController {
     LoginService loginService;
 
     @RequestMapping(value = "/", method = GET)
-    public String login(HttpServletRequest request, Model model) {
+    public String login(Model model) {
         //获得session
-        HttpSession session = request.getSession();
-        String status = (String) session.getAttribute("status");
-        if (status == null) {
+//        HttpSession session = request.getSession();
+//        String status = (String) session.getAttribute("status");
+//        if (status == null) {
+//            return "login";
+//        } else if (status.equals("401")) {
+//            model.addAttribute("message", "账号或密码有误，请重新输入！");
+//            session.setAttribute("status", null);
+//            return "redirect:/login";
+//        } else {
             return "login";
-        } else if (status.equals("401")) {
-            model.addAttribute("message", "账号或密码有误，请重新输入！");
-            session.setAttribute("status", null);
-            return "redirect:/login";
-        } else {
-            return "login";
-        }
 
     }
 
@@ -47,15 +46,16 @@ public class HomeController {
         if (student == null) {
             Teacher teacher = loginService.teacherLogin(account, password);
             if (teacher == null) {
-                session.setAttribute("status", "401");
-                return "redirect:/";
+                String  status="401";
+                return status;
             } else {
                 session.setAttribute("usertype", "teacher");
                 session.setAttribute("account", teacher.getAccount());
                 session.setAttribute("name", teacher.getName());
                 model.addAttribute("account",teacher.getAccount());
                 model.addAttribute("name",teacher.getName());
-                return "redirect:/teacher/homepage";
+                String  status="200";
+                return status;
             }
         } else {
             session.setAttribute("usertype", "student");
@@ -63,7 +63,8 @@ public class HomeController {
             session.setAttribute("name", student.getName());
             model.addAttribute("account",student.getAccount());
             model.addAttribute("name",student.getName());
-            return "redirect:/student/homepage";
+            String  status="204";
+            return status;
         }
     }
 
