@@ -66,7 +66,7 @@
                     <p>
                         <div class="formValidationError" id="contactNameFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">请填写初始密码!</p>
+                                <p class="center-text uppercase">请填写新密码!</p>
                             </div>
                         </div>             
                         <div class="formValidationError" id="contactEmailFieldError">

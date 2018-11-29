@@ -1,6 +1,7 @@
 var $ = jQuery.noConflict();
 var formSubmitted = 'false';
 
+
 jQuery(document).ready(function($) {
 
     $('#formSuccessMessageWrap').hide(0);
@@ -32,7 +33,10 @@ jQuery(document).ready(function($) {
                 else if(data=="204")
                     window.location.href="/student/homepage";
                 else if(data=="401")
+                {
                     $('#formSuccessMessageWrap').fadeIn(500);
+                    formSubmitted = 'false';
+                }
         });
         //window.location.href='1vali_psw.html';
     };

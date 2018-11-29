@@ -110,12 +110,23 @@ $(document).ready(function(){
 	});
 	
 	//Submenu Nav
+    $('.submenu-nav-deploy0').click(function(){
+        $(this).toggleClass('submenu-nav-deploy-active');
+        $(this).parent().find('.submenu-nav-items0').toggle(100);
+        return false;
+    });
 	
-	$('.submenu-nav-deploy').click(function(){
+	$('.submenu-nav-deploy1').click(function(){
 		$(this).toggleClass('submenu-nav-deploy-active');
-		$(this).parent().find('.submenu-nav-items').toggle(100);
+		$(this).parent().find('.submenu-nav-items1').toggle(100);
 		return false;
 	});
+
+    $('.submenu-nav-deploy2').click(function(){
+        $(this).toggleClass('submenu-nav-deploy-active');
+        $(this).parent().find('.submenu-nav-items2').toggle(100);
+        return false;
+    });
 
 	
 	//Sliding Door
