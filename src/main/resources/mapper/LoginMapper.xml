@@ -8,7 +8,7 @@
     <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <resultMap id="studentLoginResultMap" type="com.test.seminar.entity.Student">
-        <id property="id" column="student_id" />
+        <id property="id" column="id" />
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
@@ -18,7 +18,7 @@
     </resultMap>
 
     <resultMap id="teacherLoginResultMap" type="com.test.seminar.entity.Teacher">
-        <id property="id" column="student_id" />
+        <id property="id" column="id" />
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
@@ -28,13 +28,13 @@
     </resultMap>
 
     <select id="studentLogin" resultMap="studentLoginResultMap">
-        SELECT student_id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,name,email,email_receive_interval
         FROM student
         WHERE account=#{account} AND password=#{password}
     </select>
 
     <select id="teacherLogin" resultMap="teacherLoginResultMap">
-        SELECT teacher_id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,name,email,email_receive_interval
         FROM teacher
         WHERE account=#{account} AND password=#{password}
     </select>
