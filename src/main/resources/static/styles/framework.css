@@ -1575,11 +1575,31 @@ table tr:hover td{
 	font-weight: bold;
 }
 
-.toggle-1, .toggle-2, .toggle-3{
-	background-color:#70ACB1;
+
+@media screen and (min-width:768px ){
+	.toggle-1, .toggle-2, .toggle-3{
+		background-color: #009688;
+		border-radius: 5px;
+		margin-left: 6%;
+		margin-right: 6%;
+	}
 }
-
-
+@media screen and (max-width:768px ){
+	.toggle-1, .toggle-2, .toggle-3{
+		background-color: #009688;
+		border-radius: 5px;
+		margin-left: 6%;
+		margin-right: 6%;
+	}
+}
+@media screen and (max-width:1024px ){
+	.toggle-1, .toggle-2, .toggle-3{
+		background-color: #009688;
+		border-radius: 5px;
+		margin-left: 6%;
+		margin-right: 6%;
+	}
+}
 
 .my-deploy-toggle-1{
 	padding:15px;
@@ -1672,6 +1692,16 @@ table tr:hover td{
 	background-repeat:no-repeat;
 	background-size:16px 16px;
 	background-position:87.6% 19px;
+}
+.my-navigation2{
+	line-height: 20px;
+	font-size: 16px;
+	margin-top: -23px;
+	padding-left:65px;
+	background-image:url(../images/icons/加_展开.png);
+	background-repeat:no-repeat;
+	background-size:15px 15px;
+	background-position:2% 19px;
 }
 
 @media screen and (min-width: 768px) {

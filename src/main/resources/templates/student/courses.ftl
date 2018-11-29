@@ -15,6 +15,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css"		 rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -27,7 +28,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -69,34 +70,42 @@
     </div>
 </div>
 
-
-
-
 <div class="content">
-   <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">OOAD</a>
-                <div class="submenu-nav-items">
-                    <a class="text-white" href="/student/group-score">我的成绩</a>
-                    <a class="text-white" href="/student/teams">我的组队</a>
+    <div class="distance3"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title" >OOAD</h2>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>
+                </div>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams">我的组队</a>
                 </div>
             </div>
         </div>
-	</div>
-      <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">J2EE</a>
-                <div class="submenu-nav-items">
-                    <a class="text-white" href="#">我的成绩</a>
-                    <a class="text-white" href="/student/teams">我的组队</a>
+    </div>
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title" >J2EE</h2>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>
+                </div>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams">我的组队</a>
                 </div>
             </div>
         </div>
-      </div>
+    </div>
 
-<div class="distance2"></div>
+    <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance"></div>
 <!--
@@ -113,4 +122,16 @@
 <!--<div class="bottom-deco"></div>-->
 
 </body>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+        element.on('collapse(filter)', function(data){
+            console.log(data.show); //得到当前面板的展开状态，true或者false
+            console.log(data.title); //得到当前点击面板的标题区域DOM对象
+            console.log(data.content); //得到当前点击面板的内容区域DOM对象
+        });
+    });
+</script>
+
 </html>

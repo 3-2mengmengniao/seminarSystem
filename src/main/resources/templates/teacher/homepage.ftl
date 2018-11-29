@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css"		 rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -71,9 +72,17 @@
         </div>
     </div>
 </div>
+<!--
 <div class="distance5"></div>
 <a class="text-center welcome">${name},${account}</a>
 <a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
+-->
+<fieldset class="layui-elem-field">
+    <legend>讨论课管理系统欢迎您</legend>
+    <div class="layui-field-box">
+    ${name},${account}
+    </div>
+</fieldset>
 
 
 <div class="landing-navigation">
