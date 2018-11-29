@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data){
+                alert(data);
                 if(data=="200")
                     window.location.href="/teacher/homepage";
                 else if(data=="204")

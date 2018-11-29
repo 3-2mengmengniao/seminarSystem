@@ -50,9 +50,9 @@
 </div>
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
-        <div class="big-notification green-notification">
-            <h3 class="uppercase">Message Sent </h3>
-            <a href="#" class="close-big-notification">x</a>
+        <div class="big-notification red-notification">
+            <#--<h3 class="uppercase">Message Sent </h3>-->
+            <#--<a href="#" class="close-big-notification">x</a>-->
             <p>账号密码错误！请再次尝试</p>
         </div>
     </div>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -37,7 +39,9 @@ public class HomeController {
 
     }
 
+
     @RequestMapping(value = "/login", method = POST)
+    @ResponseBody
     public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
         //获得session
         HttpSession session = request.getSession();
@@ -64,6 +68,7 @@ public class HomeController {
             model.addAttribute("account",student.getAccount());
             model.addAttribute("name",student.getName());
             String  status="204";
+            System.out.println(status);
             return status;
         }
     }
