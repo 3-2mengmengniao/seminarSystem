@@ -2773,7 +2773,7 @@ select[multiple].form-group-lg .form-control {
     float: right;
     padding-left: 20px;
     margin-right: 8%;
-    margin-top:-345px;
+    margin-top:-240px;
     font-size: 14px;
     font-weight: normal;
     line-height: 15px;
@@ -2800,7 +2800,7 @@ select[multiple].form-group-lg .form-control {
     float: right;
     padding-left: 20px;
     margin-right: 8%;
-    margin-top:-375px;
+    margin-top:-240px;
     font-size: 14px;
     font-weight: normal;
     line-height: 15px;
@@ -2820,14 +2820,14 @@ select[multiple].form-group-lg .form-control {
   }
 }
 
-@media (min-width: 1080px){
+@media (min-width: 1024px){
   .my-btn{
     display: inline-block;
     padding: 6px 12px;
     float: right;
     padding-left: 20px;
     margin-right:8%;
-    margin-top:-385px;
+    margin-top:-240px;
     font-size: 14px;
     font-weight: normal;
     line-height: 15px;

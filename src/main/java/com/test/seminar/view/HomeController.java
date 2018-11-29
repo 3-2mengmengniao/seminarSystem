@@ -27,14 +27,15 @@ public class HomeController {
         HttpSession session = request.getSession();
         String status = (String) session.getAttribute("status");
         if (status == null) {
-
+            return "login";
         } else if (status.equals("401")) {
-            model.addAttribute("message", "账号或密码错误，请重新输入");
+            model.addAttribute("message", "账号或密码有误，请重新输入！");
             session.setAttribute("status", null);
+            return "redirect:/login";
         } else {
-
+            return "login";
         }
-        return "login";
+
     }
 
     @RequestMapping(value = "/login", method = POST)
