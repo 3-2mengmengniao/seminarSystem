@@ -2,6 +2,12 @@ package com.test.seminar.entity;
 
 import java.math.BigInteger;
 
+/**
+ *
+ * @author zhenweiwang
+ * @date 2018/11/26
+ */
+
 public class Student {
     private BigInteger id;
     private String account;
