@@ -111,7 +111,7 @@ body{
 
 @media(max-width:768px ){
 	.right-image-div{
-		margin-top:-510px;
+		margin-top:-403px;
 		margin-right:10%;
 		float:right;
 	}
@@ -126,7 +126,7 @@ body{
 
 @media(min-width:768px ){
 	.right-image-div{
-		margin-top:-543px;
+		margin-top:-403px;
 		margin-right:10%;
 		float:right;
 	}
@@ -140,7 +140,7 @@ body{
 
 @media(min-width:1024px ){
 	.right-image-div{
-		margin-top:-550px;
+		margin-top:-403px;
 		margin-right:9%;
 		float:right;
 	}
@@ -502,7 +502,7 @@ and (min-device-height: 801px){
 		display:none;
 		overflow:visible!important;
 		background-color:#FFFFFF;
-		border-bottom:solid 3px #009688;
+		border-bottom:solid 3px #009688 ;
 		border-top:solid 3px #009688;
 		position:absolute;
 		right:4%;
