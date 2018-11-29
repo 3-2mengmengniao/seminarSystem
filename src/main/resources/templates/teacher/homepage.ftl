@@ -77,12 +77,21 @@
 <a class="text-center welcome">${name},${account}</a>
 <a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
 -->
-<fieldset class="layui-elem-field">
-    <legend>讨论课管理系统欢迎您</legend>
-    <div class="layui-field-box">
-    ${name},${account}
+
+
+<div style="margin-left: 8%;margin-right:8%;padding:10px;text-align:center;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">${name},${account}</div>
+                <div class="layui-card-body">
+                    讨论课管理系统欢迎您！
+                </div>
+            </div>
+        </div>
     </div>
-</fieldset>
+</div>
+
 
 
 <div class="landing-navigation">

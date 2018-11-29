@@ -5,6 +5,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <title>登录</title>
     <link href="/styles/style.css" rel="stylesheet" type="text/css">
@@ -14,6 +15,8 @@
     <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css" rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/layui/layui.js"></script>
+
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -89,7 +92,7 @@
                    </div>
         </#if>
             <div class="formSubmitButtonErrorsWrap">
-                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="登录" data-formId="contactForm"/>
+                <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="登录" data-formId="contactForm"/>
                 </p>
             </div>
             </p>
