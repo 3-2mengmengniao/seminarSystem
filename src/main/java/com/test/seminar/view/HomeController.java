@@ -68,7 +68,6 @@ public class HomeController {
             model.addAttribute("account",student.getAccount());
             model.addAttribute("name",student.getName());
             String  status="204";
-            System.out.println(status);
             return status;
         }
     }
