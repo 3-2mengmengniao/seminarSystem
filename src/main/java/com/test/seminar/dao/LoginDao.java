@@ -8,7 +8,20 @@ import com.test.seminar.entity.Teacher;
  * @date 2018/11/26
  */
 public interface LoginDao {
+
+    /**
+     *
+     * @param account
+     * @param password
+     * @return
+     */
     Student studentLogin(String account, String password);
 
+    /**
+     *
+     * @param account
+     * @param password
+     * @return
+     */
     Teacher teacherLogin(String account, String password);
 }
