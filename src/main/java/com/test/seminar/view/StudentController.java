@@ -44,11 +44,6 @@ public class StudentController {
         return "student/group-score";
     }
 
-    @RequestMapping(value = "/seminar_info_end")
-    public String seminarInfoEnd(Model model) {
-        return "student/selected_seminar_homepage";
-    }
-
     @RequestMapping(value = "/seminar_info_begin")
     public String seminarInfoBegin(Model model) {
         return "student/seminar_info_begin";
@@ -78,4 +73,28 @@ public class StudentController {
     public String readyEnrollment(Model model) {
         return "student/ready_enrollment";
     }
+
+    @RequestMapping(value = "/begin_present")
+    public String beginPresent(Model model) {
+        return "student/begin_present";
+    }
+
+    @RequestMapping(value = "/selected_seminar_homepage")
+    public String selectedSeminarHomepage(Model model) {
+        return "student/selected_seminar_homepage";
+    }
+
+    @RequestMapping(value = "/selected_seminar_enrollment")
+    public String selectedSeminarEnrollment(Model model) {
+        return "student/selected_seminar_enrollment";
+    }
+
+    @RequestMapping(value = "/selected_seminar_info")
+    public String selectedSeminarInfo(Model model) { return "student/selected_seminar_info"; }
+
+    @RequestMapping(value = "/score")
+    public String score(Model model) { return "student/score"; }
+
+    @RequestMapping(value = "/seminar_end")
+    public String seminarEnd(Model model) { return "student/seminar_end"; }
 }
