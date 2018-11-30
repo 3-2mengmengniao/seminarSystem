@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.TeacherMapper">
+
+    <resultMap id="teacherResultMap" type="com.test.seminar.entity.Teacher">
+        <id property="id" column="id" />
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="active" column="is_active"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="emailReceiveInterval" column="email_receive_interval"/>
+    </resultMap>
+
+    <select id="getTeacherByTeacherId" resultMap="teacherResultMap">
+        SELECT id,account,password,is_active,name,email,email_receive_interval
+        FROM teacher
+        WHERE id=#{teacherId}
+    </select>
+
+    <insert id="insertTeacher">
+        insert into teacher(account,password,is_active,name,email,email_receive_interval)
+        values(#{teacher.account},#{teacher.password},#{teacher.active},#{teacher.name},#{teacher.email},#{teacher.emailReceiveInterval})
+    </insert>
+
+    <update id="updateTeacherByTeacherId">
+        update teacher
+        <set>
+            <if test="teacher.account!=null">
+                account=#{teacher.account},
+            </if>
+            <if test="teacher.password!=null">
+                password=#{teacher.password},
+            </if>
+            <if test="teacher.active!=null">
+                is_active=#{teacher.active},
+            </if>
+            <if test="teacher.name!=null">
+                name=#{teacher.name},
+            </if>
+            <if test="teacher.email!=null">
+                email=#{teacher.email},
+            </if>
+            <if test="teacher.emailReceiveInterval!=null">
+                email_receive_interval=#{teacher.emailReceiveInterval},
+            </if>
+        </set>
+        where id=#{student.id}
+    </update>
+
+    <delete id="deleteTeacherByTeacherId">
+        delete from teacher where id=#{teacherId}
+    </delete>
+</mapper>

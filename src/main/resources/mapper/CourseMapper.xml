@@ -35,9 +35,9 @@
     </select>
 
     <insert id="insertCourse">
-        insert into course(id,teacher_id,introduction,presentation_proportion,question_proportion,
+        insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
         report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time)
-        values(#{course.id},#{course.teacherId},#{course.introduction},
+        values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
         #{course.name},#{course.minTeamMember},#{course.maxTeamMember},
         #{course.teamStartTime},#{course.teamEndTime})
@@ -46,9 +46,6 @@
     <update id="updateCourseByCourseId">
         update course
         <set>
-            <if test="course.id!=null">
-                id=#{course.id},
-            </if>
             <if test="course.teacherId!=null">
                 teacher_id=#{course.teacherId},
             </if>

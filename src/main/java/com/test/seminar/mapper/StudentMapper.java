@@ -25,7 +25,7 @@ public interface StudentMapper {
     /**
      * 创建新的学生账户
      * @param student
-     * @return 新建学生的ID
+     * @return
      */
     void insertStudent(Student student);
 
@@ -37,7 +37,7 @@ public interface StudentMapper {
     void updateStudentByStudentId(Student student);
 
     /**
-     *
+     * 删除学生
      * @param studentId
      * @return
      */

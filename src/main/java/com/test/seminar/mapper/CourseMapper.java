@@ -22,40 +22,40 @@ public interface CourseMapper {
      * @param courseId
      * @return
      */
-    Course getCourseByCourseId(@Param("courseId") BigInteger courseId);
+    Course getCourseByCourseId(BigInteger courseId);
 
     /**
      * 通过老师ID获取课程列表
      * @param teacherId
      * @return
      */
-    List<Course> getCourseByTeacherId(@Param("teacherId")BigInteger teacherId);
+    List<Course> getCourseByTeacherId(BigInteger teacherId);
 
     /**
      * 通过学生ID获取课程列表
      * @param studentId
      * @return
      */
-    List<Course> getCourseByStudentId(@Param("studentId")BigInteger studentId);
+    List<Course> getCourseByStudentId(BigInteger studentId);
 
     /**
      * 创建新的课程账户
      * @param course
      * @return
      */
-    void insertCourse(@Param("course")Course course);
+    void insertCourse(Course course);
 
     /**
      * 更改课程信息
      * @param course
      * @return
      */
-    void updateCourseByCourseId(@Param("course")Course course);
+    void updateCourseByCourseId(Course course);
 
     /**
      *
      * @param courseId
      * @return
      */
-    void deleteCourseByCourseId(@Param("courseId")BigInteger courseId);
+    void deleteCourseByCourseId(BigInteger courseId);
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.StudentMapper">
+
+    <resultMap id="studentResultMap" type="com.test.seminar.entity.Student">
+        <id property="id" column="id" />
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="active" column="is_active"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="emailReceiveInterval" column="email_receive_interval"/>
+    </resultMap>
+
+    <select id="getStudentByStudentId" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,name,email,email_receive_interval
+        FROM student
+        WHERE id=#{studentId}
+    </select>
+
+    <insert id="insertStudent">
+        insert into student(account,password,is_active,name,email,email_receive_interval)
+        values(#{student.account},#{student.password},#{student.active},#{student.name},#{student.email},#{student.emailReceiveInterval})
+    </insert>
+
+    <update id="updateStudentByStudentId">
+        update student
+        <set>
+            <if test="student.account!=null">
+                account=#{student.account},
+            </if>
+            <if test="student.password!=null">
+                password=#{student.password},
+            </if>
+            <if test="student.active!=null">
+                is_active=#{student.active},
+            </if>
+            <if test="student.name!=null">
+                name=#{student.name},
+            </if>
+            <if test="student.email!=null">
+                email=#{student.email},
+            </if>
+            <if test="student.emailReceiveInterval!=null">
+                email_receive_interval=#{student.emailReceiveInterval},
+            </if>
+        </set>
+        where id=#{student.id}
+    </update>
+
+    <delete id="deleteStudentByStudentId">
+        delete from student where id=#{studentId}
+    </delete>
+</mapper>

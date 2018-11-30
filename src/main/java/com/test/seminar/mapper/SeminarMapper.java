@@ -2,6 +2,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.SeminarInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -37,7 +38,7 @@ public interface SeminarMapper {
     void updateSeminarInfoBySeminarInfoId(SeminarInfo SeminarInfo);
 
     /**
-     *
+     * 删除讨论课信息
      * @param SeminarInfoId
      * @return
      */

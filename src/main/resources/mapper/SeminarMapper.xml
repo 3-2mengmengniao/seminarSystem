@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.SeminarMapper">
+
+    <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
+        <id property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="name" column="name"/>
+        <result property="introduction" column="introduction"/>
+        <result property="maxGroup" column="max_group"/>
+        <result property="visible" column="is_visible"/>
+        <result property="reportDDL" column="report_ddl"/>
+    </resultMap>
+
+    <select id="getSeminarBySeminarId" resultMap="seminarInfoResultMap">
+        select id,course_id,name,introduction,max_group,is_visible,report_ddl
+        from seminar_info
+        where id=#{SeminarId}
+    </select>
+
+    <insert id="insertSeminar">
+        insert into seminar_info(course_id,name,introduction,max_group,is_visible,report_ddl)
+        values(#{SeminarInfo.courseId},#{SeminarInfo.name},#{SeminarInfo.introduction},
+        #{SeminarInfo.maxGroup},#{SeminarInfo.visible},#{SeminarInfo.reportDDL})
+    </insert>
+
+    <update id="updateSeminarInfoBySeminarInfoId">
+        update seminar_info
+        <set>
+            <if test="SeminarInfo.courseId!=null">
+                course_id=#{SeminarInfo.courseId},
+            </if>
+            <if test="SeminarInfo.name!=null">
+                name=#{SeminarInfo.name},
+            </if>
+            <if test="SeminarInfo.introduction!=null">
+                introduction=#{SeminarInfo.introduction},
+            </if>
+            <if test="SeminarInfo.maxGroup!=null">
+                max_group=#{SeminarInfo.maxGroup},
+            </if>
+            <if test="SeminarInfo.visible!=null">
+                is_visible=#{SeminarInfo.visible},
+            </if>
+            <if test="SeminarInfo.reportDDL!=null">
+                report_ddl=#{SeminarInfo.reportDDL},
+            </if>
+        </set>
+        where id=#{SeminarInfo.id}
+    </update>
+
+    <delete id="deleteSeminarInfoBySeminarInfoId">
+        delete from seminar_info where id=#{SeminarInfoId}
+    </delete>
+</mapper>

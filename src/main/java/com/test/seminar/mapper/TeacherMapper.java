@@ -38,7 +38,7 @@ public interface TeacherMapper {
     void updateTeacherByTeacherId(Teacher teacher);
 
     /**
-     *
+     * 删除老师
      * @param teacherId
      * @return
      */
