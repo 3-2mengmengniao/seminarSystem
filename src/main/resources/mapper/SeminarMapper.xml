@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.SeminarMapper">
+
+    <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
+        <id property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="name" column="name"/>
+        <result property="introduction" column="introduction"/>
+        <result property="maxGroup" column="max_group"/>
+        <result property="visible" column="is_visible"/>
+        <result property="reportDDL" column="report_ddl"/>
+    </resultMap>
+
+    <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
+        <id property="id" column="id"/>
+        <result property="classId" column="class_id"/>
+        <result property="seminarInfoId" column="seminarinfo_id"/>
+    </resultMap>
+
+    <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
+        select id,course_id,name,introduction,max_group,is_visible,report_ddl
+        from seminar_info
+        where id=#{seminarInfoId}
+    </select>
+
+    <insert id="insertSeminarInfo">
+        insert into seminar_info(course_id,name,introduction,max_group,is_visible,report_ddl)
+        values(#{seminarInfo.courseId},#{seminarInfo.name},#{seminarInfo.introduction},
+        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL})
+    </insert>
+
+    <update id="updateSeminarInfo">
+        update seminar_info
+        <set>
+            <if test="seminarInfo.courseId!=null">
+                course_id=#{seminarInfo.courseId},
+            </if>
+            <if test="seminarInfo.name!=null">
+                name=#{seminarInfo.name},
+            </if>
+            <if test="seminarInfo.introduction!=null">
+                introduction=#{seminarInfo.introduction},
+            </if>
+            <if test="seminarInfo.maxGroup!=null">
+                max_group=#{seminarInfo.maxGroup},
+            </if>
+            <if test="seminarInfo.visible!=null">
+                is_visible=#{seminarInfo.visible},
+            </if>
+            <if test="seminarInfo.reportDDL!=null">
+                report_ddl=#{seminarInfo.reportDDL},
+            </if>
+        </set>
+        where id=#{seminarInfo.id}
+    </update>
+
+    <delete id="deleteSeminarInfoBySeminarInfoId">
+        delete from seminar_info where id=#{seminarInfoId}
+    </delete>
+
+
+    <select id="getSeminarControlBySeminarControlId" resultMap="seminarControlResultMap">
+        select id,class_id,seminarinfo_id
+        from seminar_control
+        where id=#{seminarControlId}
+    </select>
+
+    <insert id="insertSeminarControl">
+        insert into seminar_control(class_id,seminarinfo_id)
+        values(#{seminarControl.classId},#{seminarControl.seminarInfoId})
+    </insert>
+
+    <update id="updateSeminarControl">
+        update seminar_control
+        <set>
+            <if test="seminarControl.classId!=null">
+                class_id=#{seminarControl.classId},
+            </if>
+            <if test="seminarControl.seminarInfoId!=null">
+                seminarinfo_id=#{seminarControl.seminarInfoId},
+            </if>
+        </set>
+        where id=#{seminarControl.id}
+    </update>
+
+    <delete id="deleteSeminarControlBySeminarControlId">
+        delete from seminar_control where id=#{seminarControlId}
+    </delete>
+
+    <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
+        select id,class_id,seminarinfo_id
+        from seminar_control
+        where class_id=#{classId} and seminarinfo_id=#{seminarInfoId}
+    </select>
+
+    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
+        select seminar_info.id,seminar_info.course_id,name,introduction,max_group,is_visible,report_ddl
+        from seminar_info,round
+        where round.id=#{roundId} and seminar_info.course_id=round.course_id
+    </select>
+</mapper>

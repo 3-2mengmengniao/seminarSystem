@@ -9,23 +9,23 @@ import java.math.BigInteger;
 
 public class Round {
     private BigInteger id;
-    private BigInteger classId;
+    private BigInteger courseId;
     private int enrollNumber;
-    private int caculateMethod;
+    private int calculateMethod;
 
     public BigInteger getId() {return id; }
 
     public void setId(BigInteger id) {this.id = id; }
 
-    public BigInteger getClassId() { return classId; }
+    public BigInteger getClassId() { return courseId; }
 
-    public void setClassId(BigInteger classId) {this.classId = classId; }
+    public void setClassId(BigInteger classId) {this.courseId = classId; }
 
     public int getEnrollNumber() {return enrollNumber; }
 
     public void setEnrollNumber(int enrollNumber) {this.enrollNumber = enrollNumber; }
 
-    public int getCaculateMethod() {return caculateMethod; }
+    public int getCalculateMethod() {return calculateMethod; }
 
-    public void setCaculateMethod(int caculateMethod) {this.caculateMethod = caculateMethod; }
+    public void setCalculateMethod(int calculateMethod) {this.calculateMethod = calculateMethod; }
 }

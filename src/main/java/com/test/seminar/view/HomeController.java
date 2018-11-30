@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
+import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ public class HomeController {
 
     @RequestMapping(value = "/login", method = POST)
     @ResponseBody
-    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) {
+    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model) throws UserNotFoundException {
         //获得session
         HttpSession session = request.getSession();
         //登陆验证
