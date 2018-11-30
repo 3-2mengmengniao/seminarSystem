@@ -36,6 +36,11 @@ jQuery(document).ready(function($) {
                 {
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
+                    var onFocus = document.activeElement;
+                    if(onFocus.id === "contactEmailField") {
+                        $('#formSuccessMessageWrap').fadeOut(500);
+                    }
+
                 }
         });
         //window.location.href='1vali_psw.html';

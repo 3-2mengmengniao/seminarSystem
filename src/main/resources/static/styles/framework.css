@@ -204,7 +204,6 @@ td {
 	padding-bottom: 9px;
 	line-height: 25px;
 	vertical-align: middle;
-	background-color: #fdfdfd;
 }
 
 tr:hover > td {
@@ -1035,10 +1034,21 @@ table tr{
 	padding-left:20px;
 }
 
-table tr td:first-child{
-	text-align: left;
-	padding-left:20px;
-	border-left: 0;
+
+
+@media screen and (min-width:768px){
+	table tr td:first-child{
+		text-align: left;
+		padding-left:7%;
+		border-left: 0;
+	}
+}
+@media screen and (max-width:768px){
+	table tr td:first-child{
+		text-align: left;
+		padding-left:5%;
+		border-left: 0;
+	}
 }
 
 table tr td {
@@ -1460,14 +1470,14 @@ table tr:hover td{
 
 .static-notification-green{
 	overflow:hidden;
-	background-color:#27ae60;
-	color:#FFFFFF;
-	margin-bottom:20px;
+	color:#3c3c3c;
+	text-align:center;
 }
 
 .static-notification-green p{
 	margin-top:10px;
 	margin-bottom:10px;
+	font-size:16px;
 }
 
 .static-notification-yellow{
@@ -1610,8 +1620,8 @@ table tr:hover td{
 	text-transform:uppercase;
 	background-image:url(../images/icons/右展开.png);
 	background-repeat:no-repeat;
-	background-size:35px 35px;
-	background-position:90% 8px;
+	background-size: 38px 38px;
+	background-position: 97% 4px;
 }
 
 .my-deploy-toggle-2{

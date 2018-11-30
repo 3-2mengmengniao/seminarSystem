@@ -36,11 +36,17 @@ $(document).ready(function(){
 	
 	//Notifications
 		
-	$('.tap-dismiss-notification').click(function(){
-		$(this).fadeOut();
+	$('#contactNameField').focus(function(){
+		$('#contactNameFieldError').hide();
+        $('#formSuccessMessageWrap').hide();
 		return false;
 	});
-	
+    $('#contactNameField').focus(function(){
+        $('#contactEmailFieldError').hide();
+        $('#formSuccessMessageWrap').hide();
+        return false;
+    });
+
 	$('.close-big-notification').click(function(){
 		$(this).parent().fadeOut();
 		return false;
