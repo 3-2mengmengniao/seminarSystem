@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css"		 rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -68,9 +69,16 @@
     </div>
 </div>
 <div class="distance5"></div>
-<a class="text-center welcome">${name},${account}</a>
-<a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
-
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.config({
+            time:2000
+            ,offset: '120px'
+        })
+        layer.msg('${name},${account}<br>讨论课管理系统欢迎您！');
+    });
+</script>
 
 <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div>

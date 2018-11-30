@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 </head>
 <body>
@@ -112,6 +113,73 @@
             </div>
         </div>
     </div>
+
+    <div class="center-navigation">
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">第一轮</h2>
+            <div class="layui-colla-content layui-show">
+                <div class="layui-collapse" lay-accordion="">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
+                        </div>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
+                        </div>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
+                        </div>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
+                        </div>
+                        <div class="layui-colla-content">
+                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <h2 class="layui-colla-title">第二轮</h2>
+                <div class="layui-colla-content layui-show">
+                    <div class="layui-collapse" lay-accordion="">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
+                            </div>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
+                            </div>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                            </div>
+                        </div>
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
+                            </div>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
+                            </div>
+                            <div class="layui-colla-content">
+                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="distance2"> </div>
     <div class="distance2"> </div>
     <p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
@@ -135,4 +203,15 @@
 
 
 </body>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+        element.on('collapse(filter)', function(data){
+            console.log(data.show); //得到当前面板的展开状态，true或者false
+            console.log(data.title); //得到当前点击面板的标题区域DOM对象
+            console.log(data.content); //得到当前点击面板的内容区域DOM对象
+        });
+    });
+</script>
 </html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
+
 
     <title>登录</title>
     <link href="/styles/style.css" rel="stylesheet" type="text/css">
@@ -15,8 +15,7 @@
     <link href="/styles/swipebox.css" rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css" rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="/layui/layui.js"></script>
-
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -29,10 +28,12 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 </head>
 <body>
+
+
 <div id="preloader">
     <div id="status">
         <p class="center-text">
@@ -53,10 +54,10 @@
 </div>
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
-        <div class="big-notification green-notification">
+        <div class="static-notification-green tap-dismiss-notification">
             <#--<h3 class="uppercase">Message Sent </h3>-->
             <#--<a href="#" class="close-big-notification">x</a>-->
-            <p>账号密码错误！请再次尝试</p>
+            <p style="color:#c9302c;">账号或密码有误，请重新输入！</p>
         </div>
     </div>
     <form action="/login" method="post" class="contactForm" id="contactForm">
@@ -84,13 +85,6 @@
             </div>
             <a class="forget-password" onclick="location='forget-password.html'">忘记密码？</a>
             <div class="distance"></div>
-        <#if message??>
-                   <div class="formValidationError" id="contactEmailFieldError">
-                       <div class="static-notification-red tap-dismiss-notification">
-                           <p class="uppercase">${message}</p>
-                       </div>
-                   </div>
-        </#if>
             <div class="formSubmitButtonErrorsWrap">
                 <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="登录" data-formId="contactForm"/>
                 </p>
