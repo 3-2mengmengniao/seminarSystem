@@ -80,27 +80,27 @@
             <tbody>
             <tr>
                 <td>第一组：</td>
-                <td>1-1业务流程.ppt</td>
+                <td style="color:#009688;">1-1业务流程.ppt</td>
             </tr>
             <tr>
                 <td>第二组：</td>
-                <td>1-2业务流程.ppt</td>
+                <td style="color:#009688;">1-2业务流程.ppt</td>
             </tr>
             <tr>
                 <td>第三组：</td>
-                <td>1-3业务流程.ppt</td>
+                <td style="color:#009688;">1-3业务流程.ppt</td>
             </tr>
             <tr>
                 <td>第四组：</td>
-                <td>1-4业务流程.ppt</td>
+                <td style="color:#009688;">1-4业务流程.ppt</td>
             </tr>
             <tr>
                 <td>第五组：</td>
-                <td>1-5业务流程.ppt</td>
+                <td style="color:#009688;">1-5业务流程.ppt</td>
             </tr>
             <tr>
                 <td>第六组：</td>
-                <td>1-6业务流程.ppt</td>
+                <td style="color:#009688;">1-6业务流程.ppt</td>
             </tr>
             </tbody>
         </table>
