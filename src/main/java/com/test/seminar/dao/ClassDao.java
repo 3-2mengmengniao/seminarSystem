@@ -22,12 +22,11 @@ public interface ClassDao {
     void insertCourseClass(CourseClass courseClass);
 
     /**
-     * 根据班级ID更改班级信息
-     * @param courseClassId
+     * 更改班级信息
      * @param courseClass
      * @return
      */
-    void updateCourseClassByCourseClassId(BigInteger courseClassId, CourseClass courseClass);
+    void updateCourseClassByCourseClassId( CourseClass courseClass);
 
     /**
      *

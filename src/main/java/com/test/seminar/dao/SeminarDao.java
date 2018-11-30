@@ -1,8 +1,10 @@
 package com.test.seminar.dao;
 
+import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author cxh
@@ -12,30 +14,33 @@ public interface SeminarDao {
 
     /**
      * 通过ID获取讨论课信息
-     * @param SeminarId
+     * @param seminarId
      * @return
      */
-    SeminarInfo getSeminarBySeminarId(BigInteger SeminarId);
+    SeminarInfo getseminarBySeminarId(BigInteger seminarId);
 
     /**
      * 创建新的讨论课信息
-     * @param SeminarInfo
+     * @param seminarInfo
      * @return 新建讨论课信息的ID
      */
-    void insertSeminar(SeminarInfo SeminarInfo);
+    void insertSeminar(SeminarInfo seminarInfo);
 
     /**
-     * 根据讨论课信息ID更改讨论课信息
-     * @param SeminarInfoId
-     * @param SeminarInfo
+     * 更改讨论课信息
+     * @param seminarInfo
      * @return
      */
-    void updateSeminarInfoBySeminarInfoId(BigInteger SeminarInfoId, SeminarInfo SeminarInfo);
+    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo);
 
     /**
      *
-     * @param SeminarInfoId
+     * @param seminarInfoId
      * @return
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger SeminarInfoId);
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+
+    List<SeminarControl> getSemniarControlByClassId(BigInteger classId);
+
+    List<SeminarInfo> getSeminarInfoByCourseId(BigInteger courseId);
 }
