@@ -60,7 +60,7 @@ public interface SeminarDao {
     void updateSeminarControl(SeminarInfo seminarInfo);
 
     /**
-     * 
+     *
      * @param seminarControlId
      */
     void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
