@@ -15,8 +15,6 @@ public class CourseClass {
 
     public BigInteger getId() {return id; }
 
-    public void setId(BigInteger id) {this.id = id; }
-
     public BigInteger getCourseId() {return courseId; }
 
     public void setCourseId(BigInteger courseId) {this.courseId = courseId; }

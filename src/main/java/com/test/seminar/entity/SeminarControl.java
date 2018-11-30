@@ -14,9 +14,7 @@ public class SeminarControl {
 
     public BigInteger getId() {return id; }
 
-    public void setId(BigInteger id) {this.id = id; }
-
-    public BigInteger getRoundId() {return classId; }
+    public BigInteger getClassId() {return classId; }
 
     public void setRoundId(BigInteger roundId) {this.classId = roundId; }
 

@@ -21,8 +21,6 @@ public class Question {
 
     public BigInteger getTeamId() {return teamId; }
 
-    public void setTeamId(BigInteger teamId) {this.teamId = teamId; }
-
     public BigInteger getPresentationId() {return presentationId; }
 
     public void setPresentationId(BigInteger presentationId) {this.presentationId = presentationId; }
