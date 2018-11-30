@@ -25,12 +25,11 @@ public interface StudentDao {
     void insertStudent(Student student);
 
     /**
-     * 根据学生ID更改学生信息
-     * @param studentId
+     * 更改学生信息
      * @param student
      * @return
      */
-    void updateStudentByStudentId(BigInteger studentId, Student student);
+    void updateStudentByStudentId(Student student);
 
     /**
      *

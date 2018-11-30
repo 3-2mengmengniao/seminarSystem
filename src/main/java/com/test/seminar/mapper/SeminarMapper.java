@@ -1,15 +1,20 @@
-package com.test.seminar.dao;
+package com.test.seminar.mapper;
 
 import com.test.seminar.entity.SeminarInfo;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 
 /**
- * @author cxh
+ *
+ * @author zhenweiwang
  * @date 2018/11/29
+ *
  */
-public interface SeminarDao {
-
+@Mapper
+@Component
+public interface SeminarMapper {
     /**
      * 通过ID获取讨论课信息
      * @param SeminarId
@@ -25,7 +30,7 @@ public interface SeminarDao {
     void insertSeminar(SeminarInfo SeminarInfo);
 
     /**
-     * 根据讨论课信息ID更改讨论课信息
+     * 更改讨论课信息
      * @param SeminarInfo
      * @return
      */

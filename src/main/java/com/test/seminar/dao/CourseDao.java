@@ -14,10 +14,10 @@ public interface CourseDao {
 
     /**
      * 通过ID获取课程信息
-     * @param CourseId
+     * @param courseId
      * @return
      */
-    Course getCourseByCourseId(BigInteger CourseId);
+    Course getCourseByCourseId(BigInteger courseId);
 
     /**
      * 通过老师ID获取课程列表
@@ -35,23 +35,22 @@ public interface CourseDao {
 
     /**
      * 创建新的课程账户
-     * @param Course
-     * @return 新建课程的ID
-     */
-    void insertCourse(Course Course);
-
-    /**
-     * 根据课程ID更改课程信息
-     * @param CourseId
-     * @param Course
+     * @param course
      * @return
      */
-    void updateCourseByCourseId(BigInteger CourseId, Course Course);
+    void insertCourse(Course course);
+
+    /**
+     * 更改课程信息
+     * @param course
+     * @return
+     */
+    void updateCourseByCourseId(Course course);
 
     /**
      *
-     * @param CourseId
+     * @param courseId
      * @return
      */
-    void deleteCourseByCourseId(BigInteger CourseId);
+    void deleteCourseByCourseId(BigInteger courseId);
 }

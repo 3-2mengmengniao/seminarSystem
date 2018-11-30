@@ -1,6 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.test.mapper.CourseMapper">
+<mapper namespace="com.test.seminar.mapper.CourseMapper">
 
+    <resultMap id="courseResultMap" type="com.test.seminar.entity.Course">
+        <id property="id" column="id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="introduction" column="introduction"/>
+        <result property="presentationProportion" column="presentation_proportion"/>
+        <result property="questionProportion" column="question_proportion"/>
+        <result property="reportProportion" column="report_proportion"/>
+        <result property="name" column="name"/>
+        <result property="minTeamMember" column="min_team_member"/>
+        <result property="maxTeamMember" column="max_team_member"/>
+        <result property="teamStartTime" column="team_start_time"/>
+        <result property="teamEndTime" column="team_end_time"/>
+    </resultMap>
 
+    <select id="getCourseByCourseId" resultMap="courseResultMap">
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time
+        from course
+        where id=#{courseId}
+    </select>
+
+    <select id="getCourseByTeacherId" resultMap="courseResultMap">
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time
+        from course
+        where teacher_id=#{teacherId}
+    </select>
+
+    <select id="getCourseByStudentId" resultMap="courseResultMap">
+        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.name,min_team_member,max_team_member,team_start_time,team_end_time
+        FROM course,course_class,class_student_table
+        WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
+    </select>
+
+    <insert id="insertCourse">
+        insert into course(id,teacher_id,introduction,presentation_proportion,question_proportion,
+        report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time)
+        values(#{course.id},#{course.teacherId},#{course.introduction},
+        #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
+        #{course.name},#{course.minTeamMember},#{course.maxTeamMember},
+        #{course.teamStartTime},#{course.teamEndTime})
+    </insert>
+
+    <update id="updateCourseByCourseId">
+        update course
+        <set>
+            <if test="course.id!=null">
+                id=#{course.id},
+            </if>
+            <if test="course.teacherId!=null">
+                teacher_id=#{course.teacherId},
+            </if>
+            <if test="course.introduction!=null">
+                introduction=#{course.introduction},
+            </if>
+            <if test="course.presentationProportion!=null">
+                presentation_proportion=#{course.presentationProportion},
+            </if>
+            <if test="course.question_proportion!=null">
+                question_proportion=#{course.questionProportion},
+            </if>
+            <if test="course.report_proportion!=null">
+                report_proportion=#{course.reportProportion},
+            </if>
+            <if test="course.name!=null">
+                name=#{course.name},
+            </if>
+            <if test="course.min_team_member!=null">
+                min_team_member=#{course.minTeamMember},
+            </if>
+            <if test="course.max_team_member!=null">
+                max_team_member=#{course.maxTeamMember},
+            </if>
+            <if test="course.team_start_time!=null">
+                team_start_time=#{course.teamStartTime},
+            </if>
+            <if test="course.team_end_time!=null">
+                team_end_time=#{course.teamEndTime}
+            </if>
+        </set>
+        where id=#{course.id}
+    </update>
+
+    <delete id="deleteCourseByCourseId">
+        delete from course where id=#{courseId}
+    </delete>
 </mapper>
