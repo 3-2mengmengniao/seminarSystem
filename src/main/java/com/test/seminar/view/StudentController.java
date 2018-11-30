@@ -2,13 +2,9 @@ package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import com.test.seminar.entity.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/student")
@@ -50,11 +46,36 @@ public class StudentController {
 
     @RequestMapping(value = "/seminar_info_end")
     public String seminarInfoEnd(Model model) {
-        return "student/seminar_info_end";
+        return "student/selected_seminar_homepage";
     }
 
     @RequestMapping(value = "/seminar_info_begin")
     public String seminarInfoBegin(Model model) {
         return "student/seminar_info_begin";
+    }
+
+    @RequestMapping(value = "/seminar_info_ready")
+    public String seminarInfoReady(Model model) {
+        return "student/seminar_info_ready";
+    }
+
+    @RequestMapping(value = "/seminar_info_complete")
+    public String seminarInfoComplete(Model model) {
+        return "student/seminar_info_Complete";
+    }
+
+    @RequestMapping(value = "/begin_enrollment")
+    public String beginEnrollment(Model model) {
+        return "student/begin_enrollment";
+    }
+
+    @RequestMapping(value = "/complete_enrollment")
+    public String completeEnrollment(Model model) {
+        return "student/complete_enrollment";
+    }
+
+    @RequestMapping(value = "/ready_enrollment")
+    public String readyEnrollment(Model model) {
+        return "student/ready_enrollment";
     }
 }

@@ -36,11 +36,17 @@ $(document).ready(function(){
 	
 	//Notifications
 		
-	$('.tap-dismiss-notification').click(function(){
-		$(this).fadeOut();
+	$('#contactNameField').focus(function(){
+		$('#contactNameFieldError').hide();
+        $('#formSuccessMessageWrap').hide();
 		return false;
 	});
-	
+    $('#contactNameField').focus(function(){
+        $('#contactEmailFieldError').hide();
+        $('#formSuccessMessageWrap').hide();
+        return false;
+    });
+
 	$('.close-big-notification').click(function(){
 		$(this).parent().fadeOut();
 		return false;
@@ -110,12 +116,23 @@ $(document).ready(function(){
 	});
 	
 	//Submenu Nav
+    $('.submenu-nav-deploy0').click(function(){
+        $(this).toggleClass('submenu-nav-deploy-active');
+        $(this).parent().find('.submenu-nav-items0').toggle(100);
+        return false;
+    });
 	
-	$('.submenu-nav-deploy').click(function(){
+	$('.submenu-nav-deploy1').click(function(){
 		$(this).toggleClass('submenu-nav-deploy-active');
-		$(this).parent().find('.submenu-nav-items').toggle(100);
+		$(this).parent().find('.submenu-nav-items1').toggle(100);
 		return false;
 	});
+
+    $('.submenu-nav-deploy2').click(function(){
+        $(this).toggleClass('submenu-nav-deploy-active');
+        $(this).parent().find('.submenu-nav-items2').toggle(100);
+        return false;
+    });
 
 	
 	//Sliding Door

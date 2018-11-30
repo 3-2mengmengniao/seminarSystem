@@ -75,11 +75,14 @@
     <div class="container no-bottom text-list">
         <div class="container no-bottom">
             <table cellspacing='0' class="table">
+                <tr class='even'>
+                    <td> 轮次：第二轮</td>
+                </tr>
                 <tr>
                     <td> 主题：业务流程分析</td>
                 </tr>
                 <tr class='even'>
-                    <td> 课次序号：1</td>
+                    <td> 课次序号：第1次</td>
                 </tr>
                 <tr>
                     <td> 要求：界面导航图和所有界面原型设计</td>

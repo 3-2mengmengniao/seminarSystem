@@ -11,7 +11,7 @@ public class Round {
     private BigInteger id;
     private BigInteger courseId;
     private int enrollNumber;
-    private int caculateMethod;
+    private int calculateMethod;
 
     public BigInteger getId() {return id; }
 
@@ -25,7 +25,7 @@ public class Round {
 
     public void setEnrollNumber(int enrollNumber) {this.enrollNumber = enrollNumber; }
 
-    public int getCaculateMethod() {return caculateMethod; }
+    public int getCalculateMethod() {return calculateMethod; }
 
-    public void setCaculateMethod(int caculateMethod) {this.caculateMethod = caculateMethod; }
+    public void setCalculateMethod(int calculateMethod) {this.calculateMethod = calculateMethod; }
 }

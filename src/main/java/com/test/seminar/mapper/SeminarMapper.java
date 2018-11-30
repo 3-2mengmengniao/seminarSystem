@@ -1,16 +1,23 @@
-package com.test.seminar.dao;
+package com.test.seminar.mapper;
 
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.util.List;
 
 /**
- * @author cxh
+ *
+ * @author zhenweiwang
  * @date 2018/11/29
+ *
  */
-public interface SeminarDao {
+@Mapper
+@Component
+public interface SeminarMapper {
 
     /**
      * 通过ID获取讨论课信息
@@ -71,7 +78,7 @@ public interface SeminarDao {
      * @param seminarInfoId
      * @return
      */
-    SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId);
+    SeminarControl getSemniarControlByClassIdAndSeminarInfo(@Param("classId") BigInteger classId,@Param("seminarInfoId") BigInteger seminarInfoId);
 
     /**
      * 获取某轮次下的所有讨论课信息
@@ -79,5 +86,4 @@ public interface SeminarDao {
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
-
 }

@@ -71,11 +71,14 @@
     <div class="container no-bottom text-list">
         <div class="container no-bottom">
             <table cellspacing='0' class="table">
+                <tr class='even'>
+                    <td> 轮次：第二轮</td>
+                </tr>
                 <tr>
                     <td> 主题：业务流程分析</td>
                 </tr>
                 <tr class='even'>
-                    <td> 课次序号：1</td>
+                    <td> 课次序号：第1次</td>
                 </tr>
                 <tr>
                     <td> 要求：界面导航图和所有界面原型设计</td>
@@ -83,13 +86,21 @@
                 <tr class='even'>
                     <td>课程情况：已完成   <a href="#" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 </tr>
+                <tr>
+                <td> 报名情况：2016-（1）第3组<a href="#" style="display: inline;margin-left: 20px;">修改</a></td>
+            </tr>
+                <tr class='even'>
+                    <td> PPT：已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                </tr>
+                <tr >
+                    <td> 书面报告：已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
+                </tr>
             </table>
         </div>
 
-        <div class="distance4"></div>
         <div class="distance"></div>
-        <div class="distance"></div>
-        <div class="distance"></div>
+        <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">PPT提交</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>
         <!--
         <div class="decoration"></div>
         <div class="footer">

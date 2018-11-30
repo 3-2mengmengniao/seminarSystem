@@ -10,7 +10,6 @@ import java.math.BigInteger;
 public class SeminarControl {
     private BigInteger id;
     private BigInteger classId;
-    private BigInteger questionId;
     private BigInteger seminarInfoId;
 
     public BigInteger getId() {return id; }
@@ -20,10 +19,6 @@ public class SeminarControl {
     public BigInteger getRoundId() {return classId; }
 
     public void setRoundId(BigInteger roundId) {this.classId = roundId; }
-
-    public BigInteger getQuestionId() { return questionId; }
-
-    public void setQuestionId(BigInteger questionId) {this.questionId = questionId; }
 
     public BigInteger getSeminarInfoId() {return seminarInfoId; }
 
