@@ -53,4 +53,29 @@ public class StudentController {
     public String seminarInfoBegin(Model model) {
         return "student/seminar_info_begin";
     }
+
+    @RequestMapping(value = "/seminar_info_ready")
+    public String seminarInfoReady(Model model) {
+        return "student/seminar_info_ready";
+    }
+
+    @RequestMapping(value = "/seminar_info_complete")
+    public String seminarInfoComplete(Model model) {
+        return "student/seminar_info_Complete";
+    }
+
+    @RequestMapping(value = "/begin_enrollment")
+    public String beginEnrollment(Model model) {
+        return "student/begin_enrollment";
+    }
+
+    @RequestMapping(value = "/complete_enrollment")
+    public String completeEnrollment(Model model) {
+        return "student/complete_enrollment";
+    }
+
+    @RequestMapping(value = "/ready_enrollment")
+    public String readyEnrollment(Model model) {
+        return "student/ready_enrollment";
+    }
 }
