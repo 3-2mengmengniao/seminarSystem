@@ -25,12 +25,11 @@ public interface TeamDao {
     void insertTeam(Team team);
 
     /**
-     * 根据队伍信息ID更改队伍信息
-     * @param teamId
+     * 更改队伍信息
      * @param team
      * @return
      */
-    void updateTeamByTeamId(BigInteger teamId, Team team);
+    void updateTeamByTeamId(Team team);
 
     /**
      *
@@ -53,6 +52,5 @@ public interface TeamDao {
      * @return
      */
     List<Team> getTeamByCourseId(BigInteger courseId);
-
 
 }

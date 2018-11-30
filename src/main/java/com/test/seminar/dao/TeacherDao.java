@@ -25,12 +25,11 @@ public interface TeacherDao {
     void insertTeacher(Teacher teacher);
 
     /**
-     * 根据老师ID更改老师信息
-     * @param teacherId
+     * 更改老师信息
      * @param teacher
      * @return
      */
-    void updateTeacherByTeacherId(BigInteger teacherId, Teacher teacher);
+    void updateTeacherByTeacherId( Teacher teacher);
 
     /**
      *

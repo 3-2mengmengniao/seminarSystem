@@ -1,8 +1,10 @@
 package com.test.seminar.dao;
 
+import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author cxh
@@ -12,30 +14,70 @@ public interface SeminarDao {
 
     /**
      * 通过ID获取讨论课信息
-     * @param SeminarId
+     * @param seminarInfoId
      * @return
      */
-    SeminarInfo getSeminarBySeminarId(BigInteger SeminarId);
+    SeminarInfo getseminarInfoBySeminarInfoId(BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
-     * @param SeminarInfo
+     * @param seminarInfo
      * @return 新建讨论课信息的ID
      */
-    void insertSeminar(SeminarInfo SeminarInfo);
+    void insertSeminarInfo(SeminarInfo seminarInfo);
 
     /**
-     * 根据讨论课信息ID更改讨论课信息
-     * @param SeminarInfoId
-     * @param SeminarInfo
+     * 更改讨论课信息
+     * @param seminarInfo
      * @return
      */
-    void updateSeminarInfoBySeminarInfoId(BigInteger SeminarInfoId, SeminarInfo SeminarInfo);
+    void updateSeminarInfo(SeminarInfo seminarInfo);
 
     /**
      *
-     * @param SeminarInfoId
+     * @param seminarInfoId
      * @return
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger SeminarInfoId);
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getseminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarInfo
+     */
+    void insertSeminarControl(SeminarInfo seminarInfo);
+
+    /**
+     *
+     * @param seminarInfo
+     */
+    void updateSeminarControl(SeminarInfo seminarInfo);
+
+    /**
+     * 
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 获取某班级下对应的讨论课控制器
+     * @param classId
+     * @param seminarInfoId
+     * @return
+     */
+    SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId);
+
+    /**
+     * 获取某轮次下的所有讨论课信息
+     * @param roundId
+     * @return
+     */
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
 }
