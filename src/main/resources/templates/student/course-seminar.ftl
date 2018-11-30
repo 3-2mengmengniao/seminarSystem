@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
 
 
 </head>
@@ -99,6 +101,54 @@
             </div>
         </div>
     </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    </fieldset>
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">讨论课信息</h2>
+            <div class="layui-colla-content layui-show">
+
+                <div class="layui-collapse" lay-accordion="">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第一轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>对象模型设计</p>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第二轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>对象模型设计</p>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第三轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>对象模型设计</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">已报名的讨论课</h2>
+            <div class="layui-colla-content center-text">
+                <p>代码检查</p>
+            </div>
+            <div class="layui-colla-content center-text">
+                <p>对象模型设计</p>
+            </div>
+        </div>
+    </div>
 
     <div class="distance2"> </div>
     <div class="distance"> </div>
@@ -117,6 +167,16 @@
 
 <!--<div class="bottom-deco"></div>-->
 
+<script>
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element();
+        var layer = layui.layer;
 
+        //监听折叠
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+    });
+</script>
 </body>
 </html>
