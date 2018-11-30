@@ -17,12 +17,12 @@ public interface SeminarDao {
      * @param seminarInfoId
      * @return
      */
-    SeminarInfo getseminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
      * @param seminarInfo
-     * @return 新建讨论课信息的ID
+     * @return
      */
     void insertSeminarInfo(SeminarInfo seminarInfo);
 
@@ -45,19 +45,19 @@ public interface SeminarDao {
      * @param seminarControlId
      * @return
      */
-    SeminarControl getseminarControlBySeminarControlId(BigInteger seminarControlId);
+    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
 
     /**
      *
-     * @param seminarInfo
+     * @param seminarControl
      */
-    void insertSeminarControl(SeminarInfo seminarInfo);
+    void insertSeminarControl(SeminarControl seminarControl);
 
     /**
      *
-     * @param seminarInfo
+     * @param seminarControl
      */
-    void updateSeminarControl(SeminarInfo seminarInfo);
+    void updateSeminarControl(SeminarControl seminarControl);
 
     /**
      * 

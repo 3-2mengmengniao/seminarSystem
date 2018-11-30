@@ -1,11 +1,13 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  *
@@ -16,31 +18,72 @@ import java.math.BigInteger;
 @Mapper
 @Component
 public interface SeminarMapper {
+
     /**
      * 通过ID获取讨论课信息
-     * @param SeminarId
+     * @param seminarInfoId
      * @return
      */
-    SeminarInfo getSeminarBySeminarId(BigInteger SeminarId);
+    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
-     * @param SeminarInfo
-     * @return 新建讨论课信息的ID
+     * @param seminarInfo
+     * @return
      */
-    void insertSeminar(SeminarInfo SeminarInfo);
+    void insertSeminarInfo(SeminarInfo seminarInfo);
 
     /**
      * 更改讨论课信息
-     * @param SeminarInfo
+     * @param seminarInfo
      * @return
      */
-    void updateSeminarInfoBySeminarInfoId(SeminarInfo SeminarInfo);
+    void updateSeminarInfo(SeminarInfo seminarInfo);
 
     /**
-     * 删除讨论课信息
-     * @param SeminarInfoId
+     *
+     * @param seminarInfoId
      * @return
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger SeminarInfoId);
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void insertSeminarControl(SeminarControl seminarControl);
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void updateSeminarControl(SeminarControl seminarControl);
+
+    /**
+     *
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 获取某班级下对应的讨论课控制器
+     * @param classId
+     * @param seminarInfoId
+     * @return
+     */
+    SeminarControl getSemniarControlByClassIdAndSeminarInfo(@Param("classId") BigInteger classId,@Param("seminarInfoId") BigInteger seminarInfoId);
+
+    /**
+     * 获取某轮次下的所有讨论课信息
+     * @param roundId
+     * @return
+     */
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
 }

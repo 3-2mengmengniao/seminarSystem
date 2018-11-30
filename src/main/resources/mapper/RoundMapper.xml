@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.RoundMapper">
+
+    <resultMap id="roundResultMap" type="com.test.seminar.entity.Round">
+        <id property="id" column="id" />
+        <result property="courseId" column="course_id"/>
+        <result property="enrollNumber" column="enroll_number"/>
+        <result property="calculateMethod" column="calculate_method"/>
+    </resultMap>
+
+    <select id="getRoundByCourseId" resultMap="roundResultMap">
+        SELECT id,course_id,enroll_number,calculate_method
+        FROM round
+        WHERE course_id=#{courseId}
+    </select>
+
+    <select id="getRoundByRoundId" resultMap="roundResultMap">
+        SELECT id,course_id,enroll_number,calculate_method
+        FROM round
+        WHERE id=#{roundId}
+    </select>
+
+    <insert id="insertRound">
+        insert into round(course_id,enroll_number,calculate_method)
+        values(#{round.courseId},#{round.enrollNumber},#{round.calculateMethod})
+    </insert>
+
+    <update id="updateRound">
+        update round
+        <set>
+            <if test="round.courseId!=null">
+                course_id=#{round.courseId},
+            </if>
+            <if test="round.enrollNumber!=null">
+                enroll_number=#{round.enrollNumber},
+            </if>
+            <if test="round.calculateMethod!=null">
+                calculate_method=#{round.calculateMethod},
+            </if>
+        </set>
+        where id=#{round.id}
+    </update>
+
+    <delete id="deleteRoundByRoundId">
+        delete from round where id=#{roundId}
+    </delete>
+</mapper>

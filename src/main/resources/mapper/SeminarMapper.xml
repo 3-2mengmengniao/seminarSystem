@@ -12,44 +12,91 @@
         <result property="reportDDL" column="report_ddl"/>
     </resultMap>
 
-    <select id="getSeminarBySeminarId" resultMap="seminarInfoResultMap">
+    <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
+        <id property="id" column="id"/>
+        <result property="classId" column="class_id"/>
+        <result property="seminarInfoId" column="seminarinfo_id"/>
+    </resultMap>
+
+    <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
         select id,course_id,name,introduction,max_group,is_visible,report_ddl
         from seminar_info
-        where id=#{SeminarId}
+        where id=#{seminarInfoId}
     </select>
 
-    <insert id="insertSeminar">
+    <insert id="insertSeminarInfo">
         insert into seminar_info(course_id,name,introduction,max_group,is_visible,report_ddl)
-        values(#{SeminarInfo.courseId},#{SeminarInfo.name},#{SeminarInfo.introduction},
-        #{SeminarInfo.maxGroup},#{SeminarInfo.visible},#{SeminarInfo.reportDDL})
+        values(#{seminarInfo.courseId},#{seminarInfo.name},#{seminarInfo.introduction},
+        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL})
     </insert>
 
-    <update id="updateSeminarInfoBySeminarInfoId">
+    <update id="updateSeminarInfo">
         update seminar_info
         <set>
-            <if test="SeminarInfo.courseId!=null">
-                course_id=#{SeminarInfo.courseId},
+            <if test="seminarInfo.courseId!=null">
+                course_id=#{seminarInfo.courseId},
             </if>
-            <if test="SeminarInfo.name!=null">
-                name=#{SeminarInfo.name},
+            <if test="seminarInfo.name!=null">
+                name=#{seminarInfo.name},
             </if>
-            <if test="SeminarInfo.introduction!=null">
-                introduction=#{SeminarInfo.introduction},
+            <if test="seminarInfo.introduction!=null">
+                introduction=#{seminarInfo.introduction},
             </if>
-            <if test="SeminarInfo.maxGroup!=null">
-                max_group=#{SeminarInfo.maxGroup},
+            <if test="seminarInfo.maxGroup!=null">
+                max_group=#{seminarInfo.maxGroup},
             </if>
-            <if test="SeminarInfo.visible!=null">
-                is_visible=#{SeminarInfo.visible},
+            <if test="seminarInfo.visible!=null">
+                is_visible=#{seminarInfo.visible},
             </if>
-            <if test="SeminarInfo.reportDDL!=null">
-                report_ddl=#{SeminarInfo.reportDDL},
+            <if test="seminarInfo.reportDDL!=null">
+                report_ddl=#{seminarInfo.reportDDL},
             </if>
         </set>
-        where id=#{SeminarInfo.id}
+        where id=#{seminarInfo.id}
     </update>
 
     <delete id="deleteSeminarInfoBySeminarInfoId">
-        delete from seminar_info where id=#{SeminarInfoId}
+        delete from seminar_info where id=#{seminarInfoId}
     </delete>
+
+
+    <select id="getSeminarControlBySeminarControlId" resultMap="seminarControlResultMap">
+        select id,class_id,seminarinfo_id
+        from seminar_control
+        where id=#{seminarControlId}
+    </select>
+
+    <insert id="insertSeminarControl">
+        insert into seminar_control(class_id,seminarinfo_id)
+        values(#{seminarControl.classId},#{seminarControl.seminarInfoId})
+    </insert>
+
+    <update id="updateSeminarControl">
+        update seminar_control
+        <set>
+            <if test="seminarControl.classId!=null">
+                class_id=#{seminarControl.classId},
+            </if>
+            <if test="seminarControl.seminarInfoId!=null">
+                seminarinfo_id=#{seminarControl.seminarInfoId},
+            </if>
+        </set>
+        where id=#{seminarControl.id}
+    </update>
+
+    <delete id="deleteSeminarControlBySeminarControlId">
+        delete from seminar_control where id=#{seminarControlId}
+    </delete>
+
+    <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
+        select id,class_id,seminarinfo_id
+        from seminar_control
+        where class_id=#{classId} and seminarinfo_id=#{seminarInfoId}
+    </select>
+
+    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
+        select seminar_info.id,seminar_info.course_id,name,introduction,max_group,is_visible,report_ddl
+        from seminar_info,round
+        where round.id=#{roundId} and seminar_info.course_id=round.course_id
+    </select>
 </mapper>
