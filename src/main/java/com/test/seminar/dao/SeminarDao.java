@@ -14,24 +14,24 @@ public interface SeminarDao {
 
     /**
      * 通过ID获取讨论课信息
-     * @param seminarId
+     * @param seminarInfoId
      * @return
      */
-    SeminarInfo getseminarBySeminarId(BigInteger seminarId);
+    SeminarInfo getseminarInfoBySeminarInfoId(BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
      * @param seminarInfo
      * @return 新建讨论课信息的ID
      */
-    void insertSeminar(SeminarInfo seminarInfo);
+    void insertSeminarInfo(SeminarInfo seminarInfo);
 
     /**
      * 更改讨论课信息
      * @param seminarInfo
      * @return
      */
-    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo);
+    void updateSeminarInfo(SeminarInfo seminarInfo);
 
     /**
      *
@@ -40,7 +40,44 @@ public interface SeminarDao {
      */
     void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
 
-    List<SeminarControl> getSemniarControlByClassId(BigInteger classId);
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getseminarControlBySeminarControlId(BigInteger seminarControlId);
 
-    List<SeminarInfo> getSeminarInfoByCourseId(BigInteger courseId);
+    /**
+     *
+     * @param seminarInfo
+     */
+    void insertSeminarControl(SeminarInfo seminarInfo);
+
+    /**
+     *
+     * @param seminarInfo
+     */
+    void updateSeminarControl(SeminarInfo seminarInfo);
+
+    /**
+     * 
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 获取某班级下对应的讨论课控制器
+     * @param classId
+     * @param seminarInfoId
+     * @return
+     */
+    SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId);
+
+    /**
+     * 获取某轮次下的所有讨论课信息
+     * @param roundId
+     * @return
+     */
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
 }

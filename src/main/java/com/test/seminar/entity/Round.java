@@ -9,7 +9,7 @@ import java.math.BigInteger;
 
 public class Round {
     private BigInteger id;
-    private BigInteger classId;
+    private BigInteger courseId;
     private int enrollNumber;
     private int caculateMethod;
 
@@ -17,9 +17,9 @@ public class Round {
 
     public void setId(BigInteger id) {this.id = id; }
 
-    public BigInteger getClassId() { return classId; }
+    public BigInteger getClassId() { return courseId; }
 
-    public void setClassId(BigInteger classId) {this.classId = classId; }
+    public void setClassId(BigInteger classId) {this.courseId = classId; }
 
     public int getEnrollNumber() {return enrollNumber; }
 
