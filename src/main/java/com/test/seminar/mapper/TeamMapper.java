@@ -1,17 +1,22 @@
-package com.test.seminar.dao;
+package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Team;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.util.List;
 
 /**
- * @author cxh
+ * @author zhenweiwang
  * @date 2018/11/29
  */
-public interface TeamDao {
+@Mapper
+@Component
+public interface TeamMapper {
     /**
      * 通过ID获取队伍信息
+     *
      * @param teamId
      * @return
      */
@@ -19,6 +24,7 @@ public interface TeamDao {
 
     /**
      * 创建新的队伍信息
+     *
      * @param team
      * @return
      */
@@ -26,13 +32,13 @@ public interface TeamDao {
 
     /**
      * 更改队伍信息
+     *
      * @param team
      * @return
      */
     void updateTeamByTeamId(Team team);
 
     /**
-     *
      * @param teamId
      * @return
      */
@@ -40,14 +46,16 @@ public interface TeamDao {
 
     /**
      * 以学生ID和课程ID获取学生本课程的组队信息
+     *
      * @param studentId
      * @param courseId
      * @return
      */
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
+    Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId);
 
     /**
      * 查看某课程的所有队伍
+     *
      * @param courseId
      * @return
      */

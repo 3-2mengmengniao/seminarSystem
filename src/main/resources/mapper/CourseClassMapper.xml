@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace用来指定该xml文件对应的interface  -->
+<!-- 默认idea对于该xml文件是几乎没有任何提示的，需要装一个叫 mybatis free plugins 的插件 -->
+<mapper namespace="com.test.seminar.mapper.CourseClassMapper">
+
+    <!-- id 就是方法名称 -->
+    <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
+    <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
+    <select id="getCourseClassByCourseClassId" resultType="com.test.seminar.entity.CourseClass">
+        SELECT id,course_id as courseId,name,introduction
+        FROM course_class
+        WHERE id=#{courseClassId}
+    </select>
+
+    <insert id="insertCourseClass">
+        insert into course_class(course_id,name,introduction) values(#{courseClass.courseId},#{courseClass.name},#{courseClass.introduction})
+    </insert>
+
+    <update id="updateCourseClassByCourseClassId">
+        update course_class
+        <set>
+            <if test="courseClass.courseId!=null">
+                course_id=#{courseClass.courseId},
+            </if>
+            <if test="courseClass.name!=null">
+                name=#{courseClass.name},
+            </if>
+            <if test="courseClass.introduction!=null" >
+                introduction=#{courseClass.introduction},
+            </if>
+        </set>
+        where id=#{courseClass.id}
+    </update>
+
+    <delete id="deleteCourseClassByCourseClassId">
+        delete from course_class where id=#{courseClassId}
+    </delete>
+
+    <select id="getCourseClassByCourseId" resultType="com.test.seminar.entity.CourseClass">
+        SELECT id,course_id as courseId,name,introduction
+        FROM course_class
+        WHERE course_id=#{courseId}
+    </select>
+</mapper>

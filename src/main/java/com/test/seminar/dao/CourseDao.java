@@ -35,10 +35,10 @@ public interface CourseDao {
 
     /**
      * 创建新的课程账户
-     * @param Course
-     * @return 新建课程的ID
+     * @param course
+     * @return
      */
-    void insertCourse(Course Course);
+    void insertCourse(Course course);
 
     /**
      * 更改课程信息

@@ -20,7 +20,7 @@ public interface TeacherDao {
     /**
      * 创建新的老师账户
      * @param teacher
-     * @return 新建老师的ID
+     * @return
      */
     void insertTeacher(Teacher teacher);
 
@@ -29,7 +29,7 @@ public interface TeacherDao {
      * @param teacher
      * @return
      */
-    void updateTeacherByTeacherId( Teacher teacher);
+    void updateTeacherByTeacherId(Teacher teacher);
 
     /**
      *

@@ -5,7 +5,7 @@ import com.test.seminar.entity.CourseClass;
 import java.math.BigInteger;
 import java.util.List;
 
-public interface ClassDao {
+public interface CourseClassDao {
 
     /**
      * 通过ID获取班级信息
@@ -17,7 +17,7 @@ public interface ClassDao {
     /**
      * 创建新的班级账户
      * @param courseClass
-     * @return 新建班级的ID
+     * @return
      */
     void insertCourseClass(CourseClass courseClass);
 
@@ -26,7 +26,7 @@ public interface ClassDao {
      * @param courseClass
      * @return
      */
-    void updateCourseClassByCourseClassId( CourseClass courseClass);
+    void updateCourseClassByCourseClassId(CourseClass courseClass);
 
     /**
      *
@@ -40,7 +40,7 @@ public interface ClassDao {
      * @param courseId
      * @return
      */
-    List<Class> getCourseClassByCourseId(BigInteger courseId);
+    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
 
 }
