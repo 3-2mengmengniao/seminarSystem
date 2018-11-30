@@ -27,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 
@@ -77,14 +78,17 @@
 <a class="text-center welcome">${name},${account}</a>
 <a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
 -->
-<fieldset class="layui-elem-field">
-    <legend>讨论课管理系统欢迎您</legend>
-    <div class="layui-field-box">
-    ${name},${account}
-    </div>
-</fieldset>
-
-
+<script>
+    layui.use('layer', function(){
+        var layer = layui.layer;
+        layer.config({
+            time:2000
+            ,offset: '120px'
+        })
+        layer.msg('${name},${account}<br>讨论课管理系统欢迎您！');
+    });
+</script>
+<div class="distance4"></div>
 <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div>
     <a href="/teacher/courses">

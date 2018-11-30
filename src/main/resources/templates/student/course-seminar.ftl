@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
 
 
 </head>
@@ -44,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">OOAD&nbsp;2016-1</h1>
             <a href="/student/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -68,38 +70,61 @@
 </div>
 
 <div class="content">
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">讨论课信息</a>
-                <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">第一轮
-                    </a>
-                    <div class="submenu-nav-items">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">业务流程分析</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计</a>
+    <div class="distance3"></div>
+    <div class="center-navigation">
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">讨论课信息</h2>
+            <div class="layui-colla-content">
+                <div class="layui-collapse" lay-accordion="">
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第一轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>1&emsp;代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>2&emsp;对象模型设计</p>
+                        </div>
                     </div>
-                    <a href="#" class="submenu-nav-deploy text-white">第二轮</a>
-                    <div class="submenu-nav-items">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">代码检查</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">对象模型设计</a>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第二轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>3&emsp;代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>4&emsp;对象模型设计</p>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h2 class="layui-colla-title">第三轮</h2>
+                        <div class="layui-colla-content center-text">
+                            <p>5&emsp;代码检查</p>
+                        </div>
+                        <div class="layui-colla-content center-text">
+                            <p>6&emsp;对象模型设计</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">已报名的讨论课</a>
-                <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">领域模型</a>
-                    <a href="#" class="submenu-nav-deploy text-white">controller</a>
-                </div>
-            </div>
-        </div>
     </div>
-
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+             <div class="layui-colla-item">
+                 <h2 class="layui-colla-title">已报名的讨论课</h2>
+                     <div class="layui-colla-content center-text">
+                         <p>代码检查</p>
+                     </div>
+                     <div class="layui-colla-content center-text">
+                         <p>对象模型设计</p>
+                     </div>
+            </div>
+         </div>
+    </div>
+</div>
     <div class="distance2"> </div>
     <div class="distance"> </div>
     <!--
@@ -117,6 +142,16 @@
 
 <!--<div class="bottom-deco"></div>-->
 
+<script>
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element();
+        var layer = layui.layer;
 
+        //监听折叠
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+    });
+</script>
 </body>
 </html>

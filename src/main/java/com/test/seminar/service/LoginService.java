@@ -2,6 +2,7 @@ package com.test.seminar.service;
 
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
+import com.test.seminar.exception.UserNotFoundException;
 
 /**
  * @author zhenweiwang
@@ -9,7 +10,21 @@ import com.test.seminar.entity.Teacher;
  */
 public interface LoginService {
 
-    Student studentLogin(String account, String password);
+    /**
+     *
+     * @param account
+     * @param password
+     * @return
+     * @throws UserNotFoundException
+     */
+    Student studentLogin(String account, String password)throws UserNotFoundException;
 
-    Teacher teacherLogin(String account, String password);
+    /**
+     *
+     * @param account
+     * @param password
+     * @return
+     * @throws UserNotFoundException
+     */
+    Teacher teacherLogin(String account, String password)throws UserNotFoundException;
 }

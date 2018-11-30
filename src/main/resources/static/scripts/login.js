@@ -1,6 +1,7 @@
 var $ = jQuery.noConflict();
 var formSubmitted = 'false';
 
+
 jQuery(document).ready(function($) {
 
     $('#formSuccessMessageWrap').hide(0);
@@ -27,9 +28,20 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data){
-                alert("提交成功！");
+                if(data=="200")
+                    window.location.href="/teacher/homepage";
+                else if(data=="204")
+                    window.location.href="/student/homepage";
+                else if(data=="401")
+                {
+                    $('#formSuccessMessageWrap').fadeIn(500);
+                    formSubmitted = 'false';
+                    var onFocus = document.activeElement;
+                    if(onFocus.id === "contactEmailField") {
+                        $('#formSuccessMessageWrap').fadeOut(500);
+                    }
 
-            window.location.href='/teacher/homepage';
+                }
         });
         //window.location.href='1vali_psw.html';
     };
@@ -54,7 +66,7 @@ jQuery(document).ready(function($) {
 
         });
         if(formSubmitted == 'false' && count==2){
-            return true;
+            submitData(currentForm, formType);
         };
 
     };
