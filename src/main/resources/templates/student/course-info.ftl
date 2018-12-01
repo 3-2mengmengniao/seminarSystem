@@ -44,7 +44,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">${course.courseName}</h1>
-    <a href="/teacher/courses" class="button-close">x</a>
+    <a href="/student/courses" class="button-close">x</a>
 </div>
 <div class="decoration"></div>
 
@@ -67,7 +67,6 @@
             组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
         </p>
         <div class="distance"></div>
-        <p class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
     </div>
 <!--
     <div class="decoration"></div>
@@ -82,22 +81,7 @@
 </div>
 
 <!--<div class="bottom-deco"></div>-->
-<script>
-    $(function(){
-        $('#deleteButton').click(function(){
-            $.ajax({
-                type: "DELETE",
-                url: "/teacher/courses?courseId=${course.id}",
-                success: function(data){
-                    if(data=="200")
-                        window.location.href="/teacher/courses";
-                    else if(data=="404")
-                        alert("课程不存在");
-                }
-            });
-        });
-    });
-</script>
+
 
 </body>
 </html>

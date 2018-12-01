@@ -33,9 +33,17 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
-        System.out.println(courseList.size());
         model.addAttribute("courseList",courseList);
         return "teacher/courses";
+    }
+
+    @RequestMapping(value="/courses",method = POST)
+    @ResponseBody
+    public String courseDelete(BigInteger courseId, Model model) {
+        System.out.println("enter");
+        courseService.deleteCourseByCourseId(courseId);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/security",method = GET)
@@ -49,7 +57,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course-info")
-    public String courseInfo(Model model) {
+    public String courseInfo(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course-info";
     }
 

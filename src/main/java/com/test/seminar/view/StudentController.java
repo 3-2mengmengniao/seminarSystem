@@ -119,4 +119,11 @@ public class StudentController {
 
     @RequestMapping(value = "/seminar_end")
     public String seminarEnd(Model model) { return "student/seminar_end"; }
+
+    @RequestMapping(value="/course-info")
+    public String courseInfo(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        return "student/course-info";
+    }
 }
