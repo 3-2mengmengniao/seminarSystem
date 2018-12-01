@@ -34,7 +34,7 @@ public class MapperTest {
     public void insertCourseClass(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setName("三班");
+        courseClass.setClassName("三班");
         courseClass.setIntroduction("OOAD三班");
         courseClassMapper.insertCourseClass(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
@@ -45,7 +45,7 @@ public class MapperTest {
     public void updateCourseClassByCourseClassId(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setName("三班");
+        courseClass.setClassName("三班");
         courseClass.setIntroduction("OOAD三班修改");
         courseClassMapper.updateCourseClassByCourseClassId(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
@@ -70,15 +70,15 @@ public class MapperTest {
     @Test
     public void getCourseByStudentId(){
         List<Course> courses= courseMapper.getCourseByStudentId(new BigInteger("1"));
-        System.out.println(courses.get(0).getName());
-        System.out.println(courses.get(1).getName());
+        System.out.println(courses.get(0).getCourseName());
+        System.out.println(courses.get(1).getCourseName());
         assertEquals(2,courses.size());
     }
 
     @Test
     public void insertCourse(){
        Course course=new Course();
-       course.setName("J2EE");
+       course.setCourseName("J2EE");
        course.setMaxTeamMember(5);
        course.setMinTeamMember(3);
        course.setPresentationProportion(50);

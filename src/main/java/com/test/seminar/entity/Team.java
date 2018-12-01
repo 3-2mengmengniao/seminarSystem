@@ -17,8 +17,6 @@ public class Team {
 
     public BigInteger getId() { return id; }
 
-    public void setId(BigInteger id) {this.id = id; }
-
     public BigInteger getClassId() {return classId; }
 
     public void setClassId(BigInteger classId) {this.classId = classId; }
