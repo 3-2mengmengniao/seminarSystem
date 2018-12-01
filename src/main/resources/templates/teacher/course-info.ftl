@@ -71,6 +71,7 @@
         <div class="distance"></div>
         <p class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
     </div>
+
 <!--
     <div class="decoration"></div>
     <div class="footer">

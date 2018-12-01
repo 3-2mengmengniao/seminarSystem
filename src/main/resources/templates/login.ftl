@@ -66,7 +66,7 @@
             <div class="distance4"></div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">教工号/学号:</label>
-                <input autocomplete=”off” type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
+                <input style="-webkit-tap-highlight-color:rgba(255,0,0,0);" autocomplete=”off” type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
