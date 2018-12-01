@@ -76,7 +76,7 @@
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title" >${course.name}</h2>
+                <h2 class="layui-colla-title" >${course.courseName}</h2>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
                     <a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>

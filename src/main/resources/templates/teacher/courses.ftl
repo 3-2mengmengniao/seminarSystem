@@ -81,7 +81,7 @@
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">${course.name}</h2>
+                <h2 class="layui-colla-title">${course.courseName}</h2>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
                     <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">学生成绩</a>
