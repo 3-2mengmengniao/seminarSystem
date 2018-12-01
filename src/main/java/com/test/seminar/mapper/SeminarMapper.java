@@ -24,53 +24,53 @@ public interface SeminarMapper {
      * @param seminarInfoId
      * @return
      */
-    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+    SeminarInfo getSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo);
+    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
 
     /**
      * 更改讨论课信息
      * @param seminarInfo
      * @return
      */
-    void updateSeminarInfo(SeminarInfo seminarInfo);
+    void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
 
     /**
      *
      * @param seminarInfoId
      * @return
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId);
+    void deleteSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
      *
      * @param seminarControlId
      * @return
      */
-    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+    SeminarControl getSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
      *
      * @param seminarControl
      */
-    void insertSeminarControl(SeminarControl seminarControl);
+    void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
 
     /**
      *
      * @param seminarControl
      */
-    void updateSeminarControl(SeminarControl seminarControl);
+    void updateSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
 
     /**
      *
      * @param seminarControlId
      */
-    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+    void deleteSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
      * 获取某班级下对应的讨论课控制器
@@ -85,5 +85,5 @@ public interface SeminarMapper {
      * @param roundId
      * @return
      */
-    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+    List<SeminarInfo> getSeminarInfoByRoundId(@Param("roundId")BigInteger roundId);
 }

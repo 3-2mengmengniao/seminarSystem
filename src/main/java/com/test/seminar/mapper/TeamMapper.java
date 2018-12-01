@@ -21,7 +21,7 @@ public interface TeamMapper {
      * @param teamId
      * @return
      */
-    Team getTeamByTeamId(BigInteger teamId);
+    Team getTeamByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 创建新的队伍信息
@@ -29,7 +29,7 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    void insertTeam(Team team);
+    void insertTeam(@Param("team")Team team);
 
     /**
      * 更改队伍信息
@@ -37,13 +37,13 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    void updateTeamByTeamId(Team team);
+    void updateTeamByTeamId(@Param("team")Team team);
 
     /**
      * @param teamId
      * @return
      */
-    void deleteTeamByTeamId(BigInteger teamId);
+    void deleteTeamByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 以学生ID和课程ID获取学生本课程的组队信息
@@ -60,6 +60,6 @@ public interface TeamMapper {
      * @param courseId
      * @return
      */
-    List<Team> getTeamByCourseId(BigInteger courseId);
+    List<Team> getTeamByCourseId(@Param("courseId")BigInteger courseId);
 
 }

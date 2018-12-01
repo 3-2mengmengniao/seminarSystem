@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-
-    <title>讨论课管理系统</title>
+    <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
@@ -42,56 +41,34 @@
     </div>
 </div>
 
-
 <div class="top-deco"></div>
-<div class="content">
-    <div class="header">
-        <div class="navigation-back">
-            <h1 class="navigation-back">讨论课</h1>
-        </div>
-        <a href="#" class="sub-go-menu"></a>
-        <a href="#" class="sub-go-back"></a>
-    </div>
-    <div class="decoration"></div>
-
-    <div class="navigation">
-        <div class="corner-deco"></div>
-        <div class="navigation-wrapper">
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
-                <em class="active-menu"></em>
-            </div>
-        </div>
-    </div>
+<div class="navigation-back">
+    <h1 class="navigation-back">${course.courseName}</h1>
+    <a href="/student/courses" class="button-close">x</a>
 </div>
+<div class="decoration"></div>
 
-<#list courseList as course>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar?courseId=${course.id}'>${course.courseName}</a>
-        </div>
+<div class="content">
+    <div class="container no-bottom">
+        <h3>课程要求</h3>
+        <p>
+            ${course.introduction}
+        </p>
+        <h3>成绩计算规则</h3>
+        <p>
+            课堂展示    ${course.presentationProportion}%<br>
+            课堂提问    ${course.questionProportion}%<br>
+            课堂报告    ${course.reportProportion}%<br>
+        </p>
+        <h3>分组规则</h3>
+        <p>
+            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
+            组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
+            组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
+        </p>
+        <div class="distance"></div>
     </div>
-<div class="distance3">
-    <#--<div class="container">-->
-        <#--<div class="toggle-1">-->
-            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>J2EE</a>-->
-        <#--</div>-->
-    <#--</div>-->
-</#list>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
-
-    <!--
+<!--
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>
@@ -100,8 +77,11 @@
             All Rights Reserved
         </p>
     </div>
+    -->
 </div>
-<div class="bottom-deco"></div>
--->
+
+<!--<div class="bottom-deco"></div>-->
+
+
 </body>
 </html>

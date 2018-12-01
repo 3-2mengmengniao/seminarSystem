@@ -1,5 +1,6 @@
 package com.test.seminar.service;
 
+import com.test.seminar.entity.Round;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -28,7 +29,7 @@ public interface SeminarService {
      * @param seminarInfo
      * @throws RepetitiveRecordException
      */
-    void insertSeminar(SeminarInfo seminarInfo)throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
 
     /**
      *
@@ -53,8 +54,15 @@ public interface SeminarService {
 
     /**
      *
-     * @param courseId
+     * @param roundId
      * @return
      */
-    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger courseId);
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
+    /**
+     * 根据传入的轮次列表返回每一个round对应的讨论课信息，
+     * @param roundList
+     * @return
+     */
+    List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
 }

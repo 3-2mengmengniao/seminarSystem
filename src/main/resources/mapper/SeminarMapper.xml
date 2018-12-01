@@ -5,6 +5,7 @@
     <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
         <id property="id" column="id"/>
         <result property="courseId" column="course_id"/>
+        <result property="roundId" column="round_id"/>
         <result property="seminarName" column="seminar_name"/>
         <result property="introduction" column="introduction"/>
         <result property="maxGroup" column="max_group"/>
@@ -19,14 +20,14 @@
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
-        select id,course_id,seminar_name,introduction,max_group,is_visible,report_ddl
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
         from seminar_info
         where id=#{seminarInfoId}
     </select>
 
     <insert id="insertSeminarInfo">
-        insert into seminar_info(course_id,seminar_name,introduction,max_group,is_visible,report_ddl)
-        values(#{seminarInfo.courseId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
+        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl)
+        values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
         #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL})
     </insert>
 
@@ -35,6 +36,9 @@
         <set>
             <if test="seminarInfo.courseId!=null">
                 course_id=#{seminarInfo.courseId},
+            </if>
+            <if test="seminarInfo.roundId!=null">
+                round_id=#{seminarInfo.roundId},
             </if>
             <if test="seminarInfo.seminarName!=null">
                 seminar_name=#{seminarInfo.seminarName},
@@ -95,8 +99,8 @@
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select seminar_info.id,seminar_info.course_id,seminar_name,introduction,max_group,is_visible,report_ddl
-        from seminar_info,round
-        where round.id=#{roundId} and seminar_info.course_id=round.course_id
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
+        from seminar_info
+        where round_id=#{roundId}
     </select>
 </mapper>

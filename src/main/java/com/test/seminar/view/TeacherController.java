@@ -3,17 +3,24 @@ package com.test.seminar.view;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.Round;
+import com.test.seminar.entity.SeminarControl;
+import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.service.CourseService;
+import com.test.seminar.service.RoundService;
+import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -21,6 +28,12 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    RoundService roundService;
+
+    @Autowired
+    SeminarService seminarService;
 
     @RequestMapping(value="/homepage")
     public String home(Model model) {
@@ -31,9 +44,17 @@ public class TeacherController {
     public String courses(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
         model.addAttribute("courseList",courseList);
         return "teacher/courses";
+    }
+
+    @RequestMapping(value="/courses",method = DELETE)
+    @ResponseBody
+    public String courseDelete(BigInteger courseId, Model model) {
+        courseService.deleteCourseByCourseId(courseId);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/security",method = GET)
@@ -47,13 +68,27 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course-info")
-    public String courseInfo(Model model) {
+    public String courseInfo(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course-info";
     }
 
-    @RequestMapping(value="/create-course")
+    @RequestMapping(value="/create-course",method = GET)
     public String createCourse(Model model) {
         return "teacher/create-course";
+    }
+
+    @RequestMapping(value="/create-course",method = POST)
+    @ResponseBody
+    public String createCoursePost(HttpServletRequest request,Model model,Course course) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        course.setTeacherId(teacherId);
+
+        courseService.insertCourse(course);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/group-score")
@@ -65,13 +100,20 @@ public class TeacherController {
     public String seminars(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
         model.addAttribute("courseList",courseList);
         return "teacher/seminars";
     }
 
     @RequestMapping(value="/course-seminar")
-    public String courseSeminar(Model model) {
+    public String courseSeminar(BigInteger courseId,Model model) {
+        List<Round> roundList= roundService.getRoundByCourseId(courseId);
+        model.addAttribute("roundList",roundList);
+        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
+        for(int i=0;i<seminarList.size();i++) {
+            System.out.println(seminarList.get(i).size());
+        }
+        model.addAttribute("seminarList",seminarList);
         return "teacher/course-seminar";
     }
 

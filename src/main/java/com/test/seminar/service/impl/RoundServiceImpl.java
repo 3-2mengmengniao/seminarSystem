@@ -43,6 +43,7 @@ public class RoundServiceImpl implements RoundService {
 
     @Override
     public List<Round> getRoundByCourseId(BigInteger courseId) {
-        return roundDao.getRoundByCourseId(courseId);
+         List<Round> roundlist = roundDao.getRoundByCourseId(courseId);
+         return roundlist;
     }
 }

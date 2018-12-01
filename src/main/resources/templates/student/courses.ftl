@@ -85,6 +85,10 @@
                     <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
                     <a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams">我的组队</a>
                 </div>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/course-info?courseId=${course.getId()}">课程信息</a>
+                </div>
             </div>
         </div>
     </div>
