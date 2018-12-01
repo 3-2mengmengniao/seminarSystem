@@ -76,7 +76,7 @@
             <div class="formFieldWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">密码: </label>
                 <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
-                <input autocomplete=”off” type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+                <input autocomplete=”off” type="password" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -121,10 +121,10 @@
     function hideShowPsw() {
         if (demoInput.type == "text") {
             demoInput.type = "password";
-            demo_img.src = "/images/icons/hidePasswd.png";
+            demo_img.src = "/images/icons/showPasswd.png";
         } else {
             demoInput.type = "text";
-            demo_img.src = "/images/icons/showPasswd.png";
+            demo_img.src = "/images/icons/hidePasswd.png";
         }
     }
 </script>

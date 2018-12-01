@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-
-    <title>讨论课管理系统</title>
+    <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
@@ -15,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -42,12 +42,12 @@
     </div>
 </div>
 
-
 <div class="top-deco"></div>
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">讨论课</h1>
+            <h1 class="navigation-back">OOAD讨论课</h1>
+            <a href="/student/course-seminar" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,45 +58,59 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">个人页</a>
+                <a href="/teacher/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/student/seminars" class="home-icon">讨论课</a>
+                <a href="/teacher/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
     </div>
 </div>
-<#list courseList as course>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>${course.name}</a>
-        </div>
-    </div>
-<div class="distance3">
-    <#--<div class="container">-->
-        <#--<div class="toggle-1">-->
-            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>J2EE</a>-->
-        <#--</div>-->
-    <#--</div>-->
-    </#list>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
 
-<!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
+<div class="content">
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>第一组：</td>
+                <td style="color:#009688;">1-1业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第二组：</td>
+                <td style="color:#009688;">1-2业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第三组：</td>
+                <td style="color:#009688;">1-3业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第四组：</td>
+                <td style="color:#009688;">1-4业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第五组：</td>
+                <td style="color:#009688;">1-5业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第六组：</td>
+                <td style="color:#009688;">1-6业务流程.ppt</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="distance4"></div>
+        <div class="distance"></div>
     </div>
-    -->
 </div>
+
 <!--<div class="bottom-deco"></div>-->
+
 
 </body>
 </html>

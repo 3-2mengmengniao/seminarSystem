@@ -21,10 +21,6 @@ public class Teacher{
         return id;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
     public String getAccount() {
         return account;
     }

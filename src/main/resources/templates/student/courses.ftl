@@ -71,11 +71,12 @@
 </div>
 
 <div class="content">
+<#list courseList as course>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title" >OOAD</h2>
+                <h2 class="layui-colla-title" >${course.name}</h2>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
                     <a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>
@@ -88,23 +89,23 @@
         </div>
     </div>
     <div class="distance3"></div>
-    <div class="distance5"></div>
-    <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title" >J2EE</h2>
-                <div class="layui-colla-content">
-                    <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>
-                </div>
-                <div class="layui-colla-content">
-                    <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams">我的组队</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <#--<div class="distance5"></div>-->
+    <#--<div class="center-navigation">-->
+        <#--<div class="layui-collapse" lay-accordion="">-->
+            <#--<div class="layui-colla-item">-->
+                <#--<h2 class="layui-colla-title" >J2EE</h2>-->
+                <#--<div class="layui-colla-content">-->
+                    <#--<i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>-->
+                    <#--<a class="my-navigation layui-anim layui-anim-fadein"  href="#">我的成绩</a>-->
+                <#--</div>-->
+                <#--<div class="layui-colla-content">-->
+                    <#--<i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>-->
+                    <#--<a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams">我的组队</a>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
+</#list>
     <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance"></div>

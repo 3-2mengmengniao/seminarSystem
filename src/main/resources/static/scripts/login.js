@@ -27,21 +27,19 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data){
-                if(data=="200")
-                    window.location.href="/teacher/homepage";
-                else if(data=="204")
-                    window.location.href="/student/homepage";
-                else if(data=="401")
-                {
+        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+                if(data=="404") {
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
                     var onFocus = document.activeElement;
-                    if(onFocus.id === "contactEmailField") {
+                    if (onFocus.id === "contactEmailField") {
                         $('#formSuccessMessageWrap').fadeOut(500);
                     }
-
                 }
+                else if(data=="200")
+                    window.location.href="/teacher/homepage";
+                else if(data=="204")
+                    window.location.href="/student/homepage";
         });
         //window.location.href='1vali_psw.html';
     };

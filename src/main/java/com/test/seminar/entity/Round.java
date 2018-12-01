@@ -15,9 +15,7 @@ public class Round {
 
     public BigInteger getId() {return id; }
 
-    public void setId(BigInteger id) {this.id = id; }
-
-    public BigInteger getClassId() { return courseId; }
+    public BigInteger getCourseId() { return courseId; }
 
     public void setClassId(BigInteger classId) {this.courseId = classId; }
 

@@ -33,10 +33,6 @@ public class Course {
         return teacherId;
     }
 
-    public void setTeacherId(BigInteger teacherId) {
-        this.teacherId = teacherId;
-    }
-
     public String getIntroduction() {return introduction; }
 
     public void setIntroduction(String introduction) {this.introduction=introduction; }

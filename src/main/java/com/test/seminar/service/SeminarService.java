@@ -3,7 +3,8 @@ package com.test.seminar.service;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.exception.RepetitiveRecordException;
-import com.test.seminar.exception.SeminarNotFoundException;
+import com.test.seminar.exception.SeminarControlNotFoundException;
+import com.test.seminar.exception.SeminarInfoNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -18,9 +19,9 @@ public interface SeminarService {
      *
      * @param seminarId
      * @return
-     * @throws SeminarNotFoundException
+     * @throws SeminarInfoNotFoundException
      */
-    SeminarInfo getseminarBySeminarId(BigInteger seminarId)throws SeminarNotFoundException;
+    SeminarInfo getSeminarBySeminarId(BigInteger seminarId)throws SeminarInfoNotFoundException;
 
     /**
      *
@@ -32,28 +33,28 @@ public interface SeminarService {
     /**
      *
      * @param seminarInfo
-     * @throws SeminarNotFoundException
+     * @throws SeminarInfoNotFoundException
      */
-    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo)throws SeminarNotFoundException;
+    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
 
     /**
      *
      * @param seminarInfoId
-     * @throws SeminarNotFoundException
+     * @throws SeminarInfoNotFoundException
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarNotFoundException;
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
      *
      * @param classId
      * @return
      */
-    List<SeminarControl> getSemniarControlByClassId(BigInteger classId);
+    SeminarControl getSemniarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
 
     /**
      *
      * @param courseId
      * @return
      */
-    List<SeminarInfo> getSeminarInfoByCourseId(BigInteger courseId);
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger courseId);
 }
