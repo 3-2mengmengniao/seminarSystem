@@ -10,7 +10,7 @@ import java.math.BigInteger;
 public class CourseClass {
     private BigInteger id;
     private BigInteger courseId;
-    private String name;
+    private String className;
     private String introduction;
 
     public BigInteger getId() {return id; }
@@ -19,9 +19,9 @@ public class CourseClass {
 
     public void setCourseId(BigInteger courseId) {this.courseId = courseId; }
 
-    public String getName() {return name; }
+    public String getClassName() {return className; }
 
-    public void setName(String name) {this.name = name; }
+    public void setClassName(String className) {this.className = className; }
 
     public String getIntroduction() {return introduction; }
 

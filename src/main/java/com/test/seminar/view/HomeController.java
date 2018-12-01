@@ -50,9 +50,9 @@ public class HomeController {
             session.setAttribute("usertype", "student");
             session.setAttribute("id", student.getId());
             session.setAttribute("account", student.getAccount());
-            session.setAttribute("name", student.getName());
+            session.setAttribute("name", student.getStudentName());
             model.addAttribute("account", student.getAccount());
-            model.addAttribute("name", student.getName());
+            model.addAttribute("name", student.getStudentName());
         }
        catch (UserNotFoundException e) {
             try {
@@ -60,9 +60,9 @@ public class HomeController {
                 session.setAttribute("usertype", "teacher");
                 session.setAttribute("id", teacher.getId());
                 session.setAttribute("account", teacher.getAccount());
-                session.setAttribute("name", teacher.getName());
+                session.setAttribute("name", teacher.getTeacherName());
                 model.addAttribute("account", teacher.getAccount());
-                model.addAttribute("name", teacher.getName());
+                model.addAttribute("name", teacher.getTeacherName());
             }
             catch (UserNotFoundException e2){
                 String status = "404";

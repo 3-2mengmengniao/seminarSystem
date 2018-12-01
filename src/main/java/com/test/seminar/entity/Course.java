@@ -15,7 +15,7 @@ public class Course {
     private int presentationProportion;
     private int questionProportion;
     private int reportProportion;
-    private String name;
+    private String courseName;
     private int minTeamMember;
     private int maxTeamMember;
     private Date teamStartTime;
@@ -25,47 +25,83 @@ public class Course {
         return id;
     }
 
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
     public BigInteger getTeacherId() {
         return teacherId;
     }
 
-    public String getIntroduction() {return introduction; }
+    public void setTeacherId(BigInteger teacherId) {
+        this.teacherId = teacherId;
+    }
 
-    public void setIntroduction(String introduction) {this.introduction=introduction; }
+    public String getIntroduction() {
+        return introduction;
+    }
 
-    public int getPresentationProportion() {return presentationProportion; }
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
-    public void setPresentationProportion(int presentationProportion) {this.presentationProportion=presentationProportion; }
+    public int getPresentationProportion() {
+        return presentationProportion;
+    }
 
-    public int getQuestionProportion() {return questionProportion; }
+    public void setPresentationProportion(int presentationProportion) {
+        this.presentationProportion = presentationProportion;
+    }
 
-    public void setQuestionProportion(int questionProportion) {this.questionProportion=questionProportion; }
+    public int getQuestionProportion() {
+        return questionProportion;
+    }
 
-    public int getReportProportion() {return reportProportion; }
+    public void setQuestionProportion(int questionProportion) {
+        this.questionProportion = questionProportion;
+    }
 
-    public void setReportProportion(int reportProportion) {this.reportProportion=reportProportion; }
+    public int getReportProportion() {
+        return reportProportion;
+    }
 
-    public String getName() {return name; }
+    public void setReportProportion(int reportProportion) {
+        this.reportProportion = reportProportion;
+    }
 
-    public void setName(String name) {this.name = name; }
+    public String getCourseName() {
+        return courseName;
+    }
 
-    public int getMinTeamMember() {return minTeamMember; }
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
-    public void setMinTeamMember(int minTeamMember) { this.minTeamMember = minTeamMember; }
+    public int getMinTeamMember() {
+        return minTeamMember;
+    }
 
-    public int getMaxTeamMember() {return maxTeamMember; }
+    public void setMinTeamMember(int minTeamMember) {
+        this.minTeamMember = minTeamMember;
+    }
 
-    public void setMaxTeamMember(int maxTeamMember) {this.maxTeamMember = maxTeamMember; }
+    public int getMaxTeamMember() {
+        return maxTeamMember;
+    }
 
-    public Date getTeamStartTime() {return teamStartTime; }
+    public void setMaxTeamMember(int maxTeamMember) {
+        this.maxTeamMember = maxTeamMember;
+    }
 
-    public void setTeamStartTime(Date teamStartTime) {this.teamStartTime = teamStartTime; }
+    public Date getTeamStartTime() {
+        return teamStartTime;
+    }
 
-    public Date getTeamEndTime() {return teamEndTime; }
+    public void setTeamStartTime(Date teamStartTime) {
+        this.teamStartTime = teamStartTime;
+    }
 
-    public void setTeamEndTime(Date teamEndTime) {this.teamEndTime = teamEndTime; }
+    public Date getTeamEndTime() {
+        return teamEndTime;
+    }
+
+    public void setTeamEndTime(Date teamEndTime) {
+        this.teamEndTime = teamEndTime;
+    }
 }

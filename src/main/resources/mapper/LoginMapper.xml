@@ -12,7 +12,7 @@
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="name" column="name"/>
+        <result property="studentName" column="student_name"/>
         <result property="email" column="email"/>
         <result property="emailReceiveInterval" column="email_receive_interval"/>
     </resultMap>
@@ -22,19 +22,19 @@
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="name" column="name"/>
+        <result property="teacherName" column="teacher_name"/>
         <result property="email" column="email"/>
         <result property="emailReceiveInterval" column="email_receive_interval"/>
     </resultMap>
 
     <select id="studentLogin" resultMap="studentLoginResultMap">
-        SELECT id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student
         WHERE account=#{account} AND password=#{password}
     </select>
 
     <select id="teacherLogin" resultMap="teacherLoginResultMap">
-        SELECT id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,teacher_name,email,email_receive_interval
         FROM teacher
         WHERE account=#{account} AND password=#{password}
     </select>

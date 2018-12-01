@@ -2,6 +2,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Team;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -51,7 +52,7 @@ public interface TeamMapper {
      * @param courseId
      * @return
      */
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId);
+    Team getTeamByStudentIdAndCourseId(@Param("studentId") BigInteger studentId, @Param("courseId") BigInteger courseId);
 
     /**
      * 查看某课程的所有队伍
