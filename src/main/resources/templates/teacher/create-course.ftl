@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<head>
+<head xmlns="http://www.w3.org/1999/html">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -56,16 +56,31 @@
 
 <div class="content">
     <div class="container no-bottom">
-        <form class="layui-form" action="">
+        <form class="layui-form" action="/teacher/create-course" method="post" class="contactForm" id="contactForm">
+            <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
+                <div class="static-notification-green tap-dismiss-notification">
+                    <p style="color:#c9302c;">该课程已被创建！</p>
+                </div>
+            </div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">课程名称：<span>(required)</span></label>
-                <input type="text" name="name" value="" class="contactField requiredField" id="contactNameField"/>
+                <input type="text" name="courseName" value="" class="contactField requiredField" id="contactNameField"/>
+            </div>
+            <div class="formValidationError" id="contactNameFieldError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写课程名!</p>
+                </div>
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactMessageTextarea" for="contactMessageTextarea">课程要求：<span>(required)</span></label>
                 <textarea name="introduction" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
 
                 <div class="decoration"></div>
+            </div>
+            <div class="formValidationError" id="contactMessageTextareaError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写课程要求</p>
+                </div>
             </div>
 
             <label class="field-title contactMessageTextarea" for="contactMessageTextarea">成绩计算规则：<span>(required)</span></label>
@@ -77,7 +92,7 @@
                         <select name="presentationProportion" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="1">20%</option>
-                            <option value="2">40%</option>
+                            <option value="2" selected>40%</option>
                             <option value="3">60%</option>
                             <option value="4">80%</option>
                         </select>
@@ -89,7 +104,7 @@
                         <select name="questionProportion" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="1">20%</option>
-                            <option value="2">40%</option>
+                            <option value="2" selected>40%</option>
                             <option value="3">60%</option>
                             <option value="4">80%</option>
                         </select>
@@ -100,7 +115,7 @@
                     <div class="layui-input-block">
                         <select name="reportProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="1">20%</option>
+                            <option value="1" selected>20%</option>
                             <option value="2">40%</option>
                             <option value="3">60%</option>
                             <option value="4">80%</option>
@@ -120,7 +135,7 @@
                     <div class="layui-input-block">
                         <select name="maxTeamMember" lay-filter="aihao">
                             <option value="0">4人</option>
-                            <option value="1">5人</option>
+                            <option value="1" selected>5人</option>
                             <option value="2">6人</option>
                             <option value="3">7人</option>
                             <option value="4">8人</option>
@@ -133,7 +148,7 @@
                         <select name="minTeamMember" lay-filter="aihao">
                             <option value="0">3人</option>
                             <option value="1">4人</option>
-                            <option value="2">5人</option>
+                            <option value="2" selected>5人</option>
                             <option value="3">6人</option>
                             <option value="4">7人</option>
                         </select>
@@ -155,7 +170,7 @@
             </div>
 
             <div class="distance4"></div>
-            <p class="center center-text"><a href="/teacher/courses" class="button-big button-dark">创建课程</a></p>
+            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>
         <!--
     <div class="decoration"></div>
