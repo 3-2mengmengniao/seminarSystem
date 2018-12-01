@@ -32,7 +32,8 @@ public class TeacherController {
     public String courses(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
+        System.out.println(courseList.size());
         model.addAttribute("courseList",courseList);
         return "teacher/courses";
     }
@@ -63,6 +64,7 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         course.setTeacherId(teacherId);
+
         courseService.insertCourse(course);
         String status="200";
         return status;

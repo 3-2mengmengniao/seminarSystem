@@ -28,7 +28,6 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-            alert(data);
                 if(data=="405") {
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
