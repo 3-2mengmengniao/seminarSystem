@@ -15,7 +15,7 @@ public class Course {
     private int presentationProportion;
     private int questionProportion;
     private int reportProportion;
-    private String name;
+    private String courseName;
     private int minTeamMember;
     private int maxTeamMember;
     private Date teamStartTime;
@@ -53,9 +53,9 @@ public class Course {
 
     public void setReportProportion(int reportProportion) {this.reportProportion=reportProportion; }
 
-    public String getName() {return name; }
+    public String getCourseName() {return courseName; }
 
-    public void setName(String name) {this.name = name; }
+    public void setCourseName(String courseName) {this.courseName = courseName; }
 
     public int getMinTeamMember() {return minTeamMember; }
 

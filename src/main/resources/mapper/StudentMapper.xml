@@ -7,20 +7,20 @@
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="name" column="name"/>
+        <result property="studentName" column="student_name"/>
         <result property="email" column="email"/>
         <result property="emailReceiveInterval" column="email_receive_interval"/>
     </resultMap>
 
     <select id="getStudentByStudentId" resultMap="studentResultMap">
-        SELECT id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student
         WHERE id=#{studentId}
     </select>
 
     <insert id="insertStudent">
-        insert into student(account,password,is_active,name,email,email_receive_interval)
-        values(#{student.account},#{student.password},#{student.active},#{student.name},#{student.email},#{student.emailReceiveInterval})
+        insert into student(account,password,is_active,student_name,email,email_receive_interval)
+        values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email},#{student.emailReceiveInterval})
     </insert>
 
     <update id="updateStudentByStudentId">
@@ -35,8 +35,8 @@
             <if test="student.active!=null">
                 is_active=#{student.active},
             </if>
-            <if test="student.name!=null">
-                name=#{student.name},
+            <if test="student.studentName!=null">
+                student_name=#{student.studentName},
             </if>
             <if test="student.email!=null">
                 email=#{student.email},

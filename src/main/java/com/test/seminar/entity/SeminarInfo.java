@@ -11,7 +11,7 @@ import java.util.Date;
 public class SeminarInfo {
     private BigInteger id;
     private BigInteger courseId;
-    private String name;
+    private String seminarName;
     private String introduction;
     private int maxGroup;
     private int visible;
@@ -25,9 +25,9 @@ public class SeminarInfo {
 
     public void setCourseId(BigInteger courseId) {this.courseId = courseId; }
 
-    public String getName() { return name; }
+    public String getSeminarName() { return seminarName; }
 
-    public void setName(String name) {this.name = name; }
+    public void setSeminarName(String seminarName) {this.seminarName = seminarName; }
 
     public String getIntroduction() {return introduction; }
 

@@ -8,13 +8,13 @@
     <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <select id="getCourseClassByCourseClassId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,name,introduction
+        SELECT id,course_id as courseId,class_name,introduction
         FROM course_class
         WHERE id=#{courseClassId}
     </select>
 
     <insert id="insertCourseClass">
-        insert into course_class(course_id,name,introduction) values(#{courseClass.courseId},#{courseClass.name},#{courseClass.introduction})
+        insert into course_class(course_id,class_name,introduction) values(#{courseClass.courseId},#{courseClass.className},#{courseClass.introduction})
     </insert>
 
     <update id="updateCourseClassByCourseClassId">
@@ -23,8 +23,8 @@
             <if test="courseClass.courseId!=null">
                 course_id=#{courseClass.courseId},
             </if>
-            <if test="courseClass.name!=null">
-                name=#{courseClass.name},
+            <if test="courseClass.className!=null">
+                class_name=#{courseClass.className},
             </if>
             <if test="courseClass.introduction!=null" >
                 introduction=#{courseClass.introduction},
@@ -38,7 +38,7 @@
     </delete>
 
     <select id="getCourseClassByCourseId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,name,introduction
+        SELECT id,course_id as courseId,class_name,introduction
         FROM course_class
         WHERE course_id=#{courseId}
     </select>

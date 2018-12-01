@@ -7,20 +7,20 @@
         <result property="account" column="account"/>
         <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="name" column="name"/>
+        <result property="teacherName" column="teacher_name"/>
         <result property="email" column="email"/>
         <result property="emailReceiveInterval" column="email_receive_interval"/>
     </resultMap>
 
     <select id="getTeacherByTeacherId" resultMap="teacherResultMap">
-        SELECT id,account,password,is_active,name,email,email_receive_interval
+        SELECT id,account,password,is_active,teacher_name,email,email_receive_interval
         FROM teacher
         WHERE id=#{teacherId}
     </select>
 
     <insert id="insertTeacher">
-        insert into teacher(account,password,is_active,name,email,email_receive_interval)
-        values(#{teacher.account},#{teacher.password},#{teacher.active},#{teacher.name},#{teacher.email},#{teacher.emailReceiveInterval})
+        insert into teacher(account,password,is_active,teacher_name,email,email_receive_interval)
+        values(#{teacher.account},#{teacher.password},#{teacher.active},#{teacher.teacherName},#{teacher.email},#{teacher.emailReceiveInterval})
     </insert>
 
     <update id="updateTeacherByTeacherId">
@@ -35,8 +35,8 @@
             <if test="teacher.active!=null">
                 is_active=#{teacher.active},
             </if>
-            <if test="teacher.name!=null">
-                name=#{teacher.name},
+            <if test="teacher.teacherName!=null">
+                teacher_name=#{teacher.teacherName},
             </if>
             <if test="teacher.email!=null">
                 email=#{teacher.email},

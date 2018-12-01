@@ -13,7 +13,7 @@ public class Teacher{
     private String account;
     private String password;
     private int active;
-    private String name;
+    private String teacherName;
     private String email;
     private int emailReceiveInterval;
 
@@ -49,12 +49,12 @@ public class Teacher{
         this.active = active;
     }
 
-    public String getName() {
-        return name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getEmail() {

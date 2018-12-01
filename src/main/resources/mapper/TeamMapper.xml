@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.TeamMapper">
+
+    <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
+        <id property="id" column="id" />
+        <result property="classId" column="class_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="teamName" column="team_name"/>
+        <result property="leaderId" column="leader_id"/>
+        <result property="established" column="is_established"/>
+    </resultMap>
+
+    <select id="getTeamByTeamId" resultMap="teamResultMap">
+        SELECT id,class_id,course_id,team_name,leader_id,is_established
+        FROM team
+        WHERE id=#{teamId}
+    </select>
+
+    <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
+        SELECT team.id,team.class_id,course_id,team_name,leader_id,is_established
+        FROM team,class_student_table
+        WHERE team.course_id=#{courseId} and  class_student_table.student_id=#{studentId} and team.id=class_student_table.team_id
+    </select>
+
+    <select id="getTeamByCourseId" resultMap="teamResultMap">
+        SELECT id,class_id,course_id,team_name,leader_id,is_established
+        FROM team
+        WHERE course_id=#{courseId}
+    </select>
+
+    <insert id="insertTeam">
+        insert into team(class_id,course_id,team_name,leader_id,is_established)
+        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.established})
+    </insert>
+
+    <update id="updateTeamByTeamId">
+        update team
+        <set>
+            <if test="team.classId!=null">
+                class_id=#{team.classId},
+            </if>
+            <if test="team.courseId!=null">
+                course_id=#{team.courseId},
+            </if>
+            <if test="team.teamName!=null">
+                team_name=#{team.teamName},
+            </if>
+            <if test="team.leaderId!=null">
+                leader_id=#{team.leaderId},
+            </if>
+            <if test="team.established!=null">
+                is_established=#{team.established},
+            </if>
+        </set>
+        where id=#{round.id}
+    </update>
+
+    <delete id="deleteTeamByTeamId">
+        delete from team where id=#{teamId}
+    </delete>
+</mapper>

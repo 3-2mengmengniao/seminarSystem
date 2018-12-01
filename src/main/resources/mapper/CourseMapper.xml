@@ -9,7 +9,7 @@
         <result property="presentationProportion" column="presentation_proportion"/>
         <result property="questionProportion" column="question_proportion"/>
         <result property="reportProportion" column="report_proportion"/>
-        <result property="name" column="name"/>
+        <result property="courseName" column="course_name"/>
         <result property="minTeamMember" column="min_team_member"/>
         <result property="maxTeamMember" column="max_team_member"/>
         <result property="teamStartTime" column="team_start_time"/>
@@ -17,29 +17,29 @@
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time
         from course
         where id=#{courseId}
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.name,min_team_member,max_team_member,team_start_time,team_end_time
+        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time
         FROM course,course_class,class_student_table
         WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
     </select>
 
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
-        report_proportion,name,min_team_member,max_team_member,team_start_time,team_end_time)
+        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time)
         values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
-        #{course.name},#{course.minTeamMember},#{course.maxTeamMember},
+        #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
         #{course.teamStartTime},#{course.teamEndTime})
     </insert>
 
@@ -61,8 +61,8 @@
             <if test="course.report_proportion!=null">
                 report_proportion=#{course.reportProportion},
             </if>
-            <if test="course.name!=null">
-                name=#{course.name},
+            <if test="course.courseName!=null">
+                course_name=#{course.courseName},
             </if>
             <if test="course.min_team_member!=null">
                 min_team_member=#{course.minTeamMember},
