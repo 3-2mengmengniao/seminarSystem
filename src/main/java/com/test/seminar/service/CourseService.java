@@ -56,5 +56,4 @@ public interface CourseService {
      * @throws CourseNotFoundException
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
-
 }
