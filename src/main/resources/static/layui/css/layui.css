@@ -85,4 +85,36 @@ a.my-navigation{
     margin-left: auto;
 }
 
+@media screen and (min-width:768px){
+    .layui-form-select .layui-input{
+        padding-right: 20%;
+        cursor: pointer;
+    }
+    .contactMessageTextarea{
+        padding-bottom: 5px;
+        padding-left: 28%;
+        font-size: 16px;
+    }
+
+    .layui-form-label{
+        float: left;
+        display: block;
+        padding-left: 28.5%;
+        /* padding: 9px 95px; */
+        font-weight: 400;
+        line-height: 20px;
+        text-align: right;
+    }
+
+    .layui-form-item .layui-inline{
+        margin-bottom: 5px;
+        margin-right: 10px;
+        margin-left: 10%;
+    }
+    .layui-input-block {
+        margin-left: 20%;
+        margin-right: 30%;
+        min-height: 36px;
+    }
+}
 

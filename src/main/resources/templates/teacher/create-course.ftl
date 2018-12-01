@@ -53,9 +53,11 @@
     <h1 class="navigation-back">新建课程</h1>
     <a href="/teacher/courses" class="button-close">x</a>
 </div>
+<div class="distace3"></div>
 <div class="decoration"></div>
 
 <div class="content">
+    <div class="distance3"></div>
     <div class="container no-bottom">
         <form class="layui-form" action="/teacher/create-course" method="post" class="contactForm" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
@@ -73,17 +75,16 @@
                 </div>
             </div>
             <div class="formTextareaWrap">
-                <label class="field-title contactMessageTextarea" for="contactMessageTextarea">课程要求：<span>(required)</span></label>
+                <label class="field-title contactNameField" for="contactMessageTextarea">课程要求：<span>(required)</span></label>
                 <textarea name="introduction" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
-
-                <div class="decoration"></div>
             </div>
             <div class="formValidationError" id="contactMessageTextareaError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="uppercase">请填写课程要求</p>
                 </div>
             </div>
-
+            <div class="decoration"></div>
+            <div class="distance3"></div>
             <label class="field-title contactMessageTextarea" for="contactMessageTextarea">成绩计算规则：<span>(required)</span></label>
             <div >
                 <div class="distance3"></div>
@@ -128,6 +129,7 @@
 
             </div>
             <div class="decoration"></div>
+            <div class="distance3"></div>
             <label class="field-title contactMessageTextarea" for="contactMessageTextarea">组队相关规则<span>(required)</span></label>
             <div >
                 <div class="distance3"></div>
@@ -177,6 +179,7 @@
             <div class="distance4"></div>
             <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>
+        <div class="distance2"></div>
         <!--
     <div class="decoration"></div>
     <div class="footer">
@@ -383,50 +386,6 @@
                 layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
             }
         });
-        //不出现底部栏
-        laydate.render({
-            elem: '#test22'
-            ,showBottom: false
-        });
-
-        //只出现确定按钮
-        laydate.render({
-            elem: '#test23'
-            ,btns: ['confirm']
-        });
-
-        //自定义事件
-        laydate.render({
-            elem: '#test24'
-            ,trigger: 'mousedown'
-        });
-
-        //点我触发
-        laydate.render({
-            elem: '#test25'
-            ,eventElem: '#test25-1'
-            ,trigger: 'click'
-        });
-
-        //双击我触发
-        lay('#test26-1').on('dblclick', function(){
-            laydate.render({
-                elem: '#test26'
-                ,show: true
-                ,closeStop: '#test26-1'
-            });
-        });
-
-        //日期只读
-        laydate.render({
-            elem: '#test27'
-            ,trigger: 'click'
-        });
-
-        //非input元素
-        laydate.render({
-            elem: '#test28'
-        });
 
         //墨绿主题
         laydate.render({
@@ -434,39 +393,6 @@
             ,theme: 'molv'
         });
 
-        //自定义颜色
-        laydate.render({
-            elem: '#test30'
-            ,theme: '#393D49'
-        });
-
-        //格子主题
-        laydate.render({
-            elem: '#test31'
-            ,theme: 'grid'
-        });
-
-
-        //直接嵌套显示
-        laydate.render({
-            elem: '#test-n1'
-            ,position: 'static'
-        });
-        laydate.render({
-            elem: '#test-n2'
-            ,position: 'static'
-            ,lang: 'en'
-        });
-        laydate.render({
-            elem: '#test-n3'
-            ,type: 'month'
-            ,position: 'static'
-        });
-        laydate.render({
-            elem: '#test-n4'
-            ,type: 'time'
-            ,position: 'static'
-        });
     });
 </script>
 
