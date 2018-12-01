@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -51,9 +52,20 @@ public class TeacherController {
         return "teacher/course-info";
     }
 
-    @RequestMapping(value="/create-course")
+    @RequestMapping(value="/create-course",method = GET)
     public String createCourse(Model model) {
         return "teacher/create-course";
+    }
+
+    @RequestMapping(value="/create-course",method = POST)
+    @ResponseBody
+    public String createCoursePost(HttpServletRequest request,Model model,Course course) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        course.setTeacherId(teacherId);
+        courseService.insertCourse(course);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/group-score")

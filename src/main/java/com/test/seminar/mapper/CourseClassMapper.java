@@ -22,7 +22,7 @@ public interface CourseClassMapper {
      * @param courseClassId
      * @return
      */
-    CourseClass getCourseClassByCourseClassId(BigInteger courseClassId);
+    CourseClass getCourseClassByCourseClassId(@Param("courseClassId") BigInteger courseClassId);
 
     /**
      * 创建新的班级账户
@@ -30,7 +30,7 @@ public interface CourseClassMapper {
      * @param courseClass
      * @return
      */
-    void insertCourseClass(CourseClass courseClass);
+    void insertCourseClass(@Param("courseClass")CourseClass courseClass);
 
     /**
      * 更改班级信息
@@ -38,13 +38,13 @@ public interface CourseClassMapper {
      * @param courseClass
      * @return
      */
-    void updateCourseClassByCourseClassId(CourseClass courseClass);
+    void updateCourseClassByCourseClassId(@Param("courseClass")CourseClass courseClass);
 
     /**
      * @param courseClassId
      * @return
      */
-    void deleteCourseClassByCourseClassId(BigInteger courseClassId);
+    void deleteCourseClassByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
     /**
      * 获取某课程下的所有班级
@@ -52,7 +52,7 @@ public interface CourseClassMapper {
      * @param courseId
      * @return
      */
-    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+    List<CourseClass> getCourseClassByCourseId(@Param("courseId")BigInteger courseId);
 
 
 }
