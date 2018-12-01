@@ -78,6 +78,7 @@ public class MapperTest {
     @Test
     public void insertCourse(){
        Course course=new Course();
+       course.setTeacherId(new BigInteger("1"));
        course.setCourseName("J2EE");
        course.setMaxTeamMember(5);
        course.setMinTeamMember(3);

@@ -2,6 +2,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -20,26 +21,26 @@ public interface StudentMapper {
      * @param studentId
      * @return
      */
-    Student getStudentByStudentId(BigInteger studentId);
+    Student getStudentByStudentId(@Param("studentId")BigInteger studentId);
 
     /**
      * 创建新的学生账户
      * @param student
      * @return
      */
-    void insertStudent(Student student);
+    void insertStudent(@Param("student")Student student);
 
     /**
      * 更改学生信息
      * @param student
      * @return
      */
-    void updateStudentByStudentId(Student student);
+    void updateStudentByStudentId(@Param("student")Student student);
 
     /**
      * 删除学生
      * @param studentId
      * @return
      */
-    void deleteStudentByStudentId(BigInteger studentId);
+    void deleteStudentByStudentId(@Param("studentId")BigInteger studentId);
 }

@@ -3,6 +3,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -21,26 +22,26 @@ public interface TeacherMapper {
      * @param teacherId
      * @return
      */
-    Teacher getTeacherByTeacherId(BigInteger teacherId);
+    Teacher getTeacherByTeacherId(@Param("teacherId")BigInteger teacherId);
 
     /**
      * 创建新的老师账户
      * @param teacher
      * @return
      */
-    void insertTeacher(Teacher teacher);
+    void insertTeacher(@Param("teacher")Teacher teacher);
 
     /**
      * 更改老师信息
      * @param teacher
      * @return
      */
-    void updateTeacherByTeacherId(Teacher teacher);
+    void updateTeacherByTeacherId(@Param("teacher")Teacher teacher);
 
     /**
      * 删除老师
      * @param teacherId
      * @return
      */
-    void deleteTeacherByTeacherId(BigInteger teacherId);
+    void deleteTeacherByTeacherId(@Param("teacherId")BigInteger teacherId);
 }
