@@ -66,7 +66,7 @@ public interface SeminarDao {
     void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
 
     /**
-     * 获取某班级下对应的讨论课控制器
+     * 获取某讨论课某班级下对应的讨论课控制器
      * @param classId
      * @param seminarInfoId
      * @return
@@ -79,5 +79,4 @@ public interface SeminarDao {
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
-
 }
