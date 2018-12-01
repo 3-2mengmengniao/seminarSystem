@@ -44,7 +44,6 @@ public class MapperTest {
     @Test
     public void updateCourseClassByCourseClassId(){
         CourseClass courseClass=new CourseClass();
-        courseClass.setId(new BigInteger("5"));
         courseClass.setCourseId(new BigInteger("1"));
         courseClass.setName("三班");
         courseClass.setIntroduction("OOAD三班修改");
@@ -79,7 +78,6 @@ public class MapperTest {
     @Test
     public void insertCourse(){
        Course course=new Course();
-       course.setTeacherId(new BigInteger("1"));
        course.setName("J2EE");
        course.setMaxTeamMember(5);
        course.setMinTeamMember(3);

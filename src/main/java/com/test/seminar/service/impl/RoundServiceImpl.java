@@ -6,10 +6,12 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 import com.test.seminar.service.RoundService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
 
+@Service
 public class RoundServiceImpl implements RoundService {
 
     @Autowired

@@ -68,19 +68,19 @@
         </div>
     </div>
 </div>
-
-
+<#list courseList as course>
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>OOAD</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>${course.name}</a>
         </div>
     </div>
 <div class="distance3">
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>J2EE</a>
-        </div>
-    </div>
+    <#--<div class="container">-->
+        <#--<div class="toggle-1">-->
+            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>J2EE</a>-->
+        <#--</div>-->
+    <#--</div>-->
+    </#list>
     <div class="distance2"></div>
     <div class="distance2"></div>
     <div class="distance2"></div>

@@ -2,20 +2,38 @@ package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
+import com.test.seminar.dao.CourseDao;
+import com.test.seminar.entity.Course;
+import com.test.seminar.service.CourseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.util.List;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
+
+    @Autowired
+    CourseService courseService;
+
     @RequestMapping(value = "/homepage")
     public String home(Model model) {
         return "student/homepage";
     }
 
+
     @RequestMapping(value = "/courses", method = GET)
-    public String courses(Model model) {
+    public String courses(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        List<Course> courseList= courseService.getCourseByStudentId(studentId);
+        model.addAttribute("courseList",courseList);
         return "student/courses";
     }
 
@@ -25,7 +43,11 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/seminars")
-    public String seminars(Model model) {
+    public String seminars(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        List<Course> courseList= courseService.getCourseByStudentId(studentId);
+        model.addAttribute("courseList",courseList);
         return "student/seminars";
     }
 

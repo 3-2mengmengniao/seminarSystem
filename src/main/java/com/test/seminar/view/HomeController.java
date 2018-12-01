@@ -45,26 +45,35 @@ public class HomeController {
         //获得session
         HttpSession session = request.getSession();
         //登陆验证
-        Student student = loginService.studentLogin(account, password);
-        if (student == null) {
-            Teacher teacher = loginService.teacherLogin(account, password);
-                session.setAttribute("usertype", "teacher");
-                session.setAttribute("account", teacher.getAccount());
-                session.setAttribute("name", teacher.getName());
-                model.addAttribute("account",teacher.getAccount());
-                model.addAttribute("name",teacher.getName());
-                String  status="200";
-                return status;
-
-        } else {
+        try {
+            Student student = loginService.studentLogin(account, password);
             session.setAttribute("usertype", "student");
+            session.setAttribute("id", student.getId());
             session.setAttribute("account", student.getAccount());
             session.setAttribute("name", student.getName());
-            model.addAttribute("account",student.getAccount());
-            model.addAttribute("name",student.getName());
-            String  status="204";
-            return status;
+            model.addAttribute("account", student.getAccount());
+            model.addAttribute("name", student.getName());
         }
+       catch (UserNotFoundException e) {
+            try {
+                Teacher teacher = loginService.teacherLogin(account, password);
+                session.setAttribute("usertype", "teacher");
+                session.setAttribute("id", teacher.getId());
+                session.setAttribute("account", teacher.getAccount());
+                session.setAttribute("name", teacher.getName());
+                model.addAttribute("account", teacher.getAccount());
+                model.addAttribute("name", teacher.getName());
+            }
+            catch (UserNotFoundException e2){
+                String status = "404";
+                return status;
+            }
+           String status = "200";
+           return status;
+
+           }
+        String status = "204";
+        return status;
     }
 
     @RequestMapping(value = "/vali_psw", method = GET)

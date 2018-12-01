@@ -1,6 +1,9 @@
 package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+import com.test.seminar.entity.Course;
+import com.test.seminar.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,16 +11,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.math.BigInteger;
+import java.util.List;
+
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
+    @Autowired
+    CourseService courseService;
+
     @RequestMapping(value="/homepage")
     public String home(Model model) {
         return "teacher/homepage";
     }
 
     @RequestMapping(value="/courses",method = GET)
-    public String courses(Model model) {
+    public String courses(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        model.addAttribute("courseList",courseList);
         return "teacher/courses";
     }
 
@@ -47,7 +62,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/seminars")
-    public String seminars(Model model) {
+    public String seminars(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        model.addAttribute("courseList",courseList);
         return "teacher/seminars";
     }
 

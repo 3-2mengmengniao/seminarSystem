@@ -54,21 +54,29 @@ public class ExceptionControll {
     }
 
     @ResponseBody
-    @ExceptionHandler(SeminarNotFoundException.class)
-    public String seminarNotFound(Exception exception) {
-//        logger.info("Not found seminar", exception);
+    @ExceptionHandler(SeminarInfoNotFoundException.class)
+    public String seminarinfoNotFound(Exception exception) {
+//        logger.info("Not found seminar info", exception);
         String status="404";
         return status;
     }
 
-
-    @ExceptionHandler(UserNotFoundException.class)
     @ResponseBody
-    public String userNotFound(Exception exception) {
-//        logger.info("Not found seminar", exception);
+    @ExceptionHandler(SeminarControlNotFoundException.class)
+    public String seminarcontrolNotFound(Exception exception) {
+//        logger.info("Not found seminar control", exception);
         String status="404";
         return status;
     }
+
+
+//    @ExceptionHandler(UserNotFoundException.class)
+//    @ResponseBody
+//    public String userNotFound(Exception exception) {
+////        logger.info("Not found seminar", exception);
+//        String status="404";
+//        return status;
+//    }
 
     @ResponseBody
     @ExceptionHandler(NoHandlerFoundException.class)
