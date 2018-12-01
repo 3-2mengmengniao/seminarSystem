@@ -1,5 +1,7 @@
 package com.test.seminar.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -18,13 +20,16 @@ public class Course {
     private String courseName;
     private int minTeamMember;
     private int maxTeamMember;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamStartTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamEndTime;
 
     public BigInteger getId() {
         return id;
     }
-
     public BigInteger getTeacherId() {
         return teacherId;
     }

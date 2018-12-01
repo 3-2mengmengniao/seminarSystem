@@ -24,7 +24,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/creat-course.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -92,10 +92,10 @@
                     <div class="layui-input-block">
                         <select name="presentationProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="1">20%</option>
-                            <option value="2" selected>40%</option>
-                            <option value="3">60%</option>
-                            <option value="4">80%</option>
+                            <option value="20" selected>20%</option>
+                            <option value="40">40%</option>
+                            <option value="60">60%</option>
+                            <option value="80">80%</option>
                         </select>
                     </div>
                 </div>
@@ -104,10 +104,10 @@
                     <div class="layui-input-block">
                         <select name="questionProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="1">20%</option>
-                            <option value="2" selected>40%</option>
-                            <option value="3">60%</option>
-                            <option value="4">80%</option>
+                            <option value="20" selected>20%</option>
+                            <option value="40">40%</option>
+                            <option value="60">60%</option>
+                            <option value="80">80%</option>
                         </select>
                     </div>
                 </div>
@@ -116,10 +116,10 @@
                     <div class="layui-input-block">
                         <select name="reportProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="1" selected>20%</option>
-                            <option value="2">40%</option>
-                            <option value="3">60%</option>
-                            <option value="4">80%</option>
+                            <option value="20" selected>20%</option>
+                            <option value="40">40%</option>
+                            <option value="60">60%</option>
+                            <option value="80">80%</option>
                         </select>
                     </div>
                 </div>
@@ -135,11 +135,11 @@
                     <label class="layui-form-label">小组人数上限</label>
                     <div class="layui-input-block">
                         <select name="maxTeamMember" lay-filter="aihao">
-                            <option value="0">4人</option>
-                            <option value="1" selected>5人</option>
-                            <option value="2">6人</option>
-                            <option value="3">7人</option>
-                            <option value="4">8人</option>
+                            <option value="4">4人</option>
+                            <option value="5" selected>5人</option>
+                            <option value="6">6人</option>
+                            <option value="7">7人</option>
+                            <option value="8">8人</option>
                         </select>
                     </div>
                 </div>
@@ -147,11 +147,11 @@
                     <label class="layui-form-label">小组人数下限</label>
                     <div class="layui-input-block">
                         <select name="minTeamMember" lay-filter="aihao">
-                            <option value="0">3人</option>
-                            <option value="1">4人</option>
-                            <option value="2" selected>5人</option>
-                            <option value="3">6人</option>
-                            <option value="4">7人</option>
+                            <option value="3">3人</option>
+                            <option value="4">4人</option>
+                            <option value="5" selected>5人</option>
+                            <option value="6">6人</option>
+                            <option value="7">7人</option>
                         </select>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                     <label class="layui-form-label">组队开始时间</label>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="teamStartTime" type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                     <label class="layui-form-label">组队截止时间</label>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="teamEndTime" type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                 </div>
