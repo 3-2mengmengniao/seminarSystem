@@ -7,9 +7,11 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 
+@Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
