@@ -64,9 +64,13 @@ public class SeminarServiceImpl implements SeminarService {
     @Override
     public List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList) {
         List<List<SeminarInfo>> SeminarInfoOrderByRoundId= new ArrayList<List<SeminarInfo>>();
+        List<SeminarInfo> temp;
         for(int i=0;i<roundList.size();i++)
         {
-            SeminarInfoOrderByRoundId.add(getSeminarInfoByRoundId(roundList.get(i).getId()));
+            System.out.println(roundList.get(i).getId());
+            temp=getSeminarInfoByRoundId(roundList.get(i).getId());
+            System.out.println(temp);
+            SeminarInfoOrderByRoundId.add(i,temp);
         }
         return SeminarInfoOrderByRoundId;
     }

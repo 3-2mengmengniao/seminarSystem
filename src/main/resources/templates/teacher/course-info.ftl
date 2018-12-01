@@ -27,6 +27,8 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
 
+    <!--<div class="bottom-deco"></div>-->
+
 
 
 </head>
@@ -81,23 +83,19 @@
     -->
 </div>
 
-<!--<div class="bottom-deco"></div>-->
 <script>
-    $(function(){
-        $('#deleteButton').click(function(){
-            $.ajax({
-                type: "DELETE",
-                url: "/teacher/courses?courseId=${course.id}",
-                success: function(data){
-                    if(data=="200")
-                        window.location.href="/teacher/courses";
-                    else if(data=="404")
-                        alert("课程不存在");
-                }
-            });
+    $('#deleteButton').click(function(){
+        $.ajax({
+            type: "DELETE",
+            url: "/teacher/courses?courseId=${course.id}",
+            success: function(data){
+                if(data==="200")
+                    window.location.href="/teacher/courses";
+                else if(data==="404")
+                    alert("课程不存在");
+            }
         });
     });
 </script>
-
 </body>
 </html>

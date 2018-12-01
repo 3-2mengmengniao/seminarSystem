@@ -72,75 +72,79 @@
 </div>
 
 <div class="content">
+    <#list seminarList as round>
     <div class="one-half-responsive">
         <div class="container">
             <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第一轮</a>
+                <a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第${round?index+1}轮</a>
                 <div class="submenu-nav-items submenu-nav-items0">
                     <a href="#" class="text-white">该轮轮次设置
                     </a>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">业务流程分析</a>
+                    <#list round as seminar>
+                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">${seminar.seminarName}</a>
                     <div class="submenu-nav-items submenu-nav-items1">
                         <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
                         <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
                         <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
                     </div>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">领域模型设计</a>
-                    <div class="submenu-nav-items submenu-nav-items2">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
-                    </div>
+                    <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">${seminar.seminarName}</a>-->
+                    <#--<div class="submenu-nav-items submenu-nav-items2">-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>-->
+                    <#--</div>-->
+                    </#list >
                 </div>
             </div>
         </div>
     </div>
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第二轮</a>
-                <div class="submenu-nav-items submenu-nav-items0">
-                    <a href="#" class="text-white">该轮轮次设置
-                    </a>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">业务流程分析</a>
-                    <div class="submenu-nav-items submenu-nav-items1">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
-                    </div>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">领域模型设计</a>
-                    <div class="submenu-nav-items submenu-nav-items2">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第三轮</a>
-                <div class="submenu-nav-items submenu-nav-items0">
-                    <a href="#" class="text-white">该轮轮次设置
-                    </a>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">业务流程分析</a>
-                    <div class="submenu-nav-items submenu-nav-items1">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
-                    </div>
-                    <a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">领域模型设计</a>
-                    <div class="submenu-nav-items submenu-nav-items2">
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>
-                        <a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <#--<div class="one-half-responsive">-->
+        <#--<div class="container">-->
+            <#--<div class="submenu-navigation">-->
+                <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第二轮</a>-->
+                <#--<div class="submenu-nav-items submenu-nav-items0">-->
+                    <#--<a href="#" class="text-white">该轮轮次设置-->
+                    <#--</a>-->
+                    <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">业务流程分析</a>-->
+                    <#--<div class="submenu-nav-items submenu-nav-items1">-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>-->
+                    <#--</div>-->
+                    <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">领域模型设计</a>-->
+                    <#--<div class="submenu-nav-items submenu-nav-items2">-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>-->
+                    <#--</div>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
+    <#--<div class="one-half-responsive">-->
+        <#--<div class="container">-->
+            <#--<div class="submenu-navigation">-->
+                <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy0">第三轮</a>-->
+                <#--<div class="submenu-nav-items submenu-nav-items0">-->
+                    <#--<a href="#" class="text-white">该轮轮次设置-->
+                    <#--</a>-->
+                    <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy1 text-white">业务流程分析</a>-->
+                    <#--<div class="submenu-nav-items submenu-nav-items1">-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>-->
+                    <#--</div>-->
+                    <#--<a href="#" class="submenu-nav-deploy submenu-nav-deploy2 text-white">领域模型设计</a>-->
+                    <#--<div class="submenu-nav-items submenu-nav-items2">-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（1）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（2）</a>-->
+                        <#--<a href="/student/seminar_info_end" class="my-deploy-toggle-2 text-dark" style="cursor:pointer;color: #333333;" onclick="window.location.href='#'">2016-（3）</a>-->
+                    <#--</div>-->
+                <#--</div>-->
+            <#--</div>-->
+        <#--</div>-->
+    <#--</div>-->
+    </#list>
     <div class="container">
         <div class="toggle-1">
             <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-round'>新建轮次</a>
