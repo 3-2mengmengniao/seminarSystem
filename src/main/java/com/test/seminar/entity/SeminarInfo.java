@@ -17,6 +17,7 @@ public class SeminarInfo {
     private int maxGroup;
     private int visible;
     private Date reportDDL;
+    private int seminarSerial;
 
     public BigInteger getId() {
         return id;
@@ -77,4 +78,13 @@ public class SeminarInfo {
     public void setReportDDL(Date reportDDL) {
         this.reportDDL = reportDDL;
     }
+
+    public int getSeminarSerial() {
+        return seminarSerial;
+    }
+
+    public void setSeminarSerial(int seminarSerial) {
+        this.seminarSerial = seminarSerial;
+    }
 }
+
