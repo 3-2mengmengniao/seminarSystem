@@ -5,10 +5,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.service.CourseService;
 import com.test.seminar.service.RoundService;
 import com.test.seminar.service.SeminarService;
+import com.test.seminar.service.CourseClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,9 @@ public class StudentController {
 
     @Autowired
     SeminarService seminarService;
+
+    @Autowired
+    CourseClassService courseClassService;
 
     @RequestMapping(value = "/homepage")
     public String home(Model model) {
@@ -72,6 +77,8 @@ public class StudentController {
         model.addAttribute("studentId",studentId);
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        CourseClass myClass = courseClassService.getCourseClassByStudentIdAndCourseId(studentId, courseId);
+        model.addAttribute("class",myClass);
         return "student/course-seminar";
     }
 

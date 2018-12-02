@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -44,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD讨论课</h1>
-            <a href="/teacher/course-seminar" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/teacher/course-seminar?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -55,10 +57,6 @@
     <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
-                <em class="active-menu"></em>
-            </div>
             <div class="navigation-item">
                 <a href="/teacher/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
@@ -72,39 +70,40 @@
 </div>
 
 <div class="content">
-    <div class="container no-bottom text-list">
-        <div class="container no-bottom">
-            <table cellspacing='0' class="table">
-                <tr>
-                    <td> 主题：业务流程分析</td>
-                </tr>
-                <tr class='even'>
-                    <td> 课次序号：1</td>
-                </tr>
-                <tr>
-                    <td> 要求：界面导航图和所有界面原型设计</td>
-                </tr>
-                <tr class='even'>
-                    <td>课程情况：未开始   <a href="#" style="display: inline;margin-left: 20px;">查看信息</a></td>
-                </tr>
-            </table>
-        </div>
-
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>轮次</td>
+                <td>第二轮</td>
+            </tr>
+            <tr>
+                <td>主题</td>
+                <td>业务流程分析</td>
+            </tr>
+            <tr>
+                <td>课次序号</td>
+                <td>第1次</td>
+            </tr>
+            <tr>
+                <td>要求</td>
+                <td>界面导航图和所有界面原型设计，课堂讨论每个小组15分钟</td>
+            </tr>
+            <tr>
+                <td>课程情况</td>
+                <td>正在进行 <a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+            </tr>
+            </tbody>
+        </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">开始讨论课</a></p>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改讨论课信息</a></p>
-        <div class="distance"></div>
-        <!--
-        <div class="decoration"></div>
-        <div class="footer">
-            <div class="clear"></div>
-            <p class="copyright">
-                Copyright @2018 developed by Group 3-2.<br>
-                All Rights Reserved
-            </p>
-        </div>
-        -->
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="进入讨论课" data-formId="contactForm"/>
+        </p>
     </div>
 </div>
 

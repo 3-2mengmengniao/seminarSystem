@@ -3,6 +3,7 @@ package com.test.seminar.view;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
+import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.service.CourseClassService;
 import com.test.seminar.service.CourseService;
 import com.test.seminar.service.RoundService;
@@ -64,9 +65,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/class-info")
-    public String classInfo(BigInteger courseId,Model model) {
+    public String classInfo(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
+        session.setAttribute("courseId",courseId);
         return "teacher/class-info";
     }
 
@@ -88,8 +91,29 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         course.setTeacherId(teacherId);
-
         courseService.insertCourse(course);
+        String status="200";
+        return status;
+    }
+
+    @RequestMapping(value="/create-class",method = GET)
+    public String createClass(Model model) { return "teacher/create-class"; }
+
+    @RequestMapping(value="/create-class",method = POST)
+    @ResponseBody
+    public String createClassPost(HttpServletRequest request,Model model,CourseClass courseClass) {
+        HttpSession session = request.getSession();
+        BigInteger courseId=(BigInteger)session.getAttribute("courseId");
+        courseClass.setCourseId(courseId);
+        courseClassService.insertCourseClass(courseClass);
+        String status="200";
+        return status;
+    }
+
+    @RequestMapping(value="/courses/class",method = DELETE)
+    @ResponseBody
+    public String classDelete(BigInteger classId, Model model) {
+        courseClassService.deleteCourseClassByCourseClassId(classId);
         String status="200";
         return status;
     }
@@ -124,6 +148,23 @@ public class TeacherController {
     @RequestMapping(value="/teams")
     public String teams(Model model) {
         return "teacher/teams";
+    }
+
+    @RequestMapping(value="/seminar_info")
+    public String seminarInfo(BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+            SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+            SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+            model.addAttribute("seminarInfo",seminarInfo);
+            Course course=courseService.getCourseByCourseId(courseId);
+            model.addAttribute("course",course);
+            if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+                return "/teacher/seminar_info_ready";
+            else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+                return "/teacher/seminar_info_begin";
+            else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+                return "/teacher/seminar_info_complete";
+            else
+            return "/error";
     }
 
     @RequestMapping(value="/seminar_info_end")

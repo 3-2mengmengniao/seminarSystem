@@ -27,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}</h1>
-            <a href="/teacher/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/teacher/course-seminar?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -57,10 +57,6 @@
     <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
-                <em class="active-menu"></em>
-            </div>
             <div class="navigation-item">
                 <a href="/teacher/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
@@ -74,68 +70,56 @@
 </div>
 
 <div class="content">
-	<#list seminarList as round>
-    <div class="distance3"></div>
+    <div class="distance4"></div>
     <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第${round?index+1}轮</h2>
-                <div class="layui-colla-content">
-                    <div class="layui-collapse" lay-accordion="">
-                    <#list round as seminar>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">${seminar?index+1}&emsp;${seminar.seminarName}</h2>
-                            <#list courseClassList as class>
-                            <div class="layui-colla-content center-text">
-                                <a href="/teacher/seminar_info?courseId=${course.id}&seminarId=${seminar.id}&classId=${class.id}">${class.className}</a>
-                            </div>
-                            </#list>
-
-                        </div>
-                    </#list>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="distance3"></div>
-    </#list>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-round'>新建轮次</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-seminar'>新建讨论课</a>
-        </div>
-    </div>
-    <div class="distance2"> </div>
-    <div class="distance"> </div>
-    <!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>轮次</td>
+                <td>第二轮</td>
+            </tr>
+            <tr>
+                <td>主题</td>
+                <td>业务流程分析</td>
+            </tr>
+            <tr>
+                <td>课次序号</td>
+                <td>第1次</td>
+            </tr>
+            <tr>
+                <td>要求</td>
+                <td>界面导航图和所有界面原型设计，课堂讨论每个小组15分钟</td>
+            </tr>
+            <tr>
+                <td>课程情况</td>
+                <td>未开始<a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+            </tr>
+            <tr>
+                <td>报名开始时间</td>
+                <td>2018-11-15 00:00:00</td>
+            </tr>
+            <tr>
+                <td>报名截止时间</td>
+                <td>2018-11-30 00:00:00</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="distance4"></div>
+        <div class="distance"></div>
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="开始讨论课" data-formId="contactForm"/>
+        </p>
+        <div class="distance4"></div>
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="修改讨论课信息" data-formId="contactForm"/>
         </p>
     </div>
-    -->
 </div>
 
-
 <!--<div class="bottom-deco"></div>-->
-<script>
-    layui.use(['element', 'layer'], function(){
-        var element = layui.element();
-        var layer = layui.layer;
 
-        //监听折叠
-        element.on('collapse(test)', function(data){
-            layer.msg('展开状态：'+ data.show);
-        });
-    });
-</script>
+
 </body>
 </html>

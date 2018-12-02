@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author zhenweiwang
@@ -25,6 +26,13 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public void insertStudent(Student student) {
         studentMapper.insertStudent(student);
+    }
+
+    @Override
+    public void insertStudentByStudentList(List<Student> studentList) {
+        for(Student student:studentList){
+            studentMapper.insertStudent(student);
+        }
     }
 
     @Override
