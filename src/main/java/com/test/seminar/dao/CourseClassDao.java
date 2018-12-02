@@ -49,4 +49,5 @@ public interface CourseClassDao {
      * @return
      */
     CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
+
 }
