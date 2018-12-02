@@ -55,7 +55,7 @@ public class ExceptionControll {
 
     @ResponseBody
     @ExceptionHandler(SeminarInfoNotFoundException.class)
-    public String seminarinfoNotFound(Exception exception) {
+    public String seminarInfoNotFound(Exception exception) {
 //        logger.info("Not found seminar info", exception);
         String status="404";
         return status;
@@ -63,7 +63,7 @@ public class ExceptionControll {
 
     @ResponseBody
     @ExceptionHandler(SeminarControlNotFoundException.class)
-    public String seminarcontrolNotFound(Exception exception) {
+    public String seminarControlNotFound(Exception exception) {
 //        logger.info("Not found seminar control", exception);
         String status="404";
         return status;
@@ -85,6 +85,7 @@ public class ExceptionControll {
         String status="404";
         return status;
     }
+
 
 
 }

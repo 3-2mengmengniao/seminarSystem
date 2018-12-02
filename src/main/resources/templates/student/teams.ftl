@@ -125,7 +125,7 @@
 </div>
 
 <div class="back-button">
-    <a href="/student/course-seminar" class="button-return button-dark">返回</a>
+    <a href="/student/courses" class="button-return button-dark">返回</a>
 </div>
 
 <!--

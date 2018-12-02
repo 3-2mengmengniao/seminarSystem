@@ -3,6 +3,7 @@ package com.test.seminar.view;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
+import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.service.CourseClassService;
 import com.test.seminar.service.CourseService;
 import com.test.seminar.service.RoundService;
@@ -147,6 +148,23 @@ public class TeacherController {
     @RequestMapping(value="/teams")
     public String teams(Model model) {
         return "teacher/teams";
+    }
+
+    @RequestMapping(value="/seminar_info")
+    public String seminarInfo(BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+            SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+            SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+            model.addAttribute("seminarInfo",seminarInfo);
+            Course course=courseService.getCourseByCourseId(courseId);
+            model.addAttribute("course",course);
+            if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+                return "/teacher/seminar_info_ready";
+            else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+                return "/teacher/seminar_info_begin";
+            else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+                return "/teacher/seminar_info_complete";
+            else
+            return "/error";
     }
 
     @RequestMapping(value="/seminar_info_end")
