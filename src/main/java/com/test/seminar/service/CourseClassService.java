@@ -53,4 +53,6 @@ public interface CourseClassService {
      * @return 班级列表
      */
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+
+    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId);
 }

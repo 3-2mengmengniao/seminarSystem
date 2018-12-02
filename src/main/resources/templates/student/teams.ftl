@@ -23,6 +23,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -35,6 +36,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 
@@ -78,48 +80,43 @@
 </div>
 
 
-
-
-
-   <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">1-1 早早鸟</a>
-                <div class="submenu-nav-items " id="team1">
-                    <a href="#">组长： 罗小黑</a>
-                    <a href="#">组员： 刘晓波</a>
-                    <a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</a>
-					<a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</a>
+<div class="content">
+    <div class="distance3"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">1-1 早早鸟</h2>
+                <div class="layui-colla-content">
+                    <p class="text-center">组长： 罗小黑</p>
+                    <p class="text-center">组员： 刘晓波</p>
+                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>
+                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>
                 </div>
             </div>
-        </div>
-   </div>
-      <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">1-2 晚晚鸟</a>
-                <div class="submenu-nav-items " id="team2">
-                    <a href="#">组长： 罗小黑</a>
-                    <a href="#">组员： 刘晓波</a>
-                    <a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</a>
-					<a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王新欣</a>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">1-2 晚晚鸟</h2>
+                <div class="layui-colla-content">
+                    <p class="text-center">组长： 罗小黑</p>
+                    <p class="text-center">组员： 刘晓波</p>
+                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>
+                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>
                 </div>
             </div>
-        </div>
-		</div>
-<div class="one-half-responsive">
-    <div class="container">
-        <div class="submenu-navigation">
-            <a href="#" class="submenu-nav-deploy">未组队学生</a>
-            <div class="submenu-nav-items " id="team1">
-                <a href="#">24320162202001 &nbsp&nbsp&nbsp 罗小黑</a>
-                <a href="#">24320162202002 &nbsp&nbsp&nbsp 刘晓波</a>
-                <a href="#">24320162202003 &nbsp&nbsp&nbsp 王洪</a>
-                <a href="#">24320162202004 &nbsp&nbsp&nbsp 李晓霞</a>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">未组队学生</h2>
+                <div class="layui-colla-content">
+                    <p class="text-center">24320162202001 &nbsp&nbsp&nbsp 罗小黑</p>
+                    <p class="text-center">24320162202002 &nbsp&nbsp&nbsp 刘晓波</p>
+                    <p class="text-center">24320162202003 &nbsp&nbsp&nbsp 王洪</p>
+                    <p class="text-center">24320162202004 &nbsp&nbsp&nbsp 李晓霞</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="distance4"></div>
+<div class="distance4"></div>
 
 <div class="container">
     <div class="toggle-1">
@@ -145,6 +142,16 @@
 </div>    
 -->
 
+<script>
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element();
+        var layer = layui.layer;
 
+        //监听折叠
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+    });
+</script>
 </body>
 </html>

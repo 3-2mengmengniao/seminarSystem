@@ -64,9 +64,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/class-info")
-    public String classInfo(BigInteger courseId,Model model) {
+    public String classInfo(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
+        session.setAttribute("courseId",courseId);
         return "teacher/class-info";
     }
 
@@ -88,8 +90,29 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         course.setTeacherId(teacherId);
-
         courseService.insertCourse(course);
+        String status="200";
+        return status;
+    }
+
+    @RequestMapping(value="/create-class",method = GET)
+    public String createClass(Model model) { return "teacher/create-class"; }
+
+    @RequestMapping(value="/create-class",method = POST)
+    @ResponseBody
+    public String createClassPost(HttpServletRequest request,Model model,CourseClass courseClass) {
+        HttpSession session = request.getSession();
+        BigInteger courseId=(BigInteger)session.getAttribute("courseId");
+        courseClass.setCourseId(courseId);
+        courseClassService.insertCourseClass(courseClass);
+        String status="200";
+        return status;
+    }
+
+    @RequestMapping(value="/courses/class",method = DELETE)
+    @ResponseBody
+    public String classDelete(BigInteger classId, Model model) {
+        courseClassService.deleteCourseClassByCourseClassId(classId);
         String status="200";
         return status;
     }
