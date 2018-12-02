@@ -3,14 +3,8 @@ package com.test.seminar.view;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.dao.CourseDao;
-import com.test.seminar.entity.Course;
-import com.test.seminar.entity.Round;
-import com.test.seminar.entity.CourseClass;
-import com.test.seminar.entity.SeminarInfo;
-import com.test.seminar.service.CourseService;
-import com.test.seminar.service.RoundService;
-import com.test.seminar.service.SeminarService;
-import com.test.seminar.service.CourseClassService;
+import com.test.seminar.entity.*;
+import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +31,9 @@ public class StudentController {
     @Autowired
     CourseClassService courseClassService;
 
+    @Autowired
+    StudentService studentService;
+
     @RequestMapping(value = "/homepage")
     public String home(Model model) {
         return "student/homepage";
@@ -53,7 +50,11 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/security", method = GET)
-    public String security(Model model) {
+    public String security(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        model.addAttribute("student",student);
         return "student/security";
     }
 
