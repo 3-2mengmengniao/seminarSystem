@@ -6,10 +6,12 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
 
+@Service
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDao teamDao;

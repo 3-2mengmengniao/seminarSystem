@@ -34,6 +34,9 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    TeamService teamService;
+
     @RequestMapping(value = "/homepage")
     public String home(Model model) {
         return "student/homepage";
@@ -91,6 +94,34 @@ public class StudentController {
     @RequestMapping(value = "/group-score")
     public String groupScore(Model model) {
         return "student/group-score";
+    }
+
+    @RequestMapping(value="/seminar_info")
+    public String seminarInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        boolean flag=teamList.contains(team);
+        System.out.println(flag);
+        if(flag)
+            return "student/selected_seminar_homepage" ;
+        else if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+            return "student/seminar_info_ready";
+        else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+            return "student/seminar_info_begin";
+        else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+            return "student/seminar_info_complete";
+        else
+            return "error";
     }
 
     @RequestMapping(value = "/seminar_info_begin")
