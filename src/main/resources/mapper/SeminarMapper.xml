@@ -11,6 +11,7 @@
         <result property="maxGroup" column="max_group"/>
         <result property="visible" column="is_visible"/>
         <result property="reportDDL" column="report_ddl"/>
+        <result property="seminarSerial" column="seminar_serial"/>
     </resultMap>
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
@@ -21,15 +22,15 @@
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial
         from seminar_info
         where id=#{seminarInfoId}
     </select>
 
     <insert id="insertSeminarInfo">
-        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl)
+        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial)
         values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
-        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL})
+        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL},#{seminarInfo.seminarSerial})
     </insert>
 
     <update id="updateSeminarInfo">
@@ -55,6 +56,9 @@
             </if>
             <if test="seminarInfo.reportDDL!=null">
                 report_ddl=#{seminarInfo.reportDDL},
+            </if>
+            <if test="seminarInfo.seminarSerial!=null">
+                seminar_serial=#{seminarInfo.seminarSerial},
             </if>
         </set>
         where id=#{seminarInfo.id}
@@ -103,7 +107,7 @@
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial
         from seminar_info
         where round_id=#{roundId}
     </select>
