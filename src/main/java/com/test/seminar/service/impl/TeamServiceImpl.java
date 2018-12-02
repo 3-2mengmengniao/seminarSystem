@@ -52,4 +52,9 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> getTeamByCourseId(BigInteger courseId) {
         return teamDao.getTeamByCourseId(courseId);
     }
+
+    @Override
+    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
+        return  teamDao.getTeamBySeminarControlId(seminarControlId);
+    }
 }

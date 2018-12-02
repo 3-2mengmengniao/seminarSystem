@@ -62,4 +62,5 @@ public interface TeamMapper {
      */
     List<Team> getTeamByCourseId(@Param("courseId")BigInteger courseId);
 
+    List<Team> getTeamBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 }

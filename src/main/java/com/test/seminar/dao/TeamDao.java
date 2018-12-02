@@ -53,4 +53,5 @@ public interface TeamDao {
      */
     List<Team> getTeamByCourseId(BigInteger courseId);
 
+    List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 }

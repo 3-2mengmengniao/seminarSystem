@@ -29,6 +29,12 @@
         WHERE course_id=#{courseId}
     </select>
 
+    <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
+        SELECT senimarcontrol_id,team_id,team_serial,total_score,presentation_score,question_score,report_score
+        FROM senimar_team_table
+        WHERE senimarcontrol_id=#{seminarControlId}
+    </select>
+
     <insert id="insertTeam">
         insert into team(class_id,course_id,team_name,leader_id,is_established)
         values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.established})

@@ -47,4 +47,9 @@ public class TeamDaoImpl implements TeamDao {
     public List<Team> getTeamByCourseId(BigInteger courseId) {
         return teamMapper.getTeamByCourseId(courseId);
     }
+
+    @Override
+    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
+        return teamMapper.getTeamBySeminarControlId(seminarControlId);
+    }
 }

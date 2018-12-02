@@ -20,4 +20,6 @@ public interface TeamService {
     Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws TeamNotFoundException;
 
     List<Team> getTeamByCourseId(BigInteger courseId);
+
+    List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 }
