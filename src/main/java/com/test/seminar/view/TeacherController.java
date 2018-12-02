@@ -4,10 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
 import com.test.seminar.exception.SeminarControlNotFoundException;
-import com.test.seminar.service.CourseClassService;
-import com.test.seminar.service.CourseService;
-import com.test.seminar.service.RoundService;
-import com.test.seminar.service.SeminarService;
+import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +34,9 @@ public class TeacherController {
     @Autowired
     CourseClassService courseClassService;
 
+    @Autowired
+    TeacherService teacherService;
+
     @RequestMapping(value="/homepage")
     public String home(Model model) {
         return "teacher/homepage";
@@ -60,7 +60,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/security",method = GET)
-    public String security(Model model) {
+    public String security(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+        model.addAttribute("teacher",teacher);
         return "teacher/security";
     }
 
@@ -155,16 +159,20 @@ public class TeacherController {
             SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
             SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
             model.addAttribute("seminarInfo",seminarInfo);
+            BigInteger roundId=seminarInfo.getRoundId();
+            Round round=roundService.getRoundByRoundId(roundId);
+            model.addAttribute("round",round);
+            System.out.println(round);
             Course course=courseService.getCourseByCourseId(courseId);
             model.addAttribute("course",course);
             if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
-                return "/teacher/seminar_info_ready";
+                return "teacher/seminar_info_ready";
             else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
-                return "/teacher/seminar_info_begin";
+                return "teacher/seminar_info_begin";
             else if(seminarControl.getSeminarStatus().equals("FINISHED"))
-                return "/teacher/seminar_info_complete";
+                return "teacher/seminar_info_complete";
             else
-            return "/error";
+            return "error";
     }
 
     @RequestMapping(value="/seminar_info_end")

@@ -45,7 +45,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">账户与设置</h1>
-            <a href="/student/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/homepage" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -60,7 +60,7 @@
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">讨论课</a>
+                <a href="/student/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -70,15 +70,15 @@
 <div class="content">
     <div class="container no-bottom text-list">
         用户姓名：<br>
-        阿童木<br>
+        ${student.studentName}<br>
         <div class="text-decoration"></div>
         <div class="distance3"></div>
         学号： <br>
-        1234567890<br>
+        ${student.account}<br>
         <div class="text-decoration"></div>
         <div class="distance3"></div>
         邮箱：<br>
-        atongmu@xmu.edu.cn<br>
+        ${student.email}<br>
         <div class="text-decoration"></div>
         <div class="distance4"></div>
         账户密码<br>

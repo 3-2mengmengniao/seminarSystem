@@ -80,19 +80,19 @@
             <tbody>
             <tr>
                 <td>轮次</td>
-                <td>第二轮</td>
+                <td>第${round.roundSerial}轮</td>
             </tr>
             <tr>
                 <td>主题</td>
-                <td>业务流程分析</td>
+                <td>${seminarInfo.seminarName}</td>
             </tr>
             <tr>
                 <td>课次序号</td>
-                <td>第1次</td>
+                <td>第${seminarInfo.seminarSerial}次</td>
             </tr>
             <tr>
                 <td>要求</td>
-                <td>界面导航图和所有界面原型设计，课堂讨论每个小组15分钟</td>
+                <td>${seminarInfo.introduction}</td>
             </tr>
             <tr>
                 <td>课程情况</td>
