@@ -46,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD&nbsp;2016-1</h1>
+            <h1 class="navigation-back">${course.courseName}&nbsp;2016-1</h1>
             <a href="/student/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -77,33 +77,16 @@
             <h2 class="layui-colla-title">讨论课信息</h2>
             <div class="layui-colla-content">
                 <div class="layui-collapse" lay-accordion="">
+                    <#list seminarList as round>
                     <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">第一轮</h2>
+                        <h2 class="layui-colla-title">第${round?index+1}轮</h2>
+                        <#list round as seminar>
                         <div class="layui-colla-content center-text">
-                            <p>1&emsp;代码检查</p>
+                            <a href="/student/seminar_info_begin">${seminar?index+1}&emsp;${seminar.seminarName}</a>
                         </div>
-                        <div class="layui-colla-content center-text">
-                            <p>2&emsp;对象模型设计</p>
-                        </div>
+                        </#list>
                     </div>
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">第二轮</h2>
-                        <div class="layui-colla-content center-text">
-                            <p>3&emsp;代码检查</p>
-                        </div>
-                        <div class="layui-colla-content center-text">
-                            <p>4&emsp;对象模型设计</p>
-                        </div>
-                    </div>
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">第三轮</h2>
-                        <div class="layui-colla-content center-text">
-                            <p>5&emsp;代码检查</p>
-                        </div>
-                        <div class="layui-colla-content center-text">
-                            <p>6&emsp;对象模型设计</p>
-                        </div>
-                    </div>
+                    </#list>
                 </div>
             </div>
         </div>

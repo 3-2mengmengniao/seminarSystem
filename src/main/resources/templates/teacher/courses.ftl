@@ -92,15 +92,15 @@
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-info?courseId=${course.getId()}">课程信息</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-info?courseId=${course.id}">课程信息</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/class-info">班级信息</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/class-info?courseId=${course.id}">班级信息</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-menu-fill layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-seminar">讨论课轮次</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-seminar?courseId=${course.id}">讨论课轮次</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-set-fill layui-anim layui-anim-fadein"></i>
