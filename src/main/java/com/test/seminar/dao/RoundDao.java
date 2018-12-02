@@ -28,7 +28,7 @@ public interface RoundDao {
      * 更新轮次信息
      * @param round
      */
-    void updateRound(BigInteger round);
+    void updateRound(Round round);
 
     /**
      * 通过轮次ID获得轮次信息
