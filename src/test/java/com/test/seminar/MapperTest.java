@@ -109,8 +109,7 @@ public class MapperTest {
 
     @Test
     public void getCourseClassByStudentIdAndCourseId(){
-        List<CourseClass> class1 =courseClassMapper.getCourseClassByStudentIdAndCourseId(new BigInteger("2"),new BigInteger("1"));
-        System.out.println(class1.get(0).getIntroduction());
-        assertEquals(1,class1.size());
+        CourseClass class1 =courseClassMapper.getCourseClassByStudentIdAndCourseId(new BigInteger("2"),new BigInteger("1"));
+        System.out.println(class1.getIntroduction());
     }
 }
