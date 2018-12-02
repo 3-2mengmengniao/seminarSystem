@@ -42,4 +42,10 @@
         FROM course_class
         WHERE course_id=#{courseId}
     </select>
+
+    <select id="getCourseClassByStudentIdAndCourseId" resultType="com.test.seminar.entity.CourseClass">
+        SELECT id,course_id as courseId,class_name,introduction
+        FROM course_class,class_student_table
+        WHERE course_id=#{courseId} and class_student_table.student_id=#{studentId} and course_class.id=class_student_table.class_id
+    </select>
 </mapper>
