@@ -27,6 +27,8 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
 
+    <!--<div class="bottom-deco"></div>-->
+
 
 
 </head>
@@ -43,7 +45,7 @@
 
 <div class="top-deco"></div>
 <div class="navigation-back">
-    <h1 class="navigation-back">OOAD</h1>
+    <h1 class="navigation-back">${course.courseName}</h1>
     <a href="/teacher/courses" class="button-close">x</a>
 </div>
 <div class="decoration"></div>
@@ -52,25 +54,24 @@
     <div class="container no-bottom">
         <h3>课程要求</h3>
         <p>
-            POJO和依赖注入对于系统设计和测试的意义<br>
-            本次讨论课一共可容纳6个小组<br>
-            每个小组15分钟，其中10分钟陈述，5分钟讨论<br>
+            ${course.introduction}
         </p>
         <h3>成绩计算规则</h3>
         <p>
-            课堂展示    50%<br>
-            课堂提问    10%<br>
-            课堂报告    40%<br>
+            课堂展示    ${course.presentationProportion}%<br>
+            课堂提问    ${course.questionProportion}%<br>
+            课堂报告    ${course.reportProportion}%<br>
         </p>
         <h3>分组规则</h3>
         <p>
-            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;1~5人<br>
-            组队开始时间：&emsp; &emsp;2018/10/10<br>
-            组队截止时间：&emsp;&emsp; 2018/11/10<br>
+            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
+            组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
+            组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
         </p>
         <div class="distance"></div>
-        <p class="center center-text"><a href="/teacher/courses" class="button-big button-red">删除课程</a></p>
+        <p class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
     </div>
+
 <!--
     <div class="decoration"></div>
     <div class="footer">
@@ -83,8 +84,19 @@
     -->
 </div>
 
-<!--<div class="bottom-deco"></div>-->
-
-
+<script>
+    $('#deleteButton').click(function(){
+        $.ajax({
+            type: "DELETE",
+            url: "/teacher/courses?courseId=${course.id}",
+            success: function(data){
+                if(data==="200")
+                    window.location.href="/teacher/courses";
+                else if(data==="404")
+                    alert("课程不存在");
+            }
+        });
+    });
+</script>
 </body>
 </html>

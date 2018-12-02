@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -43,36 +43,32 @@
 
 <div class="top-deco"></div>
 <div class="navigation-back">
-    <h1 class="navigation-back">班级信息</h1>
-    <a href="/teacher/courses" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+    <h1 class="navigation-back">${course.courseName}</h1>
+    <a href="/student/courses" class="button-close">x</a>
 </div>
 <div class="decoration"></div>
 
 <div class="content">
-    <#list courseClassList as class>
     <div class="container no-bottom">
-        <h3 class="center-text">${class.className}</h3>
-        <p class="center-text">
-            讨论课时间：&emsp;周三7、8节<br>
-            讨论课地点：&emsp;海韵教学楼<br>
-            班级学生名单： &emsp;周三56节.xlsx<br>
-        <p class="file center-text"><input type="file"></p>
+        <h3>课程要求</h3>
+        <p>
+            ${course.introduction}
         </p>
-        <p class="center center-text"><a href="#" class="button-big button-red">删除班级</a></p>
+        <h3>成绩计算规则</h3>
+        <p>
+            课堂展示    ${course.presentationProportion}%<br>
+            课堂提问    ${course.questionProportion}%<br>
+            课堂报告    ${course.reportProportion}%<br>
+        </p>
+        <h3>分组规则</h3>
+        <p>
+            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
+            组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
+            组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
+        </p>
+        <div class="distance"></div>
     </div>
-    <div class="decoration"></div>
-    </#list>
-    <#--<div class="container no-bottom">-->
-        <#--<h3 class="center-text">2016-2</h3>-->
-        <#--<p class="center-text">-->
-            <#--讨论课时间：&emsp;周三7、8节<br>-->
-            <#--讨论课地点：&emsp;海韵教学楼<br>-->
-            <#--班级学生名单： &emsp;周三56节.xlsx<br>-->
-        <#--<p class="file center-text"><input type="file"></p>-->
-        <#--</p>-->
-        <#--<p class="center center-text "><a href="/teacher/create-course" class="button-big button-red">删除班级</a></p>-->
-    <#--</div>-->
-    <!--
+<!--
     <div class="decoration"></div>
     <div class="footer">
         <div class="clear"></div>

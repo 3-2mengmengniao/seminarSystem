@@ -11,35 +11,70 @@ import java.util.Date;
 public class SeminarInfo {
     private BigInteger id;
     private BigInteger courseId;
+    private BigInteger roundId;
     private String seminarName;
     private String introduction;
     private int maxGroup;
     private int visible;
     private Date reportDDL;
 
-    public BigInteger getId() {return id; }
+    public BigInteger getId() {
+        return id;
+    }
 
-    public BigInteger getCourseId() {return courseId; }
+    public BigInteger getCourseId() {
+        return courseId;
+    }
 
-    public void setCourseId(BigInteger courseId) {this.courseId = courseId; }
+    public void setCourseId(BigInteger courseId) {
+        this.courseId = courseId;
+    }
 
-    public String getSeminarName() { return seminarName; }
+    public BigInteger getRoundId() {
+        return roundId;
+    }
 
-    public void setSeminarName(String seminarName) {this.seminarName = seminarName; }
+    public void setRoundId(BigInteger roundId) {
+        this.roundId = roundId;
+    }
 
-    public String getIntroduction() {return introduction; }
+    public String getSeminarName() {
+        return seminarName;
+    }
 
-    public void setIntroduction(String introduction) {this.introduction = introduction; }
+    public void setSeminarName(String seminarName) {
+        this.seminarName = seminarName;
+    }
 
-    public int getMaxGroup() {return maxGroup; }
+    public String getIntroduction() {
+        return introduction;
+    }
 
-    public void setMaxGroup(int maxGroup) { this.maxGroup = maxGroup; }
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
-    public int getVisible() {return visible; }
+    public int getMaxGroup() {
+        return maxGroup;
+    }
 
-    public void setVisible(int visible) {this.visible = visible; }
+    public void setMaxGroup(int maxGroup) {
+        this.maxGroup = maxGroup;
+    }
 
-    public Date getReportDDL() {return reportDDL; }
+    public int getVisible() {
+        return visible;
+    }
 
-    public void setReportDDL(Date reportDDL) {this.reportDDL = reportDDL; }
+    public void setVisible(int visible) {
+        this.visible = visible;
+    }
+
+    public Date getReportDDL() {
+        return reportDDL;
+    }
+
+    public void setReportDDL(Date reportDDL) {
+        this.reportDDL = reportDDL;
+    }
 }

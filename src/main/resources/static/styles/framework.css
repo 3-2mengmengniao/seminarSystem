@@ -324,6 +324,7 @@ h1.navigation-back{
 	font-family: 'Lato', sans-serif;
 	color: #1f1f1f;
 	margin-top:3px;
+	margin-bottom:10px;
 	text-align:center;
 }
 
@@ -447,7 +448,7 @@ h1.navigation-back{
 
 .decoration{
 	height:1px;
-	background-color:rgba(0,0,0,0.3);
+	background-color:rgba(0,0,0,0.2);
 	margin-bottom:20px;
 	display:block;
 	clear:both;
@@ -1993,14 +1994,14 @@ table tr:hover td{
 /*Contact Form */
 
 .contactField{
-	background-color:rgba(255,255,255,0.4);
+	/*background-color:rgba(255,255,255,0.4);*/
 	font-size:12px;
 	color:#666;
 	border:solid 1px #cacaca;
 }
 
 .contactTextarea{
-	background-color:rgba(255,255,255,0.4);
+	/*background-color:rgba(255,255,255,0.4);*/
 	font-size:12px;
 	border:solid 1px #cacaca;
 	color: #666;
@@ -2050,11 +2051,11 @@ table tr:hover td{
 }
 
 
-/*Field Styles*/
+/*Field Styles
 #contactNameField{
 	text-transform:capitalize;
 }
-
+*/
 .contactField{
 	min-width:100%;	
 	display:block;

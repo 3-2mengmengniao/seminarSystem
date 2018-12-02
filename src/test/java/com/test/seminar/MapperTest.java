@@ -2,8 +2,10 @@ package com.test.seminar;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.CourseClass;
+import com.test.seminar.entity.Round;
 import com.test.seminar.mapper.CourseClassMapper;
 import com.test.seminar.mapper.CourseMapper;
+import com.test.seminar.mapper.RoundMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class MapperTest {
 
     @Autowired
     CourseMapper courseMapper;
+
+    @Autowired
+    RoundMapper roundMapper;
 
     @Test
     public void getCourseClassByCourseClassId(){
@@ -88,5 +93,17 @@ public class MapperTest {
        course.setTeamEndTime(new Date());
        course.setTeamStartTime(new Date());
        courseMapper.insertCourse(course);
+    }
+
+    @Test
+    public void getCourseByCourseId(){
+        Course course=courseMapper.getCourseByCourseId(new BigInteger("6"));
+        System.out.println(course.getIntroduction());
+    }
+
+    @Test
+    public void getRoundByCourseId(){
+        List<Round> rounds =roundMapper.getRoundByCourseId(new BigInteger("1"));
+        assertEquals(2,rounds.size());
     }
 }

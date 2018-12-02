@@ -4,7 +4,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.Round;
+import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.service.CourseService;
+import com.test.seminar.service.RoundService;
+import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +25,12 @@ public class StudentController {
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    RoundService roundService;
+
+    @Autowired
+    SeminarService seminarService;
 
     @RequestMapping(value = "/homepage")
     public String home(Model model) {
@@ -52,7 +62,16 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/course-seminar")
-    public String courseSeminar(Model model) {
+    public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
+        List<Round> roundList= roundService.getRoundByCourseId(courseId);
+        model.addAttribute("roundList",roundList);
+        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
+        model.addAttribute("seminarList",seminarList);
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        model.addAttribute("studentId",studentId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "student/course-seminar";
     }
 
@@ -119,4 +138,11 @@ public class StudentController {
 
     @RequestMapping(value = "/seminar_end")
     public String seminarEnd(Model model) { return "student/seminar_end"; }
+
+    @RequestMapping(value="/course-info")
+    public String courseInfo(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        return "student/course-info";
+    }
 }

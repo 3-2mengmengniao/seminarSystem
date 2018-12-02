@@ -2,8 +2,11 @@ package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import com.test.seminar.entity.Course;
+import com.test.seminar.entity.*;
+import com.test.seminar.service.CourseClassService;
 import com.test.seminar.service.CourseService;
+import com.test.seminar.service.RoundService;
+import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -22,6 +26,15 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    RoundService roundService;
+
+    @Autowired
+    SeminarService seminarService;
+
+    @Autowired
+    CourseClassService courseClassService;
 
     @RequestMapping(value="/homepage")
     public String home(Model model) {
@@ -33,9 +46,16 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
-        System.out.println(courseList.size());
         model.addAttribute("courseList",courseList);
         return "teacher/courses";
+    }
+
+    @RequestMapping(value="/courses",method = DELETE)
+    @ResponseBody
+    public String courseDelete(BigInteger courseId, Model model) {
+        courseService.deleteCourseByCourseId(courseId);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/security",method = GET)
@@ -44,12 +64,16 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/class-info")
-    public String classInfo(Model model) {
+    public String classInfo(BigInteger courseId,Model model) {
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList",courseClasses);
         return "teacher/class-info";
     }
 
     @RequestMapping(value="/course-info")
-    public String courseInfo(Model model) {
+    public String courseInfo(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course-info";
     }
 
@@ -79,13 +103,21 @@ public class TeacherController {
     public String seminars(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        List<Course> courseList= courseService.getCourseByStudentId(teacherId);
+        List<Course> courseList= courseService.getCourseByTeacherId(teacherId);
         model.addAttribute("courseList",courseList);
         return "teacher/seminars";
     }
 
     @RequestMapping(value="/course-seminar")
-    public String courseSeminar(Model model) {
+    public String courseSeminar(BigInteger courseId,Model model) {
+        List<Round> roundList= roundService.getRoundByCourseId(courseId);
+        model.addAttribute("roundList",roundList);
+        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
+        model.addAttribute("seminarList",seminarList);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList",courseClasses);
         return "teacher/course-seminar";
     }
 
