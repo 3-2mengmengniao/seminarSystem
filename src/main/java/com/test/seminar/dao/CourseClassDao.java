@@ -42,5 +42,5 @@ public interface CourseClassDao {
      */
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
-
+    CourseClass getCourseClassByStudentId(BigInteger studentId);
 }
