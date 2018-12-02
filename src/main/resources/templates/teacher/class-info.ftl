@@ -49,8 +49,9 @@
 <div class="decoration"></div>
 
 <div class="content">
+    <#list courseClassList as class>
     <div class="container no-bottom">
-        <h3 class="center-text">2016-1</h3>
+        <h3 class="center-text">${class.className}</h3>
         <p class="center-text">
             讨论课时间：&emsp;周三7、8节<br>
             讨论课地点：&emsp;海韵教学楼<br>
@@ -60,16 +61,17 @@
         <p class="center center-text"><a href="#" class="button-big button-red">删除班级</a></p>
     </div>
     <div class="decoration"></div>
-    <div class="container no-bottom">
-        <h3 class="center-text">2016-2</h3>
-        <p class="center-text">
-            讨论课时间：&emsp;周三7、8节<br>
-            讨论课地点：&emsp;海韵教学楼<br>
-            班级学生名单： &emsp;周三56节.xlsx<br>
-        <p class="file center-text"><input type="file"></p>
-        </p>
-        <p class="center center-text "><a href="/teacher/create-course" class="button-big button-red">删除班级</a></p>
-    </div>
+    </#list>
+    <#--<div class="container no-bottom">-->
+        <#--<h3 class="center-text">2016-2</h3>-->
+        <#--<p class="center-text">-->
+            <#--讨论课时间：&emsp;周三7、8节<br>-->
+            <#--讨论课地点：&emsp;海韵教学楼<br>-->
+            <#--班级学生名单： &emsp;周三56节.xlsx<br>-->
+        <#--<p class="file center-text"><input type="file"></p>-->
+        <#--</p>-->
+        <#--<p class="center center-text "><a href="/teacher/create-course" class="button-big button-red">删除班级</a></p>-->
+    <#--</div>-->
     <!--
     <div class="decoration"></div>
     <div class="footer">

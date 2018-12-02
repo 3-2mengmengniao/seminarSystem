@@ -2,10 +2,8 @@ package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import com.test.seminar.entity.Course;
-import com.test.seminar.entity.Round;
-import com.test.seminar.entity.SeminarControl;
-import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.*;
+import com.test.seminar.service.CourseClassService;
 import com.test.seminar.service.CourseService;
 import com.test.seminar.service.RoundService;
 import com.test.seminar.service.SeminarService;
@@ -35,6 +33,9 @@ public class TeacherController {
     @Autowired
     SeminarService seminarService;
 
+    @Autowired
+    CourseClassService courseClassService;
+
     @RequestMapping(value="/homepage")
     public String home(Model model) {
         return "teacher/homepage";
@@ -63,7 +64,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/class-info")
-    public String classInfo(Model model) {
+    public String classInfo(BigInteger courseId,Model model) {
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList",courseClasses);
         return "teacher/class-info";
     }
 
@@ -110,10 +113,11 @@ public class TeacherController {
         List<Round> roundList= roundService.getRoundByCourseId(courseId);
         model.addAttribute("roundList",roundList);
         List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
-        for(int i=0;i<seminarList.size();i++) {
-            System.out.println(seminarList.get(i).size());
-        }
         model.addAttribute("seminarList",seminarList);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList",courseClasses);
         return "teacher/course-seminar";
     }
 

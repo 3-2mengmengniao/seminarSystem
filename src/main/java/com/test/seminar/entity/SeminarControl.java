@@ -11,14 +11,33 @@ public class SeminarControl {
     private BigInteger id;
     private BigInteger classId;
     private BigInteger seminarInfoId;
+    private String seminarStatus;
 
-    public BigInteger getId() {return id; }
+    public BigInteger getId() {
+        return id;
+    }
 
-    public BigInteger getClassId() {return classId; }
+    public BigInteger getClassId() {
+        return classId;
+    }
 
-    public void setRoundId(BigInteger roundId) {this.classId = roundId; }
+    public void setClassId(BigInteger classId) {
+        this.classId = classId;
+    }
 
-    public BigInteger getSeminarInfoId() {return seminarInfoId; }
+    public BigInteger getSeminarInfoId() {
+        return seminarInfoId;
+    }
 
-    public void setSeminarInfoId(BigInteger seminarInfoId) {this.seminarInfoId = seminarInfoId; }
+    public void setSeminarInfoId(BigInteger seminarInfoId) {
+        this.seminarInfoId = seminarInfoId;
+    }
+
+    public String getSeminarStatus() {
+        return seminarStatus;
+    }
+
+    public void setSeminarStatus(String seminarStatus) {
+        this.seminarStatus = seminarStatus;
+    }
 }

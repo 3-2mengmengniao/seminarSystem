@@ -106,4 +106,10 @@ public class MapperTest {
         List<Round> rounds =roundMapper.getRoundByCourseId(new BigInteger("1"));
         assertEquals(2,rounds.size());
     }
+
+    @Test
+    public void getCourseClassByStudentIdAndCourseId(){
+        CourseClass class1 =courseClassMapper.getCourseClassByStudentIdAndCourseId(new BigInteger("2"),new BigInteger("1"));
+        System.out.println(class1.getIntroduction());
+    }
 }

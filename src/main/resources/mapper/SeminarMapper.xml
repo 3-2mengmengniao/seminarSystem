@@ -17,6 +17,7 @@
         <id property="id" column="id"/>
         <result property="classId" column="class_id"/>
         <result property="seminarInfoId" column="seminarinfo_id"/>
+        <result property="seminarStatus" column="seminar_status"/>
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
@@ -65,14 +66,14 @@
 
 
     <select id="getSeminarControlBySeminarControlId" resultMap="seminarControlResultMap">
-        select id,class_id,seminarinfo_id
+        select id,class_id,seminarinfo_id,seminar_status
         from seminar_control
         where id=#{seminarControlId}
     </select>
 
     <insert id="insertSeminarControl">
-        insert into seminar_control(class_id,seminarinfo_id)
-        values(#{seminarControl.classId},#{seminarControl.seminarInfoId})
+        insert into seminar_control(class_id,seminarinfo_id,seminar_status)
+        values(#{seminarControl.classId},#{seminarControl.seminarInfoId},#{seminarControl.seminarStatus})
     </insert>
 
     <update id="updateSeminarControl">
@@ -84,6 +85,9 @@
             <if test="seminarControl.seminarInfoId!=null">
                 seminarinfo_id=#{seminarControl.seminarInfoId},
             </if>
+            <if test="seminarControl.seminarStatus!=null">
+                seminar_status=#{seminarControl.seminarStatus},
+            </if>
         </set>
         where id=#{seminarControl.id}
     </update>
@@ -93,7 +97,7 @@
     </delete>
 
     <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
-        select id,class_id,seminarinfo_id
+        select id,class_id,seminarinfo_id,seminar_status
         from seminar_control
         where class_id=#{classId} and seminarinfo_id=#{seminarInfoId}
     </select>
