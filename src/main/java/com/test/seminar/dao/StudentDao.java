@@ -3,6 +3,7 @@ package com.test.seminar.dao;
 import com.test.seminar.entity.Student;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author cxh
@@ -23,6 +24,13 @@ public interface StudentDao {
      * @return 新建学生的ID
      */
     void insertStudent(Student student);
+
+    /**
+     * 创建新的学生账户
+     * @param studentList
+     * @return 新建学生的ID
+     */
+    void insertStudentByStudentList(List<Student> studentList);
 
     /**
      * 更改学生信息
