@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/contact.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -64,11 +64,16 @@
 
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">填写邮箱:</label>
-                <input type="text" name="email" value="" class="contactField requiredField" id="contactNameField"  placeholder="邮箱格式如：user@hosst.domainnames"/>
+                <input type="text" name="email" value="" class="contactField requiredField requiredEmailField" id="contactNameField"  placeholder="邮箱格式如：user@hosst.domainnames"/>
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="uppercase">请填写新邮箱!</p>
+                </div>
+            </div>
+            <div class="formValidationError" id="contactNameFieldError2">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写正确的邮箱格式！</p>
                 </div>
             </div>
             <div class="formTextareaWrap">
