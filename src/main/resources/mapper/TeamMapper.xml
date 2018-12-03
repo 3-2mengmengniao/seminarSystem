@@ -59,7 +59,7 @@
                 is_established=#{team.established},
             </if>
         </set>
-        where id=#{round.id}
+        where id=#{team.id}
     </update>
 
     <delete id="deleteTeamByTeamId">

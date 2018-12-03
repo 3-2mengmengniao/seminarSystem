@@ -45,7 +45,7 @@
                 email_receive_interval=#{teacher.emailReceiveInterval},
             </if>
         </set>
-        where id=#{student.id}
+        where id=#{teacher.id}
     </update>
 
     <delete id="deleteTeacherByTeacherId">
