@@ -111,7 +111,6 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         boolean flag=teamList.contains(team);
-        System.out.println(flag);
         if(flag)
             return "student/selected_seminar_homepage" ;
         else if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
