@@ -17,30 +17,30 @@
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
         from course
         where id=#{courseId}
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time
+        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
         FROM course,course_class,class_student_table
         WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
     </select>
 
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
-        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time)
+        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount)
         values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
         #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
-        #{course.teamStartTime},#{course.teamEndTime})
+        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount)
     </insert>
 
     <update id="updateCourseByCourseId">
@@ -75,6 +75,12 @@
             </if>
             <if test="course.team_end_time!=null">
                 team_end_time=#{course.teamEndTime}
+            </if>
+            <if test="course.classAmount!=null">
+                class_amount=#{course.classAmount},
+            </if>
+            <if test="course.roundAmount!=null">
+                round_amount=#{course.roundAmount}
             </if>
         </set>
         where id=#{course.id}
