@@ -91,9 +91,37 @@ public class HomeController {
         return "vali_psw";
     }
 
+    @RequestMapping(value = "/vali_psw", method = POST)
+    @ResponseBody
+    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
+        HttpSession session = request.getSession();
+        String usertype=(String)session.getAttribute("usertype");
+        System.out.println(usertype);
+        if(usertype.equals("teacher"))
+        {
+            BigInteger teacherId=(BigInteger)session.getAttribute("id");
+            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+            teacher.setPassword(newPsw);
+            teacherService.updateTeacherByTeacherId(teacher);
+            String status="200";
+            return status;
+        }
+        else if(usertype.equals("student"))
+        {
+            BigInteger studentId=(BigInteger)session.getAttribute("id");
+            Student student=studentService.getStudentByStudentId(studentId);
+            student.setPassword(newPsw);
+            studentService.updateStudentByStudentId(student);
+            String status="204";
+            return status;
+        }
+        String status="404";
+        return status;
+    }
+
     @RequestMapping(value = "/email-modify", method = POST)
     @ResponseBody
-    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation,Model model) {
+    public String emailModifyPost(HttpServletRequest request,@RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         String usertype=(String)session.getAttribute("usertype");
         if(usertype.equals("teacher"))

@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/vali_psw.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -61,42 +61,42 @@
                         <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
                     </div>
                 </div>
-				<form action="/teacher/vali_psw" method="post" class="contactForm" id="contactForm">
+				<form action="/vali_psw" method="post" class="contactForm" id="contactForm">
                     <fieldset>
                     <p>
+                        <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
+                        <div class="formFieldWrap">
+                            <label class="field-title contactNameField" for="contactNameField">新密码:<span>(required)</span></label>
+                            <input type="password" name="newPsw" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入新密码"/>
+                        </div>
                         <div class="formValidationError" id="contactNameFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
                                 <p class="center-text uppercase">请填写新密码!</p>
                             </div>
-                        </div>             
+                        </div>
+                        <div class="formFieldWrap">
+                            <label class="field-title contactEmailField" for="contactEmailField">确认密码: <span>(required)</span></label>
+                            <input type="password" name="confirmPsw" value="" class="contactField requiredField" id="contactEmailField" placeholder="请再次输入新密码"/>
+                        </div>
                         <div class="formValidationError" id="contactEmailFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
                                 <p class="center-text uppercase">请填写确认密码!</p>
                             </div>
-                        </div> 
-                        <div class="formValidationError" id="contactMessageTextareaError">
-                            <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">请填写验证码!</p>
-                            </div>
                         </div>
-						<div class="formValidationError" id="differentError">
+                        <div class="formValidationError" id="differentError">
                             <div class="static-notification-red tap-dismiss-notification">
                                 <p class="center-text uppercase">新密码与确认密码不一致!</p>
                             </div>
                         </div>
-                        <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
-                        <div class="formFieldWrap">
-                            <label class="field-title contactNameField" for="contactNameField">新密码:<span>(required)</span></label>
-                            <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入新密码"/>
-                        </div>
-                        <div class="formFieldWrap">
-                            <label class="field-title contactEmailField" for="contactEmailField">确认密码: <span>(required)</span></label>
-                            <input type="text" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="请再次输入新密码"/>
-                        </div>
                         <div class="formTextareaWrap">
                             <label class="field-title contactMessageTextarea" for="contactMessageTextarea">验证码: <span>(required)</span></label>
                             <button id="vali_button">获取验证码</button>
-							<input name="contactMessageTextarea" class="contactField requiredField" id="contactMessageTextarea" placeholder="请输入验证码"></input>
+							<input name="validation" class="contactField requiredField" id="contactMessageTextarea" placeholder="请输入验证码"/>
+                        </div>
+                        <div class="formValidationError" id="contactMessageTextareaError">
+                            <div class="static-notification-red tap-dismiss-notification">
+                                <p class="center-text uppercase">请填写验证码!</p>
+                            </div>
                         </div>
                         <div class="distance2"></div>
                            <div class="formSubmitButtonErrorsWrap">
