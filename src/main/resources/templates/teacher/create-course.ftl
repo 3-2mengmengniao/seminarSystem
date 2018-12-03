@@ -93,10 +93,16 @@
                     <div class="layui-input-block">
                         <select name="presentationProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="20" selected>20%</option>
-                            <option value="40">40%</option>
+                            <option value="10">10%</option>
+                            <option value="20">20%</option>
+                            <option value="30">30%</option>
+                            <option value="40" selected>40%</option>
+                            <option value="50">50%</option>
                             <option value="60">60%</option>
+                            <option value="70">70%</option>
                             <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
                         </select>
                     </div>
                 </div>
@@ -105,10 +111,16 @@
                     <div class="layui-input-block">
                         <select name="questionProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="20" selected>20%</option>
+                            <option value="10">10%</option>
+                            <option value="20">20%</option>
+                            <option value="30" selected>30%</option>
                             <option value="40">40%</option>
+                            <option value="50">50%</option>
                             <option value="60">60%</option>
+                            <option value="70">70%</option>
                             <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
                         </select>
                     </div>
                 </div>
@@ -117,10 +129,16 @@
                     <div class="layui-input-block">
                         <select name="reportProportion" lay-filter="aihao">
                             <option value="0">0</option>
-                            <option value="20" selected>20%</option>
+                            <option value="10">10%</option>
+                            <option value="20">20%</option>
+                            <option value="30" selected>30%</option>
                             <option value="40">40%</option>
+                            <option value="50">50%</option>
                             <option value="60">60%</option>
+                            <option value="70">70%</option>
                             <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
                         </select>
                     </div>
                 </div>
@@ -130,7 +148,7 @@
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>
-            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">组队相关规则<span>(required)</span></label>
+            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">组队相关规则：<span>(required)</span></label>
             <div >
                 <div class="distance3"></div>
                 <div class="layui-form-item">
@@ -145,41 +163,41 @@
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item margin1 ">
                     <label class="layui-form-label">小组人数下限</label>
                     <div class="layui-input-block">
                         <select name="minTeamMember" lay-filter="aihao">
-                            <option value="3">3人</option>
+                            <option value="3" selected>3人</option>
                             <option value="4">4人</option>
-                            <option value="5" selected>5人</option>
+                            <option value="5">5人</option>
                             <option value="6">6人</option>
                             <option value="7">7人</option>
                         </select>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">组队开始时间</label>
+                <div class="layui-form-item margin2">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input name="teamStartTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
+                    <label class="layui-form-label moveUp">组队开始时间</label>
                 </div>
+                <div class="distance6"></div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">组队截止时间</label>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
+                    <label class="layui-form-label moveUp">组队截止时间</label>
+                    <div class="formValidationError" id="contactMessageTextareaError">
+                        <div class="static-notification-red tap-dismiss-notification">
+                            <p class="uppercase">请填写组队截止时间</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="formValidationError" id="test5Error">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请选择组队相关时间!</p>
-                </div>
-            </div>
-
             <div class="distance4"></div>
             <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>
@@ -210,111 +228,12 @@
     layui.use('laydate', function(){
         var laydate = layui.laydate;
 
-        //常规用法
-        laydate.render({
-            elem: '#test1'
-        });
-
-        //国际版
-        laydate.render({
-            elem: '#test1-1'
-            ,lang: 'en'
-        });
-
-        //年选择器
-        laydate.render({
-            elem: '#test2'
-            ,type: 'year'
-        });
-
-        //年月选择器
-        laydate.render({
-            elem: '#test3'
-            ,type: 'month'
-        });
-
-        //时间选择器
-        laydate.render({
-            elem: '#test4'
-            ,type: 'time'
-        });
-
         //日期时间选择器
         laydate.render({
             elem: '#test5'
             ,type: 'datetime'
         });
 
-        //日期范围
-        laydate.render({
-            elem: '#test6'
-            ,range: true
-        });
-
-        //年范围
-        laydate.render({
-            elem: '#test7'
-            ,type: 'year'
-            ,range: true
-        });
-
-        //年月范围
-        laydate.render({
-            elem: '#test8'
-            ,type: 'month'
-            ,range: true
-        });
-
-        //时间范围
-        laydate.render({
-            elem: '#test9'
-            ,type: 'time'
-            ,range: true
-        });
-
-        //日期时间范围
-        laydate.render({
-            elem: '#test10'
-            ,type: 'datetime'
-            ,range: true
-        });
-
-        //自定义格式
-        laydate.render({
-            elem: '#test11'
-            ,format: 'yyyy年MM月dd日'
-        });
-        laydate.render({
-            elem: '#test12'
-            ,format: 'dd/MM/yyyy'
-        });
-        laydate.render({
-            elem: '#test13'
-            ,format: 'yyyyMMdd'
-        });
-        laydate.render({
-            elem: '#test14'
-            ,type: 'time'
-            ,format: 'H点m分'
-        });
-        laydate.render({
-            elem: '#test15'
-            ,type: 'month'
-            ,range: '~'
-            ,format: 'yyyy-MM'
-        });
-        laydate.render({
-            elem: '#test16'
-            ,type: 'datetime'
-            ,range: '到'
-            ,format: 'yyyy年M月d日H时m分s秒'
-        });
-
-        //开启公历节日
-        laydate.render({
-            elem: '#test17'
-            ,calendar: true
-        });
 
         //自定义重要日
         laydate.render({

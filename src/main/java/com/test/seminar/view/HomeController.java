@@ -143,4 +143,13 @@ public class HomeController {
         return "email-modify";
     }
 
+    @RequestMapping(value = "/forget_password", method = GET)
+    public String forgetPassword(Model model) {
+        return "forget_password";
+    }
+
+    @RequestMapping(value = "/new_password", method = GET)
+    public String newPassword(Model model) {
+        return "new_password";
+    }
 }
