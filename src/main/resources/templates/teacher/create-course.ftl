@@ -144,7 +144,6 @@
                 </div>
 
                 <div class="distance4"></div>
-
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>

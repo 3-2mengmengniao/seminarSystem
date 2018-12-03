@@ -185,14 +185,17 @@ public class TeacherController {
             model.addAttribute("round",round);
             Course course=courseService.getCourseByCourseId(courseId);
             model.addAttribute("course",course);
-            if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+            if(seminarControl.getSeminarStatus().equals("UNSTARTED")) {
                 return "teacher/seminar_info_ready";
-            else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+            }
+            else if(seminarControl.getSeminarStatus().equals("INPROCESS")) {
                 return "teacher/seminar_info_begin";
-            else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+            }
+            else if(seminarControl.getSeminarStatus().equals("FINISHED")) {
                 return "teacher/seminar_info_complete";
+            }
             else
-            return "error";
+            {return "error";}
     }
 
     @RequestMapping(value="/seminar_info_end")
@@ -214,4 +217,7 @@ public class TeacherController {
     public String reportScore(Model model) {
         return "teacher/report_score";
     }
+
+    @RequestMapping(value = "/activate")
+    public String activate(Model model) { return "teacher/activate"; }
 }
