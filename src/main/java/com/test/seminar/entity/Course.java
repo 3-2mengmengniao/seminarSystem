@@ -20,6 +20,8 @@ public class Course {
     private String courseName;
     private int minTeamMember;
     private int maxTeamMember;
+    private int classAmount;
+    private int roundAmount;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamStartTime;
@@ -108,5 +110,21 @@ public class Course {
 
     public void setTeamEndTime(Date teamEndTime) {
         this.teamEndTime = teamEndTime;
+    }
+
+    public int getClassAmount() {
+        return classAmount;
+    }
+
+    public void setClassAmount(int classAmount) {
+        this.classAmount = classAmount;
+    }
+
+    public int getRoundAmount() {
+        return roundAmount;
+    }
+
+    public void setRoundAmount(int roundAmount) {
+        this.roundAmount = roundAmount;
     }
 }
