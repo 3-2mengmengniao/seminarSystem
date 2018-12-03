@@ -45,4 +45,11 @@ public interface StudentDao {
      * @return
      */
     void deleteStudentByStudentId(BigInteger studentId);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    List<Student> getStudentByTeamId(BigInteger teamId);
 }
