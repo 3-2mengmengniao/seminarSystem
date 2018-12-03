@@ -87,7 +87,7 @@
                 <p class="file center-text"><input type="file"></p>
             </div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建班级" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
 

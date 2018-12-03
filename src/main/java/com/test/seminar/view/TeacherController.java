@@ -162,7 +162,6 @@ public class TeacherController {
             BigInteger roundId=seminarInfo.getRoundId();
             Round round=roundService.getRoundByRoundId(roundId);
             model.addAttribute("round",round);
-            System.out.println(round);
             Course course=courseService.getCourseByCourseId(courseId);
             model.addAttribute("course",course);
             if(seminarControl.getSeminarStatus().equals("UNSTARTED"))

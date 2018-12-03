@@ -36,6 +36,15 @@ public class Team {
     public int getEstablished() { return established; }
 
     public void setEstablished(int established) {this.established = established; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Team) {
+            Team t = (Team) o;
+            return this.id.equals(t.getId());
+        }
+        return super.equals(o);
+    }
 }
 
 

@@ -30,9 +30,9 @@
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT senimarcontrol_id,team_id,team_serial,total_score,presentation_score,question_score,report_score
-        FROM senimar_team_table
-        WHERE senimarcontrol_id=#{seminarControlId}
+        SELECT id,class_id,course_id,team_name,leader_id,is_established
+        FROM seminar_team_table,team
+        WHERE seminarcontrol_id=#{seminarControlId} and team.id=seminar_team_table.team_id
     </select>
 
     <insert id="insertTeam">
@@ -59,7 +59,7 @@
                 is_established=#{team.established},
             </if>
         </set>
-        where id=#{round.id}
+        where id=#{team.id}
     </update>
 
     <delete id="deleteTeamByTeamId">
