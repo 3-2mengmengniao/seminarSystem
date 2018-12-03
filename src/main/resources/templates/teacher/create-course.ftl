@@ -178,7 +178,7 @@
                 <div class="layui-form-item margin2">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input name="teamStartTime" type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="teamStartTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">组队开始时间</label>
@@ -187,7 +187,7 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input name="teamEndTime" type="text" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">组队截止时间</label>
