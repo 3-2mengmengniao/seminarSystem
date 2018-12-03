@@ -33,21 +33,11 @@ public class HomeController {
     StudentService studentService;
 
     @RequestMapping(value = "/", method = GET)
-    public String login(Model model) {
-        //获得session
-//        HttpSession session = request.getSession();
-//        String status = (String) session.getAttribute("status");
-//        if (status == null) {
-//            return "login";
-//        } else if (status.equals("401")) {
-//            model.addAttribute("message", "账号或密码有误，请重新输入！");
-//            session.setAttribute("status", null);
-//            return "redirect:/login";
-//        } else {
+    public String login(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        session.invalidate();
             return "login";
-
     }
-
 
     @RequestMapping(value = "/login", method = POST)
     @ResponseBody
@@ -87,9 +77,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/vali_psw", method = GET)
-    public String valiPsw(Model model) {
-        return "vali_psw";
-    }
+    public String valiPsw(Model model) { return "vali_psw"; }
 
     @RequestMapping(value = "/vali_psw", method = POST)
     @ResponseBody

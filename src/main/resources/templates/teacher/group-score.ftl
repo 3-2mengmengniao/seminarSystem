@@ -73,104 +73,127 @@
 </div>
 
 <div class="content">
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">第一轮</a>
-                <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">1-1&nbsp&nbsp&nbsp 5分
-                    </a>
-                    <div class="submenu-nav-items">
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                    </div>
-                    <a href="#" class="submenu-nav-deploy text-white">1-2&nbsp&nbsp&nbsp 5分</a>
-                    <div class="submenu-nav-items">
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="one-half-responsive">
-        <div class="container">
-            <div class="submenu-navigation">
-                <a href="#" class="submenu-nav-deploy">第二轮</a>
-                <div class="submenu-nav-items">
-                    <a href="#" class="submenu-nav-deploy text-white">1-1&nbsp&nbsp&nbsp 5分
-                    </a>
-                    <div class="submenu-nav-items">
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                    </div>
-                    <a href="#" class="submenu-nav-deploy text-white">1-2&nbsp&nbsp&nbsp 5分</a>
-                    <div class="submenu-nav-items">
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">用例分析：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                        <a class="my-deploy-toggle-2 text-dark" style="cursor:pointer" onclick="window.location.href='#'">领域模型设计：&nbsp&nbsp&nbsp展示-5分 &nbsp&nbsp&nbsp提问-5分 &nbsp&nbsp&nbsp报告-5分</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="center-navigation">
-    <div class="layui-collapse" lay-accordion="">
-        <div class="layui-colla-item">
-            <h2 class="layui-colla-title">第一轮</h2>
-            <div class="layui-colla-content layui-show">
-                <div class="layui-collapse" lay-accordion="">
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
-                        </div>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
-                        </div>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
-                        </div>
-                    </div>
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
-                        </div>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
-                        </div>
-                        <div class="layui-colla-content">
-                            <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <h2 class="layui-colla-title">第二轮</h2>
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">第一轮</h2>
                 <div class="layui-colla-content layui-show">
+
                     <div class="layui-collapse" lay-accordion="">
                         <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
-                            </div>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
-                            </div>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
+                            <div class="layui-colla-content layui-show">
+
+                                <div class="layui-collapse" lay-accordion="">
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">用例分析</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">界面原型</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">总成绩</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp 5分</h2>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">用例分析</a>
+                            <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
+                            <div class="layui-colla-content layui-show">
+
+                                <div class="layui-collapse" lay-accordion="">
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">用例分析</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">界面原型</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">总成绩</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">界面原型</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">第二轮</h2>
+                <div class="layui-colla-content layui-show">
+
+                    <div class="layui-collapse" lay-accordion="">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
+                            <div class="layui-colla-content layui-show">
+
+                                <div class="layui-collapse" lay-accordion="">
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">用例分析</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">界面原型</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">总成绩</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="layui-colla-content">
-                                <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/group-score">总成绩</a>
+                        </div>
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
+                            <div class="layui-colla-content layui-show">
+
+                                <div class="layui-collapse" lay-accordion="">
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">用例分析</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">界面原型</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">总成绩</h2>
+                                        <div class="layui-colla-content layui-show">
+                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
