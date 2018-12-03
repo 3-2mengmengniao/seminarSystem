@@ -57,10 +57,6 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">代办</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
                 <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
