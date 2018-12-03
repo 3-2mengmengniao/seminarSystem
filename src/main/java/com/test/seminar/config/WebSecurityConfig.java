@@ -30,7 +30,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
 
-        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login", "/", "/images/**", "/styles/**","/layui/**", "/scripts/**","/vali_psw");
+        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login", "/", "/images/**", "/styles/**","/layui/**", "/scripts/**","/forget_password");
 
     }
 
