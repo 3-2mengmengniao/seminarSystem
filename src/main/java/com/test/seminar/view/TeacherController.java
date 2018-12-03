@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,6 +37,12 @@ public class TeacherController {
 
     @Autowired
     TeacherService teacherService;
+
+    @Autowired
+    TeamService teamService;
+
+    @Autowired
+    StudentService studentService;
 
     @RequestMapping(value="/homepage")
     public String home(Model model) {
@@ -150,7 +157,21 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/teams")
-    public String teams(Model model) {
+    public String teams(BigInteger courseId,Model model) {
+        model.addAttribute("courseId",courseId);
+        List<Team> teamList= teamService.getTeamByCourseId(courseId);
+        model.addAttribute("teamList",teamList);
+        List<List<Student>> studentList=new LinkedList<List<Student>>();
+        List<Student> leaderList=new ArrayList();
+        for( int i = 0 ; i < teamList.size() ; i++) {
+            BigInteger teamId=teamList.get(i).getId();
+            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
+            studentList.add(teamStudents);
+            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
+            leaderList.add(leader);
+        }
+        model.addAttribute("studentList",studentList);
+        model.addAttribute("leaderList",leaderList);
         return "teacher/teams";
     }
 

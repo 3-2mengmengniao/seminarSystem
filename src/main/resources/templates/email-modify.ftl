@@ -78,7 +78,7 @@
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">验证码:</label>
-                <button id="vali_button">获取验证码</button>
+                <button id="vali_button" type="button">获取验证码</button>
                 <input name="validation" class="contactField requiredField" id="contactEmailField"  placeholder="请输入验证码"/>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">

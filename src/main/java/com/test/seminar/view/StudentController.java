@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -87,7 +89,23 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/teams")
-    public String teams(Model model) {
+    public String teams(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        model.addAttribute("courseId",courseId);
+        List<Team> teamList= teamService.getTeamByCourseId(courseId);
+        model.addAttribute("teamList",teamList);
+        List<List<Student>> studentList=new LinkedList<List<Student>>();
+        List<Student> leaderList=new ArrayList();
+        for( int i = 0 ; i < teamList.size() ; i++) {
+            BigInteger teamId=teamList.get(i).getId();
+            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
+            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
+            leaderList.add(leader);
+            studentList.add(teamStudents);
+        }
+        model.addAttribute("studentList",studentList);
+        model.addAttribute("leaderList",leaderList);
         return "student/teams";
     }
 

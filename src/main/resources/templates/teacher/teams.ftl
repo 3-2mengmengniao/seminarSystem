@@ -86,31 +86,35 @@
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
+            <#list teamList as team>
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">1-1 早早鸟</h2>
+                <h2 class="layui-colla-title">${team.teamName}</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">组长： 罗小黑</p>
-                    <p class="text-center">组员： 刘晓波</p>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>
+                    <p class="text-center">组长：${leaderList[team?index].studentName}</p>
+                    <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
+                    <#list studentList[team?index] as student>
+                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
+                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
+                    </#list>
                 </div>
             </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">1-2 晚晚鸟</h2>
-                <div class="layui-colla-content">
-                    <p class="text-center">组长： 罗小黑</p>
-                    <p class="text-center">组员： 刘晓波</p>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>
-                </div>
-            </div>
+            </#list>
+            <#--<div class="layui-colla-item">-->
+                <#--<h2 class="layui-colla-title">1-2 晚晚鸟</h2>-->
+                <#--<div class="layui-colla-content">-->
+                    <#--<p class="text-center">组长： 罗小黑</p>-->
+                    <#--<p class="text-center">组员： 刘晓波</p>-->
+                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>-->
+                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
+                <#--</div>-->
+            <#--</div>-->
         </div>
     </div>
 </div>
 
 
 <div class="back-button">
-    <a href="/teacher/course-seminar" class="button-return button-dark">返回</a>
+    <a href="/teacher/courses" class="button-return button-dark">返回</a>
 </div>
 
 <!--

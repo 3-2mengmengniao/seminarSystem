@@ -1,4 +1,4 @@
-package com.test.seminar.config;
+package com.test.seminar.websocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
