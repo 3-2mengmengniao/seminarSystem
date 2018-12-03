@@ -77,14 +77,18 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/vali_psw", method = GET)
-    public String valiPsw(Model model) { return "vali_psw"; }
+    public String valiPsw(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        String usertype=(String)session.getAttribute("usertype");
+        model.addAttribute("usertype",usertype);
+        return "vali_psw";
+    }
 
     @RequestMapping(value = "/vali_psw", method = POST)
     @ResponseBody
     public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         String usertype=(String)session.getAttribute("usertype");
-        System.out.println(usertype);
         if(usertype.equals("teacher"))
         {
             BigInteger teacherId=(BigInteger)session.getAttribute("id");
