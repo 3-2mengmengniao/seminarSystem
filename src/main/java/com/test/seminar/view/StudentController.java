@@ -183,4 +183,7 @@ public class StudentController {
         model.addAttribute("course",course);
         return "student/course-info";
     }
+
+    @RequestMapping(value = "/activate")
+    public String activate(Model model) { return "student/activate"; }
 }
