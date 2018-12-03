@@ -55,8 +55,7 @@
     <div class="container no-bottom">
         <h3 class="center-text">${class.className}</h3>
         <p class="center-text">
-            讨论课时间：&emsp;周三7、8节<br>
-            讨论课地点：&emsp;海韵教学楼<br>
+            班级简介：&emsp;${class.introduction}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
         <p class="file center-text"><input type="file"></p>
         </p>

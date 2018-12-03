@@ -50,6 +50,7 @@ jQuery(document).ready(function($) {
         $('.formValidationError').hide();
         $('.fieldHasError').removeClass('fieldHasError');
         var count=3;
+        var judge=true;
         // hide any error messages ends
         $('#' + currentForm + ' .requiredField').each(function(i){
             if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){
@@ -58,6 +59,7 @@ jQuery(document).ready(function($) {
                 $(this).addClass('fieldHasError');
                 $('#' + $(this).attr('id') + 'Error').fadeIn(300);
                 count=count-1;
+                judge=false;
                 return false;
             };
 
@@ -65,12 +67,13 @@ jQuery(document).ready(function($) {
                 $('#differentError').fadeIn(300);
                 count=count-1;
                     return false;
-                };           
-        if(formSubmitted == 'false' && count==3){
-            submitData(currentForm, formType);
-        };
+                };
+
 
     });
+        if(formSubmitted == 'false' && count==3&&judge==true){
+            submitData(currentForm, formType);
+        };
 
     };
     // validate form function ends
@@ -79,7 +82,10 @@ jQuery(document).ready(function($) {
     $('#contactSubmitButton').click(function() {
         var flag2=validateForm($(this).attr('data-formId'));
         if(flag2==true)
+        {
+            alert(flag2);
             return true;
+        }
         return false;
     });
     // contact button function ends

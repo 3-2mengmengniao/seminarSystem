@@ -33,21 +33,11 @@ public class HomeController {
     StudentService studentService;
 
     @RequestMapping(value = "/", method = GET)
-    public String login(Model model) {
-        //获得session
-//        HttpSession session = request.getSession();
-//        String status = (String) session.getAttribute("status");
-//        if (status == null) {
-//            return "login";
-//        } else if (status.equals("401")) {
-//            model.addAttribute("message", "账号或密码有误，请重新输入！");
-//            session.setAttribute("status", null);
-//            return "redirect:/login";
-//        } else {
+    public String login(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        session.invalidate();
             return "login";
-
     }
-
 
     @RequestMapping(value = "/login", method = POST)
     @ResponseBody
@@ -87,7 +77,10 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/vali_psw", method = GET)
-    public String valiPsw(Model model) {
+    public String valiPsw(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        String usertype=(String)session.getAttribute("usertype");
+        model.addAttribute("usertype",usertype);
         return "vali_psw";
     }
 
@@ -96,7 +89,6 @@ public class HomeController {
     public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         String usertype=(String)session.getAttribute("usertype");
-        System.out.println(usertype);
         if(usertype.equals("teacher"))
         {
             BigInteger teacherId=(BigInteger)session.getAttribute("id");
@@ -151,4 +143,13 @@ public class HomeController {
         return "email-modify";
     }
 
+    @RequestMapping(value = "/forget_password", method = GET)
+    public String forgetPassword(Model model) {
+        return "forget_password";
+    }
+
+    @RequestMapping(value = "/new_password", method = GET)
+    public String newPassword(Model model) {
+        return "new_password";
+    }
 }
