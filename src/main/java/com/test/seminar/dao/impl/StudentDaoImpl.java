@@ -44,4 +44,9 @@ public class StudentDaoImpl implements StudentDao {
     public void deleteStudentByStudentId(BigInteger studentId) {
         studentMapper.deleteStudentByStudentId(studentId);
     }
+
+    @Override
+    public List<Student> getStudentByTeamId(BigInteger teamId) {
+        return studentMapper.getStudentByTeamId(teamId);
+    }
 }
