@@ -18,6 +18,12 @@
         WHERE id=#{studentId}
     </select>
 
+    <select id="getStudentByAccount" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        FROM student
+        WHERE id=#{account}
+    </select>
+
     <select id="getStudentByTeamId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student,class_student_table
