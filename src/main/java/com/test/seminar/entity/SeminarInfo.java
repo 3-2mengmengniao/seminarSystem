@@ -1,5 +1,7 @@
 package com.test.seminar.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -18,6 +20,11 @@ public class SeminarInfo {
     private int visible;
     private Date reportDDL;
     private int seminarSerial;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date registrationStartTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date registrationEndTime;
+
 
     public BigInteger getId() {
         return id;
@@ -85,6 +92,23 @@ public class SeminarInfo {
 
     public void setSeminarSerial(int seminarSerial) {
         this.seminarSerial = seminarSerial;
+    }
+
+
+    public Date getRegistrationStartTime() {
+        return registrationStartTime;
+    }
+
+    public void setRegistrationStartTime(Date registrationStartTime) {
+        this.registrationStartTime = registrationStartTime;
+    }
+
+    public Date getRegistrationEndTime() {
+        return registrationEndTime;
+    }
+
+    public void setRegistrationEndTime(Date registrationEndTime) {
+        this.registrationEndTime = registrationEndTime;
     }
 }
 
