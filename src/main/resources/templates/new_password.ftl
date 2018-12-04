@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/vali_psw.js"></script>
+    <script type="text/javascript" src="/scripts/new_password.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -47,7 +47,7 @@
 <div class="content">
     <div class="navigation-back">
         <h1 class="navigation-back">修改密码</h1>
-        <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+        <a href="/" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
     </div>
     <div class="decoration"></div>
 </div>
@@ -61,7 +61,7 @@
             <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="/vali_psw" method="post" class="contactForm" id="contactForm">
+    <form action="/new_password" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <div class="distance3"></div>
             <div class="formFieldWrap">
@@ -70,7 +70,7 @@
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写新密码!</p>
+                    <p class="uppercase">请填写新密码!</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -79,12 +79,12 @@
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写确认密码!</p>
+                    <p class="uppercase">请填写确认密码!</p>
                 </div>
             </div>
             <div class="formValidationError" id="differentError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">新密码与确认密码不一致!</p>
+                    <p class="uppercase">新密码与确认密码不一致!</p>
                 </div>
             </div>
             <div class="distance2"></div>
@@ -96,60 +96,5 @@
         </fieldset>
     </form>
 
-    <!-- <div id="page_container"> -->
-    <!-- <div class="input_block"> -->
-    <!-- <input type="password" name="psw1" id="psw1" placeholder="输入密码" required="required"> -->
-    <!-- </div> -->
-    <!-- <div class="input_block"> -->
-    <!-- <input type="password" name="psw2" id="psw2" placeholder="确认密码" required="required"> -->
-    <!-- </div> -->
-    <!-- <p class="notes">发送验证码到邮箱：qiulaoshi@xmu.edu.cn</p> -->
-    <!-- <div class="input_block"> -->
-    <!-- <button id="vali_button">获取验证码</button> -->
-    <!-- <input type="verification" name="verification" id="verification" placeholder="验证码" required="required"> -->
-    <!-- </div> -->
-    <!-- <button class="login-button" onclick="validate()">确认提交</button> -->
-    <!-- </div> -->
-
-
-    <!--
-    <div class="decoration"></div>
-
-        <div class="footer">
-            <div class="clear"></div>
-            <p class="copyright">
-                Copyright @2018 developed by Group 3-2.<br>
-                All Rights Reserved
-            </p>
-        </div>
-    </div>
-
-        <div class="bottom-deco"></div>
-    -->
-    <script>
-        function validate()
-        {
-            var psw1 = $("#psw1").val();
-            var psw2 = $("#psw2").val();
-            if (psw1 == "" || name == null)
-            {
-
-                alert("请输入新密码");
-                return false;
-            }
-            if (psw2 == null || psw2 == "")
-            {
-                alert("请输入确认密码");
-                return false;
-            }
-            if (psw2 != psw1)
-            {
-                alert("确认密码与新密码不一致");
-                return false;
-            }
-            window.location.href='/teacher/homepage';
-        }
-
-    </script>
 </body>
 </html>

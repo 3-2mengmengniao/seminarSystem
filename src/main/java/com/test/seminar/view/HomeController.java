@@ -148,8 +148,24 @@ public class HomeController {
         return "forget_password";
     }
 
+    @RequestMapping(value = "/forget_password", method = POST)
+    @ResponseBody
+    public String forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
+        HttpSession session = request.getSession();
+        //登陆验证
+        String stauts="200";
+        return stauts;
+    }
+
     @RequestMapping(value = "/new_password", method = GET)
     public String newPassword(Model model) {
         return "new_password";
+    }
+
+    @RequestMapping(value = "/new_password", method = POST)
+    @ResponseBody
+    public String newPasswordPost(Model model) {
+        String status="200";
+        return status;
     }
 }
