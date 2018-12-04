@@ -100,11 +100,11 @@
             </tr>
             <tr>
                 <td>报名开始时间</td>
-                <td>2018-11-15 00:00:00</td>
+                <td>${seminarInfo.registrationStartTime?string('yyyy-MM-dd HH:mm:ss')}</td>
             </tr>
             <tr>
                 <td>报名截止时间</td>
-                <td>2018-11-30 00:00:00</td>
+                <td>${seminarInfo.registrationEndTime?string('yyyy-MM-dd HH:mm:ss')}</td>
             </tr>
             </tbody>
         </table>

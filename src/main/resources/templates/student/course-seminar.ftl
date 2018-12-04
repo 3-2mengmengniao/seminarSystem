@@ -46,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}&nbsp;${class.className}</h1>
+            <h1 class="navigation-back">${course.courseName}&nbsp;${class.grade?c}-(${class.classSerial})</h1>
             <a href="/student/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>

@@ -165,15 +165,20 @@ public class TeacherController {
         model.addAttribute("teamList",teamList);
         List<List<Student>> studentList=new LinkedList<List<Student>>();
         List<Student> leaderList=new ArrayList();
+        List<CourseClass> classList=new ArrayList<>();
         for( int i = 0 ; i < teamList.size() ; i++) {
             BigInteger teamId=teamList.get(i).getId();
             List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
             studentList.add(teamStudents);
             Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
             leaderList.add(leader);
+            BigInteger classId=teamList.get(i).getClassId();
+            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
+            classList.add(teamClass);
         }
         model.addAttribute("studentList",studentList);
         model.addAttribute("leaderList",leaderList);
+        model.addAttribute("classList",classList);
         return "teacher/teams";
     }
 
