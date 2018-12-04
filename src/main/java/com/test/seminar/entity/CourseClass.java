@@ -13,6 +13,7 @@ public class CourseClass {
     private int grade;
     private int classSerial;
     private String introduction;
+    private int teamAmount;
 
     public BigInteger getId() {return id; }
 
@@ -38,5 +39,13 @@ public class CourseClass {
 
     public void setClassSerial(int classSerial) {
         this.classSerial = classSerial;
+    }
+
+    public int getTeamAmount() {
+        return teamAmount;
+    }
+
+    public void setTeamAmount(int teamAmount) {
+        this.teamAmount = teamAmount;
     }
 }
