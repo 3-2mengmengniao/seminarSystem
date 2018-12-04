@@ -1,6 +1,9 @@
 package com.test.seminar.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigInteger;
+import java.util.Date;
 
 /**
  * @author yuyingzhu
@@ -12,6 +15,7 @@ public class SeminarControl {
     private BigInteger classId;
     private BigInteger seminarInfoId;
     private String seminarStatus;
+
 
     public BigInteger getId() {
         return id;
@@ -40,4 +44,5 @@ public class SeminarControl {
     public void setSeminarStatus(String seminarStatus) {
         this.seminarStatus = seminarStatus;
     }
+
 }

@@ -12,6 +12,8 @@
         <result property="visible" column="is_visible"/>
         <result property="reportDDL" column="report_ddl"/>
         <result property="seminarSerial" column="seminar_serial"/>
+        <result property="registrationStartTime" column="registration_start_time"/>
+        <result property="registrationEndTime" column="registration_end_time"/>
     </resultMap>
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
@@ -22,15 +24,15 @@
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time
         from seminar_info
         where id=#{seminarInfoId}
     </select>
 
     <insert id="insertSeminarInfo">
-        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial)
+        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time)
         values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
-        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL},#{seminarInfo.seminarSerial})
+        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL},#{seminarInfo.seminarSerial},#{seminarInfo.registrationStartTime},#{seminarInfo.registrationEndTime})
     </insert>
 
     <update id="updateSeminarInfo">
@@ -59,6 +61,12 @@
             </if>
             <if test="seminarInfo.seminarSerial!=null">
                 seminar_serial=#{seminarInfo.seminarSerial},
+            </if>
+            <if test="seminarInfo.registrationStartTime!=null">
+                registration_start_time=#{seminarInfo.registrationStartTime},
+            </if>
+            <if test="seminarInfo.registrationEndTime!=null">
+                registration_end_time=#{seminarInfo.registrationEndTime},
             </if>
         </set>
         where id=#{seminarInfo.id}
@@ -107,7 +115,7 @@
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time
         from seminar_info
         where round_id=#{roundId}
     </select>
