@@ -46,6 +46,11 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public Student getStudentByAccount(String account) {
+        return studentMapper.getStudentByAccount(account);
+    }
+
+    @Override
     public List<Student> getStudentByTeamId(BigInteger teamId) {
         return studentMapper.getStudentByTeamId(teamId);
     }
