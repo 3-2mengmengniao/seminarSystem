@@ -28,12 +28,12 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-                if(data=="405") {
-                    $('#formSuccessMessageWrap').fadeIn(500);
-                    formSubmitted = 'false';
-                }
-                else if(data=="200")
-                    window.location.href="/teacher/class-info";
+            if(data=="405") {
+                $('#formSuccessMessageWrap').fadeIn(500);
+                formSubmitted = 'false';
+            }
+            else if(data=="200")
+                window.location.href="/teacher/courses?courseId=${courseId}";
 
         });
         //window.location.href='1vali_psw.html';
@@ -44,12 +44,12 @@ jQuery(document).ready(function($) {
         // hide any error messages starts
         $('.formValidationError').hide();
         $('.fieldHasError').removeClass('fieldHasError');
-        var count=2;
+        var count=4;
         // hide any error messages ends
         $('#' + currentForm + ' .requiredField').each(function(i){
             if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){
-                $(this).val($(this).attr('data-dummy'));
-                $(this).focus();
+                // $(this).val($(this).attr('data-dummy'));
+                // $(this).focus();
                 $(this).addClass('fieldHasError');
                 $('#' + $(this).attr('id') + 'Error').fadeIn(300);
                 count=count-1;
@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
 
 
         });
-        if(formSubmitted == 'false' && count==2){
+        if(formSubmitted == 'false' && count===4){
             submitData(currentForm, formType);
         };
 

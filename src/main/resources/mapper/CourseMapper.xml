@@ -14,33 +14,35 @@
         <result property="maxTeamMember" column="max_team_member"/>
         <result property="teamStartTime" column="team_start_time"/>
         <result property="teamEndTime" column="team_end_time"/>
-    </resultMap>
+        <result property="classAmount" column="class_amount"/>
+        <result property="roundAmount" column="round_amount"/>
+</resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
         from course
         where id=#{courseId}
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
+        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount
+        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
         FROM course,course_class,class_student_table
         WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
     </select>
 
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
-        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,classAmount,roundAmount)
+        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount)
         values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
         #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
-        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount)
+        #{course.teamStartTime},#{course.teamEndTime},#{course.class_amount},#{course.round_amount)
     </insert>
 
     <update id="updateCourseByCourseId">
@@ -76,11 +78,11 @@
             <if test="course.team_end_time!=null">
                 team_end_time=#{course.teamEndTime}
             </if>
-            <if test="course.classAmount!=null">
-                class_amount=#{course.classAmount},
+            <if test="course.class_amount!=null">
+                class_amount=#{course.class_amount},
             </if>
             <if test="course.roundAmount!=null">
-                round_amount=#{course.roundAmount}
+                round_amount=#{course.round_amount}
             </if>
         </set>
         where id=#{course.id}

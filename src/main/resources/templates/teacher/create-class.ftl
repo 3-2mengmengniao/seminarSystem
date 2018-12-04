@@ -50,7 +50,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">新建班级</h1>
-    <a href="/teacher/class-info" class="button-close">x</a>
+    <a href="/teacher/class-info?courseId=${courseId}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -66,7 +66,8 @@
             </div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">班级名称：<span>(required)</span></label>
-                <input type="text" name="className" value="" class="contactField requiredField" id="contactNameField"/>
+                <input type="text" name="grade" value="" class="contactField requiredField" id="contactNameField" placeholder="年级" style="width: 100px;"/>
+                <input type="text" name="classSerial" value="" class="contactField requiredField" id="contactNameField" placeholder="班级序号"  style="width: 100px;"/>
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -91,20 +92,91 @@
         </form>
         <div class="distance2"></div>
 
-        <!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    -->
     </div>
 </div>
 <!--<div class="bottom-deco"></div>-->
-<script type="text/javascript" src="/scripts/creat-course.js"></script>
+<#--<script type="text/javascript" src="/scripts/creat-course.js">-->
+<script>
+    var $ = jQuery.noConflict();
+    var formSubmitted = 'false';
+
+
+    jQuery(document).ready(function($) {
+
+        $('#formSuccessMessageWrap').hide(0);
+        $('.formValidationError').fadeOut(0);
+
+        // fields focus function starts
+        $('input[type="text"], input[type="password"], textarea').focus(function(){
+            if($(this).val() == $(this).attr('data-dummy')){
+                $(this).val('');
+            };
+        });
+        // fields focus function ends
+
+        // fields blur function starts
+        $('input, textarea').blur(function(){
+            if($(this).val() == ''){
+                $(this).val($(this).attr('data-dummy'));
+            };
+        });
+        // fields blur function ends
+
+        // submit form data starts
+        function submitData(currentForm, formType){
+            formSubmitted = 'true';
+            var formInput = $('#' + currentForm).serialize();
+            $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+                if(data=="405") {
+                    $('#formSuccessMessageWrap').fadeIn(500);
+                    formSubmitted = 'false';
+                }
+                else if(data=="200")
+                    window.location.href="/teacher/class-info?courseId=${courseId}";
+
+            });
+            //window.location.href='1vali_psw.html';
+        };
+        // submit form data function starts
+        // validate form function starts
+        function validateForm(currentForm, formType){
+            // hide any error messages starts
+            $('.formValidationError').hide();
+            $('.fieldHasError').removeClass('fieldHasError');
+            var count=4;
+            // hide any error messages ends
+            $('#' + currentForm + ' .requiredField').each(function(i){
+                if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){
+                    // $(this).val($(this).attr('data-dummy'));
+                    // $(this).focus();
+                    $(this).addClass('fieldHasError');
+                    $('#' + $(this).attr('id') + 'Error').fadeIn(300);
+                    count=count-1;
+                    return false;
+                };
+
+
+            });
+            if(formSubmitted == 'false' && count===4){
+                submitData(currentForm, formType);
+            };
+
+        };
+        // validate form function ends
+
+        // contact button function starts
+        $('#contactSubmitButton').click(function() {
+            var flag2=validateForm($(this).attr('data-formId'));
+            if(flag2==true)
+                return true;
+            return false;
+        });
+        // contact button function ends
+
+
+
+    });
+</script>
 <script src="/layui/layui.js"></script>
 <script>
     layui.use('form', function(){

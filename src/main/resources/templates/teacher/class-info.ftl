@@ -53,7 +53,7 @@
 <div class="content">
     <#list courseClassList as class>
     <div class="container no-bottom">
-        <h3 class="center-text">${class.className}</h3>
+        <h3 class="center-text">${class.grade?c}-(${class.classSerial})</h3>
         <p class="center-text">
             班级简介：&emsp;${class.introduction}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
@@ -66,7 +66,7 @@
 </div>
 <div class="distance4"></div>
 <div class="layui-colla-item">
-    <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-class'" style="width: 200px; text-align: center;margin:0 auto;padding: 0;">新建班级</h2>
+    <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-class?courseId=${courseId}'" style="width: 200px; text-align: center;margin:0 auto;padding: 0;">新建班级</h2>
 </div>
 <div class="distance4"></div>
 <div class="distance4"></div>
@@ -78,7 +78,7 @@
             url: "/teacher/courses/class?classId=" + $(this).attr('name'),
             success: function(data){
                 if(data==="200")
-                    window.location.href="/teacher/courses";
+                    window.location.href="/teacher/class-info?courseId=${courseId}";
                 else if(data==="404")
                     alert("班级不存在");
             }

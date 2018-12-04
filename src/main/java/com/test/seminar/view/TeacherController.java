@@ -80,6 +80,7 @@ public class TeacherController {
         HttpSession session = request.getSession();
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
+        model.addAttribute("courseId",courseId);
         session.setAttribute("courseId",courseId);
         return "teacher/class-info";
     }
@@ -92,9 +93,7 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/create-course",method = GET)
-    public String createCourse(Model model) {
-        return "teacher/create-course";
-    }
+    public String createCourse(Model model) { return "teacher/create-course"; }
 
     @RequestMapping(value="/create-course",method = POST)
     @ResponseBody
@@ -108,7 +107,10 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/create-class",method = GET)
-    public String createClass(Model model) { return "teacher/create-class"; }
+    public String createClass(BigInteger courseId,Model model) {
+        model.addAttribute("courseId",courseId);
+        return "teacher/create-class";
+    }
 
     @RequestMapping(value="/create-class",method = POST)
     @ResponseBody

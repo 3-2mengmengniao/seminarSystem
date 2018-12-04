@@ -39,7 +39,7 @@ public class MapperTest {
     public void insertCourseClass(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setClassName("三班");
+        courseClass.setGrade(3);
         courseClass.setIntroduction("OOAD三班");
         courseClassMapper.insertCourseClass(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
@@ -50,7 +50,7 @@ public class MapperTest {
     public void updateCourseClassByCourseClassId(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setClassName("三班");
+        courseClass.setGrade(3);
         courseClass.setIntroduction("OOAD三班修改");
         courseClassMapper.updateCourseClassByCourseClassId(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
