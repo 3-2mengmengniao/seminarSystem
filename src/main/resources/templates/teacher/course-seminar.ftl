@@ -100,14 +100,17 @@
     </div>
     <div class="distance3"></div>
     </#list>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-round'>新建轮次</a>
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建轮次</h2>
         </div>
     </div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="deploy-toggle-1" style="cursor:pointer" href='/teacher/create-seminar'>新建讨论课</a>
+    <div class="distance3"></div>
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建讨论课</h2>
         </div>
     </div>
     <div class="distance2"> </div>

@@ -51,6 +51,7 @@
 <div class="decoration"></div>
 
 <div class="content">
+    <div class="center-navigation">
     <div class="container no-bottom">
         <h3>课程要求</h3>
         <p>
@@ -71,7 +72,7 @@
         <div class="distance"></div>
         <p class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
     </div>
-
+    </div>
 <!--
     <div class="decoration"></div>
     <div class="footer">

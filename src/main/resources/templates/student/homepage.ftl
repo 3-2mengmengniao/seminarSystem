@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<div class="distance5"></div>
+
 <script>
     layui.use('layer', function(){
         var layer = layui.layer;
