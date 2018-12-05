@@ -6,6 +6,7 @@ import com.test.seminar.service.FileService;
 import com.test.seminar.util.ReadExcel;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,6 +16,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.math.BigInteger;
 import java.util.List;
 
+@Service
 public class FileServiceImpl implements FileService {
     @Autowired
     private StudentDao studentDao;
