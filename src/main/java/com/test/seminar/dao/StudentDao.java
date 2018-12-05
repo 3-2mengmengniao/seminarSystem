@@ -63,5 +63,5 @@ public interface StudentDao {
      */
     List<Student> getStudentByTeamId(BigInteger teamId);
 
-    List<Student> getStudentByCourseClassId(BigInteger courseId);
+    List<Student> getStudentByCourseClassId(BigInteger courseClassId);
 }
