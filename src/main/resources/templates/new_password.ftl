@@ -54,11 +54,14 @@
 
 
 <div class="content">
+    <div class="formFailureMessageWrap" id="formFailureMessageWrap">
+        <div class="big-notification green-notification">
+            <p>密码修改失败！请稍后重试</p>
+        </div>
+    </div>
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="big-notification green-notification">
-            <h3 class="uppercase">Message Sent </h3>
-            <a href="#" class="close-big-notification">x</a>
-            <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
+            <p>密码修改成功！即将跳转到登录页面</p>
         </div>
     </div>
     <form action="/new_password" method="post" class="contactForm" id="contactForm">

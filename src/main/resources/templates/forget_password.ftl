@@ -56,7 +56,7 @@
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="static-notification-green tap-dismiss-notification">
-            <p style="color:#c9302c;">验证码有误，请再次尝试！</p>
+            <p style="color:#c9302c;">未找到当前账号，请再次尝试！</p>
         </div>
     </div>
     <form action="/forget_password" method="post" class="contactForm" id="contactForm">
@@ -64,7 +64,7 @@
 
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">学号/教工号:</label>
-                <input type="text" name="account" value="" class="contactField requiredField requiredEmailField" id="contactNameField"  placeholder="邮箱格式如：user@hosst.domainnames"/>
+                <input type="text" name="account" value="" class="contactField requiredField requiredEmailField" id="contactNameField"  placeholder="请填写教工号/学号"/>
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">

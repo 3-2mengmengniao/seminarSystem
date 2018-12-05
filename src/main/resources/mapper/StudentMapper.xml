@@ -21,7 +21,7 @@
     <select id="getStudentByAccount" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student
-        WHERE id=#{account}
+        WHERE account=#{account}
     </select>
 
     <select id="getStudentByTeamId" resultMap="studentResultMap">

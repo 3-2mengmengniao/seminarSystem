@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
                     $('#formSuccessMessageWrap').fadeOut(500);
                 }
             }
-            else if(data=="200")
+            else if(data=="200"||data=="204")
                 window.location.href="/new_password";
         });
     };

@@ -153,7 +153,26 @@ public class HomeController {
     public String forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
         HttpSession session = request.getSession();
         //登陆验证
-        String stauts="200";
+        try {
+            Student student = studentService.getStudentByAccount(account);
+            session.setAttribute("usertype", "student");
+            session.setAttribute("id", student.getId());
+        }
+        catch (UserNotFoundException e) {
+            try {
+                Teacher teacher = teacherService.getTeacherByAccount(account);
+                session.setAttribute("usertype", "teacher");
+                session.setAttribute("id", teacher.getId());
+            }
+            catch (UserNotFoundException e2){
+                String status = "404";
+                return status;
+            }
+            String status = "200";
+            return status;
+
+        }
+        String stauts="204";
         return stauts;
     }
 
@@ -164,8 +183,28 @@ public class HomeController {
 
     @RequestMapping(value = "/new_password", method = POST)
     @ResponseBody
-    public String newPasswordPost(Model model) {
-        String status="200";
+    public String newPasswordPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw,Model model) {
+        HttpSession session = request.getSession();
+        String usertype=(String)session.getAttribute("usertype");
+        String status="404";
+        if(usertype.equals("teacher"))
+        {
+            BigInteger teacherId=(BigInteger)session.getAttribute("id");
+            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+            teacher.setPassword(newPsw);
+            teacherService.updateTeacherByTeacherId(teacher);
+            status="200";
+            return status;
+        }
+        else if(usertype.equals("student"))
+        {
+            BigInteger studentId=(BigInteger)session.getAttribute("id");
+            Student student=studentService.getStudentByStudentId(studentId);
+            student.setPassword(newPsw);
+            studentService.updateStudentByStudentId(student);
+            status="204";
+            return status;
+        }
         return status;
     }
 }
