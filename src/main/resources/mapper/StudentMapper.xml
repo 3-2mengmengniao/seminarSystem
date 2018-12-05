@@ -21,13 +21,19 @@
     <select id="getStudentByAccount" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student
-        WHERE id=#{account}
+        WHERE account=#{account}
     </select>
 
     <select id="getStudentByTeamId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email,email_receive_interval
         FROM student,class_student_table
         WHERE class_student_table.team_id=#{teamId} and class_student_table.student_id=student.id
+    </select>
+
+    <select id="getStudentByCourseClassId" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        FROM student,class_student_table
+        WHERE class_student_table.class_id=#{courseClassId} and class_student_table.student_id=student.id
     </select>
 
     <insert id="insertStudent">

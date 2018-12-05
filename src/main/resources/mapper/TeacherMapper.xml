@@ -21,7 +21,7 @@
     <select id="getTeacherByAccount" resultMap="teacherResultMap">
         SELECT id,account,password,is_active,teacher_name,email,email_receive_interval
         FROM teacher
-        WHERE id=#{account}
+        WHERE account=#{account}
     </select>
 
     <insert id="insertTeacher">

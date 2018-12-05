@@ -60,4 +60,10 @@ public interface StudentMapper {
      * @return
      */
     List<Student> getStudentByTeamId(BigInteger teamId);
+
+    /**
+     * @param courseClassId
+     * @return
+     */
+    List<Student> getStudentByCourseClassId(BigInteger courseClassId);
 }

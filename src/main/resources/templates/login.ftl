@@ -70,7 +70,7 @@
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写教工号/学号!</p>
+                    <p class="">请填写教工号/学号!</p>
                 </div>
             </div>
             <div class="formFieldWrap">

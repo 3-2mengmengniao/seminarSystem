@@ -5,6 +5,7 @@ var formSubmitted = 'false';
 jQuery(document).ready(function($) {
 
     $('#formSuccessMessageWrap').hide(0);
+    $('#formFailureMessageWrap').hide(0);
     $('.formValidationError').fadeOut(0);
 
     // fields focus function starts
@@ -29,15 +30,16 @@ jQuery(document).ready(function($) {
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
             if(data=="404") {
-                $('#formSuccessMessageWrap').fadeIn(500);
+                $('#formFailureMessageWrap').fadeIn(500);
                 formSubmitted = 'false';
                 var onFocus = document.activeElement;
                 if (onFocus.id === "contactEmailField") {
-                    $('#formSuccessMessageWrap').fadeOut(500);
+                    $('#formFailureMessageWrap').fadeOut(500);
                 }
             }
-            else if(data=="200")
-                window.location.href="/";
+            else if(data=="200"||data=="204")
+                $('#formSuccessMessageWrap').fadeIn(500);
+                window.setTimeout("window.location='/'",2000);
         });
         //window.location.href='1vali_psw.html';
     };

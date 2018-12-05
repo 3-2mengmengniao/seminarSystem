@@ -3,9 +3,11 @@ package com.test.seminar;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.Student;
 import com.test.seminar.mapper.CourseClassMapper;
 import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.RoundMapper;
+import com.test.seminar.mapper.StudentMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class MapperTest {
 
     @Autowired
     RoundMapper roundMapper;
+
+    @Autowired
+    StudentMapper studentMapper;
 
     @Test
     public void getCourseClassByCourseClassId(){
@@ -111,5 +116,11 @@ public class MapperTest {
     public void getCourseClassByStudentIdAndCourseId(){
         CourseClass class1 =courseClassMapper.getCourseClassByStudentIdAndCourseId(new BigInteger("2"),new BigInteger("1"));
         System.out.println(class1.getIntroduction());
+    }
+
+    @Test
+    public void getStudentByCourseClassId(){
+        List<Student> students=studentMapper.getStudentByCourseClassId(new BigInteger("1"));
+        System.out.println(students.get(0).getStudentName());
     }
 }
