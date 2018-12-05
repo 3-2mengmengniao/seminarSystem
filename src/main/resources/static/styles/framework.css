@@ -1382,8 +1382,8 @@ table tr:hover td{
 }
 
 .green-notification{
-	background-color:#27ae60;
-	color:#FFFFFF;
+	color: #009688;
+	text-align: center;
 }
 
 .yellow-notification{

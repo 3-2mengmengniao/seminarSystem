@@ -53,7 +53,7 @@
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation">
+    <div class="navigation" style="right:0%;margin-top:-5px;">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -69,62 +69,42 @@
 </div>
 
 <div class="content">
+    <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第一轮</h2>
-                <div class="layui-colla-content layui-show">
-                    <div class="layui-collapse" lay-accordion="">
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">用例分析</h2>
-                            <div class="layui-colla-content layui-show">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                            </div>
-                        </div>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">界面原型</h2>
-                            <div class="layui-colla-content layui-show">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                            </div>
-                        </div>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">总成绩</h2>
-                            <div class="layui-colla-content layui-show">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                            </div>
-                        </div>
-                    </div>
+                <h2 class="layui-colla-title" >第一轮</h2>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/student/group-score">用例分析</a>
                 </div>
-            </div>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第二轮</h2>
-                <div class="layui-colla-content layui-show">
-                    <div class="layui-collapse" lay-accordion="">
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content layui-show">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content layui-show">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content layui-show">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/teams?courseId=${course.getId()}">我的组队</a>
+                </div>
+                <div class="layui-colla-content">
+                    <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/student/course-info?courseId=${course.getId()}">课程信息</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="distance3"></div>
+
+    <div class="distance2"></div>
+    <div class="distance2"></div>
+    <div class="distance"></div>
+    <!--
+    <div class="decoration"></div>
+        <div class="footer">
+            <div class="clear"></div>
+            <p class="copyright">
+                Copyright @2018 developed by Group 3-2.<br>
+                All Rights Reserved
+            </p>
+        </div>
+        -->
+</div>
 
 <div class="distance2"> </div>
 <div class="distance2"> </div>

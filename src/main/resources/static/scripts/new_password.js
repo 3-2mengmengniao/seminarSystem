@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
             }
             else if(data=="200"||data=="204")
                 $('#formSuccessMessageWrap').fadeIn(500);
-                window.setTimeout("window.location='/'",2000);
+            window.setTimeout("window.location='/'",2000);
         });
         //window.location.href='1vali_psw.html';
     };
