@@ -50,11 +50,10 @@ public class ReadExcel {
 
     /**
      * 读EXCEL文件，获取客户信息集合
-     * @param fileName
      * @param mFile
      * @return
      */
-    public List<Student> getExcelInfo(String fileName, MultipartFile mFile){
+    public List<Student> getExcelInfo(MultipartFile mFile){
 
         //把spring文件上传的MultipartFile转换成CommonsMultipartFile类型
         CommonsMultipartFile commonsMultipartFile= (CommonsMultipartFile)mFile; //获取本地存储路径
@@ -77,12 +76,12 @@ public class ReadExcel {
         InputStream is = null;
         try{
             //验证文件名是否合格
-            if(!validateExcel(fileName)){
+            if(!validateExcel(mFile.getOriginalFilename())){
                 return null;
             }
             //根据文件名判断文件是2003版本还是2007版本
             boolean isExcel2003 = true;
-            if(isExcel2007(fileName)){
+            if(isExcel2007(mFile.getOriginalFilename())){
                 isExcel2003 = false;
             }
             //根据新建的文件实例化输入流
@@ -171,7 +170,6 @@ public class ReadExcel {
                     }
                 }
             }
-
             //添加客户
             studentList.add(student);
         }
