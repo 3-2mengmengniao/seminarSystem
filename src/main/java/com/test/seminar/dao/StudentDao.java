@@ -68,4 +68,11 @@ public interface StudentDao {
      * @return
      */
     List<Student> getStudentByCourseClassId(BigInteger courseClassId);
+
+    /**
+     * @param courseClassId
+     * @param studentId
+     * @return
+     */
+    void insertCourseClassStudentRelation(BigInteger courseClassId,BigInteger studentId);
 }
