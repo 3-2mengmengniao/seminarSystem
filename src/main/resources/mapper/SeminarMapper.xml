@@ -11,28 +11,24 @@
         <result property="maxGroup" column="max_group"/>
         <result property="visible" column="is_visible"/>
         <result property="reportDDL" column="report_ddl"/>
-        <result property="seminarSerial" column="seminar_serial"/>
-        <result property="registrationStartTime" column="registration_start_time"/>
-        <result property="registrationEndTime" column="registration_end_time"/>
     </resultMap>
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
         <id property="id" column="id"/>
         <result property="classId" column="class_id"/>
         <result property="seminarInfoId" column="seminarinfo_id"/>
-        <result property="seminarStatus" column="seminar_status"/>
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
         from seminar_info
         where id=#{seminarInfoId}
     </select>
 
     <insert id="insertSeminarInfo">
-        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time)
+        insert into seminar_info(course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl)
         values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
-        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL},#{seminarInfo.seminarSerial},#{seminarInfo.registrationStartTime},#{seminarInfo.registrationEndTime})
+        #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.reportDDL})
     </insert>
 
     <update id="updateSeminarInfo">
@@ -59,15 +55,6 @@
             <if test="seminarInfo.reportDDL!=null">
                 report_ddl=#{seminarInfo.reportDDL},
             </if>
-            <if test="seminarInfo.seminarSerial!=null">
-                seminar_serial=#{seminarInfo.seminarSerial},
-            </if>
-            <if test="seminarInfo.registrationStartTime!=null">
-                registration_start_time=#{seminarInfo.registrationStartTime},
-            </if>
-            <if test="seminarInfo.registrationEndTime!=null">
-                registration_end_time=#{seminarInfo.registrationEndTime},
-            </if>
         </set>
         where id=#{seminarInfo.id}
     </update>
@@ -78,14 +65,14 @@
 
 
     <select id="getSeminarControlBySeminarControlId" resultMap="seminarControlResultMap">
-        select id,class_id,seminarinfo_id,seminar_status
+        select id,class_id,seminarinfo_id
         from seminar_control
         where id=#{seminarControlId}
     </select>
 
     <insert id="insertSeminarControl">
-        insert into seminar_control(class_id,seminarinfo_id,seminar_status)
-        values(#{seminarControl.classId},#{seminarControl.seminarInfoId},#{seminarControl.seminarStatus})
+        insert into seminar_control(class_id,seminarinfo_id)
+        values(#{seminarControl.classId},#{seminarControl.seminarInfoId})
     </insert>
 
     <update id="updateSeminarControl">
@@ -97,9 +84,6 @@
             <if test="seminarControl.seminarInfoId!=null">
                 seminarinfo_id=#{seminarControl.seminarInfoId},
             </if>
-            <if test="seminarControl.seminarStatus!=null">
-                seminar_status=#{seminarControl.seminarStatus},
-            </if>
         </set>
         where id=#{seminarControl.id}
     </update>
@@ -109,13 +93,13 @@
     </delete>
 
     <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
-        select id,class_id,seminarinfo_id,seminar_status
+        select id,class_id,seminarinfo_id
         from seminar_control
         where class_id=#{classId} and seminarinfo_id=#{seminarInfoId}
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl,seminar_serial,registration_start_time,registration_end_time
+        select id,course_id,round_id,seminar_name,introduction,max_group,is_visible,report_ddl
         from seminar_info
         where round_id=#{roundId}
     </select>

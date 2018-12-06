@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/contact.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -55,40 +55,33 @@
 <div class="distance4"></div>
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
-        <div class="static-notification-green tap-dismiss-notification">
-            <p style="color:#c9302c;">验证码有误，请重新输入！</p>
+        <div class="big-notification green-notification">
+            <h3 class="uppercase">Message Sent </h3>
+            <a href="#" class="close-big-notification">x</a>
+            <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="/email-modify" method="post" class="contactForm" id="contactForm">
+    <form action="" method="post" class="contactForm" id="contactForm">
         <fieldset>
-
-            <div class="formFieldWrap">
-                <label class="field-title contactNameField" for="contactNameField">填写邮箱:</label>
-                <input type="text" name="email" value="" class="contactField requiredField requiredEmailField" id="contactNameField"  placeholder="邮箱格式如：user@hosst.domainnames"/>
-            </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写新邮箱!</p>
+                    <p class="center-text uppercase">请填写新邮箱!</p>
                 </div>
             </div>
-            <div class="formValidationError" id="contactNameFieldError2">
+            <div class="formValidationError" id="contactMessageTextareaError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写正确的邮箱格式！</p>
+                    <p class="center-text uppercase">请填写验证码!</p>
                 </div>
+            </div>
+            <div class="formFieldWrap">
+                <label class="field-title contactNameField" for="contactNameField">填写邮箱:</label>
+                <input type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField"  placeholder="邮箱格式如：user@hosst.domainnames"/>
             </div>
             <div class="formTextareaWrap">
-                <label class="field-title contactEmailField" for="contactEmailField">验证码:</label>
-                <button id="vali_button" type="button">获取验证码</button>
-                <input name="validation" class="contactField requiredField" id="contactEmailField"  placeholder="请输入验证码"/>
+                <label class="field-title contactMessageTextarea" for="contactMessageTextarea">验证码:</label>
+                <button id="vali_button">获取验证码</button>
+                <input name="contactMessageTextarea" class="contactField requiredField" id="contactMessageTextarea"  placeholder="请输入验证码"></input>
             </div>
-            <div class="formValidationError" id="contactEmailFieldError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写验证码!</p>
-                </div>
-            </div>
-            <div class="distance2"></div>
-            <p class="center center-text"><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="确认提交" data-formId="contactForm"/></p>
-            <div class="distance3"></div>
         </fieldset>
     </form>
 </div>
@@ -107,7 +100,9 @@
 <!-- </div> -->
 <!-- <button class="login-button" onclick="validate()">确认提交</button> -->
 <!-- </div> -->
-
+<div class="distance2"></div>
+<p class="center center-text"><a href="/teacher/homepage" class="button-big button-dark">确认提交</a></p>
+<div class="distance3"></div>
 <!--
 <div class="page_footer">
     <div class="decoration"></div>
@@ -122,5 +117,20 @@
 </div>
  -->
 
+<script>
+    function validate()
+    {
+        var psw1 = $("#psw1").val();
+        var psw2 = $("#psw2").val();
+        if (psw1 == "" || name == null)
+        {
+
+            alert("请输入新邮箱");
+            return false;
+        }
+        window.location.href='/teacher/homepage';
+    }
+
+</script>
 </body>
 </html>

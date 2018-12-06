@@ -44,12 +44,12 @@ jQuery(document).ready(function($) {
         // hide any error messages starts
         $('.formValidationError').hide();
         $('.fieldHasError').removeClass('fieldHasError');
-        var count=4;
+        var count=2;
         // hide any error messages ends
         $('#' + currentForm + ' .requiredField').each(function(i){
             if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){
-                // $(this).val($(this).attr('data-dummy'));
-                // $(this).focus();
+                $(this).val($(this).attr('data-dummy'));
+                $(this).focus();
                 $(this).addClass('fieldHasError');
                 $('#' + $(this).attr('id') + 'Error').fadeIn(300);
                 count=count-1;
@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
 
 
         });
-        if(formSubmitted == 'false' && count===4){
+        if(formSubmitted == 'false' && count==2){
             submitData(currentForm, formType);
         };
 

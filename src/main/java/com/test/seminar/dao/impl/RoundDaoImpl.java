@@ -29,7 +29,7 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
-    public void updateRound(Round round) {
+    public void updateRound(BigInteger round) {
         roundMapper.updateRound(round);
     }
 

@@ -24,11 +24,6 @@ public class TeacherDaoImpl implements TeacherDao {
     }
 
     @Override
-    public Teacher getTeacherByAccount(String account) {
-        return teacherMapper.getTeacherByAccount(account);
-    }
-
-    @Override
     public void insertTeacher(Teacher teacher) {
         teacherMapper.insertTeacher(teacher);
     }

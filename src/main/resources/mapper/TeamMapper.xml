@@ -9,36 +9,29 @@
         <result property="teamName" column="team_name"/>
         <result property="leaderId" column="leader_id"/>
         <result property="established" column="is_established"/>
-        <result property="teamSerial" column="team_serial"/>
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT id,class_id,course_id,team_name,leader_id,is_established
         FROM team
         WHERE id=#{teamId}
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT team.id,team.class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT team.id,team.class_id,course_id,team_name,leader_id,is_established
         FROM team,class_student_table
         WHERE team.course_id=#{courseId} and  class_student_table.student_id=#{studentId} and team.id=class_student_table.team_id
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT id,class_id,course_id,team_name,leader_id,is_established
         FROM team
         WHERE course_id=#{courseId}
     </select>
 
-    <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
-        FROM seminar_team_table,team
-        WHERE seminarcontrol_id=#{seminarControlId} and team.id=seminar_team_table.team_id
-    </select>
-
     <insert id="insertTeam">
-        insert into team(class_id,course_id,team_name,leader_id,is_established,team_serial)
-        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.established},#{team.teamSerial})
+        insert into team(class_id,course_id,team_name,leader_id,is_established)
+        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.established})
     </insert>
 
     <update id="updateTeamByTeamId">
@@ -59,24 +52,11 @@
             <if test="team.established!=null">
                 is_established=#{team.established},
             </if>
-            <if test="team.teamSerial!=null">
-                team_serial=#{team.teamSerial},
-            </if>
         </set>
-        where id=#{team.id}
+        where id=#{round.id}
     </update>
 
     <delete id="deleteTeamByTeamId">
         delete from team where id=#{teamId}
     </delete>
-
-    <update id="updateCourseClassStudentTeamId">
-        update class_student_table
-        <set>
-            <if test="teamId!=null">
-                team_id=#{teamId},
-            </if>
-        </set>
-        where student_id=#{studentId} and class_id=#{courseClassId}
-    </update>
 </mapper>

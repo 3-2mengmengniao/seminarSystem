@@ -15,10 +15,12 @@ public interface RoundService {
 
     /**
      *
-     * @param round
+     * @param classId
+     * @param enrollNumber
+     * @param calculateMethod
      * @throws RepetitiveRecordException
      */
-    void insertRound(Round round) throws RepetitiveRecordException;
+    void insertRound(BigInteger classId, int enrollNumber, int calculateMethod) throws RepetitiveRecordException;
 
     /**
      *

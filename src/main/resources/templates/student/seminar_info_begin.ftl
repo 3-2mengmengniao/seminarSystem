@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/course-seminar?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">OOAD讨论课</h1>
+            <a href="/student/course-seminar" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,11 +58,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">个人页</a>
+                <a href="/teacher/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">讨论课</a>
+                <a href="/teacher/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -80,19 +80,19 @@
         <tbody>
         <tr>
             <td>轮次</td>
-            <td>第${round.roundSerial}轮</td>
+            <td>第二轮</td>
         </tr>
         <tr>
             <td>主题</td>
-            <td>${seminarInfo.seminarName}</td>
+            <td>业务流程分析</td>
         </tr>
         <tr>
             <td>课次序号</td>
-            <td>第${seminarInfo.seminarSerial}次</td>
+            <td>第1次</td>
         </tr>
         <tr>
             <td>要求</td>
-            <td>${seminarInfo.introduction}</td>
+            <td>界面导航图和所有界面原型设计，课堂讨论每个小组15分钟</td>
         </tr>
         <tr>
             <td>课程情况</td>

@@ -14,7 +14,6 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
-    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -27,7 +26,6 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 
@@ -51,40 +49,41 @@
 <div class="decoration"></div>
 
 <div class="content">
-    <#list courseClassList as class>
     <div class="container no-bottom">
-        <h3 class="center-text">${class.grade?c}-(${class.classSerial})</h3>
+        <h3 class="center-text">2016-1</h3>
         <p class="center-text">
-            班级简介：&emsp;${class.introduction}<br>
+            讨论课时间：&emsp;周三7、8节<br>
+            讨论课地点：&emsp;海韵教学楼<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
         <p class="file center-text"><input type="file"></p>
         </p>
-        <p class="center center-text"><button class="button-big button-red deleteButton" id="deleteButton" name="${class.id}">删除班级</button></p>
+        <p class="center center-text"><a href="#" class="button-big button-red">删除班级</a></p>
     </div>
     <div class="decoration"></div>
-    </#list>
+    <div class="container no-bottom">
+        <h3 class="center-text">2016-2</h3>
+        <p class="center-text">
+            讨论课时间：&emsp;周三7、8节<br>
+            讨论课地点：&emsp;海韵教学楼<br>
+            班级学生名单： &emsp;周三56节.xlsx<br>
+        <p class="file center-text"><input type="file"></p>
+        </p>
+        <p class="center center-text "><a href="/teacher/create-course" class="button-big button-red">删除班级</a></p>
+    </div>
+    <!--
+    <div class="decoration"></div>
+    <div class="footer">
+        <div class="clear"></div>
+        <p class="copyright">
+            Copyright @2018 developed by Group 3-2.<br>
+            All Rights Reserved
+        </p>
+    </div>
+    -->
 </div>
-<div class="distance4"></div>
-<div class="layui-colla-item">
-    <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-class?courseId=${courseId}'" style="width: 200px; text-align: center;margin:0 auto;padding: 0;">新建班级</h2>
-</div>
-<div class="distance4"></div>
-<div class="distance4"></div>
+
 <!--<div class="bottom-deco"></div>-->
-<script>
-    $('.deleteButton').click(function(){
-        $.ajax({
-            type: "DELETE",
-            url: "/teacher/courses/class?classId=" + $(this).attr('name'),
-            success: function(data){
-                if(data==="200")
-                    window.location.href="/teacher/class-info?courseId=${courseId}";
-                else if(data==="404")
-                    alert("班级不存在");
-            }
-        });
-    });
-</script>
+
 
 </body>
 </html>

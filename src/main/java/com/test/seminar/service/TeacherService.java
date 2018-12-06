@@ -43,6 +43,4 @@ public interface TeacherService {
      * @throws UserNotFoundException
      */
     void deleteTeacherByTeacherId(BigInteger teacherId)throws UserNotFoundException;
-
-    Teacher getTeacherByAccount(String account);
 }

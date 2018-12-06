@@ -70,7 +70,7 @@
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="">请填写教工号/学号!</p>
+                    <p class="uppercase">请填写教工号/学号!</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -83,7 +83,7 @@
                     <p class="uppercase">请填写密码!</p>
                 </div>
             </div>
-            <a class="forget-password" type="button" style="cursor:pointer"  onclick="window.location.href='/forget_password'">忘记密码？</a>
+            <a class="forget-password" onclick="location='forget-password.html'">忘记密码？</a>
             <div class="distance"></div>
             <div class="formSubmitButtonErrorsWrap">
                 <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="登录" data-formId="contactForm"/>

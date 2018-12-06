@@ -71,7 +71,7 @@
 <#list courseList as course>
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar?courseId=${course.id}'>${course.courseName}</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>${course.courseName}</a>
         </div>
     </div>
 <div class="distance3">

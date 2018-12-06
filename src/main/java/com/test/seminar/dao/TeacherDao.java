@@ -12,23 +12,13 @@ public interface TeacherDao {
 
     /**
      * 通过ID获取老师信息
-     *
      * @param teacherId
      * @return
      */
     Teacher getTeacherByTeacherId(BigInteger teacherId);
 
     /**
-     * 通过account获取教师信息
-     *
-     * @param account
-     * @return
-     */
-    Teacher getTeacherByAccount(String account);
-
-    /**
      * 创建新的老师账户
-     *
      * @param teacher
      * @return
      */
@@ -36,13 +26,13 @@ public interface TeacherDao {
 
     /**
      * 更改老师信息
-     *
      * @param teacher
      * @return
      */
     void updateTeacherByTeacherId(Teacher teacher);
 
     /**
+     *
      * @param teacherId
      * @return
      */

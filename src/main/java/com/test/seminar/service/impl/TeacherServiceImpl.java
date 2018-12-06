@@ -41,12 +41,4 @@ public class TeacherServiceImpl implements TeacherService {
             throw new UserNotFoundException();
         teacherDao.deleteTeacherByTeacherId(teacherId);
     }
-
-    @Override
-    public Teacher getTeacherByAccount(String account) {
-        Teacher teacher= teacherDao.getTeacherByAccount(account);
-        if(teacher==null)
-            throw new UserNotFoundException();
-        return teacher;
-    }
 }

@@ -33,7 +33,7 @@ public interface RoundMapper {
      * 更新轮次信息
      * @param round
      */
-    void updateRound(@Param("round")Round round);
+    void updateRound(@Param("round")BigInteger round);
 
     /**
      * 通过轮次ID获得轮次信息

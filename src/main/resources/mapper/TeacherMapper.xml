@@ -18,12 +18,6 @@
         WHERE id=#{teacherId}
     </select>
 
-    <select id="getTeacherByAccount" resultMap="teacherResultMap">
-        SELECT id,account,password,is_active,teacher_name,email,email_receive_interval
-        FROM teacher
-        WHERE account=#{account}
-    </select>
-
     <insert id="insertTeacher">
         insert into teacher(account,password,is_active,teacher_name,email,email_receive_interval)
         values(#{teacher.account},#{teacher.password},#{teacher.active},#{teacher.teacherName},#{teacher.email},#{teacher.emailReceiveInterval})
@@ -51,7 +45,7 @@
                 email_receive_interval=#{teacher.emailReceiveInterval},
             </if>
         </set>
-        where id=#{teacher.id}
+        where id=#{student.id}
     </update>
 
     <delete id="deleteTeacherByTeacherId">

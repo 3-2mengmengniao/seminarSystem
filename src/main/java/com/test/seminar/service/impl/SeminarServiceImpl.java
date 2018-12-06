@@ -67,7 +67,9 @@ public class SeminarServiceImpl implements SeminarService {
         List<SeminarInfo> temp;
         for(int i=0;i<roundList.size();i++)
         {
+            System.out.println(roundList.get(i).getId());
             temp=getSeminarInfoByRoundId(roundList.get(i).getId());
+            System.out.println(temp);
             SeminarInfoOrderByRoundId.add(i,temp);
         }
         return SeminarInfoOrderByRoundId;

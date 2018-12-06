@@ -3,11 +3,9 @@ package com.test.seminar;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Round;
-import com.test.seminar.entity.Student;
 import com.test.seminar.mapper.CourseClassMapper;
 import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.RoundMapper;
-import com.test.seminar.mapper.StudentMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +29,6 @@ public class MapperTest {
     @Autowired
     RoundMapper roundMapper;
 
-    @Autowired
-    StudentMapper studentMapper;
-
     @Test
     public void getCourseClassByCourseClassId(){
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("3"));
@@ -44,7 +39,7 @@ public class MapperTest {
     public void insertCourseClass(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setGrade(3);
+        courseClass.setClassName("三班");
         courseClass.setIntroduction("OOAD三班");
         courseClassMapper.insertCourseClass(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
@@ -55,7 +50,7 @@ public class MapperTest {
     public void updateCourseClassByCourseClassId(){
         CourseClass courseClass=new CourseClass();
         courseClass.setCourseId(new BigInteger("1"));
-        courseClass.setGrade(3);
+        courseClass.setClassName("三班");
         courseClass.setIntroduction("OOAD三班修改");
         courseClassMapper.updateCourseClassByCourseClassId(courseClass);
         CourseClass class1=courseClassMapper.getCourseClassByCourseClassId(new BigInteger("5"));
@@ -110,17 +105,5 @@ public class MapperTest {
     public void getRoundByCourseId(){
         List<Round> rounds =roundMapper.getRoundByCourseId(new BigInteger("1"));
         assertEquals(2,rounds.size());
-    }
-
-    @Test
-    public void getCourseClassByStudentIdAndCourseId(){
-        CourseClass class1 =courseClassMapper.getCourseClassByStudentIdAndCourseId(new BigInteger("2"),new BigInteger("1"));
-        System.out.println(class1.getIntroduction());
-    }
-
-    @Test
-    public void getStudentByCourseClassId(){
-        List<Student> students=studentMapper.getStudentByCourseClassId(new BigInteger("1"));
-        System.out.println(students.get(0).getStudentName());
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.util.List;
 
 /**
  * @author zhenweiwang
@@ -29,13 +28,6 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void insertStudentByStudentList(List<Student> studentList) {
-        for(Student student:studentList){
-            studentMapper.insertStudent(student);
-        }
-    }
-
-    @Override
     public void updateStudentByStudentId(Student student) {
         studentMapper.updateStudentByStudentId(student);
     }
@@ -43,25 +35,5 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public void deleteStudentByStudentId(BigInteger studentId) {
         studentMapper.deleteStudentByStudentId(studentId);
-    }
-
-    @Override
-    public Student getStudentByAccount(String account) {
-        return studentMapper.getStudentByAccount(account);
-    }
-
-    @Override
-    public List<Student> getStudentByTeamId(BigInteger teamId) {
-        return studentMapper.getStudentByTeamId(teamId);
-    }
-
-    @Override
-    public List<Student> getStudentByCourseClassId(BigInteger courseClassId) {
-        return studentMapper.getStudentByCourseClassId(courseClassId);
-    }
-
-    @Override
-    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId) {
-        studentMapper.insertCourseClassStudentRelation(courseClassId,studentId);
     }
 }

@@ -23,7 +23,6 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
-    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -36,7 +35,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
+
 
 
 </head>
@@ -67,7 +66,7 @@
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">待办</a>
+                <a href="/teacher/homepage" class="home-icon">代办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -82,39 +81,39 @@
     </div>
 </div>
 
-<div class="content">
-    <div class="distance3"></div>
-    <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-            <#list teamList as team>
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
-                <div class="layui-colla-content">
-                    <p class="text-center">组长：${leaderList[team?index].studentName}</p>
-                    <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
-                    <#list studentList[team?index] as student>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
-                    </#list>
+
+
+
+
+   <div class="one-half-responsive">
+        <div class="container">
+            <div class="submenu-navigation">
+                <a href="#" class="submenu-nav-deploy">1-1 早早鸟</a>
+                <div class="submenu-nav-items " id="team1">
+                    <a href="#">组长： 罗小黑</a>
+                    <a href="#">组员： 刘晓波</a>
+                    <a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</a>
+					<a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</a>
                 </div>
             </div>
-            </#list>
-            <#--<div class="layui-colla-item">-->
-                <#--<h2 class="layui-colla-title">1-2 晚晚鸟</h2>-->
-                <#--<div class="layui-colla-content">-->
-                    <#--<p class="text-center">组长： 罗小黑</p>-->
-                    <#--<p class="text-center">组员： 刘晓波</p>-->
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</p>-->
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
-                <#--</div>-->
-            <#--</div>-->
         </div>
-    </div>
-</div>
+      <div class="one-half-responsive">
+        <div class="container">
+            <div class="submenu-navigation">
+                <a href="#" class="submenu-nav-deploy">1-2 晚晚鸟</a>
+                <div class="submenu-nav-items " id="team2">
+                    <a href="#">组长： 罗小黑</a>
+                    <a href="#">组员： 刘晓波</a>
+                    <a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王洪</a>
+					<a href="#">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 王新欣</a>
+                </div>
+            </div>
+        </div>
+		</div>
 
 
 <div class="back-button">
-    <a href="/teacher/courses" class="button-return button-dark">返回</a>
+    <a href="/teacher/course-seminar" class="button-return button-dark">返回</a>
 </div>
 
 <!--
@@ -131,16 +130,6 @@
 </div>
 -->
 
-<script>
-    layui.use(['element', 'layer'], function(){
-        var element = layui.element();
-        var layer = layui.layer;
 
-        //监听折叠
-        element.on('collapse(test)', function(data){
-            layer.msg('展开状态：'+ data.show);
-        });
-    });
-</script>
 </body>
 </html>

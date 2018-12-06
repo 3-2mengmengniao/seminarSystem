@@ -54,11 +54,5 @@ public interface CourseClassMapper {
      */
     List<CourseClass> getCourseClassByCourseId(@Param("courseId")BigInteger courseId);
 
-    /**
-     * 获取某课程下某学生的班级
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    CourseClass getCourseClassByStudentIdAndCourseId(@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
+
 }
