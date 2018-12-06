@@ -6,13 +6,17 @@ import com.test.seminar.entity.*;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.jnlp.FileSaveService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
@@ -43,6 +47,9 @@ public class TeacherController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    FileService fileService;
 
     @RequestMapping(value="/homepage")
     public String home(Model model) {
@@ -75,7 +82,7 @@ public class TeacherController {
         return "teacher/security";
     }
 
-    @RequestMapping(value="/class-info")
+    @RequestMapping(value="/class-info",method = GET)
     public String classInfo(HttpServletRequest request,BigInteger courseId,Model model) {
         HttpSession session = request.getSession();
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
@@ -83,6 +90,15 @@ public class TeacherController {
         model.addAttribute("courseId",courseId);
         session.setAttribute("courseId",courseId);
         return "teacher/class-info";
+    }
+
+
+    @RequestMapping(value="/class-info",method = POST)
+    @ResponseBody
+    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
+        fileService.uploadStudentExcel(file);
+        String status="200";
+        return status;
     }
 
     @RequestMapping(value="/course-info")
@@ -227,4 +243,14 @@ public class TeacherController {
 
     @RequestMapping(value = "/activate")
     public String activate(Model model) { return "teacher/activate"; }
+
+//    @RequestMapping(value = "/class/upload")
+//    @ResponseBody
+//    public String upload(BigInteger courseId, BigInteger classId, MultipartFile file, Model model) {
+//        System.out.println(courseId);
+//        System.out.println(classId);
+//        System.out.println(file);
+//        String status="200";
+//        return status;
+//    }
 }

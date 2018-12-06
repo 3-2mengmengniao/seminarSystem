@@ -54,7 +54,7 @@
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation">
+    <div class="navigation" style="right:0%;margin-top:-5px;">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -94,6 +94,7 @@
     </div>
     <div class="distance3"></div>
     <div class="distance5"></div>
+    <!--
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
              <div class="layui-colla-item">
@@ -107,6 +108,7 @@
             </div>
          </div>
     </div>
+    -->
 </div>
     <div class="distance2"> </div>
     <div class="distance"> </div>

@@ -57,8 +57,13 @@
         <p class="center-text">
             班级简介：&emsp;${class.introduction}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
-        <p class="file center-text"><input type="file"></p>
-        </p>
+        <form id="${class.id}" enctype="multipart/form-data" method="post" action="/teacher/class-info?courseId=${courseId}&classId=${class.id}" class="file center-text">
+            <input type="file" name="file" id="pic" class="center-block center-text"/>
+            <button type="submit" class="uploadButton layui-btn layui-btn-mini" name="${class.id}" data-formId="contactForm" style="margin: 20px;">提交</button>
+            <span class="showUrl"></span>
+        </form>
+    </div>
+</div>
         <p class="center center-text"><button class="button-big button-red deleteButton" id="deleteButton" name="${class.id}">删除班级</button></p>
     </div>
     <div class="decoration"></div>
@@ -75,7 +80,7 @@
     $('.deleteButton').click(function(){
         $.ajax({
             type: "DELETE",
-            url: "/teacher/courses/class?classId=" + $(this).attr('name'),
+            url: "/teacher/class/upload?courseId=${courseId}&classId=" + $(this).attr('name'),
             success: function(data){
                 if(data==="200")
                     window.location.href="/teacher/class-info?courseId=${courseId}";
@@ -83,6 +88,18 @@
                     alert("班级不存在");
             }
         });
+    });
+</script>
+<script>
+
+    $('.uploadButton').click(function(){
+        var currentForm=$(this).attr('data-formId');
+        var formInput = $('#' + currentForm).serialize();
+        $.post($('#' + currentForm).attr('action'),formInput,function(data){
+                if(data=="200")
+                    alert("提交成功！");
+        });
+        return false;
     });
 </script>
 
