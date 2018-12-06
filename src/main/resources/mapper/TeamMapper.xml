@@ -31,7 +31,7 @@
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT id,class_id,course_id,team_name,leader_id,is_established,team.team_serial
         FROM seminar_team_table,team
         WHERE seminarcontrol_id=#{seminarControlId} and team.id=seminar_team_table.team_id
     </select>

@@ -79,7 +79,7 @@
                 <h2 class="layui-colla-title" >${course.courseName}</h2>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-form layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/student/group-score">我的成绩</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/student/group-score?courseId=${course.getId()}">我的成绩</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>

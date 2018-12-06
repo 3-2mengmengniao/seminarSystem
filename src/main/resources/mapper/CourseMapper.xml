@@ -42,7 +42,7 @@
         values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
         #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
-        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount)
+        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount})
     </insert>
 
     <update id="updateCourseByCourseId" >

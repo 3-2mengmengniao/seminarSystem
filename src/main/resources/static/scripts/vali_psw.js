@@ -37,9 +37,9 @@ jQuery(document).ready(function($) {
                     }
                 }
                 else if(data=="200")
-                    window.location.href="/teacher/homepage";
+                    window.location.href="/teacher/security";
                 else if(data=="204")
-                    window.location.href="/student/homepage";
+                    window.location.href="/student/security";
         });
         //window.location.href='1vali_psw.html';
     };

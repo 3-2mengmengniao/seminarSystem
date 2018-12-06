@@ -115,7 +115,9 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/group-score")
-    public String groupScore(Model model) {
+    public String groupScore(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "student/group-score";
     }
 
