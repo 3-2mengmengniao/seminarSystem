@@ -53,18 +53,19 @@
 <div class="content">
     <div class="center-navigation">
     <div class="container no-bottom">
-        <h3>课程要求</h3>
-        <p>
+        <div class="distance3"></div>
+        <h3 class="margin3">课程要求</h3>
+        <p class="margin3">
             ${course.introduction}
         </p>
-        <h3>成绩计算规则</h3>
-        <p>
+        <h3 class="margin3">成绩计算规则</h3>
+        <p class="margin3">
             课堂展示    ${course.presentationProportion}%<br>
             课堂提问    ${course.questionProportion}%<br>
             课堂报告    ${course.reportProportion}%<br>
         </p>
-        <h3>分组规则</h3>
-        <p>
+        <h3 class="margin3">分组规则</h3>
+        <p class="margin4">
             小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
             组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
             组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
@@ -99,5 +100,23 @@
         });
     });
 </script>
+<style>
+    @media screen and (max-width:768px){
+        .margin3{
+             margin-left:20%;
+         }
+        .margin4{
+            margin-left:10%;
+        }
+    }
+    @media screen and (min-width:768px){
+        .margin3{
+            text-align:center;
+        }
+        .margin4{
+            margin-left:37%;
+        }
+    }
+</style>
 </body>
 </html>

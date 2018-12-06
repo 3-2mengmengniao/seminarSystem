@@ -53,25 +53,28 @@
 <div class="content">
     <#list courseClassList as class>
     <div class="container no-bottom">
-        <h3 class="center-text">${class.grade?c}-(${class.classSerial})</h3>
+        <h3 class="center-text" style="font-weight:bold;">${class.grade?c}-(${class.classSerial})</h3>
+        <div class="distance5"></div>
         <p class="center-text">
-            班级简介：&emsp;${class.introduction}<br>
+            ${class.introduction}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
         <form id="${class.id}" enctype="multipart/form-data" method="post" action="/teacher/class-info?courseId=${courseId}&classId=${class.id}" class="file center-text">
-            <input type="file" name="file" id="pic" class="center-block center-text"/>
-            <button type="submit" class="uploadButton layui-btn layui-btn-mini" name="${class.id}" data-formId="contactForm" style="margin: 20px;">提交</button>
+            <input type="file" name="file" id="pic" class="center-block center-text margin3"/>
+            <div class="distance3"></div>
+            <button type="submit" class="uploadButton layui-btn layui-btn-mini" name="${class.id}" data-formId="contactForm" style="margin-left: 10px;">提交</button>
+            <button class="uploadButton layui-btn layui-btn-mini" id="deleteButton"  style="margin-left:50px;background-color: #C0392B" name="${class.id}">删除班级</button>
             <span class="showUrl"></span>
         </form>
+        <div class="distance3"></div>
     </div>
 </div>
-        <p class="center center-text"><button class="button-big button-red deleteButton" id="deleteButton" name="${class.id}">删除班级</button></p>
-    </div>
+
     <div class="decoration"></div>
     </#list>
 </div>
 <div class="distance4"></div>
-<div class="layui-colla-item">
-    <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-class?courseId=${courseId}'" style="width: 200px; text-align: center;margin:0 auto;padding: 0;">新建班级</h2>
+<div class="layui-colla-item" style="border-color: rgb(0,0,0,0);">
+    <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-class?courseId=${courseId}'" style="width: 200px;margin:0 auto;padding: 0;">新建班级</h2>
 </div>
 <div class="distance4"></div>
 <div class="distance4"></div>
@@ -102,6 +105,17 @@
         return false;
     });
 </script>
-
+<style>
+    @media screen and (max-width:768px){
+        .margin3{
+            margin-left:25%;
+        }
+    }
+    @media screen and (min-width:768px){
+        .margin3{
+            margin-left:42%;
+        }
+    }
+</style>
 </body>
 </html>

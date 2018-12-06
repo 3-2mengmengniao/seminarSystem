@@ -73,95 +73,96 @@
 </div>
 
 <div class="content">
+    <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">第一轮</h2>
-                <div class="layui-colla-content layui-show">
-
+                <div class="layui-colla-content">
                     <div class="layui-collapse" lay-accordion="">
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content layui-show">
-
+                            <div class="layui-colla-content ">
                                 <div class="layui-collapse" lay-accordion="">
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content layui-show">
+                            <div class="layui-colla-content">
 
                                 <div class="layui-collapse" lay-accordion="">
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">第二轮</h2>
-                <div class="layui-colla-content layui-show">
-
+                <div class="layui-colla-content ">
                     <div class="layui-collapse" lay-accordion="">
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content layui-show">
+                            <div class="layui-colla-content ">
 
                                 <div class="layui-collapse" lay-accordion="">
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
@@ -171,24 +172,24 @@
                         </div>
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content layui-show">
+                            <div class="layui-colla-content ">
 
                                 <div class="layui-collapse" lay-accordion="">
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content ">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
                                     <div class="layui-colla-item">
                                         <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content layui-show">
+                                        <div class="layui-colla-content l">
                                             展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
                                         </div>
                                     </div>
@@ -203,9 +204,16 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
     <div class="distance2"> </div>
     <div class="distance2"> </div>
-    <p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
+<button onclick="window.location.href='#'"  class="uploadButton layui-btn layui-btn-mini margin3" >导出成绩</button>
 
     <div class="distance2"> </div>
     <div class="distance4"> </div>
@@ -224,7 +232,18 @@
 
 <!--<div class="bottom-deco"></div>-->
 
-
+<style>
+    @media screen and (max-width:768px){
+        .margin3{
+            margin-left:35%;
+        }
+    }
+    @media screen and (min-width:768px){
+        .margin3{
+            margin-left:44%;
+        }
+    }
+</style>
 </body>
 <script>
     //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
