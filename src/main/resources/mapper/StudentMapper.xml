@@ -41,6 +41,11 @@
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email},#{student.emailReceiveInterval})
     </insert>
 
+    <insert id="insertCourseClassStudentRelation">
+        insert into class_student_table(class_id,student_id)
+        values(#{courseClassId},#{studentId})
+    </insert>
+
     <update id="updateStudentByStudentId">
         update student
         <set>
