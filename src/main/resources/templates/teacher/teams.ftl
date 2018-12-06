@@ -85,9 +85,9 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
+        <div class="layui-collapse" lay-accordion="" >
             <#list teamList as team>
-            <div class="layui-colla-item">
+            <div class="layui-colla-item" style="border:none;">
                 <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
                     <p class="text-center">组长：${leaderList[team?index].studentName}</p>
@@ -111,11 +111,10 @@
         </div>
     </div>
 </div>
+<div class="distance4"></div>
+<div class="distance4"></div>
+<button onclick="window.location.href='/teacher/courses'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
 
-
-<div class="back-button">
-    <a href="/teacher/courses" class="button-return button-dark">返回</a>
-</div>
 
 <!--
 <div class="decoration"></div>
@@ -142,5 +141,17 @@
         });
     });
 </script>
+<style>
+    @media screen and (max-width:768px){
+        .margin3{
+            margin-left:35%;
+        }
+    }
+    @media screen and (min-width:768px){
+        .margin3{
+            margin-left:44%;
+        }
+    }
+</style>
 </body>
 </html>
