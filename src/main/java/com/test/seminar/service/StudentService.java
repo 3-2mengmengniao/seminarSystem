@@ -7,6 +7,7 @@ import com.test.seminar.exception.UserNotFoundException;
 import org.apache.catalina.User;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author cxh
@@ -42,4 +43,8 @@ public interface StudentService {
      * @throws UserNotFoundException
      */
     void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
+
+    List<Student> getStudentByTeamId(BigInteger teamId);
+
+    Student getStudentByAccount(String acoount)throws UserNotFoundException;
 }

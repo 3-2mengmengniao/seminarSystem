@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -40,5 +41,18 @@ public class StudentServiceImpl implements StudentService {
         if(studentDao.getStudentByStudentId(studentId)==null)
             throw new UserNotFoundException();
         studentDao.deleteStudentByStudentId(studentId);
+    }
+
+    @Override
+    public List<Student> getStudentByTeamId(BigInteger teamId) {
+        return studentDao.getStudentByTeamId(teamId);
+    }
+
+    @Override
+    public Student getStudentByAccount(String account) throws UserNotFoundException {
+        Student student=studentDao.getStudentByAccount(account);
+        if(student==null)
+            throw new UserNotFoundException();
+        return student;
     }
 }

@@ -14,28 +14,68 @@ public class Team {
     private String teamName;
     private BigInteger leaderId;
     private int established;
+    private int teamSerial;
 
-    public BigInteger getId() { return id; }
+    public BigInteger getId() {
+        return id;
+    }
 
-    public BigInteger getClassId() {return classId; }
+    public BigInteger getClassId() {
+        return classId;
+    }
 
-    public void setClassId(BigInteger classId) {this.classId = classId; }
+    public void setClassId(BigInteger classId) {
+        this.classId = classId;
+    }
 
-    public BigInteger getCourseId() {return courseId; }
+    public BigInteger getCourseId() {
+        return courseId;
+    }
 
-    public void setCourseId(BigInteger courseId) {this.courseId = courseId; }
+    public void setCourseId(BigInteger courseId) {
+        this.courseId = courseId;
+    }
 
-    public String getTeamName() { return teamName; }
+    public String getTeamName() {
+        return teamName;
+    }
 
-    public void setTeamName(String teamName) {this.teamName = teamName; }
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
 
-    public BigInteger getLeaderId() {return leaderId; }
+    public BigInteger getLeaderId() {
+        return leaderId;
+    }
 
-    public void setLeaderId(BigInteger leaderId) {this.leaderId = leaderId; }
+    public void setLeaderId(BigInteger leaderId) {
+        this.leaderId = leaderId;
+    }
 
-    public int getEstablished() { return established; }
+    public int getEstablished() {
+        return established;
+    }
 
-    public void setEstablished(int established) {this.established = established; }
+    public void setEstablished(int established) {
+        this.established = established;
+    }
+
+    public int getTeamSerial() {
+        return teamSerial;
+    }
+
+    public void setTeamSerial(int teamSerial) {
+        this.teamSerial = teamSerial;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Team) {
+            Team t = (Team) o;
+            return this.id.equals(t.getId());
+        }
+        return super.equals(o);
+    }
 }
 
 

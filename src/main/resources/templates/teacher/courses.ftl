@@ -59,7 +59,7 @@
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
+                <a href="/teacher/homepage" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -88,19 +88,19 @@
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-group layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/teams">学生组队</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/teams?courseId=${course.id}">学生组队</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-info?courseId=${course.getId()}">课程信息</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-info?courseId=${course.id}">课程信息</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-about layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/class-info">班级信息</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/class-info?courseId=${course.id}">班级信息</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-menu-fill layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-seminar">讨论课轮次</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein" href="/teacher/course-seminar?courseId=${course.id}">讨论课轮次</a>
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-set-fill layui-anim layui-anim-fadein"></i>
@@ -110,38 +110,7 @@
         </div>
     </div>
     <div class="distance3"></div>
-    <#--<div class="distance5"></div>-->
-    <#--<div class="center-navigation">-->
-        <#--<div class="layui-collapse" lay-accordion="">-->
-            <#--<div class="layui-colla-item layui-anim layui-anim-fadein">-->
-                    <#--<h2 class="layui-colla-title">J2EE</h2>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-form"></i>-->
-                    <#--<a class="my-navigation" href="/teacher/group-score">学生成绩</a>-->
-                <#--</div>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-group"></i>-->
-                    <#--<a class="my-navigation" href="/teacher/teams">学生组队</a>-->
-                <#--</div>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-about"></i>-->
-                    <#--<a class="my-navigation" href="/teacher/course-info">课程信息</a>-->
-                <#--</div>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-about"></i>-->
-                    <#--<a class="my-navigation" href="/teacher/class-info">班级信息</a>-->
-                <#--</div>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-menu-fill"></i>-->
-                    <#--<a class="my-navigation" href="/teacher/course-seminar">讨论课轮次</a>-->
-                <#--</div>-->
-                <#--<div class="layui-colla-content layui-anim layui-anim-fadein">-->
-                    <#--<i class="layui-icon layui-icon-set-fill"></i>-->
-                    <#--<a class="my-navigation"  href="#">共享设置</a>-->
-                <#--</div>-->
-            <#--</div>-->
-        <#--</div>-->
-    <#--</div>-->
+
     </#list>
     <div class="distance3"></div>
     <div class="distance3"></div>

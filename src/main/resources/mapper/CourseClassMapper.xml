@@ -8,13 +8,13 @@
     <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <select id="getCourseClassByCourseClassId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,class_name,introduction
+        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
         FROM course_class
         WHERE id=#{courseClassId}
     </select>
 
     <insert id="insertCourseClass">
-        insert into course_class(course_id,class_name,introduction) values(#{courseClass.courseId},#{courseClass.className},#{courseClass.introduction})
+        insert into course_class(course_id,grade,class_serial,introduction,team_amount) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.introduction},#{courseClass.teamAmount})
     </insert>
 
     <update id="updateCourseClassByCourseClassId">
@@ -23,11 +23,17 @@
             <if test="courseClass.courseId!=null">
                 course_id=#{courseClass.courseId},
             </if>
-            <if test="courseClass.className!=null">
-                class_name=#{courseClass.className},
+            <if test="courseClass.grade!=null">
+                grade=#{courseClass.grade},
+            </if>
+            <if test="courseClass.classSerial!=null">
+                class_serial=#{courseClass.classSerial},
             </if>
             <if test="courseClass.introduction!=null" >
                 introduction=#{courseClass.introduction},
+            </if>
+            <if test="courseClass.teamAmount!=null" >
+                team_amount=#{courseClass.teamAmount},
             </if>
         </set>
         where id=#{courseClass.id}
@@ -38,8 +44,14 @@
     </delete>
 
     <select id="getCourseClassByCourseId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,class_name,introduction
+        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
         FROM course_class
         WHERE course_id=#{courseId}
+    </select>
+
+    <select id="getCourseClassByStudentIdAndCourseId" resultType="com.test.seminar.entity.CourseClass">
+        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
+        FROM course_class,class_student_table
+        WHERE course_id=#{courseId} and class_student_table.student_id=#{studentId} and course_class.id=class_student_table.class_id
     </select>
 </mapper>

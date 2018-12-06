@@ -7,23 +7,24 @@
         <result property="courseId" column="course_id"/>
         <result property="enrollNumber" column="enroll_number"/>
         <result property="calculateMethod" column="calculate_method"/>
+        <result property="roundSerial" column="round_serial"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
-        SELECT id,course_id,enroll_number,calculate_method
+        SELECT id,course_id,enroll_number,calculate_method,round_serial
         FROM round
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getRoundByRoundId" resultMap="roundResultMap">
-        SELECT id,course_id,enroll_number,calculate_method
+        SELECT id,course_id,enroll_number,calculate_method,round_serial
         FROM round
         WHERE id=#{roundId}
     </select>
 
     <insert id="insertRound">
-        insert into round(course_id,enroll_number,calculate_method)
-        values(#{round.courseId},#{round.enrollNumber},#{round.calculateMethod})
+        insert into round(course_id,enroll_number,calculate_method,round_serial)
+        values(#{round.courseId},#{round.enrollNumber},#{round.calculateMethod},#{round.roundSerial})
     </insert>
 
     <update id="updateRound">
@@ -37,6 +38,9 @@
             </if>
             <if test="round.calculateMethod!=null">
                 calculate_method=#{round.calculateMethod},
+            </if>
+            <if test="round.roundSerial!=null">
+                round_serial=#{round.roundSerial},
             </if>
         </set>
         where id=#{round.id}

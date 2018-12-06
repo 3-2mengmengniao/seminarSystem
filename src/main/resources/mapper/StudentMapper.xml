@@ -18,9 +18,32 @@
         WHERE id=#{studentId}
     </select>
 
+    <select id="getStudentByAccount" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        FROM student
+        WHERE account=#{account}
+    </select>
+
+    <select id="getStudentByTeamId" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        FROM student,class_student_table
+        WHERE class_student_table.team_id=#{teamId} and class_student_table.student_id=student.id
+    </select>
+
+    <select id="getStudentByCourseClassId" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        FROM student,class_student_table
+        WHERE class_student_table.class_id=#{courseClassId} and class_student_table.student_id=student.id
+    </select>
+
     <insert id="insertStudent">
         insert into student(account,password,is_active,student_name,email,email_receive_interval)
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email},#{student.emailReceiveInterval})
+    </insert>
+
+    <insert id="insertCourseClassStudentRelation">
+        insert into class_student_table(class_id,student_id)
+        values(#{courseClassId},#{studentId})
     </insert>
 
     <update id="updateStudentByStudentId">

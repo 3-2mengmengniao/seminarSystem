@@ -18,27 +18,30 @@ public class RoundServiceImpl implements RoundService {
     private RoundDao roundDao;
 
     @Override
-    public void insertRound(BigInteger classId, int enrollNumber, int calculateMethod) throws RepetitiveRecordException {
-        Round newround=new Round();
-        newround.setEnrollNumber(enrollNumber);
-        newround.setClassId(classId);
-        newround.setCalculateMethod(calculateMethod);
-        roundDao.insertRound(newround);
+    public void insertRound(Round round) throws RepetitiveRecordException {
+        roundDao.insertRound(round);
     }
 
     @Override
     public void deleteRoundByRoundId(BigInteger roundId) throws RoundNotFoundException {
-
+        if(roundDao.getRoundByRoundId(roundId)==null)
+            throw new RoundNotFoundException();
+        roundDao.deleteRoundByRoundId(roundId);
     }
 
     @Override
     public void updateRound(Round round)throws RoundNotFoundException{
-
+        if(roundDao.getRoundByRoundId(round.getId())==null)
+            throw new RoundNotFoundException();
+        roundDao.updateRound(round);
     }
 
     @Override
     public Round getRoundByRoundId(BigInteger roundId) throws RoundNotFoundException {
-        return null;
+        Round round=roundDao.getRoundByRoundId(roundId);
+        if(round==null)
+            throw new RoundNotFoundException();
+        return round;
     }
 
     @Override

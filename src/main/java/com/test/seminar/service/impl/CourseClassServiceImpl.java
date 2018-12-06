@@ -46,4 +46,13 @@ public class CourseClassServiceImpl implements CourseClassService {
     public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
         return courseClassDao.getCourseClassByCourseId(courseId);
     }
+
+    @Override
+    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId){
+        CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+        if(courseClass==null)
+            throw new CourseClassNotFoundException();
+        return courseClass;
+    }
+
 }

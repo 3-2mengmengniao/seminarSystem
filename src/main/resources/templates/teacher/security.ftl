@@ -45,7 +45,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">账户与设置</h1>
-            <a href="/teacher/courses" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/teacher/homepage" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -56,7 +56,7 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">代办</a>
+                <a href="/teacher/homepage" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -64,7 +64,7 @@
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">讨论课</a>
+                <a href="/teacher/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -74,15 +74,15 @@
 <div class="content">
     <div class="container no-bottom text-list">
         用户姓名：<br>
-        邱明<br>
+        ${teacher.teacherName}<br>
         <div class="text-decoration"></div>
         <div class="distance3"></div>
         教工号： <br>
-        1234567890<br>
+        ${teacher.account}<br>
         <div class="text-decoration"></div>
         <div class="distance3"></div>
         邮箱：<br>
-        qiulaoshi@xmu.edu.cn<br>
+        ${teacher.email}<br>
         <div class="text-decoration"></div>
         <div class="distance4"></div>
         账户密码<br>

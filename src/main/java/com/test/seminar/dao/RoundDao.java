@@ -6,6 +6,10 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author cxh
+ * @date 2018/12/1
+ */
 public interface RoundDao {
 
     /**
@@ -24,7 +28,7 @@ public interface RoundDao {
      * 更新轮次信息
      * @param round
      */
-    void updateRound(BigInteger round);
+    void updateRound(Round round);
 
     /**
      * 通过轮次ID获得轮次信息
