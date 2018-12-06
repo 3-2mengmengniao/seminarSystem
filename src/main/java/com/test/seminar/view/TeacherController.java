@@ -116,6 +116,9 @@ public class TeacherController {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         course.setTeacherId(teacherId);
+        course.setClassAmount(0);
+        course.setRoundAmount(0);
+        System.out.println(course.getCourseName());
         courseService.insertCourse(course);
         String status="200";
         return status;

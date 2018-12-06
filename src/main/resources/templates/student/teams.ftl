@@ -82,9 +82,9 @@
 
 <div class="content">
     <div class="distance3"></div>
+    <#list teamList as team>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
-            <#list teamList as team>
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
@@ -96,7 +96,12 @@
                     </#list>
                 </div>
             </div>
-            </#list>
+        </div>
+    </div>
+    <div class="distance4"></div>
+    </#list>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">未组队学生</h2>
                 <div class="layui-colla-content">
@@ -108,20 +113,18 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="distance4"></div>
-<div class="distance4"></div>
-
-<div class="container">
-    <div class="toggle-1">
-        <a class="deploy-toggle-1" style="cursor:pointer" onclick="window.location.href='/student/create-course'">创建小组</a>
+    <div class="distance4"></div>
+    <div class="center-navigation" style="margin-top:20px;">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='#'" >创建小组</h2>
+        </div>
     </div>
+    <div class="distance4"></div>
+    <div class="distance4"></div>
+    <div class="distance4"></div>
+    <button onclick="window.location.href='/student/courses'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
 </div>
 
-<div class="back-button">
-    <a href="/student/courses" class="button-return button-dark">返回</a>
-</div>
 
 <!--
 <div class="decoration"></div>
@@ -148,5 +151,17 @@
         });
     });
 </script>
+<style>
+    @media screen and (max-width:768px){
+        .margin3{
+            margin-left:35%;
+        }
+    }
+    @media screen and (min-width:768px){
+        .margin3{
+            margin-left:44%;
+        }
+    }
+</style>
 </body>
 </html>

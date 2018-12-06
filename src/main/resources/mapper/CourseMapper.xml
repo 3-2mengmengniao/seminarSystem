@@ -36,16 +36,16 @@
         WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
     </select>
 
-    <insert id="insertCourse">
+    <insert id="insertCourse" >
         insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
         report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount)
         values(#{course.teacherId},#{course.introduction},
         #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
         #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
-        #{course.teamStartTime},#{course.teamEndTime},#{course.class_amount},#{course.round_amount)
+        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount)
     </insert>
 
-    <update id="updateCourseByCourseId">
+    <update id="updateCourseByCourseId" >
         update course
         <set>
             <if test="course.teacherId!=null">

@@ -1712,7 +1712,7 @@ table tr:hover td{
 	background-image:url(../images/icons/加_展开.png);
 	background-repeat:no-repeat;
 	background-size:15px 15px;
-	background-position:2% 19px;
+	background-position:20px;
 }
 
 @media screen and (min-width: 768px) {

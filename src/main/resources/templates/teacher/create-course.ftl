@@ -190,9 +190,9 @@
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">组队截止时间</label>
-                    <div class="formValidationError" id="contactMessageTextareaError">
+                    <div class="formValidationError" id="test5Error">
                         <div class="static-notification-red tap-dismiss-notification">
-                            <p class="uppercase">请填写组队截止时间</p>
+                            <p class="uppercase">请填写组队相关时间</p>
                         </div>
                     </div>
                 </div>

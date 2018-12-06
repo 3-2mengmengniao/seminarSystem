@@ -69,4 +69,14 @@
     <delete id="deleteTeamByTeamId">
         delete from team where id=#{teamId}
     </delete>
+
+    <update id="updateCourseClassStudentTeamId">
+        update class_student_table
+        <set>
+            <if test="teamId!=null">
+                team_id=#{teamId},
+            </if>
+        </set>
+        where student_id=#{studentId} and class_id=#{courseClassId}
+    </update>
 </mapper>

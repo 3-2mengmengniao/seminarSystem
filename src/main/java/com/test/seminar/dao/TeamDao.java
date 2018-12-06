@@ -53,5 +53,19 @@ public interface TeamDao {
      */
     List<Team> getTeamByCourseId(BigInteger courseId);
 
+    /**
+     * 查看某讨论课的所有队伍
+     * @param seminarControlId
+     * @return
+     */
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 更新某班级下某学生的队伍
+     * @param courseClassId
+     * @param studentId
+     * @param teamId
+     * @return
+     */
+    void updateCourseClassStudentTeamId(BigInteger courseClassId,BigInteger studentId,BigInteger teamId);
 }
