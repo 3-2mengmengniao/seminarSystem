@@ -13,6 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -25,7 +26,12 @@ public class FileServiceImpl implements FileService {
         //创建处理EXCEL
         ReadExcel readExcel=new ReadExcel();
         //解析excel，获取学生信息集合。
-        List<Student> studentList = readExcel.getExcelInfo(file);
+        List<Student> studentList = null;
+        try {
+            studentList = readExcel.getExcelInfo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //迭代添加学生信息
         for(Student student:studentList){

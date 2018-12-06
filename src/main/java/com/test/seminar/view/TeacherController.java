@@ -94,11 +94,10 @@ public class TeacherController {
 
 
     @RequestMapping(value="/class-info",method = POST)
-    @ResponseBody
     public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
+        System.out.println(file);
         fileService.uploadStudentExcel(file);
-        String status="200";
-        return status;
+        return "redirect:/teacher/class-info?courseId="+courseId;
     }
 
     @RequestMapping(value="/course-info")

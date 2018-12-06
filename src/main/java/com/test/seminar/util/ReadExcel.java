@@ -2,6 +2,8 @@ package com.test.seminar.util;
 
 import com.test.seminar.entity.Student;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -11,10 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,51 +52,37 @@ public class ReadExcel {
      * @param mFile
      * @return
      */
-    public List<Student> getExcelInfo(MultipartFile mFile){
-
-        //把spring文件上传的MultipartFile转换成CommonsMultipartFile类型
-        CommonsMultipartFile commonsMultipartFile= (CommonsMultipartFile)mFile; //获取本地存储路径
-        String filePath = System.getProperty("user.dir")+"/file";
-        File file = new  File(filePath);
-        //创建一个目录 （它的路径名由当前 File 对象指定，包括任一必须的父路径。）
-        if (!file.exists()) file.mkdirs();
-        //新建一个文件
-        File file1 = new File( filePath+ new Date().getTime() + ".xlsx");
-        //将上传的文件写入新建的文件中
-        try {
-            commonsMultipartFile.getFileItem().write(file1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public List<Student> getExcelInfo(MultipartFile mFile) throws IOException {
         //初始化客户信息的集合
         List<Student> studentList=new ArrayList<Student>();
         //初始化输入流
-        InputStream is = null;
+        File convFile = new File(mFile.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(mFile.getBytes());
+        fos.close();
         try{
             //验证文件名是否合格
-            if(!validateExcel(mFile.getOriginalFilename())){
+            if(!validateExcel(convFile.getName())){
                 return null;
             }
             //根据文件名判断文件是2003版本还是2007版本
             boolean isExcel2003 = true;
-            if(isExcel2007(mFile.getOriginalFilename())){
+            if(isExcel2007(convFile.getName())){
                 isExcel2003 = false;
             }
             //根据新建的文件实例化输入流
-            is = new FileInputStream(file1);
             //根据excel里面的内容读取客户信息
-            studentList = getExcelInfo(is, isExcel2003);
-            is.close();
+            studentList = getExcelInfo(convFile, isExcel2003);
         }catch(Exception e){
             e.printStackTrace();
         } finally{
-            if(is !=null)
+            if(fos !=null)
             {
                 try{
-                    is.close();
+                    fos.close();
                 }catch(IOException e){
-                    is = null;
+                    fos = null;
                     e.printStackTrace();
                 }
             }
@@ -111,17 +96,22 @@ public class ReadExcel {
      * @return
      * @throws IOException
      */
-    public  List<Student> getExcelInfo(InputStream is,boolean isExcel2003){
+    public  List<Student> getExcelInfo(File file,boolean isExcel2003){
         List<Student> studentList=null;
         try{
             /** 根据版本选择创建Workbook的方式 */
             Workbook wb = null;
             //当excel是2003时
             if(isExcel2003){
-                wb = new HSSFWorkbook(is);
+                POIFSFileSystem poiFile = new POIFSFileSystem(file);
+                wb = new HSSFWorkbook(poiFile);
             }
             else{//当excel是2007时
-                wb = new XSSFWorkbook(is);
+                try {
+                    wb = new XSSFWorkbook(file);
+                } catch (InvalidFormatException e) {
+                    e.printStackTrace();
+                }
             }
             //读取Excel里面客户的信息
             studentList=readExcelValue(wb);
@@ -160,12 +150,11 @@ public class ReadExcel {
             for(int c = 0; c <this.totalCells; c++){
                 Cell cell = row.getCell(c);
                 if (null != cell){
-                    if(c==0){//第一列不读
-                    }else if(c==1){
+                    if(c==0){
                         student.setAccount(cell.getStringCellValue());
-                    }else if(c==2){
+                    }else if(c==1){
                         student.setStudentName(cell.getStringCellValue());
-                    }else if(c==3){
+                    }else if(c==2){
                         student.setEmail(cell.getStringCellValue());
                     }
                 }
