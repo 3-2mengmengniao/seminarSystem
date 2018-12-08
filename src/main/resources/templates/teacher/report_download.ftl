@@ -44,8 +44,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD讨论课</h1>
-            <a href="/teacher/seminar_info_end" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/teacher/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -99,7 +99,7 @@
         <div class="distance4"></div>
         <div class="distance"></div>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">批量下载</a></p>
-        <p class="center center-text"><a href="/teacher/report_score" class="button-return button-turqoise">确认</a></p>
+        <p class="center center-text"><a href="/teacher/report_score?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-return button-turqoise">确认</a></p>
         <div class="distance"></div>
         <!--
         <div class="decoration"></div>

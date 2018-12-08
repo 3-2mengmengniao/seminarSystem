@@ -45,26 +45,22 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/teacher/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/course-seminar?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation">
+    <div class="navigation" style="right:0%;margin-top:-5px;">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">待办</a>
+                <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">讨论课</a>
+                <a href="/student/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -76,31 +72,39 @@
         <div class="container no-bottom">
             <table cellspacing='0' class="table">
                 <tr>
-                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr class='even'>
-                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                    <td>轮次</td>
+                    <td>第${round.roundSerial}轮</td>
                 </tr>
                 <tr>
-                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr class='even'>
-                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span> </td>
+                    <td>主题</td>
+                    <td>${seminarInfo.seminarName}</td>
                 </tr>
                 <tr>
-                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                    <td>课次序号</td>
+                    <td>第${seminarInfo.seminarSerial}次</td>
+                </tr>
+                <tr>
+                    <td>要求</td>
+                    <td>${seminarInfo.introduction}</td>
                 </tr>
                 <tr class='even'>
-                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
+                    <td>课程情况：已完成   <a href="/student/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                </tr>
+                <tr>
+                    <td> 报名情况：2016-（1）第3组<a href="#" style="display: inline;margin-left: 20px;">修改</a></td>
+                </tr>
+                <tr class='even'>
+                    <td> PPT：已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                </tr>
+                <tr >
+                    <td> 书面报告：已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
                 </tr>
             </table>
         </div>
 
-        <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="/teacher/report_download?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-return button-turqoise">修改</a></p>
-        <p class="center center-text"><a href="/teacher/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-return button-turqoise">确认</a></p>
-        <div class="distance"></div>
+        <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">PPT提交</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>
         <!--
         <div class="decoration"></div>
         <div class="footer">

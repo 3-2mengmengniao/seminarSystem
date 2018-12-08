@@ -206,6 +206,7 @@ public class TeacherController {
     public String seminarInfo(BigInteger courseId, BigInteger classId, BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo = seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
         model.addAttribute("seminarInfo", seminarInfo);
         BigInteger roundId = seminarInfo.getRoundId();
         Round round = roundService.getRoundByRoundId(roundId);
@@ -223,23 +224,62 @@ public class TeacherController {
         }
     }
 
-    @RequestMapping(value = "/seminar_info_end")
-    public String seminarInfoEnd(Model model) {
-        return "teacher/seminar_info_end";
+    @RequestMapping(value="/enrollment")
+    public String enrollment(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+            return "teacher/ready_enrollment";
+        else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+            return "teacher/begin_enrollment";
+        else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+            return "teacher/complete_enrollment";
+        else
+            return "error";
     }
 
-    @RequestMapping(value = "/seminar_info_begin")
-    public String seminarInfoBegin(Model model) {
-        return "teacher/seminar_info_begin";
-    }
+//    @RequestMapping(value = "/seminar_info_end")
+//    public String seminarInfoEnd(Model model) {
+//        return "teacher/seminar_info_end";
+//    }
+//
+//    @RequestMapping(value = "/seminar_info_begin")
+//    public String seminarInfoBegin(Model model) {
+//        return "teacher/seminar_info_begin";
+//    }
 
     @RequestMapping(value = "/report_download")
-    public String reportDownload(Model model) {
+    public String reportDownload(BigInteger courseId, BigInteger classId, BigInteger seminarId,Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo = seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarInfo", seminarInfo);
+        BigInteger roundId = seminarInfo.getRoundId();
+        Round round = roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round", round);
+        Course course = courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course", course);
         return "teacher/report_download";
     }
 
     @RequestMapping(value = "/report_score")
-    public String reportScore(Model model) {
+    public String reportScore(BigInteger courseId, BigInteger classId, BigInteger seminarId,Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo = seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarInfo", seminarInfo);
+        BigInteger roundId = seminarInfo.getRoundId();
+        Round round = roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round", round);
+        Course course = courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course", course);
         return "teacher/report_score";
     }
 

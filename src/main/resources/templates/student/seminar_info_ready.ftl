@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <td>课程情况</td>
-                <td>未开始<a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+                <td>未开始<a href="/student/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
             </tr>
             <tr>
                 <td>报名开始时间</td>

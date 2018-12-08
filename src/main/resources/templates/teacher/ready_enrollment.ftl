@@ -47,22 +47,26 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/teacher/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation" style="right:0%;margin-top:-5px;">
+    <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">个人页</a>
+                <a href="/teacher/homepage" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">讨论课</a>
+                <a href="/teacher/homepage" class="home-icon">个人页</a>
+                <em class="active-menu"></em>
+            </div>
+            <div class="navigation-item">
+                <a href="/teacher/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -88,15 +92,11 @@
             </tr>
             <tr>
                 <td>第三组：</td>
-                <td class="site-demo-button" id="layerDemo" style="margin-bottom: 0;" >
-                    <button data-method="confirmTrans" class="layui-btn my-layui-btn1">点击报名</button>
-                </td>
+                <td>未报名</td>
             </tr>
             <tr>
                 <td>第四组：</td>
-                <td class="site-demo-button" id="layerDemo" style="margin-bottom: 0;" >
-                    <button data-method="confirmTrans" class="layui-btn my-layui-btn1">点击报名</button>
-                </td>
+                <td>未报名</td>
             </tr>
             <tr>
                 <td>第五组：</td>
