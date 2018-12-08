@@ -28,6 +28,7 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+            console.log(data);
             if(data=="404") {
                 $('#formSuccessMessageWrap').fadeIn(500);
                 formSubmitted = 'false';
@@ -36,9 +37,9 @@ jQuery(document).ready(function($) {
                     $('#formSuccessMessageWrap').fadeOut(500);
                 }
             }
-            else if(data=="200")
+            else if(data==="teacherHome")
                 window.location.href="/teacher/homepage";
-            else if(data=="204")
+            else if(data==="studentHome")
                 window.location.href="/student/homepage";
         });
         //window.location.href='1vali_psw.html';
@@ -49,7 +50,7 @@ jQuery(document).ready(function($) {
         // hide any error messages starts
         $('.formValidationError').hide();
         $('.fieldHasError').removeClass('fieldHasError');
-        var count=4;
+        var count=5;
         var judge=true;
         // hide any error messages ends
         $('#' + currentForm + ' .requiredField').each(function(i){
@@ -69,17 +70,29 @@ jQuery(document).ready(function($) {
                 return false;
             };
 
-            if($('#emailMessageTextarea').val()==null||$('#emailMessageTextarea').val()==''){
+            if($('#emailMessageTextarea').length>0&&($('#emailMessageTextarea').val()==null||$('#emailMessageTextarea').val()=='')){
                 $('#emailError').fadeIn(300);
                 count=count-1;
                 return false;
             };
 
+            if($(this).hasClass('requiredEmailField')){
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var tempField = '#' + $(this).attr('id');
+                if(!emailReg.test($(tempField).val())) {
+                    $(tempField).focus();
+                    $(tempField).addClass('fieldHasError');
+                    $(tempField + 'Error2').fadeIn(300);
+                    count=count-1;
+                    return false;
+                }
+            };
+
 
         });
-        if(formSubmitted == 'false' && count==4&&judge==true){
+        if(formSubmitted == 'false' && count==5&&judge==true){
             submitData(currentForm, formType);
-        };
+        }
 
     };
     // validate form function ends

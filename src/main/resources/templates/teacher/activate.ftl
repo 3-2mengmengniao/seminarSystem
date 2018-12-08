@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/vali_psw.js"></script>
+    <script type="text/javascript" src="/scripts/activate.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -61,7 +61,7 @@
             <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="/vali_psw" method="post" class="contactForm" id="contactForm">
+    <form action="/teacher/activate" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <p>
             <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
@@ -71,7 +71,7 @@
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写新密码!</p>
+                    <p class="uppercase">请填写新密码!</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -80,12 +80,12 @@
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写确认密码!</p>
+                    <p class="uppercase">请填写确认密码!</p>
                 </div>
             </div>
             <div class="formValidationError" id="differentError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">新密码与确认密码不一致!</p>
+                    <p class="uppercase">新密码与确认密码不一致!</p>
                 </div>
             </div>
             <div class="formTextareaWrap">
@@ -95,7 +95,7 @@
             </div>
             <div class="formValidationError" id="contactMessageTextareaError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写验证码!</p>
+                    <p class="uppercase">请填写验证码!</p>
                 </div>
             </div>
             <div class="distance2"></div>

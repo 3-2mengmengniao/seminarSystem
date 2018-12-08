@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -209,6 +210,27 @@ public class StudentController {
         return "student/course-info";
     }
 
-    @RequestMapping(value = "/activate")
-    public String activate(Model model) { return "student/activate"; }
+    @RequestMapping(value = "/activate", method = GET)
+    public String activate(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        model.addAttribute(student);
+        return "student/activate";
+    }
+
+    @RequestMapping(value = "/activate", method = POST)
+    @ResponseBody
+    public String activatePost(String newPsw,String email,String validation,HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        student.setPassword(newPsw);
+        student.setEmail(email);
+        student.setActive(1);
+        studentService.updateStudentByStudentId(student);
+        String status="studentHome";
+        return status;
+    }
+
 }

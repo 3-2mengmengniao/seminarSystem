@@ -44,6 +44,7 @@ public class HomeController {
     public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model)  {
         //获得session
         HttpSession session = request.getSession();
+        String status="404";
         //登陆验证
         try {
             Student student = loginService.studentLogin(account, password);
@@ -51,8 +52,9 @@ public class HomeController {
             session.setAttribute("id", student.getId());
             session.setAttribute("account", student.getAccount());
             session.setAttribute("name", student.getStudentName());
-            model.addAttribute("account", student.getAccount());
-            model.addAttribute("name", student.getStudentName());
+            status = "studentHome";
+            if(student.getActive()==0)
+                status="studentActivate";
         }
        catch (UserNotFoundException e) {
             try {
@@ -61,18 +63,15 @@ public class HomeController {
                 session.setAttribute("id", teacher.getId());
                 session.setAttribute("account", teacher.getAccount());
                 session.setAttribute("name", teacher.getTeacherName());
-                model.addAttribute("account", teacher.getAccount());
-                model.addAttribute("name", teacher.getTeacherName());
+                status="teacherHome";
+                if(teacher.getActive()==0)
+                    status="teacherActivate";
             }
             catch (UserNotFoundException e2){
-                String status = "404";
                 return status;
             }
-           String status = "200";
            return status;
-
            }
-        String status = "204";
         return status;
     }
 
