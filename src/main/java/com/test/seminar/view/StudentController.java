@@ -160,9 +160,9 @@ public class StudentController {
         SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
         model.addAttribute("classId",classId);
         model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
+//        BigInteger roundId=seminarInfo.getRoundId();
+//        Round round=roundService.getRoundByRoundId(roundId);
+//        model.addAttribute("round",round);
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         if(seminarControl.getSeminarStatus().equals("UNSTARTED"))

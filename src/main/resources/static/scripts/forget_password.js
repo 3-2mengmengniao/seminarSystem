@@ -28,13 +28,9 @@ jQuery(document).ready(function($) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
         $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-            if(data=="404") {
+            if(data=="409") {
                 $('#formSuccessMessageWrap').fadeIn(500);
                 formSubmitted = 'false';
-                var onFocus = document.activeElement;
-                if (onFocus.id === "contactEmailField") {
-                    $('#formSuccessMessageWrap').fadeOut(500);
-                }
             }
             else if(data=="200"||data=="204")
                 window.location.href="/new_password";

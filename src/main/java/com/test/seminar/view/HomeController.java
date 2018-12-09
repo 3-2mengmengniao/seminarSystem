@@ -85,7 +85,7 @@ public class HomeController {
 
     @RequestMapping(value = "/vali_psw", method = POST)
     @ResponseBody
-    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
+    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, Model model) {
         HttpSession session = request.getSession();
         String usertype=(String)session.getAttribute("usertype");
         if(usertype.equals("teacher"))
@@ -151,28 +151,39 @@ public class HomeController {
     @ResponseBody
     public String forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
         HttpSession session = request.getSession();
-        //登陆验证
-        try {
-            Student student = studentService.getStudentByAccount(account);
-            session.setAttribute("usertype", "student");
-            session.setAttribute("id", student.getId());
-        }
-        catch (UserNotFoundException e) {
-            try {
-                Teacher teacher = teacherService.getTeacherByAccount(account);
-                session.setAttribute("usertype", "teacher");
-                session.setAttribute("id", teacher.getId());
-            }
-            catch (UserNotFoundException e2){
-                String status = "404";
-                return status;
-            }
-            String status = "200";
+        String status="409";
+        if(session.getAttribute("validation")==null)
             return status;
+        String sessionValidation=(String)session.getAttribute("validation");
+        if(!sessionValidation.equals(validation))
+            return status;
+        System.out.println("success");
+        status="200";
+        return status;
 
-        }
-        String stauts="204";
-        return stauts;
+
+//        //登陆验证
+//        try {
+//            Student student = studentService.getStudentByAccount(account);
+//            session.setAttribute("usertype", "student");
+//            session.setAttribute("id", student.getId());
+//        }
+//        catch (UserNotFoundException e) {
+//            try {
+//                Teacher teacher = teacherService.getTeacherByAccount(account);
+//                session.setAttribute("usertype", "teacher");
+//                session.setAttribute("id", teacher.getId());
+//            }
+//            catch (UserNotFoundException e2){
+//                String status = "404";
+//                return status;
+//            }
+//            String status = "200";
+//            return status;
+//
+//        }
+//        String stauts="204";
+//        return stauts;
     }
 
     @RequestMapping(value = "/new_password", method = GET)

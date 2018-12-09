@@ -56,7 +56,7 @@
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="static-notification-green tap-dismiss-notification">
-            <p style="color:#c9302c;">未找到当前账号，请再次尝试！</p>
+            <p style="color:#c9302c;">验证码错误！</p>
         </div>
     </div>
     <form action="/forget_password" method="post" class="contactForm" id="contactForm">
@@ -73,12 +73,17 @@
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">验证码:</label>
-                <button id="vali_button" type="button">获取验证码</button>
+                <button id="vali_button" type="button" onclick="submitValidation()">获取验证码</button>
                 <input name="validation" class="contactField requiredField" id="contactEmailField"  placeholder="请输入验证码"/>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="uppercase">请填写验证码!</p>
+                </div>
+            </div>
+            <div class="formValidationError" id="validationFail">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">未找到当前账号，请重新输入！</p>
                 </div>
             </div>
             <div class="distance2"></div>
@@ -116,6 +121,39 @@
     <div class="bottom-deco"></div>
 </div>
  -->
-
+<script>
+    function  submitValidation() {
+        var account=$('#contactNameField').val();
+        var flag=true;
+        if(account===''||account===null)
+        {
+            $(this).val($(this).attr('data-dummy'));
+            $('#contactNameField').focus();
+            $('#contactNameField').addClass('fieldHasError');
+            $('#contactNameFieldError').fadeIn(300);
+            flag=false;
+        }
+        if(flag)
+        {
+            // var fd=new FormData();
+            // fd.append("account",account);
+            $.ajax(
+                    {
+                        url:"/captcha/forgetPassword",
+                        type:'post',
+                        data:{"account":account},
+                        success:function(data){
+                            console.log("success");
+                            if(data=="409")
+                                $('#validationFail').fadeIn(300);
+                        },
+                        error:function(data){
+                            console.log("failure");
+                            $('#validationFail').fadeIn(300);}
+                    }
+            );
+        }
+    }
+</script>
 </body>
 </html>

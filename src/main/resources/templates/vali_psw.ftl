@@ -92,16 +92,6 @@
                                 <p class="uppercase">新密码与确认密码不一致!</p>
                             </div>
                         </div>
-                        <div class="formTextareaWrap">
-                            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">验证码: <span>(required)</span></label>
-                            <button id="vali_button" type="button">获取验证码</button>
-							<input name="validation" class="contactField requiredField" id="contactMessageTextarea" placeholder="请输入验证码"/>
-                        </div>
-                        <div class="formValidationError" id="contactMessageTextareaError">
-                            <div class="static-notification-red tap-dismiss-notification">
-                                <p class="uppercase">请填写验证码!</p>
-                            </div>
-                        </div>
                         <div class="distance2"></div>
                            <div class="formSubmitButtonErrorsWrap">
                                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="设置密码" data-formId="contactForm"/>
