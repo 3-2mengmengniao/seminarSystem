@@ -88,11 +88,11 @@
                     <td>${seminarInfo.introduction}</td>
                 </tr>
                 <tr class='even'>
-                    <td>课程情况：已完成   <a href="#" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                    <td>课程情况：已完成   <a href="/student/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 </tr>
                 <tr>
-                <td> 报名情况：2016-（1）第3组<a href="#" style="display: inline;margin-left: 20px;">修改</a></td>
-            </tr>
+                    <td> 报名情况：2016-（1）第3组<a href="#" style="display: inline;margin-left: 20px;">修改</a></td>
+                </tr>
                 <tr class='even'>
                     <td> PPT：已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
                 </tr>
@@ -105,6 +105,8 @@
         <div class="distance"></div>
         <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">PPT提交</a></p>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>
+        <div class="distance4"></div>
+        <p class="center center-text"><a href="/teacher/report_download" class="button-return button-turqoise">进入讨论课</a></p>
         <!--
         <div class="decoration"></div>
         <div class="footer">

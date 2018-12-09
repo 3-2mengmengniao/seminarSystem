@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -64,7 +66,7 @@
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">讨论课</a>
+                <a href="/teacher/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -72,45 +74,42 @@
 </div>
 
 <div class="content">
-    <div class="container no-bottom text-list">
-        <div class="container no-bottom">
-            <table cellspacing='0' class="table">
-                <tr>
-                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr class='even'>
-                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr>
-                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr class='even'>
-                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span> </td>
-                </tr>
-                <tr>
-                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-                <tr class='even'>
-                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><span  class="btn1-default my-btn2"   style="margin-top: 2px;margin-bottom: 2px;">5.0</span></td>
-                </tr>
-            </table>
-        </div>
-
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>第一组：</td>
+                <td>1-1</td>
+            </tr>
+            <tr>
+                <td>第二组：</td>
+                <td>1-2</td>
+            </tr>
+            <tr>
+                <td>第三组：</td>
+                <td>1-3</td>
+            </tr>
+            <tr>
+                <td>第四组：</td>
+                <td>1-4</td>
+            </tr>
+            <tr>
+                <td>第五组：</td>
+                <td>1-5</td>
+            </tr>
+            <tr>
+                <td>第六组：</td>
+                <td>1-6</td>
+            </tr>
+            </tbody>
+        </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="/teacher/report_download?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-return button-turqoise">修改</a></p>
-        <p class="center center-text"><a href="/teacher/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-return button-turqoise">确认</a></p>
-        <div class="distance"></div>
-        <!--
-        <div class="decoration"></div>
-        <div class="footer">
-            <div class="clear"></div>
-            <p class="copyright">
-                Copyright @2018 developed by Group 3-2.<br>
-                All Rights Reserved
-            </p>
-        </div>
-        -->
     </div>
 </div>
 

@@ -36,10 +36,14 @@ jQuery(document).ready(function($) {
                         $('#formSuccessMessageWrap').fadeOut(500);
                     }
                 }
-                else if(data=="200")
-                    window.location.href="/teacher/homepage";
-                else if(data=="204")
+                else if(data=="studentHome")
                     window.location.href="/student/homepage";
+                else if(data=="teacherHome")
+                    window.location.href="/teacher/homepage";
+                else if(data=="studentActivate")
+                    window.location.href="/student/activate";
+                else if(data=="teacherActivate")
+                    window.location.href="/teacher/activate";
         });
         //window.location.href='1vali_psw.html';
     };

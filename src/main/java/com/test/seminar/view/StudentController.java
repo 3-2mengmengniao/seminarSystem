@@ -2,13 +2,13 @@ package com.test.seminar.view;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
-import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -125,6 +125,7 @@ public class StudentController {
     public String seminarInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
@@ -136,8 +137,13 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         boolean flag=teamList.contains(team);
-        if(flag)
-            return "student/selected_seminar_homepage" ;
+        if(flag && seminarControl.getSeminarStatus().equals("UNSTARTED"))
+            return "student/selected_seminar_ready";
+        else if(flag && seminarControl.getSeminarStatus().equals("INPROCESS"))
+            return "student/selected_seminar_begin";
+        else if(flag && seminarControl.getSeminarStatus().equals("FINISHED"))
+            return "student/selected_seminar_complete";
+
         else if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
             return "student/seminar_info_ready";
         else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
@@ -148,20 +154,41 @@ public class StudentController {
             return "error";
     }
 
-    @RequestMapping(value = "/seminar_info_begin")
-    public String seminarInfoBegin(Model model) {
-        return "student/seminar_info_begin";
+    @RequestMapping(value="/enrollment")
+    public String enrollment(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
+            return "student/ready_enrollment";
+        else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
+            return "student/begin_enrollment";
+        else if(seminarControl.getSeminarStatus().equals("FINISHED"))
+            return "student/complete_enrollment";
+        else
+            return "error";
     }
 
-    @RequestMapping(value = "/seminar_info_ready")
-    public String seminarInfoReady(Model model) {
-        return "student/seminar_info_ready";
-    }
-
-    @RequestMapping(value = "/seminar_info_complete")
-    public String seminarInfoComplete(Model model) {
-        return "student/seminar_info_Complete";
-    }
+//    @RequestMapping(value = "/seminar_info_begin")
+//    public String seminarInfoBegin(Model model) {
+//        return "student/seminar_info_begin";
+//    }
+//
+//    @RequestMapping(value = "/seminar_info_ready")
+//    public String seminarInfoReady(Model model) {
+//        return "student/seminar_info_ready";
+//    }
+//
+//    @RequestMapping(value = "/seminar_info_complete")
+//    public String seminarInfoComplete(Model model) {
+//        return "student/seminar_info_Complete";
+//    }
 
     @RequestMapping(value = "/begin_enrollment")
     public String beginEnrollment(Model model) {
@@ -183,18 +210,18 @@ public class StudentController {
         return "student/begin_present";
     }
 
-    @RequestMapping(value = "/selected_seminar_homepage")
-    public String selectedSeminarHomepage(Model model) {
-        return "student/selected_seminar_homepage";
-    }
-
-    @RequestMapping(value = "/selected_seminar_enrollment")
-    public String selectedSeminarEnrollment(Model model) {
-        return "student/selected_seminar_enrollment";
-    }
-
-    @RequestMapping(value = "/selected_seminar_info")
-    public String selectedSeminarInfo(Model model) { return "student/selected_seminar_info"; }
+//    @RequestMapping(value = "/selected_seminar_homepage")
+//    public String selectedSeminarHomepage(Model model) {
+//        return "selected_seminar_ready";
+//    }
+//
+//    @RequestMapping(value = "/selected_seminar_enrollment")
+//    public String selectedSeminarEnrollment(Model model) {
+//        return "selected_seminar_begin";
+//    }
+//
+//    @RequestMapping(value = "/selected_seminar_info")
+//    public String selectedSeminarInfo(Model model) { return "selected_seminar_complete"; }
 
     @RequestMapping(value = "/score")
     public String score(Model model) { return "student/score"; }
@@ -209,6 +236,27 @@ public class StudentController {
         return "student/course-info";
     }
 
-    @RequestMapping(value = "/activate")
-    public String activate(Model model) { return "student/activate"; }
+    @RequestMapping(value = "/activate", method = GET)
+    public String activate(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        model.addAttribute(student);
+        return "student/activate";
+    }
+
+    @RequestMapping(value = "/activate", method = POST)
+    @ResponseBody
+    public String activatePost(String newPsw,String email,String validation,HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        student.setPassword(newPsw);
+        student.setEmail(email);
+        student.setActive(1);
+        studentService.updateStudentByStudentId(student);
+        String status="studentHome";
+        return status;
+    }
+
 }

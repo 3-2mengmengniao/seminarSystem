@@ -100,16 +100,18 @@
             </tr>
             <tr>
                 <td>课程情况</td>
-                <td>已完成 <a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+                <td>已完成 <a href="/teacher/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
             </tr>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="查看报告" data-formId="contactForm"/>
+        <p class="center center-text ">
+            <button type="button" class="layui-btn" id="contactSubmitButton"  data-formId="contactForm" onclick="window.location.href='/teacher/report_score?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}'">查看报告</button>
         </p>
         <div class="distance4"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="查看成绩" data-formId="contactForm"/>
+        <p class="center center-text ">
+            <button type="button" class="layui-btn" id="contactSubmitButton" data-formId="contactForm" onclick="#'">查看成绩</button>
         </p>
     </div>
 </div>
