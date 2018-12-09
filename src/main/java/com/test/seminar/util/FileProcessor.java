@@ -14,11 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ReadExcel {
+public class FileProcessor {
     //总行数
     private int totalRows = 0;
     //总条数
@@ -26,7 +27,7 @@ public class ReadExcel {
     //错误信息接收器
     private String errorMsg;
     //构造方法
-    public ReadExcel(){}
+    public FileProcessor(){}
     //获取总行数
     public int getTotalRows()  { return totalRows;}
     //获取总列数
@@ -34,6 +35,17 @@ public class ReadExcel {
     //获取错误信息
     public String getErrorInfo() { return errorMsg; }
 
+
+    public File multipartFile2File(MultipartFile multipartFile) throws IOException {
+        File file = new File(multipartFile.getOriginalFilename());
+        file.deleteOnExit();
+        multipartFile.transferTo(file);
+        return file;
+    }
+
+    public void saveFile(MultipartFile multipartFile, String path) throws IOException {
+        multipartFile.transferTo(new File(path));
+    }
     /**
      * 验证EXCEL文件
      * @param filePath
@@ -55,43 +67,28 @@ public class ReadExcel {
     public List<Student> getExcelInfo(MultipartFile mFile) throws IOException {
         //初始化客户信息的集合
         List<Student> studentList=new ArrayList<Student>();
-        //初始化输入流
-        File convFile = new File(mFile.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fos = new FileOutputStream(convFile);
-        fos.write(mFile.getBytes());
-        fos.close();
+        File file=multipartFile2File(mFile);
         try{
             //验证文件名是否合格
-            if(!validateExcel(convFile.getName())){
+            if(!validateExcel(file.getName())){
                 return null;
             }
             //根据文件名判断文件是2003版本还是2007版本
             boolean isExcel2003 = true;
-            if(isExcel2007(convFile.getName())){
+            if(isExcel2007(file.getName())){
                 isExcel2003 = false;
             }
             //根据新建的文件实例化输入流
             //根据excel里面的内容读取客户信息
-            studentList = getExcelInfo(convFile, isExcel2003);
+            studentList = getExcelInfo(file, isExcel2003);
         }catch(Exception e){
             e.printStackTrace();
-        } finally{
-            if(fos !=null)
-            {
-                try{
-                    fos.close();
-                }catch(IOException e){
-                    fos = null;
-                    e.printStackTrace();
-                }
-            }
         }
         return studentList;
     }
     /**
      * 根据excel里面的内容读取客户信息
-     * @param is 输入流
+     * @param file
      * @param isExcel2003 excel是2003还是2007版本
      * @return
      * @throws IOException

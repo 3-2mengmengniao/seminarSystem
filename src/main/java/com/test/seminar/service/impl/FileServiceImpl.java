@@ -3,15 +3,11 @@ package com.test.seminar.service.impl;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.entity.Student;
 import com.test.seminar.service.FileService;
-import com.test.seminar.util.ReadExcel;
+import com.test.seminar.util.FileProcessor;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -24,7 +20,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public void uploadStudentExcel(MultipartFile file) {
         //创建处理EXCEL
-        ReadExcel readExcel=new ReadExcel();
+        FileProcessor readExcel=new FileProcessor();
         //解析excel，获取学生信息集合。
         List<Student> studentList = null;
         try {
