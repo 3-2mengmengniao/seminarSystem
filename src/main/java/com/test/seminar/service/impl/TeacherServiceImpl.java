@@ -2,7 +2,6 @@ package com.test.seminar.service.impl;
 
 import com.test.seminar.dao.TeacherDao;
 import com.test.seminar.entity.Teacher;
-import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.service.TeacherService;

@@ -34,47 +34,48 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = GET)
     public String login(HttpServletRequest request,Model model) {
+        System.out.println("msg");
         HttpSession session = request.getSession();
         session.invalidate();
             return "login";
     }
 
-    @RequestMapping(value = "/login", method = POST)
-    @ResponseBody
-    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model)  {
-        //获得session
-        HttpSession session = request.getSession();
-        //登陆验证
-        try {
-            Student student = loginService.studentLogin(account, password);
-            session.setAttribute("usertype", "student");
-            session.setAttribute("id", student.getId());
-            session.setAttribute("account", student.getAccount());
-            session.setAttribute("name", student.getStudentName());
-            model.addAttribute("account", student.getAccount());
-            model.addAttribute("name", student.getStudentName());
-        }
-       catch (UserNotFoundException e) {
-            try {
-                Teacher teacher = loginService.teacherLogin(account, password);
-                session.setAttribute("usertype", "teacher");
-                session.setAttribute("id", teacher.getId());
-                session.setAttribute("account", teacher.getAccount());
-                session.setAttribute("name", teacher.getTeacherName());
-                model.addAttribute("account", teacher.getAccount());
-                model.addAttribute("name", teacher.getTeacherName());
-            }
-            catch (UserNotFoundException e2){
-                String status = "404";
-                return status;
-            }
-           String status = "200";
-           return status;
-
-           }
-        String status = "204";
-        return status;
-    }
+//    @RequestMapping(value = "/login", method = POST)
+//    @ResponseBody
+//    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model)  {
+//        //获得session
+//        HttpSession session = request.getSession();
+//        //登陆验证
+//        try {
+//            Student student = loginService.studentLogin(account, password);
+//            session.setAttribute("usertype", "student");
+//            session.setAttribute("id", student.getId());
+//            session.setAttribute("account", student.getAccount());
+//            session.setAttribute("name", student.getStudentName());
+//            model.addAttribute("account", student.getAccount());
+//            model.addAttribute("name", student.getStudentName());
+//        }
+//       catch (UserNotFoundException e) {
+//            try {
+//                Teacher teacher = loginService.teacherLogin(account, password);
+//                session.setAttribute("usertype", "teacher");
+//                session.setAttribute("id", teacher.getId());
+//                session.setAttribute("account", teacher.getAccount());
+//                session.setAttribute("name", teacher.getTeacherName());
+//                model.addAttribute("account", teacher.getAccount());
+//                model.addAttribute("name", teacher.getTeacherName());
+//            }
+//            catch (UserNotFoundException e2){
+//                String status = "404";
+//                return status;
+//            }
+//           String status = "200";
+//           return status;
+//
+//           }
+//        String status = "204";
+//        return status;
+//    }
 
     @RequestMapping(value = "/vali_psw", method = GET)
     public String valiPsw(HttpServletRequest request,Model model) {

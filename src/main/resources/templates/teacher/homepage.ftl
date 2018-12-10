@@ -75,7 +75,7 @@
 </div>
 <!--
 <div class="distance5"></div>
-<a class="text-center welcome">${name},${account}</a>
+<a class="text-center welcome">${teacher.teacherName},${teacher.account}</a>
 <a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
 -->
 <script>
@@ -85,7 +85,7 @@
             time:2000
             ,offset: '120px'
         })
-        layer.msg('${name},${account}<br>讨论课管理系统欢迎您！');
+        layer.msg('${teacher.teacherName},${teacher.account}<br>讨论课管理系统欢迎您！');
     });
 </script>
 <div class="distance4"></div>

@@ -8,6 +8,8 @@ import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +52,14 @@ public class TeacherController {
     @Autowired
     FileService fileService;
 
-    @RequestMapping(value="/homepage")
-    public String home(Model model) {
+    @RequestMapping(value = "/homepage")
+    public String home(Model model,HttpSession session) {
+        User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Teacher teacher = teacherService.getTeacherByAccount(user.getUsername());
+        model.addAttribute(teacher);
+        session.setAttribute("id",teacher.getId());
+        session.setAttribute("usertype", "teacher");
+        session.setAttribute("account",teacher.getAccount());
         return "teacher/homepage";
     }
 

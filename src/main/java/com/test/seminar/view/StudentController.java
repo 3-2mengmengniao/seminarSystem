@@ -6,9 +6,11 @@ import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -40,7 +42,13 @@ public class StudentController {
     TeamService teamService;
 
     @RequestMapping(value = "/homepage")
-    public String home(Model model) {
+    public String home(Model model,HttpSession session) {
+        User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Student student = studentService.getStudentByAccount(user.getUsername());
+        model.addAttribute(student);
+        session.setAttribute("id",student.getId());
+        session.setAttribute("usertype", "student");
+        session.setAttribute("account",student.getAccount());
         return "student/homepage";
     }
 

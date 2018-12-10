@@ -27,20 +27,45 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-                if(data=="404") {
+        $.ajax(
+            {
+                url:$('#' + currentForm).attr('action'),
+                type:'post',
+                processData: false,
+                contentType: false,
+                data:formInput,
+                dataType: "json",
+                success:function(data,status){
+                   console.log(data);
+                   console.log(status);
+                    console.log("success");
+                    window.location.href="/student/homepage";
+                    },
+                error:function(data){
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
                     var onFocus = document.activeElement;
                     if (onFocus.id === "contactEmailField") {
                         $('#formSuccessMessageWrap').fadeOut(500);
                     }
+                    console.log("error");
                 }
-                else if(data=="200")
-                    window.location.href="/teacher/homepage";
-                else if(data=="204")
-                    window.location.href="/student/homepage";
-        });
+            }
+        );
+        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+        //         if(data=="404") {
+        //             $('#formSuccessMessageWrap').fadeIn(500);
+        //             formSubmitted = 'false';
+        //             var onFocus = document.activeElement;
+        //             if (onFocus.id === "contactEmailField") {
+        //                 $('#formSuccessMessageWrap').fadeOut(500);
+        //             }
+        //         }
+        //         else if(data=="200")
+        //             window.location.href="/teacher/homepage";
+        //         else if(data=="204")
+        //             window.location.href="/student/homepage";
+        // });
         //window.location.href='1vali_psw.html';
     };
     // submit form data function starts

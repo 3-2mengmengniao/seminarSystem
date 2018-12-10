@@ -76,7 +76,7 @@
             time:2000
             ,offset: '120px'
         })
-        layer.msg('${name},${account}<br>讨论课管理系统欢迎您！');
+        layer.msg('${student.studentName},${student.account}<br>讨论课管理系统欢迎您！');
     });
 </script>
 
