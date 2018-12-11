@@ -2,6 +2,8 @@ package com.test.seminar.service.impl;
 
 import com.test.seminar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,7 +14,10 @@ import com.test.seminar.entity.Teacher;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.entity.Student;
 
-@Service
+import java.util.ArrayList;
+import java.util.List;
+
+@Service(value = "userServiceImpl")
 public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private StudentDao studentDao;
@@ -23,16 +28,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         //根据用户名从数据库查询对应记录
+        System.out.println("service");
+        System.out.println(s);
         Student student = studentDao.getStudentByAccount(s);
         if (student == null) {
             Teacher teacher=teacherDao.getTeacherByAccount(s);
             if(teacher==null){
                 throw new UsernameNotFoundException("username is not exists");
             }
-            else
-                 return teacher;
+            else{
+                List<GrantedAuthority> list = new ArrayList<>();
+                list.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
+                org.springframework.security.core.userdetails.User auth_teacher = new org.springframework.security.core.userdetails.User(teacher.getAccount(),teacher.getPassword(),list);
+                return auth_teacher;
+            }
         }
-        else
-            return student;
+        else{
+            List<GrantedAuthority> list = new ArrayList<>();
+            list.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
+            org.springframework.security.core.userdetails.User auth_student = new org.springframework.security.core.userdetails.User(student.getAccount(),student.getPassword(),list);
+            return auth_student;
+        }
     }
 }

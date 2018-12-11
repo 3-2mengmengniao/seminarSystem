@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2018/11/26
  */
 
-public class Teacher implements UserDetails {
+public class Teacher{
     private BigInteger id;
     private String account;
     private String password;
@@ -23,43 +23,6 @@ public class Teacher implements UserDetails {
     private String teacherName;
     private String email;
     private int emailReceiveInterval;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> auths = new ArrayList<>();
-        auths.add(new SimpleGrantedAuthority("TEACHER"));
-        return auths;
-    }
-
-    @Override
-    public String getUsername() {
-        return account;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 
     public BigInteger getId() {
         return id;
@@ -71,6 +34,10 @@ public class Teacher implements UserDetails {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

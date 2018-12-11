@@ -32,9 +32,8 @@ public class HomeController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/", method = GET)
+    @RequestMapping(value = {"/","/login"}, method = GET)
     public String login(HttpServletRequest request,Model model) {
-        System.out.println("msg");
         HttpSession session = request.getSession();
         session.invalidate();
             return "login";

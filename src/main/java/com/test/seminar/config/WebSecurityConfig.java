@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -21,15 +23,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomFailureHandler customFailureHandler;
 
+    @Autowired
+    UserServiceImpl userServiceImpl;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/student/**").access("hasRole('STUDENT')")
                 .antMatchers("/teacher/**").access("hasRole('TEACHER')" )
                 .and()
-                .formLogin().loginPage("/").loginProcessingUrl("/login")
+                .formLogin().loginPage("/login").loginProcessingUrl("/login")
                 .successHandler(customSuccessHandler).failureHandler(customFailureHandler)
-                .usernameParameter("account").passwordParameter("password")
+                .usernameParameter("username").passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout()
@@ -41,9 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 http.csrf().disable();
     }
 
-    @Bean
-    public UserDetailsService systemUserService() {
-        return new UserServiceImpl();
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userServiceImpl).passwordEncoder(new BCryptPasswordEncoder());;
     }
+
+
 
 }

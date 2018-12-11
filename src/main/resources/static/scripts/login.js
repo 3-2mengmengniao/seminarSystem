@@ -27,21 +27,23 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
+        // var form = {};
+        // form.username = $("#contactNameField").val();
+        // form.pasaword = $("#contactEmailField").val();
         $.ajax(
             {
                 url:$('#' + currentForm).attr('action'),
                 type:'post',
-                processData: false,
-                contentType: false,
                 data:formInput,
-                dataType: "json",
                 success:function(data,status){
                    console.log(data);
                    console.log(status);
                     console.log("success");
                     window.location.href="/student/homepage";
                     },
-                error:function(data){
+                error:function(data,status){
+                    console.log(data);
+                    console.log(status);
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
                     var onFocus = document.activeElement;

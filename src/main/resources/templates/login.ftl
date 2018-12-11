@@ -60,13 +60,13 @@
             <p style="color:#c9302c;">账号或密码有误，请重新输入！</p>
         </div>
     </div>
-    <form action="/login" method="post" class="contactForm" id="contactForm">
+    <form action="/login" method="post" class="contactForm" id="contactForm" >
         <fieldset>
             <p>
             <div class="distance4"></div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">教工号/学号:</label>
-                <input style="-webkit-tap-highlight-color:rgba(255,0,0,0);" autocomplete=”off” type="text" name="contactNameField" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
+                <input style="-webkit-tap-highlight-color:rgba(255,0,0,0);" autocomplete=”off” type="text" name="username" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -76,7 +76,7 @@
             <div class="formFieldWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">密码: </label>
                 <img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">
-                <input autocomplete=”off” type="password" name="contactEmailField" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
+                <input autocomplete=”off” type="password" name="password" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
