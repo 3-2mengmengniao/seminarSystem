@@ -35,12 +35,13 @@ jQuery(document).ready(function($) {
                 url:$('#' + currentForm).attr('action'),
                 type:'post',
                 data:formInput,
-                success:function(data,status){
-                   console.log(data);
-                   console.log(status);
-                    console.log("success");
-                    window.location.href="/student/homepage";
-                    },
+                success:function(data,status,response){
+                    if(response.status=="200"){
+                        var info=response.responseText;
+                        var auth=info.substring(info.indexOf('_')+1,info.indexOf(']'));
+                        window.location.href="/"+auth.toLowerCase()+"/homepage";
+                    }
+                },
                 error:function(data,status){
                     console.log(data);
                     console.log(status);

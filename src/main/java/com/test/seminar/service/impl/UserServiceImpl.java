@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.test.seminar.dao.TeacherDao;
@@ -25,11 +27,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private  TeacherDao teacherDao;
 
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         //根据用户名从数据库查询对应记录
-        System.out.println("service");
-        System.out.println(s);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Student student = studentDao.getStudentByAccount(s);
         if (student == null) {
             Teacher teacher=teacherDao.getTeacherByAccount(s);
@@ -39,14 +41,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             else{
                 List<GrantedAuthority> list = new ArrayList<>();
                 list.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
-                org.springframework.security.core.userdetails.User auth_teacher = new org.springframework.security.core.userdetails.User(teacher.getAccount(),teacher.getPassword(),list);
+                String password=passwordEncoder.encode(teacher.getPassword());
+                org.springframework.security.core.userdetails.User auth_teacher = new org.springframework.security.core.userdetails.User(teacher.getAccount(),password,list);
                 return auth_teacher;
             }
         }
         else{
             List<GrantedAuthority> list = new ArrayList<>();
             list.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
-            org.springframework.security.core.userdetails.User auth_student = new org.springframework.security.core.userdetails.User(student.getAccount(),student.getPassword(),list);
+            String password=passwordEncoder.encode(student.getPassword());
+            org.springframework.security.core.userdetails.User auth_student = new org.springframework.security.core.userdetails.User(student.getAccount(),password,list);
             return auth_student;
         }
     }
