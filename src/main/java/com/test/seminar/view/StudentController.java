@@ -180,17 +180,9 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         boolean flag=teamList.contains(team);
-        if(flag)
-            return "student/course/seminar/selected_seminar_homepage" ;
-        else if(seminarControl.getSeminarStatus().equals("UNSTARTED"))
-            return "student/course/seminar/seminar_info_ready";
-        else if(seminarControl.getSeminarStatus().equals("INPROCESS"))
-            return "student/course/seminar/seminar_info_begin";
-
-        else if(seminarControl.getSeminarStatus().equals("FINISHED"))
-            return "student/course/seminar/seminar_info_complete";
-        else
-            return "error";
+        model.addAttribute("enrollment",flag);
+        model.addAttribute("status",seminarControl.getSeminarStatus());
+        return "student/course/seminar/info";
     }
 
     @RequestMapping(value="/course/seminar/enrollment")

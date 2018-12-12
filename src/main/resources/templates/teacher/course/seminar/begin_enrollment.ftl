@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -44,15 +46,15 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD讨论课</h1>
-            <a href="/teacher/seminar_info_end" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">#{course.courseName}</h1>
+            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation">
+    <div class="navigation" style="right:0%;margin-top:-5px;">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -64,7 +66,7 @@
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">讨论课</a>
+                <a href="/teacher/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -72,45 +74,42 @@
 </div>
 
 <div class="content">
-    <div class="container no-bottom text-list">
-        <div class="container no-bottom">
-            <table cellspacing='0' class="table">
-                <tr>
-                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><input type="text" class="btn1-default my-btn2" placeholder="成绩"  style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr class='even'>
-                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr>
-                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr class='even'>
-                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"> </td>
-                </tr>
-                <tr>
-                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr class='even'>
-                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-            </table>
-        </div>
-
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>第一组：</td>
+                <td style="color:#009688;">1-1业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第二组：</td>
+                <td style="color:#009688;">1-2业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第三组：</td>
+                <td style="color:#009688;">1-3业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第四组：</td>
+                <td style="color:#009688;">1-4业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第五组：</td>
+                <td style="color:#009688;">1-5业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第六组：</td>
+                <td style="color:#009688;">1-6业务流程.ppt</td>
+            </tr>
+            </tbody>
+        </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">批量下载</a></p>
-        <p class="center center-text"><a href="/teacher/report_score" class="button-return button-turqoise">确认</a></p>
-        <div class="distance"></div>
-        <!--
-        <div class="decoration"></div>
-        <div class="footer">
-            <div class="clear"></div>
-            <p class="copyright">
-                Copyright @2018 developed by Group 3-2.<br>
-                All Rights Reserved
-            </p>
-        </div>
-        -->
     </div>
 </div>
 
