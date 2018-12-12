@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
                     if(response.status=="200"){
                         var info=response.responseText;
                         var auth=info.substring(info.indexOf('_')+1,info.indexOf(']'));
-                        window.location.href="/"+auth.toLowerCase()+"/homepage";
+                        window.location.href="/"+auth.toLowerCase()+"/index";
                     }
                 },
                 error:function(data,status){
@@ -67,7 +67,7 @@ jQuery(document).ready(function($) {
         //         else if(data=="200")
         //             window.location.href="/teacher/homepage";
         //         else if(data=="204")
-        //             window.location.href="/student/homepage";
+        //             window.location.href="/student/index";
         // });
         //window.location.href='1vali_psw.html';
     };

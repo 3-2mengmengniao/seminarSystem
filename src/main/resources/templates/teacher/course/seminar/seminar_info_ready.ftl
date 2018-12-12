@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-
-    <title>讨论课管理系统</title>
+    <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
@@ -15,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -42,12 +42,12 @@
     </div>
 </div>
 
-
 <div class="top-deco"></div>
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">讨论课</h1>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -73,35 +73,57 @@
     </div>
 </div>
 
-<#list courseList as course>
-<div class="distance3"></div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course/seminarList?courseId=${course.id}'>${course.courseName}</a>
-        </div>
-    </div>
-<div class="distance3">
-    <#--<div class="container">-->
-        <#--<div class="toggle-1">-->
-            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>J2EE</a>-->
-        <#--</div>-->
-    <#--</div>-->
-</#list>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/seminars" class="button-return button-red">返回正在进行的讨论课</a></p>
-
-    <!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
+<div class="content">
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <table class="layui-table" lay-skin="nob">
+            <colgroup>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td>轮次</td>
+                <td>第${round.roundSerial}轮</td>
+            </tr>
+            <tr>
+                <td>主题</td>
+                <td>${seminarInfo.seminarName}</td>
+            </tr>
+            <tr>
+                <td>课次序号</td>
+                <td>第${seminarInfo.seminarSerial}次</td>
+            </tr>
+            <tr>
+                <td>要求</td>
+                <td>${seminarInfo.introduction}</td>
+            </tr>
+            <tr>
+                <td>课程情况</td>
+                <td>未开始<a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+            </tr>
+            <tr>
+                <td>报名开始时间</td>
+                <td>${seminarInfo.registrationStartTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+            </tr>
+            <tr>
+                <td>报名截止时间</td>
+                <td>${seminarInfo.registrationEndTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="distance4"></div>
+        <div class="distance"></div>
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="开始讨论课" data-formId="contactForm"/>
+        </p>
+        <div class="distance4"></div>
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="修改讨论课信息" data-formId="contactForm"/>
         </p>
     </div>
 </div>
-<div class="bottom-deco"></div>
--->
+
+<!--<div class="bottom-deco"></div>-->
+
+
 </body>
 </html>

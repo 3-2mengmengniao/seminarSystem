@@ -47,11 +47,8 @@
 <div class="content">
     <div class="navigation-back">
         <h1 class="navigation-back">修改密码</h1>
-        <#if usertype =="teacher">
-        <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
-        <#else>
         <a href="/student/setting" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
-        </#if>
+
 </div>
     <div class="decoration"></div>
 </div>
@@ -65,7 +62,7 @@
                         <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
                     </div>
                 </div>
-				<form action="/vali_psw" method="post" class="contactForm" id="contactForm">
+				<form action="/student/modifyPassword" method="post" class="contactForm" id="contactForm">
                     <fieldset>
                     <p>
                         <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>

@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-
-    <title>讨论课管理系统</title>
+    <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
@@ -15,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
 
 
 </head>
@@ -42,19 +42,19 @@
     </div>
 </div>
 
-
 <div class="top-deco"></div>
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">讨论课</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
+            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation" style="right:0%;margin-top:-5px;">
+    <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -73,24 +73,48 @@
     </div>
 </div>
 
-<#list courseList as course>
-<div class="distance3"></div>
-    <div class="container">
-        <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course/seminarList?courseId=${course.id}'>${course.courseName}</a>
+<div class="content">
+	<#list seminarList as round>
+    <div class="distance3"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">第${round?index+1}轮</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-collapse" lay-accordion="">
+                    <#list round as seminar>
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">${seminar?index+1}&emsp;${seminar.seminarName}</h2>
+                            <#list courseClassList as class>
+                            <div class="layui-colla-content center-text">
+                                <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminar.id}&classId=${class.id}">${class.grade?c}-(${class.classSerial})</a>
+                            </div>
+                            </#list>
+
+                        </div>
+                    </#list>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-<div class="distance3">
-    <#--<div class="container">-->
-        <#--<div class="toggle-1">-->
-            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar'>J2EE</a>-->
-        <#--</div>-->
-    <#--</div>-->
-</#list>
-    <div class="distance2"></div>
-    <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/seminars" class="button-return button-red">返回正在进行的讨论课</a></p>
-
+    <div class="distance3"></div>
+    </#list>
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建轮次</h2>
+        </div>
+    </div>
+    <div class="distance3"></div>
+    <div class="distance4"></div>
+    <div class="center-navigation">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建讨论课</h2>
+        </div>
+    </div>
+    <div class="distance2"> </div>
+    <div class="distance"> </div>
     <!--
     <div class="decoration"></div>
     <div class="footer">
@@ -100,8 +124,21 @@
             All Rights Reserved
         </p>
     </div>
+    -->
 </div>
-<div class="bottom-deco"></div>
--->
+
+
+<!--<div class="bottom-deco"></div>-->
+<script>
+    layui.use(['element', 'layer'], function(){
+        var element = layui.element();
+        var layer = layui.layer;
+
+        //监听折叠
+        element.on('collapse(test)', function(data){
+            layer.msg('展开状态：'+ data.show);
+        });
+    });
+</script>
 </body>
 </html>

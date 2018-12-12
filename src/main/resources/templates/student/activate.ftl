@@ -167,7 +167,7 @@
                 alert("确认密码与新密码不一致");
                 return false;
             }
-            window.location.href='/teacher/homepage';
+            window.location.href='/teacher/index';
         }
 
     </script>
