@@ -46,27 +46,23 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">#{course.courseName}</h1>
-            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}</h1>
+            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation" style="right:0%;margin-top:-5px;">
+    <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">待办</a>
+                <a href="/student/index" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/student/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>

@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">OOAD</h1>
+            <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -76,37 +76,35 @@
 <div class="content">
     <div class="distance4"></div>
     <div class="center-navigation">
-        <h3 class="margin3">业务流程分析</h3>
-        <p style="color: #932d23;">第二组展示</p>
         <table class="layui-table" lay-skin="nob">
             <colgroup>
                 <col width="100">
-                <col width="170">
+                <col width="200">
             </colgroup>
             <tbody>
             <tr>
                 <td>第一组：</td>
-                <td>1-1业务流程.ppt</td>
+                <td style="color:#009688;text-align: center;">1-1</td>
             </tr>
             <tr>
                 <td>第二组：</td>
-                <td>1-2 未提交</td>
+                <td style="color:#009688;text-align: center;">1-2</td>
             </tr>
             <tr>
                 <td>第三组：</td>
-                <td>未报名</td>
+                <td style="color:#009688;text-align: center;">1-3</td>
             </tr>
             <tr>
                 <td>第四组：</td>
-                <td>未报名</td>
+                <td style="color:#009688;text-align: center;">1-4</td>
             </tr>
             <tr>
                 <td>第五组：</td>
-                <td>1-5业务流程.ppt</td>
+                <td style="color:#009688;text-align: center;">1-5</td>
             </tr>
             <tr>
                 <td>第六组：</td>
-                <td>1-6业务流程.ppt</td>
+                <td style="color:#009688;text-align: center;">1-6</td>
             </tr>
             </tbody>
         </table>
@@ -115,76 +113,12 @@
     </div>
 </div>
 
+<div class="distance4"></div>
+<div class="distance"></div>
+<p class="center center-text"><a href="#" class="button-return button-turqoise">Q&A</a></p>
+<div class="distance"></div>
 <!--<div class="bottom-deco"></div>-->
 
 
 </body>
-<script>
-    layui.use('layer', function(){ //独立版的layer无需执行这一句
-        var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-
-        //触发事件
-        var active = {
-            setTop: function(){
-                var that = this;
-                //多窗口模式，层叠置顶
-                layer.open({
-                    type: 2 //此处以iframe举例
-                    ,title: '当你选择该窗体时，即会在最顶端'
-                    ,area: ['390px', '260px']
-                    ,shade: 0
-                    ,maxmin: true
-                    ,offset: [ //为了演示，随机坐标
-                        Math.random()*($(window).height()-300)
-                        ,Math.random()*($(window).width()-390)
-                    ]
-                    ,content: '//layer.layui.com/test/settop.html'
-                    ,btn: ['继续弹出', '全部关闭'] //只是为了演示
-                    ,yes: function(){
-                        $(that).click();
-                    }
-                    ,btn2: function(){
-                        layer.closeAll();
-                    }
-
-                    ,zIndex: layer.zIndex //重点1
-                    ,success: function(layero){
-                        layer.setTop(layero); //重点2
-                    }
-                });
-            }
-            ,confirmTrans: function(){
-                //配置一个透明的询问框
-                layer.msg('是否确定报名该次讨论课？<br><br>', {
-                    time:500000
-                    ,btn: ['确定', '返回']
-                });
-            }
-            ,offset: function(othis){
-                var type = othis.data('type')
-                        ,text = othis.text();
-
-                layer.open({
-                    type: 1
-                    ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                    ,id: 'layerDemo'+type //防止重复弹出
-                    ,content: '<div style="padding: 20px 100px;">'+ text +'</div>'
-                    ,btn: '关闭全部'
-                    ,btnAlign: 'c' //按钮居中
-                    ,shade: 0 //不显示遮罩
-                    ,yes: function(){
-                        layer.closeAll();
-                    }
-                });
-            }
-        };
-
-        $('#layerDemo .layui-btn').on('click', function(){
-            var othis = $(this), method = othis.data('method');
-            active[method] ? active[method].call(this, othis) : '';
-        });
-
-    });
-</script>
-
 </html>

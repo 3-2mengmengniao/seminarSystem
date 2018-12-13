@@ -69,10 +69,16 @@ jQuery(document).ready(function($) {
                 return false;
             };
 
-            if($('#emailMessageTextarea').val()==null||$('#emailMessageTextarea').val()==''){
-                $('#emailError').fadeIn(300);
-                count=count-1;
-                return false;
+            if($(this).hasClass('requiredEmailField')){
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var tempField = '#' + $(this).attr('id');
+                if(!emailReg.test($(tempField).val())) {
+                    $(tempField).focus();
+                    $(tempField).addClass('fieldHasError');
+                    $(tempField + 'Error2').fadeIn(300);
+                    count=count-1;
+                    return false;
+                };
             };
 
 

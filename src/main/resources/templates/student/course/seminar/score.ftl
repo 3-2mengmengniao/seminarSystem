@@ -46,15 +46,15 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">#{course.courseName}</h1>
-            <a href="/student/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation">
+    <div class="navigation" style="right:0%;margin-top:-5px;">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -79,28 +79,40 @@
             </colgroup>
             <tbody>
             <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;">1-1业务流程.ppt</td>
+                <td>轮次</td>
+                <td>第${round.roundSerial}轮</td>
             </tr>
             <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;">1-2业务流程.ppt</td>
+                <td>主题</td>
+                <td>${seminarInfo.seminarName}</td>
             </tr>
             <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;">1-3业务流程.ppt</td>
+                <td>课次序号</td>
+                <td>第${seminarInfo.seminarSerial}次</td>
             </tr>
             <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;">1-4业务流程.ppt</td>
+                <td>要求</td>
+                <td>${seminarInfo.introduction}</td>
             </tr>
             <tr>
-                <td>第五组：</td>
-                <td style="color:#009688;">1-5业务流程.ppt</td>
+                <td>报名情况</td>
+                <td>2016-（1）第3组</td>
             </tr>
             <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;">1-6业务流程.ppt</td>
+                <td> PPT</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 书面报告</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 提问</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 总成绩</td>
+                <td>5.0</td>
             </tr>
             </tbody>
         </table>
