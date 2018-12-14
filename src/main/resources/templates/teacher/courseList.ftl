@@ -104,7 +104,7 @@
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-set-fill layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein"  href="#">共享设置</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/teacher/course/shareSettings">共享设置</a>
                 </div>
             </div>
         </div>
