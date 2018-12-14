@@ -20,6 +20,7 @@ h1{
 
 body{
 	/*background-image:url(../images/misc/body-bg.png);*/
+	background-color:#fafafa;
 	background-size:100px 100px;
 	background-repeat:repeat;
 }

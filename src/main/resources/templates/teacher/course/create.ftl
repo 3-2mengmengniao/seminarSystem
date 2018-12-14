@@ -18,7 +18,7 @@
     <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -62,7 +62,7 @@
         <form class="layui-form contactForm" action="/teacher/course" method="post" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#c9302c;">该课程已被创建！</p>
+                    <p style="color:#d44950;">该课程已被创建！</p>
                 </div>
             </div>
             <div class="formFieldWrap">

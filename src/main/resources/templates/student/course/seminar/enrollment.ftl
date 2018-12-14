@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
