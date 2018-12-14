@@ -57,6 +57,8 @@ public class TeacherController {
         session.setAttribute("id",teacher.getId());
         session.setAttribute("usertype", "teacher");
         session.setAttribute("account",teacher.getAccount());
+        if(teacher.getActive()==0)
+            return "teacher/activate";
         return "teacher/index";
     }
 
@@ -115,6 +117,19 @@ public class TeacherController {
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
         teacher.setPassword(newPsw);
+        teacherService.updateTeacherByTeacherId(teacher);
+        String status="200";
+        return status;
+    }
+
+    @RequestMapping(value = "/activate", method = POST)
+    @ResponseBody
+    public String activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+        teacher.setPassword(newPsw);
+        teacher.setActive(1);
         teacherService.updateTeacherByTeacherId(teacher);
         String status="200";
         return status;
@@ -246,17 +261,35 @@ public class TeacherController {
             model.addAttribute("round",round);
             Course course=courseService.getCourseByCourseId(courseId);
             model.addAttribute("course",course);
-            if(seminarControl.getSeminarStatus().equals("UNSTARTED")) {
-                return "teacher/course/seminar/seminar_info_ready";
-            }
-            else if(seminarControl.getSeminarStatus().equals("INPROCESS")) {
-                return "teacher/course/seminar/seminar_info_begin";
-            }
-            else if(seminarControl.getSeminarStatus().equals("FINISHED")) {
-                return "teacher/course/seminar/seminar_info_complete";
-            }
-            else
-            {return "error";}
+            model.addAttribute("classId",classId);
+        model.addAttribute("status",seminarControl.getSeminarStatus());
+        return "teacher/course/seminar/info";
+    }
+
+    @RequestMapping(value="/course/seminar/enrollment")
+    public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
+        model.addAttribute("status",seminarControl.getSeminarStatus());
+        return "teacher/course/seminar/enrollment";
+    }
+
+    @RequestMapping(value="/course/seminar/report")
+    public String report(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarId",seminarId);
+        return "teacher/course/seminar/report";
     }
 
     @RequestMapping(value="/report_download")
@@ -269,7 +302,12 @@ public class TeacherController {
         return "teacher/report_score";
     }
 
-    @RequestMapping(value = "/activate")
+    @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "teacher/activate"; }
+
+    @RequestMapping(value="course/shareSettings")
+    public String shareSettings(Model model) {
+        return "teacher/course/shareSettings";
+    }
 
 }

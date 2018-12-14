@@ -46,8 +46,7 @@
 
 <div class="content">
     <div class="navigation-back">
-        <h1 class="navigation-back">修改密码</h1>
-        <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+        <h1 class="navigation-back">激活账户</h1>
     </div>
     <div class="decoration"></div>
 </div>
@@ -61,7 +60,7 @@
             <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="/vali_psw" method="post" class="contactForm" id="contactForm">
+    <form action="/student/activate" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <p>
             <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
@@ -71,7 +70,7 @@
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写新密码!</p>
+                    <p class="uppercase">请填写新密码!</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -80,21 +79,21 @@
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写确认密码!</p>
+                    <p class="uppercase">请填写确认密码!</p>
                 </div>
             </div>
             <div class="formValidationError" id="differentError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">新密码与确认密码不一致!</p>
+                    <p class="uppercase">新密码与确认密码不一致!</p>
                 </div>
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactMessageTextarea" for="email">邮箱： <span>(required)</span></label>
-                <input name="validation" class="contactField requiredField" id="emailMessageTextarea" placeholder="请输入邮箱"/>
+                <input name="email" class="contactField requiredEmailField requiredField" id="emailMessageTextarea" placeholder="请输入邮箱"/>
             </div>
-            <div class="formValidationError" id="emailError">
+            <div class="formValidationError" id="emailMessageTextareaError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请填写邮箱!</p>
+                    <p class="uppercase">请填写邮箱!</p>
                 </div>
             </div>
             <div class="formTextareaWrap">
@@ -102,14 +101,14 @@
                 <button id="vali_button">获取验证码</button>
                 <input name="validation" class="contactField requiredField" id="contactMessageTextarea" placeholder="请输入验证码"/>
             </div>
-            <div class="formValidationError" id="differentError">
+            <div class="formValidationError" id="contactMessageTextareaError">
                 <div class="static-notification-red tap-dismiss-notification">
-                    <p class="center-text uppercase">请输入验证码！</p>
+                    <p class="uppercase">请输入验证码！</p>
                 </div>
             </div>
             <div class="distance2"></div>
             <div class="formSubmitButtonErrorsWrap">
-                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="设置密码" data-formId="contactForm"/>
+                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="激活账号" data-formId="contactForm"/>
                 </p>
             </div>
             </p>
@@ -146,30 +145,5 @@
 
         <div class="bottom-deco"></div>
     -->
-    <script>
-        function validate()
-        {
-            var psw1 = $("#psw1").val();
-            var psw2 = $("#psw2").val();
-            if (psw1 == "" || name == null)
-            {
-
-                alert("请输入新密码");
-                return false;
-            }
-            if (psw2 == null || psw2 == "")
-            {
-                alert("请输入确认密码");
-                return false;
-            }
-            if (psw2 != psw1)
-            {
-                alert("确认密码与新密码不一致");
-                return false;
-            }
-            window.location.href='/teacher/index';
-        }
-
-    </script>
 </body>
 </html>

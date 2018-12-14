@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}</h1>
+            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,11 +58,15 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/index" class="home-icon">个人页</a>
+                <a href="/teacher/index" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/student/seminars" class="home-icon">讨论课</a>
+                <a href="/teacher/index" class="home-icon">个人页</a>
+                <em class="active-menu"></em>
+            </div>
+            <div class="navigation-item">
+                <a href="/teacher/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -79,24 +83,28 @@
             </colgroup>
             <tbody>
             <tr>
-                <td>轮次</td>
-                <td>第${round.roundSerial}轮</td>
+                <td>第一组：</td>
+                <td style="color:#009688;">1-1业务流程.ppt</td>
             </tr>
             <tr>
-                <td>主题</td>
-                <td>${seminarInfo.seminarName}</td>
+                <td>第二组：</td>
+                <td style="color:#009688;">1-2业务流程.ppt</td>
             </tr>
             <tr>
-                <td>课次序号</td>
-                <td>第${seminarInfo.seminarSerial}次</td>
+                <td>第三组：</td>
+                <td style="color:#009688;">1-3业务流程.ppt</td>
             </tr>
             <tr>
-                <td>要求</td>
-                <td>${seminarInfo.introduction}</td>
+                <td>第四组：</td>
+                <td style="color:#009688;">1-4业务流程.ppt</td>
             </tr>
             <tr>
-                <td>课程情况</td>
-                <td>已完成 <a href="/student/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+                <td>第五组：</td>
+                <td style="color:#009688;">1-5业务流程.ppt</td>
+            </tr>
+            <tr>
+                <td>第六组：</td>
+                <td style="color:#009688;">1-6业务流程.ppt</td>
             </tr>
             </tbody>
         </table>

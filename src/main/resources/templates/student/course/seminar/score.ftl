@@ -47,7 +47,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,15 +58,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">待办</a>
+                <a href="/student/index" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/student/seminars" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -99,18 +95,29 @@
                 <td>${seminarInfo.introduction}</td>
             </tr>
             <tr>
-                <td>课程情况</td>
-                <td>已完成 <a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+                <td>报名情况</td>
+                <td>2016-（1）第3组</td>
+            </tr>
+            <tr>
+                <td> PPT</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 书面报告</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 提问</td>
+                <td>5.0</td>
+            </tr>
+            <tr>
+                <td> 总成绩</td>
+                <td>5.0</td>
             </tr>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="查看报告" data-formId="contactForm"/>
-        </p>
-        <div class="distance4"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="查看成绩" data-formId="contactForm"/>
-        </p>
     </div>
 </div>
 

@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/vali_psw.js"></script>
+    <script type="text/javascript" src="/scripts/activate.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -46,8 +46,7 @@
 
 <div class="content">
     <div class="navigation-back">
-        <h1 class="navigation-back">修改密码</h1>
-        <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+        <h1 class="navigation-back">激活账号</h1>
     </div>
     <div class="decoration"></div>
 </div>
@@ -61,7 +60,7 @@
             <p>Your message has been successfuly sent. Please allow up to 48 hours for a reply! Thank you!</p>
         </div>
     </div>
-    <form action="/vali_psw" method="post" class="contactForm" id="contactForm">
+    <form action="/teacher/activate" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <p>
             <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
@@ -100,7 +99,7 @@
             </div>
             <div class="distance2"></div>
             <div class="formSubmitButtonErrorsWrap">
-                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="设置密码" data-formId="contactForm"/>
+                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="激活账号" data-formId="contactForm"/>
                 </p>
             </div>
             </p>
@@ -137,30 +136,6 @@
 
         <div class="bottom-deco"></div>
     -->
-    <script>
-        function validate()
-        {
-            var psw1 = $("#psw1").val();
-            var psw2 = $("#psw2").val();
-            if (psw1 == "" || name == null)
-            {
 
-                alert("请输入新密码");
-                return false;
-            }
-            if (psw2 == null || psw2 == "")
-            {
-                alert("请输入确认密码");
-                return false;
-            }
-            if (psw2 != psw1)
-            {
-                alert("确认密码与新密码不一致");
-                return false;
-            }
-            window.location.href='/teacher/index';
-        }
-
-    </script>
 </body>
 </html>
