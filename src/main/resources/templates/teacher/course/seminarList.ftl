@@ -81,6 +81,7 @@
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">第${round?index+1}轮</h2>
                 <div class="layui-colla-content">
+                    <a href="/teacher/course/roundSetting?courseId=${course.id}&roundId=${roundList[round?index].id}" style="line-height: 40px;font-size: 18px;padding: 0 15px 0 65px!important;">该轮轮次设置</a>
                     <div class="layui-collapse" lay-accordion="">
                     <#list round as seminar>
                         <div class="layui-colla-item">
@@ -103,7 +104,7 @@
     <div class="distance4"></div>
     <div class="center-navigation">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建讨论课</h2>
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/course/seminar/create?courseId=${course.id}'" >新建讨论课</h2>
         </div>
     </div>
     <div class="distance2"> </div>

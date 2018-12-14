@@ -93,7 +93,7 @@
             url: "/teacher/course/${course.id}",
             success: function(data){
                 if(data==="200")
-                    window.location.href="/teacher/courses";
+                    window.location.href="/teacher/courseList";
                 else if(data==="404")
                     alert("课程不存在");
             }

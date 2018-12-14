@@ -163,6 +163,12 @@ public class TeacherController {
     @RequestMapping(value="/course/create",method = GET)
     public String createCourse(Model model) { return "teacher/course/create"; }
 
+    @RequestMapping(value="/course/seminar/create",method = GET)
+    public String createSeminar(BigInteger courseId,Model model) {
+        model.addAttribute("courseId",courseId);
+        return "teacher/course/seminar/create";
+    }
+
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
     public String createCoursePost(HttpServletRequest request,Model model,Course course) {
@@ -225,6 +231,19 @@ public class TeacherController {
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
         return "teacher/course/seminarList";
+    }
+
+    @RequestMapping(value="/course/roundSetting")
+    public String roundSetting(BigInteger courseId,BigInteger roundId,Model model) {
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        List<SeminarInfo> seminarList = seminarService.getSeminarInfoByRoundId(roundId);
+        model.addAttribute("seminarList",seminarList);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList",courseClasses);
+        return "teacher/course/roundSetting";
     }
 
     @RequestMapping(value="/course/teamList")
@@ -290,6 +309,17 @@ public class TeacherController {
         model.addAttribute("classId",classId);
         model.addAttribute("seminarId",seminarId);
         return "teacher/course/seminar/report";
+    }
+
+    @RequestMapping(value="/course/seminar/score")
+    public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
+        model.addAttribute("seminarId",seminarId);
+        return "teacher/course/seminar/score";
     }
 
     @RequestMapping(value="/report_download")

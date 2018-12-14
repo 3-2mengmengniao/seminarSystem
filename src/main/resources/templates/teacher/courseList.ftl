@@ -117,7 +117,7 @@
     <div class="distance5"></div>
     <div class="center-navigation">
     <div class="layui-colla-item">
-        <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建课程</h2>
+        <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/course/create'" >新建课程</h2>
     </div>
     </div>
     <div class="distance2"></div>
