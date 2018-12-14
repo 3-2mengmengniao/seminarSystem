@@ -79,16 +79,16 @@
 <a class="text-center welcome">讨论课管理系统欢迎您！</a><br>
 -->
 <script>
-    layui.use('layer', function(){
-        var layer = layui.layer;
-        layer.config({
-            time:2000
-            ,offset: '120px'
-        })
-        layer.msg('${teacher.teacherName},${teacher.account}<br>讨论课管理系统欢迎您！');
-    });
+    <#--layui.use('layer', function(){-->
+        <#--var layer = layui.layer;-->
+        <#--layer.config({-->
+            <#--time:2000-->
+            <#--,offset: '120px'-->
+        <#--})-->
+        <#--layer.msg('${teacher.teacherName},${teacher.account}<br>讨论课管理系统欢迎您！');-->
+    <#--});-->
 </script>
-<div class="distance4"></div>
+<p class="layui-elem-quote" style="margin-left:5%;margin-right:5%;background-color: #e9ecef;text-align:center;font-size:18px;">${teacher.teacherName}<br>${teacher.account}</p>
 <div class="landing-navigation">
     <div class="landing-navigation-tablet-top-adjustment"></div>
     <a href="/teacher/courseList">

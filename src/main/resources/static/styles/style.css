@@ -19,8 +19,8 @@ h1{
 :-ms-input-placeholder { /* Internet Explorer 10-11 */   color:   #d4d4d4; }
 
 body{
-	/*background-image:url(../images/misc/body-bg.png);*/
-	background-color:#fafafa;
+	background-image:url(../images/misc/body-bg.png);
+	/*background-color:#fafafa;*/
 	background-size:100px 100px;
 	background-repeat:repeat;
 }
@@ -81,14 +81,15 @@ body{
 }
 
 .landing-navigation a em{
-	color:#646569;
-	font-family:'Dosis', sans-serif;
-	font-style:normal;
-	text-align:center;
-	display:block;
-	font-size:14px;
-	font-weight:400;
-	padding-top:10px;
+	color: #646569;
+	font-family: 'Dosis', sans-serif;
+	font-style: normal;
+	text-align: center;
+	display: block;
+	font-size: 18px;
+	margin-left: -8px;
+	font-weight: 400;
+	padding-top: 10px;
 }
 
 .nav-icon{
