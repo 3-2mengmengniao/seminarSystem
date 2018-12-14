@@ -103,13 +103,6 @@
     <div class="distance4"></div>
     <div class="center-navigation">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建轮次</h2>
-        </div>
-    </div>
-    <div class="distance3"></div>
-    <div class="distance4"></div>
-    <div class="center-navigation">
-        <div class="layui-colla-item">
             <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建讨论课</h2>
         </div>
     </div>

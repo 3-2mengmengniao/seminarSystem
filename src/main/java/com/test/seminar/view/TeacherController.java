@@ -305,4 +305,9 @@ public class TeacherController {
     @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "teacher/activate"; }
 
+    @RequestMapping(value="course/shareSettings")
+    public String shareSettings(Model model) {
+        return "teacher/course/shareSettings";
+    }
+
 }

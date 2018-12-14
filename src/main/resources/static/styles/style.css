@@ -19,7 +19,7 @@ h1{
 :-ms-input-placeholder { /* Internet Explorer 10-11 */   color:   #d4d4d4; }
 
 body{
-	background-image:url(../images/misc/body-bg.png);
+	/*background-image:url(../images/misc/body-bg.png);*/
 	background-size:100px 100px;
 	background-repeat:repeat;
 }
