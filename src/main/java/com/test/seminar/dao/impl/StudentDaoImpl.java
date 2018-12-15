@@ -1,7 +1,9 @@
 package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.StudentDao;
+import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Student;
+import com.test.seminar.mapper.CourseClassMapper;
 import com.test.seminar.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ import java.util.List;
 public class StudentDaoImpl implements StudentDao {
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    CourseClassMapper courseClassMapper;
 
     @Override
     public Student getStudentByStudentId(BigInteger studentId) {
@@ -61,7 +65,12 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId) {
-        studentMapper.insertCourseClassStudentRelation(courseClassId,studentId);
+    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId,BigInteger courseId) {
+        studentMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        return studentMapper.getAllStudent();
     }
 }

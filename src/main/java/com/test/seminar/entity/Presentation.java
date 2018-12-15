@@ -11,13 +11,12 @@ public class Presentation {
     private BigInteger id;
     private BigInteger seminarControlId;
     private BigInteger teamId;
-    private int presentationScore;
-    private int reportScore;
+    private int teamOrder;
     private int present;
-    private int submitReport;
-    private int submitPPT;
-    private BigInteger reportId;
-    private BigInteger pptId;
+    private String reportName;
+    private String reportUrl;
+    private String pptName;
+    private String pptUrl;
 
     public BigInteger getId() {return id; }
 
@@ -29,31 +28,47 @@ public class Presentation {
 
     public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
 
-    public int getPresentationScore() {return presentationScore; }
-
-    public void setPresentationScore(int presentationScore) {this.presentationScore = presentationScore; }
-
-    public int getReportScore() {return reportScore; }
-
-    public void setReportScore(int reportScore) {this.reportScore = reportScore; }
-
     public int getPresent() {return present; }
 
     public void setPresent(int present) {this.present = present; }
 
-    public int getSubmitReport() {return submitReport; }
+    public int getTeamOrder() {
+        return teamOrder;
+    }
 
-    public void setSubmitReport(int submitReport) {this.submitReport = submitReport; }
+    public void setTeamOrder(int teamOrder) {
+        this.teamOrder = teamOrder;
+    }
 
-    public int getSubmitPPT() {return submitPPT; }
+    public String getReportName() {
+        return reportName;
+    }
 
-    public void setSubmitPPT(int submitPPT) {this.submitPPT = submitPPT; }
+    public void setReportName(String reportName) {
+        this.reportName = reportName;
+    }
 
-    public BigInteger getReportId() {return reportId; }
+    public String getReportUrl() {
+        return reportUrl;
+    }
 
-    public void setReportId(BigInteger reportId) { this.reportId = reportId; }
+    public void setReportUrl(String reportUrl) {
+        this.reportUrl = reportUrl;
+    }
 
-    public BigInteger getPptId() {return pptId; }
+    public String getPptName() {
+        return pptName;
+    }
 
-    public void setPptId(BigInteger pptId) {this.pptId = pptId; }
+    public void setPptName(String pptName) {
+        this.pptName = pptName;
+    }
+
+    public String getPptUrl() {
+        return pptUrl;
+    }
+
+    public void setPptUrl(String pptUrl) {
+        this.pptUrl = pptUrl;
+    }
 }

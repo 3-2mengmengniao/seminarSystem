@@ -1,51 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.test.seminar.mapper.CourseMapper">
-
     <resultMap id="courseResultMap" type="com.test.seminar.entity.Course">
         <id property="id" column="id"/>
         <result property="teacherId" column="teacher_id"/>
         <result property="introduction" column="introduction"/>
-        <result property="presentationProportion" column="presentation_proportion"/>
-        <result property="questionProportion" column="question_proportion"/>
-        <result property="reportProportion" column="report_proportion"/>
+        <result property="presentationPercentage" column="presentation_percentage"/>
+        <result property="questionPercentage" column="question_percentage"/>
+        <result property="reportPercentage" column="report_percentage"/>
         <result property="courseName" column="course_name"/>
-        <result property="minTeamMember" column="min_team_member"/>
-        <result property="maxTeamMember" column="max_team_member"/>
         <result property="teamStartTime" column="team_start_time"/>
         <result property="teamEndTime" column="team_end_time"/>
-        <result property="classAmount" column="class_amount"/>
-        <result property="roundAmount" column="round_amount"/>
-</resultMap>
+        <result property="teamMainCourseId" column="team_main_course_id"/>
+        <result property="teamMainCourseId" column="seminar_main_course_id"/>
+    </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
+        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
         from course
         where id=#{courseId}
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_proportion,question_proportion,report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
+        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_proportion,question_proportion,report_proportion,course.course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount
-        FROM course,course_class,class_student_table
-        WHERE student_id=#{studentId} AND class_student_table.class_id=course_class.id AND course_class.course_id=course.id;
+        SELECT course.id,teacher_id,course.introduction,presentation_percentage,question_percentage,report_percentage,course.course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
+        FROM course,klass,klass_student
+        WHERE student_id=#{studentId} AND klass_student.klass_id=klass.id AND klass.course_id=course.id;
     </select>
 
-    <insert id="insertCourse" >
-        insert into course(teacher_id,introduction,presentation_proportion,question_proportion,
-        report_proportion,course_name,min_team_member,max_team_member,team_start_time,team_end_time,class_amount,round_amount)
+    <insert id="insertCourse">
+        insert into course(teacher_id,introduction,presentation_percentage,question_percentage,
+        report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id)
         values(#{course.teacherId},#{course.introduction},
-        #{course.presentationProportion},#{course.questionProportion},#{course.reportProportion},
-        #{course.courseName},#{course.minTeamMember},#{course.maxTeamMember},
-        #{course.teamStartTime},#{course.teamEndTime},#{course.classAmount},#{course.roundAmount})
+        #{course.presentationPercentage},#{course.questionPercentage},#{course.reportPercentage},
+        #{course.courseName},#{course.teamStartTime},#{course.teamEndTime},#{course.teamMainCourseId},#{course.seminarMainCourseId})
     </insert>
 
-    <update id="updateCourseByCourseId" >
+    <update id="updateCourseByCourseId">
         update course
         <set>
             <if test="course.teacherId!=null">
@@ -54,35 +50,29 @@
             <if test="course.introduction!=null">
                 introduction=#{course.introduction},
             </if>
-            <if test="course.presentationProportion!=null">
-                presentation_proportion=#{course.presentationProportion},
+            <if test="course.presentationPercentage!=null">
+                presentation_percentage=#{course.presentationPercentage},
             </if>
-            <if test="course.question_proportion!=null">
-                question_proportion=#{course.questionProportion},
+            <if test="course.question_percentage!=null">
+                question_percentage=#{course.questionPercentage},
             </if>
-            <if test="course.report_proportion!=null">
-                report_proportion=#{course.reportProportion},
+            <if test="course.report_percentage!=null">
+                report_percentage=#{course.reportPercentage},
             </if>
             <if test="course.courseName!=null">
                 course_name=#{course.courseName},
             </if>
-            <if test="course.min_team_member!=null">
-                min_team_member=#{course.minTeamMember},
-            </if>
-            <if test="course.max_team_member!=null">
-                max_team_member=#{course.maxTeamMember},
-            </if>
-            <if test="course.team_start_time!=null">
+            <if test="course.teamStartTime!=null">
                 team_start_time=#{course.teamStartTime},
             </if>
-            <if test="course.team_end_time!=null">
+            <if test="course.teamEndTime!=null">
                 team_end_time=#{course.teamEndTime}
             </if>
-            <if test="course.class_amount!=null">
-                class_amount=#{course.class_amount},
+            <if test="course.teamMainCourseId!=null">
+                team_main_course_id=#{course.teamMainCourseId},
             </if>
-            <if test="course.roundAmount!=null">
-                round_amount=#{course.round_amount}
+            <if test="course.seminarMainCourseId!=null">
+                seminar_main_course_id=#{course.seminarMainCourseId}
             </if>
         </set>
         where id=#{course.id}

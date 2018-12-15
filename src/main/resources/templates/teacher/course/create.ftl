@@ -91,7 +91,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">课堂展示</label>
                     <div class="layui-input-block">
-                        <select name="presentationProportion" lay-filter="aihao">
+                        <select name="presentationPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>
@@ -109,7 +109,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">课堂提问</label>
                     <div class="layui-input-block">
-                        <select name="questionProportion" lay-filter="aihao">
+                        <select name="questionPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>
@@ -127,7 +127,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">书面报告</label>
                     <div class="layui-input-block">
-                        <select name="reportProportion" lay-filter="aihao">
+                        <select name="reportPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>
