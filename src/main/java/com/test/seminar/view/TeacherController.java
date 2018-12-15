@@ -335,8 +335,13 @@ public class TeacherController {
     @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "teacher/activate"; }
 
+    @RequestMapping(value = "/message",method = GET)
+    public String message(Model model) { return "teacher/message"; }
+
     @RequestMapping(value="course/shareSettings")
-    public String shareSettings(Model model) {
+    public String shareSettings(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course/shareSettings";
     }
 
