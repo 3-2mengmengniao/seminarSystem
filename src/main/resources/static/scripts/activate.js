@@ -37,10 +37,17 @@ jQuery(document).ready(function($) {
                     $('#formSuccessMessageWrap').fadeOut(500);
                 }
             }
+<<<<<<< HEAD
             else if(data==="teacherHome")
                 window.location.href="/teacher/homepage";
             else if(data==="studentHome")
                 window.location.href="/student/homepage";
+=======
+            else if(data=="200")
+                window.location.href="/teacher/index";
+            else if(data=="204")
+                window.location.href="/student/index";
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
         });
         //window.location.href='1vali_psw.html';
     };
@@ -70,10 +77,23 @@ jQuery(document).ready(function($) {
                 return false;
             };
 
+<<<<<<< HEAD
             if($('#emailMessageTextarea').length>0&&($('#emailMessageTextarea').val()==null||$('#emailMessageTextarea').val()=='')){
                 $('#emailError').fadeIn(300);
                 count=count-1;
                 return false;
+=======
+            if($(this).hasClass('requiredEmailField')){
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var tempField = '#' + $(this).attr('id');
+                if(!emailReg.test($(tempField).val())) {
+                    $(tempField).focus();
+                    $(tempField).addClass('fieldHasError');
+                    $(tempField + 'Error2').fadeIn(300);
+                    count=count-1;
+                    return false;
+                };
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
             };
 
             if($(this).hasClass('requiredEmailField')){

@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
                 formSubmitted = 'false';
             }
             else if(data=="200"||data=="204")
-                window.location.href="/new_password";
+                window.location.href="/modifyPassword";
         });
     };
     // submit form data function starts

@@ -33,7 +33,7 @@ jQuery(document).ready(function($) {
                     formSubmitted = 'false';
                 }
                 else if(data=="200")
-                    window.location.href="/teacher/courses";
+                    window.location.href="/teacher/courseList";
 
         });
         //window.location.href='1vali_psw.html';

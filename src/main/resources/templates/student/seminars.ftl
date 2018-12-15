@@ -16,7 +16,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -58,7 +58,7 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/student/homepage" class="home-icon">个人页</a>
+                <a href="/student/index" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -71,13 +71,13 @@
 <#list courseList as course>
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar?courseId=${course.id}'>${course.courseName}</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course/seminarList?courseId=${course.id}'>${course.courseName}</a>
         </div>
     </div>
 <div class="distance3">
     <#--<div class="container">-->
         <#--<div class="toggle-1">-->
-            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='/student/course-seminar'>J2EE</a>-->
+            <#--<a class="my-deploy-toggle-1" style="cursor:pointer" href='student/course/seminarList'>J2EE</a>-->
         <#--</div>-->
     <#--</div>-->
     </#list>

@@ -5,9 +5,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
+=======
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,28 +45,84 @@ public class StudentController {
     @Autowired
     TeamService teamService;
 
-    @RequestMapping(value = "/homepage")
-    public String home(Model model) {
-        return "student/homepage";
+    @RequestMapping(value = "/index")
+    public String home(Model model,HttpSession session) {
+        User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Student student = studentService.getStudentByAccount(user.getUsername());
+        model.addAttribute(student);
+        session.setAttribute("id",student.getId());
+        session.setAttribute("usertype", "student");
+        session.setAttribute("account",student.getAccount());
+        if(student.getActive()==0)
+            return "student/activate";
+        return "student/index";
     }
 
 
-    @RequestMapping(value = "/courses", method = GET)
+    @RequestMapping(value = "/courseList", method = GET)
     public String courses(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         List<Course> courseList= courseService.getCourseByStudentId(studentId);
         model.addAttribute("courseList",courseList);
-        return "student/courses";
+        return "student/courseList";
     }
 
-    @RequestMapping(value = "/security", method = GET)
+    @RequestMapping(value = "/setting", method = GET)
     public String security(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
         model.addAttribute("student",student);
-        return "student/security";
+        return "student/setting";
+    }
+
+    @RequestMapping(value = "/modifyEmail", method = POST)
+    @ResponseBody
+    public String emailModifyPost(HttpServletRequest request, @RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation, Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        student.setEmail(email);
+        studentService.updateStudentByStudentId(student);
+        String status="204";
+        return status;
+    }
+
+    @RequestMapping(value = "/modifyPassword", method = GET)
+    public String modifyPassword(Model model) {
+        return "student/modifyPassword";
+    }
+
+    @RequestMapping(value = "/modifyEmail", method = GET)
+    public String emailModify(Model model) {
+        return "student/modifyEmail";
+    }
+
+    @RequestMapping(value = "/modifyPassword", method = POST)
+    @ResponseBody
+    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        student.setPassword(newPsw);
+        studentService.updateStudentByStudentId(student);
+        String status="204";
+        return status;
+    }
+
+    @RequestMapping(value = "/activate", method = POST)
+    @ResponseBody
+    public String activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "email") String email,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Student student=studentService.getStudentByStudentId(studentId);
+        student.setPassword(newPsw);
+        student.setEmail(email);
+        student.setActive(1);
+        studentService.updateStudentByStudentId(student);
+        String status="204";
+        return status;
     }
 
     @RequestMapping(value = "/seminars")
@@ -72,7 +134,7 @@ public class StudentController {
         return "student/seminars";
     }
 
-    @RequestMapping(value = "/course-seminar")
+    @RequestMapping(value = "/course/seminarList")
     public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
         List<Round> roundList= roundService.getRoundByCourseId(courseId);
         model.addAttribute("roundList",roundList);
@@ -85,10 +147,10 @@ public class StudentController {
         model.addAttribute("course",course);
         CourseClass myClass = courseClassService.getCourseClassByStudentIdAndCourseId(studentId, courseId);
         model.addAttribute("class",myClass);
-        return "student/course-seminar";
+        return "student/course/seminarList";
     }
 
-    @RequestMapping(value = "/teams")
+    @RequestMapping(value = "/course/teams")
     public String teams(HttpServletRequest request,BigInteger courseId,Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
@@ -111,17 +173,17 @@ public class StudentController {
         model.addAttribute("studentList",studentList);
         model.addAttribute("leaderList",leaderList);
         model.addAttribute("classList",classList);
-        return "student/teams";
+        return "student/course/teams";
     }
 
-    @RequestMapping(value = "/group-score")
+    @RequestMapping(value = "/course/grade")
     public String groupScore(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
-        return "student/group-score";
+        return "student/course/grade";
     }
 
-    @RequestMapping(value="/seminar_info")
+    @RequestMapping(value="/course/seminar/info")
     public String seminarInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
@@ -132,11 +194,13 @@ public class StudentController {
         model.addAttribute("round",round);
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
         List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         boolean flag=teamList.contains(team);
+<<<<<<< HEAD
         if(flag && seminarControl.getSeminarStatus().equals("UNSTARTED"))
             return "student/selected_seminar_ready";
         else if(flag && seminarControl.getSeminarStatus().equals("INPROCESS"))
@@ -198,18 +262,31 @@ public class StudentController {
     @RequestMapping(value = "/complete_enrollment")
     public String completeEnrollment(Model model) {
         return "student/complete_enrollment";
+=======
+        model.addAttribute("enrollment",flag);
+        model.addAttribute("status",seminarControl.getSeminarStatus());
+        return "student/course/seminar/info";
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
     }
 
-    @RequestMapping(value = "/ready_enrollment")
-    public String readyEnrollment(Model model) {
-        return "student/ready_enrollment";
+    @RequestMapping(value="/course/seminar/score")
+    public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
+        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        return "student/course/seminar/score";
     }
 
-    @RequestMapping(value = "/begin_present")
-    public String beginPresent(Model model) {
-        return "student/begin_present";
-    }
-
+<<<<<<< HEAD
 //    @RequestMapping(value = "/selected_seminar_homepage")
 //    public String selectedSeminarHomepage(Model model) {
 //        return "selected_seminar_ready";
@@ -230,12 +307,42 @@ public class StudentController {
     public String seminarEnd(Model model) { return "student/seminar_end"; }
 
     @RequestMapping(value="/course-info")
+=======
+    @RequestMapping(value="/course/seminar/enrollment")
+    public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        model.addAttribute("seminarInfo",seminarInfo);
+        BigInteger roundId=seminarInfo.getRoundId();
+        Round round=roundService.getRoundByRoundId(roundId);
+        model.addAttribute("round",round);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("classId",classId);
+        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        boolean flag=teamList.contains(team);
+        model.addAttribute("enrollment",flag);
+        model.addAttribute("status",seminarControl.getSeminarStatus());
+        return "student/course/seminar/enrollment";
+    }
+
+    @RequestMapping(value="/course/seminar/run")
+    public String seminarRun(Model model) {
+        return "student/course/seminar/run";
+    }
+
+    @RequestMapping(value="/course/info")
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
     public String courseInfo(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
-        return "student/course-info";
+        return "student/course/info";
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/activate", method = GET)
     public String activate(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
@@ -259,4 +366,8 @@ public class StudentController {
         return status;
     }
 
+=======
+    @RequestMapping(value = "/activate",method = GET)
+    public String activate(Model model) { return "student/activate"; }
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
 }

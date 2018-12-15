@@ -16,7 +16,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -58,11 +58,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">待办</a>
+                <a href="/teacher/message" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/homepage" class="home-icon">个人页</a>
+                <a href="/teacher/index" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -77,7 +77,7 @@
 <div class="distance3"></div>
     <div class="container">
         <div class="toggle-1">
-            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course-seminar?courseId=${course.id}'>${course.courseName}</a>
+            <a class="my-deploy-toggle-1" style="cursor:pointer" href='/teacher/course/seminarList?courseId=${course.id}'>${course.courseName}</a>
         </div>
     </div>
 <div class="distance3">
@@ -89,7 +89,7 @@
 </#list>
     <div class="distance2"></div>
     <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/course-seminar" class="button-return button-red">返回正在进行的讨论课</a></p>
+<p class="center center-text"><a href="/teacher/seminars" class="button-return button-red">返回正在进行的讨论课</a></p>
 
     <!--
     <div class="decoration"></div>

@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -46,8 +46,7 @@
 
 <div class="content">
     <div class="navigation-back">
-        <h1 class="navigation-back">修改密码</h1>
-        <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+        <h1 class="navigation-back">激活账号</h1>
     </div>
     <div class="decoration"></div>
 </div>
@@ -100,7 +99,7 @@
             </div>
             <div class="distance2"></div>
             <div class="formSubmitButtonErrorsWrap">
-                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="设置密码" data-formId="contactForm"/>
+                <p class="center center-text "><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="激活账号" data-formId="contactForm"/>
                 </p>
             </div>
             </p>
@@ -137,30 +136,6 @@
 
         <div class="bottom-deco"></div>
     -->
-    <script>
-        function validate()
-        {
-            var psw1 = $("#psw1").val();
-            var psw2 = $("#psw2").val();
-            if (psw1 == "" || name == null)
-            {
 
-                alert("请输入新密码");
-                return false;
-            }
-            if (psw2 == null || psw2 == "")
-            {
-                alert("请输入确认密码");
-                return false;
-            }
-            if (psw2 != psw1)
-            {
-                alert("确认密码与新密码不一致");
-                return false;
-            }
-            window.location.href='/teacher/homepage';
-        }
-
-    </script>
 </body>
 </html>

@@ -27,15 +27,33 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-                if(data=="404") {
+        // var form = {};
+        // form.username = $("#contactNameField").val();
+        // form.pasaword = $("#contactEmailField").val();
+        $.ajax(
+            {
+                url:$('#' + currentForm).attr('action'),
+                type:'post',
+                data:formInput,
+                success:function(data,status,response){
+                    if(response.status=="200"){
+                        var info=response.responseText;
+                        var auth=info.substring(info.indexOf('_')+1,info.indexOf(']'));
+                        window.location.href="/"+auth.toLowerCase()+"/index";
+                    }
+                },
+                error:function(data,status){
+                    console.log(data);
+                    console.log(status);
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
                     var onFocus = document.activeElement;
                     if (onFocus.id === "contactEmailField") {
                         $('#formSuccessMessageWrap').fadeOut(500);
                     }
+                    console.log("error");
                 }
+<<<<<<< HEAD
                 else if(data=="studentHome")
                     window.location.href="/student/homepage";
                 else if(data=="teacherHome")
@@ -45,6 +63,24 @@ jQuery(document).ready(function($) {
                 else if(data=="teacherActivate")
                     window.location.href="/teacher/activate";
         });
+=======
+            }
+        );
+        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+        //         if(data=="404") {
+        //             $('#formSuccessMessageWrap').fadeIn(500);
+        //             formSubmitted = 'false';
+        //             var onFocus = document.activeElement;
+        //             if (onFocus.id === "contactEmailField") {
+        //                 $('#formSuccessMessageWrap').fadeOut(500);
+        //             }
+        //         }
+        //         else if(data=="200")
+        //             window.location.href="/teacher/homepage";
+        //         else if(data=="204")
+        //             window.location.href="/student/index";
+        // });
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
         //window.location.href='1vali_psw.html';
     };
     // submit form data function starts

@@ -1,53 +1,60 @@
 package com.test.seminar.config;
 
+import com.test.seminar.service.UserService;
+import com.test.seminar.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-
-/**
- * 登陆拦截器配置
- *
- * @author zhenweiwang
- * @date 2018/11/24
- */
 @Configuration
-public class WebSecurityConfig implements WebMvcConfigurer {
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
 
-    @Bean
-    public SecurityInterceptor getSecurityInterceptor() {
-        return new SecurityInterceptor();
+    @Autowired
+    CustomFailureHandler customFailureHandler;
+
+<<<<<<< HEAD
+        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login", "/", "/images/**", "/styles/**","/layui/**", "/scripts/**","/forget_password","/new_password","/captcha/**");
+=======
+    @Autowired
+    UserServiceImpl userServiceImpl;
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/student/**").access("hasRole('STUDENT')")
+                .antMatchers("/teacher/**").access("hasRole('TEACHER')" )
+                .and()
+                .formLogin().loginPage("/login").loginProcessingUrl("/login")
+                .successHandler(customSuccessHandler).failureHandler(customFailureHandler)
+                .usernameParameter("username").passwordParameter("password")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll();
+
+                //解决非thymeleaf的form表单提交被拦截问题
+                http.csrf().disable();
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        InterceptorRegistration addInterceptor = registry.addInterceptor(getSecurityInterceptor());
-
-        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login", "/", "/images/**", "/styles/**","/layui/**", "/scripts/**","/forget_password","/new_password","/captcha/**");
-
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userServiceImpl).passwordEncoder(new BCryptPasswordEncoder());;
     }
 
-    private class SecurityInterceptor extends HandlerInterceptorAdapter {
-        @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-            HttpSession session = request.getSession();
 
-            //判断是否已有该用户登录的session
-            if (session.getAttribute("account") != null) {
-                return true;
-            }
-            //跳转到登录页
-            String url = "/";
-            response.sendRedirect(url);
-            return false;
-        }
-    }
 
 }

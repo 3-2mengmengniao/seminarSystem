@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -50,7 +50,7 @@
         <#if usertype =="teacher">
         <a href="/teacher/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
         <#else>
-        <a href="/student/security" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
+        <a href="/student/setting" class="button-back"><img id="button-back-image" src="/images/icons/展开.png"></a>
         </#if>
 </div>
     <div class="decoration"></div>
