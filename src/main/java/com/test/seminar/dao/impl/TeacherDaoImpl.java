@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author zhenweiwang
@@ -41,5 +42,10 @@ public class TeacherDaoImpl implements TeacherDao {
     @Override
     public void deleteTeacherByTeacherId(BigInteger teacherId) {
         teacherMapper.deleteTeacherByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<Teacher> getAllTeacher() {
+        return teacherMapper.getAllTeacher();
     }
 }

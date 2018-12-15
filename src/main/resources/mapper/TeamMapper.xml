@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.test.seminar.mapper.TeamMapper">
-
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
-        <result property="classId" column="class_id"/>
+        <result property="classId" column="klass_id"/>
         <result property="courseId" column="course_id"/>
         <result property="teamName" column="team_name"/>
         <result property="leaderId" column="leader_id"/>
-        <result property="established" column="is_established"/>
+        <result property="status" column="status"/>
         <result property="teamSerial" column="team_serial"/>
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT id,klass_id,course_id,team_name,leader_id,status,team_serial
         FROM team
         WHERE id=#{teamId}
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT team.id,team.class_id,course_id,team_name,leader_id,is_established,team_serial
-        FROM team,class_student_table
-        WHERE team.course_id=#{courseId} and  class_student_table.student_id=#{studentId} and team.id=class_student_table.team_id
+        SELECT team.id,team.klass_id,team.course_id,team_name,leader_id,status,team_serial
+        FROM team,klass_student
+        WHERE team.course_id=#{courseId} and  klass_student.student_id=#{studentId} and team.id=klass_student.team_id
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team_serial
+        SELECT id,klass_id,course_id,team_name,leader_id,status,team_serial
         FROM team
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,class_id,course_id,team_name,leader_id,is_established,team.team_serial
-        FROM seminar_team_table,team
-        WHERE seminarcontrol_id=#{seminarControlId} and team.id=seminar_team_table.team_id
+        SELECT id,klass_id,course_id,team_name,leader_id,status,team.team_serial
+        FROM seminar_score,team
+        WHERE klass_seminar_id=#{seminarControlId} and team.id=seminar_score.team_id
     </select>
 
     <insert id="insertTeam">
-        insert into team(class_id,course_id,team_name,leader_id,is_established,team_serial)
-        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.established},#{team.teamSerial})
+        insert into team(klass_id,course_id,team_name,leader_id,status,team_serial)
+        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
     </insert>
 
     <update id="updateTeamByTeamId">
         update team
         <set>
             <if test="team.classId!=null">
-                class_id=#{team.classId},
+                klass_id=#{team.classId},
             </if>
             <if test="team.courseId!=null">
                 course_id=#{team.courseId},
@@ -56,8 +55,8 @@
             <if test="team.leaderId!=null">
                 leader_id=#{team.leaderId},
             </if>
-            <if test="team.established!=null">
-                is_established=#{team.established},
+            <if test="team.status!=null">
+                status=#{team.status},
             </if>
             <if test="team.teamSerial!=null">
                 team_serial=#{team.teamSerial},
@@ -71,12 +70,12 @@
     </delete>
 
     <update id="updateCourseClassStudentTeamId">
-        update class_student_table
+        update klass_student
         <set>
             <if test="teamId!=null">
                 team_id=#{teamId},
             </if>
         </set>
-        where student_id=#{studentId} and class_id=#{courseClassId}
+        where student_id=#{studentId} and klass_id=#{courseClassId}
     </update>
 </mapper>

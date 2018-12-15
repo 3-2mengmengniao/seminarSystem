@@ -3,6 +3,7 @@ package com.test.seminar.dao;
 import com.test.seminar.entity.Teacher;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author cxh
@@ -47,4 +48,9 @@ public interface TeacherDao {
      * @return
      */
     void deleteTeacherByTeacherId(BigInteger teacherId);
+
+    /**
+     * @return
+     */
+    List<Teacher> getAllTeacher();
 }

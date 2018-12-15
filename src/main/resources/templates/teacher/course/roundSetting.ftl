@@ -80,7 +80,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">展示</label>
                     <div class="layui-input-block">
-                        <select name="presentationProportion" lay-filter="aihao">
+                        <select name="presentationPercentage" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>
@@ -90,7 +90,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">提问</label>
                     <div class="layui-input-block">
-                        <select name="questionProportion" lay-filter="aihao">
+                        <select name="questionPercentage" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>
@@ -100,7 +100,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">报告</label>
                     <div class="layui-input-block">
-                        <select name="reportProportion" lay-filter="aihao">
+                        <select name="reportPercentage" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>

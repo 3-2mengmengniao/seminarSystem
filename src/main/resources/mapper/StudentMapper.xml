@@ -9,41 +9,40 @@
         <result property="active" column="is_active"/>
         <result property="studentName" column="student_name"/>
         <result property="email" column="email"/>
-        <result property="emailReceiveInterval" column="email_receive_interval"/>
     </resultMap>
 
     <select id="getStudentByStudentId" resultMap="studentResultMap">
-        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        SELECT id,account,password,is_active,student_name,email
         FROM student
         WHERE id=#{studentId}
     </select>
 
     <select id="getStudentByAccount" resultMap="studentResultMap">
-        SELECT id,account,password,is_active,student_name,email,email_receive_interval
+        SELECT id,account,password,is_active,student_name,email
         FROM student
         WHERE account=#{account}
     </select>
 
     <select id="getStudentByTeamId" resultMap="studentResultMap">
-        SELECT id,account,password,is_active,student_name,email,email_receive_interval
-        FROM student,class_student_table
-        WHERE class_student_table.team_id=#{teamId} and class_student_table.student_id=student.id
+        SELECT id,account,password,is_active,student_name,email
+        FROM student,klass_student
+        WHERE klass_student.team_id=#{teamId} and klass_student.student_id=student.id
     </select>
 
     <select id="getStudentByCourseClassId" resultMap="studentResultMap">
-        SELECT id,account,password,is_active,student_name,email,email_receive_interval
-        FROM student,class_student_table
-        WHERE class_student_table.class_id=#{courseClassId} and class_student_table.student_id=student.id
+        SELECT id,account,password,is_active,student_name,email
+        FROM student,klass_student
+        WHERE klass_student.klass_id=#{courseClassId} and klass_student.student_id=student.id
     </select>
 
     <insert id="insertStudent">
-        insert into student(account,password,is_active,student_name,email,email_receive_interval)
-        values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email},#{student.emailReceiveInterval})
+        insert into student(account,password,is_active,student_name,email)
+        values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email})
     </insert>
 
     <insert id="insertCourseClassStudentRelation">
-        insert into class_student_table(class_id,student_id)
-        values(#{courseClassId},#{studentId})
+        insert into klass_student(klass_id,student_id,course_id)
+        values(#{courseClassId},#{studentId},#{courseId})
     </insert>
 
     <update id="updateStudentByStudentId">
@@ -64,9 +63,6 @@
             <if test="student.email!=null">
                 email=#{student.email},
             </if>
-            <if test="student.emailReceiveInterval!=null">
-                email_receive_interval=#{student.emailReceiveInterval},
-            </if>
         </set>
         where id=#{student.id}
     </update>
@@ -74,4 +70,9 @@
     <delete id="deleteStudentByStudentId">
         delete from student where id=#{studentId}
     </delete>
+
+    <select id="getAllStudent" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email
+        FROM student
+    </select>
 </mapper>

@@ -70,7 +70,13 @@ public interface StudentMapper {
     /**
      * @param courseClassId
      * @param studentId
+     * @param courseId
      * @return
      */
-    void insertCourseClassStudentRelation(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId);
+    void insertCourseClassStudentRelation(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
+
+    /**
+     * @return
+     */
+    List<Student> getAllStudent();
 }

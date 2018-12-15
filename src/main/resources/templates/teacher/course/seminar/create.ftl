@@ -88,7 +88,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课次序号：</label>
                 <div class="layui-input-block">
-                    <select name="presentationProportion" lay-filter="aihao">
+                    <select name="presentationPercentage" lay-filter="aihao">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -109,7 +109,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
-                    <select name="presentationProportion" lay-filter="aihao">
+                    <select name="presentationPercentage" lay-filter="aihao">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -149,7 +149,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">报名小组数</label>
                     <div class="layui-input-block">
-                        <select name="presentationProportion" lay-filter="aihao">
+                        <select name="presentationPercentage" lay-filter="aihao">
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5" selected>5</option>
