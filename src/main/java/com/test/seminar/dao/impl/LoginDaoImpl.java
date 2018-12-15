@@ -2,6 +2,7 @@ package com.test.seminar.dao.impl;
 
 
 import com.test.seminar.dao.LoginDao;
+import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.mapper.LoginMapper;
@@ -25,5 +26,10 @@ public class LoginDaoImpl implements LoginDao {
     @Override
     public Teacher teacherLogin(String account, String password) {
         return loginMapper.teacherLogin(account, password);
+    }
+
+    @Override
+    public Admin adminLogin(String account, String password) {
+        return loginMapper.adminLogin(account,password);
     }
 }
