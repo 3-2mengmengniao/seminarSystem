@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -94,7 +94,7 @@
             url: "/teacher/course/${course.id}",
             success: function(data){
                 if(data==="200")
-                    window.location.href="/teacher/courses";
+                    window.location.href="/teacher/courseList";
                 else if(data==="404")
                     alert("课程不存在");
             }

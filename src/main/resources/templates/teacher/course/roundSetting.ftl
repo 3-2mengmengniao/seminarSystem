@@ -18,7 +18,7 @@
     <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -50,8 +50,8 @@
 
 <div class="top-deco"></div>
 <div class="navigation-back">
-    <h1 class="navigation-back">新建课程</h1>
-    <a href="/teacher/courseList" class="button-close">x</a>
+    <h1 class="navigation-back">第${round.roundSerial}轮</h1>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,86 +59,51 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course" method="post" id="contactForm">
+        <form class="layui-form contactForm" action="#" method="post" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#d44950;">该课程已被创建！</p>
+                    <p style="color:#c9302c;">！</p>
                 </div>
             </div>
             <div class="formFieldWrap">
-                <label class="field-title contactNameField" for="contactNameField">课程名称：<span>(required)</span></label>
-                <input type="text" name="courseName" value="" class="contactField requiredField" id="contactNameField"/>
-            </div>
-            <div class="formValidationError" id="contactNameFieldError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写课程名!</p>
-                </div>
-            </div>
-            <div class="formTextareaWrap">
-                <label class="field-title contactNameField" for="contactMessageTextarea">课程要求：<span>(required)</span></label>
-                <textarea name="introduction" class="contactTextarea requiredField" id="contactMessageTextarea"></textarea>
-            </div>
-            <div class="formValidationError" id="contactMessageTextareaError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写课程要求</p>
-                </div>
+                <label class="field-title contactNameField" >讨论课：</label>
+                <#list seminarList as seminar>
+                    <p class="center center-text">${seminar.seminarName}</p>
+                </#list>
+                <p class="center center-text"><a class="button-big button-dark" id="addButton" style="width: 200px;">添加讨论课</a></p>
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>
-            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">成绩计算规则：<span>(required)</span></label>
+            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">成绩设置：<span>(required)</span></label>
             <div >
                 <div class="distance3"></div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">课堂展示</label>
+                    <label class="layui-form-label">展示</label>
                     <div class="layui-input-block">
                         <select name="presentationProportion" lay-filter="aihao">
-                            <option value="0">0</option>
-                            <option value="10">10%</option>
-                            <option value="20">20%</option>
-                            <option value="30">30%</option>
-                            <option value="40" selected>40%</option>
-                            <option value="50">50%</option>
-                            <option value="60">60%</option>
-                            <option value="70">70%</option>
-                            <option value="80">80%</option>
-                            <option value="90">90%</option>
-                            <option value="100">100%</option>
+                            <option value="0" selected>最高分</option>
+                            <option value="1">平均分</option>
+                            <option value="2">最低分</option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">课堂提问</label>
+                    <label class="layui-form-label">提问</label>
                     <div class="layui-input-block">
                         <select name="questionProportion" lay-filter="aihao">
-                            <option value="0">0</option>
-                            <option value="10">10%</option>
-                            <option value="20">20%</option>
-                            <option value="30" selected>30%</option>
-                            <option value="40">40%</option>
-                            <option value="50">50%</option>
-                            <option value="60">60%</option>
-                            <option value="70">70%</option>
-                            <option value="80">80%</option>
-                            <option value="90">90%</option>
-                            <option value="100">100%</option>
+                            <option value="0" selected>最高分</option>
+                            <option value="1">平均分</option>
+                            <option value="2">最低分</option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">书面报告</label>
+                    <label class="layui-form-label">报告</label>
                     <div class="layui-input-block">
                         <select name="reportProportion" lay-filter="aihao">
-                            <option value="0">0</option>
-                            <option value="10">10%</option>
-                            <option value="20">20%</option>
-                            <option value="30" selected>30%</option>
-                            <option value="40">40%</option>
-                            <option value="50">50%</option>
-                            <option value="60">60%</option>
-                            <option value="70">70%</option>
-                            <option value="80">80%</option>
-                            <option value="90">90%</option>
-                            <option value="100">100%</option>
+                            <option value="0" selected>最高分</option>
+                            <option value="1">平均分</option>
+                            <option value="2">最低分</option>
                         </select>
                     </div>
                 </div>
@@ -147,58 +112,24 @@
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>
-            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">组队相关规则：<span>(required)</span></label>
+            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">本轮讨论课报名次数：<span>(required)</span></label>
             <div >
                 <div class="distance3"></div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">小组人数上限</label>
-                    <div class="layui-input-block">
-                        <select name="maxTeamMember" lay-filter="aihao">
-                            <option value="4">4人</option>
-                            <option value="5" selected>5人</option>
-                            <option value="6">6人</option>
-                            <option value="7">7人</option>
-                            <option value="8">8人</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item margin1 ">
-                    <label class="layui-form-label">小组人数下限</label>
-                    <div class="layui-input-block">
-                        <select name="minTeamMember" lay-filter="aihao">
-                            <option value="3" selected>3人</option>
-                            <option value="4">4人</option>
-                            <option value="5">5人</option>
-                            <option value="6">6人</option>
-                            <option value="7">7人</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item margin2">
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input name="teamStartTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                <#list courseClassList as class>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">${class.grade?c}-(${class.classSerial})</label>
+                        <div class="layui-input-block">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                            </select>
                         </div>
                     </div>
-                    <label class="layui-form-label moveUp">组队开始时间</label>
-                </div>
-                <div class="distance6"></div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
-                        </div>
-                    </div>
-                    <label class="layui-form-label moveUp">组队截止时间</label>
-                    <div class="formValidationError" id="test5Error">
-                        <div class="static-notification-red tap-dismiss-notification">
-                            <p class="uppercase">请填写组队相关时间</p>
-                        </div>
-                    </div>
-                </div>
+                </#list>
             </div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="修改" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
