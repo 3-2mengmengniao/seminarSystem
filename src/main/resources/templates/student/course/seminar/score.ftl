@@ -95,6 +95,10 @@
                 <td>${seminarInfo.introduction}</td>
             </tr>
             <tr>
+<<<<<<< HEAD:src/main/resources/templates/teacher/seminar_info_begin.ftl
+                <td>课程情况</td>
+                <td>正在进行 <a href="/teacher/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+=======
                 <td>报名情况</td>
                 <td>2016-（1）第3组</td>
             </tr>
@@ -113,6 +117,7 @@
             <tr>
                 <td> 总成绩</td>
                 <td>5.0</td>
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa:src/main/resources/templates/student/course/seminar/score.ftl
             </tr>
             </tbody>
         </table>

@@ -46,8 +46,13 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
+<<<<<<< HEAD:src/main/resources/templates/student/begin_enrollment.ftl
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/student/seminar_info?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+=======
             <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa:src/main/resources/templates/student/course/seminar/enrollment.ftl
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>

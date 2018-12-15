@@ -100,6 +100,17 @@
             </tr>
             <tr>
                 <td>课程情况</td>
+<<<<<<< HEAD:src/main/resources/templates/teacher/seminar_info_ready.ftl
+                <td>未开始<a href="/teacher/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
+            </tr>
+            <tr>
+                <td>报名开始时间</td>
+                <td>${seminarInfo.registrationStartTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+            </tr>
+            <tr>
+                <td>报名截止时间</td>
+                <td>${seminarInfo.registrationEndTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+=======
                 <#if status=="UNSTARTED">
                         <td>课程情况：未开始   <a href="/teacher/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 <#elseif status=="INPROCESS">
@@ -107,6 +118,7 @@
                 <#else>
                          <td>课程情况：已完成   <a href="/teacher/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 </#if>
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa:src/main/resources/templates/teacher/course/seminar/info.ftl
             </tr>
             </tbody>
         </table>

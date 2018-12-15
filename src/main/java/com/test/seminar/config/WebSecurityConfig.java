@@ -23,8 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomFailureHandler customFailureHandler;
 
+<<<<<<< HEAD
+        addInterceptor.addPathPatterns("/**").excludePathPatterns("/login", "/", "/images/**", "/styles/**","/layui/**", "/scripts/**","/forget_password","/new_password","/captcha/**");
+=======
     @Autowired
     UserServiceImpl userServiceImpl;
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

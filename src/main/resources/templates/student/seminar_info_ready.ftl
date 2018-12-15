@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
-            <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课</h1>
+            <a href="/student/course-seminar?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,15 +58,11 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/message" class="home-icon">待办</a>
+                <a href="/student/homepage" class="home-icon">个人页</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">个人页</a>
-                <em class="active-menu"></em>
-            </div>
-            <div class="navigation-item">
-                <a href="/teacher/seminars" class="home-icon">讨论课</a>
+                <a href="/student/homepage" class="home-icon">讨论课</a>
                 <em class="active-menu"></em>
             </div>
         </div>
@@ -83,55 +79,42 @@
             </colgroup>
             <tbody>
             <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;text-align: center;">1-1</td>
+                <td>轮次</td>
+                <td>第${round.roundSerial}轮</td>
             </tr>
             <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;text-align: center;">1-2</td>
+                <td>主题</td>
+                <td>${seminarInfo.seminarName}</td>
             </tr>
             <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;text-align: center;">1-3</td>
+                <td>课次序号</td>
+                <td>第${seminarInfo.seminarSerial}次</td>
             </tr>
             <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;text-align: center;">1-4</td>
+                <td>要求</td>
+                <td>${seminarInfo.introduction}</td>
             </tr>
             <tr>
-<<<<<<< HEAD:src/main/resources/templates/teacher/seminar_info_complete.ftl
                 <td>课程情况</td>
-                <td>已完成 <a href="/teacher/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
-=======
-                <td>第五组：</td>
-                <td style="color:#009688;text-align: center;">1-5</td>
+                <td>未开始<a href="/student/enrollment?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
             </tr>
             <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;text-align: center;">1-6</td>
->>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa:src/main/resources/templates/student/course/seminar/run.ftl
+                <td>报名开始时间</td>
+                <td>${seminarInfo.registrationStartTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+            </tr>
+            <tr>
+                <td>报名截止时间</td>
+                <td>${seminarInfo.registrationEndTime?string('yyyy-MM-dd HH:mm:ss')}</td>
             </tr>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-<<<<<<< HEAD:src/main/resources/templates/teacher/seminar_info_complete.ftl
-        <p class="center center-text ">
-            <button type="button" class="layui-btn" id="contactSubmitButton"  data-formId="contactForm" onclick="window.location.href='/teacher/report_score?courseId=${course.id}&classId=${classId}&seminarId=${seminarInfo.id}'">查看报告</button>
+        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="报名" data-formId="contactForm"/>
         </p>
-        <div class="distance4"></div>
-        <p class="center center-text ">
-            <button type="button" class="layui-btn" id="contactSubmitButton" data-formId="contactForm" onclick="#'">查看成绩</button>
-        </p>
-=======
->>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa:src/main/resources/templates/student/course/seminar/run.ftl
     </div>
 </div>
 
-<div class="distance4"></div>
-<div class="distance"></div>
-<p class="center center-text"><a href="#" class="button-return button-turqoise">Q&A</a></p>
-<div class="distance"></div>
 <!--<div class="bottom-deco"></div>-->
 
 

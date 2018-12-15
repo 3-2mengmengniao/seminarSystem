@@ -78,7 +78,7 @@
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactEmailField" for="contactEmailField">验证码:</label>
-                <button id="vali_button" type="button">获取验证码</button>
+                <button id="vali_button" type="button" onclick="submitValidation()">获取验证码</button>
                 <input name="validation" class="contactField requiredField" id="contactEmailField"  placeholder="请输入验证码"/>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
@@ -121,6 +121,37 @@
     <div class="bottom-deco"></div>
 </div>
  -->
-
+<script>
+    function  submitValidation() {
+        var email=$('#contactNameField').val();
+        var flag=true;
+        if(email===''||email===null)
+        {
+            $(this).val($(this).attr('data-dummy'));
+            $('#contactNameField').focus();
+            $('#contactNameField').addClass('fieldHasError');
+            $('#contactNameFieldError').fadeIn(300);
+            flag=false;
+        }
+        if(flag)
+        {
+            $.ajax(
+                    {
+                        url:"/captcha/emailModify",
+                        type:'post',
+                        data:{"email":email},
+                        success:function(data){
+                            console.log("success");
+                            if(data=="409")
+                                $('#validationFail').fadeIn(300);
+                        },
+                        error:function(data){
+                            console.log("failure");
+                            $('#validationFail').fadeIn(300);}
+                    }
+            );
+        }
+    }
+</script>
 </body>
 </html>

@@ -75,7 +75,7 @@
                         </div>
                         <div class="formValidationError" id="contactNameFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">请填写新密码!</p>
+                                <p class="uppercase">请填写新密码!</p>
                             </div>
                         </div>
                         <div class="formFieldWrap">
@@ -84,22 +84,12 @@
                         </div>
                         <div class="formValidationError" id="contactEmailFieldError">
                             <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">请填写确认密码!</p>
+                                <p class="uppercase">请填写确认密码!</p>
                             </div>
                         </div>
                         <div class="formValidationError" id="differentError">
                             <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">新密码与确认密码不一致!</p>
-                            </div>
-                        </div>
-                        <div class="formTextareaWrap">
-                            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">验证码: <span>(required)</span></label>
-                            <button id="vali_button" type="button">获取验证码</button>
-							<input name="validation" class="contactField requiredField" id="contactMessageTextarea" placeholder="请输入验证码"/>
-                        </div>
-                        <div class="formValidationError" id="contactMessageTextareaError">
-                            <div class="static-notification-red tap-dismiss-notification">
-                                <p class="center-text uppercase">请填写验证码!</p>
+                                <p class="uppercase">新密码与确认密码不一致!</p>
                             </div>
                         </div>
                         <div class="distance2"></div>

@@ -53,6 +53,17 @@ jQuery(document).ready(function($) {
                     }
                     console.log("error");
                 }
+<<<<<<< HEAD
+                else if(data=="studentHome")
+                    window.location.href="/student/homepage";
+                else if(data=="teacherHome")
+                    window.location.href="/teacher/homepage";
+                else if(data=="studentActivate")
+                    window.location.href="/student/activate";
+                else if(data=="teacherActivate")
+                    window.location.href="/teacher/activate";
+        });
+=======
             }
         );
         // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
@@ -69,6 +80,7 @@ jQuery(document).ready(function($) {
         //         else if(data=="204")
         //             window.location.href="/student/index";
         // });
+>>>>>>> b5d964932e63aa2fc0f79f68e4de55f7076ff3fa
         //window.location.href='1vali_psw.html';
     };
     // submit form data function starts
