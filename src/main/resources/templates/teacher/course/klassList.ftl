@@ -56,7 +56,8 @@
         <h3 class="center-text" style="font-weight:bold;">${class.grade?c}-(${class.classSerial})</h3>
         <div class="distance5"></div>
         <p class="center-text">
-            ${class.introduction}<br>
+            上课时间： ${class.classTime}<br>
+            上课地点： ${class.classLocation}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
         <form id="form${class.id}" enctype="multipart/form-data" method="post" action="/teacher/course/klassList?courseId=${courseId}&classId=${class.id}" class="file center-text">
             <input type="file" name="file" id="file${class.id}" class="center-block center-text" multiple/>

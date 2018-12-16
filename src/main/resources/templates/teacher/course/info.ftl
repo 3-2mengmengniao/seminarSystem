@@ -67,7 +67,7 @@
         </p>
         <h3 class="margin3">分组规则</h3>
         <p class="margin4">
-            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
+            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6~8人<br>
             组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
             组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
         </p>
