@@ -1,4 +1,4 @@
-package com.test.seminar.view;
+package com.test.seminar.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 

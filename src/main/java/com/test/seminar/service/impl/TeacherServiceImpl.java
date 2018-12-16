@@ -17,8 +17,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacherByTeacherId(BigInteger teacherId) throws UserNotFoundException {
         Teacher teacher=teacherDao.getTeacherByTeacherId(teacherId);
-        if(teacher==null)
+        if(teacher==null) {
             throw new UserNotFoundException();
+        }
         return teacher;
     }
 
@@ -29,23 +30,26 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void updateTeacherByTeacherId(Teacher teacher) throws UserNotFoundException {
-        if(teacherDao.getTeacherByTeacherId(teacher.getId())==null)
+        if(teacherDao.getTeacherByTeacherId(teacher.getId())==null) {
             throw new UserNotFoundException();
+        }
         teacherDao.updateTeacherByTeacherId(teacher);
     }
 
     @Override
     public void deleteTeacherByTeacherId(BigInteger teacherId) throws UserNotFoundException {
-        if(teacherDao.getTeacherByTeacherId(teacherId)==null)
+        if(teacherDao.getTeacherByTeacherId(teacherId)==null) {
             throw new UserNotFoundException();
+        }
         teacherDao.deleteTeacherByTeacherId(teacherId);
     }
 
     @Override
     public Teacher getTeacherByAccount(String account) {
         Teacher teacher= teacherDao.getTeacherByAccount(account);
-        if(teacher==null)
+        if(teacher==null) {
             throw new UserNotFoundException();
+        }
         return teacher;
     }
 }

@@ -18,22 +18,25 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public Team getTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
         Team team=teamDao.getTeamByTeamId(teamId);
-        if(team==null)
+        if(team==null) {
             throw new TeamNotFoundException();
+        }
         return team;
     }
 
     @Override
     public void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
-        if(teamDao.getTeamByTeamId(teamId)==null)
+        if(teamDao.getTeamByTeamId(teamId)==null) {
             throw new TeamNotFoundException();
+        }
         teamDao.deleteTeamByTeamId(teamId);
     }
 
     @Override
     public void updateTeamByTeamId(Team team) throws TeamNotFoundException {
-        if(teamDao.getTeamByTeamId(team.getId())==null)
+        if(teamDao.getTeamByTeamId(team.getId())==null) {
             throw new TeamNotFoundException();
+        }
         teamDao.updateTeamByTeamId(team);
     }
 
@@ -45,8 +48,9 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
         Team team=teamDao.getTeamByStudentIdAndCourseId(studentId,courseId);
-        if(team==null)
+        if(team==null) {
             throw new TeamNotFoundException();
+        }
         return team;
     }
 

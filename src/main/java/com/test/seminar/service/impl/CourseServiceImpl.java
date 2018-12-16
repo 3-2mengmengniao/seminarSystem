@@ -18,8 +18,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getCourseByCourseId(BigInteger courseId) throws CourseNotFoundException {
         Course course = courseDao.getCourseByCourseId(courseId);
-        if(course==null)
+        if(course==null) {
             throw new CourseNotFoundException();
+        }
         return  course;
     }
 

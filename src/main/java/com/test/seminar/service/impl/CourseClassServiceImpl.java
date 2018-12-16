@@ -18,8 +18,9 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
         CourseClass courseClass=courseClassDao.getCourseClassByCourseClassId(courseClassId);
-        if(courseClass==null)
+        if(courseClass==null){
             throw new CourseClassNotFoundException();
+        }
         return courseClass;
     }
 
@@ -30,15 +31,17 @@ public class CourseClassServiceImpl implements CourseClassService {
 
     @Override
     public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException {
-        if(courseClassDao.getCourseClassByCourseClassId(courseClass.getId())==null)
+        if(courseClassDao.getCourseClassByCourseClassId(courseClass.getId())==null) {
             throw new CourseClassNotFoundException();
+        }
         courseClassDao.updateCourseClassByCourseClassId(courseClass);
     }
 
     @Override
     public void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
-        if(courseClassDao.getCourseClassByCourseClassId(courseClassId)==null)
+        if(courseClassDao.getCourseClassByCourseClassId(courseClassId)==null) {
             throw new CourseClassNotFoundException();
+        }
         courseClassDao.deleteCourseClassByCourseClassId(courseClassId);
     }
 
@@ -50,8 +53,9 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId){
         CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-        if(courseClass==null)
+        if(courseClass==null) {
             throw new CourseClassNotFoundException();
+        }
         return courseClass;
     }
 
