@@ -1,4 +1,4 @@
-package com.test.seminar.view;
+package com.test.seminar.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -48,10 +48,10 @@ public class StudentController {
         Student student = studentService.getStudentByAccount(user.getUsername());
         model.addAttribute(student);
         session.setAttribute("id",student.getId());
-        session.setAttribute("usertype", "student");
-        session.setAttribute("account",student.getAccount());
         if(student.getActive()==0)
+        {
             return "student/activate";
+        }
         return "student/index";
     }
 
@@ -183,7 +183,7 @@ public class StudentController {
     @RequestMapping(value="/course/seminar/info")
     public String seminarInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
@@ -204,7 +204,7 @@ public class StudentController {
     @RequestMapping(value="/course/seminar/score")
     public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
@@ -221,7 +221,7 @@ public class StudentController {
     @RequestMapping(value="/course/seminar/enrollment")
     public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarBySeminarId(seminarId);
+        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);

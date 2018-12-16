@@ -1,6 +1,8 @@
 package com.test.seminar.dao;
 
 import com.test.seminar.entity.Team;
+import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.TeamNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -15,28 +17,28 @@ public interface TeamDao {
      * @param teamId
      * @return
      */
-    Team getTeamByTeamId(BigInteger teamId);
+    Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;
 
     /**
      * 创建新的队伍信息
      * @param team
      * @return
      */
-    void insertTeam(Team team);
+    void insertTeam(Team team)throws RepetitiveRecordException;
 
     /**
      * 更改队伍信息
      * @param team
      * @return
      */
-    void updateTeamByTeamId(Team team);
+    void updateTeamByTeamId(Team team)throws TeamNotFoundException;
 
     /**
      *
      * @param teamId
      * @return
      */
-    void deleteTeamByTeamId(BigInteger teamId);
+    void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
 
     /**
      * 以学生ID和课程ID获取学生本课程的组队信息
@@ -44,7 +46,7 @@ public interface TeamDao {
      * @param courseId
      * @return
      */
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
+    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId) throws TeamNotFoundException;
 
     /**
      * 查看某课程的所有队伍

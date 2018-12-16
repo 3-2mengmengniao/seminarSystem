@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,20 +68,20 @@ public class FileProcessor {
     public List<Student> getExcelInfo(MultipartFile mFile) throws IOException {
         //初始化客户信息的集合
         List<Student> studentList=new ArrayList<Student>();
-        File file=multipartFile2File(mFile);
         try{
             //验证文件名是否合格
-            if(!validateExcel(file.getName())){
+            if(!validateExcel(mFile.getOriginalFilename())){
+                System.out.println(mFile.getName());
                 return null;
             }
             //根据文件名判断文件是2003版本还是2007版本
             boolean isExcel2003 = true;
-            if(isExcel2007(file.getName())){
+            if(isExcel2007(mFile.getOriginalFilename())){
                 isExcel2003 = false;
             }
             //根据新建的文件实例化输入流
             //根据excel里面的内容读取客户信息
-            studentList = getExcelInfo(file, isExcel2003);
+            studentList = getExcelInfo(mFile, isExcel2003);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -88,27 +89,22 @@ public class FileProcessor {
     }
     /**
      * 根据excel里面的内容读取客户信息
-     * @param file
+     * @param mFile
      * @param isExcel2003 excel是2003还是2007版本
      * @return
      * @throws IOException
      */
-    public  List<Student> getExcelInfo(File file,boolean isExcel2003){
+    public  List<Student> getExcelInfo(MultipartFile mFile,boolean isExcel2003){
         List<Student> studentList=null;
         try{
             /** 根据版本选择创建Workbook的方式 */
             Workbook wb = null;
             //当excel是2003时
             if(isExcel2003){
-                POIFSFileSystem poiFile = new POIFSFileSystem(file);
-                wb = new HSSFWorkbook(poiFile);
+                wb = new HSSFWorkbook(mFile.getInputStream());
             }
             else{//当excel是2007时
-                try {
-                    wb = new XSSFWorkbook(file);
-                } catch (InvalidFormatException e) {
-                    e.printStackTrace();
-                }
+                wb = new XSSFWorkbook(mFile.getInputStream());
             }
             //读取Excel里面客户的信息
             studentList=readExcelValue(wb);
@@ -151,11 +147,11 @@ public class FileProcessor {
                         student.setAccount(cell.getStringCellValue());
                     }else if(c==1){
                         student.setStudentName(cell.getStringCellValue());
-                    }else if(c==2){
-                        student.setEmail(cell.getStringCellValue());
                     }
                 }
             }
+            student.setPassword("123456");
+            student.setActive(0);
             //添加客户
             studentList.add(student);
         }

@@ -1,5 +1,6 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.entity.Student;
 import com.test.seminar.service.FileService;
@@ -17,8 +18,10 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private CourseClassDao courseClassDao;
     @Override
-    public void uploadStudentExcel(MultipartFile file) {
+    public void uploadStudentExcel(MultipartFile file, BigInteger courseClassId, BigInteger courseId) {
         //创建处理EXCEL
         FileProcessor readExcel=new FileProcessor();
         //解析excel，获取学生信息集合。
@@ -29,9 +32,17 @@ public class FileServiceImpl implements FileService {
             e.printStackTrace();
         }
 
-        //迭代添加学生信息
-        for(Student student:studentList){
-            studentDao.insertStudent(student);
+        if(studentList != null) {
+            //迭代添加学生信息
+            for(Student student:studentList){
+                Student studentWithId=studentDao.getStudentByAccount(student.getAccount());
+                if(studentWithId==null)
+                {
+                    studentDao.insertStudent(student);
+                    studentWithId=studentDao.getStudentByAccount(student.getAccount());
+                }
+                courseClassDao.insertCourseClassStudentRelation(courseClassId, studentWithId.getId(), courseId);
+            }
         }
     }
 

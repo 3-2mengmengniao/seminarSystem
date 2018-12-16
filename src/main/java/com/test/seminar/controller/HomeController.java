@@ -1,4 +1,4 @@
-package com.test.seminar.view;
+package com.test.seminar.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -9,6 +9,8 @@ import com.test.seminar.service.LoginService;
 import com.test.seminar.service.StudentService;
 import com.test.seminar.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -127,13 +129,11 @@ public class HomeController {
         //登陆验证
         try {
             Student student = studentService.getStudentByAccount(account);
-            session.setAttribute("usertype", "student");
             session.setAttribute("id", student.getId());
         }
         catch (UserNotFoundException e) {
             try {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
-                session.setAttribute("usertype", "teacher");
                 session.setAttribute("id", teacher.getId());
             }
             catch (UserNotFoundException e2){
@@ -157,7 +157,7 @@ public class HomeController {
     @ResponseBody
     public String newPasswordPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw,Model model) {
         HttpSession session = request.getSession();
-        String usertype=(String)session.getAttribute("usertype");
+        String usertype = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().toLowerCase();
         String status="404";
         if(usertype.equals("teacher"))
         {

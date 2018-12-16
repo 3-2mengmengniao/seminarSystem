@@ -1,5 +1,6 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
@@ -30,5 +31,14 @@ public interface LoginMapper {
      * @return com.test.seminar.entity.Teacher
      */
     Teacher teacherLogin(@Param("account") String account, @Param("password") String password);
+
+    /**
+     * 根据账号密码查询管理员
+     *
+     * @param account   账号
+     * @param password  密码
+     * @return com.test.seminar.entity.Admin
+     */
+    Admin adminLogin(@Param("account") String account, @Param("password") String password);
 
 }

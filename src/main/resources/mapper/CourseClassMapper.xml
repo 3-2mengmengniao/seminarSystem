@@ -7,18 +7,27 @@
     <!-- id 就是方法名称 -->
     <!-- resultType 指定返回的类型，如果返回多个，一样只要指定这个类型,mybatis会自动生成一个list-->
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
-    <select id="getCourseClassByCourseClassId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
-        FROM course_class
+    <resultMap id="courseClassResultMap" type="com.test.seminar.entity.CourseClass">
+        <id property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="grade" column="grade"/>
+        <result property="classSerial" column="klass_serial"/>
+        <result property="classTime" column="klass_time"/>
+        <result property="classLocation" column="klass_location"/>
+    </resultMap>
+
+    <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
+        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        FROM klass
         WHERE id=#{courseClassId}
     </select>
 
     <insert id="insertCourseClass">
-        insert into course_class(course_id,grade,class_serial,introduction,team_amount) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.introduction},#{courseClass.teamAmount})
+        insert into klass(course_id,grade,klass_serial,klass_time,klass_location) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
     <update id="updateCourseClassByCourseClassId">
-        update course_class
+        update klass
         <set>
             <if test="courseClass.courseId!=null">
                 course_id=#{courseClass.courseId},
@@ -27,31 +36,36 @@
                 grade=#{courseClass.grade},
             </if>
             <if test="courseClass.classSerial!=null">
-                class_serial=#{courseClass.classSerial},
+                klass_serial=#{courseClass.classSerial},
             </if>
-            <if test="courseClass.introduction!=null" >
-                introduction=#{courseClass.introduction},
+            <if test="courseClass.classTime!=null" >
+                klass_time=#{courseClass.classTime},
             </if>
-            <if test="courseClass.teamAmount!=null" >
-                team_amount=#{courseClass.teamAmount},
+            <if test="courseClass.classLocation!=null" >
+                klass_location=#{courseClass.classLocation},
             </if>
         </set>
         where id=#{courseClass.id}
     </update>
 
     <delete id="deleteCourseClassByCourseClassId">
-        delete from course_class where id=#{courseClassId}
+        delete from klass where id=#{courseClassId}
     </delete>
 
-    <select id="getCourseClassByCourseId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
-        FROM course_class
+    <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
+        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        FROM klass
         WHERE course_id=#{courseId}
     </select>
 
-    <select id="getCourseClassByStudentIdAndCourseId" resultType="com.test.seminar.entity.CourseClass">
-        SELECT id,course_id as courseId,grade,class_serial,introduction,team_amount
-        FROM course_class,class_student_table
-        WHERE course_id=#{courseId} and class_student_table.student_id=#{studentId} and course_class.id=class_student_table.class_id
+    <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
+        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        FROM klass,klass_student
+        WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
+
+    <insert id="insertCourseClassStudentRelation">
+        insert into klass_student(klass_id,student_id,course_id)
+        values(#{courseClassId},#{studentId},#{courseId})
+    </insert>
 </mapper>

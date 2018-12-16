@@ -18,10 +18,7 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
     @Override
     public Student getStudentByStudentId(BigInteger studentId) throws UserNotFoundException {
-        Student student=studentDao.getStudentByStudentId(studentId);
-        if(student==null)
-            throw new UserNotFoundException();
-        return student;
+        return studentDao.getStudentByStudentId(studentId);
     }
 
     @Override
@@ -31,15 +28,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void updateStudentByStudentId(Student student) throws UserNotFoundException {
-        if(studentDao.getStudentByStudentId(student.getId())==null)
-            throw new UserNotFoundException();
         studentDao.updateStudentByStudentId(student);
     }
 
     @Override
     public void deleteStudentByStudentId(BigInteger studentId) throws UserNotFoundException {
-        if(studentDao.getStudentByStudentId(studentId)==null)
-            throw new UserNotFoundException();
         studentDao.deleteStudentByStudentId(studentId);
     }
 
@@ -51,8 +44,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentByAccount(String account) throws UserNotFoundException {
         Student student=studentDao.getStudentByAccount(account);
-        if(student==null)
+        if(student==null) {
             throw new UserNotFoundException();
+        }
         return student;
     }
 }

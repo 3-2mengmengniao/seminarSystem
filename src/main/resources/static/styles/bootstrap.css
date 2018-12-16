@@ -3117,7 +3117,7 @@ fieldset[disabled] .btn-warning.active {
 .btn-danger.active,
 .open > .dropdown-toggle1.btn-danger {
   color: #fff;
-  background-color: #c9302c;
+  background-color: #d44950;
   border-color: #ac2925;
 }
 .btn-danger:active,
@@ -4919,7 +4919,7 @@ a.label:focus {
 }
 .label-danger[href]:hover,
 .label-danger[href]:focus {
-  background-color: #c9302c;
+  background-color: #d44950;
 }
 .badge {
   display: inline-block;

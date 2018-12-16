@@ -13,7 +13,7 @@ public class Team {
     private BigInteger courseId;
     private String teamName;
     private BigInteger leaderId;
-    private int established;
+    private int status;
     private int teamSerial;
 
     public BigInteger getId() {
@@ -52,20 +52,20 @@ public class Team {
         this.leaderId = leaderId;
     }
 
-    public int getEstablished() {
-        return established;
-    }
-
-    public void setEstablished(int established) {
-        this.established = established;
-    }
-
     public int getTeamSerial() {
         return teamSerial;
     }
 
     public void setTeamSerial(int teamSerial) {
         this.teamSerial = teamSerial;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override

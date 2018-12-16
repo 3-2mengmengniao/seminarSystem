@@ -10,9 +10,11 @@ import java.math.BigInteger;
 public class Round {
     private BigInteger id;
     private BigInteger courseId;
-    private int enrollNumber;
-    private int calculateMethod;
     private int roundSerial;
+    private int presentationScoreMethod;
+    private int reportScoreMethod;
+    private int questionScoreMethod;
+
 
     public BigInteger getId() {
         return id;
@@ -26,27 +28,39 @@ public class Round {
         this.courseId = classId;
     }
 
-    public int getEnrollNumber() {
-        return enrollNumber;
-    }
-
-    public void setEnrollNumber(int enrollNumber) {
-        this.enrollNumber = enrollNumber;
-    }
-
-    public int getCalculateMethod() {
-        return calculateMethod;
-    }
-
-    public void setCalculateMethod(int calculateMethod) {
-        this.calculateMethod = calculateMethod;
-    }
-
     public int getRoundSerial() {
         return roundSerial;
     }
 
     public void setRoundSerial(int roundSerial) {
         this.roundSerial = roundSerial;
+    }
+
+    public void setCourseId(BigInteger courseId) {
+        this.courseId = courseId;
+    }
+
+    public int getPresentationScoreMethod() {
+        return presentationScoreMethod;
+    }
+
+    public void setPresentationScoreMethod(int presentationScoreMethod) {
+        this.presentationScoreMethod = presentationScoreMethod;
+    }
+
+    public int getReportScoreMethod() {
+        return reportScoreMethod;
+    }
+
+    public void setReportScoreMethod(int reportScoreMethod) {
+        this.reportScoreMethod = reportScoreMethod;
+    }
+
+    public int getQuestionScoreMethod() {
+        return questionScoreMethod;
+    }
+
+    public void setQuestionScoreMethod(int questionScoreMethod) {
+        this.questionScoreMethod = questionScoreMethod;
     }
 }

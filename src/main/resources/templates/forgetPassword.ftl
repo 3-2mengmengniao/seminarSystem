@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -56,7 +56,7 @@
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="static-notification-green tap-dismiss-notification">
-            <p style="color:#c9302c;">未找到当前账号，请再次尝试！</p>
+            <p style="color:#d44950;">未找到当前账号，请再次尝试！</p>
         </div>
     </div>
     <form action="/forgetPassword" method="post" class="contactForm" id="contactForm">

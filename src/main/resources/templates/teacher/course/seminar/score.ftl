@@ -14,9 +14,8 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
-    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -27,7 +26,6 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -46,8 +44,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}讨论课成绩</h1>
+            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -58,7 +56,7 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">待办</a>
+                <a href="/teacher/message" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -75,50 +73,73 @@
 
 <div class="content">
     <div class="distance4"></div>
-    <div class="center-navigation">
-        <table class="layui-table" lay-skin="nob">
-            <colgroup>
-                <col width="100">
-                <col width="200">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td>轮次</td>
-                <td>第${round.roundSerial}轮</td>
-            </tr>
-            <tr>
-                <td>主题</td>
-                <td>${seminarInfo.seminarName}</td>
-            </tr>
-            <tr>
-                <td>课次序号</td>
-                <td>第${seminarInfo.seminarSerial}次</td>
-            </tr>
-            <tr>
-                <td>要求</td>
-                <td>${seminarInfo.introduction}</td>
-            </tr>
-            <tr>
-                <td>课程情况</td>
-                <td>未开始<a href="#" style="display: inline;margin-left: 20px;color:#009688;">查看信息</a></td>
-            </tr>
-            <tr>
-                <td>报名开始时间</td>
-                <td>${seminarInfo.registrationStartTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-            </tr>
-            <tr>
-                <td>报名截止时间</td>
-                <td>${seminarInfo.registrationEndTime?string('yyyy-MM-dd HH:mm:ss')}</td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="distance4"></div>
+    <div class="container no-bottom text-list">
+        <div class="container no-bottom">
+            <table cellspacing='0' class="table">
+                <thead>
+                <tr>
+                    <th>小组</th>
+                    <th>展示</th>
+                    <th>提问</th>
+                    <th>报告</th>
+                    <th>总分</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1-1</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>1-2</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>1-3</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>1-4</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                </tr>
+                <tr>
+                    <td>1-5</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                    <td>5.0</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
         <div class="distance"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="开始讨论课" data-formId="contactForm"/>
-        </p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
         <div class="distance4"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="修改讨论课信息" data-formId="contactForm"/>
-        </p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
+            <!--
+        <div class="decoration"></div>
+        <div class="footer">
+            <div class="clear"></div>
+            <p class="copyright">
+                Copyright @2018 developed by Group 3-2.<br>
+                All Rights Reserved
+            </p>
+        </div>
+        -->
     </div>
 </div>
 

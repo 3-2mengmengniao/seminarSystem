@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -58,7 +58,7 @@
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">待办</a>
+                <a href="/teacher/message" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -113,20 +113,16 @@
         <div class="distance4"></div>
         <div class="distance"></div>
         <#if status=="FINISHED">
-        <p class="center center-text "><button type="button" class="layui-btn" id="contactSubmitButton" data-formId="contactForm" onclick="window.location.href='/teacher/course/seminar/report?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}'">查看报告</button>
-        </p>
+        <p class="center center-text "><a href="/teacher/course/seminar/report?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看报告</a></p>
         <div class="distance4"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="查看成绩" data-formId="contactForm"/>
-        </p>
+        <p class="center center-text "><a href="/teacher/course/seminar/score?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
         <#elseif status=="UNSTARTED">
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="开始讨论课" data-formId="contactForm"/>
-        </p>
-        <div class="distance4"></div>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="修改讨论课信息" data-formId="contactForm"/>
+        <p class="center center-text "><a href="#" class="button-return button-turqoise">开始讨论课</a></p>
+        <div class="distance"></div>
+        <p class="center center-text "><a href="#" class="button-return button-turqoise">修改讨论课信息</a>
         </p>
         <#else>
-        <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="进入讨论课" data-formId="contactForm"/>
-        </p>
+        <p class="center center-text "><a href="#" class="button-return button-turqoise">进入讨论课</a></p>
         </#if>
     </div>
 </div>

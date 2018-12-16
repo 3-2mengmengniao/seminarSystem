@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author zhenweiwang
@@ -54,4 +55,9 @@ public interface TeacherMapper {
      * @return
      */
     void deleteTeacherByTeacherId(@Param("teacherId") BigInteger teacherId);
+
+    /**
+     * @return
+     */
+    List<Teacher> getAllTeacher();
 }

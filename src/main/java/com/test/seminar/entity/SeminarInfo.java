@@ -18,7 +18,6 @@ public class SeminarInfo {
     private String introduction;
     private int maxGroup;
     private int visible;
-    private Date reportDDL;
     private int seminarSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationStartTime;
@@ -76,14 +75,6 @@ public class SeminarInfo {
 
     public void setVisible(int visible) {
         this.visible = visible;
-    }
-
-    public Date getReportDDL() {
-        return reportDDL;
-    }
-
-    public void setReportDDL(Date reportDDL) {
-        this.reportDDL = reportDDL;
     }
 
     public int getSeminarSerial() {

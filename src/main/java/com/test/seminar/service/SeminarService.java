@@ -17,50 +17,50 @@ import java.util.List;
 public interface SeminarService {
 
     /**
-     *
-     * @param seminarId
+     * 通过ID获取讨论课信息
+     * @param seminarInfoId
      * @return
      * @throws SeminarInfoNotFoundException
      */
-    SeminarInfo getSeminarBySeminarId(BigInteger seminarId)throws SeminarInfoNotFoundException;
+    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
-     *
+     * 创建新的讨论课信息
      * @param seminarInfo
      * @throws RepetitiveRecordException
      */
     void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
 
     /**
-     *
+     * 更改讨论课信息
      * @param seminarInfo
      * @throws SeminarInfoNotFoundException
      */
     void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
 
     /**
-     *
+     * 删除讨论课信息
      * @param seminarInfoId
      * @throws SeminarInfoNotFoundException
      */
     void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
-     *
+     * 通过ID获取某个班级的讨论课信息
      * @param classId
      * @return
      */
     SeminarControl getSemniarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
 
     /**
-     *
+     * 通过roundID获取round对应的讨论课信息
      * @param roundId
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
 
     /**
-     * 根据传入的轮次列表返回每一个round对应的讨论课信息，
+     * 根据传入的轮次列表返回每一个round对应的讨论课信息
      * @param roundList
      * @return
      */
