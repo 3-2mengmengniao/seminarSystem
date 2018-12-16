@@ -2,6 +2,8 @@ package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.entity.CourseClass;
+import com.test.seminar.exception.CourseClassNotFoundException;
+import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.mapper.CourseClassMapper;
 import com.test.seminar.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,22 +22,32 @@ public class CourseClassDaoImpl implements CourseClassDao {
     private CourseClassMapper courseClassMapper;
 
     @Override
-    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) {
-        return courseClassMapper.getCourseClassByCourseClassId(courseClassId);
+    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
+        CourseClass courseClass=courseClassMapper.getCourseClassByCourseClassId(courseClassId);
+        if(courseClass==null){
+            throw new CourseClassNotFoundException();
+        }
+        return courseClass;
     }
 
     @Override
-    public void insertCourseClass(CourseClass courseClass) {
+    public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
         courseClassMapper.insertCourseClass(courseClass);
     }
 
     @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass) {
+    public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException{
+        if(courseClassMapper.getCourseClassByCourseClassId(courseClass.getId())==null) {
+            throw new CourseClassNotFoundException();
+        }
         courseClassMapper.updateCourseClassByCourseClassId(courseClass);
     }
 
     @Override
-    public void deleteCourseClassByCourseClassId(BigInteger courseClassId) {
+    public void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException{
+        if(courseClassMapper.getCourseClassByCourseClassId(courseClassId)==null) {
+            throw new CourseClassNotFoundException();
+        }
         courseClassMapper.deleteCourseClassByCourseClassId(courseClassId);
     }
 
@@ -45,8 +57,12 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
-    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) {
-        return courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
+        CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+        if(courseClass==null) {
+            throw new CourseClassNotFoundException();
+        }
+        return courseClass;
     }
 
     @Override

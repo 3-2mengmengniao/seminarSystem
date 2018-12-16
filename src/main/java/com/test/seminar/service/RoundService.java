@@ -14,28 +14,28 @@ import java.util.List;
 public interface RoundService {
 
     /**
-     *
+     * 创建新轮次
      * @param round
      * @throws RepetitiveRecordException
      */
     void insertRound(Round round) throws RepetitiveRecordException;
 
     /**
-     *
+     * 删除轮次
      * @param roundId
      * @throws RoundNotFoundException
      */
     void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 
     /**
-     *
+     * 更新轮次信息
      * @param round
      * @throws RoundNotFoundException
      */
     void updateRound(Round round)throws RoundNotFoundException;
 
     /**
-     *
+     * 通过轮次ID获得轮次信息
      * @param roundId
      * @return
      * @throws RoundNotFoundException
@@ -43,7 +43,7 @@ public interface RoundService {
     Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 
     /**
-     *
+     * 根据课程ID获得本课程的所有轮次信息
      * @param courseId
      * @return
      */

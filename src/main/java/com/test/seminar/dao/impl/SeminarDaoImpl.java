@@ -3,6 +3,9 @@ package com.test.seminar.dao.impl;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.SeminarControlNotFoundException;
+import com.test.seminar.exception.SeminarInfoNotFoundException;
 import com.test.seminar.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,22 +23,32 @@ public class SeminarDaoImpl implements SeminarDao {
     SeminarMapper seminarMapper;
 
     @Override
-    public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) {
-        return seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId);
+    public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
+        SeminarInfo seminarInfo = seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId);
+        if(seminarInfo==null) {
+            throw new SeminarInfoNotFoundException();
+        }
+        return seminarInfo;
     }
 
     @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo) {
+    public void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException {
         seminarMapper.insertSeminarInfo(seminarInfo);
     }
 
     @Override
-    public void updateSeminarInfo(SeminarInfo seminarInfo) {
+    public void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException {
+        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null) {
+            throw new SeminarInfoNotFoundException();
+        }
         seminarMapper.updateSeminarInfo(seminarInfo);
     }
 
     @Override
-    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) {
+    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
+        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId)==null) {
+            throw new SeminarInfoNotFoundException();
+        }
         seminarMapper.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
     }
 
@@ -60,8 +73,12 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId) {
-        return seminarMapper.getSemniarControlByClassIdAndSeminarInfo(classId, seminarInfoId);
+    public SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
+        SeminarControl seminarControl = seminarMapper.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
+        if (seminarControl==null) {
+            throw new SeminarControlNotFoundException();
+        }
+        return seminarControl;
     }
 
     @Override

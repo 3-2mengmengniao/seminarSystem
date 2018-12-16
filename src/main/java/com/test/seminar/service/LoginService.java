@@ -11,7 +11,7 @@ import com.test.seminar.exception.UserNotFoundException;
 public interface LoginService {
 
     /**
-     *
+     * 学生登录
      * @param account
      * @param password
      * @return
@@ -20,7 +20,7 @@ public interface LoginService {
     Student studentLogin(String account, String password)throws UserNotFoundException;
 
     /**
-     *
+     * 教师登录
      * @param account
      * @param password
      * @return

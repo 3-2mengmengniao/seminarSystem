@@ -18,31 +18,27 @@ public interface CourseClassService {
      * 获取班级
      * @param courseClassId
      * @return
-     * @throws CourseClassNotFoundException 找不到班级
      */
     CourseClass getCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException;
 
 
     /**
-     *
+     * 添加班级
      * @param courseClass
-     * @throws RepetitiveRecordException
      */
     void insertCourseClass(CourseClass courseClass)throws RepetitiveRecordException;
 
 
     /**
-     *
+     * 更新班级
      * @param courseClass
-     * @throws CourseClassNotFoundException
      */
-    void updateCourseClassByCourseClassId( CourseClass courseClass)throws CourseClassNotFoundException;
+    void updateCourseClassByCourseClassId( CourseClass courseClass) throws CourseClassNotFoundException;
 
 
     /**
-     *
+     * 删除班级
      * @param courseClassId
-     * @throws CourseClassNotFoundException
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException;
 
@@ -54,5 +50,5 @@ public interface CourseClassService {
      */
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
-    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId);
+    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException;
 }

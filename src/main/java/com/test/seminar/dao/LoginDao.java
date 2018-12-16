@@ -3,6 +3,7 @@ package com.test.seminar.dao;
 import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
+import com.test.seminar.exception.UserNotFoundException;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -12,15 +13,15 @@ import org.apache.ibatis.annotations.Param;
 public interface LoginDao {
 
     /**
-     *
+     * 学生登录
      * @param account
      * @param password
      * @return
      */
-    Student studentLogin(String account, String password);
+    Student studentLogin(String account, String password)throws UserNotFoundException;
 
     /**
-     *
+     * 教师登录
      * @param account
      * @param password
      * @return
