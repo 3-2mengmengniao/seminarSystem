@@ -50,4 +50,10 @@ public interface CourseClassDao {
      */
     CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
 
+    /**
+     * @param courseClassId
+     * @param studentId
+     * @return
+     */
+    void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId);
 }

@@ -151,7 +151,7 @@ public class TeacherController {
     @RequestMapping(value="/course/klassList",method = POST)
     public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
         System.out.println(file);
-        fileService.uploadStudentExcel(file);
+        fileService.uploadStudentExcel(file,classId,courseId);
         return "redirect:/teacher/course/klassList?courseId="+courseId;
     }
 

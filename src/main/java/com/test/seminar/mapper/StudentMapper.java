@@ -68,14 +68,6 @@ public interface StudentMapper {
     List<Student> getStudentByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
     /**
-     * @param courseClassId
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    void insertCourseClassStudentRelation(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
-
-    /**
      * @return
      */
     List<Student> getAllStudent();

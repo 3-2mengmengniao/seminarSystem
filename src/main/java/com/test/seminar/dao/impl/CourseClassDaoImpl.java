@@ -3,6 +3,7 @@ package com.test.seminar.dao.impl;
 import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.entity.CourseClass;
 import com.test.seminar.mapper.CourseClassMapper;
+import com.test.seminar.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,5 +47,10 @@ public class CourseClassDaoImpl implements CourseClassDao {
     @Override
     public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) {
         return courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+    }
+
+    @Override
+    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
+        courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
     }
 }

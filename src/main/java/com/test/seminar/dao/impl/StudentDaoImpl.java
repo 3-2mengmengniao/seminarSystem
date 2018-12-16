@@ -65,11 +65,6 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId,BigInteger courseId) {
-        studentMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
-    }
-
-    @Override
     public List<Student> getAllStudent() {
         return studentMapper.getAllStudent();
     }

@@ -63,4 +63,9 @@
         FROM klass,klass_student
         WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
+
+    <insert id="insertCourseClassStudentRelation">
+        insert into klass_student(klass_id,student_id,course_id)
+        values(#{courseClassId},#{studentId},#{courseId})
+    </insert>
 </mapper>

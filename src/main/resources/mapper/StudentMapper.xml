@@ -40,11 +40,6 @@
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email})
     </insert>
 
-    <insert id="insertCourseClassStudentRelation">
-        insert into klass_student(klass_id,student_id,course_id)
-        values(#{courseClassId},#{studentId},#{courseId})
-    </insert>
-
     <update id="updateStudentByStudentId">
         update student
         <set>
