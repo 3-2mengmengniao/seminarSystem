@@ -134,11 +134,6 @@
 </script>
 </body>
 <script>
-    <#if message??>
-        window.onload = function () {
-            alert("${message}")
-        };
-    </#if>
     //隐藏text block，显示password block
     var demoImg = document.getElementById("demo_img");
     var demoInput = document.getElementById("contactEmailField");

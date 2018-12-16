@@ -51,7 +51,9 @@ public class StudentController {
         session.setAttribute("usertype", "student");
         session.setAttribute("account",student.getAccount());
         if(student.getActive()==0)
+        {
             return "student/activate";
+        }
         return "student/index";
     }
 
