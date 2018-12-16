@@ -134,7 +134,7 @@ public class FileProcessor {
         List<Student> studentList=new ArrayList<Student>();
         Student student;
         //循环Excel行数,从第二行开始。标题不入库
-        for(int r=1;r<totalRows;r++){
+        for(int r=2;r<totalRows;r++){
             Row row = sheet.getRow(r);
             if (row == null) continue;
             student = new Student();
@@ -144,9 +144,10 @@ public class FileProcessor {
                 Cell cell = row.getCell(c);
                 if (null != cell){
                     if(c==0){
-                        student.setAccount(cell.getStringCellValue());
+                        //trim去掉英文空格，replace去掉中文空格
+                        student.setAccount(cell.getStringCellValue().trim().replaceAll("\\u00A0",""));
                     }else if(c==1){
-                        student.setStudentName(cell.getStringCellValue());
+                        student.setStudentName(cell.getStringCellValue().trim().replaceAll("\\u00A0",""));
                     }
                 }
             }
