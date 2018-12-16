@@ -48,8 +48,6 @@ public class StudentController {
         Student student = studentService.getStudentByAccount(user.getUsername());
         model.addAttribute(student);
         session.setAttribute("id",student.getId());
-        session.setAttribute("usertype", "student");
-        session.setAttribute("account",student.getAccount());
         if(student.getActive()==0)
         {
             return "student/activate";

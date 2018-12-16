@@ -55,8 +55,6 @@ public class TeacherController {
         Teacher teacher = teacherService.getTeacherByAccount(user.getUsername());
         model.addAttribute(teacher);
         session.setAttribute("id",teacher.getId());
-        session.setAttribute("usertype", "teacher");
-        session.setAttribute("account",teacher.getAccount());
         if(teacher.getActive()==0)
         {
             return "teacher/activate";
@@ -143,7 +141,6 @@ public class TeacherController {
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
         model.addAttribute("courseId",courseId);
-        session.setAttribute("courseId",courseId);
         return "teacher/course/klassList";
     }
 
