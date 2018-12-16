@@ -128,6 +128,7 @@
 <!--<div class="bottom-deco"></div>-->
 
 <script>
+    sessionStorage.setItem('course',${course});
     layui.use(['element', 'layer'], function(){
         var element = layui.element();
         var layer = layui.layer;
