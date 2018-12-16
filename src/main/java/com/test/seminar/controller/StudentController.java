@@ -181,13 +181,14 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/info")
-    public String seminarInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+    public String seminarInfo(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
         model.addAttribute("round",round);
+        BigInteger courseId=round.getCourseId();
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         model.addAttribute("classId",classId);
