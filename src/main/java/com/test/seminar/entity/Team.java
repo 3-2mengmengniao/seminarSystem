@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -15,6 +16,7 @@ public class Team {
     private BigInteger leaderId;
     private int status;
     private int teamSerial;
+    private List<RoundScore> roundScores;
 
     public BigInteger getId() {
         return id;

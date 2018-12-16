@@ -17,6 +17,7 @@ public class SeminarControl {
     private int seminarStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reportDDL;
+    private SeminarInfo seminarInfo;
 
     public BigInteger getId() {
         return id;
@@ -52,5 +53,13 @@ public class SeminarControl {
 
     public void setReportDDL(Date reportDDL) {
         this.reportDDL = reportDDL;
+    }
+
+    public SeminarInfo getSeminarInfo() {
+        return seminarInfo;
+    }
+
+    public void setSeminarInfo(SeminarInfo seminarInfo) {
+        this.seminarInfo = seminarInfo;
     }
 }
