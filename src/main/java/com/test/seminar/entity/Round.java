@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -14,7 +15,7 @@ public class Round {
     private int presentationScoreMethod;
     private int reportScoreMethod;
     private int questionScoreMethod;
-
+    private List<SeminarInfo> seminarInfos;
 
     public BigInteger getId() {
         return id;
@@ -62,5 +63,13 @@ public class Round {
 
     public void setQuestionScoreMethod(int questionScoreMethod) {
         this.questionScoreMethod = questionScoreMethod;
+    }
+
+    public List<SeminarInfo> getSeminarInfos() {
+        return seminarInfos;
+    }
+
+    public void setSeminarInfos(List<SeminarInfo> seminarInfos) {
+        this.seminarInfos = seminarInfos;
     }
 }
