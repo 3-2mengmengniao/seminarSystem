@@ -20,16 +20,18 @@ public class LoginServiceImlp implements LoginService {
     @Override
     public Student studentLogin(String account, String password) {
         Student student=loginDao.studentLogin(account, password);
-        if(student==null)
+        if(student==null) {
             throw new UserNotFoundException();
+        }
         return student;
     }
 
     @Override
     public Teacher teacherLogin(String account, String password) {
         Teacher teacher=loginDao.teacherLogin(account, password);
-        if(teacher==null)
+        if(teacher==null) {
             throw new UserNotFoundException();
+        }
         return teacher;
     }
 
