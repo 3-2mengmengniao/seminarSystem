@@ -85,11 +85,10 @@
         $.ajax({
             type: "DELETE",
             url: "/teacher/course/klass/" + $(this).attr('name'),
-            success: function(data){
-                if(data==="200")
+            success:function(data,status,response){
+                if(response.status=="200"){
                     window.location.href="/teacher/course/klassList?courseId=${courseId}";
-                else if(data==="404")
-                    alert("班级不存在");
+                }
             }
         });
     });

@@ -5,6 +5,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -73,10 +75,10 @@ public class TeacherController {
 
     @RequestMapping(value="/course/{courseId}",method = DELETE)
     @ResponseBody
-    public String courseDelete(@PathVariable BigInteger courseId, Model model) {
+    public ResponseEntity<String> courseDelete(@PathVariable BigInteger courseId, Model model) {
         courseService.deleteCourseByCourseId(courseId);
-        String status="200";
-        return status;
+
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/setting",method = GET)
@@ -90,14 +92,13 @@ public class TeacherController {
 
     @RequestMapping(value = "/modifyEmail", method = POST)
     @ResponseBody
-    public String emailModifyPost(HttpServletRequest request, @RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation, Model model) {
+    public ResponseEntity<String> emailModifyPost(HttpServletRequest request, @RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation, Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
         teacher.setEmail(email);
         teacherService.updateTeacherByTeacherId(teacher);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/modifyPassword", method = GET)
@@ -112,27 +113,25 @@ public class TeacherController {
 
     @RequestMapping(value = "/modifyPassword", method = POST)
     @ResponseBody
-    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
         teacher.setPassword(newPsw);
         teacherService.updateTeacherByTeacherId(teacher);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/activate", method = POST)
     @ResponseBody
-    public String activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
         teacher.setPassword(newPsw);
         teacher.setActive(1);
         teacherService.updateTeacherByTeacherId(teacher);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/klassList",method = GET)
@@ -170,14 +169,13 @@ public class TeacherController {
 
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
-    public String createCoursePost(HttpServletRequest request,Model model,Course course) {
+    public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model,Course course) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         course.setTeacherId(teacherId);
         System.out.println(course.getCourseName());
         courseService.insertCourse(course);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/klass/create",method = GET)
@@ -188,19 +186,17 @@ public class TeacherController {
 
     @RequestMapping(value="/course/klass/create",method = POST)
     @ResponseBody
-    public String createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
+    public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
         courseClass.setCourseId(courseId);
         courseClassService.insertCourseClass(courseClass);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/klass/{klassId}",method = DELETE)
     @ResponseBody
-    public String classDelete(@PathVariable BigInteger klassId, Model model) {
+    public ResponseEntity<String> classDelete(@PathVariable BigInteger klassId, Model model) {
         courseClassService.deleteCourseClassByCourseClassId(klassId);
-        String status="200";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/grade")

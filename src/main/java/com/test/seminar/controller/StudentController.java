@@ -5,6 +5,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,14 +78,13 @@ public class StudentController {
 
     @RequestMapping(value = "/modifyEmail", method = POST)
     @ResponseBody
-    public String emailModifyPost(HttpServletRequest request, @RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation, Model model) {
+    public ResponseEntity<String> emailModifyPost(HttpServletRequest request, @RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation, Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
         student.setEmail(email);
         studentService.updateStudentByStudentId(student);
-        String status="204";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/modifyPassword", method = GET)
@@ -98,19 +99,18 @@ public class StudentController {
 
     @RequestMapping(value = "/modifyPassword", method = POST)
     @ResponseBody
-    public String valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> valiPswPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw, @RequestParam(value = "validation") String validation,Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
         student.setPassword(newPsw);
         studentService.updateStudentByStudentId(student);
-        String status="204";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/activate", method = POST)
     @ResponseBody
-    public String activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "email") String email,Model model) {
+    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "email") String email,Model model) {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
@@ -118,8 +118,7 @@ public class StudentController {
         student.setEmail(email);
         student.setActive(1);
         studentService.updateStudentByStudentId(student);
-        String status="204";
-        return status;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/seminars")

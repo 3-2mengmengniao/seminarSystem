@@ -27,7 +27,6 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        var courseId=$('#contactForm').attr("name");
         $.ajax(
             {
                 url:$('#' + currentForm).attr('action'),
@@ -36,7 +35,7 @@ jQuery(document).ready(function($) {
                 success:function(data,status,response){
                     if(response.status=="200"){
                         var info=response.responseText;
-                        window.location.href="/teacher/course/klassList?courseId="+courseId;
+                        window.location.href="/student/index";
                     }
                 },
                 error:function(data,status){
@@ -44,18 +43,28 @@ jQuery(document).ready(function($) {
                     console.log(status);
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
+                    var onFocus = document.activeElement;
+                    if (onFocus.id === "contactEmailField") {
+                        $('#formSuccessMessageWrap').fadeOut(500);
+                    }
+                    console.log("error");
                 }
             }
         );
 
-        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-        //     if(data=="405") {
+        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status,response){
+        //     if(data=="404") {
         //         $('#formSuccessMessageWrap').fadeIn(500);
         //         formSubmitted = 'false';
+        //         var onFocus = document.activeElement;
+        //         if (onFocus.id === "contactEmailField") {
+        //             $('#formSuccessMessageWrap').fadeOut(500);
+        //         }
         //     }
         //     else if(data=="200")
-        //         window.location.href="/teacher/course/klassList?courseId="+courseId;
-        //
+        //         window.location.href="/teacher/index";
+        //     else if(data=="204")
+        //         window.location.href="/student/index";
         // });
         //window.location.href='1vali_psw.html';
     };
@@ -66,20 +75,40 @@ jQuery(document).ready(function($) {
         $('.formValidationError').hide();
         $('.fieldHasError').removeClass('fieldHasError');
         var count=4;
+        var judge=true;
         // hide any error messages ends
         $('#' + currentForm + ' .requiredField').each(function(i){
             if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){
-                // $(this).val($(this).attr('data-dummy'));
-                // $(this).focus();
+                $(this).val($(this).attr('data-dummy'));
+                $(this).focus();
                 $(this).addClass('fieldHasError');
                 $('#' + $(this).attr('id') + 'Error').fadeIn(300);
+                count=count-1;
+                judge=false;
+                return false;
+            };
+
+            if($('#contactNameField').val()!==$('#contactEmailField').val()){
+                $('#differentError').fadeIn(300);
                 count=count-1;
                 return false;
             };
 
+            if($(this).hasClass('requiredEmailField')){
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var tempField = '#' + $(this).attr('id');
+                if(!emailReg.test($(tempField).val())) {
+                    $(tempField).focus();
+                    $(tempField).addClass('fieldHasError');
+                    $(tempField + 'Error2').fadeIn(300);
+                    count=count-1;
+                    return false;
+                };
+            };
+
 
         });
-        if(formSubmitted == 'false' && count===4){
+        if(formSubmitted == 'false' && count==4&&judge==true){
             submitData(currentForm, formType);
         };
 
@@ -90,7 +119,10 @@ jQuery(document).ready(function($) {
     $('#contactSubmitButton').click(function() {
         var flag2=validateForm($(this).attr('data-formId'));
         if(flag2==true)
+        {
+            alert(flag2);
             return true;
+        }
         return false;
     });
     // contact button function ends
@@ -98,3 +130,7 @@ jQuery(document).ready(function($) {
 
 
 });
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////// Document Ready Function Ends                                                                       */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/

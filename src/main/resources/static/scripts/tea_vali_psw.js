@@ -5,7 +5,6 @@ var formSubmitted = 'false';
 jQuery(document).ready(function($) {
 
     $('#formSuccessMessageWrap').hide(0);
-    $('#formFailureMessageWrap').hide(0);
     $('.formValidationError').fadeOut(0);
 
     // fields focus function starts
@@ -28,42 +27,42 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.ajax(
-            {
-                url:$('#' + currentForm).attr('action'),
-                type:'post',
-                data:formInput,
-                success:function(data,status,response){
-                    if(response.status=="200"){
-                        $('#formSuccessMessageWrap').fadeIn(500);
-                        window.setTimeout("window.location='/'",2000);
-                    }
-                },
-                error:function(data,status){
-                    console.log(data);
-                    console.log(status);
-                    $('#formFailureMessageWrap').fadeIn(500);
-                    formSubmitted = 'false';
-                    var onFocus = document.activeElement;
-                    if (onFocus.id === "contactEmailField") {
-                        $('#formFailureMessageWrap').fadeOut(500);
+            $.ajax(
+                {
+                    url:$('#' + currentForm).attr('action'),
+                    type:'post',
+                    data:formInput,
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            window.location.href="/teacher/setting";
+                        }
+                    },
+                    error:function(data,status){
+                        console.log(data);
+                        console.log(status);
+                        $('#formFailureMessageWrap').fadeIn(500);
+                        formSubmitted = 'false';
+                        var onFocus = document.activeElement;
+                        if (onFocus.id === "contactEmailField") {
+                            $('#formFailureMessageWrap').fadeOut(500);
+                        }
                     }
                 }
-            }
-        );
+            );
 
         // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-        //     if(data=="404") {
-        //         $('#formFailureMessageWrap').fadeIn(500);
-        //         formSubmitted = 'false';
-        //         var onFocus = document.activeElement;
-        //         if (onFocus.id === "contactEmailField") {
-        //             $('#formFailureMessageWrap').fadeOut(500);
+        //         if(data=="404") {
+        //             $('#formSuccessMessageWrap').fadeIn(500);
+        //             formSubmitted = 'false';
+        //             var onFocus = document.activeElement;
+        //             if (onFocus.id === "contactEmailField") {
+        //                 $('#formSuccessMessageWrap').fadeOut(500);
+        //             }
         //         }
-        //     }
-        //     else if(data=="200"||data=="204")
-        //         $('#formSuccessMessageWrap').fadeIn(500);
-        //     window.setTimeout("window.location='/'",2000);
+        //         else if(data=="200")
+        //             window.location.href="/teacher/setting";
+        //         else if(data=="204")
+        //             window.location.href="/student/setting";
         // });
         //window.location.href='1vali_psw.html';
     };
@@ -90,11 +89,11 @@ jQuery(document).ready(function($) {
             if($('#contactNameField').val()!==$('#contactEmailField').val()){
                 $('#differentError').fadeIn(300);
                 count=count-1;
-                return false;
-            };
+                    return false;
+                };
 
 
-        });
+    });
         if(formSubmitted == 'false' && count==3&&judge==true){
             submitData(currentForm, formType);
         };
@@ -117,3 +116,7 @@ jQuery(document).ready(function($) {
 
 
 });
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////// Document Ready Function Ends                                                                       */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
