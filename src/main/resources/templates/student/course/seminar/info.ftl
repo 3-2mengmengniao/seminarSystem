@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -127,8 +127,9 @@
             <p class="center center-text "><a href="/student/course/seminar/score?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
 
         </#if>
-        <#if enrollment==true>
+        <#if enrollment==true && status!="FINISHED">
         <p class="center center-text"><a href="#" class="button-return button-turqoise">PPT提交</a></p>
+        <#else>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>
         </#if>
             <!--

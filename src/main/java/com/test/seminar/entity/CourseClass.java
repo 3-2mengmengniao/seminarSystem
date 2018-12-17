@@ -12,18 +12,20 @@ public class CourseClass {
     private BigInteger courseId;
     private int grade;
     private int classSerial;
-    private String introduction;
-    private int teamAmount;
+    private String classTime;
+    private String classLocation;
 
-    public BigInteger getId() {return id; }
+    public BigInteger getId() {
+        return id;
+    }
 
-    public BigInteger getCourseId() {return courseId; }
+    public BigInteger getCourseId() {
+        return courseId;
+    }
 
-    public void setCourseId(BigInteger courseId) {this.courseId = courseId; }
-
-    public String getIntroduction() {return introduction; }
-
-    public void setIntroduction(String introduction) {this.introduction = introduction; }
+    public void setCourseId(BigInteger courseId) {
+        this.courseId = courseId;
+    }
 
     public int getGrade() {
         return grade;
@@ -41,11 +43,19 @@ public class CourseClass {
         this.classSerial = classSerial;
     }
 
-    public int getTeamAmount() {
-        return teamAmount;
+    public String getClassTime() {
+        return classTime;
     }
 
-    public void setTeamAmount(int teamAmount) {
-        this.teamAmount = teamAmount;
+    public void setClassTime(String classTime) {
+        this.classTime = classTime;
+    }
+
+    public String getClassLocation() {
+        return classLocation;
+    }
+
+    public void setClassLocation(String classLocation) {
+        this.classLocation = classLocation;
     }
 }

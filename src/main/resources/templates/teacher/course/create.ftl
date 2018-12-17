@@ -18,7 +18,7 @@
     <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -62,7 +62,7 @@
         <form class="layui-form contactForm" action="/teacher/course" method="post" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#c9302c;">该课程已被创建！</p>
+                    <p style="color:#d44950;">该课程已被创建！</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -91,7 +91,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">课堂展示</label>
                     <div class="layui-input-block">
-                        <select name="presentationProportion" lay-filter="aihao">
+                        <select name="presentationPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>
@@ -109,7 +109,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">课堂提问</label>
                     <div class="layui-input-block">
-                        <select name="questionProportion" lay-filter="aihao">
+                        <select name="questionPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>
@@ -127,7 +127,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">书面报告</label>
                     <div class="layui-input-block">
-                        <select name="reportProportion" lay-filter="aihao">
+                        <select name="reportPercentage" lay-filter="aihao">
                             <option value="0">0</option>
                             <option value="10">10%</option>
                             <option value="20">20%</option>

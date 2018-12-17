@@ -1439,13 +1439,13 @@ table tr:hover td{
 
 .static-notification-red{
 	overflow:hidden;
-	color:#c9302c;
-	margin-bottom:20px;
+	color:#d44950;
+	margin-bottom:30px;
+	margin-top:-30px;
 }
 
 .static-notification-red p{
-	font-size:14px;
-	margin-top:-10px;
+	font-size:16px;
 	margin-bottom:10px;
 	margin-left:7%;
 }

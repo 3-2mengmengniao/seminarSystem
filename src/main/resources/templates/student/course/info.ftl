@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -56,9 +56,9 @@
         </p>
         <h3>成绩计算规则</h3>
         <p>
-            课堂展示    ${course.presentationProportion}%<br>
-            课堂提问    ${course.questionProportion}%<br>
-            课堂报告    ${course.reportProportion}%<br>
+            课堂展示    ${course.presentationPercentage}%<br>
+            课堂提问    ${course.questionPercentage}%<br>
+            课堂报告    ${course.reportPercentage}%<br>
         </p>
         <h3>分组规则</h3>
         <p>

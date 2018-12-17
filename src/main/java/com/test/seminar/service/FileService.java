@@ -10,7 +10,7 @@ public interface FileService {
      * 输入Excel文件导入学生，不会读取非excel文件
      * @param file
      */
-    void uploadStudentExcel(MultipartFile file);
+    void uploadStudentExcel(MultipartFile file, BigInteger courseClassId, BigInteger courseId);
 
     MultipartFile downloadFileByFilePath(String filePath);
 

@@ -13,21 +13,17 @@ import java.util.Date;
 public class Course {
     private BigInteger id;
     private BigInteger teacherId;
-    private String introduction;
-    private int presentationProportion;
-    private int questionProportion;
-    private int reportProportion;
     private String courseName;
-    private int minTeamMember;
-    private int maxTeamMember;
-    private int classAmount;
-    private int roundAmount;
-
+    private String introduction;
+    private int presentationPercentage;
+    private int questionPercentage;
+    private int reportPercentage;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamStartTime;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamEndTime;
+    private BigInteger teamMainCourseId;
+    private BigInteger seminarMainCourseId;
 
     public BigInteger getId() {
         return id;
@@ -48,28 +44,28 @@ public class Course {
         this.introduction = introduction;
     }
 
-    public int getPresentationProportion() {
-        return presentationProportion;
+    public int getPresentationPercentage() {
+        return presentationPercentage;
     }
 
-    public void setPresentationProportion(int presentationProportion) {
-        this.presentationProportion = presentationProportion;
+    public void setPresentationPercentage(int presentationPercentage) {
+        this.presentationPercentage = presentationPercentage;
     }
 
-    public int getQuestionProportion() {
-        return questionProportion;
+    public int getQuestionPercentage() {
+        return questionPercentage;
     }
 
-    public void setQuestionProportion(int questionProportion) {
-        this.questionProportion = questionProportion;
+    public void setQuestionPercentage(int questionPercentage) {
+        this.questionPercentage = questionPercentage;
     }
 
-    public int getReportProportion() {
-        return reportProportion;
+    public int getReportPercentage() {
+        return reportPercentage;
     }
 
-    public void setReportProportion(int reportProportion) {
-        this.reportProportion = reportProportion;
+    public void setReportPercentage(int reportPercentage) {
+        this.reportPercentage = reportPercentage;
     }
 
     public String getCourseName() {
@@ -78,22 +74,6 @@ public class Course {
 
     public void setCourseName(String courseName) {
         this.courseName = courseName;
-    }
-
-    public int getMinTeamMember() {
-        return minTeamMember;
-    }
-
-    public void setMinTeamMember(int minTeamMember) {
-        this.minTeamMember = minTeamMember;
-    }
-
-    public int getMaxTeamMember() {
-        return maxTeamMember;
-    }
-
-    public void setMaxTeamMember(int maxTeamMember) {
-        this.maxTeamMember = maxTeamMember;
     }
 
     public Date getTeamStartTime() {
@@ -112,19 +92,19 @@ public class Course {
         this.teamEndTime = teamEndTime;
     }
 
-    public int getClassAmount() {
-        return classAmount;
+    public BigInteger getTeamMainCourseId() {
+        return teamMainCourseId;
     }
 
-    public void setClassAmount(int classAmount) {
-        this.classAmount = classAmount;
+    public void setTeamMainCourseId(BigInteger teamMainCourseId) {
+        this.teamMainCourseId = teamMainCourseId;
     }
 
-    public int getRoundAmount() {
-        return roundAmount;
+    public BigInteger getSeminarMainCourseId() {
+        return seminarMainCourseId;
     }
 
-    public void setRoundAmount(int roundAmount) {
-        this.roundAmount = roundAmount;
+    public void setSeminarMainCourseId(BigInteger seminarMainCourseId) {
+        this.seminarMainCourseId = seminarMainCourseId;
     }
 }

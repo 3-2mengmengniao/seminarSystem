@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -56,7 +56,8 @@
         <h3 class="center-text" style="font-weight:bold;">${class.grade?c}-(${class.classSerial})</h3>
         <div class="distance5"></div>
         <p class="center-text">
-            ${class.introduction}<br>
+            上课时间： ${class.classTime}<br>
+            上课地点： ${class.classLocation}<br>
             班级学生名单： &emsp;周三56节.xlsx<br>
         <form id="form${class.id}" enctype="multipart/form-data" method="post" action="/teacher/course/klassList?courseId=${courseId}&classId=${class.id}" class="file center-text">
             <input type="file" name="file" id="file${class.id}" class="center-block center-text" multiple/>
@@ -84,11 +85,10 @@
         $.ajax({
             type: "DELETE",
             url: "/teacher/course/klass/" + $(this).attr('name'),
-            success: function(data){
-                if(data==="200")
+            success:function(data,status,response){
+                if(response.status=="200"){
                     window.location.href="/teacher/course/klassList?courseId=${courseId}";
-                else if(data==="404")
-                    alert("班级不存在");
+                }
             }
         });
     });

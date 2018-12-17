@@ -16,29 +16,22 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Autowired
     private CourseClassDao courseClassDao;
     @Override
-    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
-        CourseClass courseClass=courseClassDao.getCourseClassByCourseClassId(courseClassId);
-        if(courseClass==null)
-            throw new CourseClassNotFoundException();
-        return courseClass;
+    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException {
+        return courseClassDao.getCourseClassByCourseClassId(courseClassId);
     }
 
     @Override
-    public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
+    public void insertCourseClass(CourseClass courseClass)throws RepetitiveRecordException {
         courseClassDao.insertCourseClass(courseClass);
     }
 
     @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException {
-        if(courseClassDao.getCourseClassByCourseClassId(courseClass.getId())==null)
-            throw new CourseClassNotFoundException();
+    public void updateCourseClassByCourseClassId(CourseClass courseClass)throws CourseClassNotFoundException {
         courseClassDao.updateCourseClassByCourseClassId(courseClass);
     }
 
     @Override
-    public void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
-        if(courseClassDao.getCourseClassByCourseClassId(courseClassId)==null)
-            throw new CourseClassNotFoundException();
+    public void deleteCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException {
         courseClassDao.deleteCourseClassByCourseClassId(courseClassId);
     }
 
@@ -48,11 +41,8 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId){
-        CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-        if(courseClass==null)
-            throw new CourseClassNotFoundException();
-        return courseClass;
+    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
+        return courseClassDao.getCourseClassByStudentIdAndCourseId(studentId,courseId);
     }
 
 }

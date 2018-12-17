@@ -1,6 +1,8 @@
 package com.test.seminar.dao;
 
 import com.test.seminar.entity.Student;
+import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.UserNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -17,7 +19,7 @@ public interface StudentDao {
      * @param studentId
      * @return
      */
-    Student getStudentByStudentId(BigInteger studentId);
+    Student getStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
 
     /**
      * 通过account获取学生信息
@@ -33,7 +35,7 @@ public interface StudentDao {
      * @param student
      * @return 新建学生的ID
      */
-    void insertStudent(Student student);
+    void insertStudent(Student student)throws RepetitiveRecordException;
 
     /**
      * 创建新的学生账户
@@ -49,13 +51,13 @@ public interface StudentDao {
      * @param student
      * @return
      */
-    void updateStudentByStudentId(Student student);
+    void updateStudentByStudentId(Student student)throws UserNotFoundException;
 
     /**
      * @param studentId
      * @return
      */
-    void deleteStudentByStudentId(BigInteger studentId);
+    void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
 
     /**
      * @param teamId
@@ -70,9 +72,7 @@ public interface StudentDao {
     List<Student> getStudentByCourseClassId(BigInteger courseClassId);
 
     /**
-     * @param courseClassId
-     * @param studentId
      * @return
      */
-    void insertCourseClassStudentRelation(BigInteger courseClassId,BigInteger studentId);
+    List<Student> getAllStudent();
 }

@@ -61,4 +61,13 @@ public interface CourseClassMapper {
      * @return
      */
     CourseClass getCourseClassByStudentIdAndCourseId(@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
+
+    /**
+     * @param courseClassId
+     * @param studentId
+     * @param courseId
+     * @return
+     */
+    void insertCourseClassStudentRelation(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
+
 }

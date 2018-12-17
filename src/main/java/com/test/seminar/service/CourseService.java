@@ -15,7 +15,7 @@ import java.util.List;
 public interface CourseService {
 
     /**
-     *
+     * 通过ID获取课程信息
      * @param courseId
      * @return
      * @throws CourseNotFoundException
@@ -23,35 +23,35 @@ public interface CourseService {
     Course getCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
 
     /**
-     *
+     * 通过老师ID获取课程列表
      * @param teacherId
      * @return
      */
     List<Course> getCourseByTeacherId(BigInteger teacherId);
 
     /**
-     *
+     * 通过学生ID获取课程列表
      * @param studentId
      * @return
      */
     List<Course> getCourseByStudentId(BigInteger studentId);
 
     /**
-     *
+     * 创建新的课程
      * @param Course
      * @throws RepetitiveRecordException
      */
     void insertCourse(Course Course)throws RepetitiveRecordException;
 
     /**
-     *
+     * 更改课程信息
      * @param course
      * @throws CourseNotFoundException
      */
     void updateCourseByCourseId(Course course)throws CourseNotFoundException;
 
     /**
-     *
+     * 删除课程
      * @param courseId
      * @throws CourseNotFoundException
      */

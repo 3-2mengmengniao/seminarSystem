@@ -15,7 +15,7 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -26,6 +26,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+
 
     <!--<div class="bottom-deco"></div>-->
 
@@ -60,13 +61,13 @@
         </p>
         <h3 class="margin3">成绩计算规则</h3>
         <p class="margin3">
-            课堂展示    ${course.presentationProportion}%<br>
-            课堂提问    ${course.questionProportion}%<br>
-            课堂报告    ${course.reportProportion}%<br>
+            课堂展示    ${course.presentationPercentage}%<br>
+            课堂提问    ${course.questionPercentage}%<br>
+            课堂报告    ${course.reportPercentage}%<br>
         </p>
         <h3 class="margin3">分组规则</h3>
         <p class="margin4">
-            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${course.minTeamMember}~${course.maxTeamMember}人<br>
+            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6~8人<br>
             组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
             组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
         </p>
@@ -93,7 +94,7 @@
             url: "/teacher/course/${course.id}",
             success: function(data){
                 if(data==="200")
-                    window.location.href="/teacher/courses";
+                    window.location.href="/teacher/courseList";
                 else if(data==="404")
                     alert("课程不存在");
             }

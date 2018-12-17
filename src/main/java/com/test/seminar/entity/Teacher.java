@@ -22,7 +22,6 @@ public class Teacher{
     private int active;
     private String teacherName;
     private String email;
-    private int emailReceiveInterval;
 
     public BigInteger getId() {
         return id;
@@ -68,11 +67,4 @@ public class Teacher{
         this.email = email;
     }
 
-    public int getEmailReceiveInterval() {
-        return emailReceiveInterval;
-    }
-
-    public void setEmailReceiveInterval(int emailReceiveInterval) {
-        this.emailReceiveInterval = emailReceiveInterval;
-    }
 }

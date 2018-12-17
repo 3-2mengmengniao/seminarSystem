@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -16,10 +17,7 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
     @Override
     public Teacher getTeacherByTeacherId(BigInteger teacherId) throws UserNotFoundException {
-        Teacher teacher=teacherDao.getTeacherByTeacherId(teacherId);
-        if(teacher==null)
-            throw new UserNotFoundException();
-        return teacher;
+        return teacherDao.getTeacherByTeacherId(teacherId);
     }
 
     @Override
@@ -29,23 +27,25 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void updateTeacherByTeacherId(Teacher teacher) throws UserNotFoundException {
-        if(teacherDao.getTeacherByTeacherId(teacher.getId())==null)
-            throw new UserNotFoundException();
         teacherDao.updateTeacherByTeacherId(teacher);
     }
 
     @Override
     public void deleteTeacherByTeacherId(BigInteger teacherId) throws UserNotFoundException {
-        if(teacherDao.getTeacherByTeacherId(teacherId)==null)
-            throw new UserNotFoundException();
         teacherDao.deleteTeacherByTeacherId(teacherId);
     }
 
     @Override
-    public Teacher getTeacherByAccount(String account) {
+    public Teacher getTeacherByAccount(String account)throws UserNotFoundException {
         Teacher teacher= teacherDao.getTeacherByAccount(account);
-        if(teacher==null)
+        if(teacher==null) {
             throw new UserNotFoundException();
+        }
         return teacher;
+    }
+
+    @Override
+    public List<Teacher> getAllTeacher() {
+        return teacherDao.getAllTeacher();
     }
 }

@@ -14,6 +14,7 @@ public class Question {
     private BigInteger studentId;
     private BigInteger seminarControlId;
     private int selected;
+    private double score;
 
     public BigInteger getId() {
         return id;
@@ -57,5 +58,13 @@ public class Question {
 
     public void setSelected(int selected) {
         this.selected = selected;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
     }
 }

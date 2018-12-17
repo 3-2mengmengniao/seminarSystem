@@ -22,11 +22,8 @@ public class SeminarServiceImpl implements SeminarService {
     private SeminarDao seminarDao;
 
     @Override
-    public SeminarInfo getSeminarBySeminarId(BigInteger seminarId) throws SeminarInfoNotFoundException {
-        SeminarInfo seminarInfo = seminarDao.getSeminarInfoBySeminarInfoId(seminarId);
-        if(seminarInfo==null)
-            throw new SeminarInfoNotFoundException();
-        return seminarInfo;
+    public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
+        return seminarDao.getSeminarInfoBySeminarInfoId(seminarInfoId);
     }
 
     @Override
@@ -36,24 +33,17 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo) throws SeminarInfoNotFoundException {
-        if(seminarDao.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null)
-            throw new SeminarInfoNotFoundException();
         seminarDao.updateSeminarInfo(seminarInfo);
     }
 
     @Override
     public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
-        if(seminarDao.getSeminarInfoBySeminarInfoId(seminarInfoId)==null)
-            throw new SeminarInfoNotFoundException();
         seminarDao.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
     }
 
     @Override
     public SeminarControl getSemniarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
-        SeminarControl seminarControl = seminarDao.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
-        if (seminarControl==null)
-            throw new SeminarControlNotFoundException();
-        return seminarControl;
+        return seminarDao.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
     }
 
     @Override

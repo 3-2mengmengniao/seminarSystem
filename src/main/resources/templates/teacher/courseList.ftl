@@ -17,7 +17,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css"		 rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -59,7 +59,7 @@
     	<div class="corner-deco"></div>
     	<div class="navigation-wrapper">
             <div class="navigation-item">
-                <a href="/teacher/index" class="home-icon">待办</a>
+                <a href="/teacher/message" class="home-icon">待办</a>
                 <em class="active-menu"></em>
             </div>
             <div class="navigation-item">
@@ -104,7 +104,7 @@
                 </div>
                 <div class="layui-colla-content">
                     <i class="layui-icon layui-icon-set-fill layui-anim layui-anim-fadein"></i>
-                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/teacher/course/shareSettings">共享设置</a>
+                    <a class="my-navigation layui-anim layui-anim-fadein"  href="/teacher/course/shareSettings?courseId=${course.id}">共享设置</a>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
     <div class="distance5"></div>
     <div class="center-navigation">
     <div class="layui-colla-item">
-        <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/create-course'" >新建课程</h2>
+        <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/course/create'" >新建课程</h2>
     </div>
     </div>
     <div class="distance2"></div>

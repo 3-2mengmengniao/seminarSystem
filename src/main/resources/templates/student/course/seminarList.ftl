@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -82,7 +82,7 @@
                         <h2 class="layui-colla-title">第${round?index+1}轮</h2>
                         <#list round as seminar>
                         <div class="layui-colla-content center-text">
-                            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminar.id}&classId=${class.id}">${seminar?index+1}&emsp;${seminar.seminarName}</a>
+                            <a href="/student/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${seminar?index+1}&emsp;${seminar.seminarName}</a>
                         </div>
                         </#list>
                     </div>
@@ -128,6 +128,7 @@
 <!--<div class="bottom-deco"></div>-->
 
 <script>
+    sessionStorage.setItem('course',${course});
     layui.use(['element', 'layer'], function(){
         var element = layui.element();
         var layer = layui.layer;
