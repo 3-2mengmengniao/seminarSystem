@@ -53,10 +53,9 @@ public class ExceptionControll {
     }
 
 
-    @ResponseBody
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<String> noMapping(Exception exception) {
-        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+    public String noMapping(Exception exception) {
+        return "error";
     }
 
 

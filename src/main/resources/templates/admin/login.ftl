@@ -20,7 +20,6 @@
     <div class="login layui-anim layui-anim-up">
         <div class="message">翻转课堂管理平台-管理登录</div>
         <div id="darkbannerwrap"></div>
-        
         <form method="post" class="layui-form" >
             <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" autocomplete="off">
             <hr class="hr15">

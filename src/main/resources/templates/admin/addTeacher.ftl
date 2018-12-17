@@ -21,13 +21,13 @@
 
 <body>
 <div class="x-body layui-anim layui-anim-up">
-    <form class="layui-form" style="margin-left: 60px;margin-top:10px;">
+    <form class="layui-form" style="margin-left: 60px;margin-top:10px;" id="currentForm">
         <div class="layui-form-item">
             <label for="L_username" class="layui-form-label">
                 <span class="x-red">*</span>教师姓名
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_username" name="username" required="" lay-verify="required"
+                <input type="text" id="L_username" name="teacherName" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <span class="x-red">*</span>教工号
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="L_usernumber" name="username" required="" lay-verify="required|number"
+                <input type="text" id="L_usernumber" name="account" required="" lay-verify="required|number"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -57,7 +57,7 @@
                 <span class="x-red">*</span>初始密码
             </label>
             <div class="layui-input-inline">
-                <input type="password" id="L_pass" name="pass" required="" lay-verify="required"
+                <input type="password" id="L_pass" name="password" required="" lay-verify="required"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
@@ -82,6 +82,28 @@
         form.on('submit(add)', function(data){
             console.log(data);
             //发异步，把数据提交给php
+            var formInput = $('#currentForm').serialize();
+            console.log(formInput);
+            console.log("mydata");
+            //发异步，把数据提交给php
+            $.ajax(
+                    {
+                        url:"/admin/teacher",
+                        type:'put',
+                        data:formInput,
+                        success:function(data,status,response){
+                            if(response.status=="200"){
+                                console.log("success");
+                            }
+                        },
+                        error:function(data,status){
+                            console.log(data);
+                            console.log(status);
+                            alert("修改失败");
+                            console.log("error");
+                        }
+                    }
+            );
             layer.alert("增加成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);

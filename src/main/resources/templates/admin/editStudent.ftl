@@ -21,14 +21,16 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form" style="margin-left: 35px;margin-top:10px;">
+        <form class="layui-form" style="margin-left: 35px;margin-top:10px;" id="currentForm">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
                   <span class="x-red">*</span>学工号
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required="" lay-verify="required|number"
-                  autocomplete="off" value="admin" class="layui-input">
+                  <input type="hidden" id="studentId" name="id" required=""
+                         autocomplete="off" value="${student.id}" class="layui-input">
+                  <input type="text" id="username" name="account" required="" lay-verify="required"
+                  autocomplete="off" value="${student.account}" class="layui-input">
               </div>
           </div>
           <div class="layui-form-item">
@@ -36,7 +38,7 @@
                   <span class="x-red">*</span>姓名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="18925139194" id="phone" name="phone" required="" lay-verify="required"
+                  <input type="text" value="${student.studentName}" id="name" name="studentName" required="" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -45,16 +47,16 @@
                   <span class="x-red">*</span>邮箱
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="113664000@qq.com" id="L_email" name="email" required="" lay-verify="email"
+                  <input type="text" value="${student.email!""}" id="L_email" name="email" required="" lay-verify="email"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
             <div class="layui-form-item">
                 <label for="phone" class="layui-form-label">
-                    <span class="x-red">*</span>初始密码
+                    <span class="x-red">*</span>密码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="18925139194" id="phone" name="phone" required="" lay-verify="required"
+                    <input type="text" value="${student.password}" id="password" name="password" required="" lay-verify="required"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -75,8 +77,28 @@
 
           //监听提交
           form.on('submit(add)', function(data){
-            console.log(data);
-            //发异步，把数据提交给php
+              var formInput = $('#currentForm').serialize();
+              console.log(formInput);
+              console.log("mydata");
+              //发异步，把数据提交给php
+              $.ajax(
+                      {
+                          url:"/admin/student/edit",
+                          type:'patch',
+                          data:formInput,
+                          success:function(data,status,response){
+                              if(response.status=="200"){
+                                  console.log("success");
+                              }
+                          },
+                          error:function(data,status){
+                              console.log(data);
+                              console.log(status);
+                              alert("修改失败");
+                              console.log("error");
+                          }
+                      }
+              );
             layer.alert("修改成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);
