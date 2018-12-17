@@ -27,19 +27,39 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-            if(data=="404") {
-                $('#formSuccessMessageWrap').fadeIn(500);
-                formSubmitted = 'false';
-                var onFocus = document.activeElement;
-                if (onFocus.id === "contactEmailField") {
-                    $('#formSuccessMessageWrap').fadeOut(500);
+        $.ajax(
+            {
+                url:$('#' + currentForm).attr('action'),
+                type:'post',
+                data:formInput,
+                success:function(data,status,response){
+                    if(response.status=="200"){
+                        var info=response.responseText;
+                        window.location.href="/modifyPassword";
+                    }
+                },
+                error:function(data,status){
+                    console.log(data);
+                    console.log(status);
+                    $('#formSuccessMessageWrap').fadeIn(500);
+                    formSubmitted = 'false';
                 }
             }
-            else if(data=="200"||data=="204")
-                window.location.href="/modifyPassword";
-        });
-    };
+        );
+
+    //     $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+    //         if(data=="404") {
+    //             $('#formSuccessMessageWrap').fadeIn(500);
+    //             formSubmitted = 'false';
+    //             var onFocus = document.activeElement;
+    //             if (onFocus.id === "contactEmailField") {
+    //                 $('#formSuccessMessageWrap').fadeOut(500);
+    //             }
+    //         }
+    //         else if(data=="200"||data=="204")
+    //             window.location.href="/modifyPassword";
+    //     });
+     };
     // submit form data function starts
     // validate form function starts
     function validateForm(currentForm, formType){

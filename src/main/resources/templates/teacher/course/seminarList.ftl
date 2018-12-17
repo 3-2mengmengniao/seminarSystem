@@ -88,7 +88,7 @@
                             <h2 class="layui-colla-title">${seminar?index+1}&emsp;${seminar.seminarName}</h2>
                             <#list courseClassList as class>
                             <div class="layui-colla-content center-text">
-                                <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminar.id}&classId=${class.id}">${class.grade?c}-(${class.classSerial})</a>
+                                <a href="/teacher/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${class.grade?c}-(${class.classSerial})</a>
                             </div>
                             </#list>
 
