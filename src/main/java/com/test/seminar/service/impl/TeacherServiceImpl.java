@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -41,5 +42,10 @@ public class TeacherServiceImpl implements TeacherService {
             throw new UserNotFoundException();
         }
         return teacher;
+    }
+
+    @Override
+    public List<Teacher> getAllTeacher() {
+        return teacherDao.getAllTeacher();
     }
 }

@@ -53,50 +53,52 @@
             <th>操作</th>
         </thead>
         <tbody>
-          <tr class="item">
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td class="number">24320172202899</td>
-            <td class="name">小明</td>
-            <td class="email">123432642@qq.com</td>
-            <!--<td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>-->
-            <td class="td-manage">
+        <#list studentList as student>
+            <tr class="item">
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                </td>
+                <td class="number">${student.account}</td>
+                <td class="name">${student.studentName}</td>
+                <td class="email">${student.email!""}</td>
+                <!--<td class="td-status">
+                  <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>-->
+                <td class="td-manage">
 
-              <a title="编辑"  onclick="x_admin_show('编辑','/admin/editStudent','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;"  style="margin-right:5px;font-size:15px;">
-                <i class="iconfont" style="font-size:13px;">&#xe6aa;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  style="margin-right:5px;font-size:25px;">
-                <i class="layui-icon" >&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-          <tr class="item">
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td class="number">24320172202898</td>
-            <td class="name">小张</td>
-            <td class="email">123432642@qq.com</td>
-            <!--<td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>-->
-            <td class="td-manage">
+                    <a title="编辑"  onclick="x_admin_show('编辑','/admin/editStudent?studentId=${student.id}','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                    <a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;" name="${student.id}" style="margin-right:5px;font-size:15px;">
+                        <i class="iconfont" style="font-size:13px;">&#xe6aa;</i>
+                    </a>
+                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  name="${student.id}" style="margin-right:5px;font-size:25px;">
+                        <i class="layui-icon" >&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        </#list>
+          <#--<tr class="item">-->
+            <#--<td>-->
+              <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
+            <#--</td>-->
+            <#--<td class="number">24320172202898</td>-->
+            <#--<td class="name">小张</td>-->
+            <#--<td class="email">123432642@qq.com</td>-->
+            <#--<!--<td class="td-status">-->
+              <#--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>&ndash;&gt;-->
+            <#--<td class="td-manage">-->
 
-              <a title="编辑"  onclick="x_admin_show('编辑','/admin/editStudent','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;"  style="margin-right:5px;font-size:15px;">
-                <i class="iconfont" style="font-size:13px;">&#xe6aa;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  style="margin-right:5px;font-size:25px;">
-                <i class="layui-icon" >&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+              <#--<a title="编辑"  onclick="x_admin_show('编辑','/admin/editStudent','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">-->
+                <#--<i class="layui-icon">&#xe642;</i>-->
+              <#--</a>-->
+              <#--<a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;"  style="margin-right:5px;font-size:15px;">-->
+                <#--<i class="iconfont" style="font-size:13px;">&#xe6aa;</i>-->
+              <#--</a>-->
+              <#--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  style="margin-right:5px;font-size:25px;">-->
+                <#--<i class="layui-icon" >&#xe640;</i>-->
+              <#--</a>-->
+            <#--</td>-->
+          <#--</tr>-->
         </tbody>
       </table>
       <div class="page" style="margin-top:80px;">
@@ -139,6 +141,25 @@
           layer.confirm('确认要重置密码吗？',function(index){
 
               if($(obj).attr('title')=='重置密码'){
+                  var studentId=$(obj).attr("name");
+                  console.log(studentId);
+                  $.ajax(
+                          {
+                              url:"/admin/student/"+studentId+"/resetPwd",
+                              type:'post',
+                              success:function(data,status,response){
+                                  if(response.status=="200"){
+                                      console.log("success");
+                                  }
+                              },
+                              error:function(data,status){
+                                  console.log(data);
+                                  console.log(status);
+                                  alert("修改失败");
+                                  console.log("error");
+                              }
+                          }
+                  );
                   layer.msg('已重置!',{icon: 1,time:1000});
               }else{
 
@@ -175,6 +196,25 @@
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
+              var studentId=$(obj).attr("name");
+              console.log(studentId);
+              $.ajax(
+                      {
+                          url:"/admin/student/"+studentId,
+                          type:'delete',
+                          success:function(data,status,response){
+                              if(response.status=="200"){
+                                  console.log("success");
+                              }
+                          },
+                          error:function(data,status){
+                              console.log(data);
+                              console.log(status);
+                              alert("修改失败");
+                              console.log("error");
+                          }
+                      }
+              );
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
           });
