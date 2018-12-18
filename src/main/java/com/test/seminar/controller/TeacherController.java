@@ -164,6 +164,7 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/create",method = GET)
     public String createSeminar(BigInteger courseId,Model model) {
         model.addAttribute("courseId",courseId);
+        System.out.println(courseId);
         return "teacher/course/seminar/create";
     }
 
@@ -189,6 +190,21 @@ public class TeacherController {
     public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
         courseClass.setCourseId(courseId);
         courseClassService.insertCourseClass(courseClass);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/seminar/create",method = PUT)
+    @ResponseBody
+    public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,String seminarVisible) {
+        seminarInfo.setCourseId(courseId);
+        if(seminarVisible.equals("on"))
+        {
+            seminarInfo.setVisible(1);
+        }
+        else{
+            seminarInfo.setVisible(0);
+        }
+        seminarService.insertSeminarInfo(seminarInfo);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
