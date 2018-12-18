@@ -23,25 +23,49 @@ jQuery(document).ready(function($) {
 	// fields blur function ends
 		
 	// submit form data starts	   
-    function submitData(currentForm, formType){
+    function submitData(currentForm, formType) {
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-            if(data=="404") {
-                $('#formSuccessMessageWrap').fadeIn(500);
-                formSubmitted = 'false';
-                var onFocus = document.activeElement;
-                if (onFocus.id === "contactEmailField") {
-                    $('#formSuccessMessageWrap').fadeOut(500);
+        $.ajax(
+            {
+                url:$('#' + currentForm).attr('action'),
+                type:'post',
+                data:formInput,
+                success:function(data,status,response){
+                    if(response.status=="200"){
+                        var info=response.responseText;
+                        window.location.href="/student/setting";
+                    }
+                },
+                error:function(data,status){
+                    console.log(data);
+                    console.log(status);
+                    $('#formSuccessMessageWrap').fadeIn(500);
+                    formSubmitted = 'false';
+                    var onFocus = document.activeElement;
+                    if (onFocus.id === "contactEmailField") {
+                        $('#formSuccessMessageWrap').fadeOut(500);
+                    }
+                    console.log("error");
                 }
             }
-            else if(data=="200")
-                window.location.href="/teacher/setting";
-            else if(data=="204")
-                window.location.href="/student/setting";
-        });
-        //window.location.href='1vali_psw.html';
-    };
+        );
+            // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+            //     if(data=="404") {
+            //         $('#formSuccessMessageWrap').fadeIn(500);
+            //         formSubmitted = 'false';
+            //         var onFocus = document.activeElement;
+            //         if (onFocus.id === "contactEmailField") {
+            //             $('#formSuccessMessageWrap').fadeOut(500);
+            //         }
+            //     }
+            //     else if(data=="200")
+            //         window.location.href="/teacher/setting";
+            //     else if(data=="204")
+            //         window.location.href="/student/setting";
+            // });
+            //window.location.href='1vali_psw.html';
+        };
 	// submit form data function starts	
 	// validate form function starts
     function validateForm(currentForm, formType){

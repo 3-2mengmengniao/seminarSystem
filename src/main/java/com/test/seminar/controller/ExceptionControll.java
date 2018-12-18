@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.test.seminar.exception.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,67 +18,44 @@ public class ExceptionControll {
 
     @ResponseBody
     @ExceptionHandler(CourseClassNotFoundException.class)
-    public String courseClassNotFound(Exception exception) {
-//        logger.info("Not found course class", exception);
-        String status="404";
-        return status;
+    public ResponseEntity<String> courseClassNotFound(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @ResponseBody
     @ExceptionHandler(CourseNotFoundException.class)
-    public String courseNotFound(Exception exception) {
-//        logger.info("Not found course", exception);
-        String status="404";
-        return status;
+    public ResponseEntity<String> courseNotFound(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @ResponseBody
     @ExceptionHandler(RepetitiveRecordException.class)
-    public String repetitiveRecord(Exception exception) {
-//        logger.info("Record has existed", exception);
-        String status="405";
-        return status;
+    public ResponseEntity<String> repetitiveRecord(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.CONFLICT);
     }
 
     @ResponseBody
     @ExceptionHandler(RoundNotFoundException.class)
-    public String roundNotFound(Exception exception) {
-//        logger.info("Not found round", exception);
-        String status="404";
-        return status;
+    public ResponseEntity<String> roundNotFound(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @ResponseBody
     @ExceptionHandler(SeminarInfoNotFoundException.class)
-    public String seminarInfoNotFound(Exception exception) {
-//        logger.info("Not found seminar info", exception);
-        String status="404";
-        return status;
+    public ResponseEntity<String> seminarInfoNotFound(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @ResponseBody
     @ExceptionHandler(SeminarControlNotFoundException.class)
-    public String seminarControlNotFound(Exception exception) {
-//        logger.info("Not found seminar control", exception);
-        String status="404";
-        return status;
+    public ResponseEntity<String> seminarControlNotFound(Exception exception) {
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
 
-//    @ExceptionHandler(UserNotFoundException.class)
-//    @ResponseBody
-//    public String userNotFound(Exception exception) {
-////        logger.info("Not found seminar", exception);
-//        String status="404";
-//        return status;
-//    }
-
-    @ResponseBody
     @ExceptionHandler(NoHandlerFoundException.class)
     public String noMapping(Exception exception) {
-//        logger.info("Not found seminar", exception);
-        String status="404";
-        return status;
+        return "error";
     }
 
 

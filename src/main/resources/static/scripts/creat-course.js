@@ -27,15 +27,35 @@ jQuery(document).ready(function($) {
     function submitData(currentForm, formType){
         formSubmitted = 'true';
         var formInput = $('#' + currentForm).serialize();
-        $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-                if(data=="405") {
+        $.ajax(
+            {
+                url:$('#' + currentForm).attr('action'),
+                type:'post',
+                data:formInput,
+                success:function(data,status,response){
+                    if(response.status=="200"){
+                        var info=response.responseText;
+                        window.location.href="/teacher/courseList";
+                    }
+                },
+                error:function(data,status){
+                    console.log(data);
+                    console.log(status);
                     $('#formSuccessMessageWrap').fadeIn(500);
                     formSubmitted = 'false';
                 }
-                else if(data=="200")
-                    window.location.href="/teacher/courseList";
+            }
+        );
 
-        });
+        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
+        //         if(data=="405") {
+        //             $('#formSuccessMessageWrap').fadeIn(500);
+        //             formSubmitted = 'false';
+        //         }
+        //         else if(data=="200")
+        //             window.location.href="/teacher/courseList";
+        //
+        // });
         //window.location.href='1vali_psw.html';
     };
     // submit form data function starts

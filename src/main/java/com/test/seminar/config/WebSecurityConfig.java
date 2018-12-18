@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //解决非thymeleaf的form表单提交被拦截问题
                 http.csrf().disable();
+                http.headers().frameOptions().sameOrigin();
     }
 
     @Override

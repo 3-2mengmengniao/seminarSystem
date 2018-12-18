@@ -45,4 +45,6 @@ public interface TeacherService {
     void deleteTeacherByTeacherId(BigInteger teacherId)throws UserNotFoundException;
 
     Teacher getTeacherByAccount(String account);
+
+    List<Teacher> getAllTeacher();
 }

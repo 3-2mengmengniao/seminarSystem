@@ -17,10 +17,9 @@
     <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/styles/htmleaf-demo.css"><!--演示页面样式，使用时可以不引用-->
     <link rel="stylesheet" href="/styles/bootstrap-float-label.css">
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -57,16 +56,16 @@
     <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="login-header">
-        <h4>讨论课管理系统登录</h4>
+        <h1>讨论课管理系统登录</h1>
     </div>
+    <div class="distance4"></div>
     <div class="distance5"></div>
-    <div class="distance3"></div>
 </div>
 <div class="content">
     <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
         <div class="static-notification-green tap-dismiss-notification">
-            <#--<h3 class="uppercase">Message Sent </h3>-->
-            <#--<a href="#" class="close-big-notification">x</a>-->
+        <#--<h3 class="uppercase">Message Sent </h3>-->
+        <#--<a href="#" class="close-big-notification">x</a>-->
             <p style="color:#d44950;">账号或密码有误，请重新输入！</p>
         </div>
     </div>
@@ -74,28 +73,28 @@
         <fieldset>
             <p>
             <#--<div class="formFieldWrap">-->
-                <#--<label class="field-title contactNameField" for="contactNameField">教工号/学号:</label>-->
-                <#--<input style="-webkit-tap-highlight-color:rgba(255,0,0,0);" autocomplete=”off” type="text" name="username" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>-->
+            <#--<label class="field-title contactNameField" for="contactNameField">教工号/学号:</label>-->
+            <#--<input style="-webkit-tap-highlight-color:rgba(255,0,0,0);" autocomplete=”off” type="text" name="username" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入账号"/>-->
             <#--</div>-->
             <div class="form-group floating-control-group formFieldWrap">
                 <label for="txtFloatingUsername" style="z-index:9999;font-size:18px;">教工号/学工号</label>
-                <input type="text" name="username" autocomplete="off" class="my-form-control contactField requiredField" id="contactNameField"  placeholder="Enter Username">
+                <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="text" name="username" autocomplete="off" class="my-form-control contactField requiredField" id="contactNameField"  placeholder="Enter Username">
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="">请填写教工号/学号!</p>
                 </div>
             </div>
-            <#--<div class="formFieldWrap">-->
-                <#--<label class="field-title contactEmailField" for="contactEmailField">密码: </label>-->
-                <#--<img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">-->
-                <#--<input autocomplete=”off” type="password" name="password" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>-->
-            <#--</div>-->
+        <#--<div class="formFieldWrap">-->
+        <#--<label class="field-title contactEmailField" for="contactEmailField">密码: </label>-->
+        <#--<img id="demo_img" onclick="hideShowPsw()" src="/images/icons/showPasswd.png">-->
+        <#--<input autocomplete=”off” type="password" name="password" value="" class="contactField requiredField" id="contactEmailField" placeholder="初次登录默认密码为 123456"/>-->
+        <#--</div>-->
             <div class="form-group floating-control-group formFieldWrap">
                 <label for="txtFloatingPassword" style="z-index:9999;font-size:18px;">密码</label>
-                <input type="password" name="password" autocomplete="off" class="my-form-control contactField requiredField" id="contactEmailField" placeholder="Enter Password">
+                <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="password" name="password" autocomplete="off" class="my-form-control contactField requiredField" id="contactEmailField" placeholder="Enter Password">
+                <span style="font-size: 15px;margin-left: 15px;padding-bottom: 10px;color:rgb(0,0,0,0.4);">默认密码为123456</span>
             </div>
-
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="uppercase">请填写密码!</p>
@@ -134,6 +133,11 @@
 </script>
 </body>
 <script>
+    <#if message??>
+        window.onload = function () {
+            alert("${message}")
+        };
+    </#if>
     //隐藏text block，显示password block
     var demoImg = document.getElementById("demo_img");
     var demoInput = document.getElementById("contactEmailField");
