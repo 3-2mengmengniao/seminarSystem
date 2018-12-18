@@ -21,27 +21,6 @@ public class RoundDaoImpl implements RoundDao {
     RoundMapper roundMapper;
 
     @Override
-    public void insertRound(Round round)throws RepetitiveRecordException {
-        roundMapper.insertRound(round);
-    }
-
-    @Override
-    public void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
-        if(roundMapper.getRoundByRoundId(roundId)==null) {
-            throw new RoundNotFoundException();
-        }
-        roundMapper.deleteRoundByRoundId(roundId);
-    }
-
-    @Override
-    public void updateRound(Round round)throws RoundNotFoundException {
-        if(roundMapper.getRoundByRoundId(round.getId())==null) {
-            throw new RoundNotFoundException();
-        }
-        roundMapper.updateRound(round);
-    }
-
-    @Override
     public Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
         Round round=roundMapper.getRoundByRoundId(roundId);
         if(round==null) {
@@ -53,5 +32,26 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public List<Round> getRoundByCourseId(BigInteger courseId) {
         return roundMapper.getRoundByCourseId(courseId);
+    }
+
+    @Override
+    public void insertRound(Round round)throws RepetitiveRecordException {
+        roundMapper.insertRound(round);
+    }
+
+    @Override
+    public void updateRound(Round round)throws RoundNotFoundException {
+        if(roundMapper.getRoundByRoundId(round.getId())==null) {
+            throw new RoundNotFoundException();
+        }
+        roundMapper.updateRound(round);
+    }
+
+    @Override
+    public void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
+        if(roundMapper.getRoundByRoundId(roundId)==null) {
+            throw new RoundNotFoundException();
+        }
+        roundMapper.deleteRoundByRoundId(roundId);
     }
 }

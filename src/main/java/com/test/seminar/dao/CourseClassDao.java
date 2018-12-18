@@ -8,6 +8,20 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface CourseClassDao {
+    /**
+     * 获取某课程下的所有班级
+     * @param courseId
+     * @return
+     */
+    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+
+    /**
+     * 获取某课程下某学生的班级
+     * @param studentId
+     * @param courseId
+     * @return
+     */
+    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws CourseClassNotFoundException;
 
     /**
      * 通过ID获取班级信息
@@ -26,6 +40,13 @@ public interface CourseClassDao {
     void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException;
 
     /**
+     * @param courseClassId
+     * @param studentId
+     * @return
+     */
+    void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId);
+
+    /**
      * 更改班级信息
      * @param courseClass
      * @throws CourseClassNotFoundException
@@ -40,26 +61,4 @@ public interface CourseClassDao {
      * @return
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException;
-
-    /**
-     * 获取某课程下的所有班级
-     * @param courseId
-     * @return
-     */
-    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
-
-    /**
-     * 获取某课程下某学生的班级
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws CourseClassNotFoundException;
-
-    /**
-     * @param courseClassId
-     * @param studentId
-     * @return
-     */
-    void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId);
 }

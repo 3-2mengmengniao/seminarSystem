@@ -36,6 +36,11 @@ public class TeacherDaoImpl implements TeacherDao {
     }
 
     @Override
+    public List<Teacher> getAllTeacher() {
+        return teacherMapper.getAllTeacher();
+    }
+
+    @Override
     public void insertTeacher(Teacher teacher)throws RepetitiveRecordException {
         teacherMapper.insertTeacher(teacher);
     }
@@ -54,10 +59,5 @@ public class TeacherDaoImpl implements TeacherDao {
             throw new UserNotFoundException();
         }
         teacherMapper.deleteTeacherByTeacherId(teacherId);
-    }
-
-    @Override
-    public List<Teacher> getAllTeacher() {
-        return teacherMapper.getAllTeacher();
     }
 }

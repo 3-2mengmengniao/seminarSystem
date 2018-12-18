@@ -20,27 +20,6 @@ public interface TeamDao {
     Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;
 
     /**
-     * 创建新的队伍信息
-     * @param team
-     * @return
-     */
-    void insertTeam(Team team)throws RepetitiveRecordException;
-
-    /**
-     * 更改队伍信息
-     * @param team
-     * @return
-     */
-    void updateTeamByTeamId(Team team)throws TeamNotFoundException;
-
-    /**
-     *
-     * @param teamId
-     * @return
-     */
-    void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
-
-    /**
      * 以学生ID和课程ID获取学生本课程的组队信息
      * @param studentId
      * @param courseId
@@ -63,6 +42,20 @@ public interface TeamDao {
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 
     /**
+     * 创建新的队伍信息
+     * @param team
+     * @return
+     */
+    void insertTeam(Team team)throws RepetitiveRecordException;
+
+    /**
+     * 更改队伍信息
+     * @param team
+     * @return
+     */
+    void updateTeamByTeamId(Team team)throws TeamNotFoundException;
+
+    /**
      * 更新某班级下某学生的队伍
      * @param courseClassId
      * @param studentId
@@ -70,4 +63,12 @@ public interface TeamDao {
      * @return
      */
     void updateCourseClassStudentTeamId(BigInteger courseClassId,BigInteger studentId,BigInteger teamId);
+
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
 }

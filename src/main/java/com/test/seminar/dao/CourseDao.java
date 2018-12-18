@@ -13,7 +13,6 @@ import java.util.List;
  * @date 2018/11/24
  */
 public interface CourseDao {
-
     /**
      * 通过ID获取课程信息
      * @param courseId

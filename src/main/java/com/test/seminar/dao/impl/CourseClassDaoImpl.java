@@ -22,6 +22,20 @@ public class CourseClassDaoImpl implements CourseClassDao {
     private CourseClassMapper courseClassMapper;
 
     @Override
+    public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
+        return courseClassMapper.getCourseClassByCourseId(courseId);
+    }
+
+    @Override
+    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
+        CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+        if(courseClass==null) {
+            throw new CourseClassNotFoundException();
+        }
+        return courseClass;
+    }
+
+    @Override
     public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
         CourseClass courseClass=courseClassMapper.getCourseClassByCourseClassId(courseClassId);
         if(courseClass==null){
@@ -33,6 +47,11 @@ public class CourseClassDaoImpl implements CourseClassDao {
     @Override
     public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
         courseClassMapper.insertCourseClass(courseClass);
+    }
+
+    @Override
+    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
+        courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
     }
 
     @Override
@@ -49,24 +68,5 @@ public class CourseClassDaoImpl implements CourseClassDao {
             throw new CourseClassNotFoundException();
         }
         courseClassMapper.deleteCourseClassByCourseClassId(courseClassId);
-    }
-
-    @Override
-    public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
-        return courseClassMapper.getCourseClassByCourseId(courseId);
-    }
-
-    @Override
-    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
-        CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-        if(courseClass==null) {
-            throw new CourseClassNotFoundException();
-        }
-        return courseClass;
-    }
-
-    @Override
-    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
-        courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
     }
 }

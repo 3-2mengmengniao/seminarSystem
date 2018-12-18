@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -12,7 +13,6 @@ import java.util.Date;
 
 public class Course {
     private BigInteger id;
-    private BigInteger teacherId;
     private String courseName;
     private String introduction;
     private int presentationPercentage;
@@ -22,18 +22,13 @@ public class Course {
     private Date teamStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamEndTime;
-    private BigInteger teamMainCourseId;
-    private BigInteger seminarMainCourseId;
+    private Course teamMainCourse;
+    private Course seminarMainCourse;
+    private List<Round> roundList;
+
 
     public BigInteger getId() {
         return id;
-    }
-    public BigInteger getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(BigInteger teacherId) {
-        this.teacherId = teacherId;
     }
 
     public String getIntroduction() {
@@ -48,9 +43,7 @@ public class Course {
         return presentationPercentage;
     }
 
-    public void setPresentationPercentage(int presentationPercentage) {
-        this.presentationPercentage = presentationPercentage;
-    }
+    public void setPresentationPercentage(int presentationPercentage) { this.presentationPercentage = presentationPercentage; }
 
     public int getQuestionPercentage() {
         return questionPercentage;
@@ -92,19 +85,25 @@ public class Course {
         this.teamEndTime = teamEndTime;
     }
 
-    public BigInteger getTeamMainCourseId() {
-        return teamMainCourseId;
+    public Course getTeamMainCourse() { return teamMainCourse; }
+
+    public void setTeamMainCourse(Course teamMainCourse) {
+        this.teamMainCourse = teamMainCourse;
     }
 
-    public void setTeamMainCourseId(BigInteger teamMainCourseId) {
-        this.teamMainCourseId = teamMainCourseId;
+    public Course getSeminarMainCourse() {
+        return seminarMainCourse;
     }
 
-    public BigInteger getSeminarMainCourseId() {
-        return seminarMainCourseId;
+    public void setSeminarMainCourse(Course seminarMainCourse) {
+        this.seminarMainCourse = seminarMainCourse;
     }
 
-    public void setSeminarMainCourseId(BigInteger seminarMainCourseId) {
-        this.seminarMainCourseId = seminarMainCourseId;
+    public List<Round> getRoundList() {
+        return roundList;
+    }
+
+    public void setRoundList(List<Round> roundList) {
+        this.roundList = roundList;
     }
 }

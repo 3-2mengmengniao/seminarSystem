@@ -30,48 +30,6 @@ public class SeminarDaoImpl implements SeminarDao {
         }
         return seminarInfo;
     }
-
-    @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException {
-        seminarMapper.insertSeminarInfo(seminarInfo);
-    }
-
-    @Override
-    public void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException {
-        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null) {
-            throw new SeminarInfoNotFoundException();
-        }
-        seminarMapper.updateSeminarInfo(seminarInfo);
-    }
-
-    @Override
-    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
-        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId)==null) {
-            throw new SeminarInfoNotFoundException();
-        }
-        seminarMapper.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
-    }
-
-    @Override
-    public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId) {
-        return seminarMapper.getSeminarControlBySeminarControlId(seminarControlId);
-    }
-
-    @Override
-    public void insertSeminarControl(SeminarControl seminarControl) {
-        seminarMapper.insertSeminarControl(seminarControl);
-    }
-
-    @Override
-    public void updateSeminarControl(SeminarControl seminarControl) {
-        seminarMapper.updateSeminarControl(seminarControl);
-    }
-
-    @Override
-    public void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId) {
-        seminarMapper.deleteSeminarControlBySeminarControlId(seminarControlId);
-    }
-
     @Override
     public SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
         SeminarControl seminarControl = seminarMapper.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
@@ -84,5 +42,46 @@ public class SeminarDaoImpl implements SeminarDao {
     @Override
     public List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId) {
         return seminarMapper.getSeminarInfoByRoundId(roundId);
+    }
+
+    @Override
+    public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId) {
+        return seminarMapper.getSeminarControlBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException {
+        seminarMapper.insertSeminarInfo(seminarInfo);
+    }
+
+    @Override
+    public void insertSeminarControl(SeminarControl seminarControl) {
+        seminarMapper.insertSeminarControl(seminarControl);
+    }
+
+    @Override
+    public void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException {
+        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null) {
+            throw new SeminarInfoNotFoundException();
+        }
+        seminarMapper.updateSeminarInfo(seminarInfo);
+    }
+
+    @Override
+    public void updateSeminarControl(SeminarControl seminarControl) {
+        seminarMapper.updateSeminarControl(seminarControl);
+    }
+
+    @Override
+    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
+        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId)==null) {
+            throw new SeminarInfoNotFoundException();
+        }
+        seminarMapper.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
+    }
+
+    @Override
+    public void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId) {
+        seminarMapper.deleteSeminarControlBySeminarControlId(seminarControlId);
     }
 }

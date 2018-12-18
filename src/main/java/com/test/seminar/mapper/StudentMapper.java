@@ -32,6 +32,23 @@ public interface StudentMapper {
     Student getStudentByAccount(String account);
 
     /**
+     * @param teamId
+     * @return
+     */
+    List<Student> getStudentByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
+     * @param courseClassId
+     * @return
+     */
+    List<Student> getStudentByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
+
+    /**
+     * @return
+     */
+    List<Student> getAllStudent();
+
+    /**
      * 创建新的学生账户
      *
      * @param student
@@ -54,21 +71,4 @@ public interface StudentMapper {
      * @return
      */
     void deleteStudentByStudentId(@Param("studentId") BigInteger studentId);
-
-    /**
-     * @param teamId
-     * @return
-     */
-    List<Student> getStudentByTeamId(@Param("teamId")BigInteger teamId);
-
-    /**
-     * @param courseClassId
-     * @return
-     */
-    List<Student> getStudentByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
-
-    /**
-     * @return
-     */
-    List<Student> getAllStudent();
 }

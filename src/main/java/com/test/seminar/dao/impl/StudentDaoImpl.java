@@ -34,6 +34,26 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public Student getStudentByAccount(String account){
+        return studentMapper.getStudentByAccount(account);
+    }
+
+    @Override
+    public List<Student> getStudentByTeamId(BigInteger teamId) {
+        return studentMapper.getStudentByTeamId(teamId);
+    }
+
+    @Override
+    public List<Student> getStudentByCourseClassId(BigInteger courseClassId) {
+        return studentMapper.getStudentByCourseClassId(courseClassId);
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        return studentMapper.getAllStudent();
+    }
+
+    @Override
     public void insertStudent(Student student)throws RepetitiveRecordException {
         studentMapper.insertStudent(student);
     }
@@ -59,25 +79,5 @@ public class StudentDaoImpl implements StudentDao {
             throw new UserNotFoundException();
         }
         studentMapper.deleteStudentByStudentId(studentId);
-    }
-
-    @Override
-    public Student getStudentByAccount(String account){
-        return studentMapper.getStudentByAccount(account);
-    }
-
-    @Override
-    public List<Student> getStudentByTeamId(BigInteger teamId) {
-        return studentMapper.getStudentByTeamId(teamId);
-    }
-
-    @Override
-    public List<Student> getStudentByCourseClassId(BigInteger courseClassId) {
-        return studentMapper.getStudentByCourseClassId(courseClassId);
-    }
-
-    @Override
-    public List<Student> getAllStudent() {
-        return studentMapper.getAllStudent();
     }
 }

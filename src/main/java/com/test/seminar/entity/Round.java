@@ -10,24 +10,14 @@ import java.util.List;
 
 public class Round {
     private BigInteger id;
-    private BigInteger courseId;
     private int roundSerial;
     private int presentationScoreMethod;
     private int reportScoreMethod;
     private int questionScoreMethod;
-    private List<SeminarInfo> seminarInfos;
+    private List<SeminarInfo> seminarInfoList;
+    private List<RoundScore> roundScoreList;
 
-    public BigInteger getId() {
-        return id;
-    }
-
-    public BigInteger getCourseId() {
-        return courseId;
-    }
-
-    public void setClassId(BigInteger classId) {
-        this.courseId = classId;
-    }
+    public BigInteger getId() { return id; }
 
     public int getRoundSerial() {
         return roundSerial;
@@ -37,17 +27,11 @@ public class Round {
         this.roundSerial = roundSerial;
     }
 
-    public void setCourseId(BigInteger courseId) {
-        this.courseId = courseId;
-    }
-
     public int getPresentationScoreMethod() {
         return presentationScoreMethod;
     }
 
-    public void setPresentationScoreMethod(int presentationScoreMethod) {
-        this.presentationScoreMethod = presentationScoreMethod;
-    }
+    public void setPresentationScoreMethod(int presentationScoreMethod) { this.presentationScoreMethod = presentationScoreMethod; }
 
     public int getReportScoreMethod() {
         return reportScoreMethod;
@@ -65,11 +49,11 @@ public class Round {
         this.questionScoreMethod = questionScoreMethod;
     }
 
-    public List<SeminarInfo> getSeminarInfos() {
-        return seminarInfos;
-    }
+    public List<SeminarInfo> getSeminarInfoList() { return seminarInfoList; }
 
-    public void setSeminarInfos(List<SeminarInfo> seminarInfos) {
-        this.seminarInfos = seminarInfos;
-    }
+    public void setSeminarInfoList(List<SeminarInfo> seminarInfoList) { this.seminarInfoList = seminarInfoList; }
+
+    public List<RoundScore> getRoundScoreList() { return roundScoreList; }
+
+    public void setRoundScoreList(List<RoundScore> roundScoreList) { this.roundScoreList = roundScoreList; }
 }

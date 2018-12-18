@@ -4,38 +4,21 @@ import java.math.BigInteger;
 
 public class ShareSeminarApplication {
     private BigInteger id;
-    private BigInteger mainCourseId;
-    private BigInteger subCourseId;
-    private BigInteger subCourseTeacherId;
+    private Course mainCourse;
+    private Course subCourse;
     private int status;
 
     public BigInteger getId() {
         return id;
     }
 
-    public BigInteger getMainCourseId() {
-        return mainCourseId;
-    }
+    public Course getMainCourse() { return mainCourse; }
 
-    public void setMainCourseId(BigInteger mainCourseId) {
-        this.mainCourseId = mainCourseId;
-    }
+    public void setMainCourse(Course mainCourse) { this.mainCourse = mainCourse; }
 
-    public BigInteger getSubCourseId() {
-        return subCourseId;
-    }
+    public Course getSubCourse() { return subCourse; }
 
-    public void setSubCourseId(BigInteger subCourseId) {
-        this.subCourseId = subCourseId;
-    }
-
-    public BigInteger getSubCourseTeacherId() {
-        return subCourseTeacherId;
-    }
-
-    public void setSubCourseTeacherId(BigInteger subCourseTeacherId) {
-        this.subCourseTeacherId = subCourseTeacherId;
-    }
+    public void setSubCourse(Course subCourse) { this.subCourse = subCourse; }
 
     public int getStatus() {
         return status;
