@@ -52,7 +52,7 @@ public interface CourseClassDao {
      * @throws CourseClassNotFoundException
      * @return
      */
-    void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException;
+    void updateCourseClassByCourseClass(CourseClass courseClass) throws CourseClassNotFoundException;
 
     /**
      *

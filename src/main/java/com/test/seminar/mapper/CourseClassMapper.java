@@ -1,5 +1,6 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.Course;
 import com.test.seminar.entity.CourseClass;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -62,7 +63,7 @@ public interface CourseClassMapper {
      * @param courseClass
      * @return
      */
-    void updateCourseClassByCourseClassId(@Param("courseClass")CourseClass courseClass);
+    void updateCourseClassByCourseClass(@Param("courseClass")CourseClass courseClass);
 
     /**
      * @param courseClassId
