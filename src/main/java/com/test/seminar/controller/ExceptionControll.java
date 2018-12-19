@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+/**
+ * @author hatake
+ * @date 2018/11/30
+ */
 @ControllerAdvice
 public class ExceptionControll {
 
