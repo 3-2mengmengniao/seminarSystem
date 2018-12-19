@@ -24,7 +24,7 @@ public class SeminarInfo {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationEndTime;
 
-
+    public void setId(BigInteger id){this.id=id;}
     public BigInteger getId() {
         return id;
     }

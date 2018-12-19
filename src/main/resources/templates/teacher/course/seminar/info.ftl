@@ -100,27 +100,24 @@
             </tr>
             <tr>
                 <td>课程情况</td>
-                <#if status=="UNSTARTED">
-                        <td>课程情况：未开始   <a href="/teacher/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
-                <#elseif status=="INPROCESS">
-                         <td>课程情况：进行中   <a href="/teacher/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                <#if status==0>
+                        <td>课程情况：未开始   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                <#elseif status==1>
+                         <td>课程情况：进行中   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 <#else>
-                         <td>课程情况：已完成   <a href="/teacher/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                         <td>课程情况：已完成   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 </#if>
             </tr>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <#if status=="FINISHED">
-        <p class="center center-text "><a href="/teacher/course/seminar/report?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看报告</a></p>
+        <#if status==2>
+        <p class="center center-text "><a href="/teacher/course/seminar/report?seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看报告</a></p>
         <div class="distance4"></div>
-        <p class="center center-text "><a href="/teacher/course/seminar/score?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
-        <#elseif status=="UNSTARTED">
+        <p class="center center-text "><a href="/teacher/course/seminar/score?seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
+        <#elseif status==0>
         <p class="center center-text "><a href="#" class="button-return button-turqoise">开始讨论课</a></p>
-        <div class="distance"></div>
-        <p class="center center-text "><a href="#" class="button-return button-turqoise">修改讨论课信息</a>
-        </p>
         <#else>
         <p class="center center-text "><a href="#" class="button-return button-turqoise">进入讨论课</a></p>
         </#if>

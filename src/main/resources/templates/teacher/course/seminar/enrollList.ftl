@@ -84,27 +84,43 @@
             <tbody>
             <tr>
                 <td>第一组：</td>
+                <#if status==0>
                 <td style="color:#009688;">1-1业务流程.ppt</td>
+                <#else>
+                <td style="color:#009688;">1-1<a>1-1业务流程.ppt</a></td>
+                </#if>
             </tr>
             <tr>
                 <td>第二组：</td>
-                <td style="color:#009688;">1-2业务流程.ppt</td>
+                <td style="color:#009688;">1-2 未提交</td>
             </tr>
             <tr>
                 <td>第三组：</td>
-                <td style="color:#009688;">1-3业务流程.ppt</td>
+                <td style="color:#009688;">1-3 未报名</td>
             </tr>
             <tr>
                 <td>第四组：</td>
+                <#if status==0>
                 <td style="color:#009688;">1-4业务流程.ppt</td>
+                <#else>
+                <td style="color:#009688;">1-4<a>1-4业务流程.ppt</a></td>
+                </#if>
             </tr>
             <tr>
                 <td>第五组：</td>
+                <#if status==0>
                 <td style="color:#009688;">1-5业务流程.ppt</td>
+                <#else>
+                <td style="color:#009688;">1-5<a>1-5业务流程.ppt</a></td>
+                </#if>
             </tr>
             <tr>
                 <td>第六组：</td>
+                <#if status==0>
                 <td style="color:#009688;">1-6业务流程.ppt</td>
+                <#else>
+                <td style="color:#009688;">1-6<a>1-6业务流程.ppt</a></td>
+                </#if>
             </tr>
             </tbody>
         </table>
