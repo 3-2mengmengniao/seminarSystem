@@ -16,6 +16,13 @@ public interface CourseClassDao {
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
     /**
+     *
+     * @param teamId
+     * @return
+     */
+    CourseClass getCourseClassByTeamId(BigInteger teamId);
+
+    /**
      * 获取某课程下某学生的班级
      * @param studentId
      * @param courseId

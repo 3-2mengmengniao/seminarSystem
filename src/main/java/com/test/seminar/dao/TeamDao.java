@@ -71,11 +71,4 @@ public interface TeamDao {
      * @return
      */
     void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
-
-    /**
-     *
-     * @param courseClassId
-     * @return
-     */
-    List<Team> getTeamByCourseClassId(BigInteger courseClassId);
 }

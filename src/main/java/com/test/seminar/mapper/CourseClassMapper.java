@@ -34,6 +34,13 @@ public interface CourseClassMapper {
     List<CourseClass> getCourseClassByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
+     *
+     * @param teamId
+     * @return
+     */
+    CourseClass getCourseClassByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
      * 获取某课程下某学生的班级
      * @param studentId
      * @param courseId
