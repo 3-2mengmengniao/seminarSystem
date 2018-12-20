@@ -37,7 +37,7 @@ public interface CourseClassDao {
      * @throws RepetitiveRecordException
      * @return
      */
-    void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException;
+    void insertCourseClass(CourseClass courseClass, BigInteger courseId) throws RepetitiveRecordException;
 
     /**
      * @param courseClassId

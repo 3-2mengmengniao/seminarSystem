@@ -35,12 +35,6 @@
     <update id="updatePresentation">
         update attendance
         <set>
-            <if test="seminarControlId!=null">
-                klass_seminar_id=#{seminarControlId},
-            </if>
-            <if test="teamId!=null">
-                team_id=#{teamId},
-            </if>
             <if test="presentation.teamOrder!=null">
                 team_order=#{presentation.teamOrder},
             </if>

@@ -55,9 +55,6 @@
     <update id="updateCourseClassByCourseClass">
         update klass
         <set>
-            <if test="courseClass.courseId!=null">
-                course_id=#{courseClass.courseId},
-            </if>
             <if test="courseClass.grade!=null">
                 grade=#{courseClass.grade},
             </if>
