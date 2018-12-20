@@ -26,8 +26,8 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass)throws CourseClassNotFoundException {
-        courseClassDao.updateCourseClassByCourseClassId(courseClass);
+    public void updateCourseClassByCourseClass(CourseClass courseClass)throws CourseClassNotFoundException {
+        courseClassDao.updateCourseClassByCourseClass(courseClass);
     }
 
     @Override

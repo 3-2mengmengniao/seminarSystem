@@ -8,6 +8,14 @@
         <result property="presentationScoreMethod" column="presentation_score_method"/>
         <result property="reportScoreMethod" column="report_score_method"/>
         <result property="questionScoreMethod" column="question_score_method"/>
+        <collection property="roundScoreList" ofType="com.test.seminar.entity.RoundScore" select="getRoundScoreByRoundScoreId"/>
+    </resultMap>
+
+    <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
+        <id property="id" column="id"/>
+        <result property="presentationScore" column="presentation_score"/>
+        <result property="questionScore" column="question_score"/>
+        <result property="reportScore" column="report_score"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -51,5 +59,51 @@
 
     <delete id="deleteRoundByRoundId">
         delete from round where id=#{roundId}
+    </delete>
+
+    <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from round_score
+        where id=#{roundId}
+    </select>
+
+    <select id="getRoundScoreByRoundIdAndTeamId" resultMap="RoundScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from round_score
+        where round_id=#{roundId} and team_id=#{teamId}
+    </select>
+
+    <select id="getRoundScoreByTeamId" resultMap="RoundScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from round_score
+        where team_id=#{teamId}
+    </select>
+
+    <insert id="insertRoundScore">
+        insert into round_score(total_score,presentation_score,question_score,report_score)
+        values (#{roundScore.totalScore},#{roundScore.presentationScore},#{roundScore.questionScore},#{roundScore.reportScore})
+    </insert>
+
+    <update id="updateRoundScore">
+        update round_score
+        <set>
+            <if test="roundScore.totalScore!=null">
+                total_score=#{roundScore.totalScore},
+            </if>
+            <if test="roundScore.presentationScore!=null">
+                prensentation_score=#{roundScore.presentationScore},
+            </if>
+            <if test="roundScore.questionScore!=null">
+                question_score=#{roundScore.questionScore},
+            </if>
+            <if test="roundScore.reportScore!=null">
+                report_score=#{roundScore.reportScore},
+            </if>
+        </set>
+          where id=#{roundScore.id}
+    </update>
+
+    <delete id="deleteRoundScoreByRoundScoreId">
+        delete from round_score where id=#{roundScoreId}
     </delete>
 </mapper>

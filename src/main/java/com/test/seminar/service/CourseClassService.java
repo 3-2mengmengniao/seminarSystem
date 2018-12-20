@@ -33,7 +33,7 @@ public interface CourseClassService {
      * 更新班级
      * @param courseClass
      */
-    void updateCourseClassByCourseClassId( CourseClass courseClass) throws CourseClassNotFoundException;
+    void updateCourseClassByCourseClass( CourseClass courseClass) throws CourseClassNotFoundException;
 
 
     /**

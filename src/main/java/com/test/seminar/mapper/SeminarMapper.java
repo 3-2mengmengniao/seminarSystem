@@ -2,6 +2,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.SeminarScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -86,4 +87,44 @@ public interface SeminarMapper {
      * @param seminarControlId
      */
     void deleteSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarScoreId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarScoreId(@Param("seminarScoreId")BigInteger seminarScoreId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @param teamId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    List<SeminarScore> getSeminarScoreByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void insertSeminarScore(@Param("seminarScore")SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void updateSeminarScore(@Param("seminarScore")SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScoreId
+     */
+    void deleteSeminarScoreBySeminarScoreId(@Param("seminarScoreId")BigInteger seminarScoreId);
 }

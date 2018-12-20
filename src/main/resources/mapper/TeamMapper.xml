@@ -9,6 +9,8 @@
         <result property="leaderId" column="leader_id"/>
         <result property="status" column="status"/>
         <result property="teamSerial" column="team_serial"/>
+        <collection property="seminarScoreList" ofType="com.test.seminar.entity.SeminarScore" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByTeamId"/>
+        <collection property="roundScoreList" ofType="com.test.seminar.entity.RoundScore" select="com.test.seminar.mapper.SeminarMapper.getRoundScoreByTeamId"/>
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
