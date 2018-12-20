@@ -42,7 +42,7 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public SeminarControl getSemniarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
+    public SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
         return seminarDao.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
     }
 
