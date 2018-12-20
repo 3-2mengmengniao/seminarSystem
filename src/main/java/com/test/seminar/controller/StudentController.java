@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author hatake
+ * @date 2018/11/20
+ */
+
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -202,13 +208,14 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/score")
-    public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+    public String seminarScore(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
         model.addAttribute("round",round);
+        BigInteger courseId=seminarInfo.getCourseId();
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         model.addAttribute("classId",classId);
@@ -219,13 +226,14 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/enrollment")
-    public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
+    public String enrollmentInfo(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
         SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         model.addAttribute("seminarInfo",seminarInfo);
         BigInteger roundId=seminarInfo.getRoundId();
         Round round=roundService.getRoundByRoundId(roundId);
         model.addAttribute("round",round);
+        BigInteger courseId=seminarInfo.getCourseId();
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         model.addAttribute("classId",classId);

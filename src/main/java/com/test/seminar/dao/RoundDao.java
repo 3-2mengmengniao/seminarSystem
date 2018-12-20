@@ -12,25 +12,6 @@ import java.util.List;
  * @date 2018/12/1
  */
 public interface RoundDao {
-
-    /**
-     * 创建新轮次
-     * @param round
-     */
-    void insertRound(Round round)throws RepetitiveRecordException;
-
-    /**
-     * 删除轮次
-     * @param roundId
-     */
-    void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
-
-    /**
-     * 更新轮次信息
-     * @param round
-     */
-    void updateRound(Round round)throws RoundNotFoundException;
-
     /**
      * 通过轮次ID获得轮次信息
      * @param roundId
@@ -44,4 +25,22 @@ public interface RoundDao {
      * @return
      */
     List<Round> getRoundByCourseId(BigInteger courseId);
+
+    /**
+     * 创建新轮次
+     * @param round
+     */
+    void insertRound(Round round)throws RepetitiveRecordException;
+
+    /**
+     * 更新轮次信息
+     * @param round
+     */
+    void updateRound(Round round)throws RoundNotFoundException;
+
+    /**
+     * 删除轮次
+     * @param roundId
+     */
+    void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 }

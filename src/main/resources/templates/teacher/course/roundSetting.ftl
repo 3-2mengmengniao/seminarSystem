@@ -24,7 +24,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/creat-course.js"></script>
+    <script type="text/javascript" src="/scripts/roundSetting.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -59,10 +59,10 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="#" method="post" id="contactForm">
+        <form class="layui-form contactForm" action="/teacher/course/roundSetting?roundId=${round.id}" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#c9302c;">！</p>
+                    <p style="color:#c9302c;">轮次设置失败！</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -80,7 +80,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">展示</label>
                     <div class="layui-input-block">
-                        <select name="presentationPercentage" lay-filter="aihao">
+                        <select name="presentationScoreMethod" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>
@@ -90,7 +90,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">提问</label>
                     <div class="layui-input-block">
-                        <select name="questionPercentage" lay-filter="aihao">
+                        <select name="questionScoreMethod" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>
@@ -100,7 +100,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">报告</label>
                     <div class="layui-input-block">
-                        <select name="reportPercentage" lay-filter="aihao">
+                        <select name="reportScoreMethod" lay-filter="aihao">
                             <option value="0" selected>最高分</option>
                             <option value="1">平均分</option>
                             <option value="2">最低分</option>

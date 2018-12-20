@@ -27,50 +27,11 @@ public interface SeminarMapper {
     SeminarInfo getSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
-     * 创建新的讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
-
-    /**
-     * 更改讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
-
-    /**
-     *
-     * @param seminarInfoId
-     * @return
-     */
-    void deleteSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
-
-    /**
      *
      * @param seminarControlId
      * @return
      */
     SeminarControl getSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void updateSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
-
-    /**
-     *
-     * @param seminarControlId
-     */
-    void deleteSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
      * 获取某班级下对应的讨论课控制器
@@ -86,4 +47,43 @@ public interface SeminarMapper {
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(@Param("roundId")BigInteger roundId);
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
+
+    /**
+     * 创建新的讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
+
+    /**
+     * 更改讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void updateSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
+
+    /**
+     *
+     * @param seminarInfoId
+     * @return
+     */
+    void deleteSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
+
+    /**
+     *
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 }

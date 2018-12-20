@@ -22,11 +22,29 @@
         WHERE id=#{courseClassId}
     </select>
 
+    <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
+        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        FROM klass
+        WHERE course_id=#{courseId}
+    </select>
+
+    <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
+        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        FROM klass,klass_student
+        WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
+    </select>
+
+
     <insert id="insertCourseClass">
         insert into klass(course_id,grade,klass_serial,klass_time,klass_location) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
-    <update id="updateCourseClassByCourseClassId">
+    <insert id="insertCourseClassStudentRelation">
+        insert into klass_student(klass_id,student_id,course_id)
+        values(#{courseClassId},#{studentId},#{courseId})
+    </insert>
+
+    <update id="updateCourseClassByCourseClass">
         update klass
         <set>
             <if test="courseClass.courseId!=null">
@@ -51,21 +69,4 @@
     <delete id="deleteCourseClassByCourseClassId">
         delete from klass where id=#{courseClassId}
     </delete>
-
-    <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
-        FROM klass
-        WHERE course_id=#{courseId}
-    </select>
-
-    <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
-        FROM klass,klass_student
-        WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
-    </select>
-
-    <insert id="insertCourseClassStudentRelation">
-        insert into klass_student(klass_id,student_id,course_id)
-        values(#{courseClassId},#{studentId},#{courseId})
-    </insert>
 </mapper>

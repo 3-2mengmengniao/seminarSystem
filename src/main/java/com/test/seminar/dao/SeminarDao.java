@@ -23,52 +23,6 @@ public interface SeminarDao {
     SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
-     * 创建新的讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
-
-    /**
-     * 更改讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
-
-    /**
-     * 删除讨论课信息
-     * @param seminarInfoId
-     * @return
-     */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
-
-    /**
-     * 通过roundID获取round对应的讨论课信息
-     * @param seminarControlId
-     * @return
-     */
-    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void insertSeminarControl(SeminarControl seminarControl);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void updateSeminarControl(SeminarControl seminarControl);
-
-    /**
-     *
-     * @param seminarControlId
-     */
-    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
-
-    /**
      * 获取某讨论课某班级下对应的讨论课控制器
      * @param classId
      * @param seminarInfoId
@@ -82,4 +36,52 @@ public interface SeminarDao {
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
+    /**
+     * 通过roundID获取round对应的讨论课信息
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 创建新的讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void insertSeminarControl(SeminarControl seminarControl);
+
+    /**
+     * 更改讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void updateSeminarControl(SeminarControl seminarControl);
+
+    /**
+     * 删除讨论课信息
+     * @param seminarInfoId
+     * @return
+     */
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+
+
+
+    /**
+     *
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
 }

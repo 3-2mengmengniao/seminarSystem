@@ -22,6 +22,7 @@ public class Student{
     private int active;
     private String studentName;
     private String email;
+    private List<Course> courseList;
 
     public BigInteger getId() {
         return id;
@@ -67,4 +68,7 @@ public class Student{
         this.email = email;
     }
 
+    public List<Course> getCourseList() { return courseList; }
+
+    public void setCourseList(List<Course> courseList) { this.courseList = courseList; }
 }

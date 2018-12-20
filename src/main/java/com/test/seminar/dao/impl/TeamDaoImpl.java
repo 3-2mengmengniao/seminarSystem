@@ -30,6 +30,25 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public List<Team> getTeamByCourseId(BigInteger courseId) {
+        return teamMapper.getTeamByCourseId(courseId);
+    }
+
+    @Override
+    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
+        return teamMapper.getTeamBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
+        Team team=teamMapper.getTeamByStudentIdAndCourseId(studentId,courseId);
+        if(team==null) {
+            throw new TeamNotFoundException();
+        }
+        return team;
+    }
+
+    @Override
     public void insertTeam(Team team)throws RepetitiveRecordException {
         teamMapper.insertTeam(team);
     }
@@ -43,34 +62,15 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public void updateCourseClassStudentTeamId(BigInteger courseClassId, BigInteger studentId, BigInteger teamId) {
+        teamMapper.updateCourseClassStudentTeamId(courseClassId,studentId,teamId);
+    }
+
+    @Override
     public void deleteTeamByTeamId(BigInteger teamId)throws TeamNotFoundException {
         if(teamMapper.getTeamByTeamId(teamId)==null) {
             throw new TeamNotFoundException();
         }
         teamMapper.deleteTeamByTeamId(teamId);
-    }
-
-    @Override
-    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
-        Team team=teamMapper.getTeamByStudentIdAndCourseId(studentId,courseId);
-        if(team==null) {
-            throw new TeamNotFoundException();
-        }
-        return team;
-    }
-
-    @Override
-    public List<Team> getTeamByCourseId(BigInteger courseId) {
-        return teamMapper.getTeamByCourseId(courseId);
-    }
-
-    @Override
-    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
-        return teamMapper.getTeamBySeminarControlId(seminarControlId);
-    }
-
-    @Override
-    public void updateCourseClassStudentTeamId(BigInteger courseClassId, BigInteger studentId, BigInteger teamId) {
-        teamMapper.updateCourseClassStudentTeamId(courseClassId,studentId,teamId);
     }
 }

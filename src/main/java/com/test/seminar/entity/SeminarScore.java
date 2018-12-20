@@ -3,20 +3,15 @@ package com.test.seminar.entity;
 import java.math.BigInteger;
 
 public class SeminarScore {
-    private BigInteger seminarControlId;
-    private BigInteger teamId;
+    private BigInteger id;
     private double totalScore;
     private double presentationScore;
     private double questionScore;
     private double reportScore;
 
-    public BigInteger getSeminarControlId() {
-        return seminarControlId;
-    }
+    public BigInteger getId() { return id; }
 
-    public BigInteger getTeamId() {
-        return teamId;
-    }
+    public void setId(BigInteger id) { this.id = id; }
 
     public double getTotalScore() {
         return totalScore;
@@ -32,14 +27,6 @@ public class SeminarScore {
 
     public double getReportScore() {
         return reportScore;
-    }
-
-    public void setSeminarControlId(BigInteger seminarControlId) {
-        this.seminarControlId = seminarControlId;
-    }
-
-    public void setTeamId(BigInteger teamId) {
-        this.teamId = teamId;
     }
 
     public void setTotalScore(double totalScore) {

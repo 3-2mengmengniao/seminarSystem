@@ -18,24 +18,6 @@ import java.util.List;
 @Component
 public interface RoundMapper {
     /**
-     * 创建新轮次
-     * @param round
-     */
-    void insertRound(@Param("round")Round round);
-
-    /**
-     * 删除轮次
-     * @param roundId
-     */
-    void deleteRoundByRoundId(@Param("roundId")BigInteger roundId);
-
-    /**
-     * 更新轮次信息
-     * @param round
-     */
-    void updateRound(@Param("round")Round round);
-
-    /**
      * 通过轮次ID获得轮次信息
      * @param roundId
      * @return
@@ -48,4 +30,22 @@ public interface RoundMapper {
      * @return
      */
     List<Round> getRoundByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 创建新轮次
+     * @param round
+     */
+    void insertRound(@Param("round")Round round);
+
+    /**
+     * 更新轮次信息
+     * @param round
+     */
+    void updateRound(@Param("round")Round round);
+
+    /**
+     * 删除轮次
+     * @param roundId
+     */
+    void deleteRoundByRoundId(@Param("roundId")BigInteger roundId);
 }
