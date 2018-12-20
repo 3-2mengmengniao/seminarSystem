@@ -54,14 +54,6 @@ public interface StudentDao {
     void insertStudent(Student student)throws RepetitiveRecordException;
 
     /**
-     * 创建新的学生账户
-     *
-     * @param studentList
-     * @return 新建学生的ID
-     */
-    void insertStudentByStudentList(List<Student> studentList);
-
-    /**
      * 更改学生信息
      *
      * @param student

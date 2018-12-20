@@ -63,11 +63,8 @@
     <update id="updateSeminarInfo">
         update seminar
         <set>
-            <if test="seminarInfo.courseId!=null">
-                course_id=#{seminarInfo.courseId},
-            </if>
-            <if test="seminarInfo.roundId!=null">
-                round_id=#{seminarInfo.roundId},
+            <if test="#{roundId}!=null">
+                round_id=#{roundId},
             </if>
             <if test="seminarInfo.seminarName!=null">
                 seminar_name=#{seminarInfo.seminarName},
@@ -113,12 +110,6 @@
     <update id="updateSeminarControl">
         update klass_seminar
         <set>
-            <if test="seminarControl.classId!=null">
-                klass_id=#{seminarControl.classId},
-            </if>
-            <if test="seminarControl.seminarInfoId!=null">
-                seminar_id=#{seminarControl.seminarInfoId},
-            </if>
             <if test="seminarControl.seminarStatus!=null">
                 status=#{seminarControl.seminarStatus},
             </if>

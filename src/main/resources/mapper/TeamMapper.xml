@@ -48,17 +48,8 @@
     <update id="updateTeamByTeamId">
         update team
         <set>
-            <if test="team.classId!=null">
-                klass_id=#{team.classId},
-            </if>
-            <if test="team.courseId!=null">
-                course_id=#{team.courseId},
-            </if>
             <if test="team.teamName!=null">
                 team_name=#{team.teamName},
-            </if>
-            <if test="team.leaderId!=null">
-                leader_id=#{team.leaderId},
             </if>
             <if test="team.status!=null">
                 status=#{team.status},

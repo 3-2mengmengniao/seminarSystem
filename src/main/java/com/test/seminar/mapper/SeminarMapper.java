@@ -74,7 +74,7 @@ public interface SeminarMapper {
      * @param seminarInfo
      * @return
      */
-    void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
+    void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo,@Param("roundId")BigInteger roundId);
 
     /**
      *

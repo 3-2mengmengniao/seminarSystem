@@ -2,6 +2,7 @@ package com.test.seminar.dao;
 
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
@@ -21,6 +22,13 @@ public interface SeminarDao {
      * @return
      */
     SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarInfo getSeminarInfoBySeminarControlId(BigInteger seminarControlId);
 
     /**
      * 获取某讨论课某班级下对应的讨论课控制器
@@ -49,20 +57,20 @@ public interface SeminarDao {
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId)throws RepetitiveRecordException;
 
     /**
      *
      * @param seminarControl
      */
-    void insertSeminarControl(SeminarControl seminarControl);
+    void insertSeminarControl(SeminarControl seminarControl,BigInteger classId,BigInteger seminarInfoId);
 
     /**
      * 更改讨论课信息
      * @param seminarInfo
      * @return
      */
-    void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
+    void updateSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException;
 
     /**
      *
@@ -84,4 +92,11 @@ public interface SeminarDao {
      * @param seminarControlId
      */
     void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarScoreId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
 }

@@ -39,9 +39,6 @@
     <update id="updateRound">
         update round
         <set>
-            <if test="round.courseId!=null">
-                course_id=#{round.courseId},
-            </if>
             <if test="round.roundSerial!=null">
                 round_serial=#{round.roundSerial},
             </if>

@@ -46,7 +46,7 @@ public interface TeamDao {
      * @param team
      * @return
      */
-    void insertTeam(Team team)throws RepetitiveRecordException;
+    void insertTeam(Team team,BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException;
 
     /**
      * 更改队伍信息
@@ -71,4 +71,11 @@ public interface TeamDao {
      * @return
      */
     void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
+
+    /**
+     *
+     * @param courseClassId
+     * @return
+     */
+    List<Team> getTeamByCourseClassId(BigInteger courseClassId);
 }
