@@ -5,7 +5,7 @@
     <resultMap id="studentResultMap" type="com.test.seminar.entity.Student">
         <id property="id" column="id" />
         <result property="active" column="is_active"/>
-        <collection property="courseList" javaType="ArrayList" column="id" ofType="Course" select="getCourseByStudentId"/>
+        <collection property="courseList" javaType="ArrayList" column="id" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByStudentId"/>
     </resultMap>
 
 

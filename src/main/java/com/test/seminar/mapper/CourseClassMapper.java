@@ -42,6 +42,12 @@ public interface CourseClassMapper {
     CourseClass getCourseClassByStudentIdAndCourseId(@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
 
     /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    CourseClass getCourseClassBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+    /**
      * 创建新的班级账户
      *
      * @param courseClass

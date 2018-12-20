@@ -2,6 +2,7 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.RoundScore;
+import com.test.seminar.entity.SeminarScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -89,4 +90,11 @@ public interface RoundMapper {
      * @param roundScoreId
      */
     void deleteRoundScoreByRoundScoreId(@Param("roundScoreId")BigInteger roundScoreId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 }

@@ -77,4 +77,11 @@ public interface TeamMapper {
      * @return
      */
     void deleteTeamByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param courseClassId
+     * @return
+     */
+    List<Team> getTeamByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 }

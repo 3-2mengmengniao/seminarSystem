@@ -8,7 +8,8 @@
         <result property="presentationScoreMethod" column="presentation_score_method"/>
         <result property="reportScoreMethod" column="report_score_method"/>
         <result property="questionScoreMethod" column="question_score_method"/>
-        <collection property="roundScoreList" ofType="com.test.seminar.entity.RoundScore" select="getRoundScoreByRoundScoreId"/>
+        <collection property="seminarInfoList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarInfo" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarInfoByRoundId"/>
+        <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId"/>
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">

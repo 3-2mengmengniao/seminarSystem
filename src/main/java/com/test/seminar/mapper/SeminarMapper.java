@@ -32,6 +32,13 @@ public interface SeminarMapper {
      * @param seminarControlId
      * @return
      */
+    SeminarInfo getSeminarInfoBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
     SeminarControl getSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**

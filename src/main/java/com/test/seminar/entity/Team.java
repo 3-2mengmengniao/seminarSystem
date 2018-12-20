@@ -11,13 +11,14 @@ import java.util.List;
 public class Team {
     private BigInteger id;
     private String teamName;
-    private Student leader;
     private int status;
     private int teamSerial;
+    private Student leader;
+    private BigInteger leader_id;
+    private List<Student> memberList;
+    private List<Question> questionList;
     private List<RoundScore> roundScoreList;
     private List<SeminarScore> seminarScoreList;
-    private List<Question> questionList;
-    private List<Student> memberList;
 
     public BigInteger getId() {
         return id;

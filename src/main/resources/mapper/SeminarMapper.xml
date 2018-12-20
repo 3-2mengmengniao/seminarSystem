@@ -13,7 +13,6 @@
         <result property="seminarSerial" column="seminar_serial"/>
         <result property="registrationStartTime" column="enroll_start_time"/>
         <result property="registrationEndTime" column="enroll_end_time"/>
-        <collection property=""
     </resultMap>
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
@@ -22,7 +21,11 @@
         <result property="seminarInfoId" column="seminar_id"/>
         <result property="seminarStatus" column="status"/>
         <result property="reportDDL" column="report_ddl"/>
-        <collection property="seminarScoreList" ofType="com.test.seminar.entity.SeminarScore" select="getSeminarScoreByseminarScoreId"/>
+        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassBySeminarControlId"/>
+        <association property="seminarInfo" javaType="com.test.seminar.entity.SeminarInfo" column="id" select="getSeminarInfoBySeminarControlId"/>
+        <collection property="presentationList" javaType="ArrayList" ofType="com.test.seminar.entity.Presentation" column="id" select="com.test.seminar.mapper.PresentationMapper.getPresentationBySeminarControlId"/>
+        <collection property="questionList" javaType="ArrayList" ofType="com.test.seminar.entity.Question" column="id" select="com.test.seminar.mapper.QuestionMapper.getQuestionBySeminarControlId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreBySeminarControlId"/>
     </resultMap>
     
     <resultMap id="seminarScoreResultMap" type="com.test.seminar.entity.SeminarScore">
@@ -39,6 +42,18 @@
         where id=#{seminarInfoId}
     </select>
 
+    <select id="getSeminarInfoBySeminarControlId" resultMap="seminarInfoResultMap">
+        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        from seminar
+        where id=#{seminarControlId}
+    </select>
+
+    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
+        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        from seminar
+        where round_id=#{roundId}
+    </select>
+    
     <insert id="insertSeminarInfo">
         insert into seminar(course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time)
         values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
@@ -118,16 +133,10 @@
         delete from klass_seminar where id=#{seminarControlId}
     </delete>
 
-    <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
+    <select id="getSeminarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
         select id,klass_id,seminar_id,status,report_ddl
         from klass_seminar
         where klass_id=#{classId} and seminar_id=#{seminarInfoId}
-    </select>
-
-    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
-        from seminar
-        where round_id=#{roundId}
     </select>
 
     <select id="getSeminarScoreBySeminarScoreId" resultMap="seminarScoreResultMap">
@@ -146,6 +155,12 @@
         select id,totalScore,presentationScore,questionScore,reportScore
         from seminar_score
         where team_id=#{teamId}
+    </select>
+
+    <select id="getSeminarScoreBySeminarControlId" resultMap="seminarScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from seminar_score
+        where klass_seminar_id=#{seminarControlId}
     </select>
     
     <insert id="insertSeminarScore">
@@ -175,5 +190,7 @@
     <delete id="deleteSeminarScoreBySeminarScoreId">
         delete from seminar_score where id=#{seminarScoreId}
     </delete>
+
+
 
 </mapper>
