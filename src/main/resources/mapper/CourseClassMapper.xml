@@ -36,7 +36,8 @@
 
 
     <insert id="insertCourseClass">
-        insert into klass(course_id,grade,klass_serial,klass_time,klass_location) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
+        insert into klass(course_id,grade,klass_serial,klass_time,klass_location)
+        values(#{courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
     <insert id="insertCourseClassStudentRelation">

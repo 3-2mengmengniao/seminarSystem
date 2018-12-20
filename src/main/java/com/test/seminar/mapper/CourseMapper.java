@@ -43,7 +43,7 @@ public interface CourseMapper {
      * @param course
      * @return
      */
-    void insertCourse(@Param("course") Course course);
+    void insertCourse(@Param("course") Course course,@Param("teacherId")BigInteger teacherId);
 
     /**
      * 更改课程信息

@@ -24,7 +24,7 @@
 
     <insert id="insertRound">
         insert into round(id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method)
-        values(#{round.courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})
+        values(#{courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})
     </insert>
 
     <update id="updateRound">

@@ -33,7 +33,7 @@
 
     <insert id="insertTeam">
         insert into team(klass_id,course_id,team_name,leader_id,status,team_serial)
-        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
+        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
     </insert>
 
     <update id="updateTeamByTeamId">
