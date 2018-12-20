@@ -8,14 +8,9 @@ import java.math.BigInteger;
  */
 
 public class Question {
-    private BigInteger id;
     private Student student;
     private int selected;
     private double score;
-
-    public BigInteger getId() {
-        return id;
-    }
 
     public Student getStudent() { return student; }
 
