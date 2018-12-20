@@ -13,6 +13,7 @@
         <result property="teamEndTime" column="team_end_time"/>
         <result property="teamMainCourseId" column="team_main_course_id"/>
         <result property="teamMainCourseId" column="seminar_main_course_id"/>
+        <collection property="roundList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Round" select="com.test.seminar.mapper.RoundMapper.getRoundByCourseId"/>
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">

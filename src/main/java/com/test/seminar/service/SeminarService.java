@@ -50,7 +50,7 @@ public interface SeminarService {
      * @param classId
      * @return
      */
-    SeminarControl getSemniarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
+    SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
 
     /**
      * 通过roundID获取round对应的讨论课信息
