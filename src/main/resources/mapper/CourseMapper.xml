@@ -45,9 +45,6 @@
     <update id="updateCourseByCourseId">
         update course
         <set>
-            <if test="course.teacherId!=null">
-                teacher_id=#{course.teacherId},
-            </if>
             <if test="course.introduction!=null">
                 introduction=#{course.introduction},
             </if>

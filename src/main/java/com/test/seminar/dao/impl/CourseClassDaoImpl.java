@@ -45,8 +45,8 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
-    public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
-        courseClassMapper.insertCourseClass(courseClass);
+    public void insertCourseClass(CourseClass courseClass, BigInteger courseId) throws RepetitiveRecordException {
+        courseClassMapper.insertCourseClass(courseClass,courseId);
     }
 
     @Override
@@ -55,11 +55,11 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException{
+    public void updateCourseClassByCourseClass(CourseClass courseClass) throws CourseClassNotFoundException{
         if(courseClassMapper.getCourseClassByCourseClassId(courseClass.getId())==null) {
             throw new CourseClassNotFoundException();
         }
-        courseClassMapper.updateCourseClassByCourseClassId(courseClass);
+        courseClassMapper.updateCourseClassByCourseClass(courseClass);
     }
 
     @Override

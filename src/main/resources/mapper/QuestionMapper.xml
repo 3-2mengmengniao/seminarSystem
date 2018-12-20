@@ -33,18 +33,6 @@
     <update id="updateQuestion">
         update question
         <set>
-            <if test="seminarControlId!=null">
-                klass_seminar_id=#{seminarControlId},
-            </if>
-            <if test="presentationId!=null">
-                attandance_id=#{presentationId},
-            </if>
-            <if test="teamId!=null">
-                team_id=#{teamId},
-            </if>
-            <if test="studentId!=null">
-                student_id=#{studentId},
-            </if>
             <if test="question.selected!=null">
                 is_selected=#{question.selected},
             </if>
