@@ -3,15 +3,10 @@ package com.test.seminar.entity;
 import java.math.BigInteger;
 
 public class RoundScore {
-    private BigInteger id;
     private double total_score;
     private double presentation_score;
     private double question_score;
     private double report_score;
-
-    public BigInteger getId() { return id; }
-
-    public void setId(BigInteger id) { this.id = id; }
 
     public double getTotal_score() {
         return total_score;

@@ -17,7 +17,53 @@
         <result property="reportUrl" column="report_url"/>
         <result property="pptName" column="ppt_name"/>
         <result property="pptUrl" column="ppt_url"/>
+        <association property="team" column="team_id" javaType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByTeamId"/>
     </resultMap>
 
+    <select id="getPresentationBySeminarControlId" resultMap="presentationResultMap">
+        select id,klass_seminar_id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
+        from  attendance
+        where klass_seminar_id=#{seminarControlId}
+    </select>
+
+    <insert id="insertPresentation">
+        insert into attendance(klass_seminar_id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url)
+        values(#{seminarControlId},#{teamId},#{presentation.teamOrder},#{presentation.present},#{presentation.reportName},#{presentation.reportUrl},#{presentation.pptName},#{presentation.pptUrl})
+    </insert>
+
+    <update id="updatePresentation">
+        update attendance
+        <set>
+            <if test="seminarControlId!=null">
+                klass_seminar_id=#{seminarControlId},
+            </if>
+            <if test="teamId!=null">
+                team_id=#{teamId},
+            </if>
+            <if test="presentation.teamOrder!=null">
+                team_order=#{presentation.teamOrder},
+            </if>
+            <if test="presentation.present!=null">
+                is_present=#{presentation.present},
+            </if>
+            <if test="presentation.reportName!=null">
+                report_name=#{presentation.reportName},
+            </if>
+            <if test="presentation.reportUrl!=null">
+                report_url=#{presentation.reportUrl},
+            </if>
+            <if test="presentation.pptName!=null">
+                ppt_name=#{presentation.pptName},
+            </if>
+            <if test="presentation.pptUrl!=null">
+                ppt_url=#{presentation.pptUrl},
+            </if>
+        </set>
+        where id=#{presentation.id}
+    </update>
+
+    <delete id="deletePresentationByPresentationId">
+        delete from attendance where id=#{presentationId}
+    </delete>
 
 </mapper>

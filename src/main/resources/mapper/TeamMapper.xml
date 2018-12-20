@@ -4,13 +4,7 @@
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
         <result property="classId" column="klass_id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="teamName" column="team_name"/>
-        <result property="leaderId" column="leader_id"/>
-        <result property="status" column="status"/>
-        <result property="teamSerial" column="team_serial"/>
-        <collection property="seminarScoreList" ofType="com.test.seminar.entity.SeminarScore" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByTeamId"/>
-        <collection property="roundScoreList" ofType="com.test.seminar.entity.RoundScore" select="com.test.seminar.mapper.SeminarMapper.getRoundScoreByTeamId"/>
+        <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
