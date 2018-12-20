@@ -19,4 +19,11 @@ import java.util.List;
 public interface PresentationMapper {
 
     List<Presentation> getPresentationBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    void insertPresentation(@Param("presentation")Presentation presentation, @Param("courseClassId")BigInteger courseClassId, @Param("seminarControlId") BigInteger seminarControlId);
+
+    void updatePresentation(@Param("presentation")Presentation presentation);
+
+    void deletePresentationByPresentationId(@Param("presentationId")BigInteger presentationId);
+
 }

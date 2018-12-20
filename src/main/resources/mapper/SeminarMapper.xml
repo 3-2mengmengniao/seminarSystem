@@ -13,6 +13,7 @@
         <result property="seminarSerial" column="seminar_serial"/>
         <result property="registrationStartTime" column="enroll_start_time"/>
         <result property="registrationEndTime" column="enroll_end_time"/>
+        <collection property=""
     </resultMap>
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
