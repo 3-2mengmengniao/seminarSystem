@@ -60,14 +60,14 @@ public interface SeminarMapper {
      *
      * @param seminarControl
      */
-    void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
+    void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl,@Param("classId")BigInteger classId, @Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
      * 创建新的讨论课信息
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo);
+    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo,@Param("courseId")BigInteger courseId,@Param("roundId")BigInteger roundId);
 
     /**
      * 更改讨论课信息

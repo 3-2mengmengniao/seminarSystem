@@ -53,7 +53,7 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    void insertTeam(@Param("team")Team team);
+    void insertTeam(@Param("team")Team team, @Param("courseClassId")BigInteger courseClassId,@Param("courseId")BigInteger courseId);
 
     /**
      * 更改队伍信息

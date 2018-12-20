@@ -37,7 +37,7 @@ public interface RoundMapper {
      * 创建新轮次
      * @param round
      */
-    void insertRound(@Param("round")Round round);
+    void insertRound(@Param("round")Round round,@Param("courseId")BigInteger courseId);
 
     /**
      * 更新轮次信息

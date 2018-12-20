@@ -56,7 +56,7 @@
     
     <insert id="insertSeminarInfo">
         insert into seminar(course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time)
-        values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
+        values(#{courseId},#{roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
         #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.seminarSerial},#{seminarInfo.registrationStartTime},#{seminarInfo.registrationEndTime})
     </insert>
 
@@ -107,7 +107,7 @@
 
     <insert id="insertSeminarControl">
         insert into klass_seminar(klass_id,seminar_id,status,report_ddl)
-        values(#{seminarControl.classId},#{seminarControl.seminarInfoId},#{seminarControl.seminarStatus},#{seminarControl.reportDDL})
+        values(#{classId},#{seminarInfoId},#{seminarControl.seminarStatus},#{seminarControl.reportDDL})
     </insert>
 
     <update id="updateSeminarControl">
