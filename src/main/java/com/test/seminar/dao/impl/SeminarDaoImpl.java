@@ -30,10 +30,28 @@ public class SeminarDaoImpl implements SeminarDao {
         }
         return seminarInfo;
     }
+    @Override
+    public SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
+        SeminarControl seminarControl = seminarMapper.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
+        if (seminarControl==null) {
+            throw new SeminarControlNotFoundException();
+        }
+        return seminarControl;
+    }
+
+    @Override
+    public List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId) {
+        return seminarMapper.getSeminarInfoByRoundId(roundId);
+    }
 
     @Override
     public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId) {
         return seminarMapper.getSeminarControlBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException {
+        seminarMapper.insertSeminarInfo(seminarInfo);
     }
 
     @Override
@@ -65,10 +83,5 @@ public class SeminarDaoImpl implements SeminarDao {
     @Override
     public void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId) {
         seminarMapper.deleteSeminarControlBySeminarControlId(seminarControlId);
-    }
-
-    @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger roundId) throws RepetitiveRecordException {
-        seminarMapper.insertSeminarInfo(seminarInfo,roundId);
     }
 }

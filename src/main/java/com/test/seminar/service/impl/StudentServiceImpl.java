@@ -37,11 +37,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public List<Student> getStudentByTeamId(BigInteger teamId) {
+        return studentDao.getStudentByTeamId(teamId);
+    }
+
+    @Override
     public Student getStudentByAccount(String account) throws UserNotFoundException {
         Student student=studentDao.getStudentByAccount(account);
         if(student==null) {
             throw new UserNotFoundException();
         }
         return student;
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        return studentDao.getAllStudent();
     }
 }

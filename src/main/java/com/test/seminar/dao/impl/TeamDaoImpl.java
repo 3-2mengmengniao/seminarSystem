@@ -4,7 +4,6 @@ import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Team;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
-import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,9 +30,27 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public void insertTeam(Team team,BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException {
+    public List<Team> getTeamByCourseId(BigInteger courseId) {
+        return teamMapper.getTeamByCourseId(courseId);
+    }
 
-        teamMapper.insertTeam(team,courseClassId,courseId);
+    @Override
+    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
+        return teamMapper.getTeamBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
+        Team team=teamMapper.getTeamByStudentIdAndCourseId(studentId,courseId);
+        if(team==null) {
+            throw new TeamNotFoundException();
+        }
+        return team;
+    }
+
+    @Override
+    public void insertTeam(Team team)throws RepetitiveRecordException {
+        teamMapper.insertTeam(team);
     }
 
     @Override

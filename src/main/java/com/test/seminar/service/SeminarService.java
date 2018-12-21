@@ -29,8 +29,7 @@ public interface SeminarService {
      * @param seminarInfo
      * @throws RepetitiveRecordException
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId)throws RepetitiveRecordException;
-
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId) throws RepetitiveRecordException;
 
     /**
      * 更改讨论课信息
@@ -45,4 +44,25 @@ public interface SeminarService {
      * @throws SeminarInfoNotFoundException
      */
     void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+
+    /**
+     * 通过ID获取某个班级的讨论课信息
+     * @param classId
+     * @return
+     */
+    SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
+
+    /**
+     * 通过roundID获取round对应的讨论课信息
+     * @param roundId
+     * @return
+     */
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
+    /**
+     * 根据传入的轮次列表返回每一个round对应的讨论课信息
+     * @param roundList
+     * @return
+     */
+    List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
 }

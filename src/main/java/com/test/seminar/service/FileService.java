@@ -15,4 +15,11 @@ public interface FileService {
     void uploadStudentExcel(MultipartFile file, BigInteger courseClassId, BigInteger courseId);
 
     MultipartFile downloadFileByFilePath(String filePath);
+
+    /**
+     * 将某班级的学生信息导出为XSSF格式，可输出为.xlsx
+     * @param courseClassId
+     * @return
+     */
+    XSSFWorkbook downloadStudentListByCourseClassId(BigInteger courseClassId);
 }

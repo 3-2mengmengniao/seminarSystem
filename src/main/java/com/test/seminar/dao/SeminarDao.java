@@ -24,6 +24,28 @@ public interface SeminarDao {
     SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarInfo getSeminarInfoBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 获取某讨论课某班级下对应的讨论课控制器
+     * @param classId
+     * @param seminarInfoId
+     * @return
+     */
+    SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
+
+    /**
+     * 获取某轮次下的所有讨论课信息
+     * @param roundId
+     * @return
+     */
+    List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
+    /**
      * 通过roundID获取round对应的讨论课信息
      * @param seminarControlId
      * @return
@@ -35,7 +57,7 @@ public interface SeminarDao {
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId)throws RepetitiveRecordException;
 
     /**
      *
@@ -70,4 +92,11 @@ public interface SeminarDao {
      * @param seminarControlId
      */
     void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarScoreId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
 }
