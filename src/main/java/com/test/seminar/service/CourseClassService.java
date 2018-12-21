@@ -41,14 +41,4 @@ public interface CourseClassService {
      * @param courseClassId
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException;
-
-
-    /**
-     * 获取某课程下的所有班级
-     * @param courseId
-     * @return 班级列表
-     */
-    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
-
-    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException;
 }

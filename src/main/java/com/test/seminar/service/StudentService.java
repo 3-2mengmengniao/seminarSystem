@@ -44,9 +44,5 @@ public interface StudentService {
      */
     void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
 
-    List<Student> getStudentByTeamId(BigInteger teamId);
-
     Student getStudentByAccount(String acoount)throws UserNotFoundException;
-
-    List<Student> getAllStudent();
 }

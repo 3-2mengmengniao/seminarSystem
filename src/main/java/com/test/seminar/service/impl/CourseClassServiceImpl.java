@@ -35,14 +35,4 @@ public class CourseClassServiceImpl implements CourseClassService {
         courseClassDao.deleteCourseClassByCourseClassId(courseClassId);
     }
 
-    @Override
-    public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
-        return courseClassDao.getCourseClassByCourseId(courseId);
-    }
-
-    @Override
-    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
-        return courseClassDao.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-    }
-
 }

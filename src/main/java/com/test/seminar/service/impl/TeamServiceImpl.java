@@ -1,6 +1,8 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.TeamDao;
+import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Team;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
@@ -15,6 +17,8 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDao teamDao;
+    @Autowired
+    private CourseClassDao courseClassDao;
     @Override
     public Team getTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
         return teamDao.getTeamByTeamId(teamId);
@@ -31,22 +35,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void insertTeam(Team team) throws RepetitiveRecordException {
-        teamDao.insertTeam(team);
-    }
-
-    @Override
-    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
-        return teamDao.getTeamByStudentIdAndCourseId(studentId,courseId);
-    }
-
-    @Override
-    public List<Team> getTeamByCourseId(BigInteger courseId) {
-        return teamDao.getTeamByCourseId(courseId);
-    }
-
-    @Override
-    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
-        return  teamDao.getTeamBySeminarControlId(seminarControlId);
+    public void insertTeam(Team team,BigInteger courseClassId) throws RepetitiveRecordException {
+        CourseClass courseClass = courseClassDao.getCourseClassByCourseClassId(courseClassId);
+        teamDao.insertTeam(team,courseClassId,courseClass.getCourse().getId());
     }
 }

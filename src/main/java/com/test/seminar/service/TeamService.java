@@ -15,11 +15,6 @@ public interface TeamService {
 
     void updateTeamByTeamId(Team team) throws TeamNotFoundException;
 
-    void insertTeam(Team team) throws RepetitiveRecordException;
+    void insertTeam(Team team,BigInteger courseClassId) throws RepetitiveRecordException;
 
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws TeamNotFoundException;
-
-    List<Team> getTeamByCourseId(BigInteger courseId);
-
-    List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 }

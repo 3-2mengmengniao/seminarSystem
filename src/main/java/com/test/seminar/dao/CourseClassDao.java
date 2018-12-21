@@ -8,27 +8,6 @@ import java.math.BigInteger;
 import java.util.List;
 
 public interface CourseClassDao {
-    /**
-     * 获取某课程下的所有班级
-     * @param courseId
-     * @return
-     */
-    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
-
-    /**
-     *
-     * @param teamId
-     * @return
-     */
-    CourseClass getCourseClassByTeamId(BigInteger teamId);
-
-    /**
-     * 获取某课程下某学生的班级
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws CourseClassNotFoundException;
 
     /**
      * 通过ID获取班级信息

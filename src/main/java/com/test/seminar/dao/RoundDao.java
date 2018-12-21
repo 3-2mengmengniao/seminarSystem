@@ -22,13 +22,6 @@ public interface RoundDao {
     Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 
     /**
-     * 根据课程ID获得本课程的所有轮次信息
-     * @param courseId
-     * @return
-     */
-    List<Round> getRoundByCourseId(BigInteger courseId);
-
-    /**
      * 创建新轮次
      * @param round
      */

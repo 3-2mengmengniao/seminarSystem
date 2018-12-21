@@ -36,10 +36,4 @@ public class RoundServiceImpl implements RoundService {
     public Round getRoundByRoundId(BigInteger roundId) throws RoundNotFoundException {
         return roundDao.getRoundByRoundId(roundId);
     }
-
-    @Override
-    public List<Round> getRoundByCourseId(BigInteger courseId) {
-         List<Round> roundlist = roundDao.getRoundByCourseId(courseId);
-         return roundlist;
-    }
 }

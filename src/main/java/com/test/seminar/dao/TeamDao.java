@@ -20,28 +20,6 @@ public interface TeamDao {
     Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;
 
     /**
-     * 以学生ID和课程ID获取学生本课程的组队信息
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId) throws TeamNotFoundException;
-
-    /**
-     * 查看某课程的所有队伍
-     * @param courseId
-     * @return
-     */
-    List<Team> getTeamByCourseId(BigInteger courseId);
-
-    /**
-     * 查看某讨论课的所有队伍
-     * @param seminarControlId
-     * @return
-     */
-    List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
-
-    /**
      * 创建新的队伍信息
      * @param team
      * @return

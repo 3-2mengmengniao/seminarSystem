@@ -28,22 +28,6 @@ public interface StudentDao {
      * @return
      */
     Student getStudentByAccount(String account);
-    /**
-     * @param teamId
-     * @return
-     */
-    List<Student> getStudentByTeamId(BigInteger teamId);
-
-    /**
-     * @param courseClassId
-     * @return
-     */
-    List<Student> getStudentByCourseClassId(BigInteger courseClassId);
-
-    /**
-     * @return
-     */
-    List<Student> getAllStudent();
 
     /**
      * 创建新的学生账户

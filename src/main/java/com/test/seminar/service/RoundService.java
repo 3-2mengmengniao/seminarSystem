@@ -41,11 +41,4 @@ public interface RoundService {
      * @throws RoundNotFoundException
      */
     Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
-
-    /**
-     * 根据课程ID获得本课程的所有轮次信息
-     * @param courseId
-     * @return
-     */
-    List<Round> getRoundByCourseId(BigInteger courseId);
 }

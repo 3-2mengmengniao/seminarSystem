@@ -21,16 +21,6 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourseByTeacherId(BigInteger teacherId) {
-        return courseDao.getCourseByTeacherId(teacherId);
-    }
-
-    @Override
-    public List<Course> getCourseByStudentId(BigInteger studentId) {
-        return courseDao.getCourseByStudentId(studentId);
-    }
-
-    @Override
     public void insertCourse(Course course,BigInteger teacherId) throws RepetitiveRecordException {
         courseDao.insertCourse(course,teacherId);
     }

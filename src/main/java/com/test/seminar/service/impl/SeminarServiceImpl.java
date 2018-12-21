@@ -27,8 +27,8 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo) throws RepetitiveRecordException {
-        seminarDao.insertSeminarInfo(seminarInfo);
+    public void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger courseId, BigInteger roundId) throws RepetitiveRecordException {
+
     }
 
     @Override
@@ -39,27 +39,5 @@ public class SeminarServiceImpl implements SeminarService {
     @Override
     public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
         seminarDao.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
-    }
-
-    @Override
-    public SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
-        return seminarDao.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
-    }
-
-    @Override
-    public List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId){
-        return seminarDao.getSeminarInfoByRoundId(roundId);
-    }
-
-    @Override
-    public List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList) {
-        List<List<SeminarInfo>> SeminarInfoOrderByRoundId= new ArrayList<List<SeminarInfo>>();
-        List<SeminarInfo> temp;
-        for(int i=0;i<roundList.size();i++)
-        {
-            temp=getSeminarInfoByRoundId(roundList.get(i).getId());
-            SeminarInfoOrderByRoundId.add(i,temp);
-        }
-        return SeminarInfoOrderByRoundId;
     }
 }

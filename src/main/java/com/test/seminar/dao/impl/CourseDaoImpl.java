@@ -30,16 +30,6 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<Course> getCourseByTeacherId(BigInteger teacherId) {
-        return courseMapper.getCourseByTeacherId(teacherId);
-    }
-
-    @Override
-    public List<Course> getCourseByStudentId(BigInteger studentId) {
-        return courseMapper.getCourseByStudentId(studentId);
-    }
-
-    @Override
     public void insertCourse(Course course,BigInteger teacherId)throws RepetitiveRecordException {
         courseMapper.insertCourse(course,teacherId);
     }
