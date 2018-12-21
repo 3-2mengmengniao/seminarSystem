@@ -4,11 +4,7 @@
 
     <resultMap id="teacherResultMap" type="com.test.seminar.entity.Teacher">
         <id property="id" column="id" />
-        <result property="account" column="account"/>
-        <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="teacherName" column="teacher_name"/>
-        <result property="email" column="email"/>
         <collection property="courseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeacherId"/>
     </resultMap>
 

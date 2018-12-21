@@ -3,11 +3,6 @@
 <mapper namespace="com.test.seminar.mapper.RoundMapper">
     <resultMap id="roundResultMap" type="com.test.seminar.entity.Round">
         <id property="id" column="id" />
-        <result property="courseId" column="course_id"/>
-        <result property="roundSerial" column="round_serial"/>
-        <result property="presentationScoreMethod" column="presentation_score_method"/>
-        <result property="reportScoreMethod" column="report_score_method"/>
-        <result property="questionScoreMethod" column="question_score_method"/>
         <collection property="seminarInfoList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarInfo" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarInfoByRoundId"/>
         <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId"/>
     </resultMap>
@@ -20,13 +15,13 @@
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getRoundByRoundId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE id=#{roundId}
     </select>
@@ -38,7 +33,7 @@
     </select>
 
     <select id="getRoundByCourseIdAndRoundSerial" resultMap="roundResultMap">
-      select id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+      select id,round_serial,presentation_score_method,report_score_method,question_score_method
       FROM round
       WHERE course_id=#{courseId} and round_serial=#{roundSerial}
     </select>
@@ -51,7 +46,7 @@
     </select>
 
     <insert id="insertRound">
-        insert into round(id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method)
+        insert into round(id,course_Id,round_serial,presentation_score_method,report_score_method,question_score_method)
         values(#{courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})
     </insert>
 
