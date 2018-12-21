@@ -5,6 +5,7 @@
     <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
         <id property="id" column="id"/>
         <result property="visible" column="is_visible"/>
+        <result property="maxGroup" column="max_team"/>
         <result property="registrationStartTime" column="enroll_start_time"/>
         <result property="registrationEndTime" column="enroll_end_time"/>
     </resultMap>
@@ -57,7 +58,7 @@
         update seminar
         <set>
             <if test="roundId!=null">
-                round_id=roundId,
+                round_id=#{roundId},
             </if>
             <if test="seminarInfo.seminarName!=null">
                 seminar_name=#{seminarInfo.seminarName},
