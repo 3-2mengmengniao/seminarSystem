@@ -1,9 +1,6 @@
 package com.test.seminar.entity;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> bf0f78b815a0cbdeebec6b568c74f5ff90aa8d7a
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
@@ -26,6 +23,10 @@ public class SeminarControl {
     private CourseClass courseClass;
     private List<SeminarScore> seminarScoreList;
     private Round round;
+
+    public SeminarControl() {
+        seminarStatus=0;
+    }
 
     public BigInteger getId() {
         return id;

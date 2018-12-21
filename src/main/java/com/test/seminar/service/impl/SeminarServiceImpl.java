@@ -1,7 +1,9 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.dao.SeminarDao;
+import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
@@ -24,6 +26,8 @@ public class SeminarServiceImpl implements SeminarService {
     private SeminarDao seminarDao;
     @Autowired
     private RoundDao roundDao;
+    @Autowired
+    private CourseClassDao courseClassDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -37,9 +41,16 @@ public class SeminarServiceImpl implements SeminarService {
             Round round = new Round();
             round.setRoundSerial(roundDao.getMaxRoundSerialByCourseId(courseId)+1);
             roundDao.insertRound(round,courseId);
-            roundId=
+            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
+            roundId=round.getId();
         }
         seminarDao.insertSeminarInfo(seminarInfo,roundId);
+        seminarInfo = seminarDao.getseminarInfoBySeminarName(seminarInfo.getSeminarName());
+        List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
+        for(CourseClass courseClass:courseClassList){
+            SeminarControl seminarControl = new SeminarControl();
+            seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
+        }
     }
 
     @Override
