@@ -7,6 +7,7 @@ import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
+import com.test.seminar.mapper.RoundMapper;
 import com.test.seminar.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.List;
 public class SeminarDaoImpl implements SeminarDao {
     @Autowired
     SeminarMapper seminarMapper;
+    RoundMapper roundMapper;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
@@ -29,6 +31,7 @@ public class SeminarDaoImpl implements SeminarDao {
         if(seminarInfo==null) {
             throw new SeminarInfoNotFoundException();
         }
+        seminarInfo.setRoundSerial(roundMapper.getRoundSerialBySeminarInfoId(seminarInfoId));
         return seminarInfo;
     }
     @Override
@@ -43,6 +46,11 @@ public class SeminarDaoImpl implements SeminarDao {
     @Override
     public List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId) {
         return seminarMapper.getSeminarInfoByRoundId(roundId);
+    }
+
+    @Override
+    public SeminarInfo getSeminarInfoBySeminarNameAndCourseId(String seminarName,BigInteger courseId){
+        return seminarMapper.getSeminarInfoBySeminarNameAndCourseId(seminarName, courseId);
     }
 
     @Override

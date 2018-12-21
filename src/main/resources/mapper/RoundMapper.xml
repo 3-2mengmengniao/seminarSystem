@@ -31,6 +31,19 @@
         WHERE id=#{roundId}
     </select>
 
+    <select id="getRoundSerialBySeminarInfoId" resultMap="getSeminarScoreBySeminarControlId">
+    select round.round_serial
+    from round,seminar
+    where seminar.id=#{seminarInfoId} and seminar.round_id=round.id
+    </select>
+
+    <select id="getRoundByCourseIdAndRoundSerial" resultMap="getRoundByCourseIdAndRoundSerial">
+      select id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+      FROM round
+      WHERE course_id=#{courseId} and round_serial=#{roundSerial}
+    </select>
+
+
     <select id="getMaxRoundSerialByCourseId" resultType="Integer">
         SELECT MAX(round_serial)
         FROM round

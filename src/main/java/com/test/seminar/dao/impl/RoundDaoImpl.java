@@ -37,6 +37,12 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
+    public int getRoundSerialBySeminarInfoId(BigInteger seminarInfoId){
+        return roundMapper.getRoundSerialBySeminarInfoId(seminarInfoId);
+    }
+
+
+    @Override
     public void insertRound(Round round, BigInteger courseId)throws RepetitiveRecordException {
         roundMapper.insertRound(round,courseId);
     }
@@ -85,5 +91,10 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public int getMaxRoundSerialByCourseId(BigInteger courseId) {
         return roundMapper.getMaxRoundSerialByCourseId(courseId);
+    }
+
+    @Override
+    public Round getRoundByCourseIdAndRoundSerial(BigInteger courseId,int roundSerial){
+        return roundMapper.getRoundByCourseIdAndRoundSerial(courseId,roundSerial);
     }
 }

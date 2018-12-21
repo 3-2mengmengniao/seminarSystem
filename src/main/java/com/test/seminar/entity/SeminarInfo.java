@@ -17,6 +17,7 @@ public class SeminarInfo {
     private int maxGroup;
     private int visible;
     private int seminarSerial;
+    private int roundSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -68,6 +69,10 @@ public class SeminarInfo {
     public void setSeminarSerial(int seminarSerial) {
         this.seminarSerial = seminarSerial;
     }
+
+    public int getRoundSerial() { return roundSerial; }
+
+    public void setRoundSerial(int roundSerial) { this.roundSerial = roundSerial; }
 
     public Date getRegistrationStartTime() {
         return registrationStartTime;

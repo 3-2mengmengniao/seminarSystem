@@ -46,6 +46,14 @@ public interface SeminarDao {
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
 
     /**
+     *
+     * @param seminarName
+     * @param courseId
+     * @return
+     */
+    SeminarInfo getSeminarInfoBySeminarNameAndCourseId(String seminarName,BigInteger courseId);
+
+    /**
      * 通过roundID获取round对应的讨论课信息
      * @param seminarControlId
      * @return
