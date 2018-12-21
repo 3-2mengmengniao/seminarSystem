@@ -4,8 +4,6 @@
 
     <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
         <id property="id" column="id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="roundId" column="round_id"/>
         <result property="seminarName" column="seminar_name"/>
         <result property="introduction" column="introduction"/>
         <result property="maxGroup" column="max_team"/>

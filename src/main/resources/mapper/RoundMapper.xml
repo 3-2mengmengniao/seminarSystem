@@ -3,7 +3,6 @@
 <mapper namespace="com.test.seminar.mapper.RoundMapper">
     <resultMap id="roundResultMap" type="com.test.seminar.entity.Round">
         <id property="id" column="id" />
-        <result property="courseId" column="course_id"/>
         <result property="roundSerial" column="round_serial"/>
         <result property="presentationScoreMethod" column="presentation_score_method"/>
         <result property="reportScoreMethod" column="report_score_method"/>

@@ -5,7 +5,6 @@ import com.test.seminar.entity.RoundScore;
 import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
-import sun.awt.image.PixelConverter;
 
 import java.math.BigInteger;
 import java.util.List;

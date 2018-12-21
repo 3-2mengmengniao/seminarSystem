@@ -9,7 +9,6 @@
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <resultMap id="courseClassResultMap" type="com.test.seminar.entity.CourseClass">
         <id property="id" column="id"/>
-        <result property="courseId" column="course_id"/>
         <result property="grade" column="grade"/>
         <result property="classSerial" column="klass_serial"/>
         <result property="classTime" column="klass_time"/>
