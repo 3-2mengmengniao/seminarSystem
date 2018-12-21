@@ -58,6 +58,13 @@ public interface SeminarMapper {
 
     /**
      *
+     * @param seminarName
+     * @param courseId
+     * @return
+     */
+    SeminarInfo getSeminarInfoBySeminarNameAndCourseId(@Param("seminarName")String seminarName,@Param("courseId")BigInteger courseId);
+    /**
+     *
      * @param seminarControl
      */
     void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl,@Param("classId")BigInteger classId, @Param("seminarInfoId")BigInteger seminarInfoId);
@@ -101,6 +108,13 @@ public interface SeminarMapper {
      * @return
      */
     SeminarScore getSeminarScoreBySeminarScoreId(@Param("seminarScoreId")BigInteger seminarScoreId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
      *

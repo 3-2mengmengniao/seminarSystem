@@ -69,4 +69,9 @@ public class CourseClassDaoImpl implements CourseClassDao {
         }
         courseClassMapper.deleteCourseClassByCourseClassId(courseClassId);
     }
+
+    @Override
+    public CourseClass getCourseClassByTeamId(BigInteger teamId) {
+        return courseClassMapper.getCourseClassByTeamId(teamId);
+    }
 }

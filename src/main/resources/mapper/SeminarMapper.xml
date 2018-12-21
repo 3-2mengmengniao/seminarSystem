@@ -43,9 +43,9 @@
     </select>
 
     <select id="getSeminarInfoBySeminarControlId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
-        from seminar
-        where id=#{seminarControlId}
+        select seminar.id,seminar.course_id,seminar.round_id,seminar.seminar_name,seminar.introduction,seminar.max_team,seminar.is_visible,seminar.seminar_serial,seminar.enroll_start_time,seminar.enroll_end_time
+        from seminar,klass_seminar
+        where seminar.id=klass_seminar.seminar_id and klass_seminar.id=#{seminarControlId}
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
@@ -53,7 +53,13 @@
         from seminar
         where round_id=#{roundId}
     </select>
-    
+
+    <select id="getSeminarInfoBySeminarNameAndCourseId" resultMap="seminarInfoResultMap">
+        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        from seminar
+        where seminar_name=#{seminarName} and course_id=#{courseId}
+    </select>
+
     <insert id="insertSeminarInfo">
         insert into seminar(course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time)
         values(#{courseId},#{roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},

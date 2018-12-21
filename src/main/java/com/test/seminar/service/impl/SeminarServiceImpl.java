@@ -1,12 +1,16 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.CourseClassDao;
+import com.test.seminar.dao.RoundDao;
 import com.test.seminar.dao.SeminarDao;
+import com.test.seminar.entity.CourseClass;
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
+import com.test.seminar.service.RoundService;
 import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,10 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Autowired
     private SeminarDao seminarDao;
+    @Autowired
+    private RoundDao roundDao;
+    @Autowired
+    private CourseClassDao courseClassDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -28,7 +36,21 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId) throws RepetitiveRecordException {
-        seminarDao.insertSeminarInfo(seminarInfo,courseId,roundId);
+        if(roundId.equals(new BigInteger("-1")))
+        {
+            Round round = new Round();
+            round.setRoundSerial(roundDao.getMaxRoundSerialByCourseId(courseId)+1);
+            roundDao.insertRound(round,courseId);
+            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
+            roundId=round.getId();
+        }
+        seminarDao.insertSeminarInfo(seminarInfo,roundId);
+        seminarInfo = seminarDao.getSeminarInfoBySeminarNameAndCourseId(seminarInfo.getSeminarName(),courseId);
+        List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
+        for(CourseClass courseClass:courseClassList){
+            SeminarControl seminarControl = new SeminarControl();
+            seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
+        }
     }
 
     @Override

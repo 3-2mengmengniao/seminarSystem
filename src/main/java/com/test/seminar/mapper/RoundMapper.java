@@ -34,6 +34,21 @@ public interface RoundMapper {
     List<Round> getRoundByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
+     *
+     * @param courseId
+     * @param roundSerial
+     * @return
+     */
+    Round getRoundByCourseIdAndRoundSerial(@Param("courseId")BigInteger courseId,@Param("roundSerial")int roundSerial);
+
+    /**
+     *
+     * @param seminarInfoId
+     * @return
+     */
+    int getRoundSerialBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
+
+    /**
      * 创建新轮次
      * @param round
      */
@@ -93,8 +108,8 @@ public interface RoundMapper {
 
     /**
      *
-     * @param seminarControlId
+     * @param courseId
      * @return
      */
-    SeminarScore getSeminarScoreBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+    int getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
 }
