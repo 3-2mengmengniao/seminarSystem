@@ -47,7 +47,7 @@ public interface SeminarMapper {
      * @param seminarInfoId
      * @return
      */
-    SeminarControl getSemniarControlByClassIdAndSeminarInfo(@Param("classId") BigInteger classId,@Param("seminarInfoId") BigInteger seminarInfoId);
+    SeminarControl getSeminarControlByClassIdAndSeminarInfo(@Param("classId") BigInteger classId,@Param("seminarInfoId") BigInteger seminarInfoId);
 
     /**
      * 获取某轮次下的所有讨论课信息
