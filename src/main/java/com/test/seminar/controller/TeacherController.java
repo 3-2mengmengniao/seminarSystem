@@ -183,9 +183,6 @@ public class TeacherController {
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
     public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model,Course course) {
-        HttpSession session = request.getSession();
-        BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        course.setTeacherId(teacherId);
         System.out.println(course.getCourseName());
         courseService.insertCourse(course);
         return new ResponseEntity<>("", HttpStatus.OK);

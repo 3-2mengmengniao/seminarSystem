@@ -1,8 +1,7 @@
 package com.test.seminar.entity;
 
-import com.sun.tools.javac.util.List;
-
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu

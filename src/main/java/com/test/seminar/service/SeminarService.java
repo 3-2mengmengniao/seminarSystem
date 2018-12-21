@@ -36,7 +36,7 @@ public interface SeminarService {
      * @param seminarInfo
      * @throws SeminarInfoNotFoundException
      */
-    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
+    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException;
 
     /**
      * 删除讨论课信息

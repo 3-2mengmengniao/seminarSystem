@@ -55,16 +55,16 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void insertSeminarControl(SeminarControl seminarControl) {
-        seminarMapper.insertSeminarControl(seminarControl);
+    public void insertSeminarControl(SeminarControl seminarControl,BigInteger courseClassId,BigInteger seminarInfoId) {
+        seminarMapper.insertSeminarControl(seminarControl,courseClassId,seminarInfoId);
     }
 
     @Override
-    public void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException {
+    public void updateSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException {
         if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null) {
             throw new SeminarInfoNotFoundException();
         }
-        seminarMapper.updateSeminarInfo(seminarInfo);
+        seminarMapper.updateSeminarInfo(seminarInfo,roundId);
     }
 
     @Override

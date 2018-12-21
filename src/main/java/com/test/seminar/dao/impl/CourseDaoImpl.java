@@ -40,8 +40,8 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public void insertCourse(Course course)throws RepetitiveRecordException {
-        courseMapper.insertCourse(course);
+    public void insertCourse(Course course,BigInteger teacherId)throws RepetitiveRecordException {
+        courseMapper.insertCourse(course,teacherId);
     }
 
     @Override

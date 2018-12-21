@@ -22,7 +22,7 @@ public class CourseClassServiceImpl implements CourseClassService {
 
     @Override
     public void insertCourseClass(CourseClass courseClass, BigInteger courseId)throws RepetitiveRecordException {
-        courseClassDao.insertCourseClass(courseClass, courseId);
+        courseClassDao.insertCourseClass(courseClass,courseId);
     }
 
     @Override

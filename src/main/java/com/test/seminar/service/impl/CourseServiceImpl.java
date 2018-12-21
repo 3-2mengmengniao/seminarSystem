@@ -31,8 +31,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void insertCourse(Course course) throws RepetitiveRecordException {
-        courseDao.insertCourse(course);
+    public void insertCourse(Course course,BigInteger teacherId) throws RepetitiveRecordException {
+        courseDao.insertCourse(course,teacherId);
     }
 
     @Override
