@@ -23,9 +23,9 @@ public class Teacher{
     private String teacherName;
     private String email;
     private List<Course> courseList;
-    private List<ShareSeminarApplication> shareSeminarApplicationsList;
-    private List<ShareTeamApplication> shareTeamApplicationList;
-    private List<TeamValidApplication> teamValidApplicationList;
+    //private List<ShareSeminarApplication> shareSeminarApplicationsList;
+    //private List<ShareTeamApplication> shareTeamApplicationList;
+    //private List<TeamValidApplication> teamValidApplicationList;
 
     public BigInteger getId() {
         return id;
@@ -75,15 +75,15 @@ public class Teacher{
 
     public void setCourseList(List<Course> courseList) { this.courseList = courseList; }
 
-    public List<ShareSeminarApplication> getShareSeminarApplicationsList() { return shareSeminarApplicationsList; }
+    //public List<ShareSeminarApplication> getShareSeminarApplicationsList() { return shareSeminarApplicationsList; }
 
-    public void setShareSeminarApplicationsList(List<ShareSeminarApplication> shareSeminarApplicationsList) { this.shareSeminarApplicationsList = shareSeminarApplicationsList; }
+   // public void setShareSeminarApplicationsList(List<ShareSeminarApplication> shareSeminarApplicationsList) { this.shareSeminarApplicationsList = shareSeminarApplicationsList; }
 
-    public List<ShareTeamApplication> getShareTeamApplicationList() { return shareTeamApplicationList; }
+    //public List<ShareTeamApplication> getShareTeamApplicationList() { return shareTeamApplicationList; }
 
-    public void setShareTeamApplicationList(List<ShareTeamApplication> shareTeamApplicationList) { this.shareTeamApplicationList = shareTeamApplicationList; }
+    //public void setShareTeamApplicationList(List<ShareTeamApplication> shareTeamApplicationList) { this.shareTeamApplicationList = shareTeamApplicationList; }
 
-    public List<TeamValidApplication> getTeamValidApplicationList() { return teamValidApplicationList; }
+    //public List<TeamValidApplication> getTeamValidApplicationList() { return teamValidApplicationList; }
 
-    public void setTeamValidApplicationList(List<TeamValidApplication> teamValidApplicationList) { this.teamValidApplicationList = teamValidApplicationList; }
+    //public void setTeamValidApplicationList(List<TeamValidApplication> teamValidApplicationList) { this.teamValidApplicationList = teamValidApplicationList; }
 }
