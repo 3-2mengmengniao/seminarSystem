@@ -37,6 +37,12 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
+    public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId)
+    {
+        return seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+    }
+
+    @Override
     public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
         seminarDao.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
     }

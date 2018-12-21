@@ -183,8 +183,9 @@ public class TeacherController {
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
     public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model,Course course) {
-        System.out.println(course.getCourseName());
-        courseService.insertCourse(course);
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        courseService.insertCourse(course,teacherId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -197,15 +198,14 @@ public class TeacherController {
     @RequestMapping(value="/course/klass/create",method = POST)
     @ResponseBody
     public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
-        courseClass.setCourseId(courseId);
-        courseClassService.insertCourseClass(courseClass);
+        courseClassService.insertCourseClass(courseClass,courseId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/seminar/create",method = PUT)
     @ResponseBody
-    public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,String seminarVisible) {
-        seminarInfo.setCourseId(courseId);
+    public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,
+                                                    String seminarVisible,BigInteger roundId) {
         if(seminarVisible.equals("on"))
         {
             seminarInfo.setVisible(1);
@@ -213,26 +213,28 @@ public class TeacherController {
         else{
             seminarInfo.setVisible(0);
         }
-        seminarService.insertSeminarInfo(seminarInfo);
+        seminarService.insertSeminarInfo(seminarInfo,courseId,roundId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/seminar/setting",method = PUT)
     @ResponseBody
-    public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,String seminarVisible) {
+    public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
+                                                     String seminarVisible,BigInteger roundId,BigInteger courseId) {
         SeminarInfo seminarInfoOld=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         if(seminarVisible.equals("on"))
         {
-            seminarInfo.setVisible(1);
+            seminarInfoOld.setVisible(1);
         }
         else{
-            seminarInfo.setVisible(0);
+            seminarInfoOld.setVisible(0);
         }
-        seminarInfo.setIntroduction(seminarInfoOld.getIntroduction());
-        seminarInfo.setSeminarName(seminarInfoOld.getSeminarName());
-        seminarInfo.setId(seminarInfoOld.getId());
-        seminarInfo.setCourseId(seminarInfoOld.getCourseId());
-        seminarService.insertSeminarInfo(seminarInfo);
+        seminarInfoOld.setMaxGroup(seminarInfo.getMaxGroup());
+        seminarInfoOld.setRegistrationEndTime(seminarInfo.getRegistrationEndTime());
+        seminarInfoOld.setRegistrationStartTime(seminarInfo.getRegistrationStartTime());
+        seminarInfoOld.setSeminarSerial(seminarInfo.getSeminarSerial());
+        seminarService.deleteSeminarInfoBySeminarInfoId(seminarInfoOld.getId());
+        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -259,24 +261,21 @@ public class TeacherController {
 
     @RequestMapping(value="/course/seminarList")
     public String courseSeminar(BigInteger courseId,Model model) {
-        List<Round> roundList= roundService.getRoundByCourseId(courseId);
-        model.addAttribute("roundList",roundList);
-        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
-        model.addAttribute("seminarList",seminarList);
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        List<Round> roundList= course.getRoundList();
+        model.addAttribute("roundList",roundList);
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
         return "teacher/course/seminarList";
     }
 
     @RequestMapping(value="/course/roundSetting",method = GET)
-    public String roundSetting(BigInteger roundId,Model model) {
+    public String roundSetting(BigInteger roundId,BigInteger courseId,Model model) {
         Round round=roundService.getRoundByRoundId(roundId);
         model.addAttribute("round",round);
         List<SeminarInfo> seminarList = seminarService.getSeminarInfoByRoundId(roundId);
         model.addAttribute("seminarList",seminarList);
-        BigInteger courseId=round.getCourseId();
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
@@ -301,80 +300,52 @@ public class TeacherController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
-        List<List<Student>> studentList=new LinkedList<List<Student>>();
-        List<Student> leaderList=new ArrayList();
-        List<CourseClass> classList=new ArrayList<>();
-        for( int i = 0 ; i < teamList.size() ; i++) {
-            BigInteger teamId=teamList.get(i).getId();
-            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
-            studentList.add(teamStudents);
-            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
-            leaderList.add(leader);
-            BigInteger classId=teamList.get(i).getClassId();
-            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
-            classList.add(teamClass);
-        }
-        model.addAttribute("studentList",studentList);
-        model.addAttribute("leaderList",leaderList);
-        model.addAttribute("classList",classList);
+//        List<List<Student>> studentList=new LinkedList<List<Student>>();
+//        List<Student> leaderList=new ArrayList();
+//        List<CourseClass> classList=new ArrayList<>();
+//        for( int i = 0 ; i < teamList.size() ; i++) {
+//            BigInteger teamId=teamList.get(i).getId();
+//            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
+//            studentList.add(teamStudents);
+//            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
+//            leaderList.add(leader);
+//            BigInteger classId=teamList.get(i).getClassId();
+//            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
+//            classList.add(teamClass);
+//        }
+//        model.addAttribute("studentList",studentList);
+//        model.addAttribute("leaderList",leaderList);
+//        model.addAttribute("classList",classList);
         return "teacher/course/teamList";
     }
 
     @RequestMapping(value="/course/seminar/info")
     public String seminarInfo(BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        BigInteger courseId=round.getCourseId();
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
+        SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/info";
     }
 
 
 
     @RequestMapping(value="/course/seminar/enrollList")
-    public String enrollmentInfo(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        BigInteger courseId=round.getCourseId();
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
+    public String enrollmentInfo(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/enrollList";
     }
 
     @RequestMapping(value="/course/seminar/report")
-    public String report(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger courseId=seminarInfo.getCourseId();
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("seminarId",seminarId);
+    public String report(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/report";
     }
 
     @RequestMapping(value="/course/seminar/score")
-    public String seminarScore(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger courseId=seminarInfo.getCourseId();
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("seminarId",seminarId);
+    public String seminarScore(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/score";
     }
 

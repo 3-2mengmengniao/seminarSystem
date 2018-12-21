@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${class.course.courseName}</h1>
-            <a href="/student/course/seminar/info?courseId=${class.course.id}&seminarId=${seminarInfo.id}&classId=${class.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
+            <a href="/student/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -78,30 +78,44 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;">1-1业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;">1-2业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;">1-3业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;">1-4业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第五组：</td>
-                <td style="color:#009688;">1-5业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;">1-6业务流程.ppt</td>
-            </tr>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <tr>
+                        <td>第${t+1}组：</td>
+                        <#if seminarControl.seminarStatus==0>
+                        <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&npsb;&npsb;${seminarControl.presentationList[t].pptName}</td>
+                        <#else>
+                    <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&npsb;&npsb;<a>${seminarControl.presentationList[t].pptName}</a></td>
+                        </#if>
+                    </tr>
+                <#else>
+                <tr>
+                    <td>第${t+1}组：</td>
+                    <td style="color:#009688;">未报名</td>
+                </tr>
+                </#if>
+            </#list>
+            <#---->
+            <#--<tr>-->
+                <#--<td>第二组：</td>-->
+                <#--<td style="color:#009688;">1-2业务流程.ppt</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第三组：</td>-->
+                <#--<td style="color:#009688;">1-3业务流程.ppt</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第四组：</td>-->
+                <#--<td style="color:#009688;">1-4业务流程.ppt</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第五组：</td>-->
+                <#--<td style="color:#009688;">1-5业务流程.ppt</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第六组：</td>-->
+                <#--<td style="color:#009688;">1-6业务流程.ppt</td>-->
+            <#--</tr>-->
             </tbody>
         </table>
         <div class="distance4"></div>

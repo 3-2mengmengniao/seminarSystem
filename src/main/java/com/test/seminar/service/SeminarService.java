@@ -39,6 +39,13 @@ public interface SeminarService {
     void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException;
 
     /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
      * 删除讨论课信息
      * @param seminarInfoId
      * @throws SeminarInfoNotFoundException

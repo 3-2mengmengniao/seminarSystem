@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}</h1>
-            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
+            <a href="/teacher/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -82,46 +82,63 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>第一组：</td>
-                <#if status==0>
-                <td style="color:#009688;">1-1业务流程.ppt</td>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <tr>
+                        <td>第${t+1}组：</td>
+                    <#if seminarControl.seminarStatus==0>
+                        <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&npsb;&npsb;${seminarControl.presentationList[t].pptName}</td>
+                    <#else>
+                    <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&npsb;&npsb;<a>${seminarControl.presentationList[t].pptName}</a></td>
+                    </#if>
+                    </tr>
                 <#else>
-                <td style="color:#009688;">1-1<a>1-1业务流程.ppt</a></td>
+                <tr>
+                    <td>第${t+1}组：</td>
+                    <td style="color:#009688;">未报名</td>
+                </tr>
                 </#if>
-            </tr>
-            <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;">1-2 未提交</td>
-            </tr>
-            <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;">1-3 未报名</td>
-            </tr>
-            <tr>
-                <td>第四组：</td>
-                <#if status==0>
-                <td style="color:#009688;">1-4业务流程.ppt</td>
-                <#else>
-                <td style="color:#009688;">1-4<a>1-4业务流程.ppt</a></td>
-                </#if>
-            </tr>
-            <tr>
-                <td>第五组：</td>
-                <#if status==0>
-                <td style="color:#009688;">1-5业务流程.ppt</td>
-                <#else>
-                <td style="color:#009688;">1-5<a>1-5业务流程.ppt</a></td>
-                </#if>
-            </tr>
-            <tr>
-                <td>第六组：</td>
-                <#if status==0>
-                <td style="color:#009688;">1-6业务流程.ppt</td>
-                <#else>
-                <td style="color:#009688;">1-6<a>1-6业务流程.ppt</a></td>
-                </#if>
-            </tr>
+            </#list>
+            <#--<tr>-->
+                <#--<td>第一组：</td>-->
+                <#--<#if seminarControl.seminarStatus==0>-->
+                <#--<td style="color:#009688;">1-1业务流程.ppt</td>-->
+                <#--<#else>-->
+                <#--<td style="color:#009688;">1-1<a>1-1业务流程.ppt</a></td>-->
+                <#--</#if>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第二组：</td>-->
+                <#--<td style="color:#009688;">1-2 未提交</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第三组：</td>-->
+                <#--<td style="color:#009688;">1-3 未报名</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第四组：</td>-->
+                <#--<#if seminarControl.seminarStatus==0>-->
+                <#--<td style="color:#009688;">1-4业务流程.ppt</td>-->
+                <#--<#else>-->
+                <#--<td style="color:#009688;">1-4<a>1-4业务流程.ppt</a></td>-->
+                <#--</#if>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第五组：</td>-->
+                <#--<#if seminarControl.seminarStatus==0>-->
+                <#--<td style="color:#009688;">1-5业务流程.ppt</td>-->
+                <#--<#else>-->
+                <#--<td style="color:#009688;">1-5<a>1-5业务流程.ppt</a></td>-->
+                <#--</#if>-->
+            <#--</tr>-->
+            <#--<tr>-->
+                <#--<td>第六组：</td>-->
+                <#--<#if seminarControl.seminarStatus==0>-->
+                <#--<td style="color:#009688;">1-6业务流程.ppt</td>-->
+                <#--<#else>-->
+                <#--<td style="color:#009688;">1-6<a>1-6业务流程.ppt</a></td>-->
+                <#--</#if>-->
+            <#--</tr>-->
             </tbody>
         </table>
         <div class="distance4"></div>

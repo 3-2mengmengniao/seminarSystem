@@ -44,8 +44,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${class.course.courseName}讨论课</h1>
-            <a href="/student/course/seminarList?courseId=${class.course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课</h1>
+            <a href="/student/course/seminarList?courseId=${seminarControl.courseClass.course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -77,26 +77,26 @@
                 <#--</tr>-->
                 <tr>
                     <td>主题</td>
-                    <td>${seminarInfo.seminarName}</td>
+                    <td>${seminarControl.seminarInfo.seminarName}</td>
                 </tr>
                 <tr>
                     <td>课次序号</td>
-                    <td>第${seminarInfo.seminarSerial}次</td>
+                    <td>第${seminarControl.seminarInfo.seminarSerial}次</td>
                 </tr>
                 <tr>
                     <td>要求</td>
-                    <td>${seminarInfo.introduction}</td>
+                    <td>${seminarControl.seminarInfo.introduction}</td>
                 </tr>
                 <tr>
-                    <#if status=="UNSTARTED">
+                    <#if seminarControl.seminarStatus=="UNSTARTED">
                         <td>课程情况</td>
-                        <td>未开始   <a href="/student/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
-                    <#elseif status=="INPROCESS">
+                        <td>未开始   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                    <#elseif seminarControl.seminarStatus=="INPROCESS">
                          <td>课程情况</td>
-                         <td>进行中   <a href="/student/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                         <td>进行中   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                     <#else>
                          <td>课程情况</td>
-                         <td>已结束   <a href="/student/course/seminar/enrollment?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                         <td>已结束   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                     </#if>
                 </tr>
                 <#if enrollment==true>
@@ -117,17 +117,17 @@
         </div>
 
         <div class="distance"></div>
-        <#if enrollment!=true && status=="UNSTARTED">
+        <#if enrollment!=true && seminarControl.seminarStatus=="UNSTARTED">
             <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="报名" data-formId="contactForm"/>
         </#if>
-        <#if enrollment==true && status=="INPROCESS">
+        <#if enrollment==true && seminarControl.seminarStatus=="INPROCESS">
             <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="进入讨论课" data-formId="contactForm"/>
         </#if>
-        <#if enrollment==true && status=="FINISHED">
-            <p class="center center-text "><a href="/student/course/seminar/score?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
+        <#if enrollment==true && seminarControl.seminarStatus=="FINISHED">
+            <p class="center center-text "><a href="/student/course/seminar/score?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看成绩</a></p>
 
         </#if>
-        <#if enrollment==true && status!="FINISHED">
+        <#if enrollment==true && seminarControl.seminarStatus!="FINISHED">
         <p class="center center-text"><a href="#" class="button-return button-turqoise">PPT提交</a></p>
         <#else>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>

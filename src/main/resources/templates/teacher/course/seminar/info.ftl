@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课</h1>
+            <a href="/teacher/course/seminarList?courseId=${seminarControl.courseClass.course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -82,41 +82,41 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>轮次</td>
-                <td>第${round.roundSerial}轮</td>
-            </tr>
+            <#--<tr>-->
+                <#--<td>轮次</td>-->
+                <#--<td>第${round.roundSerial}轮</td>-->
+            <#--</tr>-->
             <tr>
                 <td>主题</td>
-                <td>${seminarInfo.seminarName}</td>
+                <td>${seminarControl.seminarInfo.seminarName}</td>
             </tr>
             <tr>
                 <td>课次序号</td>
-                <td>第${seminarInfo.seminarSerial}次</td>
+                <td>第${seminarControl.seminarInfo.seminarSerial}次</td>
             </tr>
             <tr>
                 <td>要求</td>
-                <td>${seminarInfo.introduction}</td>
+                <td>${seminarControl.seminarInfo.introduction}</td>
             </tr>
             <tr>
                 <td>课程情况</td>
-                <#if status==0>
-                        <td>课程情况：未开始   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
-                <#elseif status==1>
-                         <td>课程情况：进行中   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                <#if seminarControl.seminarStatus==0>
+                        <td>课程情况：未开始   <a href="/teacher/course/seminar/enrollList?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                <#elseif seminarControl.seminarStatus==1>
+                         <td>课程情况：进行中   <a href="/teacher/course/seminar/enrollList?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 <#else>
-                         <td>课程情况：已完成   <a href="/teacher/course/seminar/enrollList?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                         <td>课程情况：已完成   <a href="/teacher/course/seminar/enrollList?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
                 </#if>
             </tr>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
-        <#if status==2>
-        <p class="center center-text "><a href="/teacher/course/seminar/report?seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看报告</a></p>
+        <#if seminarControl.seminarStatus==2>
+        <p class="center center-text "><a href="/teacher/course/seminar/report?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看报告</a></p>
         <div class="distance4"></div>
-        <p class="center center-text "><a href="/teacher/course/seminar/score?seminarId=${seminarInfo.id}&classId=${classId}" class="button-return button-turqoise">查看成绩</a></p>
-        <#elseif status==0>
+        <p class="center center-text "><a href="/teacher/course/seminar/score?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看成绩</a></p>
+        <#elseif seminarControl.seminarStatus==0>
         <p class="center center-text "><a href="#" class="button-return button-turqoise">开始讨论课</a></p>
         <#else>
         <p class="center center-text "><a href="#" class="button-return button-turqoise">进入讨论课</a></p>
