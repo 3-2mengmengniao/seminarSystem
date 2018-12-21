@@ -32,8 +32,8 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo) throws SeminarInfoNotFoundException {
-        seminarDao.updateSeminarInfo(seminarInfo);
+    public void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo,BigInteger roundId) throws SeminarInfoNotFoundException {
+        seminarDao.updateSeminarInfo(seminarInfo,roundId);
     }
 
     @Override

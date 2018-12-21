@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${class.course.courseName}讨论课</h1>
+            <a href="/student/course/seminar/info?courseId=${class.course.id}&seminarId=${seminarInfo.id}&classId=${class.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -78,10 +78,10 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>轮次</td>
-                <td>第${round.roundSerial}轮</td>
-            </tr>
+            <#--<tr>-->
+                <#--<td>轮次</td>-->
+                <#--<td>第${round.roundSerial}轮</td>-->
+            <#--</tr>-->
             <tr>
                 <td>主题</td>
                 <td>${seminarInfo.seminarName}</td>
@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <td>报名情况</td>
-                <td>2016-（1）第3组</td>
+                <td>${class.grade}-（${class.classSerial}）第${team.teamSerial}组</td>
             </tr>
             <tr>
                 <td> PPT</td>

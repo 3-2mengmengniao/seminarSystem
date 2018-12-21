@@ -1,10 +1,10 @@
 package com.test.seminar.entity;
 
-import com.sun.tools.javac.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yuyingzhu

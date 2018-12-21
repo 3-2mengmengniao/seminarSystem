@@ -39,7 +39,7 @@ public interface CourseDao {
      * @param course
      * @return
      */
-    void insertCourse(Course course)throws RepetitiveRecordException;
+    void insertCourse(Course course,BigInteger teacherId)throws RepetitiveRecordException;
 
     /**
      * 更改课程信息

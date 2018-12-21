@@ -41,7 +41,7 @@ public interface CourseService {
      * @param Course
      * @throws RepetitiveRecordException
      */
-    void insertCourse(Course Course)throws RepetitiveRecordException;
+    void insertCourse(Course Course,BigInteger teacherId)throws RepetitiveRecordException;
 
     /**
      * 更改课程信息

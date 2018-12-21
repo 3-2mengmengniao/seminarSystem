@@ -67,7 +67,7 @@ public interface SeminarMapper {
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo,@Param("courseId")BigInteger courseId,@Param("roundId")BigInteger roundId);
+    void insertSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo,@Param("roundId")BigInteger roundId);
 
     /**
      * 更改讨论课信息

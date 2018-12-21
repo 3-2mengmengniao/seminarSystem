@@ -18,7 +18,7 @@ public interface RoundService {
      * @param round
      * @throws RepetitiveRecordException
      */
-    void insertRound(Round round) throws RepetitiveRecordException;
+    void insertRound(Round round, BigInteger courseId) throws RepetitiveRecordException;
 
     /**
      * 删除轮次

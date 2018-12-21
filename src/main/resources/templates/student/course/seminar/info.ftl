@@ -44,8 +44,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/course/seminarList?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${class.course.courseName}讨论课</h1>
+            <a href="/student/course/seminarList?courseId=${class.course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -71,10 +71,10 @@
     <div class="container no-bottom text-list">
         <div class="container no-bottom">
             <table cellspacing='0' class="table">
-                <tr>
-                    <td>轮次</td>
-                    <td>第${round.roundSerial}轮</td>
-                </tr>
+                <#--<tr>-->
+                    <#--<td>轮次</td>-->
+                    <#--<td>第${round.roundSerial}轮</td>-->
+                <#--</tr>-->
                 <tr>
                     <td>主题</td>
                     <td>${seminarInfo.seminarName}</td>

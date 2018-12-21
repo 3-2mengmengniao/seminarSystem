@@ -26,7 +26,7 @@ public interface CourseClassService {
      * 添加班级
      * @param courseClass
      */
-    void insertCourseClass(CourseClass courseClass)throws RepetitiveRecordException;
+    void insertCourseClass(CourseClass courseClass, BigInteger courseId)throws RepetitiveRecordException;
 
 
     /**
