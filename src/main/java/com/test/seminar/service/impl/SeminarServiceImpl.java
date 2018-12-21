@@ -45,7 +45,7 @@ public class SeminarServiceImpl implements SeminarService {
             roundId=round.getId();
         }
         seminarDao.insertSeminarInfo(seminarInfo,roundId);
-        seminarInfo = seminarDao.getseminarInfoBySeminarName(seminarInfo.getSeminarName());
+        seminarInfo = seminarDao.getSeminarInfoBySeminarNameAndCourseId(seminarInfo.getSeminarName(),courseId);
         List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
         for(CourseClass courseClass:courseClassList){
             SeminarControl seminarControl = new SeminarControl();
