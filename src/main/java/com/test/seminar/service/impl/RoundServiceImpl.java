@@ -18,8 +18,8 @@ public class RoundServiceImpl implements RoundService {
     private RoundDao roundDao;
 
     @Override
-    public void insertRound(Round round) throws RepetitiveRecordException {
-        roundDao.insertRound(round);
+    public void insertRound(Round round,BigInteger courseId) throws RepetitiveRecordException {
+        roundDao.insertRound(round,courseId);
     }
 
     @Override

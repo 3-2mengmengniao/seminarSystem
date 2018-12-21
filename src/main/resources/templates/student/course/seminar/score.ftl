@@ -46,8 +46,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课</h1>
-            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课</h1>
+            <a href="/student/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -78,25 +78,25 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>轮次</td>
-                <td>第${round.roundSerial}轮</td>
-            </tr>
+            <#--<tr>-->
+                <#--<td>轮次</td>-->
+                <#--<td>第${round.roundSerial}轮</td>-->
+            <#--</tr>-->
             <tr>
                 <td>主题</td>
-                <td>${seminarInfo.seminarName}</td>
+                <td>${seminarControl.seminarInfo.seminarName}</td>
             </tr>
             <tr>
                 <td>课次序号</td>
-                <td>第${seminarInfo.seminarSerial}次</td>
+                <td>第${seminarControl.seminarInfo.seminarSerial}次</td>
             </tr>
             <tr>
                 <td>要求</td>
-                <td>${seminarInfo.introduction}</td>
+                <td>${seminarControl.seminarInfo.introduction}</td>
             </tr>
             <tr>
                 <td>报名情况</td>
-                <td>2016-（1）第3组</td>
+                <td>${seminarControl.courseClass.grade}-（${seminarControl.courseClass.classSerial}）第${team.teamSerial}组</td>
             </tr>
             <tr>
                 <td> PPT</td>

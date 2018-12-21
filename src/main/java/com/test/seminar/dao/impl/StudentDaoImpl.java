@@ -34,34 +34,6 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void insertStudent(Student student)throws RepetitiveRecordException {
-        studentMapper.insertStudent(student);
-    }
-
-    @Override
-    public void insertStudentByStudentList(List<Student> studentList) {
-        for(Student student:studentList){
-            studentMapper.insertStudent(student);
-        }
-    }
-
-    @Override
-    public void updateStudentByStudentId(Student student)throws UserNotFoundException {
-        if(studentMapper.getStudentByStudentId(student.getId())==null) {
-            throw new UserNotFoundException();
-        }
-        studentMapper.updateStudentByStudentId(student);
-    }
-
-    @Override
-    public void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException {
-        if(studentMapper.getStudentByStudentId(studentId)==null) {
-            throw new UserNotFoundException();
-        }
-        studentMapper.deleteStudentByStudentId(studentId);
-    }
-
-    @Override
     public Student getStudentByAccount(String account){
         return studentMapper.getStudentByAccount(account);
     }
@@ -79,5 +51,26 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> getAllStudent() {
         return studentMapper.getAllStudent();
+    }
+
+    @Override
+    public void insertStudent(Student student)throws RepetitiveRecordException {
+        studentMapper.insertStudent(student);
+    }
+
+    @Override
+    public void updateStudentByStudentId(Student student)throws UserNotFoundException {
+        if(studentMapper.getStudentByStudentId(student.getId())==null) {
+            throw new UserNotFoundException();
+        }
+        studentMapper.updateStudentByStudentId(student);
+    }
+
+    @Override
+    public void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException {
+        if(studentMapper.getStudentByStudentId(studentId)==null) {
+            throw new UserNotFoundException();
+        }
+        studentMapper.deleteStudentByStudentId(studentId);
     }
 }

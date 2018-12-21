@@ -30,24 +30,13 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public void insertTeam(Team team)throws RepetitiveRecordException {
-        teamMapper.insertTeam(team);
+    public List<Team> getTeamByCourseId(BigInteger courseId) {
+        return teamMapper.getTeamByCourseId(courseId);
     }
 
     @Override
-    public void updateTeamByTeamId(Team team)throws TeamNotFoundException {
-        if(teamMapper.getTeamByTeamId(team.getId())==null) {
-            throw new TeamNotFoundException();
-        }
-        teamMapper.updateTeamByTeamId(team);
-    }
-
-    @Override
-    public void deleteTeamByTeamId(BigInteger teamId)throws TeamNotFoundException {
-        if(teamMapper.getTeamByTeamId(teamId)==null) {
-            throw new TeamNotFoundException();
-        }
-        teamMapper.deleteTeamByTeamId(teamId);
+    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
+        return teamMapper.getTeamBySeminarControlId(seminarControlId);
     }
 
     @Override
@@ -60,17 +49,28 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public List<Team> getTeamByCourseId(BigInteger courseId) {
-        return teamMapper.getTeamByCourseId(courseId);
+    public void insertTeam(Team team, BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException {
+        teamMapper.insertTeam(team,courseClassId,courseId);
     }
 
     @Override
-    public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
-        return teamMapper.getTeamBySeminarControlId(seminarControlId);
+    public void updateTeamByTeamId(Team team)throws TeamNotFoundException {
+        if(teamMapper.getTeamByTeamId(team.getId())==null) {
+            throw new TeamNotFoundException();
+        }
+        teamMapper.updateTeamByTeamId(team);
     }
 
     @Override
     public void updateCourseClassStudentTeamId(BigInteger courseClassId, BigInteger studentId, BigInteger teamId) {
         teamMapper.updateCourseClassStudentTeamId(courseClassId,studentId,teamId);
+    }
+
+    @Override
+    public void deleteTeamByTeamId(BigInteger teamId)throws TeamNotFoundException {
+        if(teamMapper.getTeamByTeamId(teamId)==null) {
+            throw new TeamNotFoundException();
+        }
+        teamMapper.deleteTeamByTeamId(teamId);
     }
 }

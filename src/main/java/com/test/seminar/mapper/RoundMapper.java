@@ -1,6 +1,8 @@
 package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
+import com.test.seminar.entity.SeminarScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -18,24 +20,6 @@ import java.util.List;
 @Component
 public interface RoundMapper {
     /**
-     * 创建新轮次
-     * @param round
-     */
-    void insertRound(@Param("round")Round round);
-
-    /**
-     * 删除轮次
-     * @param roundId
-     */
-    void deleteRoundByRoundId(@Param("roundId")BigInteger roundId);
-
-    /**
-     * 更新轮次信息
-     * @param round
-     */
-    void updateRound(@Param("round")Round round);
-
-    /**
      * 通过轮次ID获得轮次信息
      * @param roundId
      * @return
@@ -48,4 +32,84 @@ public interface RoundMapper {
      * @return
      */
     List<Round> getRoundByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     *
+     * @param courseId
+     * @param roundSerial
+     * @return
+     */
+    Round getRoundByCourseIdAndRoundSerial(@Param("courseId")BigInteger courseId,@Param("roundSerial")int roundSerial);
+
+    /**
+     *
+     * @param seminarInfoId
+     * @return
+     */
+    int getRoundSerialBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
+
+    /**
+     * 创建新轮次
+     * @param round
+     */
+    void insertRound(@Param("round")Round round,@Param("courseId")BigInteger courseId);
+
+    /**
+     * 更新轮次信息
+     * @param round
+     */
+    void updateRound(@Param("round")Round round);
+
+    /**
+     * 删除轮次
+     * @param roundId
+     */
+    void deleteRoundByRoundId(@Param("roundId")BigInteger roundId);
+
+    /**
+     *
+     * @param roundScoreId
+     * @return
+     */
+    RoundScore getRoundScoreByRoundId(@Param("roundScoreId")BigInteger roundScoreId);
+
+    /**
+     *
+     * @param roundId
+     * @param teamId
+     * @return
+     */
+    RoundScore getRoundScoreByRoundIdAndTeamId(@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    List<RoundScore> getRoundScoreByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param roundScore
+     */
+    void insertRoundScore(@Param("roundScore")RoundScore roundScore);
+
+    /**
+     *
+     * @param roundScore
+     */
+    void updateRoundScore(@Param("roundScore")RoundScore roundScore);
+
+    /**
+     *
+     * @param roundScoreId
+     */
+    void deleteRoundScoreByRoundScoreId(@Param("roundScoreId")BigInteger roundScoreId);
+
+    /**
+     *
+     * @param courseId
+     * @return
+     */
+    int getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
 }

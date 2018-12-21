@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author hatake
+ * @date 2018/11/20
+ */
+
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
@@ -134,8 +140,8 @@ public class StudentController {
     public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
         List<Round> roundList= roundService.getRoundByCourseId(courseId);
         model.addAttribute("roundList",roundList);
-        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
-        model.addAttribute("seminarList",seminarList);
+//        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
+//        model.addAttribute("seminarList",seminarList);
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         model.addAttribute("studentId",studentId);
@@ -153,22 +159,22 @@ public class StudentController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
-        List<List<Student>> studentList=new LinkedList<List<Student>>();
-        List<Student> leaderList=new ArrayList();
-        List<CourseClass> classList=new ArrayList<>();
-        for( int i = 0 ; i < teamList.size() ; i++) {
-            BigInteger teamId=teamList.get(i).getId();
-            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
-            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
-            leaderList.add(leader);
-            studentList.add(teamStudents);
-            BigInteger classId=teamList.get(i).getClassId();
-            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
-            classList.add(teamClass);
-        }
-        model.addAttribute("studentList",studentList);
-        model.addAttribute("leaderList",leaderList);
-        model.addAttribute("classList",classList);
+//        List<List<Student>> studentList=new LinkedList<List<Student>>();
+//        List<Student> leaderList=new ArrayList();
+//        List<CourseClass> classList=new ArrayList<>();
+//        for( int i = 0 ; i < teamList.size() ; i++) {
+//            BigInteger teamId=teamList.get(i).getId();
+//            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
+//            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
+//            leaderList.add(leader);
+//            studentList.add(teamStudents);
+//            BigInteger classId=teamList.get(i).getClassId();
+//            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
+//            classList.add(teamClass);
+//        }
+//        model.addAttribute("studentList",studentList);
+//        model.addAttribute("leaderList",leaderList);
+//        model.addAttribute("classList",classList);
         return "student/course/teams";
     }
 
@@ -181,61 +187,48 @@ public class StudentController {
 
     @RequestMapping(value="/course/seminar/info")
     public String seminarInfo(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        BigInteger courseId=round.getCourseId();
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+        SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        List<Presentation> presentationList= seminarControl.getPresentationList();
+        List<Team> teamList=new ArrayList<>();
+        for(int i=0;i<presentationList.size();i++)
+        {
+            teamList.add(presentationList.get(i).getTeam());
+        }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
-        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         boolean flag=teamList.contains(team);
         model.addAttribute("enrollment",flag);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
         return "student/course/seminar/info";
     }
 
     @RequestMapping(value="/course/seminar/score")
-    public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+    public String seminarScore(HttpServletRequest request,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
+        model.addAttribute("team",team);
         return "student/course/seminar/score";
     }
 
     @RequestMapping(value="/course/seminar/enrollment")
-    public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        List<Team> teamList= teamService.getTeamBySeminarControlId(seminarControl.getId());
+    public String enrollmentInfo(HttpServletRequest request,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        List<Presentation> presentationList= seminarControl.getPresentationList();
+        List<Team> teamList=new ArrayList<>();
+        for(int i=0;i<presentationList.size();i++)
+        {
+            teamList.add(presentationList.get(i).getTeam());
+        }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
-        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         boolean flag=teamList.contains(team);
         model.addAttribute("enrollment",flag);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
         return "student/course/seminar/enrollment";
     }
 

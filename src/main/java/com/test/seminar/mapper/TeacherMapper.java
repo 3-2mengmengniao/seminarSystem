@@ -33,6 +33,11 @@ public interface TeacherMapper {
     Teacher getTeacherByAccount(String account);
 
     /**
+     * @return
+     */
+    List<Teacher> getAllTeacher();
+
+    /**
      * 创建新的老师账户
      *
      * @param teacher
@@ -55,9 +60,4 @@ public interface TeacherMapper {
      * @return
      */
     void deleteTeacherByTeacherId(@Param("teacherId") BigInteger teacherId);
-
-    /**
-     * @return
-     */
-    List<Teacher> getAllTeacher();
 }

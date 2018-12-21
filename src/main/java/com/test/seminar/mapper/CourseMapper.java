@@ -25,6 +25,13 @@ public interface CourseMapper {
     Course getCourseByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
+     *
+     * @param courseClassId
+     * @return
+     */
+    Course getCourseByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
+
+    /**
      * 通过老师ID获取课程列表
      * @param teacherId
      * @return
@@ -43,7 +50,7 @@ public interface CourseMapper {
      * @param course
      * @return
      */
-    void insertCourse(@Param("course") Course course);
+    void insertCourse(@Param("course") Course course,@Param("teacherId")BigInteger teacherId);
 
     /**
      * 更改课程信息

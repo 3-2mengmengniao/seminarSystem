@@ -26,14 +26,14 @@ public interface CourseClassService {
      * 添加班级
      * @param courseClass
      */
-    void insertCourseClass(CourseClass courseClass)throws RepetitiveRecordException;
+    void insertCourseClass(CourseClass courseClass, BigInteger courseId)throws RepetitiveRecordException;
 
 
     /**
      * 更新班级
      * @param courseClass
      */
-    void updateCourseClassByCourseClassId( CourseClass courseClass) throws CourseClassNotFoundException;
+    void updateCourseClassByCourseClass( CourseClass courseClass) throws CourseClassNotFoundException;
 
 
     /**

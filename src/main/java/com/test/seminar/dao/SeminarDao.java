@@ -2,6 +2,7 @@ package com.test.seminar.dao;
 
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
@@ -23,50 +24,11 @@ public interface SeminarDao {
     SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
 
     /**
-     * 创建新的讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void insertSeminarInfo(SeminarInfo seminarInfo)throws RepetitiveRecordException;
-
-    /**
-     * 更改讨论课信息
-     * @param seminarInfo
-     * @return
-     */
-    void updateSeminarInfo(SeminarInfo seminarInfo)throws SeminarInfoNotFoundException;
-
-    /**
-     * 删除讨论课信息
-     * @param seminarInfoId
-     * @return
-     */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
-
-    /**
-     * 通过roundID获取round对应的讨论课信息
-     * @param seminarControlId
-     * @return
-     */
-    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void insertSeminarControl(SeminarControl seminarControl);
-
-    /**
-     *
-     * @param seminarControl
-     */
-    void updateSeminarControl(SeminarControl seminarControl);
-
-    /**
      *
      * @param seminarControlId
+     * @return
      */
-    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+    SeminarInfo getSeminarInfoBySeminarControlId(BigInteger seminarControlId);
 
     /**
      * 获取某讨论课某班级下对应的讨论课控制器
@@ -82,4 +44,107 @@ public interface SeminarDao {
      * @return
      */
     List<SeminarInfo> getSeminarInfoByRoundId(BigInteger roundId);
+
+    /**
+     *
+     * @param seminarName
+     * @param courseId
+     * @return
+     */
+    SeminarInfo getSeminarInfoBySeminarNameAndCourseId(String seminarName,BigInteger courseId);
+
+    /**
+     * 通过roundID获取round对应的讨论课信息
+     * @param seminarControlId
+     * @return
+     */
+    SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     * 创建新的讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws RepetitiveRecordException;
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void insertSeminarControl(SeminarControl seminarControl,BigInteger classId,BigInteger seminarInfoId);
+
+    /**
+     * 更改讨论课信息
+     * @param seminarInfo
+     * @return
+     */
+    void updateSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException;
+
+    /**
+     *
+     * @param seminarControl
+     */
+    void updateSeminarControl(SeminarControl seminarControl);
+
+    /**
+     * 删除讨论课信息
+     * @param seminarInfoId
+     * @return
+     */
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+
+
+
+    /**
+     *
+     * @param seminarControlId
+     */
+    void deleteSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarScoreId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @param teamId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    List<SeminarScore> getSeminarScoreByTeamId(BigInteger teamId);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void insertSeminarScore(SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void updateSeminarScore(SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScoreId
+     */
+    void deleteSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
 }

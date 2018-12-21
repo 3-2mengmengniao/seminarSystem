@@ -13,7 +13,6 @@ import java.util.List;
  * @date 2018/11/24
  */
 public interface CourseDao {
-
     /**
      * 通过ID获取课程信息
      * @param courseId
@@ -40,7 +39,7 @@ public interface CourseDao {
      * @param course
      * @return
      */
-    void insertCourse(Course course)throws RepetitiveRecordException;
+    void insertCourse(Course course,BigInteger teacherId)throws RepetitiveRecordException;
 
     /**
      * 更改课程信息

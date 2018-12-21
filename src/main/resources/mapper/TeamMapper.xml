@@ -4,11 +4,11 @@
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
         <result property="classId" column="klass_id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="teamName" column="team_name"/>
-        <result property="leaderId" column="leader_id"/>
-        <result property="status" column="status"/>
-        <result property="teamSerial" column="team_serial"/>
+        <association property="courseClass" column="id" javaType="com.test.seminar.entity.CourseClass" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByTeamId"/>
+        <collection property="seminarScoreList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByTeamId"/>
+        <collection property="roundScoreList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" select="com.test.seminar.mapper.RoundMapper.getRoundScoreByTeamId"/>
+        <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
+        <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
@@ -37,23 +37,14 @@
 
     <insert id="insertTeam">
         insert into team(klass_id,course_id,team_name,leader_id,status,team_serial)
-        values(#{team.classId},#{team.courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
+        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
     </insert>
 
     <update id="updateTeamByTeamId">
         update team
         <set>
-            <if test="team.classId!=null">
-                klass_id=#{team.classId},
-            </if>
-            <if test="team.courseId!=null">
-                course_id=#{team.courseId},
-            </if>
             <if test="team.teamName!=null">
                 team_name=#{team.teamName},
-            </if>
-            <if test="team.leaderId!=null">
-                leader_id=#{team.leaderId},
             </if>
             <if test="team.status!=null">
                 status=#{team.status},

@@ -77,12 +77,12 @@
             <h2 class="layui-colla-title">讨论课信息</h2>
             <div class="layui-colla-content">
                 <div class="layui-collapse" lay-accordion="">
-                    <#list seminarList as round>
+                    <#list roundList as round>
                     <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">第${round?index+1}轮</h2>
-                        <#list round as seminar>
+                        <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
+                        <#list round.seminarInfoList as seminar>
                         <div class="layui-colla-content center-text">
-                            <a href="/student/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${seminar?index+1}&emsp;${seminar.seminarName}</a>
+                            <a href="/student/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${seminar.seminarSerial}&emsp;${seminar.seminarName}</a>
                         </div>
                         </#list>
                     </div>

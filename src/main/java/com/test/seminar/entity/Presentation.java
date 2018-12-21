@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -9,8 +10,8 @@ import java.math.BigInteger;
 
 public class Presentation {
     private BigInteger id;
-    private BigInteger seminarControlId;
-    private BigInteger teamId;
+    private Team team;
+    private List<Question> questionList;
     private int teamOrder;
     private int present;
     private String reportName;
@@ -20,13 +21,13 @@ public class Presentation {
 
     public BigInteger getId() {return id; }
 
-    public BigInteger getSeminarControlId() {return seminarControlId; }
+    public Team getTeam() { return team; }
 
-    public void setSeminarControlId(BigInteger seminarControlId) {this.seminarControlId = seminarControlId; }
+    public void setTeam(Team team) { this.team = team; }
 
-    public BigInteger getTeamId() {return teamId; }
+    public List<Question> getQuestionList() { return questionList; }
 
-    public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
+    public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
 
     public int getPresent() {return present; }
 

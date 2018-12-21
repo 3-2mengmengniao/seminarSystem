@@ -22,36 +22,6 @@ public class CourseClassDaoImpl implements CourseClassDao {
     private CourseClassMapper courseClassMapper;
 
     @Override
-    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
-        CourseClass courseClass=courseClassMapper.getCourseClassByCourseClassId(courseClassId);
-        if(courseClass==null){
-            throw new CourseClassNotFoundException();
-        }
-        return courseClass;
-    }
-
-    @Override
-    public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
-        courseClassMapper.insertCourseClass(courseClass);
-    }
-
-    @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException{
-        if(courseClassMapper.getCourseClassByCourseClassId(courseClass.getId())==null) {
-            throw new CourseClassNotFoundException();
-        }
-        courseClassMapper.updateCourseClassByCourseClassId(courseClass);
-    }
-
-    @Override
-    public void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException{
-        if(courseClassMapper.getCourseClassByCourseClassId(courseClassId)==null) {
-            throw new CourseClassNotFoundException();
-        }
-        courseClassMapper.deleteCourseClassByCourseClassId(courseClassId);
-    }
-
-    @Override
     public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
         return courseClassMapper.getCourseClassByCourseId(courseId);
     }
@@ -66,7 +36,42 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
+    public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
+        CourseClass courseClass=courseClassMapper.getCourseClassByCourseClassId(courseClassId);
+        if(courseClass==null){
+            throw new CourseClassNotFoundException();
+        }
+        return courseClass;
+    }
+
+    @Override
+    public void insertCourseClass(CourseClass courseClass, BigInteger courseId) throws RepetitiveRecordException {
+        courseClassMapper.insertCourseClass(courseClass,courseId);
+    }
+
+    @Override
     public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
         courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
+    }
+
+    @Override
+    public void updateCourseClassByCourseClass(CourseClass courseClass) throws CourseClassNotFoundException{
+        if(courseClassMapper.getCourseClassByCourseClassId(courseClass.getId())==null) {
+            throw new CourseClassNotFoundException();
+        }
+        courseClassMapper.updateCourseClassByCourseClass(courseClass);
+    }
+
+    @Override
+    public void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException{
+        if(courseClassMapper.getCourseClassByCourseClassId(courseClassId)==null) {
+            throw new CourseClassNotFoundException();
+        }
+        courseClassMapper.deleteCourseClassByCourseClassId(courseClassId);
+    }
+
+    @Override
+    public CourseClass getCourseClassByTeamId(BigInteger teamId) {
+        return courseClassMapper.getCourseClassByTeamId(teamId);
     }
 }

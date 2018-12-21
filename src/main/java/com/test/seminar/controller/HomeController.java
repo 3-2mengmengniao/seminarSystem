@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
+/**
+ * @author hatake
+ * @date 2018/11/20
+ */
 
 @Controller
 public class HomeController {
@@ -37,85 +41,6 @@ public class HomeController {
         session.invalidate();
             return "login";
     }
-
-//    @RequestMapping(value = "/login", method = POST)
-//    @ResponseBody
-//    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model)  {
-//        //获得session
-//        HttpSession session = request.getSession();
-//        //登陆验证
-//        try {
-//            Student student = loginService.studentLogin(account, password);
-//            session.setAttribute("usertype", "student");
-//            session.setAttribute("id", student.getId());
-//            session.setAttribute("account", student.getAccount());
-//            session.setAttribute("name", student.getStudentName());
-//            model.addAttribute("account", student.getAccount());
-//            model.addAttribute("name", student.getStudentName());
-//        }
-//       catch (UserNotFoundException e) {
-//            try {
-//                Teacher teacher = loginService.teacherLogin(account, password);
-//                session.setAttribute("usertype", "teacher");
-//                session.setAttribute("id", teacher.getId());
-//                session.setAttribute("account", teacher.getAccount());
-//                session.setAttribute("name", teacher.getTeacherName());
-//                model.addAttribute("account", teacher.getAccount());
-//                model.addAttribute("name", teacher.getTeacherName());
-//            }
-//            catch (UserNotFoundException e2){
-//                String status = "404";
-//                return status;
-//            }
-//           String status = "200";
-//           return status;
-//
-//           }
-//        String status = "204";
-//        return status;
-//    }
-
-//    @RequestMapping(value = "/vali_psw", method = GET)
-//    public String valiPsw(HttpServletRequest request,Model model) {
-//        HttpSession session = request.getSession();
-//        String usertype=(String)session.getAttribute("usertype");
-//        model.addAttribute("usertype",usertype);
-//        return "vali_psw";
-//    }
-
-
-
-//    @RequestMapping(value = "/email-modify", method = POST)
-//    @ResponseBody
-//    public String emailModifyPost(HttpServletRequest request,@RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation,Model model) {
-//        HttpSession session = request.getSession();
-//        String usertype=(String)session.getAttribute("usertype");
-//        if(usertype.equals("teacher"))
-//        {
-//            BigInteger teacherId=(BigInteger)session.getAttribute("id");
-//            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
-//            teacher.setEmail(email);
-//            teacherService.updateTeacherByTeacherId(teacher);
-//            String status="200";
-//            return status;
-//        }
-//        else if(usertype.equals("student"))
-//        {
-//            BigInteger studentId=(BigInteger)session.getAttribute("id");
-//            Student student=studentService.getStudentByStudentId(studentId);
-//            student.setEmail(email);
-//            studentService.updateStudentByStudentId(student);
-//            String status="204";
-//            return status;
-//        }
-//        String status="404";
-//        return status;
-//    }
-
-//    @RequestMapping(value = "/email-modify", method = GET)
-//    public String emailModify(Model model) {
-//        return "email-modify";
-//    }
 
     @RequestMapping(value = "/forgetPassword", method = GET)
     public String forgetPassword(Model model) {
@@ -159,9 +84,11 @@ public class HomeController {
         HttpSession session = request.getSession();
         String usertype = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().toLowerCase();
         String status="404";
+        BigInteger teacherId;
+        BigInteger studentId;
         if(usertype.equals("teacher"))
         {
-            BigInteger teacherId=(BigInteger)session.getAttribute("id");
+            teacherId=(BigInteger)session.getAttribute("id");
             Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
             teacher.setPassword(newPsw);
             teacherService.updateTeacherByTeacherId(teacher);
@@ -170,7 +97,7 @@ public class HomeController {
         }
         else if(usertype.equals("student"))
         {
-            BigInteger studentId=(BigInteger)session.getAttribute("id");
+            studentId=(BigInteger)session.getAttribute("id");
             Student student=studentService.getStudentByStudentId(studentId);
             student.setPassword(newPsw);
             studentService.updateStudentByStudentId(student);

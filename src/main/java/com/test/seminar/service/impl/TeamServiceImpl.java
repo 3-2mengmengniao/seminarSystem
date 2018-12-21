@@ -1,5 +1,7 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.CourseClassDao;
+import com.test.seminar.dao.CourseDao;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Team;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -15,6 +17,8 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDao teamDao;
+    @Autowired
+    private CourseClassDao courseClassDao;
     @Override
     public Team getTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
         return teamDao.getTeamByTeamId(teamId);
@@ -31,8 +35,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void insertTeam(Team team) throws RepetitiveRecordException {
-        teamDao.insertTeam(team);
+    public void insertTeam(Team team,BigInteger courseClassId) throws RepetitiveRecordException {
+        teamDao.insertTeam(team,courseClassId,courseClassDao.getCourseClassByCourseClassId(courseClassId).getCourse().getId());
     }
 
     @Override

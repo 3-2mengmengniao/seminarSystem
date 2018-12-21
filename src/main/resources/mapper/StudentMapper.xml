@@ -4,12 +4,10 @@
 
     <resultMap id="studentResultMap" type="com.test.seminar.entity.Student">
         <id property="id" column="id" />
-        <result property="account" column="account"/>
-        <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="studentName" column="student_name"/>
-        <result property="email" column="email"/>
+        <collection property="courseList" javaType="ArrayList" column="id" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByStudentId"/>
     </resultMap>
+
 
     <select id="getStudentByStudentId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email

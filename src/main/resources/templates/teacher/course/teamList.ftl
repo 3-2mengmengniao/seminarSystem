@@ -88,11 +88,11 @@
         <div class="layui-collapse" lay-accordion="" >
             <#list teamList as team>
             <div class="layui-colla-item" style="border:none;">
-                <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
+                <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">组长：${leaderList[team?index].studentName}</p>
+                    <p class="text-center">组长：${team.memberList[0]}</p>
                     <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
-                    <#list studentList[team?index] as student>
+                    <#list team.memberList as student>
                     <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
                     <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
                     </#list>

@@ -19,7 +19,10 @@ import java.math.BigInteger;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
-
+/**
+ * @author hatake
+ * @date 2018/12/12
+ */
 @Controller
 public class AdminController {
 

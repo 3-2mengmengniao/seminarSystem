@@ -10,32 +10,19 @@ import java.util.List;
 
 public class Team {
     private BigInteger id;
-    private BigInteger classId;
-    private BigInteger courseId;
     private String teamName;
-    private BigInteger leaderId;
     private int status;
     private int teamSerial;
-    private List<RoundScore> roundScores;
+    private Student leader;
+    private CourseClass courseClass;
+    private BigInteger leader_id;
+    private List<Student> memberList;
+    private List<Question> questionList;
+    private List<RoundScore> roundScoreList;
+    private List<SeminarScore> seminarScoreList;
 
     public BigInteger getId() {
         return id;
-    }
-
-    public BigInteger getClassId() {
-        return classId;
-    }
-
-    public void setClassId(BigInteger classId) {
-        this.classId = classId;
-    }
-
-    public BigInteger getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(BigInteger courseId) {
-        this.courseId = courseId;
     }
 
     public String getTeamName() {
@@ -46,13 +33,9 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public BigInteger getLeaderId() {
-        return leaderId;
-    }
+    public Student getLeader() { return leader; }
 
-    public void setLeaderId(BigInteger leaderId) {
-        this.leaderId = leaderId;
-    }
+    public void setLeader(Student leader) { this.leader = leader; }
 
     public int getTeamSerial() {
         return teamSerial;
@@ -69,6 +52,26 @@ public class Team {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public List<RoundScore> getRoundScoreList() { return roundScoreList; }
+
+    public void setRoundScoreList(List<RoundScore> roundScoreList) { this.roundScoreList = roundScoreList; }
+
+    public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
+
+    public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
+
+    public List<Question> getQuestionList() { return questionList; }
+
+    public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
+
+    public List<Student> getMemberList() { return memberList; }
+
+    public void setMemberList(List<Student> memberList) { this.memberList = memberList; }
+
+    public CourseClass getCourseClass() { return courseClass; }
+
+    public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
 
     @Override
     public boolean equals(Object o) {

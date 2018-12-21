@@ -4,8 +4,6 @@
 
     <resultMap id="seminarInfoResultMap" type="com.test.seminar.entity.SeminarInfo">
         <id property="id" column="id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="roundId" column="round_id"/>
         <result property="seminarName" column="seminar_name"/>
         <result property="introduction" column="introduction"/>
         <result property="maxGroup" column="max_team"/>
@@ -21,6 +19,19 @@
         <result property="seminarInfoId" column="seminar_id"/>
         <result property="seminarStatus" column="status"/>
         <result property="reportDDL" column="report_ddl"/>
+        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassBySeminarControlId"/>
+        <association property="seminarInfo" javaType="com.test.seminar.entity.SeminarInfo" column="id" select="getSeminarInfoBySeminarControlId"/>
+        <collection property="presentationList" javaType="ArrayList" ofType="com.test.seminar.entity.Presentation" column="id" select="com.test.seminar.mapper.PresentationMapper.getPresentationBySeminarControlId"/>
+        <collection property="questionList" javaType="ArrayList" ofType="com.test.seminar.entity.Question" column="id" select="com.test.seminar.mapper.QuestionMapper.getQuestionBySeminarControlId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreBySeminarControlId"/>
+    </resultMap>
+    
+    <resultMap id="seminarScoreResultMap" type="com.test.seminar.entity.SeminarScore">
+        <id property="id" column="id"/>
+        <result property="totalScore" column="total_score"/>
+        <result property="presentationScore" column="presentation_score"/>
+        <result property="questionScore" column="question_score"/>
+        <result property="reportScore" column="report_score"/>
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
@@ -29,20 +40,35 @@
         where id=#{seminarInfoId}
     </select>
 
+    <select id="getSeminarInfoBySeminarControlId" resultMap="seminarInfoResultMap">
+        select seminar.id,seminar.course_id,seminar.round_id,seminar.seminar_name,seminar.introduction,seminar.max_team,seminar.is_visible,seminar.seminar_serial,seminar.enroll_start_time,seminar.enroll_end_time
+        from seminar,klass_seminar
+        where seminar.id=klass_seminar.seminar_id and klass_seminar.id=#{seminarControlId}
+    </select>
+
+    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
+        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        from seminar
+        where round_id=#{roundId}
+    </select>
+
+    <select id="getSeminarInfoBySeminarNameAndCourseId" resultMap="seminarInfoResultMap">
+        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        from seminar
+        where seminar_name=#{seminarName} and course_id=#{courseId}
+    </select>
+
     <insert id="insertSeminarInfo">
         insert into seminar(course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time)
-        values(#{seminarInfo.courseId},#{seminarInfo.roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
+        values(#{courseId},#{roundId},#{seminarInfo.seminarName},#{seminarInfo.introduction},
         #{seminarInfo.maxGroup},#{seminarInfo.visible},#{seminarInfo.seminarSerial},#{seminarInfo.registrationStartTime},#{seminarInfo.registrationEndTime})
     </insert>
 
     <update id="updateSeminarInfo">
         update seminar
         <set>
-            <if test="seminarInfo.courseId!=null">
-                course_id=#{seminarInfo.courseId},
-            </if>
-            <if test="seminarInfo.roundId!=null">
-                round_id=#{seminarInfo.roundId},
+            <if test="#{roundId}!=null">
+                round_id=#{roundId},
             </if>
             <if test="seminarInfo.seminarName!=null">
                 seminar_name=#{seminarInfo.seminarName},
@@ -82,18 +108,12 @@
 
     <insert id="insertSeminarControl">
         insert into klass_seminar(klass_id,seminar_id,status,report_ddl)
-        values(#{seminarControl.classId},#{seminarControl.seminarInfoId},#{seminarControl.seminarStatus},#{seminarControl.reportDDL})
+        values(#{classId},#{seminarInfoId},#{seminarControl.seminarStatus},#{seminarControl.reportDDL})
     </insert>
 
     <update id="updateSeminarControl">
         update klass_seminar
         <set>
-            <if test="seminarControl.classId!=null">
-                klass_id=#{seminarControl.classId},
-            </if>
-            <if test="seminarControl.seminarInfoId!=null">
-                seminar_id=#{seminarControl.seminarInfoId},
-            </if>
             <if test="seminarControl.seminarStatus!=null">
                 status=#{seminarControl.seminarStatus},
             </if>
@@ -108,15 +128,64 @@
         delete from klass_seminar where id=#{seminarControlId}
     </delete>
 
-    <select id="getSemniarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
+    <select id="getSeminarControlByClassIdAndSeminarInfo" resultMap="seminarControlResultMap">
         select id,klass_id,seminar_id,status,report_ddl
         from klass_seminar
         where klass_id=#{classId} and seminar_id=#{seminarInfoId}
     </select>
 
-    <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
-        from seminar
-        where round_id=#{roundId}
+    <select id="getSeminarScoreBySeminarScoreId" resultMap="seminarScoreResultMap">
+    select id,totalScore,presentationScore,questionScore,reportScore
+    from seminar_score
+    where id=#{seminarScoreId}
     </select>
+
+    <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from seminar_score
+        where klass_seminar_id=#{seminarScoreId} and team_id=#{teamId}
+    </select>
+
+    <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from seminar_score
+        where team_id=#{teamId}
+    </select>
+
+    <select id="getSeminarScoreBySeminarControlId" resultMap="seminarScoreResultMap">
+        select id,totalScore,presentationScore,questionScore,reportScore
+        from seminar_score
+        where klass_seminar_id=#{seminarControlId}
+    </select>
+    
+    <insert id="insertSeminarScore">
+        insert into seminar_score(total_score,presentation_score,question_score,report_score)
+        values (#{seminarScore.totalScore},#{seminarScore.presentationScore},#{seminarScore.questionScore},#{seminarScore.reportScore})
+    </insert>
+
+    <update id="updateSeminarScore">
+        update seminar_score
+        <set>
+            <if test="seminarScore.totalScore!=null">
+                total_score=#{seminarScore.totalScore},
+            </if>
+            <if test="seminarScore.presentationScore!=null">
+                prensentation_score=#{seminarScore.presentationScore},
+            </if>
+            <if test="seminarScore.questionScore!=null">
+                question_score=#{seminarScore.questionScore},
+            </if>
+            <if test="seminarScore.reportScore!=null">
+                report_score=#{seminarScore.reportScore},
+            </if>
+        </set>
+          where id=#{seminarScore.id}
+    </update>
+
+    <delete id="deleteSeminarScoreBySeminarScoreId">
+        delete from seminar_score where id=#{seminarScoreId}
+    </delete>
+
+
+
 </mapper>

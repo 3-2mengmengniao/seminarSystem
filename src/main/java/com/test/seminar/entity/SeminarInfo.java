@@ -12,37 +12,22 @@ import java.util.Date;
 
 public class SeminarInfo {
     private BigInteger id;
-    private BigInteger courseId;
-    private BigInteger roundId;
     private String seminarName;
     private String introduction;
     private int maxGroup;
     private int visible;
     private int seminarSerial;
+    private int roundSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationEndTime;
+    private SeminarControl seminarControl;
+    private BigInteger seminarControlId;
 
-
+    public void setId(BigInteger id){this.id=id;}
     public BigInteger getId() {
         return id;
-    }
-
-    public BigInteger getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(BigInteger courseId) {
-        this.courseId = courseId;
-    }
-
-    public BigInteger getRoundId() {
-        return roundId;
-    }
-
-    public void setRoundId(BigInteger roundId) {
-        this.roundId = roundId;
     }
 
     public String getSeminarName() {
@@ -85,14 +70,15 @@ public class SeminarInfo {
         this.seminarSerial = seminarSerial;
     }
 
+    public int getRoundSerial() { return roundSerial; }
+
+    public void setRoundSerial(int roundSerial) { this.roundSerial = roundSerial; }
 
     public Date getRegistrationStartTime() {
         return registrationStartTime;
     }
 
-    public void setRegistrationStartTime(Date registrationStartTime) {
-        this.registrationStartTime = registrationStartTime;
-    }
+    public void setRegistrationStartTime(Date registrationStartTime) { this.registrationStartTime = registrationStartTime; }
 
     public Date getRegistrationEndTime() {
         return registrationEndTime;
@@ -101,5 +87,13 @@ public class SeminarInfo {
     public void setRegistrationEndTime(Date registrationEndTime) {
         this.registrationEndTime = registrationEndTime;
     }
+
+    public SeminarControl getSeminarControl() { return seminarControl; }
+
+    public void setSeminarControl(SeminarControl seminarControl) { this.seminarControl = seminarControl; }
+
+    public BigInteger getSeminarControlId() { return seminarControlId; }
+
+    public void setSeminarControlId(BigInteger seminarControlId) { this.seminarControlId = seminarControlId; }
 }
 
