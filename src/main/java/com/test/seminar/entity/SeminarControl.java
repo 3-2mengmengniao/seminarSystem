@@ -1,10 +1,11 @@
 package com.test.seminar.entity;
 
-import com.sun.tools.javac.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -21,6 +22,7 @@ public class SeminarControl {
     private List<Question> questionList;
     private CourseClass courseClass;
     private List<SeminarScore> seminarScoreList;
+    private Round round;
 
     public BigInteger getId() {
         return id;
@@ -65,4 +67,12 @@ public class SeminarControl {
     public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
 
     public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
+
+    public Round getRound() {
+        return round;
+    }
+
+    public void setRound(Round round) {
+        this.round = round;
+    }
 }
