@@ -9,8 +9,6 @@
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <resultMap id="courseClassResultMap" type="com.test.seminar.entity.CourseClass">
         <id property="id" column="id"/>
-        <result property="courseId" column="course_id"/>
-        <result property="grade" column="grade"/>
         <result property="classSerial" column="klass_serial"/>
         <result property="classTime" column="klass_time"/>
         <result property="classLocation" column="klass_location"/>
@@ -18,31 +16,31 @@
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass _time,klass_location
+        SELECT id,grade,klass_serial,klass _time,klass_location
         FROM klass
         WHERE id=#{courseClassId}
     </select>
 
     <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        SELECT id,grade,klass_serial,klass_time,klass_location
         FROM klass
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        SELECT id,grade,klass_serial,klass_time,klass_location
         FROM klass,klass_student
         WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
 
     <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
-        select id,course_id,grade,klass_serial,klass_time,klass_location
+        select id,grade,klass_serial,klass_time,klass_location
         from klass,team
         where id=#{teamId} and team.klass_id=klass.id
     </select>
 
     <select id="getCourseClassBySeminarControlId" resultMap="courseClassResultMap">
-        select id,course_id,grade,klass_serial,klass_time,klass_location
+        select id,grade,klass_serial,klass_time,klass_location
         from klass,klass_seminar
         where klass_seminar.id=#{seminarControlId} and klass_seminar.klass_id=klass.id
     </select>
