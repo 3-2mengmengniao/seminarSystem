@@ -31,6 +31,12 @@
         WHERE id=#{roundId}
     </select>
 
+    <select id="getMaxRoundSerialByCourseId" resultType="Integer">
+        SELECT MAX(round_serial)
+        FROM round
+        WHERE course_id=#{courseId}
+    </select>
+
     <insert id="insertRound">
         insert into round(id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method)
         values(#{courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})

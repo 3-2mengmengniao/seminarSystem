@@ -105,6 +105,13 @@ public interface SeminarMapper {
     /**
      *
      * @param seminarControlId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
      * @param teamId
      * @return
      */

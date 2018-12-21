@@ -79,10 +79,5 @@ public interface RoundDao {
      */
     void deleteRoundScoreByRoundScoreId(BigInteger roundScoreId);
 
-    /**
-     *
-     * @param seminarControlId
-     * @return
-     */
-    SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
+    int getMaxRoundSerialByCourseId(BigInteger courseId);
 }

@@ -59,13 +59,6 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void insertStudentByStudentList(List<Student> studentList) {
-        for(Student student:studentList){
-            studentMapper.insertStudent(student);
-        }
-    }
-
-    @Override
     public void updateStudentByStudentId(Student student)throws UserNotFoundException {
         if(studentMapper.getStudentByStudentId(student.getId())==null) {
             throw new UserNotFoundException();

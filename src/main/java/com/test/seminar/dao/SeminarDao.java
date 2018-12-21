@@ -57,7 +57,7 @@ public interface SeminarDao {
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId)throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws RepetitiveRecordException;
 
     /**
      *
@@ -99,4 +99,44 @@ public interface SeminarDao {
      * @return
      */
     SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @param teamId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    List<SeminarScore> getSeminarScoreByTeamId(BigInteger teamId);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void insertSeminarScore(SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScore
+     */
+    void updateSeminarScore(SeminarScore seminarScore);
+
+    /**
+     *
+     * @param seminarScoreId
+     */
+    void deleteSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
 }

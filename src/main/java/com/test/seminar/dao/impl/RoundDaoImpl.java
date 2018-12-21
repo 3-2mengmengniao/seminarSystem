@@ -2,6 +2,8 @@ package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
+import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 import com.test.seminar.mapper.RoundMapper;
@@ -35,8 +37,8 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
-    public void insertRound(Round round)throws RepetitiveRecordException {
-        roundMapper.insertRound(round);
+    public void insertRound(Round round, BigInteger courseId)throws RepetitiveRecordException {
+        roundMapper.insertRound(round,courseId);
     }
 
     @Override
@@ -53,5 +55,35 @@ public class RoundDaoImpl implements RoundDao {
             throw new RoundNotFoundException();
         }
         roundMapper.deleteRoundByRoundId(roundId);
+    }
+
+    @Override
+    public RoundScore getRoundScoreByRoundId(BigInteger roundScoreId) {
+        return roundMapper.getRoundScoreByRoundId(roundScoreId);
+    }
+
+    @Override
+    public RoundScore getRoundScoreByRoundIdAndTeamId(BigInteger roundId, BigInteger teamId) {
+        return roundMapper.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
+    }
+
+    @Override
+    public void insertRoundScore(RoundScore roundScore) {
+        roundMapper.insertRoundScore(roundScore);
+    }
+
+    @Override
+    public void updateRoundScore(RoundScore roundScore) {
+        roundMapper.updateRoundScore(roundScore);
+    }
+
+    @Override
+    public void deleteRoundScoreByRoundScoreId(BigInteger roundScoreId) {
+        roundMapper.deleteRoundScoreByRoundScoreId(roundScoreId);
+    }
+
+    @Override
+    public int getMaxRoundSerialByCourseId(BigInteger courseId) {
+        return roundMapper.getMaxRoundSerialByCourseId(courseId);
     }
 }

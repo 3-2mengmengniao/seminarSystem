@@ -49,8 +49,8 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public void insertTeam(Team team)throws RepetitiveRecordException {
-        teamMapper.insertTeam(team);
+    public void insertTeam(Team team, BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException {
+        teamMapper.insertTeam(team,courseClassId,courseId);
     }
 
     @Override
