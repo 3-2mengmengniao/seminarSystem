@@ -14,12 +14,12 @@
         <result property="reportUrl" column="report_url"/>
         <result property="pptName" column="ppt_name"/>
         <result property="pptUrl" column="ppt_url"/>
-        <association property="team" column="team_id" javaType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByTeamId" fetchType="eager"/>
+        <association property="team" column="team_id" javaType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByTeamId"/>
         <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByPresentationId"/>
     </resultMap>
 
     <select id="getPresentationBySeminarControlId" resultMap="presentationResultMap">
-        select id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
+        select id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
         from  attendance
         where klass_seminar_id=#{seminarControlId}
     </select>

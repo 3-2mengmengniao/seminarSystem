@@ -180,15 +180,18 @@ public class StudentController {
         SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
         model.addAttribute("seminarControl",seminarControl);
         List<Presentation> presentationList= seminarControl.getPresentationList();
-        List<Team> teamList=new ArrayList<>();
-        for(int i=0;i<presentationList.size();i++)
-        {
-            teamList.add(teamService.getTeamByTeamId(new BigInteger("1")));
-        }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
+        boolean flag=false;
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
-        boolean flag=teamList.contains(team);
+        for(int i=0;i<presentationList.size();i++)
+        {
+            Team temp=presentationList.get(i).getTeam();
+            if(temp.getId().equals(team.getId()))
+            {
+                flag=true;
+            }
+        }
         model.addAttribute("myTeam",team);
         model.addAttribute("enrollment",flag);
         return "student/course/seminar/info";
@@ -216,17 +219,20 @@ public class StudentController {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         List<Presentation> presentationList= seminarControl.getPresentationList();
-        List<Team> teamList=new ArrayList<>();
-        for(int i=0;i<presentationList.size();i++)
-        {
-            teamList.add(presentationList.get(i).getTeam());
-        }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
+        boolean flag=false;
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
-        boolean flag=teamList.contains(team);
-        model.addAttribute("enrollment",flag);
+        for(int i=0;i<presentationList.size();i++)
+        {
+            Team temp=presentationList.get(i).getTeam();
+            if(temp.getId().equals(team.getId()))
+            {
+                flag=true;
+            }
+        }
         model.addAttribute("team",team);
+        model.addAttribute("enrollment",flag);
         return "student/course/seminar/enrollment";
     }
 

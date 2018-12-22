@@ -66,6 +66,15 @@ public class Team {
     public BigInteger getLeader_id() { return leader_id; }
 
     public void setLeader_id(BigInteger leader_id) { this.leader_id = leader_id; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Team) {
+            Team t = (Team) o;
+            return this.id.equals(t.getId());
+        }
+        return super.equals(o);
+    }
 }
 
 
