@@ -253,6 +253,8 @@ public class TeacherController {
         model.addAttribute("course",course);
         List<Team> teamList=teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
+        List<Round> roundList=roundService.getRoundByCourseId(courseId);
+        model.addAttribute("roundList",roundList);
         return "teacher/course/grade";
     }
 
