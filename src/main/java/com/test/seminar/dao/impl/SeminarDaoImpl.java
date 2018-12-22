@@ -46,12 +46,7 @@ public class SeminarDaoImpl implements SeminarDao {
         if (seminarControl==null) {
             throw new SeminarControlNotFoundException();
         }
-        List<Presentation> presentationList= presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
-        List<Presentation> presentationListReconstruct=new ArrayList();
-        for(Presentation presentation:presentationList){
-            presentationListReconstruct.add(presentation.getTeamOrder(),presentation);
-        }
-        seminarControl.setPresentationList(presentationListReconstruct);
+        addPresentation(seminarControl);
         return seminarControl;
     }
 
@@ -67,7 +62,9 @@ public class SeminarDaoImpl implements SeminarDao {
 
     @Override
     public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId) {
-        return seminarMapper.getSeminarControlBySeminarControlId(seminarControlId);
+        SeminarControl seminarControl = seminarMapper.getSeminarControlBySeminarControlId(seminarControlId);
+        addPresentation(seminarControl);
+        return seminarControl;
     }
 
     @Override
@@ -144,5 +141,14 @@ public class SeminarDaoImpl implements SeminarDao {
     @Override
     public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId) {
         seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarControlId,teamId);
+    }
+
+    private void addPresentation(SeminarControl seminarControl){
+        List<Presentation> presentationList= presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
+        List<Presentation> presentationListReconstruct=new ArrayList();
+        for(Presentation presentation:presentationList){
+            presentationListReconstruct.add(presentation.getTeamOrder(),presentation);
+        }
+        seminarControl.setPresentationList(presentationListReconstruct);
     }
 }

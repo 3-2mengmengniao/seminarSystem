@@ -183,7 +183,7 @@ public class StudentController {
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<presentationList.size();i++)
         {
-            teamList.add(presentationList.get(i).getTeam());
+            teamList.add(teamService.getTeamByTeamId(new BigInteger("1")));
         }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
@@ -216,7 +216,6 @@ public class StudentController {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         List<Presentation> presentationList= seminarControl.getPresentationList();
-        System.out.println(presentationList);
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<presentationList.size();i++)
         {

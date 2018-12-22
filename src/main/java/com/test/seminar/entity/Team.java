@@ -73,14 +73,6 @@ public class Team {
 
     public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof Team) {
-            Team t = (Team) o;
-            return this.id.equals(t.getId());
-        }
-        return super.equals(o);
-    }
 }
 
 
