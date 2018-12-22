@@ -16,7 +16,6 @@
         <result property="reportDDL" column="report_ddl"/>
         <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassBySeminarControlId"/>
         <association property="seminarInfo" javaType="com.test.seminar.entity.SeminarInfo" column="id" select="getSeminarInfoBySeminarControlId"/>
-        <collection property="presentationList" javaType="ArrayList" ofType="com.test.seminar.entity.Presentation" column="id" select="com.test.seminar.mapper.PresentationMapper.getPresentationBySeminarControlId"/>
         <collection property="questionList" javaType="ArrayList" ofType="com.test.seminar.entity.Question" column="id" select="com.test.seminar.mapper.QuestionMapper.getQuestionBySeminarControlId"/>
         <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreBySeminarControlId"/>
     </resultMap>

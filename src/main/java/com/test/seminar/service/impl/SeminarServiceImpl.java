@@ -1,12 +1,10 @@
 package com.test.seminar.service.impl;
 
 import com.test.seminar.dao.CourseClassDao;
+import com.test.seminar.dao.PresentationDao;
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.dao.SeminarDao;
-import com.test.seminar.entity.CourseClass;
-import com.test.seminar.entity.Round;
-import com.test.seminar.entity.SeminarControl;
-import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
@@ -27,6 +25,8 @@ public class SeminarServiceImpl implements SeminarService {
     private RoundDao roundDao;
     @Autowired
     private CourseClassDao courseClassDao;
+    @Autowired
+    private PresentationDao presentationDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -88,5 +88,12 @@ public class SeminarServiceImpl implements SeminarService {
             SeminarInfoOrderByRoundId.add(i,temp);
         }
         return SeminarInfoOrderByRoundId;
+    }
+
+    @Override
+    public void insertPresentation(int teamOrder,BigInteger seminarControlId, BigInteger teamId) {
+        Presentation presentation = new Presentation();
+        presentation.setTeamOrder(teamOrder);
+        presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }
 }

@@ -6,12 +6,14 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
 import com.test.seminar.mapper.CourseMapper;
+import com.test.seminar.mapper.PresentationMapper;
 import com.test.seminar.mapper.RoundMapper;
 import com.test.seminar.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +28,8 @@ public class SeminarDaoImpl implements SeminarDao {
     RoundMapper roundMapper;
     @Autowired
     CourseMapper courseMapper;
+    @Autowired
+    PresentationMapper presentationMapper;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
@@ -42,6 +46,12 @@ public class SeminarDaoImpl implements SeminarDao {
         if (seminarControl==null) {
             throw new SeminarControlNotFoundException();
         }
+        List<Presentation> presentationList= presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
+        List<Presentation> presentationListReconstruct=new ArrayList();
+        for(Presentation presentation:presentationList){
+            presentationListReconstruct.add(presentation.getTeamOrder(),presentation);
+        }
+        seminarControl.setPresentationList(presentationListReconstruct);
         return seminarControl;
     }
 

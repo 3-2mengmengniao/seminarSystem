@@ -20,7 +20,7 @@ public interface PresentationMapper {
 
     List<Presentation> getPresentationBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
-    void insertPresentation(@Param("presentation")Presentation presentation, @Param("courseClassId")BigInteger courseClassId, @Param("seminarControlId") BigInteger seminarControlId);
+    void insertPresentation(@Param("presentation")Presentation presentation, @Param("seminarControlId") BigInteger seminarControlId, @Param("teamId")BigInteger teamId);
 
     void updatePresentation(@Param("presentation")Presentation presentation);
 

@@ -48,6 +48,8 @@ public interface StudentMapper {
      */
     List<Student> getAllStudent();
 
+    List<Student> getStudentNotTeamInCourse(@Param("courseId")BigInteger courseId);
+
     /**
      * 创建新的学生账户
      *

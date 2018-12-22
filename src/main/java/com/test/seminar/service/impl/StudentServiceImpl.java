@@ -54,4 +54,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getAllStudent() {
         return studentDao.getAllStudent();
     }
+
+    @Override
+    public List<Student> getStudentNotTeamInCourse(BigInteger courseId) {
+        return studentDao.getStudentNotTeamInCourse(courseId);
+    }
 }
