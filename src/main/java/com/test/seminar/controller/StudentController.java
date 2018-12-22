@@ -158,22 +158,9 @@ public class StudentController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
-//        List<List<Student>> studentList=new LinkedList<List<Student>>();
-//        List<Student> leaderList=new ArrayList();
-//        List<CourseClass> classList=new ArrayList<>();
-//        for( int i = 0 ; i < teamList.size() ; i++) {
-//            BigInteger teamId=teamList.get(i).getId();
-//            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
-//            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
-//            leaderList.add(leader);
-//            studentList.add(teamStudents);
-//            BigInteger classId=teamList.get(i).getClassId();
-//            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
-//            classList.add(teamClass);
-//        }
-//        model.addAttribute("studentList",studentList);
-//        model.addAttribute("leaderList",leaderList);
-//        model.addAttribute("classList",classList);
+        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
+        System.out.println(noTeamStudentList.size());
+        model.addAttribute("noTeamStudentList",noTeamStudentList);
         return "student/course/teams";
     }
 
@@ -202,6 +189,7 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         boolean flag=teamList.contains(team);
+        model.addAttribute("myTeam",team);
         model.addAttribute("enrollment",flag);
         return "student/course/seminar/info";
     }
@@ -217,11 +205,18 @@ public class StudentController {
         return "student/course/seminar/score";
     }
 
+    @RequestMapping(value="/course/seminar/info/register",method = POST)
+    public ResponseEntity<String> seminarRegister(int order,BigInteger teamId,BigInteger seminarId, Model model) {
+        seminarService.insertPresentation(order,seminarId,teamId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/seminar/enrollment")
     public String enrollmentInfo(HttpServletRequest request,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         List<Presentation> presentationList= seminarControl.getPresentationList();
+        System.out.println(presentationList);
         List<Team> teamList=new ArrayList<>();
         for(int i=0;i<presentationList.size();i++)
         {
@@ -232,6 +227,7 @@ public class StudentController {
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         boolean flag=teamList.contains(team);
         model.addAttribute("enrollment",flag);
+        model.addAttribute("team",team);
         return "student/course/seminar/enrollment";
     }
 

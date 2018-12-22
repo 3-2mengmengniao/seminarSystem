@@ -106,10 +106,9 @@
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">未组队学生</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">24320162202001 &nbsp&nbsp&nbsp 罗小黑</p>
-                    <p class="text-center">24320162202002 &nbsp&nbsp&nbsp 刘晓波</p>
-                    <p class="text-center">24320162202003 &nbsp&nbsp&nbsp 王洪</p>
-                    <p class="text-center">24320162202004 &nbsp&nbsp&nbsp 李晓霞</p>
+                    <#list noTeamStudentList as student>
+                        <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
+                    </#list>
                 </div>
             </div>
         </div>

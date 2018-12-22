@@ -307,6 +307,8 @@ public class TeacherController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
+        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
+        model.addAttribute("noTeamStudentList",noTeamStudentList);
         return "teacher/course/teamList";
     }
 

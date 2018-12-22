@@ -91,31 +91,14 @@
                 <#else>
                 <tr>
                     <td>第${t+1}组：</td>
+                    <#if seminarControl.seminarStatus==0>
+                        <td style="color:#009688;"><a class="registerButton" href="/student/course/seminar/info/register?teamId=${team.id}&seminarId=${seminarControl.id}&order=${t}">未报名</a></td>
+                    <#else>
                     <td style="color:#009688;">未报名</td>
+                    </#if>
                 </tr>
                 </#if>
             </#list>
-            <#---->
-            <#--<tr>-->
-                <#--<td>第二组：</td>-->
-                <#--<td style="color:#009688;">1-2业务流程.ppt</td>-->
-            <#--</tr>-->
-            <#--<tr>-->
-                <#--<td>第三组：</td>-->
-                <#--<td style="color:#009688;">1-3业务流程.ppt</td>-->
-            <#--</tr>-->
-            <#--<tr>-->
-                <#--<td>第四组：</td>-->
-                <#--<td style="color:#009688;">1-4业务流程.ppt</td>-->
-            <#--</tr>-->
-            <#--<tr>-->
-                <#--<td>第五组：</td>-->
-                <#--<td style="color:#009688;">1-5业务流程.ppt</td>-->
-            <#--</tr>-->
-            <#--<tr>-->
-                <#--<td>第六组：</td>-->
-                <#--<td style="color:#009688;">1-6业务流程.ppt</td>-->
-            <#--</tr>-->
             </tbody>
         </table>
         <div class="distance4"></div>
@@ -127,4 +110,25 @@
 
 
 </body>
+<script>
+    $(".registerButton").on("click",function(event){
+        event.preventDefault(); // 使a自带的方法失效，即无法向addStudent.action发出请求
+        var posturl=this.attr("href");
+        console.log(posturl);
+        $.ajax({
+            type: "POST", // 使用post方式
+            url: posturl,
+            success: function(result){
+                function(data,status,response){
+                    if(response.status=="200"){
+                        window.location.href="/student/course/seminar/enrollment?seminarId="+${seminarControl.id};
+                    }
+                }
+            },
+            error: function(result){
+                alert("报名失败！");
+            }
+        });
+    });
+</script>
 </html>

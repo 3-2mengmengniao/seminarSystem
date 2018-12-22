@@ -112,6 +112,18 @@
         </div>
     </div>
 </div>
+<div class="center-navigation">
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">未组队学生</h2>
+            <div class="layui-colla-content">
+                    <#list noTeamStudentList as student>
+                        <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
+                    </#list>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="distance4"></div>
 <div class="distance4"></div>
 <button onclick="window.location.href='/teacher/courseList'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
