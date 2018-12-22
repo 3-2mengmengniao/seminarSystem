@@ -178,9 +178,13 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/course/grade")
-    public String groupScore(BigInteger courseId,Model model) {
+    public String groupScore(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        model.addAttribute("team",team);
         return "student/course/grade";
     }
 

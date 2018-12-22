@@ -50,8 +50,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
-            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
+            <a href="/teacher/course/seminar/info?classId=${seminarControl.courseClass.id}&seminarId=${seminarControl.seminarInfo.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -175,6 +175,7 @@
                         </td>
                     </tr>
                 </table>
+                <p class="center center-text "><a style="width: 100px;" href="/teacher/course/seminar/report?seminarId=${seminarControl.id}" class="button-return button-turqoise">确认</a></p>
             </div>
             <div id="second" style="margin-left:10%;">
                 <div style="height:30px;"></div>
@@ -231,6 +232,7 @@
                         </td>
                     </tr>
                 </table>
+                <p class="center center-text "><a style="width: 100px;" href="/teacher/course/seminar/report?seminarId=${seminarControl.id}" class="button-return button-turqoise">确认</a></p>
             </div>
             <div id="third" style="margin-left:10%;">
                 <div style="height:30px;"></div>
@@ -267,6 +269,7 @@
                         </td>
                     </tr>
                 </table>
+                <p class="center center-text "><a style="width: 100px;" href="/teacher/course/seminar/report?seminarId=${seminarControl.id}" class="button-return button-turqoise">确认</a></p>
             </div>
             <div id="fourth" style="margin-left:10%;">
                 <div style="height:30px;"></div>
@@ -303,6 +306,7 @@
                         </td>
                     </tr>
                 </table>
+                <p class="center center-text "><a style="width: 100px;" href="/teacher/course/seminar/report?seminarId=${seminarControl.id}" class="button-return button-turqoise">确认</a></p>
             </div>
         </div>
     </div>
@@ -608,9 +612,9 @@
 
     #wrapper {
         width: 95%;
-        height: 490px;
+        height: 540px;
         position: absolute;
-        top: 30px;
+        top: 60px;
         bottom: 0;
         left: 10px;
         right: 10px;
