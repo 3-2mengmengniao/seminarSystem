@@ -36,7 +36,7 @@
     <select id="getStudentNotTeamInCourse" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
         FROM student,klass_student
-        WHERE klass_student.course_id=#{courseId} and klass_student.student_id=student.id and klass_student.team_id=null
+        WHERE klass_student.course_id=#{courseId} and klass_student.student_id=student.id and klass_student.team_id is null
     </select>
 
     <insert id="insertStudent">
