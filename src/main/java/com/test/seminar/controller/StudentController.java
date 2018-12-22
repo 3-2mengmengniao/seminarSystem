@@ -138,16 +138,14 @@ public class StudentController {
 
     @RequestMapping(value = "/course/seminarList")
     public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
-        List<Round> roundList= roundService.getRoundByCourseId(courseId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<Round> roundList= course.getRoundList();
         model.addAttribute("roundList",roundList);
-        System.out.println(roundList.get(0).getSeminarInfoList().get(0).getRegistrationEndTime());
-//        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
-//        model.addAttribute("seminarList",seminarList);
+        System.out.println(roundList.get(0).getSeminarInfoList().size());
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         model.addAttribute("studentId",studentId);
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
         CourseClass myClass = courseClassService.getCourseClassByStudentIdAndCourseId(studentId, courseId);
         model.addAttribute("class",myClass);
         return "student/course/seminarList";

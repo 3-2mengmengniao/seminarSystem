@@ -12,7 +12,6 @@
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
-        <id property="id" column="id"/>
         <result property="presentationScore" column="presentation_score"/>
         <result property="questionScore" column="question_score"/>
         <result property="reportScore" column="report_score"/>
