@@ -18,7 +18,7 @@
         <result property="presentationScore" column="presentation_score"/>
         <result property="questionScore" column="question_score"/>
         <result property="reportScore" column="report_score"/>
-        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{round_id,team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_score.round_id,teamId=round_score.team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -80,7 +80,7 @@
     </delete>
 
     <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
-        select klass_serial,team_serial,total_score,presentation_score,question_score,report_score
+        select round_score.round_id,round_score.team_id,klass_serial,team_serial,total_score,presentation_score,question_score,report_score
         from round_score,round,klass,team
         where round.id=#{roundId} and team.course_id=round.course_id and team.klass_id=klass.id and round_score.round_id=#{roundId}
     </select>
