@@ -32,18 +32,19 @@ public class SeminarDaoImpl implements SeminarDao {
     PresentationMapper presentationMapper;
 
     @Override
-    public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
+    public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
         SeminarInfo seminarInfo = seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId);
-        if(seminarInfo==null) {
+        if (seminarInfo == null) {
             throw new SeminarInfoNotFoundException();
         }
         seminarInfo.setRoundSerial(roundMapper.getRoundSerialBySeminarInfoId(seminarInfoId));
         return seminarInfo;
     }
+
     @Override
-    public SeminarControl getSeminarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
-        SeminarControl seminarControl = seminarMapper.getSeminarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
-        if (seminarControl==null) {
+    public SeminarControl getSeminarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
+        SeminarControl seminarControl = seminarMapper.getSeminarControlByClassIdAndSeminarInfo(classId, seminarInfoId);
+        if (seminarControl == null) {
             throw new SeminarControlNotFoundException();
         }
         addPresentation(seminarControl);
@@ -56,7 +57,7 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public SeminarInfo getSeminarInfoBySeminarNameAndCourseId(String seminarName,BigInteger courseId){
+    public SeminarInfo getSeminarInfoBySeminarNameAndCourseId(String seminarName, BigInteger courseId) {
         return seminarMapper.getSeminarInfoBySeminarNameAndCourseId(seminarName, courseId);
     }
 
@@ -68,21 +69,21 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId,BigInteger courseId)throws RepetitiveRecordException {
-        seminarMapper.insertSeminarInfo(seminarInfo,roundId,courseId);
+    public void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger roundId, BigInteger courseId) throws RepetitiveRecordException {
+        seminarMapper.insertSeminarInfo(seminarInfo, roundId, courseId);
     }
 
     @Override
-    public void insertSeminarControl(SeminarControl seminarControl,BigInteger courseClassId,BigInteger seminarInfoId) {
-        seminarMapper.insertSeminarControl(seminarControl,courseClassId,seminarInfoId);
+    public void insertSeminarControl(SeminarControl seminarControl, BigInteger courseClassId, BigInteger seminarInfoId) {
+        seminarMapper.insertSeminarControl(seminarControl, courseClassId, seminarInfoId);
     }
 
     @Override
-    public void updateSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException {
-        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId())==null) {
+    public void updateSeminarInfo(SeminarInfo seminarInfo, BigInteger roundId) throws SeminarInfoNotFoundException {
+        if (seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfo.getId()) == null) {
             throw new SeminarInfoNotFoundException();
         }
-        seminarMapper.updateSeminarInfo(seminarInfo,roundId);
+        seminarMapper.updateSeminarInfo(seminarInfo, roundId);
     }
 
     @Override
@@ -91,8 +92,8 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
-        if(seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId)==null) {
+    public void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
+        if (seminarMapper.getSeminarInfoBySeminarInfoId(seminarInfoId) == null) {
             throw new SeminarInfoNotFoundException();
         }
         seminarMapper.deleteSeminarInfoBySeminarInfoId(seminarInfoId);
@@ -105,12 +106,7 @@ public class SeminarDaoImpl implements SeminarDao {
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarControlId(BigInteger seminarControlId) {
-        return seminarMapper.getSeminarInfoBySeminarControlId( seminarControlId);
-    }
-
-    @Override
-    public SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId) {
-        return seminarMapper.getSeminarScoreBySeminarScoreId(seminarScoreId);
+        return seminarMapper.getSeminarInfoBySeminarControlId(seminarControlId);
     }
 
     @Override
@@ -120,7 +116,7 @@ public class SeminarDaoImpl implements SeminarDao {
 
     @Override
     public SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId, BigInteger teamId) {
-        return seminarMapper.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
+        return seminarMapper.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId, teamId);
     }
 
     @Override
@@ -129,25 +125,25 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void insertSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId) {
-        seminarMapper.insertSeminarScore(seminarScore,seminarControlId,teamId);
+    public void insertSeminarScore(SeminarScore seminarScore, BigInteger seminarControlId, BigInteger teamId) {
+        seminarMapper.insertSeminarScore(seminarScore, seminarControlId, teamId);
     }
 
     @Override
     public void updateSeminarScore(SeminarScore seminarScore, BigInteger seminarControlId, BigInteger teamId) {
-        seminarMapper.updateSeminarScore(seminarScore,seminarControlId,teamId);
+        seminarMapper.updateSeminarScore(seminarScore, seminarControlId, teamId);
     }
 
     @Override
-    public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId) {
-        seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarControlId,teamId);
+    public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId, BigInteger teamId) {
+        seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarControlId, teamId);
     }
 
-    private void addPresentation(SeminarControl seminarControl){
-        List<Presentation> presentationList= presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
-        List<Presentation> presentationListReconstruct=new ArrayList();
-        for(Presentation presentation:presentationList){
-            presentationListReconstruct.add(presentation.getTeamOrder(),presentation);
+    private void addPresentation(SeminarControl seminarControl) {
+        List<Presentation> presentationList = presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
+        List<Presentation> presentationListReconstruct = new ArrayList();
+        for (Presentation presentation : presentationList) {
+            presentationListReconstruct.add(presentation.getTeamOrder(), presentation);
         }
         seminarControl.setPresentationList(presentationListReconstruct);
     }

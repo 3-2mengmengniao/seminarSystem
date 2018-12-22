@@ -103,13 +103,6 @@ public interface SeminarDao {
 
     /**
      *
-     * @param seminarScoreId
-     * @return
-     */
-    SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
-
-    /**
-     *
      * @param seminarControlId
      * @return
      */
