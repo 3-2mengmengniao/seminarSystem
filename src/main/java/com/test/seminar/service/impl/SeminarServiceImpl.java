@@ -43,7 +43,7 @@ public class SeminarServiceImpl implements SeminarService {
             round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
             roundId=round.getId();
         }
-        seminarDao.insertSeminarInfo(seminarInfo,roundId);
+        seminarDao.insertSeminarInfo(seminarInfo,roundId,courseId);
         seminarInfo = seminarDao.getSeminarInfoBySeminarNameAndCourseId(seminarInfo.getSeminarName(),courseId);
         List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
         for(CourseClass courseClass:courseClassList){

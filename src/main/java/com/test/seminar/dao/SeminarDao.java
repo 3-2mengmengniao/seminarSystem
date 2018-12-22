@@ -65,7 +65,7 @@ public interface SeminarDao {
      * @param seminarInfo
      * @return
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId,BigInteger courseId)throws RepetitiveRecordException;
 
     /**
      *

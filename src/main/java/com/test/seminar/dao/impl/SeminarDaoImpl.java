@@ -1,12 +1,11 @@
 package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.SeminarDao;
-import com.test.seminar.entity.SeminarControl;
-import com.test.seminar.entity.SeminarInfo;
-import com.test.seminar.entity.SeminarScore;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
+import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.RoundMapper;
 import com.test.seminar.mapper.SeminarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,10 @@ import java.util.List;
 public class SeminarDaoImpl implements SeminarDao {
     @Autowired
     SeminarMapper seminarMapper;
+    @Autowired
     RoundMapper roundMapper;
+    @Autowired
+    CourseMapper courseMapper;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException {
@@ -59,8 +61,8 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId)throws RepetitiveRecordException {
-        seminarMapper.insertSeminarInfo(seminarInfo,roundId);
+    public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger roundId,BigInteger courseId)throws RepetitiveRecordException {
+        seminarMapper.insertSeminarInfo(seminarInfo,roundId,courseId);
     }
 
     @Override

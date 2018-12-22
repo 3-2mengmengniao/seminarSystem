@@ -61,7 +61,7 @@
     <update id="updateSeminarInfo">
         update seminar
         <set>
-            <if test="#{roundId}!=null">
+            <if test="roundId!=null">
                 round_id=#{roundId},
             </if>
             <if test="seminarInfo.seminarName!=null">

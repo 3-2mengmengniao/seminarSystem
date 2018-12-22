@@ -265,6 +265,7 @@ public class TeacherController {
         model.addAttribute("course",course);
         List<Round> roundList= course.getRoundList();
         model.addAttribute("roundList",roundList);
+        System.out.println(roundList.get(0).getSeminarInfoList().size());
         List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
         model.addAttribute("courseClassList",courseClasses);
         return "teacher/course/seminarList";
