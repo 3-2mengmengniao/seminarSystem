@@ -135,17 +135,13 @@ public interface SeminarMapper {
      *
      * @param seminarScore
      */
-    void insertSeminarScore(@Param("seminarScore")SeminarScore seminarScore);
+    void insertSeminarScore(@Param("seminarScore")SeminarScore seminarScore,@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
     /**
      *
      * @param seminarScore
      */
-    void updateSeminarScore(@Param("seminarScore")SeminarScore seminarScore);
+    void updateSeminarScore(@Param("seminarScore")SeminarScore seminarScore,@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
-    /**
-     *
-     * @param seminarScoreId
-     */
-    void deleteSeminarScoreBySeminarScoreId(@Param("seminarScoreId")BigInteger seminarScoreId);
+    void deleteSeminarScoreBySeminarScoreId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 }

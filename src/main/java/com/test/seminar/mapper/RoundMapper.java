@@ -98,13 +98,13 @@ public interface RoundMapper {
      *
      * @param roundScore
      */
-    void updateRoundScore(@Param("roundScore")RoundScore roundScore);
+    void updateRoundScore(@Param("roundScore")RoundScore roundScore,@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
 
     /**
      *
-     * @param roundScoreId
+     * @param roundId
      */
-    void deleteRoundScoreByRoundScoreId(@Param("roundScoreId")BigInteger roundScoreId);
+    void deleteRoundScoreByRoundScoreId(@Param("roundId")BigInteger roundId);
 
     /**
      *

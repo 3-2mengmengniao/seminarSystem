@@ -78,13 +78,13 @@ public interface RoundDao {
      *
      * @param roundScore
      */
-    void updateRoundScore(RoundScore roundScore);
+    void updateRoundScore(RoundScore roundScore,BigInteger roundId,BigInteger teamId);
 
     /**
      *
-     * @param roundScoreId
+     * @param roundId
      */
-    void deleteRoundScoreByRoundScoreId(BigInteger roundScoreId);
+    void deleteRoundScoreByRoundId(BigInteger roundId);
 
     /**
      *

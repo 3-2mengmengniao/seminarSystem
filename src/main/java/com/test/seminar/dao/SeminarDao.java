@@ -134,17 +134,14 @@ public interface SeminarDao {
      *
      * @param seminarScore
      */
-    void insertSeminarScore(SeminarScore seminarScore);
+    void insertSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId);
+
+    void updateSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId);
 
     /**
      *
-     * @param seminarScore
+     * @param seminarControlId
+     * @param teamId
      */
-    void updateSeminarScore(SeminarScore seminarScore);
-
-    /**
-     *
-     * @param seminarScoreId
-     */
-    void deleteSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
+    void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId);
 }

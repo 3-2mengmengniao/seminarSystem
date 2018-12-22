@@ -79,13 +79,13 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
-    public void updateRoundScore(RoundScore roundScore) {
-        roundMapper.updateRoundScore(roundScore);
+    public void updateRoundScore(RoundScore roundScore,BigInteger roundId,BigInteger teamId) {
+        roundMapper.updateRoundScore(roundScore,roundId,teamId);
     }
 
     @Override
-    public void deleteRoundScoreByRoundScoreId(BigInteger roundScoreId) {
-        roundMapper.deleteRoundScoreByRoundScoreId(roundScoreId);
+    public void deleteRoundScoreByRoundId(BigInteger roundId) {
+        roundMapper.deleteRoundScoreByRoundScoreId(roundId);
     }
 
     @Override

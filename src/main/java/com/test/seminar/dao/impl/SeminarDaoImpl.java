@@ -120,17 +120,17 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void insertSeminarScore(SeminarScore seminarScore) {
-        seminarMapper.insertSeminarScore(seminarScore);
+    public void insertSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId) {
+        seminarMapper.insertSeminarScore(seminarScore,seminarControlId,teamId);
     }
 
     @Override
-    public void updateSeminarScore(SeminarScore seminarScore) {
-        seminarMapper.updateSeminarScore(seminarScore);
+    public void updateSeminarScore(SeminarScore seminarScore, BigInteger seminarControlId, BigInteger teamId) {
+        seminarMapper.updateSeminarScore(seminarScore,seminarControlId,teamId);
     }
 
     @Override
-    public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarScoreId) {
-        seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarScoreId);
+    public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId) {
+        seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarControlId,teamId);
     }
 }
