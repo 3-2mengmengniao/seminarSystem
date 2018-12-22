@@ -210,6 +210,26 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding:0 10px;">
+                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div class="form-group floating-control-group formFieldWrap">
+                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 10px;">
+                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div class="form-group floating-control-group formFieldWrap">
+                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <div id="third" style="margin-left:10%;">
@@ -609,7 +629,7 @@
         -webkit-justify-content: left;
         -ms-flex-pack: left;
         justify-content: left;
-        overflow:auto;
+        overflow:hidden;
     }
 
     #left-side {
@@ -706,7 +726,7 @@
         height: 350px;
         margin-top: 25%;
         width: 90%;
-        overflow: auto;
+        overflow: hidden;
     }
     #right-side #first, #right-side #second, #right-side #third, #right-side #fourth {
         position: absolute;
