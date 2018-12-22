@@ -45,6 +45,8 @@ public interface StudentDao {
      */
     List<Student> getAllStudent();
 
+    List<Student> getStudentNotTeamInCourse(BigInteger courseId);
+
     /**
      * 创建新的学生账户
      *

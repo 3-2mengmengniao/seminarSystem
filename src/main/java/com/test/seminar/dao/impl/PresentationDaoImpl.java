@@ -19,8 +19,8 @@ public class PresentationDaoImpl implements PresentationDao {
     PresentationMapper presentationMapper;
 
     @Override
-    public void insertPresentation(Presentation presentation, BigInteger courseClassId, BigInteger seminarControlId) {
-        presentationMapper.insertPresentation(presentation,courseClassId,seminarControlId);
+    public void insertPresentation(Presentation presentation, BigInteger seminarControlId,BigInteger teamId) {
+        presentationMapper.insertPresentation(presentation,seminarControlId,teamId);
     }
 
     @Override

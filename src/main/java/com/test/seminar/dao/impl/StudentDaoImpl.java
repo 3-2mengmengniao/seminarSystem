@@ -49,6 +49,11 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public List<Student> getStudentNotTeamInCourse(BigInteger courseId) {
+        return studentMapper.getStudentNotTeamInCourse(courseId);
+    }
+
+    @Override
     public List<Student> getAllStudent() {
         return studentMapper.getAllStudent();
     }

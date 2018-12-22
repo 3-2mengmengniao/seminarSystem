@@ -19,6 +19,10 @@ public class Presentation {
     private String pptName;
     private String pptUrl;
 
+    public Presentation(){
+        this.present=0;
+    }
+
     public BigInteger getId() {return id; }
 
     public Team getTeam() { return team; }

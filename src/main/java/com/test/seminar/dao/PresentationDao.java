@@ -13,10 +13,10 @@ public interface PresentationDao {
     /**
      *
      * @param presentation
-     * @param courseClassId
+     * @param teamId
      * @param seminarControlId
      */
-    void insertPresentation(Presentation presentation, BigInteger courseClassId,BigInteger seminarControlId);
+    void insertPresentation(Presentation presentation, BigInteger seminarControlId,BigInteger teamId);
 
     /**
      *

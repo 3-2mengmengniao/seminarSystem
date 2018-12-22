@@ -26,7 +26,7 @@
 
     <insert id="insertPresentation">
         insert into attendance(klass_seminar_id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url)
-        values(#{seminarControlId},#{presentation.team.id},#{presentation.teamOrder},#{presentation.present},#{presentation.reportName},#{presentation.reportUrl},#{presentation.pptName},#{presentation.pptUrl})
+        values(#{seminarControlId},#{teamId},#{presentation.teamOrder},#{presentation.present},#{presentation.reportName},#{presentation.reportUrl},#{presentation.pptName},#{presentation.pptUrl})
     </insert>
 
     <update id="updatePresentation">

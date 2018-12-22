@@ -49,4 +49,6 @@ public interface StudentService {
     Student getStudentByAccount(String acoount)throws UserNotFoundException;
 
     List<Student> getAllStudent();
+
+    List<Student> getStudentNotTeamInCourse(BigInteger courseId);
 }

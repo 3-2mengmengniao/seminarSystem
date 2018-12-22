@@ -33,6 +33,12 @@
         WHERE klass_student.klass_id=#{courseClassId} and klass_student.student_id=student.id
     </select>
 
+    <select id="getStudentNotTeamInCourse" resultMap="studentResultMap">
+        SELECT id,account,password,is_active,student_name,email
+        FROM student,klass_student
+        WHERE klass_student.course_id=#{courseId} and klass_student.student_id=student.id and klass_student.team_id=null
+    </select>
+
     <insert id="insertStudent">
         insert into student(account,password,is_active,student_name,email)
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email})

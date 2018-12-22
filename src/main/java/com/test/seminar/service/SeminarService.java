@@ -72,4 +72,6 @@ public interface SeminarService {
      * @return
      */
     List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
+
+    void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId);
 }
