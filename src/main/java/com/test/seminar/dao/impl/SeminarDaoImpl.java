@@ -112,11 +112,6 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId) {
-        return seminarMapper.getSeminarScoreBySeminarScoreId(seminarScoreId);
-    }
-
-    @Override
     public SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId) {
         return seminarMapper.getSeminarScoreBySeminarControlId(seminarControlId);
     }
@@ -144,5 +139,10 @@ public class SeminarDaoImpl implements SeminarDao {
     @Override
     public void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId) {
         seminarMapper.deleteSeminarScoreBySeminarScoreId(seminarControlId,teamId);
+    }
+
+    @Override
+    public List<SeminarScore> getSeminarScoreByRoundId(BigInteger roundId){
+        return seminarMapper.getSeminarScoreByRoundId(roundId);
     }
 }

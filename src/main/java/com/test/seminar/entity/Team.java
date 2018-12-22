@@ -18,8 +18,6 @@ public class Team {
     private BigInteger leader_id;
     private List<Student> memberList;
     private List<Question> questionList;
-    private List<RoundScore> roundScoreList;
-    private List<SeminarScore> seminarScoreList;
 
     public BigInteger getId() {
         return id;
@@ -53,14 +51,6 @@ public class Team {
         this.status = status;
     }
 
-    public List<RoundScore> getRoundScoreList() { return roundScoreList; }
-
-    public void setRoundScoreList(List<RoundScore> roundScoreList) { this.roundScoreList = roundScoreList; }
-
-    public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
-
-    public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
-
     public List<Question> getQuestionList() { return questionList; }
 
     public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
@@ -72,6 +62,10 @@ public class Team {
     public CourseClass getCourseClass() { return courseClass; }
 
     public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
+
+    public BigInteger getLeader_id() { return leader_id; }
+
+    public void setLeader_id(BigInteger leader_id) { this.leader_id = leader_id; }
 
     @Override
     public boolean equals(Object o) {

@@ -3,10 +3,15 @@ package com.test.seminar.entity;
 import java.math.BigInteger;
 
 public class SeminarScore {
+    private BigInteger seminarInfoName;
     private double totalScore;
     private double presentationScore;
     private double questionScore;
     private double reportScore;
+
+    public BigInteger getSeminarInfoName() { return seminarInfoName; }
+
+    public void setSeminarInfoName(BigInteger seminarInfoName) { this.seminarInfoName = seminarInfoName; }
 
     public double getTotalScore() {
         return totalScore;

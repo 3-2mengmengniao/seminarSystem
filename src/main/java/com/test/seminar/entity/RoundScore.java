@@ -1,8 +1,12 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public class RoundScore {
+    private int  courseClassSerial;
+    private int teamSerial;
+    private List<SeminarScore> seminarScoreList;
     private double total_score;
     private double presentation_score;
     private double question_score;
@@ -39,4 +43,16 @@ public class RoundScore {
     public void setReport_score(double report_score) {
         this.report_score = report_score;
     }
+
+    public int getCourseClassSerial() { return courseClassSerial; }
+
+    public void setCourseClassSerial(int courseClassSerial) { this.courseClassSerial = courseClassSerial; }
+
+    public int getTeamSerial() { return teamSerial; }
+
+    public void setTeamSerial(int teamSerial) { this.teamSerial = teamSerial; }
+
+    public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
+
+    public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
 }

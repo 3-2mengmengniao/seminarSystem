@@ -104,13 +104,6 @@ public interface SeminarMapper {
 
     /**
      *
-     * @param seminarScoreId
-     * @return
-     */
-    SeminarScore getSeminarScoreBySeminarScoreId(@Param("seminarScoreId")BigInteger seminarScoreId);
-
-    /**
-     *
      * @param seminarControlId
      * @return
      */
@@ -146,4 +139,6 @@ public interface SeminarMapper {
     void updateSeminarScore(@Param("seminarScore")SeminarScore seminarScore,@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
     void deleteSeminarScoreBySeminarScoreId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
+
+    List<SeminarScore> getSeminarScoreByRoundId(@Param("roundId")BigInteger roundId);
 }

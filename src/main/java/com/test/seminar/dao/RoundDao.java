@@ -55,18 +55,10 @@ public interface RoundDao {
 
     /**
      *
-     * @param roundScoreId
-     * @return
-     */
-    RoundScore getRoundScoreByRoundId(BigInteger roundScoreId);
-
-    /**
-     *
      * @param roundId
-     * @param teamId
      * @return
      */
-    RoundScore getRoundScoreByRoundIdAndTeamId(BigInteger roundId,BigInteger teamId);
+    List<RoundScore> getRoundScoreByRoundId(BigInteger roundId);
 
     /**
      *

@@ -12,9 +12,13 @@
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
+        <result property="courseClassSerial" column="klass_serial"/>
+        <result property="teamSerial" column="team_serial"/>
+        <result property="totalScore" column="total_score"/>
         <result property="presentationScore" column="presentation_score"/>
         <result property="questionScore" column="question_score"/>
         <result property="reportScore" column="report_score"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{round_id,team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundId"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -40,7 +44,6 @@
       FROM round
       WHERE course_id=#{courseId} and round_serial=#{roundSerial}
     </select>
-
 
     <select id="getMaxRoundSerialByCourseId" resultType="Integer">
         SELECT MAX(round_serial)
@@ -77,19 +80,13 @@
     </delete>
 
     <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
-        select totalScore,presentationScore,questionScore,reportScore
-        from round_score
-        where round_id=#{roundId}
-    </select>
-
-    <select id="getRoundScoreByRoundIdAndTeamId" resultMap="RoundScoreResultMap">
-        select totalScore,presentationScore,questionScore,reportScore
-        from round_score
-        where round_id=#{roundId} and team_id=#{teamId}
+        select klass_serial,team_serial,total_score,presentation_score,question_score,report_score
+        from round_score,round,klass,team
+        where round.id=#{roundId} and team.course_id=round.course_id and team.klass_id=klass.id and round_score.round_id=#{roundId}
     </select>
 
     <select id="getRoundScoreByTeamId" resultMap="RoundScoreResultMap">
-        select totalScore,presentationScore,questionScore,reportScore
+        select total_score,presentation_score,question_score,report_score
         from round_score
         where team_id=#{teamId}
     </select>

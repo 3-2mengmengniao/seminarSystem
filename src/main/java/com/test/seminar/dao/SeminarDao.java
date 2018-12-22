@@ -103,13 +103,6 @@ public interface SeminarDao {
 
     /**
      *
-     * @param seminarScoreId
-     * @return
-     */
-    SeminarScore getSeminarScoreBySeminarScoreId(BigInteger seminarScoreId);
-
-    /**
-     *
      * @param seminarControlId
      * @return
      */
@@ -144,4 +137,11 @@ public interface SeminarDao {
      * @param teamId
      */
     void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId);
+
+    /**
+     *
+     * @param roundId
+     * @return
+     */
+    List<SeminarScore> getSeminarScoreByRoundId(BigInteger roundId);
 }

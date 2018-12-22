@@ -21,6 +21,7 @@
     </resultMap>
     
     <resultMap id="seminarScoreResultMap" type="com.test.seminar.entity.SeminarScore">
+        <result property="seminarInfoName" column="seminar_name"/>
         <result property="totalScore" column="total_score"/>
         <result property="presentationScore" column="presentation_score"/>
         <result property="questionScore" column="question_score"/>
@@ -127,12 +128,6 @@
         where klass_id=#{classId} and seminar_id=#{seminarInfoId}
     </select>
 
-    <select id="getSeminarScoreBySeminarScoreId" resultMap="seminarScoreResultMap">
-    select totalScore,presentationScore,questionScore,reportScore
-    from seminar_score
-    where id=#{seminarScoreId}
-    </select>
-
     <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
         select totalScore,presentationScore,questionScore,reportScore
         from seminar_score
@@ -150,7 +145,13 @@
         from seminar_score
         where klass_seminar_id=#{seminarControlId}
     </select>
-    
+
+    <select id="getSeminarScoreByRoundId" resultMap="seminarScoreResultMap">
+        select seminar_name,totalScore,presentationScore,questionScore,reportScore
+        from seminar,klass_seminar,seminar_score
+        where seminar.round_id=#{roundId} and klass_seminar.seminar_id=seminar.id and seminar_score.klass_seminar_id=klass_seminar.id
+    </select>
+
     <insert id="insertSeminarScore">
         insert into seminar_score(klass_seminar_id,team_id,total_score,presentation_score,question_score,report_score)
         values (#{seminarControlId},#{teamId},#{seminarScore.totalScore},#{seminarScore.presentationScore},#{seminarScore.questionScore},#{seminarScore.reportScore})

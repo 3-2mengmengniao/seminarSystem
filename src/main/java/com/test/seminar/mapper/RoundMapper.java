@@ -66,20 +66,13 @@ public interface RoundMapper {
      */
     void deleteRoundByRoundId(@Param("roundId")BigInteger roundId);
 
-    /**
-     *
-     * @param roundScoreId
-     * @return
-     */
-    RoundScore getRoundScoreByRoundId(@Param("roundScoreId")BigInteger roundScoreId);
 
     /**
-     *
+     * 获取某轮次下所有队伍的该轮成绩
      * @param roundId
-     * @param teamId
      * @return
      */
-    RoundScore getRoundScoreByRoundIdAndTeamId(@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
+    List<RoundScore> getRoundScoreByRoundId(@Param("roundId")BigInteger roundId);
 
     /**
      *
