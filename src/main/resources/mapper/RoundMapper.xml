@@ -33,8 +33,8 @@
         WHERE id=#{roundId}
     </select>
 
-    <select id="getRoundSerialBySeminarInfoId" resultMap="roundResultMap">
-    select round.round_serial
+    <select id="getRoundSerialBySeminarInfoId" resultType="Integer">
+    select round_serial
     from round,seminar
     where seminar.id=#{seminarInfoId} and seminar.round_id=round.id
     </select>

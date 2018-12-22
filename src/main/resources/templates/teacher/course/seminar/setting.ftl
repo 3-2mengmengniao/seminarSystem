@@ -51,7 +51,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">修改讨论课</h1>
-    <a href="/teacher/course/seminarList?courseId=${seminar.courseId}" class="button-close">x</a>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,7 +59,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course/seminar/setting?seminarId=${seminar.id}" method="post" id="contactForm" name="${seminar.courseId}">
+        <form class="layui-form contactForm" action="/teacher/course/seminar/setting?seminarId=${seminar.id}" method="post" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#c9302c;">修改失败！</p>

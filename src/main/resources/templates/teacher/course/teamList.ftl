@@ -90,10 +90,11 @@
             <div class="layui-colla-item" style="border:none;">
                 <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">组长：${team.memberList[0]}</p>
-                    <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
+                    <p class="text-center">组长：</p>
+                    <p class="text-center">${team.memberList[0].studentName}&nbsp&nbsp&nbsp${team.memberList[0].account}</p>
+                    <p class="text-center">成员： </p>
                     <#list team.memberList as student>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
+                    <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
                     <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
                     </#list>
                 </div>
@@ -108,6 +109,18 @@
                     <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
                 <#--</div>-->
             <#--</div>-->
+        </div>
+    </div>
+</div>
+<div class="center-navigation">
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">未组队学生</h2>
+            <div class="layui-colla-content">
+                    <#list noTeamStudentList as student>
+                        <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
+                    </#list>
+            </div>
         </div>
     </div>
 </div>

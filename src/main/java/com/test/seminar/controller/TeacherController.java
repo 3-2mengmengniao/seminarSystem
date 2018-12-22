@@ -173,8 +173,10 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course/seminar/setting",method = GET)
-    public String seminarSetting(BigInteger seminarId,Model model) {
+    public String seminarSetting(BigInteger courseId,BigInteger seminarId,Model model) {
         SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         model.addAttribute("seminar",seminarInfo);
         return "teacher/course/seminar/setting";
     }
@@ -246,7 +248,11 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course/grade")
-    public String groupScore(Model model) {
+    public String groupScore(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<Team> teamList=teamService.getTeamByCourseId(courseId);
+        model.addAttribute("teamList",teamList);
         return "teacher/course/grade";
     }
 
@@ -301,22 +307,8 @@ public class TeacherController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
-//        List<List<Student>> studentList=new LinkedList<List<Student>>();
-//        List<Student> leaderList=new ArrayList();
-//        List<CourseClass> classList=new ArrayList<>();
-//        for( int i = 0 ; i < teamList.size() ; i++) {
-//            BigInteger teamId=teamList.get(i).getId();
-//            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
-//            studentList.add(teamStudents);
-//            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
-//            leaderList.add(leader);
-//            BigInteger classId=teamList.get(i).getClassId();
-//            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
-//            classList.add(teamClass);
-//        }
-//        model.addAttribute("studentList",studentList);
-//        model.addAttribute("leaderList",leaderList);
-//        model.addAttribute("classList",classList);
+        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
+        model.addAttribute("noTeamStudentList",noTeamStudentList);
         return "teacher/course/teamList";
     }
 
@@ -324,6 +316,7 @@ public class TeacherController {
     public String seminarInfo(BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
         model.addAttribute("seminarControl",seminarControl);
+        System.out.println(seminarControl.getSeminarStatus());
         return "teacher/course/seminar/info";
     }
 
@@ -348,6 +341,14 @@ public class TeacherController {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/score";
+    }
+
+    @RequestMapping(value="/course/seminar/progressing")
+    public String progressing(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        seminarControl.setSeminarStatus(1);
+        model.addAttribute("seminarControl",seminarControl);
+        return "teacher/course/seminar/progressing";
     }
 
     @RequestMapping(value="/report_download")

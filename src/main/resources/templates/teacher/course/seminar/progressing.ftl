@@ -16,23 +16,16 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/styles/bootstrap-float-label.css">
-
-
     <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
-    <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
     <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
     <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
 
 </head>
 <body>
@@ -51,7 +44,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">OOAD</h1>
-            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -76,62 +69,30 @@
         </div>
     </div>
 </div>
-<div class="distance4"></div>
-<div class="distance2"></div>
-<div class="distance2"></div>
-<div class="center-navigation">
+<div>
     <div id="wrapper">
         <div class="center-title">
             <h1 class="thick">业务流程分析</h1>
-            <div style="height:20px;"></div>
             <p style="color:#009688;font-size:17px;margin-left:-33px;">1-1组已展示</p>
             <div>
                 <span id="runner"></span><br><br>
                 <div>
-                    <div style="z-index: 999;" id="timeMonitor"><img id="startBtn" src="/images/开始.png"></div>
+                    <div style="z-index: 999;" id="timeMonitor"><img id="startBtn" src="images/开始.png"></div>
                 </div>
             </div>
         </div>
         <div id="left-side">
             <ul>
-                <li class="group1 active">
-                    <div class="icon active">
-                        <svg viewBox="0 0 32 32">
-                            <g filter="">
-                                <use xlink:href="#group1-1"></use>
-                            </g>
-                        </svg>
-                    </div>
+                <li class="group active">
                     1-1
                 </li>
-                <li class="group2">
-                    <div class="icon">
-                        <svg viewBox="0 0 32 32">
-                            <g filter="">
-                                <use xlink:href="#group1-2"></use>
-                            </g>
-                        </svg>
-                    </div>
+                <li class="group">
                     1-2
                 </li>
-                <li class="group3">
-                    <div class="icon">
-                        <svg viewBox="0 0 32 32">
-                            <g filter="">
-                                <use xlink:href="#group1-3"></use>
-                            </g>
-                        </svg>
-                    </div>
+                <li class="group">
                     1-3
                 </li>
-                <li class="group4">
-                    <div class="icon">
-                        <svg viewBox="0 0 32 32">
-                            <g filter="">
-                                <use xlink:href="#group1-4"></use>
-                            </g>
-                        </svg>
-                    </div>
+                <li class="group">
                     1-4
                 </li>
             </ul>
@@ -140,7 +101,7 @@
             <div id="line" class="one"></div>
         </div>
         <div id="right-side">
-            <div id="first" class="active" style="margin-left:10%;">
+            <div class="group active" >
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <div class="form-group floating-control-group formFieldWrap">
@@ -174,9 +135,20 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding:0 10px;">
+                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div class="form-group floating-control-group formFieldWrap">
+                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                            </div>
+                        </td>
+                    </tr>
                 </table>
+                <div style="height:20px;"></div>
             </div>
-            <div id="second" style="margin-left:10%;">
+            <div class="group" >
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <div class="form-group floating-control-group formFieldWrap">
@@ -210,37 +182,18 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
                 </table>
+                <div style="height:20px;"></div>
             </div>
-            <div id="third" style="margin-left:10%;">
+            <div class="group" >
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <div class="form-group floating-control-group formFieldWrap">
-                    <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
+                    <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
                 </div>
-                <div style="height:10px;"></div>
+                <div style="height:20px;"></div>
                 <h1>提问</h1>
-                <a style="font-size:16px;margin-top:4px;">当前已有5人提问</a>
+                <a style="font-size:16px;">当前已有5人提问</a>
                 <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
                     <colgroup>
                         <col width="100">
@@ -252,7 +205,7 @@
                         </td>
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
                             </div>
                         </td>
                     </tr>
@@ -262,13 +215,14 @@
                         </td>
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:-20%;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
                             </div>
                         </td>
                     </tr>
                 </table>
+                <div style="height:20px;"></div>
             </div>
-            <div id="fourth" style="margin-left:10%;">
+            <div  class="group">
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <div class="form-group floating-control-group formFieldWrap">
@@ -302,19 +256,40 @@
                             </div>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding:0 10px;">
+                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div class="form-group floating-control-group formFieldWrap">
+                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 10px;">
+                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
+                        </td>
+                        <td style="padding:0 10px;">
+                            <div class="form-group floating-control-group formFieldWrap">
+                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                            </div>
+                        </td>
+                    </tr>
                 </table>
+                <div style="height:20px;"></div>
             </div>
         </div>
     </div>
-</div>
-<div style="height:290px;z-index:-1;"></div>
-<div class="center center-text ">
-    <div class="formSubmitButtonErrorsWrap">
-        <input type="submit" class="layui-btn"  style="margin-right:15%;font-size: 18px;line-height: 42px;height: 40px;" value="抽取提问" data-formId="contactForm"/>
-        <input id="restart" type="submit" class="layui-btn"  style="font-size: 18px;line-height: 42px;height: 40px;" value="下组展示" data-formId="contactForm"/>
+    <div class="center center-text ">
+        <div class="formSubmitButtonErrorsWrap">
+            <input type="submit" class="layui-btn"  style="margin-right:15%;font-size: 18px;line-height: 42px;height: 40px;" value="抽取提问" data-formId="contactForm"/>
+            <input id="restart" type="submit" class="layui-btn"  style="font-size: 18px;line-height: 42px;height: 40px;" value="下组展示" data-formId="contactForm"/>
+        </div>
     </div>
+    <div style="height:100px;z-index:-1;"></div>
 </div>
-<div style="height:100px;z-index:-1;"></div>
+
 <styles>
 
 </styles>
@@ -331,8 +306,55 @@
     });
 </script>
 <script>
+    $('li.group').click(function(){
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+        var groupIndex= $(this).index();
+        var allDiv= $('div.group');
+        $(allDiv).eq(groupIndex).css('margin-top','');
+        $(allDiv).eq(groupIndex).addClass('active');
+        $(allDiv).eq(groupIndex).siblings().removeClass('active');
+        $.each($(allDiv),function(){
+            if($(this).index()<groupIndex){
+                var divHeight=$(this).height();
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+            if($(this).index()>groupIndex){
+                var divHeight=$(this).height()-20;
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+        })
+    })
+
     $('#restart').click(function(){
         $('#runner').runner('reset');
+        var currentLi=$('li.group').filter('.active').next();
+        var groupIndex= $(currentLi).index();
+        if(groupIndex=='-1'){
+            var currentLi=$('li.group').eq(0);
+        }
+        $(currentLi).addClass('active');
+        $(currentLi).siblings().removeClass('active');
+        var groupIndex= $(currentLi).index();
+        var allDiv= $('div.group');
+        $(allDiv).eq(groupIndex).css('margin-top','');
+        $(allDiv).eq(groupIndex).addClass('active');
+        $(allDiv).eq(groupIndex).siblings().removeClass('active');
+        $.each($(allDiv),function(){
+            if($(this).index()<groupIndex){
+                var divHeight=$(this).height();
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+            if($(this).index()>groupIndex){
+                var divHeight=$(this).height()-20;
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+        })
+
     })
 
     $('#timeMonitor').click(function(){
@@ -340,12 +362,12 @@
         if(btnId=='startBtn'){
             $('#runner').runner('start');
             $(this).children('img').attr('id','stopBtn');
-            $(this).children('img').attr('src','/images/暂停.png');
+            $(this).children('img').attr('src','images/暂停.png');
         }
         if(btnId=='stopBtn'){
             $('#runner').runner('stop');
             $(this).children('img').attr('id','startBtn');
-            $(this).children('img').attr('src','/images/开始.png');
+            $(this).children('img').attr('src','images/开始.png');
         }
     })
     $('.my-form-control').click(function(){
@@ -434,70 +456,70 @@
     //     $('#startBtn').removeClass('activeBtn');
     // });
 
-    $('.group1').click(function () {
-        $('.group1').addClass('active');
-        $('.group2').removeClass('active');
-        $('.group3').removeClass('active');
-        $('.group4').removeClass('active');
-        $('#line').addClass('one');
-        $('#line').removeClass('two');
-        $('#line').removeClass('three');
-        $('#line').removeClass('four');
-    });
-    $('.group2').click(function () {
-        $('.group2').addClass('active');
-        $('.group1').removeClass('active');
-        $('.group3').removeClass('active');
-        $('.group4').removeClass('active');
-        $('#line').addClass('two');
-        $('#line').removeClass('one');
-        $('#line').removeClass('three');
-        $('#line').removeClass('four');
-    });
-    $('.group3').click(function () {
-        $('.group3').addClass('active');
-        $('.group2').removeClass('active');
-        $('.group1').removeClass('active');
-        $('.group4').removeClass('active');
-        $('#line').addClass('three');
-        $('#line').removeClass('two');
-        $('#line').removeClass('one');
-        $('#line').removeClass('four');
-    });
-    $('.group4').click(function () {
-        $('.group4').addClass('active');
-        $('.group2').removeClass('active');
-        $('.group3').removeClass('active');
-        $('.group1').removeClass('active');
-        $('#line').addClass('four');
-        $('#line').removeClass('two');
-        $('#line').removeClass('three');
-        $('#line').removeClass('one');
-    });
-    $('.group1').click(function () {
-        $('#first').addClass('active');
-        $('#second').removeClass('active');
-        $('#third').removeClass('active');
-        $('#fourth').removeClass('active');
-    });
-    $('.group2').click(function () {
-        $('#first').removeClass('active');
-        $('#second').addClass('active');
-        $('#third').removeClass('active');
-        $('#fourth').removeClass('active');
-    });
-    $('.group3').click(function () {
-        $('#first').removeClass('active');
-        $('#second').removeClass('active');
-        $('#third').addClass('active');
-        $('#fourth').removeClass('active');
-    });
-    $('.group4').click(function () {
-        $('#first').removeClass('active');
-        $('#second').removeClass('active');
-        $('#third').removeClass('active');
-        $('#fourth').addClass('active');
-    });
+    // $('.group1').click(function () {
+    //     $('.group1').addClass('active');
+    //     $('.group2').removeClass('active');
+    //     $('.group3').removeClass('active');
+    //     $('.group4').removeClass('active');
+    //     $('#line').addClass('one');
+    //     $('#line').removeClass('two');
+    //     $('#line').removeClass('three');
+    //     $('#line').removeClass('four');
+    // });
+    // $('.group2').click(function () {
+    //     $('.group2').addClass('active');
+    //     $('.group1').removeClass('active');
+    //     $('.group3').removeClass('active');
+    //     $('.group4').removeClass('active');
+    //     $('#line').addClass('two');
+    //     $('#line').removeClass('one');
+    //     $('#line').removeClass('three');
+    //     $('#line').removeClass('four');
+    // });
+    // $('.group3').click(function () {
+    //     $('.group3').addClass('active');
+    //     $('.group2').removeClass('active');
+    //     $('.group1').removeClass('active');
+    //     $('.group4').removeClass('active');
+    //     $('#line').addClass('three');
+    //     $('#line').removeClass('two');
+    //     $('#line').removeClass('one');
+    //     $('#line').removeClass('four');
+    // });
+    // $('.group4').click(function () {
+    //     $('.group4').addClass('active');
+    //     $('.group2').removeClass('active');
+    //     $('.group3').removeClass('active');
+    //     $('.group1').removeClass('active');
+    //     $('#line').addClass('four');
+    //     $('#line').removeClass('two');
+    //     $('#line').removeClass('three');
+    //     $('#line').removeClass('one');
+    // });
+    // $('.group1').click(function () {
+    //     $('#first').addClass('active');
+    //     $('#second').removeClass('active');
+    //     $('#third').removeClass('active');
+    //     $('#fourth').removeClass('active');
+    // });
+    // $('.group2').click(function () {
+    //     $('#first').removeClass('active');
+    //     $('#second').addClass('active');
+    //     $('#third').removeClass('active');
+    //     $('#fourth').removeClass('active');
+    // });
+    // $('.group3').click(function () {
+    //     $('#first').removeClass('active');
+    //     $('#second').removeClass('active');
+    //     $('#third').addClass('active');
+    //     $('#fourth').removeClass('active');
+    // });
+    // $('.group4').click(function () {
+    //     $('#first').removeClass('active');
+    //     $('#second').removeClass('active');
+    //     $('#third').removeClass('active');
+    //     $('#fourth').addClass('active');
+    // });
 </script>
 <style type="text/css">
     #startBtn{
@@ -585,35 +607,9 @@
             font-weight:800;
         }
     }
-    .icon {
-        position: relative;
-        width: 32px;
-        height: 32px;
-        display: block;
-        fill: rgba(51, 51, 51, 0.5);
-        margin-right: 20px;
-        -webkit-transition: all .2s ease-out;
-        transition: all .2s ease-out;
-    }
-
-    .icon.active {
-        fill: #009688;
-    }
-
-    .icon.big {
-        width: 64px;
-        height: 64px;
-        fill: rgba(51, 51, 51, 0.5);
-    }
 
     #wrapper {
         width: 95%;
-        height: 490px;
-        position: absolute;
-        top: 30px;
-        bottom: 0;
-        left: 10px;
-        right: 10px;
         margin: auto;
         background-color: #fff;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
@@ -633,10 +629,10 @@
     }
 
     #left-side {
-        height: 70%;
-        width: 20%;
-        margin-left: -4%;
-        margin-top: 13%;
+        height: 100%;
+        width: 10%;
+        margin-left: 5%;
+        margin-top: -15%;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -649,6 +645,15 @@
         -webkit-justify-content: center;
         -ms-flex-pack: center;
         justify-content: center;
+    }
+
+    @media screen and  (min-width:768px){
+        #left-side {
+            height: 100%;
+            width: 10%;
+            margin-left:0;
+            margin-top: -10%;
+        }
     }
     #left-side ul li {
         padding-top: 10px;
@@ -681,7 +686,7 @@
 
     #border {
         height: 288px;
-        margin-top: 13%;
+        margin-top: -15%;
         width:1px;
         background-color: rgba(51, 51, 51, 0.2);
     }
@@ -723,18 +728,37 @@
     }
 
     #right-side {
-        height: 350px;
-        margin-top: 25%;
+        /*height: 350px;*/
+        margin-top: 28%;
         width: 90%;
-        overflow: hidden;
+        overflow:hidden;
     }
-    #right-side #first, #right-side #second, #right-side #third, #right-side #fourth {
-        position: absolute;
-        height: 380px;
+
+    @media screen and (min-width:768px) and (max-width:1024px){
+        #right-side {
+            /*height: 350px;*/
+            margin-top: 13%;
+            width: 90%;
+            overflow:hidden;
+        }
+    }
+
+    @media screen and (min-width:1024px){
+        #right-side {
+            /*height: 350px;*/
+            margin-top: 10%;
+            width: 90%;
+            overflow:hidden;
+        }
+    }
+    div.group{
+        /*position: absolute;*/
+        /* height: 380px; */
         width: 85%;
         -webkit-transition: all .6s ease-in-out;
         transition: all .6s ease-in-out;
         margin-top: -350px;
+        margin-left:10%;
         opacity: 0;
         display: -webkit-box;
         display: -webkit-flex;
@@ -754,18 +778,22 @@
         -ms-flex-direction: column;
         flex-direction: column;
     }
-    #right-side #first h1, #right-side #second h1, #right-side #third h1, #right-side #fourth h1 {
+    .active{
+        z-index:99;
+    }
+
+    #right-side h1 {
         font-weight: 500;
         font-size: 22px;
         color: #333;
     }
-    #right-side #first p, #right-side #second p, #right-side #third p, #right-side #fourth p {
+    #right-side p {
         color: #333;
         font-weight: 500;
         padding-left: 30px;
         padding-right: 30px;
     }
-    #right-side #first.active, #right-side #second.active, #right-side #third.active, #right-side #fourth.active {
+    div.group.active{
         margin-top: 0px;
         opacity: 1;
         -webkit-transition: all .6s ease-in-out;
@@ -773,4 +801,5 @@
     }
 </style>
 </body>
+
 </html>
