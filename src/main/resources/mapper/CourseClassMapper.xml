@@ -17,25 +17,25 @@
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        SELECT id,grade,klass_serial,klass_time,klass_location
         FROM klass
         WHERE id=#{courseClassId}
     </select>
 
     <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        SELECT id,grade,klass_serial,klass_time,klass_location
         FROM klass
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
-        SELECT klass.id,klass.course_id,grade,klass_serial,klass_time,klass_location
+        SELECT klass.id,grade,klass_serial,klass_time,klass_location
         FROM klass,klass_student
         WHERE klass.course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
 
     <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
-        select klass.id,klass.course_id,grade,klass_serial,klass_time,klass_location
+        select klass.id,grade,klass_serial,klass_time,klass_location
         from klass,team
         where team.id=#{teamId} and team.klass_id=klass.id
     </select>
