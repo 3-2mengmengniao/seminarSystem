@@ -10,7 +10,6 @@
     <resultMap id="presentationResultMap" type="com.test.seminar.entity.Presentation">
         <id property="id" column="id"/>
         <result property="seminarControlId" column="klass_seminar_id"/>
-        <result property="teamId" column="team_id"/>
         <result property="teamOrder" column="team_order"/>
         <result property="present" column="is_present"/>
         <result property="reportName" column="report_name"/>
@@ -22,7 +21,7 @@
     </resultMap>
 
     <select id="getPresentationBySeminarControlId" resultMap="presentationResultMap">
-        select id,klass_seminar_id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
+        select id,klass_seminar_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
         from  attendance
         where klass_seminar_id=#{seminarControlId}
     </select>

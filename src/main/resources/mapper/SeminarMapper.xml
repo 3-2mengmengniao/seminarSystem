@@ -129,7 +129,7 @@
     </select>
 
     <select id="getSeminarScoreBySeminarScoreId" resultMap="seminarScoreResultMap">
-    select id,totalScore,presentationScore,questionScore,reportScore
+    select totalScore,presentationScore,questionScore,reportScore
     from seminar_score
     where id=#{seminarScoreId}
     </select>
@@ -137,7 +137,7 @@
     <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
         select totalScore,presentationScore,questionScore,reportScore
         from seminar_score
-        where klass_seminar_id=#{seminarScoreId} and team_id=#{teamId}
+        where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">

@@ -10,41 +10,40 @@
         <result property="courseName" column="course_name"/>
         <result property="teamStartTime" column="team_start_time"/>
         <result property="teamEndTime" column="team_end_time"/>
-        <result property="teamMainCourseId" column="team_main_course_id"/>
-        <result property="teamMainCourseId" column="seminar_main_course_id"/>
         <collection property="roundList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Round" select="com.test.seminar.mapper.RoundMapper.getRoundByCourseId"/>
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
+        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where id=#{courseId}
     </select>
 
     <select id="getCourseByCourseClassId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
-        from course
-        where id=#{courseClassId}
+        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,klass
+        where klass.id=#{courseClassId} and course.id=klass.course_id
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
+        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_percentage,question_percentage,report_percentage,course.course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
-        FROM course,klass,klass_student
-        WHERE student_id=#{studentId} AND klass_student.klass_id=klass.id AND klass.course_id=course.id;
+        SELECT course.id,course.introduction,presentation_percentage,question_percentage,report_percentage,course.course_name,team_start_time,team_end_time
+        FROM course,klass_student
+        WHERE student_id=#{studentId} AND klass_student.course_id=course.id;
+
     </select>
 
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_percentage,question_percentage,
-        report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id)
+        report_percentage,course_name,team_start_time,team_end_time)
         values(#{teacherId},#{course.introduction},
         #{course.presentationPercentage},#{course.questionPercentage},#{course.reportPercentage},
-        #{course.courseName},#{course.teamStartTime},#{course.teamEndTime},#{course.teamMainCourseId},#{course.seminarMainCourseId})
+        #{course.courseName},#{course.teamStartTime},#{course.teamEndTime})
     </insert>
 
     <update id="updateCourseByCourseId">
@@ -70,12 +69,6 @@
             </if>
             <if test="course.teamEndTime!=null">
                 team_end_time=#{course.teamEndTime}
-            </if>
-            <if test="course.teamMainCourseId!=null">
-                team_main_course_id=#{course.teamMainCourseId},
-            </if>
-            <if test="course.seminarMainCourseId!=null">
-                seminar_main_course_id=#{course.seminarMainCourseId}
             </if>
         </set>
         where id=#{course.id}

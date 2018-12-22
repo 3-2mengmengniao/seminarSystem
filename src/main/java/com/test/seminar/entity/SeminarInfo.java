@@ -22,8 +22,6 @@ public class SeminarInfo {
     private Date registrationStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationEndTime;
-    private SeminarControl seminarControl;
-    private BigInteger seminarControlId;
 
     public void setId(BigInteger id){this.id=id;}
     public BigInteger getId() {
@@ -87,13 +85,5 @@ public class SeminarInfo {
     public void setRegistrationEndTime(Date registrationEndTime) {
         this.registrationEndTime = registrationEndTime;
     }
-
-    public SeminarControl getSeminarControl() { return seminarControl; }
-
-    public void setSeminarControl(SeminarControl seminarControl) { this.seminarControl = seminarControl; }
-
-    public BigInteger getSeminarControlId() { return seminarControlId; }
-
-    public void setSeminarControlId(BigInteger seminarControlId) { this.seminarControlId = seminarControlId; }
 }
 
