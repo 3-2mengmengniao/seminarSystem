@@ -93,7 +93,7 @@
             <div class="form-group floating-control-group formFieldWrap">
                 <label for="txtFloatingPassword" style="z-index:9999;font-size:18px;">密码</label>
                 <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="password" name="password" autocomplete="off" class="my-form-control contactField requiredField" id="contactEmailField" placeholder="Enter Password">
-                <span style="font-size: 15px;margin-left: 15px;padding-bottom: 10px;color:rgb(0,0,0,0.4);">默认密码为123456</span>
+                <span class="pswtips" style="font-size: 15px;margin-left: 15px;padding-bottom: 10px;color:rgb(0,0,0,0.4);">默认密码为123456</span>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
