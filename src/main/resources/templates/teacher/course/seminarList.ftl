@@ -85,7 +85,7 @@
                     <div class="layui-collapse" lay-accordion="">
                     <#list round.seminarInfoList as seminar>
                         <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">${seminar.seminarSerial}&emsp;${seminar.seminarName}<img style="width: 20px;float: right;margin-top: 11px;" src="/images/修改.png" onclick="window.location.href='/teacher/course/seminar/setting?courseId=${course.id}&seminarId=${seminar.id}'"/></h2>
+                            <h2 class="layui-colla-title">第${seminar.seminarSerial}轮&emsp;${seminar.seminarName}<img style="width: 20px;float: right;margin-top: 11px;" src="/images/修改.png" onclick="window.location.href='/teacher/course/seminar/setting?courseId=${course.id}&seminarId=${seminar.id}'"/></h2>
                             <#list courseClassList as class>
                             <div class="layui-colla-content center-text">
                                 <a href="/teacher/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${class.grade?c}-(${class.classSerial})</a>

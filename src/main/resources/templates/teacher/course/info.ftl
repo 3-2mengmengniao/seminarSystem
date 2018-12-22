@@ -21,7 +21,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/courseDelete.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -92,8 +92,8 @@
         $.ajax({
             type: "DELETE",
             url: "/teacher/course/${course.id}",
-            success: function(data){
-                if(data==="200")
+            success: function(data,status,response){
+                if(response.status=="200")
                     window.location.href="/teacher/courseList";
                 else if(data==="404")
                     alert("课程不存在");

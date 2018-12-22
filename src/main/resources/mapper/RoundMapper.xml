@@ -19,13 +19,13 @@
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getRoundByRoundId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE id=#{roundId}
     </select>
@@ -37,7 +37,7 @@
     </select>
 
     <select id="getRoundByCourseIdAndRoundSerial" resultMap="roundResultMap">
-      select id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+      select id,round_serial,presentation_score_method,report_score_method,question_score_method
       FROM round
       WHERE course_id=#{courseId} and round_serial=#{roundSerial}
     </select>
@@ -80,7 +80,7 @@
     <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
         select id,totalScore,presentationScore,questionScore,reportScore
         from round_score
-        where id=#{roundId}
+        where round_id=#{roundId}
     </select>
 
     <select id="getRoundScoreByRoundIdAndTeamId" resultMap="RoundScoreResultMap">

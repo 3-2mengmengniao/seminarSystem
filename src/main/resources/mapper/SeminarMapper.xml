@@ -15,8 +15,6 @@
 
     <resultMap id="seminarControlResultMap" type="com.test.seminar.entity.SeminarControl">
         <id property="id" column="id"/>
-        <result property="classId" column="klass_id"/>
-        <result property="seminarInfoId" column="seminar_id"/>
         <result property="seminarStatus" column="status"/>
         <result property="reportDDL" column="report_ddl"/>
         <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassBySeminarControlId"/>
@@ -35,25 +33,25 @@
     </resultMap>
 
     <select id="getSeminarInfoBySeminarInfoId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        select id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
         from seminar
         where id=#{seminarInfoId}
     </select>
 
     <select id="getSeminarInfoBySeminarControlId" resultMap="seminarInfoResultMap">
-        select seminar.id,seminar.course_id,seminar.round_id,seminar.seminar_name,seminar.introduction,seminar.max_team,seminar.is_visible,seminar.seminar_serial,seminar.enroll_start_time,seminar.enroll_end_time
+        select seminar.id,seminar.seminar_name,seminar.introduction,seminar.max_team,seminar.is_visible,seminar.seminar_serial,seminar.enroll_start_time,seminar.enroll_end_time
         from seminar,klass_seminar
         where seminar.id=klass_seminar.seminar_id and klass_seminar.id=#{seminarControlId}
     </select>
 
     <select id="getSeminarInfoByRoundId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        select id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
         from seminar
         where round_id=#{roundId}
     </select>
 
     <select id="getSeminarInfoBySeminarNameAndCourseId" resultMap="seminarInfoResultMap">
-        select id,course_id,round_id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
+        select id,seminar_name,introduction,max_team,is_visible,seminar_serial,enroll_start_time,enroll_end_time
         from seminar
         where seminar_name=#{seminarName} and course_id=#{courseId}
     </select>
@@ -101,7 +99,7 @@
 
 
     <select id="getSeminarControlBySeminarControlId" resultMap="seminarControlResultMap">
-        select id,klass_id,seminar_id,status,report_ddl
+        select id,status,report_ddl
         from klass_seminar
         where id=#{seminarControlId}
     </select>
@@ -135,25 +133,25 @@
     </select>
 
     <select id="getSeminarScoreBySeminarScoreId" resultMap="seminarScoreResultMap">
-    select id,totalScore,presentationScore,questionScore,reportScore
+    select totalScore,presentationScore,questionScore,reportScore
     from seminar_score
     where id=#{seminarScoreId}
     </select>
 
     <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
-        select id,totalScore,presentationScore,questionScore,reportScore
+        select totalScore,presentationScore,questionScore,reportScore
         from seminar_score
-        where klass_seminar_id=#{seminarScoreId} and team_id=#{teamId}
+        where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">
-        select id,totalScore,presentationScore,questionScore,reportScore
+        select totalScore,presentationScore,questionScore,reportScore
         from seminar_score
         where team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreBySeminarControlId" resultMap="seminarScoreResultMap">
-        select id,totalScore,presentationScore,questionScore,reportScore
+        select totalScore,presentationScore,questionScore,reportScore
         from seminar_score
         where klass_seminar_id=#{seminarControlId}
     </select>
@@ -179,7 +177,7 @@
                 report_score=#{seminarScore.reportScore},
             </if>
         </set>
-          where id=#{seminarScore.id}
+          where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </update>
 
     <delete id="deleteSeminarScoreBySeminarScoreId">

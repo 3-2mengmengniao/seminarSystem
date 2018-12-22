@@ -10,7 +10,6 @@ import com.test.seminar.entity.SeminarInfo;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
-import com.test.seminar.service.RoundService;
 import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +70,7 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException {
-        return seminarDao.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
+        return seminarDao.getSeminarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
     }
 
     @Override

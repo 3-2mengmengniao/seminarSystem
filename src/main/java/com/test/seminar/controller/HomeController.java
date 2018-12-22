@@ -9,6 +9,8 @@ import com.test.seminar.service.LoginService;
 import com.test.seminar.service.StudentService;
 import com.test.seminar.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -49,28 +51,27 @@ public class HomeController {
 
     @RequestMapping(value = "/forgetPassword", method = POST)
     @ResponseBody
-    public String forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
+    public ResponseEntity<String> forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
         HttpSession session = request.getSession();
         //登陆验证
         try {
             Student student = studentService.getStudentByAccount(account);
             session.setAttribute("id", student.getId());
+            session.setAttribute("usertype","student");
         }
         catch (UserNotFoundException e) {
             try {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
                 session.setAttribute("id", teacher.getId());
+                session.setAttribute("usertype","teacher");
             }
             catch (UserNotFoundException e2){
-                String status = "404";
-                return status;
+                return new ResponseEntity<>("", HttpStatus.OK);
             }
-            String status = "200";
-            return status;
+            return new ResponseEntity<>("", HttpStatus.OK);
 
         }
-        String stauts="204";
-        return stauts;
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/modifyPassword", method = GET)
@@ -80,10 +81,9 @@ public class HomeController {
 
     @RequestMapping(value = "/modifyPassword", method = POST)
     @ResponseBody
-    public String newPasswordPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw,Model model) {
+    public ResponseEntity<String> newPasswordPost(HttpServletRequest request, @RequestParam(value = "newPsw") String newPsw, @RequestParam(value = "confirmPsw") String confirmPsw, Model model) {
         HttpSession session = request.getSession();
-        String usertype = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().toLowerCase();
-        String status="404";
+        String usertype = (String)session.getAttribute("usertype");
         BigInteger teacherId;
         BigInteger studentId;
         if(usertype.equals("teacher"))
@@ -92,8 +92,7 @@ public class HomeController {
             Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
             teacher.setPassword(newPsw);
             teacherService.updateTeacherByTeacherId(teacher);
-            status="200";
-            return status;
+            return new ResponseEntity<>("", HttpStatus.OK);
         }
         else if(usertype.equals("student"))
         {
@@ -101,9 +100,8 @@ public class HomeController {
             Student student=studentService.getStudentByStudentId(studentId);
             student.setPassword(newPsw);
             studentService.updateStudentByStudentId(student);
-            status="204";
-            return status;
+            return new ResponseEntity<>("", HttpStatus.OK);
         }
-        return status;
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 }

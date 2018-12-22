@@ -35,8 +35,8 @@ public class SeminarDaoImpl implements SeminarDao {
         return seminarInfo;
     }
     @Override
-    public SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
-        SeminarControl seminarControl = seminarMapper.getSemniarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
+    public SeminarControl getSeminarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException {
+        SeminarControl seminarControl = seminarMapper.getSeminarControlByClassIdAndSeminarInfo(classId,seminarInfoId);
         if (seminarControl==null) {
             throw new SeminarControlNotFoundException();
         }
@@ -125,8 +125,8 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public void updateSeminarScore(SeminarScore seminarScore) {
-        seminarMapper.updateSeminarScore(seminarScore);
+    public void updateSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId) {
+        seminarMapper.updateSeminarScore(seminarScore,seminarControlId,teamId);
     }
 
     @Override

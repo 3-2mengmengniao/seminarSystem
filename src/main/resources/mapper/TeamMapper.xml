@@ -3,7 +3,6 @@
 <mapper namespace="com.test.seminar.mapper.TeamMapper">
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
-        <result property="classId" column="klass_id"/>
         <association property="courseClass" column="id" javaType="com.test.seminar.entity.CourseClass" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByTeamId"/>
         <collection property="seminarScoreList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByTeamId"/>
         <collection property="roundScoreList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" select="com.test.seminar.mapper.RoundMapper.getRoundScoreByTeamId"/>
@@ -12,25 +11,25 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status,team_serial
+        SELECT id,team_name,leader_id,status,team_serial
         FROM team
         WHERE id=#{teamId}
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT team.id,team.klass_id,team.course_id,team_name,leader_id,status,team_serial
+        SELECT team.id,team_name,leader_id,status,team_serial
         FROM team,klass_student
         WHERE team.course_id=#{courseId} and  klass_student.student_id=#{studentId} and team.id=klass_student.team_id
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status,team_serial
+        SELECT id,team_name,leader_id,status,team_serial
         FROM team
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status,team.team_serial
+        SELECT id,team_name,leader_id,status,team.team_serial
         FROM seminar_score,team
         WHERE klass_seminar_id=#{seminarControlId} and team.id=seminar_score.team_id
     </select>

@@ -36,7 +36,7 @@ public interface SeminarDao {
      * @param seminarInfoId
      * @return
      */
-    SeminarControl getSemniarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
+    SeminarControl getSeminarControlByClassIdAndSeminarInfo(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
 
     /**
      * 获取某轮次下的所有讨论课信息
@@ -140,7 +140,7 @@ public interface SeminarDao {
      *
      * @param seminarScore
      */
-    void updateSeminarScore(SeminarScore seminarScore);
+    void updateSeminarScore(SeminarScore seminarScore,BigInteger seminarControlId,BigInteger teamId);
 
     /**
      *

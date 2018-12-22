@@ -140,6 +140,7 @@ public class StudentController {
     public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
         List<Round> roundList= roundService.getRoundByCourseId(courseId);
         model.addAttribute("roundList",roundList);
+        System.out.println(roundList.get(0).getSeminarInfoList().get(0).getRegistrationEndTime());
 //        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
 //        model.addAttribute("seminarList",seminarList);
         HttpSession session = request.getSession();
