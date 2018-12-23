@@ -4,14 +4,13 @@ import com.test.seminar.dao.PresentationDao;
 import com.test.seminar.dao.QuestionDao;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.dao.StudentDao;
-import com.test.seminar.entity.Presentation;
-import com.test.seminar.entity.Question;
-import com.test.seminar.entity.SeminarControl;
+import com.test.seminar.entity.*;
 import com.test.seminar.service.RundSeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +48,14 @@ public class RunSeminarServiceImpl implements RundSeminarService {
 
     @Override
     public Question selectQuestion(BigInteger seminarControlId) {
+        SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        List<SeminarInfo> seminarInfoList=seminarControl.getRound().getSeminarInfoList();
+        List<SeminarControl> seminarControlList=new ArrayList<>();
+        for(SeminarInfo seminarInfo:seminarInfoList){
+            if(!seminarInfo.getId().equals(seminarControl.getSeminarInfo().getId())){
+                seminarControlList.add(seminarDao.getSeminarControlByClassIdAndSeminarInfo(seminarControl.getCourseClass().getId(),seminarInfo.getId()));
+            }
+        }
         return null;
     }
 
