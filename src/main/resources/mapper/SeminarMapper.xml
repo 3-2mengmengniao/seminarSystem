@@ -129,13 +129,13 @@
     </select>
 
     <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
-        select totalScore,presentationScore,questionScore,reportScore
+        select total_score,presentation_score,question_score,report_score
         from seminar_score
         where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">
-        select totalScore,presentationScore,questionScore,reportScore
+        select totalScore,presentation_score,question_score,report_score
         from seminar_score
         where team_id=#{teamId}
     </select>
@@ -146,10 +146,10 @@
         where klass_seminar_id=#{seminarControlId}
     </select>
 
-    <select id="getSeminarScoreByRoundId" resultMap="seminarScoreResultMap">
-        select seminar_name,totalScore,presentationScore,questionScore,reportScore
+    <select id="getSeminarScoreByRoundIdAndTeamId" resultMap="seminarScoreResultMap">
+        select seminar_name,total_score,presentation_score,question_score,report_score
         from seminar,klass_seminar,seminar_score
-        where seminar.round_id=#{roundId} and klass_seminar.seminar_id=seminar.id and seminar_score.klass_seminar_id=klass_seminar.id
+        where seminar.round_id=#{roundId} and klass_seminar.seminar_id=seminar.id and seminar_score.klass_seminar_id=klass_seminar.id and seminar_score.team_id=#{teamId}
     </select>
 
     <insert id="insertSeminarScore">
