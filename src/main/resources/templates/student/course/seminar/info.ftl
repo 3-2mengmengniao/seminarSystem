@@ -193,7 +193,6 @@
                                 error:function(data){console.log("error");}
                             }
                     );
-                    return false;
                 }
                 ,btn2: function(index, layero){
                     //按钮【按钮二】的回调
@@ -233,7 +232,6 @@
                                 error:function(data){console.log("error");}
                             }
                     );
-                    return false;
                 }
                 ,btn2: function(index, layero){
                     //按钮【按钮二】的回调

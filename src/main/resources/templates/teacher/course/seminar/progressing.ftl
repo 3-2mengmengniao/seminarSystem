@@ -26,9 +26,6 @@
     <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
     <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
-    <script>
-        $("#right-side:first-child").addClass('active');
-    </script>
 </head>
 <body>
 
@@ -316,6 +313,7 @@
     });
 </script>
 <script>
+    $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');
         $(this).siblings().removeClass('active');
@@ -354,7 +352,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: 'report_deadline.html',
+                    content: '/teacher/course/seminar/report_deadline.html',
                     scrollbar: true
                 });
             }
@@ -368,7 +366,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: 'report_deadline.html',
+                    content: '/teacher/course/seminar/report_deadline.html',
                     scrollbar: true
                 });
             }

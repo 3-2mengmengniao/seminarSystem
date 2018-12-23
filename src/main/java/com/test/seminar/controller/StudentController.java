@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -258,6 +259,12 @@ public class StudentController {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         System.out.println(file);
+        try {
+            seminarService.upLoadPPT(file, seminarId, teamId);
+        }catch (IOException e)
+        {
+            return new ResponseEntity<>("", HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
