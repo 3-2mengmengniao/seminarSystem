@@ -48,4 +48,6 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> getAllTeacher() {
         return teacherDao.getAllTeacher();
     }
+
+
 }

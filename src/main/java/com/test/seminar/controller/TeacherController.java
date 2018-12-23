@@ -53,8 +53,8 @@ public class TeacherController {
     @Autowired
     StudentService studentService;
 
-    @Autowired
-    FileService fileService;
+//    @Autowired
+//    FileService fileService;
 
     @RequestMapping(value = "/index")
     public String home(Model model,HttpSession session) {
@@ -149,12 +149,12 @@ public class TeacherController {
     }
 
 
-    @RequestMapping(value="/course/klassList",method = POST)
-    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
-        System.out.println(file);
-        fileService.uploadStudentExcel(file,classId,courseId);
-        return "redirect:/teacher/course/klassList?courseId="+courseId;
-    }
+//    @RequestMapping(value="/course/klassList",method = POST)
+//    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
+//        System.out.println(file);
+//        fileService.uploadStudentExcel(file,classId,courseId);
+//        return "redirect:/teacher/course/klassList?courseId="+courseId;
+//    }
 
     @RequestMapping(value="/course/info")
     public String courseInfo(BigInteger courseId,Model model) {

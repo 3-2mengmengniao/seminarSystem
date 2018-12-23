@@ -12,7 +12,10 @@ import com.test.seminar.exception.SeminarInfoNotFoundException;
 import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,5 +107,12 @@ public class SeminarServiceImpl implements SeminarService {
     @Override
     public void updateSeminarControl(SeminarControl seminarControl) {
         seminarDao.updateSeminarControl(seminarControl);
+    }
+
+    @Override
+    public void upLoadPPT(MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId) throws IOException {
+        String path=System.getProperty("user.dir")+seminarControlId.toString()+"/"+teamId.toString()+"/PPT";
+        File file = new File("path");
+        multipartFile.transferTo(file);
     }
 }
