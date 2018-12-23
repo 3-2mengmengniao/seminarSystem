@@ -75,4 +75,6 @@ public interface SeminarService {
     List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
 
     void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId)throws HaveEnrollException;
+
+    void updateSeminarControl(SeminarControl seminarControl);
 }
