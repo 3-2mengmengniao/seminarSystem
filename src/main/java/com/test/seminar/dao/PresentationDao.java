@@ -10,7 +10,9 @@ import java.util.List;
  */
 public interface PresentationDao {
 
-    Presentation getPresentationByTeamOrder(int teamOrder);
+    Presentation getPresentationBySeminarControlIdAndTeamOrder(BigInteger seminarControlId, int teamOrder);
+
+    Presentation getPresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId, BigInteger teamId);
     /**
      *
      * @param presentation

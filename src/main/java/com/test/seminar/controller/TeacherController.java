@@ -54,7 +54,10 @@ public class TeacherController {
     StudentService studentService;
 
     @Autowired
-    FileService fileService;
+    RundSeminarService rundSeminarService;
+
+//    @Autowired
+//    FileService fileService;
 
     @RequestMapping(value = "/index")
     public String home(Model model,HttpSession session) {
@@ -149,12 +152,12 @@ public class TeacherController {
     }
 
 
-    @RequestMapping(value="/course/klassList",method = POST)
-    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
-        System.out.println(file);
-        fileService.uploadStudentExcel(file,classId,courseId);
-        return "redirect:/teacher/course/klassList?courseId="+courseId;
-    }
+//    @RequestMapping(value="/course/klassList",method = POST)
+//    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
+//        System.out.println(file);
+//        fileService.uploadStudentExcel(file,classId,courseId);
+//        return "redirect:/teacher/course/klassList?courseId="+courseId;
+//    }
 
     @RequestMapping(value="/course/info")
     public String courseInfo(BigInteger courseId,Model model) {
@@ -347,7 +350,7 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
-        seminarControl.setSeminarStatus(1);
+        rundSeminarService.beginSeminar(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/progressing";
     }

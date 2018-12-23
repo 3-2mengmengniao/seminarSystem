@@ -4,6 +4,7 @@ import com.test.seminar.entity.CourseClass;
 import com.test.seminar.exception.CourseClassNotFoundException;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -51,4 +52,10 @@ public interface CourseClassService {
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
     CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException;
+
+    /**
+     * 输入Excel文件导入学生，不会读取非excel文件
+     * @param file
+     */
+    void uploadStudentExcel(MultipartFile file, BigInteger courseClassId, BigInteger courseId);
 }

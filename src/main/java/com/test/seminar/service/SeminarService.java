@@ -7,7 +7,9 @@ import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -19,28 +21,30 @@ public interface SeminarService {
 
     /**
      * 通过ID获取讨论课信息
+     *
      * @param seminarInfoId
      * @return
      * @throws SeminarInfoNotFoundException
      */
-    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+    SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException;
 
     /**
      * 创建新的讨论课信息
+     *
      * @param seminarInfo
      * @throws RepetitiveRecordException
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId) throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger courseId, BigInteger roundId) throws RepetitiveRecordException;
 
     /**
      * 更改讨论课信息
+     *
      * @param seminarInfo
      * @throws SeminarInfoNotFoundException
      */
-    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo,BigInteger roundId)throws SeminarInfoNotFoundException;
+    void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo, BigInteger roundId) throws SeminarInfoNotFoundException;
 
     /**
-     *
      * @param seminarControlId
      * @return
      */
@@ -48,20 +52,23 @@ public interface SeminarService {
 
     /**
      * 删除讨论课信息
+     *
      * @param seminarInfoId
      * @throws SeminarInfoNotFoundException
      */
-    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId)throws SeminarInfoNotFoundException;
+    void deleteSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException;
 
     /**
      * 通过ID获取某个班级的讨论课信息
+     *
      * @param classId
      * @return
      */
-    SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId)throws SeminarControlNotFoundException;
+    SeminarControl getSeminarControlByClassIdAndSeminarInfoId(BigInteger classId, BigInteger seminarInfoId) throws SeminarControlNotFoundException;
 
     /**
      * 通过roundID获取round对应的讨论课信息
+     *
      * @param roundId
      * @return
      */
@@ -69,10 +76,17 @@ public interface SeminarService {
 
     /**
      * 根据传入的轮次列表返回每一个round对应的讨论课信息
+     *
      * @param roundList
      * @return
      */
     List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
 
-    void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId)throws HaveEnrollException;
+    void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId) throws HaveEnrollException;
+
+    void updateSeminarControl(SeminarControl seminarControl);
+
+    void upLoadPPT(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
+
+    void upLoadReport(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
 }

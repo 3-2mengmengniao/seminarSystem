@@ -23,10 +23,9 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
     <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
-
 </head>
 <body>
 
@@ -44,7 +43,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">OOAD</h1>
-            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="images/icons/展开.png"></a>
+            <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -77,31 +76,37 @@
             <div>
                 <span id="runner"></span><br><br>
                 <div>
-                    <div style="z-index: 999;" id="timeMonitor"><img id="startBtn" src="images/开始.png"></div>
+                    <div style="z-index: 999;" id="timeMonitor"><img id="startBtn" src="/images/开始.png"></div>
                 </div>
             </div>
         </div>
         <div id="left-side">
             <ul>
-                <li class="group active">
-                    1-1
-                </li>
-                <li class="group">
-                    1-2
-                </li>
-                <li class="group">
-                    1-3
-                </li>
-                <li class="group">
-                    1-4
-                </li>
+                <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                    <#if seminarControl.presentationList[t]??>
+                    <li class="group active">
+                        ${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}
+                    </li>
+                    </#if>
+                </#list>
+                <#--<li class="group">-->
+                    <#--1-2-->
+                <#--</li>-->
+                <#--<li class="group">-->
+                    <#--1-3-->
+                <#--</li>-->
+                <#--<li class="group">-->
+                    <#--1-4-->
+                <#--</li>-->
             </ul>
         </div>
         <div id="border">
             <div id="line" class="one"></div>
         </div>
         <div id="right-side">
-            <div class="group active" >
+        <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+            <#if seminarControl.presentationList[t]??>
+            <div class="group">
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <div class="form-group floating-control-group formFieldWrap">
@@ -148,137 +153,139 @@
                 </table>
                 <div style="height:20px;"></div>
             </div>
-            <div class="group" >
-                <div style="height:30px;"></div>
-                <h1>展示成绩</h1>
-                <div class="form-group floating-control-group formFieldWrap">
-                    <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
-                </div>
-                <div style="height:20px;"></div>
-                <h1>提问</h1>
-                <a style="font-size:16px;">当前已有5人提问</a>
-                <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
-                    <colgroup>
-                        <col width="100">
-                        <col width="200">
-                    </colgroup>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div style="height:20px;"></div>
-            </div>
-            <div class="group" >
-                <div style="height:30px;"></div>
-                <h1>展示成绩</h1>
-                <div class="form-group floating-control-group formFieldWrap">
-                    <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
-                </div>
-                <div style="height:20px;"></div>
-                <h1>提问</h1>
-                <a style="font-size:16px;">当前已有5人提问</a>
-                <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
-                    <colgroup>
-                        <col width="100">
-                        <col width="200">
-                    </colgroup>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div style="height:20px;"></div>
-            </div>
-            <div  class="group">
-                <div style="height:30px;"></div>
-                <h1>展示成绩</h1>
-                <div class="form-group floating-control-group formFieldWrap">
-                    <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
-                </div>
-                <div style="height:20px;"></div>
-                <h1>提问</h1>
-                <a style="font-size:16px;margin-top:4px;">当前已有5人提问</a>
-                <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
-                    <colgroup>
-                        <col width="100">
-                        <col width="200">
-                    </colgroup>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div style="height:20px;"></div>
-            </div>
+            </#if>
+            </#list>
+            <#--<div class="group" >-->
+                <#--<div style="height:30px;"></div>-->
+                <#--<h1>展示成绩</h1>-->
+                <#--<div class="form-group floating-control-group formFieldWrap">-->
+                    <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
+                <#--</div>-->
+                <#--<div style="height:20px;"></div>-->
+                <#--<h1>提问</h1>-->
+                <#--<a style="font-size:16px;">当前已有5人提问</a>-->
+                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
+                    <#--<colgroup>-->
+                        <#--<col width="100">-->
+                        <#--<col width="200">-->
+                    <#--</colgroup>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                <#--</table>-->
+                <#--<div style="height:20px;"></div>-->
+            <#--</div>-->
+            <#--<div class="group" >-->
+                <#--<div style="height:30px;"></div>-->
+                <#--<h1>展示成绩</h1>-->
+                <#--<div class="form-group floating-control-group formFieldWrap">-->
+                    <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
+                <#--</div>-->
+                <#--<div style="height:20px;"></div>-->
+                <#--<h1>提问</h1>-->
+                <#--<a style="font-size:16px;">当前已有5人提问</a>-->
+                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
+                    <#--<colgroup>-->
+                        <#--<col width="100">-->
+                        <#--<col width="200">-->
+                    <#--</colgroup>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                <#--</table>-->
+                <#--<div style="height:20px;"></div>-->
+            <#--</div>-->
+            <#--<div  class="group">-->
+                <#--<div style="height:30px;"></div>-->
+                <#--<h1>展示成绩</h1>-->
+                <#--<div class="form-group floating-control-group formFieldWrap">-->
+                    <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
+                <#--</div>-->
+                <#--<div style="height:20px;"></div>-->
+                <#--<h1>提问</h1>-->
+                <#--<a style="font-size:16px;margin-top:4px;">当前已有5人提问</a>-->
+                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
+                    <#--<colgroup>-->
+                        <#--<col width="100">-->
+                        <#--<col width="200">-->
+                    <#--</colgroup>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
+                        <#--</td>-->
+                        <#--<td style="padding:0 10px;">-->
+                            <#--<div class="form-group floating-control-group formFieldWrap">-->
+                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
+                            <#--</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                <#--</table>-->
+                <#--<div style="height:20px;"></div>-->
+            <#--</div>-->
         </div>
     </div>
     <div class="center center-text ">
@@ -306,6 +313,7 @@
     });
 </script>
 <script>
+    $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');
         $(this).siblings().removeClass('active');
@@ -332,29 +340,59 @@
         $('#runner').runner('reset');
         var currentLi=$('li.group').filter('.active').next();
         var groupIndex= $(currentLi).index();
+        var iframeWidth=$(window).width();
         if(groupIndex=='-1'){
-            var currentLi=$('li.group').eq(0);
-        }
-        $(currentLi).addClass('active');
-        $(currentLi).siblings().removeClass('active');
-        var groupIndex= $(currentLi).index();
-        var allDiv= $('div.group');
-        $(allDiv).eq(groupIndex).css('margin-top','');
-        $(allDiv).eq(groupIndex).addClass('active');
-        $(allDiv).eq(groupIndex).siblings().removeClass('active');
-        $.each($(allDiv),function(){
-            if($(this).index()<groupIndex){
-                var divHeight=$(this).height();
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
+            if(iframeWidth>768){
+                layer.open({
+                    type: 2,
+                    icon:7,
+                    titlt:"",
+                    shade: 0.6 ,//遮罩透明度
+                    area: ['500px', '520px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    anim: 6, //0-6的动画形式，-1不开启
+                    content: '/teacher/course/seminar/report_deadline.html',
+                    scrollbar: true
+                });
             }
-            if($(this).index()>groupIndex){
-                var divHeight=$(this).height()-20;
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
+            else{
+                layer.open({
+                    type: 2,
+                    icon:7,
+                    titlt:"",
+                    shade: 0.6 ,//遮罩透明度
+                    area: ['300px', '520px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    anim: 6, //0-6的动画形式，-1不开启
+                    content: '/teacher/course/seminar/report_deadline.html',
+                    scrollbar: true
+                });
             }
-        })
 
+        }
+        else{
+            $(currentLi).addClass('active');
+            $(currentLi).siblings().removeClass('active');
+            var groupIndex= $(currentLi).index();
+            var allDiv= $('div.group');
+            $(allDiv).eq(groupIndex).css('margin-top','');
+            $(allDiv).eq(groupIndex).addClass('active');
+            $(allDiv).eq(groupIndex).siblings().removeClass('active');
+            $.each($(allDiv),function(){
+                if($(this).index()<groupIndex){
+                    var divHeight=$(this).height();
+                    // alert(divHeight);
+                    $(this).css('margin-top','-'+divHeight+'px');
+                }
+                if($(this).index()>groupIndex){
+                    var divHeight=$(this).height()-20;
+                    // alert(divHeight);
+                    $(this).css('margin-top','-'+divHeight+'px');
+                }
+            })
+        }
     })
 
     $('#timeMonitor').click(function(){
@@ -435,93 +473,117 @@
 
     });
 
-    //buttons
+</script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form();
 
-    // $('#startBtn').click(function() {
-    //     $('#runner').runner('start');
-    //     $(this).addClass('activeBtn');
-    //     $('#stopBtn').removeClass('activeBtn');
-    //
-    // });
-    //
-    // $('#stopBtn').click(function() {
-    //     $('#runner').runner('stop');
-    //     $(this).addClass('activeBtn');
-    //     $('#startBtn').removeClass('activeBtn');
-    // });
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+    new Function($('.run').text())()
 
-    // $('#resetBtn').click(function() {
-    //     $('#runner').runner('reset');
-    //     $('#stopBtn').removeClass('activeBtn');
-    //     $('#startBtn').removeClass('activeBtn');
-    // });
+    //var index = parent.layer.getFrameIndex(window.name);
+    //parent.layer.iframeAuto(index);
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
 
-    // $('.group1').click(function () {
-    //     $('.group1').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('one');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group2').click(function () {
-    //     $('.group2').addClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('two');
-    //     $('#line').removeClass('one');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group3').click(function () {
-    //     $('.group3').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('three');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('one');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group4').click(function () {
-    //     $('.group4').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('#line').addClass('four');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('one');
-    // });
-    // $('.group1').click(function () {
-    //     $('#first').addClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group2').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').addClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group3').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').addClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group4').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').addClass('active');
-    // });
+        //日期时间选择器
+        laydate.render({
+            elem: '#test5'
+            ,type: 'datetime'
+        });
+
+
+        //自定义重要日
+        laydate.render({
+            elem: '#test18'
+            ,mark: {
+                '0-10-14': '生日'
+                ,'0-12-31': '跨年' //每年的日期
+                ,'0-0-10': '工资' //每月某天
+                ,'0-0-15': '月中'
+                ,'2017-8-15': '' //如果为空字符，则默认显示数字+徽章
+                ,'2099-10-14': '呵呵'
+            }
+            ,done: function(value, date){
+                if(date.year === 2017 && date.month === 8 && date.date === 15){ //点击2017年8月15日，弹出提示语
+                    layer.msg('这一天是：中国人民抗日战争胜利72周年');
+                }
+            }
+        });
+
+        //限定可选日期
+        var ins22 = laydate.render({
+            elem: '#test-limit1'
+            ,min: '2016-10-14'
+            ,max: '2080-10-14'
+            ,ready: function(){
+                ins22.hint('日期可选值设定在 <br> 2016-10-14 到 2080-10-14');
+            }
+        });
+
+        //前后若干天可选，这里以7天为例
+        laydate.render({
+            elem: '#test-limit2'
+            ,min: -7
+            ,max: 7
+        });
+
+        //限定可选时间
+        laydate.render({
+            elem: '#test-limit3'
+            ,type: 'time'
+            ,min: '09:30:00'
+            ,max: '17:30:00'
+            ,btns: ['clear', 'confirm']
+        });
+
+        //同时绑定多个
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+            });
+        });
+
+        //初始赋值
+        laydate.render({
+            elem: '#test19'
+            ,value: '1989-10-14'
+            ,isInitValue: true
+        });
+
+        //选中后的回调
+        laydate.render({
+            elem: '#test20'
+            ,done: function(value, date){
+                layer.alert('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
+            }
+        });
+
+        //日期切换的回调
+        laydate.render({
+            elem: '#test21'
+            ,change: function(value, date){
+                layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
+            }
+        });
+
+        //墨绿主题
+        laydate.render({
+            elem: '#test29'
+            ,theme: 'molv'
+        });
+
+    });
 </script>
 <style type="text/css">
+    .layui-laydate-content table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: 14px;
+    }
+
     #startBtn{
         width:23px;
         height:23px;
@@ -801,5 +863,4 @@
     }
 </style>
 </body>
-
 </html>

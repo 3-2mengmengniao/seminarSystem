@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -185,6 +187,7 @@ public class StudentController {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         boolean flag=false;
+        int order=-1;
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         for(int i=0;i<presentationList.size();i++)
         {
@@ -193,11 +196,13 @@ public class StudentController {
                 if(temp.getId().equals(team.getId()))
                 {
                     flag=true;
+                    order=i;
                 }
             }
         }
         model.addAttribute("myTeam",team);
         model.addAttribute("enrollment",flag);
+        model.addAttribute("order",order);
         return "student/course/seminar/info";
     }
 
@@ -243,8 +248,34 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/run")
-    public String seminarRun(Model model) {
+    public String seminarRun(BigInteger seminarId,Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "student/course/seminar/run";
+    }
+
+    @RequestMapping(value="/course/seminar/PPT",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> submitPPT(BigInteger seminarId, BigInteger teamId, MultipartFile file, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        System.out.println(file);
+        try {
+            seminarService.upLoadPPT(file, seminarId, teamId);
+        }catch (IOException e)
+        {
+            return new ResponseEntity<>("", HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/seminar/report",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> submitReport(BigInteger seminarId, BigInteger teamId, MultipartFile file, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        System.out.println(file);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/info")

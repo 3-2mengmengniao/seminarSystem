@@ -24,6 +24,11 @@ public class PresentationDaoImpl implements PresentationDao {
     }
 
     @Override
+    public Presentation getPresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId, BigInteger teamId) {
+        return presentationMapper.getPresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
+    }
+
+    @Override
     public void updatePresentation(Presentation presentation) {
         presentationMapper.updatePresentation(presentation);
     }
@@ -34,8 +39,8 @@ public class PresentationDaoImpl implements PresentationDao {
     }
 
     @Override
-    public Presentation getPresentationByTeamOrder(int teamOrder) {
-        return presentationMapper.getPresentationByTeamOrder(teamOrder);
+    public Presentation getPresentationBySeminarControlIdAndTeamOrder(BigInteger seminarControlId, int teamOrder) {
+        return presentationMapper.getPresentationBySeminarControlIdAndTeamOrder(seminarControlId,teamOrder);
     }
 
     @Override
