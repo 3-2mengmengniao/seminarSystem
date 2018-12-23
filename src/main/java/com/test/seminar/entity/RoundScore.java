@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 public class RoundScore {
+    private BigInteger teamId;
     private int  courseClassSerial;
     private int teamSerial;
     private List<SeminarScore> seminarScoreList;
@@ -11,6 +12,10 @@ public class RoundScore {
     private double presentationScore;
     private double questionScore;
     private double reportScore;
+
+    public BigInteger getTeamId() { return teamId; }
+
+    public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
 
     public double getTotalScore() { return totalScore; }
 

@@ -30,6 +30,13 @@ public interface RoundDao {
 
     /**
      *
+     * @param courseId
+     * @param teamId
+     * @return
+     */
+    List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
+    /**
+     *
      * @param seminarInfoId
      * @return
      */
