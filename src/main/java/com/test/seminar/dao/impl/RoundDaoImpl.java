@@ -7,6 +7,7 @@ import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 import com.test.seminar.mapper.RoundMapper;
+import com.test.seminar.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,21 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
+    public List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId){
+        List<Round> roundList=roundMapper.getRoundByCourseId(courseId);
+        for(int i=0;i<roundList.size();i++){
+            List<RoundScore> roundScoreList=roundList.get(i).getRoundScoreList();
+            for(int j=0;j<roundScoreList.size();j++){
+                if(!roundScoreList.get(j).getTeamId().equals(teamId)){
+                    roundScoreList.remove(j);
+                    j--;
+                }
+            }
+        }
+        return roundList;
+    }
+
+    @Override
     public int getRoundSerialBySeminarInfoId(BigInteger seminarInfoId){
         return roundMapper.getRoundSerialBySeminarInfoId(seminarInfoId);
     }
@@ -64,8 +80,8 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
-    public List<RoundScore> getRoundScoreByRoundId(BigInteger roundScoreId) {
-        return roundMapper.getRoundScoreByRoundId(roundScoreId);
+    public List<RoundScore> getRoundScoreByRoundId(BigInteger roundId) {
+        return roundMapper.getRoundScoreByRoundId(roundId);
     }
 
     @Override

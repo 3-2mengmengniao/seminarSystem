@@ -15,7 +15,6 @@ public class Team {
     private int teamSerial;
     private Student leader;
     private CourseClass courseClass;
-    private BigInteger leader_id;
     private List<Student> memberList;
     private List<Question> questionList;
 
@@ -62,10 +61,6 @@ public class Team {
     public CourseClass getCourseClass() { return courseClass; }
 
     public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
-
-    public BigInteger getLeader_id() { return leader_id; }
-
-    public void setLeader_id(BigInteger leader_id) { this.leader_id = leader_id; }
 
     @Override
     public boolean equals(Object o) {
