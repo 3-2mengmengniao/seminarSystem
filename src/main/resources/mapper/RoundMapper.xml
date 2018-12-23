@@ -18,7 +18,7 @@
         <result property="presentationScore" column="presentation_score"/>
         <result property="questionScore" column="question_score"/>
         <result property="reportScore" column="report_score"/>
-        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_score.round_id,teamId=round_score.team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">

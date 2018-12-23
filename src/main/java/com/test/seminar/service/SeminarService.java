@@ -87,4 +87,6 @@ public interface SeminarService {
     void updateSeminarControl(SeminarControl seminarControl);
 
     void upLoadPPT(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
+
+    void upLoadReport(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
 }

@@ -14,6 +14,7 @@
     <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
      <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
@@ -26,6 +27,7 @@
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
 
 
 </head>
@@ -125,6 +127,7 @@
         </div>
 
         <div class="distance"></div>
+        <div id="layerDemo">
         <#if enrollment==false && seminarControl.seminarStatus==0>
             <p class="center center-text "><a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" class="button-return button-turqoise">报名</a>
         </#if>
@@ -136,10 +139,11 @@
 
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus!=2>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">PPT提交</a></p>
+        <p class="center center-text"><button data-method="notice" class="layui-btn button-return button-turqoise">PPT提交</button></p>
         <#elseif  enrollment==true>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">书面报告提交</a></p>
+        <p class="center center-text"><button data-method="submit2" class="layui-btn button-return button-turqoise">报告提交</button></p>
         </#if>
+        </div>
             <!--
         <div class="decoration"></div>
         <div class="footer">
@@ -157,4 +161,93 @@
 
 
 </body>
+<script>
+    layui.use('layer', function(){ //独立版的layer无需执行这一句
+    var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+    var active = {
+        notice: function(){
+            //示范一个公告层
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['确认提交', '取消']
+                ,yes: function(index, layero){
+                    var fd=new FormData();
+                    fd.append("teamId", ${myTeam.id});
+                    fd.append("seminarId", ${seminarControl.id});
+                    var ttt= $('#submitPPT')[0].files[0];
+                    fd.append("file", $('#submitPPT')[0].files[0]);
+                    console.log(ttt)
+                    $.ajax(
+                            {
+                                url:"/student/course/seminar/PPT",
+                                type:'post',
+                                processData: false,
+                                contentType: false,
+                                data:fd,
+                                success:function(data){console.log("success");},
+                                error:function(data){console.log("error");}
+                            }
+                    );
+                }
+                ,btn2: function(index, layero){
+                    //按钮【按钮二】的回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<h2 class="center-text" style="margin-top:15px; ">上传PPT</h2><div class="distance"></div><form enctype="multipart/form-data" method="post" class="file center-text"><input type="file" name="file" class="center-block center-text" id="submitPPT" multiple/></form><div class="distance"></div>'
+            });
+        }
+        ,submit2: function(){
+            //示范一个公告层
+            layer.open({
+                type: 1
+                ,title: false //不显示标题栏
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.8
+                ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,btn: ['确认提交', '取消']
+                ,yes: function(index, layero){
+                    var fd=new FormData();
+                    fd.append("teamId", ${myTeam.id});
+                    fd.append("seminarId", ${seminarControl.id});
+                    var ttt= $('#submitReport')[0].files[0];
+                    fd.append("file", $('#submitReport')[0].files[0]);
+                    console.log(ttt)
+                    $.ajax(
+                            {
+                                url:"/student/course/seminar/report",
+                                type:'post',
+                                processData: false,
+                                contentType: false,
+                                data:fd,
+                                success:function(data){console.log("success");},
+                                error:function(data){console.log("error");}
+                            }
+                    );
+                }
+                ,btn2: function(index, layero){
+                    //按钮【按钮二】的回调
+
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+                ,btnAlign: 'c'
+                ,moveType: 1 //拖拽模式，0或者1
+                ,content: '<h2 class="center-text" style="margin-top:15px;">上传报告</h2><div class="distance"></div><form enctype="multipart/form-data" method="post" class="file center-text"><input type="file" name="file" class="center-block center-text" id="submitReport" multiple/></form><div class="distance"></div>'
+            });
+        }
+    }
+        $('#layerDemo .layui-btn').on('click', function(){
+            var othis = $(this), method = othis.data('method');
+            active[method] ? active[method].call(this, othis) : '';
+        });
+    });
+</script>
 </html>

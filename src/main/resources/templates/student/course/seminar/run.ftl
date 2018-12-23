@@ -28,6 +28,9 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
+    <script src="/scripts/sockjs.js"></script>
+    <script src="/scripts/stomp.js"></script>
+    <script src="/scripts/app.js"></script>
 
 
 </head>
@@ -75,6 +78,10 @@
 
 <div class="content">
     <div class="distance4"></div>
+    <h2 class="center-text" id="greetings">当前有0人提问</h2>
+    <span id="teamId" name="${myTeam.id}"></span>
+    <span id="seminarId" name="${seminarControl.id}"></span>
+    <div class="distance"></div>
     <div class="center-navigation">
         <table class="layui-table" lay-skin="nob">
             <colgroup>
@@ -85,8 +92,12 @@
             <#list 0..<seminarControl.seminarInfo.maxGroup as t>
                 <#if seminarControl.presentationList[t]??>
                     <tr>
+                        <#if seminarControl.presentationList[t].present==1>
                         <td>第${t+1}组：</td>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                            <td class="normal">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                           <#else>
+                            <td class="active">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                           </#if>
                     </tr>
                 </#if>
             </#list>
@@ -99,10 +110,18 @@
 
 <div class="distance4"></div>
 <div class="distance"></div>
-<p class="center center-text"><a href="#" class="button-return button-turqoise">Q&A</a></p>
+<p class="center center-text"><button type="button" class="button-return button-turqoise" id="QAbutton">Q&A</button></p>
 <div class="distance"></div>
 <!--<div class="bottom-deco"></div>-->
 
 
 </body>
+<style>
+    .active{
+        color:darkred;
+    }
+    .normal{
+        color:#009688;
+    }
+</style>
 </html>

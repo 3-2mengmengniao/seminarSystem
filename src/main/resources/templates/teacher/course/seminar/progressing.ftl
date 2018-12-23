@@ -26,9 +26,10 @@
     <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
     <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
-    <script>
-        $("#right-side:first-child").addClass('active');
-    </script>
+    <script src="/scripts/sockjs.js"></script>
+    <script src="/scripts/stomp.js"></script>
+    <script src="/scripts/app.js"></script>
+
 </head>
 <body>
 
@@ -45,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
             <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -74,7 +75,9 @@
 <div>
     <div id="wrapper">
         <div class="center-title">
+            <span id="seminarId" name="${seminarControl.id}"></span>
             <h1 class="thick">业务流程分析</h1>
+            <p style="font-size:16px;" id="greetings">当前已有5人提问</p>
             <p style="color:#009688;font-size:17px;margin-left:-33px;">1-1组已展示</p>
             <div>
                 <span id="runner"></span><br><br>
@@ -117,7 +120,6 @@
                 </div>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
-                <a style="font-size:16px;">当前已有5人提问</a>
                 <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
                     <colgroup>
                         <col width="100" >
@@ -158,142 +160,11 @@
             </div>
             </#if>
             </#list>
-            <#--<div class="group" >-->
-                <#--<div style="height:30px;"></div>-->
-                <#--<h1>展示成绩</h1>-->
-                <#--<div class="form-group floating-control-group formFieldWrap">-->
-                    <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
-                <#--</div>-->
-                <#--<div style="height:20px;"></div>-->
-                <#--<h1>提问</h1>-->
-                <#--<a style="font-size:16px;">当前已有5人提问</a>-->
-                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
-                    <#--<colgroup>-->
-                        <#--<col width="100">-->
-                        <#--<col width="200">-->
-                    <#--</colgroup>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                <#--</table>-->
-                <#--<div style="height:20px;"></div>-->
-            <#--</div>-->
-            <#--<div class="group" >-->
-                <#--<div style="height:30px;"></div>-->
-                <#--<h1>展示成绩</h1>-->
-                <#--<div class="form-group floating-control-group formFieldWrap">-->
-                    <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
-                <#--</div>-->
-                <#--<div style="height:20px;"></div>-->
-                <#--<h1>提问</h1>-->
-                <#--<a style="font-size:16px;">当前已有5人提问</a>-->
-                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
-                    <#--<colgroup>-->
-                        <#--<col width="100">-->
-                        <#--<col width="200">-->
-                    <#--</colgroup>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                <#--</table>-->
-                <#--<div style="height:20px;"></div>-->
-            <#--</div>-->
-            <#--<div  class="group">-->
-                <#--<div style="height:30px;"></div>-->
-                <#--<h1>展示成绩</h1>-->
-                <#--<div class="form-group floating-control-group formFieldWrap">-->
-                    <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text" name="password" autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">-->
-                <#--</div>-->
-                <#--<div style="height:20px;"></div>-->
-                <#--<h1>提问</h1>-->
-                <#--<a style="font-size:16px;margin-top:4px;">当前已有5人提问</a>-->
-                <#--<table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >-->
-                    <#--<colgroup>-->
-                        <#--<col width="100">-->
-                        <#--<col width="200">-->
-                    <#--</colgroup>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>-->
-                        <#--</td>-->
-                        <#--<td style="padding:0 10px;">-->
-                            <#--<div class="form-group floating-control-group formFieldWrap">-->
-                                <#--<input style="margin-bottom:3px;font-size:15px;padding-top:10px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">-->
-                            <#--</div>-->
-                        <#--</td>-->
-                    <#--</tr>-->
-                <#--</table>-->
-                <#--<div style="height:20px;"></div>-->
-            <#--</div>-->
         </div>
     </div>
     <div class="center center-text ">
         <div class="formSubmitButtonErrorsWrap">
-            <input type="submit" class="layui-btn"  style="margin-right:15%;font-size: 18px;line-height: 42px;height: 40px;" value="抽取提问" data-formId="contactForm"/>
+            <input id="select" type="submit" class="layui-btn"  style="margin-right:15%;font-size: 18px;line-height: 42px;height: 40px;" value="抽取提问" data-formId="contactForm"/>
             <input id="restart" type="submit" class="layui-btn"  style="font-size: 18px;line-height: 42px;height: 40px;" value="下组展示" data-formId="contactForm"/>
         </div>
     </div>
@@ -316,6 +187,7 @@
     });
 </script>
 <script>
+    $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');
         $(this).siblings().removeClass('active');
@@ -354,7 +226,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: 'report_deadline.html',
+                    content: '/teacher/course/seminar/report_deadline',
                     scrollbar: true
                 });
             }
@@ -368,7 +240,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: 'report_deadline.html',
+                    content: '/teacher/course/seminar/report_deadline',
                     scrollbar: true
                 });
             }

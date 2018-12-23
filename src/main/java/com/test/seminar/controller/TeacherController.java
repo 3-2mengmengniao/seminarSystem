@@ -53,6 +53,9 @@ public class TeacherController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    RundSeminarService rundSeminarService;
+
 //    @Autowired
 //    FileService fileService;
 
@@ -347,19 +350,9 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
-        seminarControl.setSeminarStatus(1);
+        rundSeminarService.beginSeminar(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/progressing";
-    }
-
-    @RequestMapping(value="/report_download")
-    public String reportDownload(Model model) {
-        return "teacher/report_download";
-    }
-
-    @RequestMapping(value="/report_score")
-    public String reportScore(Model model) {
-        return "teacher/report_score";
     }
 
     @RequestMapping(value = "/activate",method = GET)
@@ -367,6 +360,9 @@ public class TeacherController {
 
     @RequestMapping(value = "/message",method = GET)
     public String message(Model model) { return "teacher/message"; }
+
+    @RequestMapping(value = "/course/seminar/report_deadline",method = GET)
+    public String deadline(Model model) { return "teacher/course/seminar/report_deadline"; }
 
     @RequestMapping(value="course/shareSettings")
     public String shareSettings(BigInteger courseId,Model model) {

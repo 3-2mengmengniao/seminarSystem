@@ -77,15 +77,22 @@
                 <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                 <div class="layui-colla-content">
                     <div class="layui-collapse" lay-accordion="">
-                        <#list round.seminarInfoList as seminar>
+                        <#list round.roundScoreList as roundScore>
+                            <#list roundScore.seminarScoreList as seminarScore>
+                                            <div class="layui-colla-item">
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
+                                                <div class="layui-colla-content ">
+                                                    展示：${seminarScore.presentationScore}分&nbsp&nbsp提问：${seminarScore.questionScore}分&nbsp&nbsp报告：${seminarScore.reportScore}分
+                                                </div>
+                                            </div>
+                            </#list>
                         <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">${seminar.seminarName}</h2>
+                            <h2 class="layui-colla-title">总成绩</h2>
                             <div class="layui-colla-content ">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                展示：${roundScore.presentationScore}分&nbsp&nbsp提问：${roundScore.questionScore}分&nbsp&nbsp报告：${roundScore.reportScore}分
                             </div>
                         </div>
-                            </#list>
-
+                        </#list>
                     </div>
                 </div>
             </div>
