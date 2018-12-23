@@ -3,6 +3,7 @@ package com.test.seminar.service;
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
@@ -73,5 +74,5 @@ public interface SeminarService {
      */
     List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList);
 
-    void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId);
+    void insertPresentation(int teamOrder, BigInteger seminarControlId, BigInteger teamId)throws HaveEnrollException;
 }

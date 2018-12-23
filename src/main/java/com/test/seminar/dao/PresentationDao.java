@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface PresentationDao {
 
+    Presentation getPresentationByTeamOrder(int teamOrder);
     /**
      *
      * @param presentation
@@ -29,4 +30,6 @@ public interface PresentationDao {
      * @param presentationId
      */
     void deletePresentationByPresentationId(BigInteger presentationId);
+
+    void deletePresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
 }

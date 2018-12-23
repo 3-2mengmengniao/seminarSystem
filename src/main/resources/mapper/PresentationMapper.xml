@@ -24,6 +24,12 @@
         where klass_seminar_id=#{seminarControlId}
     </select>
 
+    <select id="getPresentationByTeamOrder" resultMap="presentationResultMap">
+        select id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
+        from  attendance
+        where team_order=#{teamOrder}
+    </select>
+
     <insert id="insertPresentation">
         insert into attendance(klass_seminar_id,team_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url)
         values(#{seminarControlId},#{teamId},#{presentation.teamOrder},#{presentation.present},#{presentation.reportName},#{presentation.reportUrl},#{presentation.pptName},#{presentation.pptUrl})
@@ -58,4 +64,7 @@
         delete from attendance where id=#{presentationId}
     </delete>
 
+    <delete id="deletePresentationBySeminarControlIdAndTeamId">
+        delete from attendance where team_id=#{teamId} and klass_seminar_id=#{seminarControlId}
+    </delete>
 </mapper>

@@ -5,6 +5,7 @@ import com.test.seminar.dao.PresentationDao;
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.entity.*;
+import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
@@ -91,9 +92,12 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void insertPresentation(int teamOrder,BigInteger seminarControlId, BigInteger teamId) {
+    public void insertPresentation(int teamOrder,BigInteger seminarControlId, BigInteger teamId) throws HaveEnrollException{
         Presentation presentation = new Presentation();
         presentation.setTeamOrder(teamOrder);
+        if(presentationDao.getPresentationByTeamOrder(teamOrder)!=null)
+            throw new HaveEnrollException();
+        presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }
 }

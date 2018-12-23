@@ -1,6 +1,7 @@
 package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Presentation;
+import com.test.seminar.entity.SeminarControl;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -26,4 +27,7 @@ public interface PresentationMapper {
 
     void deletePresentationByPresentationId(@Param("presentationId")BigInteger presentationId);
 
+    Presentation getPresentationByTeamOrder(@Param("teamOrder")int teamOrder);
+
+    void deletePresentationBySeminarControlIdAndTeamId(@Param("seminarControlId") BigInteger seminarControlId,@Param("teamId") BigInteger teamId);
 }

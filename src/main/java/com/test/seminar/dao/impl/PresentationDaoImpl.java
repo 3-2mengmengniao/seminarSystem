@@ -32,4 +32,14 @@ public class PresentationDaoImpl implements PresentationDao {
     public void deletePresentationByPresentationId(BigInteger presentationId) {
         presentationMapper.deletePresentationByPresentationId(presentationId);
     }
+
+    @Override
+    public Presentation getPresentationByTeamOrder(int teamOrder) {
+        return presentationMapper.getPresentationByTeamOrder(teamOrder);
+    }
+
+    @Override
+    public void deletePresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId, BigInteger teamId) {
+        presentationMapper.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
+    }
 }
