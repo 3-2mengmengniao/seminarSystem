@@ -92,4 +92,6 @@ public interface RoundDao {
      * @return
      */
     Round getRoundByCourseIdAndRoundSerial(BigInteger courseId, int roundSerial);
+
+    List<RoundScore> getRoundScoreByTeamId(BigInteger teamId);
 }

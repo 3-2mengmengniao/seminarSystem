@@ -2,6 +2,7 @@ package com.test.seminar.service.impl;
 
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 import com.test.seminar.service.RoundService;
@@ -41,5 +42,10 @@ public class RoundServiceImpl implements RoundService {
     public List<Round> getRoundByCourseId(BigInteger courseId) {
          List<Round> roundlist = roundDao.getRoundByCourseId(courseId);
          return roundlist;
+    }
+
+    @Override
+    public List<RoundScore> getRoundScoreByTeamId(BigInteger teamId) {
+        return roundDao.getRoundScoreByTeamId(teamId);
     }
 }

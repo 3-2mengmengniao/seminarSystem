@@ -1,6 +1,7 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 
@@ -48,4 +49,6 @@ public interface RoundService {
      * @return
      */
     List<Round> getRoundByCourseId(BigInteger courseId);
+
+    List<RoundScore> getRoundScoreByTeamId(BigInteger teamId);
 }
