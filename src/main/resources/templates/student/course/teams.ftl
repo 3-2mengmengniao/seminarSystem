@@ -89,7 +89,7 @@
                 <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
                     <p class="text-center">组长：</p>
-                    <p class="text-center">${team.memberList[0].studentName}&nbsp&nbsp&nbsp${team.memberList[0].account}</p>
+                    <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
                     <p class="text-center">成员： </p>
                     <#list team.memberList as student>
                     <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
