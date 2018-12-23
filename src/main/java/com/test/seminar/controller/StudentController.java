@@ -255,6 +255,7 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         model.addAttribute("myTeam",team);
+        model.addAttribute("studentId",studentId);
         return "student/course/seminar/run";
     }
 

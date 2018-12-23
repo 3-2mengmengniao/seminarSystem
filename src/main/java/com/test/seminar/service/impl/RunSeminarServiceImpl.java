@@ -85,15 +85,16 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         boolean flag=false;
         for(Presentation presentation:seminarControl.getPresentationList()){
             if(presentation!=null){
-                if(presentation.getPresent()==1){
-                    presentation.setPresent(0);
-                    presentationDao.updatePresentation(presentation);
-                    flag=true;
-                }
                 if(flag){
                     presentation.setPresent(1);
                     presentationDao.updatePresentation(presentation);
                     flag=false;
+                    break;
+                }
+                if(presentation.getPresent()==1){
+                    presentation.setPresent(0);
+                    presentationDao.updatePresentation(presentation);
+                    flag=true;
                 }
             }
         }

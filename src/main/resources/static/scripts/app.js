@@ -1,4 +1,5 @@
 var stompClient = null;
+var send=false;
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -13,18 +14,25 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/queueServer');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
+        if(send===false)
+        {
+            stompClient.send("/app/buildRoom", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
+            send=true;
+        }
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/addQuestion', function (greeting) {
+        stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/addQuestion', function (greeting) {
+            console.log("enter");
+            console.log(greeting);
             showGreeting(greeting);
         });
-        stompClient.subscribe('/topic/addQuestion', function (greeting) {
+        stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/nextGroup', function (greeting) {
             showNext();
         });
-        stompClient.subscribe('/topic/selectQuestion', function (greeting) {
+        stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (greeting) {
             showGreeting("提问中");
         });
     });
@@ -39,7 +47,7 @@ function disconnect() {
 }
 
 function sendQuestion() {
-    stompClient.send("/app/QA", {}, JSON.stringify({'teamId': $("#teamId").attr("name"),"seminarId": $("#seminarId").attr("name")}));
+    stompClient.send("/app/QA", {}, JSON.stringify({'studentId': $("#studentId").attr("name"),'teamId': $("#teamId").attr("name"),"seminarId": $("#seminarId").attr("name")}));
 }
 
 function nextGroup() {
@@ -51,23 +59,21 @@ function selectQuestion() {
 }
 
 function showGreeting(message) {
-    $("#greetings").html(message);
+    console.log(message.body);
+    $("#greetings").html(message.body);
 }
 
 function showNext() {
     var currentLi=$('tr.group').filter('.active').next();
+    console.log($(currentLi).val());
     $(currentLi).addClass('active');
+    $(currentLi).children('tr').addClass('active');
     $(currentLi).siblings().removeClass('active');
+    $(currentLi).siblings().children('tr').removeClass('active');
 }
 
-$(function () {
     connect();
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#QAbutton" ).click(function() { sendQuestion(); });
-    $( "#restart" ).click(function() { nextGroup(); });
-    $( "#select" ).click(function() { selectQuestion(); });
-});
+

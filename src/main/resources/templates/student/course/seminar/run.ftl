@@ -81,6 +81,7 @@
     <h2 class="center-text" id="greetings">当前有0人提问</h2>
     <span id="teamId" name="${myTeam.id}"></span>
     <span id="seminarId" name="${seminarControl.id}"></span>
+    <span id="studentId" name="${studentId}"></span>
     <div class="distance"></div>
     <div class="center-navigation">
         <table class="layui-table" lay-skin="nob">
@@ -91,14 +92,17 @@
             <tbody>
             <#list 0..<seminarControl.seminarInfo.maxGroup as t>
                 <#if seminarControl.presentationList[t]??>
-                    <tr>
-                        <#if seminarControl.presentationList[t].present==1>
-                        <td>第${t+1}组：</td>
-                            <td class="normal">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
-                           <#else>
+                    <#if seminarControl.presentationList[t].present==1>
+                        <tr class="group active">
+                            <td class="active">第${t+1}组：</td>
                             <td class="active">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
-                           </#if>
-                    </tr>
+                        </tr>
+                    <#else>
+                        <tr class="group normal">
+                            <td>第${t+1}组：</td>
+                            <td>${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                        </tr>
+                    </#if>
                 </#if>
             </#list>
             </tbody>
@@ -116,6 +120,12 @@
 
 
 </body>
+<script>
+    $( "#connect" ).click(function() { connect(); });
+    $( "#disconnect" ).click(function() { disconnect(); });
+    $( "#QAbutton" ).click(function() { sendQuestion(); });
+
+</script>
 <style>
     .active{
         color:darkred;

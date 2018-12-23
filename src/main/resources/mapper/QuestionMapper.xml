@@ -22,11 +22,11 @@
     <select id="getQuestionByPresentationId" resultMap="questionResultMap">
         select is_selected, score
         from question
-        where attendance={#presentationId}
+        where attendance_id={#presentationId}
     </select>
 
     <insert id="insertQuestion">
-        insert into question(klass_seminar_id,attandance_id,team_id,student_id,is_selected,score)
+        insert into question(klass_seminar_id,attendance_id,team_id,student_id,is_selected,score)
         values(#{seminarControlId},#{presentationId},#{teamId},#{studentId},#{question.selected},#{question.score})
     </insert>
 

@@ -28,6 +28,10 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
+    <script src="/scripts/sockjs.js"></script>
+    <script src="/scripts/stomp.js"></script>
+    <script src="/scripts/app.js"></script>
+
 
 
 </head>
@@ -131,7 +135,7 @@
         <#if enrollment==false && seminarControl.seminarStatus==0>
             <p class="center center-text "><a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" class="button-return button-turqoise">报名</a>
         </#if>
-        <#if enrollment==true && seminarControl.seminarStatus==1>
+        <#if seminarControl.seminarStatus==1>
             <p class="center center-text "><a href="/student/course/seminar/run?seminarId=${seminarControl.id}" class="button-return button-turqoise">进入讨论课</a></p>
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus==2>

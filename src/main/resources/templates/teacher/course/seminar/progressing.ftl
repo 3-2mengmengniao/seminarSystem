@@ -267,7 +267,10 @@
                 }
             })
         }
+        nextGroup();
     })
+
+    $( "#select" ).click(function() { selectQuestion(); });
 
     $('#timeMonitor').click(function(){
         var btnId=$(this).children('img').attr('id');

@@ -142,16 +142,11 @@ public class SeminarDaoImpl implements SeminarDao {
     private void addPresentation(SeminarControl seminarControl) {
         List<Presentation> presentationList = presentationMapper.getPresentationBySeminarControlId(seminarControl.getId());
         List<Presentation> presentationListReconstruct = new ArrayList();
-        int order;
-        int count=0;
+        for (int i=0;i<seminarControl.getSeminarInfo().getMaxGroup();i++){
+            presentationListReconstruct.add(null);
+        }
         for (Presentation presentation : presentationList) {
-            order=presentation.getTeamOrder();
-            while(order!=count){
-                presentationListReconstruct.add(null);
-                count++;
-            }
-            presentationListReconstruct.add(order, presentation);
-            count++;
+            presentationListReconstruct.add(presentation.getTeamOrder(),presentation);
         }
         seminarControl.setPresentationList(presentationListReconstruct);
     }
