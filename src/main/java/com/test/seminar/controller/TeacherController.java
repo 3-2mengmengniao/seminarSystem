@@ -53,6 +53,9 @@ public class TeacherController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    RundSeminarService rundSeminarService;
+
 //    @Autowired
 //    FileService fileService;
 
@@ -347,7 +350,7 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
-        seminarControl.setSeminarStatus(1);
+        rundSeminarService.beginSeminar(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/progressing";
     }
