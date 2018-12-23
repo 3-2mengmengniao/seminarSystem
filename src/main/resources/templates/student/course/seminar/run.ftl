@@ -79,33 +79,17 @@
         <table class="layui-table" lay-skin="nob">
             <colgroup>
                 <col width="100">
-                <col width="200">
+                <col width="100">
             </colgroup>
             <tbody>
-            <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;text-align: center;">1-1</td>
-            </tr>
-            <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;text-align: center;">1-2</td>
-            </tr>
-            <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;text-align: center;">1-3</td>
-            </tr>
-            <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;text-align: center;">1-4</td>
-            </tr>
-            <tr>
-                <td>第五组：</td>
-                <td style="color:#009688;text-align: center;">1-5</td>
-            </tr>
-            <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;text-align: center;">1-6</td>
-            </tr>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <tr>
+                        <td>第${t+1}组：</td>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                    </tr>
+                </#if>
+            </#list>
             </tbody>
         </table>
         <div class="distance4"></div>

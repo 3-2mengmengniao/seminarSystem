@@ -102,15 +102,23 @@
                 <#if enrollment==true>
                 <tr>
                     <td> 报名情况</td>
-                    <td>2016-（1）第3组<a href="#" style="display: inline;margin-left: 20px;">修改</a></td>
+                    <td>${seminarControl.courseClass.grade}-（${seminarControl.courseClass.classSerial}）第${order+1}组<a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">修改</a></td>
                 </tr>
                  <tr>
                      <td> PPT</td>
+                     <#if seminarControl.presentationList[order].pptName??>
                      <td>已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                     <#else>
+                     <td>未提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                     </#if>
                 </tr>
                 <tr >
                     <td> 书面报告</td>
+                    <#if seminarControl.presentationList[order].reportName??>
                     <td>已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
+                    <#else>
+                    <td>未提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
+                    </#if>
                 </tr>
                 </#if>
             </table>
@@ -118,10 +126,10 @@
 
         <div class="distance"></div>
         <#if enrollment==false && seminarControl.seminarStatus==0>
-            <p class="center center-text "><a href="#" class="button-return button-turqoise">报名</a>
+            <p class="center center-text "><a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" class="button-return button-turqoise">报名</a>
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus==1>
-            <p class="center center-text "><input type="submit" class="layui-btn" id="contactSubmitButton" value="进入讨论课" data-formId="contactForm"/>
+            <p class="center center-text "><a href="/student/course/seminar/run?seminarId=${seminarControl.id}" class="button-return button-turqoise">进入讨论课</a></p>
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus==2>
             <p class="center center-text "><a href="/student/course/seminar/score?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看成绩</a></p>
