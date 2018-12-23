@@ -40,15 +40,15 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId){
         List<Round> roundList=roundMapper.getRoundByCourseId(courseId);
-//        for(int i=0;i<roundList.size();i++){
-//            List<RoundScore> roundScoreList=roundList.get(i).getRoundScoreList();
-//            for(int j=0;j<roundScoreList.size();j++){
-//                if(roundScoreList.get(j).getTeamId().equals(teamId)==false){
-//                    roundScoreList.remove(j);
-//                    j--;
-//                }
-//            }
-//        }
+        for(int i=0;i<roundList.size();i++){
+            List<RoundScore> roundScoreList=roundList.get(i).getRoundScoreList();
+            for(int j=0;j<roundScoreList.size();j++){
+                if(roundScoreList.get(j).getTeamId().equals(teamId)==false){
+                    roundScoreList.remove(j);
+                    j--;
+                }
+            }
+        }
         return roundList;
     }
 

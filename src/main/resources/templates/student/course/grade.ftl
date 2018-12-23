@@ -69,7 +69,7 @@
 </div>
 
 <div class="content">
-<#list course.roundList as round>
+<#list roundList as round>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
@@ -80,7 +80,7 @@
                         <#list round.roundScoreList as roundScore>
                             <#list roundScore.seminarScoreList as seminarScore>
                                             <div class="layui-colla-item">
-                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName} ${roundScore?index}  ${seminarScore?index}</h2>
                                                 <div class="layui-colla-content ">
                                                     展示：${seminarScore.presentationScore}分&nbsp&nbsp提问：${seminarScore.questionScore}分&nbsp&nbsp报告：${seminarScore.reportScore}分
                                                 </div>
