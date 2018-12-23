@@ -87,7 +87,7 @@
                         <#elseif seminarControl.seminarStatus==0>
                             <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
                         <#else>
-                    <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].pptName}</a></td>
+                    <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a href="${seminarControl.presentationList[t].pptUrl}">${seminarControl.presentationList[t].pptName}</a></td>
                         </#if>
                     </tr>
                 <#else>
