@@ -172,6 +172,7 @@ public class StudentController {
         model.addAttribute("course",course);
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         model.addAttribute("team",team);
+
         return "student/course/grade";
     }
 

@@ -73,7 +73,7 @@
 </div>
 
 <div class="content">
-    <#list course.roundList as round>
+    <#list roundList as round>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
@@ -81,23 +81,23 @@
                 <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                 <div class="layui-colla-content">
                     <div class="layui-collapse" lay-accordion="">
-                        <#list teamList as team>
+                        <#list round.roundScoreList as roundScore>
                             <div class="layui-colla-item">
-                                <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial}&nbsp&nbsp&nbsp4.5分</h2>
+                                <h2 class="layui-colla-title">${roundScore.courseClassSerial}-${roundScore.teamSerial}&nbsp&nbsp&nbsp${roundScore.totalScore}分</h2>
                                 <div class="layui-colla-content ">
                                     <div class="layui-collapse" lay-accordion="">
-                                        <#list round.seminarInfoList as seminar>
+                                        <#list roundScore.seminarScoreList as seminarScore>
                                             <div class="layui-colla-item">
-                                                <h2 class="layui-colla-title">${seminar.seminarName}</h2>
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
                                                 <div class="layui-colla-content ">
-                                                    展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                                    展示：${seminarScore.presentationScore}分&nbsp&nbsp提问：${seminarScore.questionScore}分&nbsp&nbsp报告：${seminarScore.reportScore}分
                                                 </div>
                                             </div>
                                         </#list>
                                         <div class="layui-colla-item">
                                             <h2 class="layui-colla-title">总成绩</h2>
                                             <div class="layui-colla-content ">
-                                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                                展示：${roundScore.presentationScore}分&nbsp&nbsp提问：${roundScore.questionScore}分&nbsp&nbsp报告：${roundScore.reportScore}分
                                             </div>
                                         </div>
                                     </div>

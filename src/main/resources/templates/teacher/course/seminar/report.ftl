@@ -73,27 +73,34 @@
 
 <div class="content">
     <div class="container no-bottom text-list">
-        <div class="container no-bottom">
-            <table cellspacing='0' class="table">
+        <div class="center-navigation">
+            <table class="layui-table" lay-skin="nob">
+                <colgroup>
+                    <col width="100">
+                    <col width="200">
+                </colgroup>
+                <tbody>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <tr>
+                        <td>第${t+1}组：</td>
+                        <#if seminarControl.presentationList[t].reportName??>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].reportName}</a></td>
+                        <#else>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
+                        </#if>
+                    </tr>
+                <#else>
                 <tr>
-                    <td> 第一组：<a href="#" style="margin-left: 10px;display: inline;">1-1 业务流程分析</a><input type="text" class="btn1-default my-btn2" placeholder="成绩"  style="margin-top: 2px;margin-bottom: 2px;"></td>
+                    <td>第${t+1}组：</td>
+                    <td style="color:#009688;">未报名</td>
                 </tr>
-                <tr class='even'>
-                    <td>  第二组：<a href="#" style="margin-left: 10px;display: inline;">1-2 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr>
-                    <td> 第三组：<a href="#" style="margin-left: 10px;display: inline;">1-3 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr class='even'>
-                    <td>第四组：<a href="#" style="margin-left: 10px;display: inline;">1-4 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"> </td>
-                </tr>
-                <tr>
-                    <td> 第五组：<a href="#" style="margin-left: 10px;display: inline;">1-5 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
-                <tr class='even'>
-                    <td>第六组：<a href="#" style="margin-left: 10px;display: inline;">1-6 业务流程分析</a><input type="text" class=" btn1-default my-btn2" placeholder="成绩" style="margin-top: 2px;margin-bottom: 2px;"></td>
-                </tr>
+                </#if>
+            </#list>
+                </tbody>
             </table>
+            <div class="distance4"></div>
+            <div class="distance"></div>
         </div>
 
         <div class="distance4"></div>

@@ -86,13 +86,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1-1</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
+                <#list seminarControl.seminarScoreList as seminarScore>
+                    <tr>
+                        <td>1-1</td>
+                        <td>${seminarScore.presentationScore}</td>
+                        <td>${}</td>
+                        <td>5.0</td>
+                        <td>5.0</td>
+                    </tr>
+                </#list>
                 <tr>
                     <td>1-2</td>
                     <td>5.0</td>
