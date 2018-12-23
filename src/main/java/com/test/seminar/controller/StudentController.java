@@ -184,6 +184,7 @@ public class StudentController {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         boolean flag=false;
+        int order=-1;
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         for(int i=0;i<presentationList.size();i++)
         {
@@ -192,11 +193,13 @@ public class StudentController {
                 if(temp.getId().equals(team.getId()))
                 {
                     flag=true;
+                    order=i;
                 }
             }
         }
         model.addAttribute("myTeam",team);
         model.addAttribute("enrollment",flag);
+        model.addAttribute("order",order);
         return "student/course/seminar/info";
     }
 
@@ -242,7 +245,9 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/run")
-    public String seminarRun(Model model) {
+    public String seminarRun(BigInteger seminarId,Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "student/course/seminar/run";
     }
 
