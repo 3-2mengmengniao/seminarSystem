@@ -99,7 +99,7 @@
                         error:function(data,status){
                             console.log(data);
                             console.log(status);
-                            alert("修改失败");
+                            layer.alert("修改失败",{icon:5});
                             console.log("error");
                         }
                     }
@@ -108,6 +108,7 @@
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);
                 //关闭当前frame
+                parent.location.reload();
                 parent.layer.close(index);
             });
             return false;
