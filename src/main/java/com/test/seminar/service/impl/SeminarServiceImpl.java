@@ -100,4 +100,9 @@ public class SeminarServiceImpl implements SeminarService {
         presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }
+
+    @Override
+    public void updateSeminarControl(SeminarControl seminarControl) {
+        seminarDao.updateSeminarControl(seminarControl);
+    }
 }
