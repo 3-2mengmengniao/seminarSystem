@@ -175,6 +175,7 @@ public class StudentController {
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         model.addAttribute("team",team);
         List<Round> roundList=roundService.getRoundByCourseId(courseId,team.getId());
+        System.out.println(roundList.get(0).getRoundScoreList().size());
         model.addAttribute("roundList",roundList);
         return "student/course/grade";
     }

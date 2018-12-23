@@ -43,7 +43,7 @@ public class RoundDaoImpl implements RoundDao {
         for(int i=0;i<roundList.size();i++){
             List<RoundScore> roundScoreList=roundList.get(i).getRoundScoreList();
             for(int j=0;j<roundScoreList.size();j++){
-                if(!roundScoreList.get(j).getTeamId().equals(teamId)){
+                if(roundScoreList.get(j).getTeamId().equals(teamId)==false){
                     roundScoreList.remove(j);
                     j--;
                 }
