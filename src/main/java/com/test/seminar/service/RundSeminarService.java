@@ -18,7 +18,7 @@ public interface RundSeminarService {
 
     void updateQuestion(Question question);
 
-    Presentation nextPresentation(BigInteger seminarControlId);
+    void nextPresentation(BigInteger seminarControlId);
 
     void updatePresentation(Presentation presentation);
 }

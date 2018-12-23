@@ -55,22 +55,45 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     @Override
     public void addQuestion(BigInteger seminarControlId, BigInteger teamId,BigInteger studentId) {
         Question question=new Question();
-        question.setStudent(studentDao.getStudentByStudentId(studentId));
-
+        BigInteger presentationId=new BigInteger("-1");
+        SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        for(Presentation presentation:seminarControl.getPresentationList()){
+            if(presentation!=null){
+                if(presentation.getPresent()==1){
+                    presentationId=presentation.getId();
+                }
+            }
+        }
+        questionDao.insertQuestion(question,seminarControlId,presentationId,studentId,teamId);
     }
 
     @Override
     public void updateQuestion(Question question) {
-
+        questionDao.updateQuestion(question);
     }
 
     @Override
-    public Presentation nextPresentation(BigInteger seminarControlId) {
-        return null;
+    public void nextPresentation(BigInteger seminarControlId) {
+        SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        boolean flag=false;
+        for(Presentation presentation:seminarControl.getPresentationList()){
+            if(presentation!=null){
+                if(presentation.getPresent()==1){
+                    presentation.setPresent(0);
+                    presentationDao.updatePresentation(presentation);
+                    flag=true;
+                }
+                if(flag){
+                    presentation.setPresent(1);
+                    presentationDao.updatePresentation(presentation);
+                    flag=false;
+                }
+            }
+        }
     }
 
     @Override
     public void updatePresentation(Presentation presentation) {
-
+        presentationDao.updatePresentation(presentation);
     }
 }
