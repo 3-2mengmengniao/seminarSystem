@@ -227,10 +227,12 @@ public class StudentController {
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
         for(int i=0;i<presentationList.size();i++)
         {
-            Team temp=presentationList.get(i).getTeam();
-            if(temp.getId().equals(team.getId()))
-            {
-                flag=true;
+            if(presentationList.get(i)!=null){
+                Team temp=presentationList.get(i).getTeam();
+                if(temp.getId().equals(team.getId()))
+                {
+                    flag=true;
+                }
             }
         }
         model.addAttribute("team",team);
