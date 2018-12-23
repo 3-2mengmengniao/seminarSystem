@@ -32,9 +32,9 @@
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,course.introduction,presentation_percentage,question_percentage,report_percentage,course.course_name,team_start_time,team_end_time
+        SELECT course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         FROM course,klass_student
-        WHERE student_id=#{studentId} AND klass_student.course_id=course.id;
+        WHERE student_id=#{studentId} AND klass_student.course_id=course.id
 
     </select>
 

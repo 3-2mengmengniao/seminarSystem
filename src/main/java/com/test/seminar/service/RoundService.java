@@ -50,5 +50,13 @@ public interface RoundService {
      */
     List<Round> getRoundByCourseId(BigInteger courseId);
 
+    /**
+     * 得到包含筛选过队伍的RoundScore的轮次信息
+     * @param courseId
+     * @param teamId
+     * @return
+     */
+    List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
+
     List<RoundScore> getRoundScoreByTeamId(BigInteger teamId);
 }

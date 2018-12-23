@@ -21,19 +21,16 @@ import java.util.List;
 public class TeamDaoImpl implements TeamDao {
     @Autowired
     TeamMapper teamMapper;
+    @Autowired
+    StudentMapper studentMapper;
 
-    private Team setTeamLeader(Team team_old){
-        Team team=team_old;
-        List<Student> memberList=team.getMemberList();
-        for(int i=0;i<memberList.size();i++){
-            if(memberList.get(i).getId().equals(team.getLeader_id())) {
-                team.setLeader(memberList.get(i));
-                memberList.remove(i);
+    private void setTeamLeaderAndUpdateMemberList(Team team){
+        for(int i=0;i<team.getMemberList().size();i++){
+            if(team.getMemberList().get(i).getId().equals(team.getLeader().getId())) {
+                team.getMemberList().remove(i);
                 break;
             }
         }
-        team.setMemberList(memberList);
-        return team;
     }
     @Override
     public Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException {
@@ -41,7 +38,7 @@ public class TeamDaoImpl implements TeamDao {
         if(team==null) {
             throw new TeamNotFoundException();
         }
-        team=setTeamLeader(team);
+        setTeamLeaderAndUpdateMemberList(team);
         return team;
     }
 
@@ -49,16 +46,16 @@ public class TeamDaoImpl implements TeamDao {
     public List<Team> getTeamByCourseId(BigInteger courseId) {
         List<Team> teamList=teamMapper.getTeamByCourseId(courseId);
         for(int i=0;i<teamList.size();i++){
-            teamList.set(i,setTeamLeader(teamList.get(i)));
+            setTeamLeaderAndUpdateMemberList(teamList.get(i));
         }
-        return teamList;
+       return teamList;
     }
 
     @Override
     public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
         List<Team> teamList=teamMapper.getTeamBySeminarControlId(seminarControlId);
         for(int i=0;i<teamList.size();i++){
-            teamList.set(i,setTeamLeader(teamList.get(i)));
+            setTeamLeaderAndUpdateMemberList(teamList.get(i));
         }
         return teamList;
     }
@@ -69,7 +66,7 @@ public class TeamDaoImpl implements TeamDao {
         if(team==null) {
             throw new TeamNotFoundException();
         }
-        team=setTeamLeader(team);
+        setTeamLeaderAndUpdateMemberList(team);
         return team;
     }
 
