@@ -247,9 +247,13 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/run")
-    public String seminarRun(BigInteger seminarId,Model model) {
+    public String seminarRun(HttpServletRequest request,BigInteger seminarId,Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,seminarControl.getCourseClass().getCourse().getId());
+        model.addAttribute("myTeam",team);
         return "student/course/seminar/run";
     }
 

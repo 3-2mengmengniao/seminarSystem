@@ -26,6 +26,10 @@
     <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
     <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
+    <script src="/scripts/sockjs.js"></script>
+    <script src="/scripts/stomp.js"></script>
+    <script src="/scripts/app.js"></script>
+
 </head>
 <body>
 
@@ -42,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
             <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -73,6 +77,7 @@
         <div class="center-title">
             <h1 class="thick">业务流程分析</h1>
             <p style="color:#009688;font-size:17px;margin-left:-33px;">1-1组已展示</p>
+            <p style="font-size:16px;" id="greetings">当前已有5人提问</p>
             <div>
                 <span id="runner"></span><br><br>
                 <div>
@@ -114,7 +119,6 @@
                 </div>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
-                <a style="font-size:16px;">当前已有5人提问</a>
                 <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
                     <colgroup>
                         <col width="100" >
