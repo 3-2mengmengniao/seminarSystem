@@ -342,29 +342,59 @@
         $('#runner').runner('reset');
         var currentLi=$('li.group').filter('.active').next();
         var groupIndex= $(currentLi).index();
+        var iframeWidth=$(window).width();
         if(groupIndex=='-1'){
-            var currentLi=$('li.group').eq(0);
-        }
-        $(currentLi).addClass('active');
-        $(currentLi).siblings().removeClass('active');
-        var groupIndex= $(currentLi).index();
-        var allDiv= $('div.group');
-        $(allDiv).eq(groupIndex).css('margin-top','');
-        $(allDiv).eq(groupIndex).addClass('active');
-        $(allDiv).eq(groupIndex).siblings().removeClass('active');
-        $.each($(allDiv),function(){
-            if($(this).index()<groupIndex){
-                var divHeight=$(this).height();
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
+            if(iframeWidth>768){
+                layer.open({
+                    type: 2,
+                    icon:7,
+                    titlt:"",
+                    shade: 0.6 ,//遮罩透明度
+                    area: ['500px', '520px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    anim: 6, //0-6的动画形式，-1不开启
+                    content: 'report_deadline.html',
+                    scrollbar: true
+                });
             }
-            if($(this).index()>groupIndex){
-                var divHeight=$(this).height()-20;
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
+            else{
+                layer.open({
+                    type: 2,
+                    icon:7,
+                    titlt:"",
+                    shade: 0.6 ,//遮罩透明度
+                    area: ['300px', '520px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    anim: 6, //0-6的动画形式，-1不开启
+                    content: 'report_deadline.html',
+                    scrollbar: true
+                });
             }
-        })
 
+        }
+        else{
+            $(currentLi).addClass('active');
+            $(currentLi).siblings().removeClass('active');
+            var groupIndex= $(currentLi).index();
+            var allDiv= $('div.group');
+            $(allDiv).eq(groupIndex).css('margin-top','');
+            $(allDiv).eq(groupIndex).addClass('active');
+            $(allDiv).eq(groupIndex).siblings().removeClass('active');
+            $.each($(allDiv),function(){
+                if($(this).index()<groupIndex){
+                    var divHeight=$(this).height();
+                    // alert(divHeight);
+                    $(this).css('margin-top','-'+divHeight+'px');
+                }
+                if($(this).index()>groupIndex){
+                    var divHeight=$(this).height()-20;
+                    // alert(divHeight);
+                    $(this).css('margin-top','-'+divHeight+'px');
+                }
+            })
+        }
     })
 
     $('#timeMonitor').click(function(){
@@ -372,12 +402,12 @@
         if(btnId=='startBtn'){
             $('#runner').runner('start');
             $(this).children('img').attr('id','stopBtn');
-            $(this).children('img').attr('src','/images/暂停.png');
+            $(this).children('img').attr('src','images/暂停.png');
         }
         if(btnId=='stopBtn'){
             $('#runner').runner('stop');
             $(this).children('img').attr('id','startBtn');
-            $(this).children('img').attr('src','/images/开始.png');
+            $(this).children('img').attr('src','images/开始.png');
         }
     })
     $('.my-form-control').click(function(){
@@ -445,93 +475,117 @@
 
     });
 
-    //buttons
+</script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form();
 
-    // $('#startBtn').click(function() {
-    //     $('#runner').runner('start');
-    //     $(this).addClass('activeBtn');
-    //     $('#stopBtn').removeClass('activeBtn');
-    //
-    // });
-    //
-    // $('#stopBtn').click(function() {
-    //     $('#runner').runner('stop');
-    //     $(this).addClass('activeBtn');
-    //     $('#startBtn').removeClass('activeBtn');
-    // });
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+    new Function($('.run').text())()
 
-    // $('#resetBtn').click(function() {
-    //     $('#runner').runner('reset');
-    //     $('#stopBtn').removeClass('activeBtn');
-    //     $('#startBtn').removeClass('activeBtn');
-    // });
+    //var index = parent.layer.getFrameIndex(window.name);
+    //parent.layer.iframeAuto(index);
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
 
-    // $('.group1').click(function () {
-    //     $('.group1').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('one');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group2').click(function () {
-    //     $('.group2').addClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('two');
-    //     $('#line').removeClass('one');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group3').click(function () {
-    //     $('.group3').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('.group4').removeClass('active');
-    //     $('#line').addClass('three');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('one');
-    //     $('#line').removeClass('four');
-    // });
-    // $('.group4').click(function () {
-    //     $('.group4').addClass('active');
-    //     $('.group2').removeClass('active');
-    //     $('.group3').removeClass('active');
-    //     $('.group1').removeClass('active');
-    //     $('#line').addClass('four');
-    //     $('#line').removeClass('two');
-    //     $('#line').removeClass('three');
-    //     $('#line').removeClass('one');
-    // });
-    // $('.group1').click(function () {
-    //     $('#first').addClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group2').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').addClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group3').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').addClass('active');
-    //     $('#fourth').removeClass('active');
-    // });
-    // $('.group4').click(function () {
-    //     $('#first').removeClass('active');
-    //     $('#second').removeClass('active');
-    //     $('#third').removeClass('active');
-    //     $('#fourth').addClass('active');
-    // });
+        //日期时间选择器
+        laydate.render({
+            elem: '#test5'
+            ,type: 'datetime'
+        });
+
+
+        //自定义重要日
+        laydate.render({
+            elem: '#test18'
+            ,mark: {
+                '0-10-14': '生日'
+                ,'0-12-31': '跨年' //每年的日期
+                ,'0-0-10': '工资' //每月某天
+                ,'0-0-15': '月中'
+                ,'2017-8-15': '' //如果为空字符，则默认显示数字+徽章
+                ,'2099-10-14': '呵呵'
+            }
+            ,done: function(value, date){
+                if(date.year === 2017 && date.month === 8 && date.date === 15){ //点击2017年8月15日，弹出提示语
+                    layer.msg('这一天是：中国人民抗日战争胜利72周年');
+                }
+            }
+        });
+
+        //限定可选日期
+        var ins22 = laydate.render({
+            elem: '#test-limit1'
+            ,min: '2016-10-14'
+            ,max: '2080-10-14'
+            ,ready: function(){
+                ins22.hint('日期可选值设定在 <br> 2016-10-14 到 2080-10-14');
+            }
+        });
+
+        //前后若干天可选，这里以7天为例
+        laydate.render({
+            elem: '#test-limit2'
+            ,min: -7
+            ,max: 7
+        });
+
+        //限定可选时间
+        laydate.render({
+            elem: '#test-limit3'
+            ,type: 'time'
+            ,min: '09:30:00'
+            ,max: '17:30:00'
+            ,btns: ['clear', 'confirm']
+        });
+
+        //同时绑定多个
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+            });
+        });
+
+        //初始赋值
+        laydate.render({
+            elem: '#test19'
+            ,value: '1989-10-14'
+            ,isInitValue: true
+        });
+
+        //选中后的回调
+        laydate.render({
+            elem: '#test20'
+            ,done: function(value, date){
+                layer.alert('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
+            }
+        });
+
+        //日期切换的回调
+        laydate.render({
+            elem: '#test21'
+            ,change: function(value, date){
+                layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
+            }
+        });
+
+        //墨绿主题
+        laydate.render({
+            elem: '#test29'
+            ,theme: 'molv'
+        });
+
+    });
 </script>
 <style type="text/css">
+    .layui-laydate-content table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: 14px;
+    }
+
     #startBtn{
         width:23px;
         height:23px;
@@ -811,5 +865,4 @@
     }
 </style>
 </body>
-
 </html>
