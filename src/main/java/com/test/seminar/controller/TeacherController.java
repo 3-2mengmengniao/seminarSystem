@@ -350,6 +350,14 @@ public class TeacherController {
         return "teacher/course/seminar/score";
     }
 
+    @RequestMapping(value="/course/seminar/presentationScore",method = POST)
+    public String presentationScore(BigInteger presentationId, Model model) {
+
+
+
+        return "teacher/course/seminar/score";
+    }
+
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
         rundSeminarService.beginSeminar(seminarId);

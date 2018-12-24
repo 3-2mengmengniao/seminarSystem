@@ -3,6 +3,7 @@ package com.test.seminar.service;
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarInfo;
+import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
@@ -49,6 +50,14 @@ public interface SeminarService {
      * @return
      */
     SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
+     * @param teamId
+     * @return
+     */
+    SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
 
     /**
      * 删除讨论课信息

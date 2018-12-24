@@ -78,7 +78,7 @@
 
 <div class="content">
     <div class="distance4"></div>
-    <h2 class="center-text" id="greetings">当前有0人提问</h2>
+    <h2 class="center-text" id="notation">1-1组正在展示 <span id="greetings">当前有0人提问</span></h2>
     <span id="teamId" name="${myTeam.id}"></span>
     <span id="seminarId" name="${seminarControl.id}"></span>
     <span id="studentId" name="${studentId}"></span>
