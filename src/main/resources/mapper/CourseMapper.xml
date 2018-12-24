@@ -45,6 +45,18 @@
         where seminar_main_course_id=#{seminarMainCourseId}
     </select>
 
+    <select id="getMainCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
+    </select>
+
+    <select id="getSubCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
+    </select>
+
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_percentage,question_percentage,
         report_percentage,course_name,team_start_time,team_end_time)

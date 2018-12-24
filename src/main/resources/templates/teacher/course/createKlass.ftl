@@ -58,7 +58,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course/klass/create?courseId=${courseId}" method="post" id="contactForm" name="${courseId}">
+        <form class="layui-form contactForm" id="contactForm" name="${courseId}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#d44950;">该班级已被创建！</p>
@@ -92,13 +92,15 @@
                     <p class="uppercase">请填写上课地点！</p>
                 </div>
             </div>
+            <div class="distance4"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label contactNameField" style="font-weight: bold;">班级学生名单</label>
-                <p class="file center-text"><input type="file"></p>
+                <input type="file" name="file" id="excelUpload" class="center-block center-text" multiple/>
             </div>
-            <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建班级" data-formId="contactForm"/></p>
+                <div class="distance3"></div>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建班级" data-formId="contactForm"/></p>
         </form>
+
         <div class="distance2"></div>
 
     </div>
@@ -113,7 +115,6 @@
         //各种基于事件的操作，下面会有进一步介绍
     });
 </script>
-
 
 </body>
 </html>

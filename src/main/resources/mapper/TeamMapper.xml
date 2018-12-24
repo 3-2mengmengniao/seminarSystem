@@ -9,6 +9,17 @@
         <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
 
+    <resultMap id="teamValidResultMap" type="com.test.seminar.entity.TeamValidApplication">
+        <id property="id" column="id"/>
+        <association property="team" column="id" javaType="com.test.seminar.entity.Team" select="getTeamByTeamValidApplicationId"/>
+    </resultMap>
+
+    <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
+        <id property="id" column="id"/>
+        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareTeamApplicationId"/>
+        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
+    </resultMap>
+
     <select id="getTeamByTeamId" resultMap="teamResultMap">
         SELECT id,team_name,leader_id,status,team_serial
         FROM team
@@ -44,7 +55,7 @@
         values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
     </insert>
 
-    <update id="updateTeamByTeamId">
+    <update id="updateTeam">
         update team
         <set>
             <if test="team.teamName!=null">
@@ -73,4 +84,47 @@
         </set>
         where student_id=#{studentId} and klass_id=#{courseClassId}
     </update>
+
+    <select id="getTeamValidApplicationByTeacherId" resultMap="teamValidResultMap">
+        select id,team_id,reason,status
+        from team_valid_application
+        where teacher_id=#{teacherId}
+    </select>
+
+    <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
+        select id,team_name,leader_id,status,team.team_serial
+        from team,team_valid_application
+        where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
+    </select>
+
+    <insert id="insertTeamValidApplication">
+        insert into team_valid_application(team_id,teacher_id,reason,status)
+        values (#{team_id},#{teacher_id},#{teamValidApplication.reason},#{teamValidApplication.status})
+    </insert>
+
+    <update id="updateTeamValidApplication">
+        update team_valid_application
+        <set>
+            <if test="teamValidApplication.status!=null">
+                status=#{teamValidApplication.status},
+            </if>
+        </set>
+        where id=#{teamValidApplication.id}
+    </update>
+
+    <delete id="deleteTeamValidApplicationByTeamValidApplicationId">
+        delete from team_valid_application where id=#{teamValidApplicationId}
+    </delete>
+
+    <select id="getShareTeamApplicationByTeacherId" resultMap="shareTeamResultMap">
+        select
+    </select>
+
+    <select id="getShareTeamApplicationByMainCourseId" resultMap="shareTeamResultMap">
+
+    </select>
+
+    <select id="getShareTeamApplicationBySubCourseId" resultMap="shareTeamResultMap">
+
+    </select>
 </mapper>

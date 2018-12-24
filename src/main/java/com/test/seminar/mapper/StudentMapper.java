@@ -64,7 +64,7 @@ public interface StudentMapper {
      * @param student
      * @return
      */
-    void updateStudentByStudentId(@Param("student") Student student);
+    void updateStudentByStudent(@Param("student") Student student);
 
     /**
      * 删除学生
