@@ -12,7 +12,7 @@ public class Team {
     private BigInteger id;
     private String teamName;
     private int status;
-    private int teamSerial;
+    private Integer teamSerial;
     private Student leader;
     private CourseClass courseClass;
     private List<Student> memberList;
@@ -34,7 +34,7 @@ public class Team {
 
     public void setLeader(Student leader) { this.leader = leader; }
 
-    public int getTeamSerial() {
+    public Integer getTeamSerial() {
         return teamSerial;
     }
 

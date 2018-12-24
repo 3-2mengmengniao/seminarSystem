@@ -21,6 +21,20 @@ public interface CourseDao {
     Course getCourseByCourseId(BigInteger courseId)  throws CourseNotFoundException;
 
     /**
+     * 根据课程ID获得共享讨论课从课程列表
+     * @param seminarMainCourseId
+     * @return
+     */
+    List<Course> getCourseBySeminarMainCourseId(BigInteger seminarMainCourseId);
+
+    /**
+     * 根据课程ID获得共享分组从课程
+     * @param teamMainCourseId
+     * @return
+     */
+    List<Course> getCourseByTeamMainCourseId(BigInteger teamMainCourseId);
+
+    /**
      * 通过老师ID获取课程列表
      * @param teacherId
      * @return

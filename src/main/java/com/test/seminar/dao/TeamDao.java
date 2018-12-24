@@ -1,6 +1,7 @@
 package com.test.seminar.dao;
 
 import com.test.seminar.entity.Team;
+import com.test.seminar.entity.TeamValidApplication;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 
@@ -53,7 +54,7 @@ public interface TeamDao {
      * @param team
      * @return
      */
-    void updateTeamByTeamId(Team team)throws TeamNotFoundException;
+    void updateTeam(Team team)throws TeamNotFoundException;
 
     /**
      * 更新某班级下某学生的队伍
@@ -71,4 +72,31 @@ public interface TeamDao {
      * @return
      */
     void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
+
+    /**
+     * 根据老师ID获取老师对应的所有课程的学生发送的申请
+     * @param teacherId
+     * @return
+     */
+    List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId);
+
+    /**
+     *
+     * @param teamValidApplication
+     * @param teamId
+     * @param teacherId
+     */
+    void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId);
+
+    /**
+     *
+     * @param teamValidApplication
+     */
+    void updateTeamValidApplication(TeamValidApplication teamValidApplication);
+
+    /**
+     *
+     * @param teamValidApplicationId
+     */
+    void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId);
 }

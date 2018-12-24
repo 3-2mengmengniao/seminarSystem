@@ -39,6 +39,12 @@
     where seminar.id=#{seminarInfoId} and seminar.round_id=round.id
     </select>
 
+    <select id="getRoundBySeminarControlId" resultType="Integer">
+    select round.id,round_serial,presentation_score_method,report_score_method,question_score_method
+    from round,seminar,klass_seminar
+    where klass_seminar.id=#{seminarControlId} and seminar.round_id=round.id and seminar.id=klass_seminar.seminar_id
+    </select>
+
     <select id="getRoundByCourseIdAndRoundSerial" resultMap="roundResultMap">
       select id,round_serial,presentation_score_method,report_score_method,question_score_method
       FROM round

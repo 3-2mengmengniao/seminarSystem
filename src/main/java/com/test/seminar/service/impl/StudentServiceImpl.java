@@ -27,8 +27,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudentByStudentId(Student student) throws UserNotFoundException {
-        studentDao.updateStudentByStudentId(student);
+    public void updateStudentByStudent(Student student) throws UserNotFoundException {
+        studentDao.updateStudentByStudent(student);
     }
 
     @Override

@@ -43,6 +43,12 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     public void endSeminar(BigInteger seminarControlId) {
         SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
         seminarControl.setSeminarStatus(2);
+        for(Presentation presentation:seminarControl.getPresentationList()){
+            if(presentation.getPresent()==1){
+                presentation.setPresent(0);
+                presentationDao.updatePresentation(presentation);
+            }
+        }
         seminarDao.updateSeminarControl(seminarControl);
     }
 

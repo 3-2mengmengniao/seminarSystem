@@ -64,11 +64,11 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void updateStudentByStudentId(Student student)throws UserNotFoundException {
+    public void updateStudentByStudent(Student student)throws UserNotFoundException {
         if(studentMapper.getStudentByStudentId(student.getId())==null) {
             throw new UserNotFoundException();
         }
-        studentMapper.updateStudentByStudentId(student);
+        studentMapper.updateStudentByStudent(student);
     }
 
     @Override

@@ -4,8 +4,8 @@
     <resultMap id="courseResultMap" type="com.test.seminar.entity.Course">
         <id property="id" column="id"/>
         <collection property="roundList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Round" select="com.test.seminar.mapper.RoundMapper.getRoundByCourseId"/>
-        <collection property="seminarSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseBySeminarSubCourseId"/>
-        <collection property="teamSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeamSubCourseId"/>
+        <collection property="seminarSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseBySeminarMainCourseId"/>
+        <collection property="teamSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeamMainCourseId"/>
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
@@ -33,16 +33,28 @@
 
     </select>
 
-    <select id="getCourseByTeamSubCourseId" resultMap="courseResultMap">
+    <select id="getCourseByTeamMainCourseId" resultMap="courseResultMap">
         select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where team_main_course_id=#{teamMainCourseId}
     </select>
 
-    <select id="getCourseBySeminarSubCourseId" resultMap="courseResultMap">
+    <select id="getCourseBySeminarMainCourseId" resultMap="courseResultMap">
         select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where seminar_main_course_id=#{seminarMainCourseId}
+    </select>
+
+    <select id="getMainCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
+    </select>
+
+    <select id="getSubCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
 
     <insert id="insertCourse">
