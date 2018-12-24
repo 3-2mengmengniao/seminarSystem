@@ -37,7 +37,7 @@ function connect() {
             }
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (greeting) {
-            showGreeting("提问中");
+            $("#greetings").html("提问中");
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/endSeminar', function (greeting) {
             if(user=="student")

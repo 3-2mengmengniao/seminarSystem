@@ -60,9 +60,13 @@ public class RunSeminarController {
     @MessageMapping("/selectQuestion")
     @ResponseBody
     public void selectQuestion(Message message) throws Exception{
+        SeminarRoom seminarRoom=seminarRoomMap.get(message.getSeminarId());
+        if(seminarRoom.getCount()==0)
+            return;
         Question question=rundSeminarService.selectQuestion(message.getSeminarId());
-
-        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion","");
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion","当前"+question.getTeamSerial().getSerial()+"正在提问");
+        seminarRoom.decCount();
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/addQuestion", "目前"+seminarRoom.getCount().toString()+"人已提问");
     }
 
     @MessageMapping("/endSeminar")

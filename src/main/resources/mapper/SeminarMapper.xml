@@ -14,7 +14,7 @@
         <id property="id" column="id"/>
         <result property="seminarStatus" column="status"/>
         <result property="reportDDL" column="report_ddl"/>
-        <association property="round" javaType="com.test.seminar.entity.Round" column="id" select="getRoundBySeminarControlId"/>
+        <association property="round" javaType="com.test.seminar.entity.Round" column="id" select="com.test.seminar.mapper.RoundMapper.getRoundBySeminarControlId"/>
         <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassBySeminarControlId"/>
         <association property="seminarInfo" javaType="com.test.seminar.entity.SeminarInfo" column="id" select="getSeminarInfoBySeminarControlId"/>
         <collection property="questionList" javaType="ArrayList" ofType="com.test.seminar.entity.Question" column="id" select="com.test.seminar.mapper.QuestionMapper.getQuestionBySeminarControlId"/>
