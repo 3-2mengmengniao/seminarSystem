@@ -39,6 +39,12 @@ function connect() {
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (greeting) {
             showGreeting("提问中");
         });
+        stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/endSeminar', function (greeting) {
+            if(user=="student")
+            {
+                endFunction();
+            }
+        });
     });
 }
 
@@ -54,12 +60,20 @@ function sendQuestion() {
     stompClient.send("/app/QA", {}, JSON.stringify({'studentId': $("#studentId").attr("name"),'teamId': $("#teamId").attr("name"),"seminarId": $("#seminarId").attr("name")}));
 }
 
+function endSeminar() {
+    stompClient.send("/app/endSeminar", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
+}
+
 function nextGroup() {
     stompClient.send("/app/nextGroup", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
 }
 
 function selectQuestion() {
     stompClient.send("/app/selectQuestion", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
+}
+
+function endFunction() {
+    window.location.href="/student/course/seminar/score?seminarId="+$("#seminarId").attr("name");
 }
 
 function showGreeting(message) {

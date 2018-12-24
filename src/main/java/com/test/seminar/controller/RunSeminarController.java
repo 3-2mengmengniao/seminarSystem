@@ -68,6 +68,6 @@ public class RunSeminarController {
     @MessageMapping("/endSeminar")
     @ResponseBody
     public void endSeminar(Message message) throws Exception{
-        rundSeminarService.endSeminar(message.getSeminarId());
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/endSeminar","end");
     }
 }
