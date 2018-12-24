@@ -8,9 +8,18 @@ import java.math.BigInteger;
  */
 
 public class Question {
+    private BigInteger teamId;
     private Student student;
     private int selected;
     private double score;
+
+    public BigInteger getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(BigInteger teamId) {
+        this.teamId = teamId;
+    }
 
     public Student getStudent() { return student; }
 
