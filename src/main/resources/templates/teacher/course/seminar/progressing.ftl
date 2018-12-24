@@ -79,7 +79,7 @@
             <span id="usertype" name="teacher"></span>
             <h1 class="thick">业务流程分析</h1>
             <p style="font-size:16px;" id="greetings">当前已有5人提问</p>
-            <p style="color:#009688;font-size:17px;margin-left:-33px;">1-1组已展示</p>
+            <p style="color:#009688;font-size:17px;margin-left:-33px;" id="notation">1-1组已展示</p>
             <div>
                 <span id="runner"></span><br><br>
                 <div>
@@ -100,15 +100,6 @@
                     </li>
                     </#if>
                 </#list>
-                <#--<li class="group">-->
-                    <#--1-2-->
-                <#--</li>-->
-                <#--<li class="group">-->
-                    <#--1-3-->
-                <#--</li>-->
-                <#--<li class="group">-->
-                    <#--1-4-->
-                <#--</li>-->
             </ul>
         </div>
         <div id="border">
@@ -120,9 +111,10 @@
             <div class="group">
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
-                <div class="form-group floating-control-group formFieldWrap">
-                    <input style="margin-bottom:3px;font-size:15px;padding-top:10px;z-index:99;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩">
-                </div>
+                <form class="form-group floating-control-group formFieldWrap" action="/teacher/course/seminar/presentationScore?presentationId=${seminarControl.presentationList[t].id}">
+                    <input style="margin-bottom:3px;font-size:15px;padding-top:10px;z-index:99;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩" name="score">
+                    <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                </form>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
                 <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
@@ -136,7 +128,8 @@
                         </td>
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
+                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -146,7 +139,8 @@
                         </td>
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
+                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -156,7 +150,8 @@
                         </td>
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 ">
+                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
+                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -174,6 +169,8 @@
         </div>
     </div>
     <div style="height:100px;z-index:-1;"></div>
+    <div class="distance"></div>
+    <p class="center center-text"><button class="button-big button-red" id="endButton" >结束讨论课</button></p>
 </div>
 
 <styles>
@@ -231,7 +228,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: '/teacher/course/seminar/report_deadline',
+                    content: '/teacher/course/seminar/report_deadline?seminarId=${seminarControl.id}',
                     scrollbar: true
                 });
             }
@@ -245,7 +242,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: '/teacher/course/seminar/report_deadline',
+                    content: '/teacher/course/seminar/report_deadline?seminarId=${seminarControl.id}',
                     scrollbar: true
                 });
             }
@@ -276,6 +273,12 @@
     })
 
     $( "#select" ).click(function() { selectQuestion(); });
+
+    $( "#endButton" ).click(function() {
+        endSeminar();
+
+        window.location.href="/teacher/course/seminar/score?seminarId=${seminarControl.id}";
+    });
 
     $('#timeMonitor').click(function(){
         var btnId=$(this).children('img').attr('id');
