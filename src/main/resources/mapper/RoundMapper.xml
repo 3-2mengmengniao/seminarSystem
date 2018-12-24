@@ -12,14 +12,8 @@
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
-        <result property="courseClassSerial" column="klass_serial"/>
-        <result property="teamSerial" column="team_serial"/>
-        <result property="totalScore" column="total_score"/>
-        <result property="presentationScore" column="presentation_score"/>
-        <result property="questionScore" column="question_score"/>
-        <result property="reportScore" column="report_score"/>
         <association property="teamSerial" javaType="com.test.seminar.entity.TeamSerial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getTeamSerialByTeamId"/>
-        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_score.round_id,teamId=round_score.team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -40,7 +34,7 @@
     where seminar.id=#{seminarInfoId} and seminar.round_id=round.id
     </select>
 
-    <select id="getRoundBySeminarControlId" resultType="Integer">
+    <select id="getRoundBySeminarControlId" resultMap="roundResultMap">
     select round.id,round_serial,presentation_score_method,report_score_method,question_score_method
     from round,seminar,klass_seminar
     where klass_seminar.id=#{seminarControlId} and seminar.round_id=round.id and seminar.id=klass_seminar.seminar_id
@@ -87,13 +81,13 @@
     </delete>
 
     <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
-        select round_score.round_id,round_score.team_id,klass_serial,team_serial,total_score,presentation_score,question_score,report_score
-        from round,team,round_score,klass
-        where round.id=#{roundId} and team.course_id=round.course_id and round_score.round_id=round.id and round_score.team_id=team.id and klass.id=team.klass_id
+        select team_id,total_score,presentation_score,question_score,report_score
+        from round_score
+        where round_id=#{roundId}
     </select>
 
     <select id="getRoundScoreByTeamId" resultMap="RoundScoreResultMap">
-        select total_score,presentation_score,question_score,report_score
+        select team_id,total_score,presentation_score,question_score,report_score
         from round_score
         where team_id=#{teamId}
     </select>

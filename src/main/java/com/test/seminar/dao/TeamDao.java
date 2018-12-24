@@ -1,6 +1,7 @@
 package com.test.seminar.dao;
 
 import com.test.seminar.entity.Team;
+import com.test.seminar.entity.TeamSerial;
 import com.test.seminar.entity.TeamValidApplication;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
@@ -41,6 +42,8 @@ public interface TeamDao {
      * @return
      */
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
+
+    TeamSerial getTeamSerialByTeamId(BigInteger teamId);
 
     /**
      * 创建新的队伍信息
