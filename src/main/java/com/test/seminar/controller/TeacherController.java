@@ -352,14 +352,9 @@ public class TeacherController {
 
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
-        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         rundSeminarService.beginSeminar(seminarId);
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
-        for(int i=0;i<seminarControl.getPresentationList().size();i++) {
-            if(seminarControl.getPresentationList().get(i)!=null) {
-                System.out.println(seminarControl.getPresentationList().get(i).getPresent());
-            }
-        }
         return "teacher/course/seminar/progressing";
     }
 

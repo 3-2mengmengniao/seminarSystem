@@ -34,6 +34,14 @@ public interface CourseClassMapper {
     List<CourseClass> getCourseClassByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
+     * 找到某课程的第serial个班级
+     * @param courseId
+     * @param serial
+     * @return
+     */
+    CourseClass getCourseClassByCourseIdAndSerial(@Param("courseId")BigInteger courseId,@Param("serial")int serial);
+
+    /**
      *
      * @param teamId
      * @return
