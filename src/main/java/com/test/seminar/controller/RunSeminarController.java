@@ -39,7 +39,10 @@ public class RunSeminarController {
     public void nextGroup(Message message){
         BigInteger seminarControlId=message.getSeminarId();
         rundSeminarService.nextPresentation(seminarControlId);
+        SeminarRoom seminarRoom=seminarRoomMap.get(seminarControlId);
+        seminarRoom.setCountZero();
         template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup","OK");
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+seminarRoom.getCount().toString()+"人已提问");
     }
 
     @MessageMapping("/buildRoom")
