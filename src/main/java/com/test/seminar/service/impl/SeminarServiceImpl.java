@@ -73,6 +73,11 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
+    public List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId){
+        return seminarDao.getSeminarScoreBySeminarControlId(seminarControlId);
+    }
+
+    @Override
     public SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId){
         return seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
     }
@@ -109,7 +114,9 @@ public class SeminarServiceImpl implements SeminarService {
         Presentation presentation = new Presentation();
         presentation.setTeamOrder(teamOrder);
         if(presentationDao.getPresentationBySeminarControlIdAndTeamOrder(seminarControlId,teamOrder)!=null)
+        {
             throw new HaveEnrollException();
+        }
         presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }

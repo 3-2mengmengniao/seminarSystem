@@ -5,10 +5,7 @@ import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
-import com.test.seminar.mapper.CourseMapper;
-import com.test.seminar.mapper.PresentationMapper;
-import com.test.seminar.mapper.RoundMapper;
-import com.test.seminar.mapper.SeminarMapper;
+import com.test.seminar.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +27,8 @@ public class SeminarDaoImpl implements SeminarDao {
     CourseMapper courseMapper;
     @Autowired
     PresentationMapper presentationMapper;
+    @Autowired
+    TeamMapper teamMapper;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -110,8 +109,12 @@ public class SeminarDaoImpl implements SeminarDao {
     }
 
     @Override
-    public SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId) {
-        return seminarMapper.getSeminarScoreBySeminarControlId(seminarControlId);
+    public List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId) {
+        List<SeminarScore> seminarScoreList=seminarMapper.getSeminarScoreBySeminarControlId(seminarControlId);
+        for(int i=0;i<seminarScoreList.size();i++){
+            seminarScoreList.get(i).setTeamSerial(teamMapper.getTeamSerialByTeamId(seminarScoreList.get(i).getTeamId()));
+        }
+        return seminarScoreList;
     }
 
     @Override

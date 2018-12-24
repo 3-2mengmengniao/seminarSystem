@@ -54,6 +54,13 @@ public interface SeminarService {
     /**
      *
      * @param seminarControlId
+     * @return
+     */
+    List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
+
+    /**
+     *
+     * @param seminarControlId
      * @param teamId
      * @return
      */
