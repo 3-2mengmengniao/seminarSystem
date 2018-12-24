@@ -8,19 +8,25 @@
     </resultMap>
 
     <select id="getQuestionBySeminarControlId" resultMap="questionResultMap">
-        select is_selected, score
+        select team_id,is_selected, score
         from question
         where klass_seminar_id={#seminarConrtolId}
     </select>
 
     <select id="getQuestionByTeamId" resultMap="questionResultMap">
-        select is_selected, score
+        select team_id,is_selected, score
         from question
-        where team={#teamId}
+        where team_id={#teamId}
+    </select>
+
+    <select id="getQuestionByPresentationIdAndTeamId" resultMap="questionResultMap">
+        select team_id,is_selected, score
+        from question
+        where team_id={#teamId} and attendance_id=#{presentationId}
     </select>
 
     <select id="getQuestionByPresentationId" resultMap="questionResultMap">
-        select is_selected, score
+        select team_id,is_selected, score
         from question
         where attendance_id={#presentationId}
     </select>
@@ -40,7 +46,7 @@
                 score=#{question.score},
             </if>
         </set>
-        where id=#{presentation.id}
+        where id=#{question.id}
     </update>
 
     <delete id="deleteQuestionByQuestionId">

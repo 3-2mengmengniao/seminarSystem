@@ -53,4 +53,14 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
         return  teamDao.getTeamBySeminarControlId(seminarControlId);
     }
+
+    @Override
+    public void addTeamMember(BigInteger teamId, BigInteger studentId) {
+
+    }
+
+    @Override
+    public void deleteTeamMember(BigInteger teamId, BigInteger studentId) {
+
+    }
 }

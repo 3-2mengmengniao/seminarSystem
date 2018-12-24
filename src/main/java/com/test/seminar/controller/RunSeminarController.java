@@ -1,12 +1,11 @@
 package com.test.seminar.controller;
 
 import com.test.seminar.entity.Message;
+import com.test.seminar.entity.Question;
 import com.test.seminar.entity.SeminarRoom;
 import com.test.seminar.service.RundSeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,4 +50,16 @@ public class RunSeminarController {
         }
     }
 
+    @MessageMapping("/selectQuestion")
+    @ResponseBody
+    public void selectQuestion(Message message) throws Exception{
+        Question question=rundSeminarService.selectQuestion(message.getSeminarId());
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion",question);
+    }
+
+    @MessageMapping("/endSeminar")
+    @ResponseBody
+    public void endSeminar(Message message) throws Exception{
+        rundSeminarService.endSeminar(message.getSeminarId());
+    }
 }
