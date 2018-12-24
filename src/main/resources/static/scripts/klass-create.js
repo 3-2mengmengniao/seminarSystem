@@ -26,16 +26,22 @@ jQuery(document).ready(function($) {
     // submit form data starts
     function submitData(currentForm, formType){
         formSubmitted = 'true';
-        var formInput = $('#' + currentForm).serialize();
+         var formInput =  new FormData($('#' + currentForm)[0]);
+        // var formInput = $('#' + currentForm).serialize();
+        console.log(formInput);
+        formInput.append("file", $('#excelUpload')[0].files[0]);
+        console.log(formInput.get("file"));
         var courseId=$('#contactForm').attr("name");
+        alert(courseId);
         $.ajax(
             {
-                url:$('#' + currentForm).attr('action'),
+                url:"/teacher/course/klass/create?courseId="+courseId,
                 type:'post',
+                processData: false,
+                contentType: false,
                 data:formInput,
                 success:function(data,status,response){
                     if(response.status=="200"){
-                        var info=response.responseText;
                         window.location.href="/teacher/course/klassList?courseId="+courseId;
                     }
                 },
@@ -48,16 +54,6 @@ jQuery(document).ready(function($) {
             }
         );
 
-        // $.post($('#' + currentForm).attr('action'),formInput, function(data,status){
-        //     if(data=="405") {
-        //         $('#formSuccessMessageWrap').fadeIn(500);
-        //         formSubmitted = 'false';
-        //     }
-        //     else if(data=="200")
-        //         window.location.href="/teacher/course/klassList?courseId="+courseId;
-        //
-        // });
-        //window.location.href='1vali_psw.html';
     };
     // submit form data function starts
     // validate form function starts
