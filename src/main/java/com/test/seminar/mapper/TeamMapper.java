@@ -99,7 +99,7 @@ public interface TeamMapper {
      * @param teamId
      * @param teacherId
      */
-    void insertTeamValidApplication(@Param("teamValidApplication")TeamValidApplication teamValidApplication,@Param("teamId")BigInteger teamId,@Param("teacherId")BigInteger teacherId);
+    void insertTeamValidApplication(@Param("teamValidApplication") TeamValidApplication teamValidApplication, @Param("teamId")BigInteger teamId, @Param("teacherId")BigInteger teacherId);
 
     /**
      *

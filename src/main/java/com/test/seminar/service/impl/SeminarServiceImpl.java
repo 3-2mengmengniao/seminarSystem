@@ -1,9 +1,6 @@
 package com.test.seminar.service.impl;
 
-import com.test.seminar.dao.CourseClassDao;
-import com.test.seminar.dao.PresentationDao;
-import com.test.seminar.dao.RoundDao;
-import com.test.seminar.dao.SeminarDao;
+import com.test.seminar.dao.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -31,6 +28,8 @@ public class SeminarServiceImpl implements SeminarService {
     private CourseClassDao courseClassDao;
     @Autowired
     private PresentationDao presentationDao;
+    @Autowired
+    private CourseDao courseDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -53,6 +52,12 @@ public class SeminarServiceImpl implements SeminarService {
         for(CourseClass courseClass:courseClassList){
             SeminarControl seminarControl = new SeminarControl();
             seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
+        }
+        List<Course> subCourseList=courseDao.getCourseBySeminarMainCourseId(courseId);
+        if(subCourseList!=null){
+            for(Course course:subCourseList){
+
+            }
         }
     }
 

@@ -1,9 +1,11 @@
 package com.test.seminar.controller;
 
+import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Message;
 import com.test.seminar.entity.Question;
 import com.test.seminar.entity.SeminarRoom;
 import com.test.seminar.service.RundSeminarService;
+import com.test.seminar.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,6 +22,8 @@ public class RunSeminarController {
 
     @Autowired
     private RundSeminarService rundSeminarService;
+    @Autowired
+    private TeamService teamService;
     @Autowired
     public SimpMessagingTemplate template;
     private Map<BigInteger, SeminarRoom> seminarRoomMap=new HashMap<>();
@@ -54,7 +58,8 @@ public class RunSeminarController {
     @ResponseBody
     public void selectQuestion(Message message) throws Exception{
         Question question=rundSeminarService.selectQuestion(message.getSeminarId());
-        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion",question);
+
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion","");
     }
 
     @MessageMapping("/endSeminar")
