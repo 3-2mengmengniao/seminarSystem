@@ -15,6 +15,12 @@
         WHERE id=#{teamId}
     </select>
 
+    <select id="getTeamSerialByTeamId" resultType="com.test.seminar.entity.TeamSerial">
+        SELECT team_serial,klass_serial
+        FROM team,klass
+        WHERE team.id=#{teamId} and team.klass_id=klass.id
+    </select>
+
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
         SELECT team.id,team_name,leader_id,status,team_serial
         FROM team,klass_student
