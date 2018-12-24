@@ -30,7 +30,7 @@
     <script type="text/javascript" src="/layui/layui.js"></script>
     <script src="/scripts/sockjs.js"></script>
     <script src="/scripts/stomp.js"></script>
-    <script src="/scripts/app.js"></script>
+
 
 
 </head>
@@ -82,6 +82,7 @@
     <span id="teamId" name="${myTeam.id}"></span>
     <span id="seminarId" name="${seminarControl.id}"></span>
     <span id="studentId" name="${studentId}"></span>
+    <span id="usertype" name="student"></span>
     <div class="distance"></div>
     <div class="center-navigation">
         <table class="layui-table" lay-skin="nob">
@@ -98,7 +99,7 @@
                             <td class="active">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
                         </tr>
                     <#else>
-                        <tr class="group normal">
+                        <tr class="group">
                             <td>第${t+1}组：</td>
                             <td>${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
                         </tr>
@@ -120,6 +121,7 @@
 
 
 </body>
+<script src="/scripts/app.js"></script>
 <script>
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });

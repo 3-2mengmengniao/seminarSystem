@@ -352,6 +352,11 @@ public class TeacherController {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         rundSeminarService.beginSeminar(seminarId);
         model.addAttribute("seminarControl",seminarControl);
+        for(int i=0;i<seminarControl.getPresentationList().size();i++) {
+            if(seminarControl.getPresentationList().get(i)!=null) {
+                System.out.println(seminarControl.getPresentationList().get(i).getPresent());
+            }
+        }
         return "teacher/course/seminar/progressing";
     }
 
@@ -363,6 +368,12 @@ public class TeacherController {
 
     @RequestMapping(value = "/course/seminar/report_deadline",method = GET)
     public String deadline(Model model) { return "teacher/course/seminar/report_deadline"; }
+
+    @RequestMapping(value = "/course/seminar/endSeminar",method = POST)
+    public String endSeminar(String deadline,Model model) {
+        System.out.println(deadline);
+        return "teacher/course/seminar/report_deadline";
+    }
 
     @RequestMapping(value="course/shareSettings")
     public String shareSettings(BigInteger courseId,Model model) {

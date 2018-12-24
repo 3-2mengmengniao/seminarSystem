@@ -43,6 +43,24 @@
             layer.msg('请填写报告截止日期!');
             return;
         }
+        var fd=new FormData();
+        fd.append("deadline", val);
+        $.ajax(
+                {
+                    url:"/teacher/course/seminar/endSeminar",
+                    type:'post',
+                    data:fd,
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            window.location.href="/teacher/courseList";
+                        }
+                    },
+                    error:function(data,status){
+                        console.log(data);
+                        console.log(status);
+                    }
+                }
+        );
         parent.layer.msg('您将日期 [ ' +val + ' ] 成功传送给了父窗口');
         parent.layer.close(index);
     });

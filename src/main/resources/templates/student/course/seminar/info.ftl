@@ -113,17 +113,17 @@
                  <tr>
                      <td> PPT</td>
                      <#if seminarControl.presentationList[order].pptName??>
-                     <td>已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                     <td>已提交<span href="#" style="display: inline;margin-left: 20px;"></span></td>
                      <#else>
-                     <td>未提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间0时12分</span></td>
+                     <td>未提交<span href="#" style="display: inline;margin-left: 20px;"></span></td>
                      </#if>
                 </tr>
                 <tr >
                     <td> 书面报告</td>
                     <#if seminarControl.presentationList[order].reportName??>
-                    <td>已提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
+                    <td>已提交<span href="#" style="display: inline;margin-left: 20px;">截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span></td>
                     <#else>
-                    <td>未提交<span href="#" style="display: inline;margin-left: 20px;">距截止时间13时12分</span></td>
+                    <td>未提交<span href="#" style="display: inline;margin-left: 20px;">截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span></td>
                     </#if>
                 </tr>
                 </#if>

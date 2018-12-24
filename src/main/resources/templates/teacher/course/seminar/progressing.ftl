@@ -76,6 +76,7 @@
     <div id="wrapper">
         <div class="center-title">
             <span id="seminarId" name="${seminarControl.id}"></span>
+            <span id="usertype" name="teacher"></span>
             <h1 class="thick">业务流程分析</h1>
             <p style="font-size:16px;" id="greetings">当前已有5人提问</p>
             <p style="color:#009688;font-size:17px;margin-left:-33px;">1-1组已展示</p>
@@ -89,8 +90,12 @@
         <div id="left-side">
             <ul>
                 <#list 0..<seminarControl.seminarInfo.maxGroup as t>
-                    <#if seminarControl.presentationList[t]??>
+                    <#if seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==1>
                     <li class="group active">
+                        ${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}
+                    </li>
+                    <#elseif seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==0>
+                    <li class="group">
                         ${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}
                     </li>
                     </#if>
@@ -277,12 +282,12 @@
         if(btnId=='startBtn'){
             $('#runner').runner('start');
             $(this).children('img').attr('id','stopBtn');
-            $(this).children('img').attr('src','images/暂停.png');
+            $(this).children('img').attr('src','/images/暂停.png');
         }
         if(btnId=='stopBtn'){
             $('#runner').runner('stop');
             $(this).children('img').attr('id','startBtn');
-            $(this).children('img').attr('src','images/开始.png');
+            $(this).children('img').attr('src','/images/开始.png');
         }
     })
     $('.my-form-control').click(function(){

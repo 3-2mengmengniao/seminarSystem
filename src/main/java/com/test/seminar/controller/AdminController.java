@@ -33,8 +33,7 @@ public class AdminController {
     StudentService studentService;
 
     @RequestMapping(value = {"/admin/","/admin/login"}, method = GET)
-    public String login(HttpServletResponse response, Model model) {
-        response.addHeader("x-frame-options","SAMEORIGIN");
+    public String login(Model model) {
         return "admin/login";
     }
 
