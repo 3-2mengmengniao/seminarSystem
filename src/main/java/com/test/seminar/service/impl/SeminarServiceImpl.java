@@ -104,7 +104,9 @@ public class SeminarServiceImpl implements SeminarService {
         Presentation presentation = new Presentation();
         presentation.setTeamOrder(teamOrder);
         if(presentationDao.getPresentationBySeminarControlIdAndTeamOrder(seminarControlId,teamOrder)!=null)
+        {
             throw new HaveEnrollException();
+        }
         presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }
