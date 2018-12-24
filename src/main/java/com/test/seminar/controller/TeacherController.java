@@ -347,7 +347,8 @@ public class TeacherController {
     public String seminarScore(BigInteger seminarId, Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
-
+        List<SeminarScore> seminarScoreList=seminarService.getSeminarScoreBySeminarControlId(seminarId);
+        model.addAttribute("seminarScoreList",seminarScoreList);
         return "teacher/course/seminar/score";
     }
 

@@ -99,7 +99,7 @@ public class HomeController {
             studentId=(BigInteger)session.getAttribute("id");
             Student student=studentService.getStudentByStudentId(studentId);
             student.setPassword(newPsw);
-            studentService.updateStudentByStudentId(student);
+            studentService.updateStudentByStudent(student);
             return new ResponseEntity<>("", HttpStatus.OK);
         }
         return new ResponseEntity<>("", HttpStatus.NOT_FOUND);

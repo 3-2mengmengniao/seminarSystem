@@ -86,22 +86,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <#list 0..<seminarControl.seminarInfo.maxGroup as t>
-                    <#if seminarControl.presentationList[t]??>
+                <#list seminarScoreList as seminarScore>
                     <tr>
-                        <td>第${t+1}组：</td>
-                        <#list seminarControl.presentationList[t].>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].reportName}</a></td>
-                        <#else>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
-                        </#if>
+                        <td>${seminarControl.courseClass}-${seminarScore.teamSerial.teamSerial}</td>
+                        <td>${seminarScore.presentationScore!""}</td>
+                        <td>${seminarScore.questionScore!""}</td>
+                        <td>${seminarScore.reportScore!""}</td>
+                        <td>${seminarScore.totalScore!""}</td>
                     </tr>
-                    <#else>
-                    <tr>
-                        <td>第${t+1}组：</td>
-                        <td style="color:#009688;">未报名</td>
-                    </tr>
-                    </#if>
                 </#list>
                 <#--<#if seminarControl.seminarScoreList??>-->
                 <#--<#list seminarControl.seminarScoreList as seminarScore>-->
@@ -114,34 +106,34 @@
                     <#--</tr>-->
                 <#--</#list>-->
                 <#--</#if>-->
-                <tr>
-                    <td>1-2</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-3</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-4</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-5</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
+                <#--<tr>-->
+                    <#--<td>1-2</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-3</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-4</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-5</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
                 </tbody>
 
             </table>
