@@ -174,6 +174,8 @@
         </div>
     </div>
     <div style="height:100px;z-index:-1;"></div>
+    <div class="distance"></div>
+    <p class="center center-text"><button class="button-big button-red" id="endButton" >结束讨论课</button></p>
 </div>
 
 <styles>
@@ -231,7 +233,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: '/teacher/course/seminar/report_deadline',
+                    content: '/teacher/course/seminar/report_deadline?seminarId=${seminarControl.id}',
                     scrollbar: true
                 });
             }
@@ -245,7 +247,7 @@
                     fixed: false, //不固定
                     maxmin: true,
                     anim: 6, //0-6的动画形式，-1不开启
-                    content: '/teacher/course/seminar/report_deadline',
+                    content: '/teacher/course/seminar/report_deadline?seminarId=${seminarControl.id}',
                     scrollbar: true
                 });
             }
@@ -276,6 +278,8 @@
     })
 
     $( "#select" ).click(function() { selectQuestion(); });
+
+    $( "#endButton" ).click(function() { endSeminar(); });
 
     $('#timeMonitor').click(function(){
         var btnId=$(this).children('img').attr('id');
