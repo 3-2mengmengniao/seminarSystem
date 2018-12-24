@@ -1,5 +1,6 @@
 var stompClient = null;
 var send=false;
+var user=$('#usertype').attr("name");
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -30,7 +31,10 @@ function connect() {
             showGreeting(greeting);
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/nextGroup', function (greeting) {
-            showNext();
+            if(user=="student")
+            {
+                showNext();
+            }
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (greeting) {
             showGreeting("提问中");
@@ -63,13 +67,13 @@ function showGreeting(message) {
     $("#greetings").html(message.body);
 }
 
-function showNext() {
-    var currentLi=$('tr.group').filter('.active').next();
-    console.log($(currentLi).val());
-    $(currentLi).addClass('active');
-    $(currentLi).children('tr').addClass('active');
-    $(currentLi).siblings().removeClass('active');
-    $(currentLi).siblings().children('tr').removeClass('active');
+function showNext(){
+    var currentTr=$('tr.group').filter('.active').next();
+    var groupIndex= $(currentTr).index();
+    var allTr= $('tr.group');
+    $(allTr).eq(groupIndex).addClass('active');
+    $(allTr).eq(groupIndex).siblings().removeClass('active');
+    window.location.reload();
 }
 
     connect();

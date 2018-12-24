@@ -1,5 +1,6 @@
 package com.test.seminar.service;
 
+import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.UserNotFoundException;
