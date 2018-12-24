@@ -14,7 +14,7 @@ public interface TeamService {
 
     void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
 
-    void updateTeamByTeamId(Team team) throws TeamNotFoundException;
+    void updateTeam(Team team) throws TeamNotFoundException;
 
     void insertTeam(Team team,BigInteger courseClassId) throws RepetitiveRecordException;
 

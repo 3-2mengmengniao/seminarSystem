@@ -48,6 +48,8 @@ public interface CourseMapper {
     List<Course> getCourseBySeminarSubCourseId(@Param("seminarSubCourseId")BigInteger seminarSubCourseId);
 
     List<Course> getCourseByTeamSubCourseId(@Param("teamMainSubId")BigInteger teamSubCourseId);
+
+    Course getCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
     /**
      * 创建新的课程账户
      * @param course

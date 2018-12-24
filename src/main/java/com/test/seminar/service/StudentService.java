@@ -35,7 +35,7 @@ public interface StudentService {
      * @param student
      * @throws UserNotFoundException
      */
-    void updateStudentByStudentId(Student student)throws UserNotFoundException;
+    void updateStudentByStudent(Student student)throws UserNotFoundException;
 
     /**
      *
