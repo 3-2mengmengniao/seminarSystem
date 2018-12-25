@@ -75,12 +75,17 @@
 
 <div class="content">
     <div class="container no-bottom text-list">
-        <div class="container no-bottom">
-            <table cellspacing='0' class="table">
-                <#--<tr>-->
-                    <#--<td>轮次</td>-->
-                    <#--<td>第${round.roundSerial}轮</td>-->
-                <#--</tr>-->
+        <div class="center-navigation">
+            <table class="layui-table" lay-skin="nob">
+                <colgroup>
+                    <col width="100">
+                    <col width="200">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>轮次</td>
+                    <td>第${seminarControl.round.roundSerial}轮</td>
+                </tr>
                 <tr>
                     <td>主题</td>
                     <td>${seminarControl.seminarInfo.seminarName}</td>
@@ -127,6 +132,7 @@
                     </#if>
                 </tr>
                 </#if>
+                </tbody>
             </table>
         </div>
 
@@ -197,6 +203,8 @@
                                 error:function(data){console.log("error");}
                             }
                     );
+                    layer.close(layer.index);
+                    window.location.reload();
                 }
                 ,btn2: function(index, layero){
                     //按钮【按钮二】的回调
@@ -236,6 +244,7 @@
                                 error:function(data){console.log("error");}
                             }
                     );
+                    layer.close(layer.index);
                 }
                 ,btn2: function(index, layero){
                     //按钮【按钮二】的回调

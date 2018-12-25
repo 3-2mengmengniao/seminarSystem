@@ -98,14 +98,12 @@
                     </select>
                 </div>
             </div>
-            <div class="decoration"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课可见：</label>
                 <div class="layui-input-block" style="float: right;">
                     <input type="checkbox" name="seminarVisible" title="可见" checked>
                 </div>
             </div>
-            <div class="decoration"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
@@ -119,11 +117,9 @@
                     </select>
                 </div>
             </div>
-            <div class="distance3"></div>
             <div class="decoration"></div>
             <div class="distance3"></div>
             <div>
-                <div class="distance3"></div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">报名小组数</label>
                     <div class="layui-input-block">
@@ -134,12 +130,6 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                         </select>
-                    </div>
-                </div>
-                <div class="layui-form-item margin1 ">
-                    <label class="layui-form-label">报名顺序</label>
-                    <div class="layui-input-block" style="float: right;">
-                        <input type="checkbox" name="serial" title="自定" checked>
                     </div>
                 </div>
                 <div class="layui-form-item margin2">

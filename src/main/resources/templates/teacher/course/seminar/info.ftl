@@ -82,10 +82,10 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <#--<tr>-->
-                <#--<td>轮次</td>-->
-                <#--<td>第${round.roundSerial}轮</td>-->
-            <#--</tr>-->
+            <tr>
+                <td>轮次</td>
+                <td>第${seminarControl.round.roundSerial}轮</td>
+            </tr>
             <tr>
                 <td>主题</td>
                 <td>${seminarControl.seminarInfo.seminarName}</td>

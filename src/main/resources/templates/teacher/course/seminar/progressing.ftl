@@ -190,6 +190,7 @@
 
 </script>
 <script>
+    function() { comeIn(); }
     $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');

@@ -123,6 +123,7 @@
 </body>
 <script src="/scripts/app.js"></script>
 <script>
+    function() { comeIn(); }
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#QAbutton" ).click(function() { sendQuestion(); });
