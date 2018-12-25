@@ -71,7 +71,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         }
         Map<String,Integer> weightMap=new HashMap<>();
         for(Question question:activePresentation.getQuestionList()){
-            weightMap.put(question.getTeamSerial().getSerial(),0);
+            weightMap.put(question.getSerial().getSerial(),0);
         }
         for(SeminarControl otherControl:seminarControlList){
             calculateWeight(weightMap,otherControl,-100,0);
@@ -83,7 +83,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         String selectTeamSerial=mapList.get(0).getKey();
         Question selectQuestion=activePresentation.getQuestionList().get(0);
         for(Question question:activePresentation.getQuestionList()){
-            if(question.getTeamSerial().getSerial().equals(selectTeamSerial)){
+            if(question.getSerial().getSerial().equals(selectTeamSerial)){
                 selectQuestion=question;
             }
         }
@@ -141,16 +141,16 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         Integer weight;
         List<Question> questionList=seminarControl.getQuestionList();
         for(Question oldQuestion:questionList){
-            if(!weightMap.keySet().contains(oldQuestion.getTeamSerial().getSerial()))
+            if(!weightMap.keySet().contains(oldQuestion.getSerial().getSerial()))
                 continue;
-            weight=weightMap.get(oldQuestion.getTeamSerial().getSerial());
+            weight=weightMap.get(oldQuestion.getSerial().getSerial());
             if(oldQuestion.getSelected()==1){
                 weight+=select;
             }
             else{
                 weight+=notselect;
             }
-            weightMap.put(oldQuestion.getTeamSerial().getSerial(),weight);
+            weightMap.put(oldQuestion.getSerial().getSerial(),weight);
         }
     }
 }

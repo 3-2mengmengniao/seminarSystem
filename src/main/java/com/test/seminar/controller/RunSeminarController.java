@@ -64,7 +64,7 @@ public class RunSeminarController {
         if(seminarRoom.getCount()==0)
             return;
         Question question=rundSeminarService.selectQuestion(message.getSeminarId());
-        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion","当前"+question.getTeamSerial().getSerial()+"正在提问");
+        template.convertAndSendToUser(message.getSeminarId().toString(),"/selectQuestion","当前"+question.getSerial().getSerial()+"正在提问");
         seminarRoom.decCount();
         template.convertAndSendToUser(message.getSeminarId().toString(),"/addQuestion", "目前"+seminarRoom.getCount().toString()+"人已提问");
     }

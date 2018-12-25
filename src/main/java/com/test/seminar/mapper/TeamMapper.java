@@ -1,8 +1,8 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.Serial;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.TeamValidApplication;
-import com.test.seminar.entity.TeamSerial;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -54,7 +54,7 @@ public interface TeamMapper {
      * @param teamId
      * @return
      */
-    TeamSerial getTeamSerialByTeamId(@Param("teamId")BigInteger teamId);
+    Serial getSerialByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 创建新的队伍信息

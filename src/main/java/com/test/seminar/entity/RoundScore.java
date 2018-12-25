@@ -5,7 +5,7 @@ import java.util.List;
 
 public class RoundScore {
     private BigInteger teamId;
-    private TeamSerial teamSerial;
+    private Serial serial;
     private List<SeminarScore> seminarScoreList;
     private double totalScore;
     private double presentationScore;
@@ -46,9 +46,9 @@ public class RoundScore {
         this.reportScore = reportScore;
     }
 
-    public TeamSerial getTeamSerial() { return teamSerial; }
+    public Serial getSerial() { return serial; }
 
-    public void setTeamSerial(TeamSerial teamSerial) { this.teamSerial = teamSerial; }
+    public void setSerial(Serial serial) { this.serial = serial; }
 
     public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
 

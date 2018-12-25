@@ -5,6 +5,7 @@
         <id property="id" column="id" />
         <association property="courseClass" column="id" javaType="com.test.seminar.entity.CourseClass" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByTeamId"/>
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
         <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
@@ -20,16 +21,20 @@
         <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
     </resultMap>
 
+    <resultMap id="SerialResultMap" type="com.test.seminar.entity.Serial">
+        <result property="courseClassSerial" column="klass_serial"/>
+    </resultMap>
+
     <select id="getTeamByTeamId" resultMap="teamResultMap">
         SELECT id,team_name,leader_id,status,team_serial
         FROM team
         WHERE id=#{teamId}
     </select>
 
-    <select id="getTeamSerialByTeamId" resultType="com.test.seminar.entity.TeamSerial">
+    <select id="getSerialByTeamId" resultMap="SerialResultMap">
         SELECT team_serial,klass_serial
-        FROM team,klass
-        WHERE team.id=#{teamId} and team.klass_id=klass.id
+        FROM team
+        WHERE id=#{teamId}
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">

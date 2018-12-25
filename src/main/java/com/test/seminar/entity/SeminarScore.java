@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 public class SeminarScore {
     private BigInteger teamId;
-    private TeamSerial teamSerial;
+    private Serial serial;
     private BigInteger seminarInfoName;
     private double totalScore;
     private double presentationScore;
@@ -51,11 +51,11 @@ public class SeminarScore {
 
     public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
 
-    public TeamSerial getTeamSerial() {
-        return teamSerial;
+    public Serial getSerial() {
+        return serial;
     }
 
-    public void setTeamSerial(TeamSerial teamSerial) {
-        this.teamSerial = teamSerial;
+    public void setSerial(Serial teamSerial) {
+        this.serial = serial;
     }
 }
