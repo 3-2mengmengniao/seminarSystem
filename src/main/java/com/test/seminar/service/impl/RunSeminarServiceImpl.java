@@ -29,6 +29,8 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     @Override
     public SeminarControl beginSeminar(BigInteger seminarControlId) {
         SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        SeminarRoom seminarRoom=buildSeminarRoomBySeminarControlId(seminarControl);
+        seminarRoomMap.put(seminarControlId,seminarRoom);
         seminarControl.setSeminarStatus(1);
         seminarDao.updateSeminarControl(seminarControl);
         List<Presentation> presentationList=seminarControl.getPresentationList();
@@ -40,8 +42,6 @@ public class RunSeminarServiceImpl implements RundSeminarService {
                 break;
             }
         }
-        SeminarRoom seminarRoom=buildSeminarRoomBySeminarControlId(seminarControl);
-        seminarRoomMap.put(seminarControlId,seminarRoom);
         return seminarControl;
     }
 
@@ -173,7 +173,6 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         for(SeminarControl otherControl:seminarControlList){
             calculateWeight(weightMap,otherControl,-100,0);
         }
-        calculateWeight(weightMap,seminarControl,-200,10);
         seminarRoom.setWeightMap(weightMap);
         return seminarRoom;
     }

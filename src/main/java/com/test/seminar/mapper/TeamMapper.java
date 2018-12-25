@@ -42,6 +42,7 @@ public interface TeamMapper {
      */
     List<Team> getTeamByCourseId(@Param("courseId")BigInteger courseId);
 
+    List<Team> getTeamByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
     /**
      * 查看某讨论课的所有队伍
      * @param seminarControlId
