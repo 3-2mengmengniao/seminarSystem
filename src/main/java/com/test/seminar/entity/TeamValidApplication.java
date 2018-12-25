@@ -6,7 +6,7 @@ public class TeamValidApplication {
     private BigInteger id;
     private Team team;
     private String reason;
-    private int status;
+    private Integer status;
 
     public BigInteger getId() {
         return id;

@@ -15,9 +15,9 @@ public class Course {
     private BigInteger id;
     private String courseName;
     private String introduction;
-    private int presentationPercentage;
-    private int questionPercentage;
-    private int reportPercentage;
+    private Integer presentationPercentage;
+    private Integer questionPercentage;
+    private Integer reportPercentage;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
