@@ -3,7 +3,7 @@ package com.test.seminar.dao.impl;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
-import com.test.seminar.entity.TeamSerial;
+import com.test.seminar.entity.Serial;
 import com.test.seminar.entity.TeamValidApplication;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
@@ -73,8 +73,8 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public TeamSerial getTeamSerialByTeamId(BigInteger teamId) {
-        return teamMapper.getTeamSerialByTeamId(teamId);
+    public Serial getTeamSerialByTeamId(BigInteger teamId) {
+        return teamMapper.getSerialByTeamId(teamId);
     }
 
     @Override

@@ -12,8 +12,7 @@ public class Team {
     private BigInteger id;
     private String teamName;
     private int status;
-    private Integer teamSerial;
-    private Integer classSerial;
+    private Serial serial;
     private Student leader;
     private CourseClass courseClass;
     private Course course;
@@ -38,14 +37,6 @@ public class Team {
 
     public void setLeader(Student leader) {
         this.leader = leader;
-    }
-
-    public Integer getTeamSerial() {
-        return teamSerial;
-    }
-
-    public void setTeamSerial(int teamSerial) {
-        this.teamSerial = teamSerial;
     }
 
     public int getStatus() {
@@ -78,10 +69,6 @@ public class Team {
 
     public void setCourseClass(CourseClass courseClass) {
         this.courseClass = courseClass;
-    }
-
-    public Integer getClassSerial() {
-        return classSerial;
     }
 
     public Course getCourse() {

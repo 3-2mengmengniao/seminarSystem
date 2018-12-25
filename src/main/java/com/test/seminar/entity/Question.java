@@ -12,7 +12,7 @@ public class Question {
     private Student student;
     private int selected;
     private double score;
-    private TeamSerial teamSerial;
+    private Serial serial;
 
     public BigInteger getId() {
         return id;
@@ -38,11 +38,11 @@ public class Question {
         this.score = score;
     }
 
-    public TeamSerial getTeamSerial() {
-        return teamSerial;
+    public Serial getSerial() {
+        return serial;
     }
 
-    public void setTeamSerial(TeamSerial teamSerial) {
-        this.teamSerial = teamSerial;
+    public void setSerial(Serial serial) {
+        this.serial = serial;
     }
 }

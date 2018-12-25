@@ -12,7 +12,7 @@
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
-        <association property="teamSerial" javaType="com.test.seminar.entity.TeamSerial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getTeamSerialByTeamId"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
     </resultMap>
 
