@@ -16,6 +16,16 @@
         <id property="id" column="id"/>
     </resultMap>
 
+    <resultMap id="courseMemberLimitStrategyResultMap" type="com.test.seminar.strategy.impl.CourseMemberLimitStrategy">
+        <id property="id" column="id"/>
+        <association property="course" javaType="com.test.seminar.entity.Course" column="id" select="getCourseByCourseId"/>
+    </resultMap>
+
+    <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.strategy.impl.ConflictCourseStrategy">
+        <id property="id" column="id"/>
+        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="conflict_course_strategy.id" select="getCourseIdByConflictCourseStrategyId"/>
+    </resultMap>
+
     <select id="getCourseByCourseId" resultMap="courseResultMap">
         select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
@@ -114,6 +124,24 @@
     <select id="getMemberLimitStrategyByStrategyId" resultMap="memberLimitStrategyResultMap">
         select id,min_number,max_number
         from member_limit_strategy
+        where id=#{strategyId}
+    </select>
+
+    <select id="getCourseMemberLimitStrategyByStrategyId" resultMap="courseMemberLimitStrategyResultMap">
+        select id,course_id,min_number,max_number
+        from course_member_limit_strategy
+        where id=#{strategyId}
+    </select>
+
+    <select id="getCourseIdByConflictCourseStrategyId" resultType="BigInteger">
+        select course_id
+        from conflict_course_strategy
+        where id=#{strategyId}
+    </select>
+
+    <select id="getConflictCourseStrategyByStrategyId" resultType="conflictCourseStrategyResultMap">
+        select id
+        from conflict_course_strategy
         where id=#{strategyId}
     </select>
 </mapper>
