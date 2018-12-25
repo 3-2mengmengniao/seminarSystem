@@ -13,8 +13,10 @@ public class Team {
     private String teamName;
     private int status;
     private Integer teamSerial;
+    private Integer classSerial;
     private Student leader;
     private CourseClass courseClass;
+    private Course course;
     private List<Student> memberList;
     private List<Question> questionList;
 
@@ -30,9 +32,13 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public Student getLeader() { return leader; }
+    public Student getLeader() {
+        return leader;
+    }
 
-    public void setLeader(Student leader) { this.leader = leader; }
+    public void setLeader(Student leader) {
+        this.leader = leader;
+    }
 
     public Integer getTeamSerial() {
         return teamSerial;
@@ -50,17 +56,37 @@ public class Team {
         this.status = status;
     }
 
-    public List<Question> getQuestionList() { return questionList; }
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
 
-    public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
+    }
 
-    public List<Student> getMemberList() { return memberList; }
+    public List<Student> getMemberList() {
+        return memberList;
+    }
 
-    public void setMemberList(List<Student> memberList) { this.memberList = memberList; }
+    public void setMemberList(List<Student> memberList) {
+        this.memberList = memberList;
+    }
 
-    public CourseClass getCourseClass() { return courseClass; }
+    public CourseClass getCourseClass() {
+        return courseClass;
+    }
 
-    public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
+    public void setCourseClass(CourseClass courseClass) {
+        this.courseClass = courseClass;
+    }
+
+    public Integer getClassSerial() {
+        return classSerial;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
 
     @Override
     public boolean equals(Object o) {

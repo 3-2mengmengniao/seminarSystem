@@ -4,6 +4,7 @@ import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void deleteCourseByCourseId(BigInteger courseId) throws CourseNotFoundException {
         courseDao.deleteCourseByCourseId(courseId);
+    }
+
+    @Override
+    public Boolean isTeamValid(BigInteger teamId) throws TeamNotFoundException {
+        return null;
     }
 }
