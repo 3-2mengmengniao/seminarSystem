@@ -28,6 +28,12 @@
         WHERE course_id=#{courseId}
     </select>
 
+    <select id="getCourseClassByCourseIdAndSerial" resultMap="courseClassResultMap">
+        SELECT id,grade,klass_serial,klass_time,klass_location
+        FROM klass
+        WHERE course_id=#{courseId} and klass_serial=#{serial}
+    </select>
+
     <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
         SELECT klass.id,grade,klass_serial,klass_time,klass_location
         FROM klass,klass_student

@@ -91,7 +91,7 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
         student.setEmail(email);
-        studentService.updateStudentByStudentId(student);
+        studentService.updateStudentByStudent(student);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -112,7 +112,7 @@ public class StudentController {
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         Student student=studentService.getStudentByStudentId(studentId);
         student.setPassword(newPsw);
-        studentService.updateStudentByStudentId(student);
+        studentService.updateStudentByStudent(student);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -125,7 +125,7 @@ public class StudentController {
         student.setPassword(newPsw);
         student.setEmail(email);
         student.setActive(1);
-        studentService.updateStudentByStudentId(student);
+        studentService.updateStudentByStudent(student);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

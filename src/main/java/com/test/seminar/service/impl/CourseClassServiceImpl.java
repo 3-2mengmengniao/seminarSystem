@@ -1,9 +1,9 @@
 package com.test.seminar.service.impl;
 
 import com.test.seminar.dao.CourseClassDao;
+import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.dao.StudentDao;
-import com.test.seminar.entity.CourseClass;
-import com.test.seminar.entity.Student;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.CourseClassNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.service.CourseClassService;
@@ -22,6 +22,8 @@ public class CourseClassServiceImpl implements CourseClassService {
     private CourseClassDao courseClassDao;
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private SeminarDao seminarDao;
     @Override
     public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException {
         return courseClassDao.getCourseClassByCourseClassId(courseClassId);
@@ -30,6 +32,15 @@ public class CourseClassServiceImpl implements CourseClassService {
     @Override
     public void insertCourseClass(CourseClass courseClass, BigInteger courseId)throws RepetitiveRecordException {
         courseClassDao.insertCourseClass(courseClass,courseId);
+        courseClass=courseClassDao.getCourseClassByCourseIdAndSerial(courseId,courseClass.getClassSerial());
+        //根据讨论课信息创建
+        List<Round> roundList=courseClass.getCourse().getRoundList();
+        for(Round round:roundList){
+            for(SeminarInfo seminarInfo:round.getSeminarInfoList()){
+                seminarDao.insertSeminarControl(new SeminarControl(),courseClass.getId(),seminarInfo.getId());
+            }
+        }
+        /*共享分组相关*/
     }
 
     @Override

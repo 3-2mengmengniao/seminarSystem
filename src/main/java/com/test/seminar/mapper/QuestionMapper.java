@@ -24,6 +24,8 @@ public interface QuestionMapper {
 
     List<Question> getQuestionByPresentationId(@Param("presentationId")BigInteger presentationId);
 
+    Question getQuestionByPresentationIdAndTeamId(@Param("presentationId")BigInteger presentationId,@Param("teamId")BigInteger teamId);
+
     void insertQuestion(@Param("question")Question question, @Param("seminarControlId")BigInteger seminarControlId, @Param("presentationId") BigInteger presentationId, @Param("studentId")BigInteger studentId, @Param("teamId")BigInteger teamId);
 
     void updateQuestion(@Param("question")Question question);

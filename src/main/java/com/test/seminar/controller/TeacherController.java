@@ -20,7 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -152,12 +155,12 @@ public class TeacherController {
     }
 
 
-//    @RequestMapping(value="/course/klassList",method = POST)
-//    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
-//        System.out.println(file);
-//        fileService.uploadStudentExcel(file,classId,courseId);
-//        return "redirect:/teacher/course/klassList?courseId="+courseId;
-//    }
+    @RequestMapping(value="/course/klassList",method = POST)
+    public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
+        System.out.println(file);
+        courseClassService.uploadStudentExcel(file,classId,courseId);
+        return "redirect:/teacher/course/klassList?courseId="+courseId;
+    }
 
     @RequestMapping(value="/course/info")
     public String courseInfo(BigInteger courseId,Model model) {
@@ -202,7 +205,8 @@ public class TeacherController {
 
     @RequestMapping(value="/course/klass/create",method = POST)
     @ResponseBody
-    public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
+    public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass,MultipartFile file) {
+        System.out.println(file);
         courseClassService.insertCourseClass(courseClass,courseId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
@@ -347,10 +351,18 @@ public class TeacherController {
         return "teacher/course/seminar/score";
     }
 
+    @RequestMapping(value="/course/seminar/presentationScore",method = POST)
+    public String presentationScore(BigInteger presentationId, Model model) {
+
+
+
+        return "teacher/course/seminar/score";
+    }
+
     @RequestMapping(value="/course/seminar/progressing")
     public String progressing(BigInteger seminarId, Model model) {
-        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         rundSeminarService.beginSeminar(seminarId);
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/progressing";
     }
@@ -362,7 +374,26 @@ public class TeacherController {
     public String message(Model model) { return "teacher/message"; }
 
     @RequestMapping(value = "/course/seminar/report_deadline",method = GET)
-    public String deadline(Model model) { return "teacher/course/seminar/report_deadline"; }
+    public String deadline(BigInteger seminarId,Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        return "teacher/course/seminar/report_deadline";
+    }
+
+    @RequestMapping(value = "/course/seminar/endSeminar",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> endSeminar(BigInteger seminarId,String deadline,Model model) {
+        SeminarControl mySeminar=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        System.out.println(deadline);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(deadline, pos);
+        System.out.println(strtodate);
+        mySeminar.setReportDDL(strtodate);
+        rundSeminarService.endSeminar(mySeminar.getId());
+        seminarService.updateSeminarControl(mySeminar);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
 
     @RequestMapping(value="course/shareSettings")
     public String shareSettings(BigInteger courseId,Model model) {

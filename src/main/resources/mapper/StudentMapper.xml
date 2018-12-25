@@ -44,7 +44,7 @@
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email})
     </insert>
 
-    <update id="updateStudentByStudentId">
+    <update id="updateStudentByStudent">
         update student
         <set>
             <if test="student.account!=null">

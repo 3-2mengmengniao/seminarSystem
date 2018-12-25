@@ -3,26 +3,34 @@
 <mapper namespace="com.test.seminar.mapper.QuestionMapper">
 
     <resultMap id="questionResultMap" type="com.test.seminar.entity.Question">
+        <id property="id" column="id" />
         <result property="selected" column="is_selected"/>
         <association property="student" javaType="com.test.seminar.entity.Student" column="id" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
+        <association property="teamSerial" javaType="com.test.seminar.entity.TeamSerial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getTeamSerialByTeamId"/>
     </resultMap>
 
     <select id="getQuestionBySeminarControlId" resultMap="questionResultMap">
-        select is_selected, score
+        select id,team_id,is_selected, score
         from question
-        where klass_seminar_id={#seminarConrtolId}
+        where klass_seminar_id=#{seminarConrtolId}
     </select>
 
     <select id="getQuestionByTeamId" resultMap="questionResultMap">
-        select is_selected, score
+        select id,team_id,is_selected, score
         from question
-        where team={#teamId}
+        where team_id=#{teamId}
+    </select>
+
+    <select id="getQuestionByPresentationIdAndTeamId" resultMap="questionResultMap">
+        select id,team_id,is_selected, score
+        from question
+        where team_id=#{teamId} and attendance_id=#{presentationId}
     </select>
 
     <select id="getQuestionByPresentationId" resultMap="questionResultMap">
-        select is_selected, score
+        select id,team_id,is_selected, score
         from question
-        where attendance_id={#presentationId}
+        where attendance_id=#{presentationId}
     </select>
 
     <insert id="insertQuestion">
@@ -40,7 +48,7 @@
                 score=#{question.score},
             </if>
         </set>
-        where id=#{presentation.id}
+        where id=#{question.id}
     </update>
 
     <delete id="deleteQuestionByQuestionId">

@@ -1,6 +1,8 @@
 package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Team;
+import com.test.seminar.entity.TeamValidApplication;
+import com.test.seminar.entity.TeamSerial;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -48,6 +50,13 @@ public interface TeamMapper {
     List<Team> getTeamBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
+     *
+     * @param teamId
+     * @return
+     */
+    TeamSerial getTeamSerialByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
      * 创建新的队伍信息
      *
      * @param team
@@ -77,4 +86,38 @@ public interface TeamMapper {
      * @return
      */
     void deleteTeamByTeamId(@Param("teamId")BigInteger teamId);
+
+    /**
+     *
+     * @param teacherId
+     * @return
+     */
+    List<TeamValidApplication> getTeamValidApplicationByTeacherId(@Param("teacherId")BigInteger teacherId);
+
+    /**
+     *
+     * @param teamValidApplicationId
+     * @return
+     */
+    Team getTeamByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
+
+    /**
+     *
+     * @param teamValidApplication
+     * @param teamId
+     * @param teacherId
+     */
+    void insertTeamValidApplication(@Param("teamValidApplication") TeamValidApplication teamValidApplication, @Param("teamId")BigInteger teamId, @Param("teacherId")BigInteger teacherId);
+
+    /**
+     *
+     * @param teamValidApplication
+     */
+    void updateTeamValidApplication(@Param("teamValidApplication")TeamValidApplication teamValidApplication);
+
+    /**
+     *
+     * @param teamValidApplicationId
+     */
+    void deleteTeamValidApplicationByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
 }

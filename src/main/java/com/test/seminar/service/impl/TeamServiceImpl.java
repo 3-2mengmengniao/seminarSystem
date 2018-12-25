@@ -30,8 +30,8 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void updateTeamByTeamId(Team team) throws TeamNotFoundException {
-        teamDao.updateTeamByTeamId(team);
+    public void updateTeam(Team team) throws TeamNotFoundException {
+        teamDao.updateTeam(team);
     }
 
     @Override
@@ -52,5 +52,15 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
         return  teamDao.getTeamBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public void addTeamMember(BigInteger teamId, BigInteger studentId) {
+
+    }
+
+    @Override
+    public void deleteTeamMember(BigInteger teamId, BigInteger studentId) {
+
     }
 }

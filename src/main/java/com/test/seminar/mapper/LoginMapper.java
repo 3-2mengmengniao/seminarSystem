@@ -36,9 +36,8 @@ public interface LoginMapper {
      * 根据账号密码查询管理员
      *
      * @param account   账号
-     * @param password  密码
      * @return com.test.seminar.entity.Admin
      */
-    Admin adminLogin(@Param("account") String account, @Param("password") String password);
+    Admin adminLogin(@Param("account") String account);
 
 }

@@ -3,6 +3,8 @@ package com.test.seminar.entity;
 import java.math.BigInteger;
 
 public class SeminarScore {
+    private BigInteger teamId;
+    private TeamSerial teamSerial;
     private BigInteger seminarInfoName;
     private double totalScore;
     private double presentationScore;
@@ -43,5 +45,17 @@ public class SeminarScore {
 
     public void setReportScore(double reportScore) {
         this.reportScore = reportScore;
+    }
+
+    public BigInteger getTeamId() { return teamId; }
+
+    public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
+
+    public TeamSerial getTeamSerial() {
+        return teamSerial;
+    }
+
+    public void setTeamSerial(TeamSerial teamSerial) {
+        this.teamSerial = teamSerial;
     }
 }

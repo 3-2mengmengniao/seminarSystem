@@ -40,6 +40,6 @@
     <select id="adminLogin" resultType="com.test.seminar.entity.Admin">
         SELECT id,account,password
         FROM admin
-        WHERE account=#{account} AND password=#{password}
+        WHERE account=#{account}
     </select>
 </mapper>

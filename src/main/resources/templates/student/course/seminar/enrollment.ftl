@@ -83,11 +83,11 @@
                     <tr>
                         <td>第${t+1}组：</td>
                         <#if seminarControl.seminarStatus==0 && seminarControl.presentationList[t].pptName??>
-                        <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;${seminarControl.presentationList[t].pptName}</td>
-                        <#elseif seminarControl.seminarStatus==0>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;${seminarControl.presentationList[t].pptName}</td>
+                        <#elseif seminarControl.presentationList[t].pptName??>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].pptName}</a></td>
                         <#else>
-                    <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a href="${seminarControl.presentationList[t].pptUrl}">${seminarControl.presentationList[t].pptName}</a></td>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
                         </#if>
                     </tr>
                 <#else>

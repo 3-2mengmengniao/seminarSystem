@@ -16,6 +16,15 @@ public interface CourseClassDao {
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
 
     /**
+     * 找到某课程的第serial个班级
+     * @param courseId
+     * @param serial
+     * @return
+     */
+    CourseClass getCourseClassByCourseIdAndSerial(BigInteger courseId,int serial);
+
+
+    /**
      *
      * @param teamId
      * @return
