@@ -14,6 +14,7 @@
         <result property="classTime" column="klass_time"/>
         <result property="classLocation" column="klass_location"/>
         <association property="course" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseClassId"/>
+        <collection property="teamList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByCourseClassId" fetchType="eager"/>
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
