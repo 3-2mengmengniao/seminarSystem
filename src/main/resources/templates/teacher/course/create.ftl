@@ -197,6 +197,58 @@
                     </div>
                 </div>
             </div>
+            <div class="decoration"></div>
+            <div class="distance3"></div>
+            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">组内选修课程人数：<span>(required)</span></label>
+            <div>
+                <div class="distance3"></div>
+                <div class="layui-form-item margin1 ">
+                    <label class="layui-form-label">选修课程</label>
+                    <div class="layui-input-block">
+                        <select name="optionCourse" lay-filter="aihao">
+                            <option value="3" selected>无</option>
+                            <option value="4">.NET(王美红)</option>
+                            <option value="5">J2EE</option>
+                            <option value="6">.NET(林坤辉)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选修人数上限</label>
+                    <div class="layui-input-block">
+                        <select name="maxTeamMember" lay-filter="aihao">
+                            <option value="4">4人</option>
+                            <option value="5" selected>5人</option>
+                            <option value="6">6人</option>
+                            <option value="7">7人</option>
+                            <option value="8">8人</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item margin1 ">
+                    <label class="layui-form-label">选修人数下限</label>
+                    <div class="layui-input-block">
+                        <select name="minTeamMember" lay-filter="aihao">
+                            <option value="3" selected>3人</option>
+                            <option value="4">4人</option>
+                            <option value="5">5人</option>
+                            <option value="6">6人</option>
+                            <option value="7">7人</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="center center-text"><button type="button" class="layui-btn layui-btn-small">新增</button></p>
+                <div class="layui-form-item margin1 ">
+                    <label class="layui-form-label">选修课人数要求：</label>
+                    <div class="layui-input-block">
+                        <select name="minTeamMember" lay-filter="aihao">
+                            <option value="3" selected>均满足</option>
+                            <option value="4">仅一个满足</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="decoration"></div>
             <div class="distance4"></div>
             <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>

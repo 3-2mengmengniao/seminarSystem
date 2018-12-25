@@ -64,6 +64,7 @@ public class HomeController {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
                 session.setAttribute("id", teacher.getId());
                 session.setAttribute("usertype","teacher");
+                System.out.println("teacher");
             }
             catch (UserNotFoundException e2){
                 return new ResponseEntity<>("", HttpStatus.OK);

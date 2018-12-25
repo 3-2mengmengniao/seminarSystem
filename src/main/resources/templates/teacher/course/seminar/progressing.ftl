@@ -92,11 +92,11 @@
                 <#list 0..<seminarControl.seminarInfo.maxGroup as t>
                     <#if seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==1>
                     <li class="group active">
-                        ${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}
+                        ${seminarControl.presentationList[t].team.serial.getSerial()}
                     </li>
                     <#elseif seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==0>
                     <li class="group">
-                        ${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}
+                        ${seminarControl.presentationList[t].team.serial.getSerial()}
                     </li>
                     </#if>
                 </#list>

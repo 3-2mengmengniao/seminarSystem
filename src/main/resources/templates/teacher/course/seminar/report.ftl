@@ -85,9 +85,9 @@
                     <tr>
                         <td>第${t+1}组：</td>
                         <#if seminarControl.presentationList[t].reportName??>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].reportName}</a></td>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].reportName}</a></td>
                         <#else>
-                            <td style="color:#009688;">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}&nbsp;&nbsp;未提交</td>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;未提交</td>
                         </#if>
                     </tr>
                 <#else>

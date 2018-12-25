@@ -79,17 +79,17 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<MemberLimitStrategy> getMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+    public MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
         return null;
     }
 
     @Override
-    public List<CourseMemberLimitStrategy> getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+    public CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
         return null;
     }
 
     @Override
-    public List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+    public ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
         return null;
     }
 }
