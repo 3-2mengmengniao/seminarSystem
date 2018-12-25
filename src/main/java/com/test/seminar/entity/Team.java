@@ -23,6 +23,22 @@ public class Team {
         return id;
     }
 
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public Serial getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Serial serial) {
+        this.serial = serial;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     public String getTeamName() {
         return teamName;
     }

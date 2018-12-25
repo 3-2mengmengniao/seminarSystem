@@ -96,12 +96,12 @@
                     <#if seminarControl.presentationList[t].present==1>
                         <tr class="group active">
                             <td class="active">第${t+1}组：</td>
-                            <td class="active">${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                            <td class="active">${seminarControl.presentationList[t].team.serial.getSerial()}</td>
                         </tr>
                     <#else>
                         <tr class="group">
                             <td>第${t+1}组：</td>
-                            <td>${seminarControl.presentationList[t].team.courseClass.classSerial}-${seminarControl.presentationList[t].team.teamSerial}</td>
+                            <td>${seminarControl.presentationList[t].team.serial.getSerial()}</td>
                         </tr>
                     </#if>
                 </#if>
