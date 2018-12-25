@@ -56,7 +56,5 @@ public class ConflictCourseStrategy implements Strategy {
         }
 
         return true;
-
-
     }
 }
