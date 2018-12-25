@@ -86,19 +86,19 @@ public interface CourseDao {
      * @param strategyId
      * @return
      */
-    List<MemberLimitStrategy> getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
      * @param strategyId
      * @return
      */
-    List<CourseMemberLimitStrategy> getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略ID获取ConflictCourseStrategy
      * @param strategyId
      * @return
      */
-    List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 }

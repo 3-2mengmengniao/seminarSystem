@@ -75,21 +75,37 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public List<TeamStrategy> getTeamStrategyListByCourseId(BigInteger courseId) throws StrategyNotFoundException {
-        return null;
+        List<TeamStrategy> teamStrategyList=courseMapper.getTeamStrategyListByCourseId(courseId);
+        if(teamStrategyList==null){
+            throw new StrategyNotFoundException();
+        }
+        return teamStrategyList;
     }
 
     @Override
-    public List<MemberLimitStrategy> getMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+    public MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+        MemberLimitStrategy memberLimitStrategy=courseMapper.getMemberLimitStrategyByStrategyId(strategyId);
+        if(memberLimitStrategy==null){
+            throw new StrategyNotFoundException();
+        }
+        return memberLimitStrategy;
     }
 
     @Override
-    public List<CourseMemberLimitStrategy> getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+    public CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+        CourseMemberLimitStrategy courseMemberLimitStrategy=courseMapper.getCourseMemberLimitStrategyByStrategyId(strategyId);
+        if(courseMemberLimitStrategy==null){
+            throw new StrategyNotFoundException();
+        }
+        return courseMemberLimitStrategy;
     }
 
     @Override
-    public List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+    public ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+        ConflictCourseStrategy conflictCourseStrategy=courseMapper.getConflictCourseStrategyByStrategyId(strategyId);
+        if(conflictCourseStrategy==null){
+            throw new StrategyNotFoundException();
+        }
+        return conflictCourseStrategy;
     }
 }

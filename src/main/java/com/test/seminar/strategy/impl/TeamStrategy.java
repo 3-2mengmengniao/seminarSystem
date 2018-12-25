@@ -8,7 +8,7 @@ import com.test.seminar.entity.Course;
  */
 public class TeamStrategy {
     private Course course;
-    private int strategySerial;
+    private Integer strategySerial;
     private String strategyName;
     private String strategyId;
 

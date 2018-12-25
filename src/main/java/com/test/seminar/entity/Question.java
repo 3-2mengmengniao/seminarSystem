@@ -10,7 +10,7 @@ import java.math.BigInteger;
 public class Question {
     private BigInteger id;
     private Student student;
-    private int selected;
+    private Integer selected;
     private double score;
     private Serial serial;
 

@@ -3,6 +3,8 @@ package com.test.seminar.strategy.impl;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
 import com.test.seminar.strategy.Strategy;
+
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -10,27 +12,27 @@ import java.util.List;
  * date 2018/12/25
  */
 public class MemberLimitStrategy implements Strategy {
-    private int id;
-    private int minMember;
-    private int maxMember;
+    private BigInteger id;
+    private Integer minMember;
+    private Integer maxMember;
 
-    public int getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public int getMinMember() {
+    public Integer getMinMember() {
         return minMember;
     }
 
-    public void setMinMember(int minMember) {
+    public void setMinMember(Integer minMember) {
         this.minMember = minMember;
     }
 
-    public int getMaxMember() {
+    public Integer getMaxMember() {
         return maxMember;
     }
 
-    public void setMaxMember(int maxMember) {
+    public void setMaxMember(Integer maxMember) {
         this.maxMember = maxMember;
     }
 
@@ -42,10 +44,17 @@ public class MemberLimitStrategy implements Strategy {
         }
 
         int size = studentList.size();
-        if (size >= minMember && size <= maxMember) {
-            return true;
-        } else {
-            return false;
+        if(minMember!=null){
+            if(size<minMember){
+                return false;
+            }
         }
+        if(maxMember!=null){
+            if(size>maxMember){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

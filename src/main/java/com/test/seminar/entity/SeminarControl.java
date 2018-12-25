@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SeminarControl {
     private BigInteger id;
-    private int seminarStatus;
+    private Integer seminarStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reportDDL;
     private SeminarInfo seminarInfo;

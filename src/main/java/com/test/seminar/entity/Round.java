@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Round {
     private BigInteger id;
-    private int roundSerial;
-    private int presentationScoreMethod;
-    private int reportScoreMethod;
-    private int questionScoreMethod;
+    private Integer roundSerial;
+    private Integer presentationScoreMethod;
+    private Integer reportScoreMethod;
+    private Integer questionScoreMethod;
     private List<SeminarInfo> seminarInfoList;
     private List<RoundScore> roundScoreList;
 

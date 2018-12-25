@@ -14,10 +14,10 @@ public class SeminarInfo {
     private BigInteger id;
     private String seminarName;
     private String introduction;
-    private int maxGroup;
-    private int visible;
-    private int seminarSerial;
-    private int roundSerial;
+    private Integer maxGroup;
+    private Integer visible;
+    private Integer seminarSerial;
+    private Integer roundSerial;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registrationStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

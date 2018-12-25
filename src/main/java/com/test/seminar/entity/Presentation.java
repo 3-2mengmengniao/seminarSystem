@@ -12,8 +12,8 @@ public class Presentation {
     private BigInteger id;
     private Team team;
     private List<Question> questionList;
-    private int teamOrder;
-    private int present;
+    private Integer teamOrder;
+    private Integer present;
     private String reportName;
     private String reportUrl;
     private String pptName;
