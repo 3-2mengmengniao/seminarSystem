@@ -137,13 +137,13 @@
     </select>
 
     <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">
-        select totalScore,presentation_score,question_score,report_score
+        select total_score,presentation_score,question_score,report_score
         from seminar_score
         where team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreBySeminarControlId" resultMap="seminarScoreResultMap">
-        select team_id,totalScore,presentationScore,questionScore,reportScore
+        select team_id,total_score,presentation_score,question_score,report_score
         from seminar_score
         where klass_seminar_id=#{seminarControlId}
     </select>
