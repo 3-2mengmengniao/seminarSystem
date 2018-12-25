@@ -14,6 +14,10 @@ public class Question {
     private double score;
     private Serial serial;
 
+    public Question() {
+        selected=0;
+    }
+
     public BigInteger getId() {
         return id;
     }

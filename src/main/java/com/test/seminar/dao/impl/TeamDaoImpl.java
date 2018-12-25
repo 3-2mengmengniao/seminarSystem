@@ -73,7 +73,7 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public Serial getTeamSerialByTeamId(BigInteger teamId) {
+    public Serial getSerialByTeamId(BigInteger teamId) {
         return teamMapper.getSerialByTeamId(teamId);
     }
 

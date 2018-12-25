@@ -6,10 +6,7 @@ import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.StrategyNotFoundException;
 import com.test.seminar.mapper.CourseMapper;
-import com.test.seminar.strategy.impl.ConflictCourseStrategy;
-import com.test.seminar.strategy.impl.CourseMemberLimitStrategy;
-import com.test.seminar.strategy.impl.MemberLimitStrategy;
-import com.test.seminar.strategy.impl.TeamStrategy;
+import com.test.seminar.strategy.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -107,5 +104,15 @@ public class CourseDaoImpl implements CourseDao {
             throw new StrategyNotFoundException();
         }
         return conflictCourseStrategy;
+    }
+
+    @Override
+    public TeamAndStrategy getTeamAndStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+        return null;
+    }
+
+    @Override
+    public TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+        return null;
     }
 }

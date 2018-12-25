@@ -14,7 +14,6 @@ public class Team {
     private Integer status;
     private Serial serial;
     private Student leader;
-    private CourseClass courseClass;
     private Course course;
     private List<Student> memberList;
     private List<Question> questionList;
@@ -77,14 +76,6 @@ public class Team {
 
     public void setMemberList(List<Student> memberList) {
         this.memberList = memberList;
-    }
-
-    public CourseClass getCourseClass() {
-        return courseClass;
-    }
-
-    public void setCourseClass(CourseClass courseClass) {
-        this.courseClass = courseClass;
     }
 
     public Course getCourse() {
