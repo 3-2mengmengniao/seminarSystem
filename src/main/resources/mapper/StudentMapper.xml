@@ -23,8 +23,8 @@
 
     <select id="getStudentByTeamId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
-        FROM student,klass_student
-        WHERE klass_student.team_id=#{teamId} and klass_student.student_id=student.id
+        FROM student,team_student
+        WHERE team_student.team_id=#{teamId} and team_student.student_id=student.id
     </select>
 
     <select id="getStudentByCourseClassId" resultMap="studentResultMap">
