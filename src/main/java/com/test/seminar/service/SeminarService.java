@@ -10,6 +10,7 @@ import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
@@ -102,7 +103,7 @@ public interface SeminarService {
 
     void updateSeminarControl(SeminarControl seminarControl);
 
-    void upLoadPPT(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
+    void upLoadPPT(HttpServletRequest request, MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
 
-    void upLoadReport(MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
+    void upLoadReport(HttpServletRequest request,MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
 }

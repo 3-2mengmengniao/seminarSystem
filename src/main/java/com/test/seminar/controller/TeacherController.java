@@ -323,6 +323,14 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/info")
     public String seminarInfo(BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        for(int i=0;i<seminarControl.getPresentationList().size();i++)
+        {
+            if(seminarControl.getPresentationList().get(i)!=null && seminarControl.getPresentationList().get(i).getPptUrl()!=null)
+            {
+                System.out.println("ppt");
+                System.out.println(seminarControl.getPresentationList().get(i).getPptUrl());
+            }
+        }
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/info";
     }
@@ -378,6 +386,13 @@ public class TeacherController {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         return "teacher/course/shareSettings";
+    }
+
+    @RequestMapping(value="course/addShare")
+    public String addShare(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        return "teacher/course/addShare";
     }
 
 }

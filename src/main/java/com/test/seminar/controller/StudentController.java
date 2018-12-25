@@ -262,12 +262,12 @@ public class StudentController {
 
     @RequestMapping(value="/course/seminar/PPT",method = POST)
     @ResponseBody
-    public ResponseEntity<String> submitPPT(BigInteger seminarId, BigInteger teamId, MultipartFile file, Model model) {
+    public ResponseEntity<String> submitPPT(HttpServletRequest request,BigInteger seminarId, BigInteger teamId, MultipartFile file, Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         System.out.println(file);
         try {
-            seminarService.upLoadPPT(file, seminarId, teamId);
+            seminarService.upLoadPPT(request,file, seminarId, teamId);
         }catch (IOException e)
         {
             return new ResponseEntity<>("", HttpStatus.CONFLICT);
