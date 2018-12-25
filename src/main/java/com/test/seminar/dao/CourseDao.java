@@ -2,8 +2,13 @@ package com.test.seminar.dao;
 
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.strategy.impl.TeamStrategy;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.StrategyNotFoundException;
+import com.test.seminar.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.strategy.impl.MemberLimitStrategy;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -68,4 +73,32 @@ public interface CourseDao {
      * @return
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
+
+    /**
+     * 通过课程ID获取课程的分组策略列表
+     * @param courseId
+     * @return
+     */
+    List<TeamStrategy> getTeamStrategyListByCourseId(BigInteger courseId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取MemberLimitStrategy
+     * @param strategyId
+     * @return
+     */
+    List<MemberLimitStrategy> getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取CourseMemberLimitStrategy
+     * @param strategyId
+     * @return
+     */
+    List<CourseMemberLimitStrategy> getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取ConflictCourseStrategy
+     * @param strategyId
+     * @return
+     */
+    List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 }
