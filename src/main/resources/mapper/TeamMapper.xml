@@ -21,7 +21,7 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team_serial
+        SELECT id,team_name,leader_id,status
         FROM team
         WHERE id=#{teamId}
     </select>
@@ -33,34 +33,31 @@
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT team.id,team_name,leader_id,status,team_serial
-        FROM team,klass_student
-        WHERE team.course_id=#{courseId} and  klass_student.student_id=#{studentId} and team.id=klass_student.team_id
+        SELECT team.id,team_name,leader_id,status
+        FROM team,klass_team,team_student,klass
+        WHERE  klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team_student.team_id=klass_team.team_id and team_student.student_id=#{studentId} and team.id=klass_team.team_id
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team_serial
-        FROM team
-        WHERE course_id=#{courseId}
+        SELECT id,team_name,leader_id,status
+        FROM team,klass,klass_team
+        WHERE klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team.id=klass_team.team_id
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team.team_serial
-        FROM seminar_score,team
-        WHERE klass_seminar_id=#{seminarControlId} and team.id=seminar_score.team_id
+        SELECT id,team_name,leader_id,status
+        FROM attendance,team
+        WHERE klass_seminar_id=#{seminarControlId} and team.id=attendance.team_id
     </select>
 
     <insert id="insertTeam">
-        insert into team(klass_id,course_id,team_name,leader_id,status,team_serial)
-        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
+        insert into team(klass_id,course_id,team_name,leader_id,status,team_serial,klass_serial)
+        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.serial.teamSerial},#{team.serial.courseClassSerial})
     </insert>
 
     <update id="updateTeam">
         update team
         <set>
-            <if test="team.teamName!=null">
-                team_name=#{team.teamName},
-            </if>
             <if test="team.status!=null">
                 status=#{team.status},
             </if>
@@ -76,13 +73,14 @@
     </delete>
 
     <update id="updateCourseClassStudentTeamId">
-        update klass_student
+        update team_student
         <set>
             <if test="teamId!=null">
-                team_id=#{teamId},
+                team_student.team_id=#{teamId},
             </if>
         </set>
-        where student_id=#{studentId} and klass_id=#{courseClassId}
+        from klass_student
+        where  team_student.student_id=#{studentId} and klass_student.student_id=team_student.student_id and klass_id=#{courseClassId}
     </update>
 
     <select id="getTeamValidApplicationByTeacherId" resultMap="teamValidResultMap">
@@ -92,7 +90,7 @@
     </select>
 
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
-        select id,team_name,leader_id,status,team.team_serial
+        select id,team_name,leader_id,status
         from team,team_valid_application
         where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
     </select>
