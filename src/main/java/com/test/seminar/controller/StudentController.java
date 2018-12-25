@@ -293,4 +293,9 @@ public class StudentController {
 
     @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "student/activate"; }
+
+    @RequestMapping(value = "/course/createTeam", method = GET)
+    public String createTeam(Model model) {
+        return "student/course/createTeam";
+    }
 }

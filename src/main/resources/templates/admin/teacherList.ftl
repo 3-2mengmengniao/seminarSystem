@@ -78,28 +78,6 @@
       </td>
     </tr>
     </#list>
-    <#--<tr class="item">-->
-      <#--<td>-->
-        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
-      <#--</td>-->
-      <#--<td class="number">2017004022</td>-->
-      <#--<td class="name">张老师</td>-->
-      <#--<td class="email">123432642@qq.com</td>-->
-      <#--<!--<td class="td-status">-->
-        <#--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>&ndash;&gt;-->
-      <#--<td class="td-manage">-->
-
-        <#--<a title="编辑"  onclick="x_admin_show('编辑','/admin/editTeacher','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">-->
-          <#--<i class="layui-icon">&#xe642;</i>-->
-        <#--</a>-->
-        <#--<a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;"  style="margin-right:5px;font-size:15px;">-->
-          <#--<i class="iconfont" style="font-size:13px;">&#xe6aa;</i>-->
-        <#--</a>-->
-        <#--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  style="margin-right:5px;font-size:25px;">-->
-          <#--<i class="layui-icon" >&#xe640;</i>-->
-        <#--</a>-->
-      <#--</td>-->
-    <#--</tr>-->
     </tbody>
   </table>
   <div class="page" style="margin-top:80px;">
