@@ -117,7 +117,7 @@
                 </form>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
-                <table class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
+                <table  class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
                     <colgroup>
                         <col width="100" >
                         <col width="200" >
@@ -187,6 +187,7 @@
             layer.msg('展开状态：'+ data.show);
         });
     });
+
 </script>
 <script>
     $("#right-side").children(":first").addClass('active');
