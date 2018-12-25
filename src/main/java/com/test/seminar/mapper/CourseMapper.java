@@ -86,19 +86,19 @@ public interface CourseMapper {
      * @param strategyId
      * @return
      */
-    List<MemberLimitStrategy> getMemberLimitStrategyByStrategyId(BigInteger strategyId);
+    MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId);
 
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
      * @param strategyId
      * @return
      */
-    List<CourseMemberLimitStrategy> getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId);
+    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId);
 
     /**
      * 通过策略ID获取ConflictCourseStrategy
      * @param strategyId
      * @return
      */
-    List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(BigInteger strategyId);
+    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId);
 }
