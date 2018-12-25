@@ -23,7 +23,7 @@
 
     <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.strategy.impl.ConflictCourseStrategy">
         <id property="id" column="id"/>
-        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="conflict_course_strategy.id" select="getCourseIdByConflictCourseStrategyId"/>
+        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
@@ -139,7 +139,7 @@
         where id=#{strategyId}
     </select>
 
-    <select id="getConflictCourseStrategyByStrategyId" resultType="conflictCourseStrategyResultMap">
+    <select id="getConflictCourseStrategyByStrategyId" resultMap="conflictCourseStrategyResultMap">
         select id
         from conflict_course_strategy
         where id=#{strategyId}

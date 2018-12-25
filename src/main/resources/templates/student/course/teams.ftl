@@ -86,7 +86,7 @@
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
+                <h2 class="layui-colla-title">${team.serial.getSerial()} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
                     <p class="text-center">组长：</p>
                     <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
