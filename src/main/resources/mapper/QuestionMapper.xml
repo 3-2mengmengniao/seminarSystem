@@ -6,7 +6,7 @@
         <id property="id" column="id" />
         <result property="selected" column="is_selected"/>
         <association property="student" javaType="com.test.seminar.entity.Student" column="id" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
-        <association property="teamSerial" javaType="com.test.seminar.entity.TeamSerial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getTeamSerialByTeamId"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
     </resultMap>
 
     <select id="getQuestionBySeminarControlId" resultMap="questionResultMap">

@@ -3,6 +3,7 @@ package com.test.seminar.service;
 import com.test.seminar.entity.Course;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.exception.UserNotFoundException;
 
 import java.math.BigInteger;
@@ -56,4 +57,12 @@ public interface CourseService {
      * @throws CourseNotFoundException
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
+
+    /**
+     * 验证队伍是否合法
+     * @param teamId
+     * @throws TeamNotFoundException
+     * @return
+     */
+    Boolean isTeamValid(BigInteger teamId)throws TeamNotFoundException;
 }

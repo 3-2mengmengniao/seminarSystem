@@ -42,8 +42,8 @@
 
     <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
         select klass.id,grade,klass_serial,klass_time,klass_location
-        from klass,team
-        where team.id=#{teamId} and team.klass_id=klass.id
+        from klass,klass_team
+        where team.id=#{teamId} and klass_team.klass_id=klass.id
     </select>
 
     <select id="getCourseClassBySeminarControlId" resultMap="courseClassResultMap">
