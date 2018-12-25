@@ -106,7 +106,7 @@ public interface SeminarDao {
      * @param seminarControlId
      * @return
      */
-    SeminarScore getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
+    List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId);
 
     /**
      *

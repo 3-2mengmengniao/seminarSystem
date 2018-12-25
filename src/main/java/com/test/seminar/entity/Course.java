@@ -22,10 +22,9 @@ public class Course {
     private Date teamStartTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date teamEndTime;
-    private Course teamMainCourse;
-    private Course seminarMainCourse;
+    private List<Course> teamSubCourseList;
+    private List<Course> seminarSubCourseList;
     private List<Round> roundList;
-
 
     public BigInteger getId() {
         return id;
@@ -85,19 +84,13 @@ public class Course {
         this.teamEndTime = teamEndTime;
     }
 
-    public Course getTeamMainCourse() { return teamMainCourse; }
+    public List<Course> getTeamSubCourseList() { return teamSubCourseList; }
 
-    public void setTeamMainCourse(Course teamMainCourse) {
-        this.teamMainCourse = teamMainCourse;
-    }
+    public void setTeamSubCourseList(List<Course> teamSubCourseList) { this.teamSubCourseList = teamSubCourseList; }
 
-    public Course getSeminarMainCourse() {
-        return seminarMainCourse;
-    }
+    public List<Course> getSeminarSubCourseList() { return seminarSubCourseList; }
 
-    public void setSeminarMainCourse(Course seminarMainCourse) {
-        this.seminarMainCourse = seminarMainCourse;
-    }
+    public void setSeminarSubCourseList(List<Course> seminarSubCourseList) { this.seminarSubCourseList = seminarSubCourseList; }
 
     public List<Round> getRoundList() {
         return roundList;

@@ -8,17 +8,14 @@ import java.math.BigInteger;
  */
 
 public class Question {
-    private BigInteger teamId;
+    private BigInteger id;
     private Student student;
     private int selected;
     private double score;
+    private TeamSerial teamSerial;
 
-    public BigInteger getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(BigInteger teamId) {
-        this.teamId = teamId;
+    public BigInteger getId() {
+        return id;
     }
 
     public Student getStudent() { return student; }
@@ -39,5 +36,13 @@ public class Question {
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public TeamSerial getTeamSerial() {
+        return teamSerial;
+    }
+
+    public void setTeamSerial(TeamSerial teamSerial) {
+        this.teamSerial = teamSerial;
     }
 }

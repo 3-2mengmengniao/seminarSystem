@@ -34,5 +34,5 @@ public interface LoginDao {
      * @param password  密码
      * @return com.test.seminar.entity.Admin
      */
-    Admin adminLogin(String account, String password);
+    Admin adminLogin(String account);
 }

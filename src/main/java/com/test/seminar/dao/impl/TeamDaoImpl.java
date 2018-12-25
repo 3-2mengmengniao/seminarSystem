@@ -3,6 +3,8 @@ package com.test.seminar.dao.impl;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
+import com.test.seminar.entity.TeamSerial;
+import com.test.seminar.entity.TeamValidApplication;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.mapper.StudentMapper;
@@ -71,12 +73,17 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public TeamSerial getTeamSerialByTeamId(BigInteger teamId) {
+        return teamMapper.getTeamSerialByTeamId(teamId);
+    }
+
+    @Override
     public void insertTeam(Team team, BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException {
         teamMapper.insertTeam(team,courseClassId,courseId);
     }
 
     @Override
-    public void updateTeamByTeamId(Team team)throws TeamNotFoundException {
+    public void updateTeam(Team team)throws TeamNotFoundException {
         if(teamMapper.getTeamByTeamId(team.getId())==null) {
             throw new TeamNotFoundException();
         }
@@ -94,5 +101,25 @@ public class TeamDaoImpl implements TeamDao {
             throw new TeamNotFoundException();
         }
         teamMapper.deleteTeamByTeamId(teamId);
+    }
+
+    @Override
+    public List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId){
+        return teamMapper.getTeamValidApplicationByTeacherId(teacherId);
+    }
+
+    @Override
+    public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
+        teamMapper.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
+    }
+
+    @Override
+    public void updateTeamValidApplication(TeamValidApplication teamValidApplication){
+        teamMapper.updateTeamValidApplication(teamValidApplication);
+    }
+
+    @Override
+    public void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId){
+        teamMapper.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplicationId);
     }
 }

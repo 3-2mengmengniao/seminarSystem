@@ -1,9 +1,6 @@
 package com.test.seminar.service.impl;
 
-import com.test.seminar.dao.CourseClassDao;
-import com.test.seminar.dao.PresentationDao;
-import com.test.seminar.dao.RoundDao;
-import com.test.seminar.dao.SeminarDao;
+import com.test.seminar.dao.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -31,6 +28,8 @@ public class SeminarServiceImpl implements SeminarService {
     private CourseClassDao courseClassDao;
     @Autowired
     private PresentationDao presentationDao;
+    @Autowired
+    private CourseDao courseDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -54,6 +53,12 @@ public class SeminarServiceImpl implements SeminarService {
             SeminarControl seminarControl = new SeminarControl();
             seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
         }
+        List<Course> subCourseList=courseDao.getCourseBySeminarMainCourseId(courseId);
+        if(subCourseList!=null){
+            for(Course course:subCourseList){
+
+            }
+        }
     }
 
     @Override
@@ -65,6 +70,16 @@ public class SeminarServiceImpl implements SeminarService {
     public SeminarControl getSeminarControlBySeminarControlId(BigInteger seminarControlId)
     {
         return seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId){
+        return seminarDao.getSeminarScoreBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId){
+        return seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
     }
 
     @Override
@@ -99,7 +114,9 @@ public class SeminarServiceImpl implements SeminarService {
         Presentation presentation = new Presentation();
         presentation.setTeamOrder(teamOrder);
         if(presentationDao.getPresentationBySeminarControlIdAndTeamOrder(seminarControlId,teamOrder)!=null)
+        {
             throw new HaveEnrollException();
+        }
         presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentationDao.insertPresentation(presentation,seminarControlId,teamId);
     }

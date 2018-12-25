@@ -33,8 +33,7 @@ public class AdminController {
     StudentService studentService;
 
     @RequestMapping(value = {"/admin/","/admin/login"}, method = GET)
-    public String login(HttpServletResponse response, Model model) {
-        response.addHeader("x-frame-options","SAMEORIGIN");
+    public String login(Model model) {
         return "admin/login";
     }
 
@@ -97,7 +96,7 @@ public class AdminController {
         studentOld.setEmail(studentNew.getEmail());
         studentOld.setAccount(studentNew.getAccount());
         studentOld.setStudentName(studentNew.getStudentName());
-        studentService.updateStudentByStudentId(studentOld);
+        studentService.updateStudentByStudent(studentOld);
         response.addHeader("x-frame-options","SAMEORIGIN");
         return new ResponseEntity<>("", HttpStatus.OK);
     }
@@ -107,7 +106,7 @@ public class AdminController {
     public ResponseEntity<String> resetPwdStudent(@PathVariable BigInteger id,Model model) {
         Student student=studentService.getStudentByStudentId(id);
         student.setPassword("123456");
-        studentService.updateStudentByStudentId(student);
+        studentService.updateStudentByStudent(student);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

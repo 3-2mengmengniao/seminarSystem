@@ -43,6 +43,12 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     public void endSeminar(BigInteger seminarControlId) {
         SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
         seminarControl.setSeminarStatus(2);
+        for(Presentation presentation:seminarControl.getPresentationList()){
+            if(presentation.getPresent()==1){
+                presentation.setPresent(0);
+                presentationDao.updatePresentation(presentation);
+            }
+        }
         seminarDao.updateSeminarControl(seminarControl);
     }
 
@@ -63,21 +69,21 @@ public class RunSeminarServiceImpl implements RundSeminarService {
                 seminarControlList.add(seminarDao.getSeminarControlByClassIdAndSeminarInfo(seminarControl.getCourseClass().getId(),seminarInfo.getId()));
             }
         }
-        Map<BigInteger,Integer> weightMap=new HashMap<>();
+        Map<String,Integer> weightMap=new HashMap<>();
         for(Question question:activePresentation.getQuestionList()){
-            weightMap.put(question.getTeamId(),0);
+            weightMap.put(question.getTeamSerial().getSerial(),0);
         }
         for(SeminarControl otherControl:seminarControlList){
             calculateWeight(weightMap,otherControl,-100,0);
         }
         calculateWeight(weightMap,seminarControl,-200,10);
         //查找最大权重的问题
-        List<Map.Entry<BigInteger,Integer>> mapList = new ArrayList(weightMap.entrySet());
+        List<Map.Entry<String,Integer>> mapList = new ArrayList(weightMap.entrySet());
         Collections.sort(mapList, (o1, o2) -> (o2.getValue() - o1.getValue()));
-        BigInteger selectTeamId=mapList.get(0).getKey();
+        String selectTeamSerial=mapList.get(0).getKey();
         Question selectQuestion=activePresentation.getQuestionList().get(0);
         for(Question question:activePresentation.getQuestionList()){
-            if(question.getTeamId().equals(selectTeamId)){
+            if(question.getTeamSerial().getSerial().equals(selectTeamSerial)){
                 selectQuestion=question;
             }
         }
@@ -131,20 +137,20 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         presentationDao.updatePresentation(presentation);
     }
 
-    private void calculateWeight(Map<BigInteger, Integer> weightMap, SeminarControl seminarControl,int select,int notselect){
+    private void calculateWeight(Map<String, Integer> weightMap, SeminarControl seminarControl,int select,int notselect){
         Integer weight;
         List<Question> questionList=seminarControl.getQuestionList();
         for(Question oldQuestion:questionList){
-            if(!weightMap.keySet().contains(oldQuestion.getTeamId()))
+            if(!weightMap.keySet().contains(oldQuestion.getTeamSerial().getSerial()))
                 continue;
-            weight=weightMap.get(oldQuestion.getTeamId());
+            weight=weightMap.get(oldQuestion.getTeamSerial().getSerial());
             if(oldQuestion.getSelected()==1){
                 weight+=select;
             }
             else{
                 weight+=notselect;
             }
-            weightMap.put(oldQuestion.getTeamId(),weight);
+            weightMap.put(oldQuestion.getTeamSerial().getSerial(),weight);
         }
     }
 }

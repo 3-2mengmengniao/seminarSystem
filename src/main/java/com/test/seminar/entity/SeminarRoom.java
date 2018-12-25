@@ -22,6 +22,10 @@ public class SeminarRoom {
         count++;
     }
 
+    public void decCount(){
+        count=count-1;
+    }
+
     public void setCountZero(){
         count=0;
     }

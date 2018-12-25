@@ -27,6 +27,11 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
+    public CourseClass getCourseClassByCourseIdAndSerial(BigInteger courseId, int serial) {
+        return courseClassMapper.getCourseClassByCourseIdAndSerial(courseId,serial);
+    }
+
+    @Override
     public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
         CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
         if(courseClass==null) {

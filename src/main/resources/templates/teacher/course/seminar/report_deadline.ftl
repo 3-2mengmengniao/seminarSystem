@@ -5,9 +5,16 @@
     <link href="/styles/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/snap.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/framework.js"></script>
+    <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script src="/layui/layui.js"></script>
-
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/scripts/bootstrap-float-label.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.runner-min.js"></script>
     <style>
         body{padding:10px; font-size:16px; background:#fff; width:95%; margin:0 auto;  line-height:20px; overflow:hidden;}
         p{margin-bottom:10px;text-align:center;}
@@ -24,7 +31,7 @@
     </div>
 </div>
 <div>
-    <p><button class="layui-btn layui-btn-primary" id="submitIframe" style="margin-top:20px;">确定</button></p>
+    <p><button class="layui-btn layui-btn-primary" id="submitIframe" type="button" style="margin-top:20px;">确定</button></p>
 </div>
 
 <style type="text/css">
@@ -37,14 +44,31 @@
 <script>
     var index = parent.layer.getFrameIndex(window.name);
     $('#submitIframe').click(function(){
-        alert("1111")
         var val = $('input').val();
         if(val === ''){
             layer.msg('请填写报告截止日期!');
             return;
         }
-        parent.layer.msg('您将日期 [ ' +val + ' ] 成功传送给了父窗口');
-        parent.layer.close(index);
+       var deadline=val;
+        $.ajax(
+                {
+                    url:"/teacher/course/seminar/endSeminar?seminarId=${seminarControl.id}",
+                    type:'post',
+                    data:{"deadline":deadline},
+                    contentType:'application/x-www-form-urlencoded',
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            parent.layer.close(index);
+                        }
+                    },
+                    error:function(data,status){
+                        console.log(data);
+                        console.log(status);
+                    }
+                }
+        );
+        // parent.layer.msg('您将日期 [ ' +val + ' ] 成功传送给了父窗口');
+        //
     });
     layui.use('form', function(){
         var form = layui.form();

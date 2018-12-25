@@ -61,7 +61,7 @@ public interface StudentDao {
      * @param student
      * @return
      */
-    void updateStudentByStudentId(Student student)throws UserNotFoundException;
+    void updateStudentByStudent(Student student)throws UserNotFoundException;
 
     /**
      * @param studentId
