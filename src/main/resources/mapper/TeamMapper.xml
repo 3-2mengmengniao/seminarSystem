@@ -26,7 +26,7 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team_serial
+        SELECT id,team_name,leader_id,status
         FROM team
         WHERE id=#{teamId}
     </select>
@@ -38,26 +38,26 @@
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT team.id,team_name,leader_id,status,team_serial
+        SELECT team.id,team_name,leader_id,status
         FROM team,klass_student
         WHERE team.course_id=#{courseId} and  klass_student.student_id=#{studentId} and team.id=klass_student.team_id
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team_serial
+        SELECT id,team_name,leader_id,status
         FROM team
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status,team.team_serial
+        SELECT id,team_name,leader_id,status
         FROM seminar_score,team
         WHERE klass_seminar_id=#{seminarControlId} and team.id=seminar_score.team_id
     </select>
 
     <insert id="insertTeam">
-        insert into team(klass_id,course_id,team_name,leader_id,status,team_serial)
-        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.teamSerial})
+        insert into team(klass_id,course_id,team_name,leader_id,status,team_serial,klass_serial)
+        values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.serial.teamSerial},#{team.serial.courseClassSerial})
     </insert>
 
     <update id="updateTeam">
@@ -68,9 +68,6 @@
             </if>
             <if test="team.status!=null">
                 status=#{team.status},
-            </if>
-            <if test="team.teamSerial!=null">
-                team_serial=#{team.teamSerial},
             </if>
         </set>
         where id=#{team.id}
@@ -97,7 +94,7 @@
     </select>
 
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
-        select id,team_name,leader_id,status,team.team_serial
+        select id,team_name,leader_id,status
         from team,team_valid_application
         where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
     </select>
