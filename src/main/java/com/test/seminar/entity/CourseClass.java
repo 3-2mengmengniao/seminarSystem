@@ -10,8 +10,8 @@ import java.util.List;
 
 public class CourseClass {
     private BigInteger id;
-    private int grade;
-    private int classSerial;
+    private Integer grade;
+    private Integer classSerial;
     private String classTime;
     private String classLocation;
     private Course course;

@@ -11,7 +11,7 @@ import java.util.List;
 public class Team {
     private BigInteger id;
     private String teamName;
-    private int status;
+    private Integer status;
     private Serial serial;
     private Student leader;
     private CourseClass courseClass;
@@ -21,6 +21,22 @@ public class Team {
 
     public BigInteger getId() {
         return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public Serial getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Serial serial) {
+        this.serial = serial;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public String getTeamName() {

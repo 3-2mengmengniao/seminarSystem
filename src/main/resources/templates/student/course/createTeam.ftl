@@ -86,12 +86,10 @@
             </div>
             <div class="distance3"></div>
             <div >
-                <div class="distance3"></div>
                 <div class="layui-form-item">
                     <div >
-                        <div class="distance3"></div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label" style="font-weight:bold;font-size:16px;">选择班级:&nbsp;&nbsp;<span style="float: right;opacity: 0.2;">(required)</span></label>
+                            <label class="layui-form-label margin2" style="font-weight:bold;font-size:16px;">选择班级:&nbsp;&nbsp;<span style="float: right;opacity: 0.2;">(required)</span></label>
                             <div class="layui-input-block">
                                 <select name="presentationPercentage" lay-filter="aihao">
                                     <option >2016-(1)</option>
@@ -101,39 +99,78 @@
                             </div>
                         </div>
                 </div>
-                <div class="distance4"></div>
             </div>
             <div class="decoration"></div>
-            <label class="field-title contactMessageTextarea" for="contactMessageTextarea">添加成员：</label>
-            <div >
+                <form name="filterForm" id="filterForm" class="layui-form" style="display: inline-block" onkeydown="if(event.keyCode===13){return false;}">
+                    <div class="layui-form-item" >
+                        <div class="searchDiv">
+                            <input name="searchContent" id="searchContent" type="text" placeholder="请输入学工号/姓名" autocomplete="off" class="layui-input" style="height:35px;width: 170px;display: inline-block;border-radius:8px;">
+                            <img style="width:23px;margin-left:-30px;" id="searchBtn" src="/images/搜索.png">
+                        </div>
+
+                        <#--<div class="layui-inline">-->
+                            <#--<button name="searchBtn" id="searchBtn" type="button" class="layui-btn"><i class="layui-icon">&#xe615;</i></button>-->
+                        <#--</div>-->
+                    </div>
+                </form>
+            <label class="field-title contactMessageTextarea margin3" for="contactMessageTextarea">添加成员：</label>
+            <div class="layui-table-box">
                 <div class="distance3"></div>
-                <table id="member" class="layui-hide" >
+                <table  id="member" class="layui-table addMember" >
                     <tbody >
                     <tr class="item">
-                        <td>
-                            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                        <td data-field="0"  class="layui-table-col-special">
+                            <div class="layui-table-cell  laytable-cell-checkbox">
+                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                    <i class="layui-icon layui-icon-ok"></i>
+                                </div>
+                            </div>
                         </td>
-                        <td id="id" class="number">24320122202844</td>
-                        <td id="username" class="name">小张</td>
+                        <td data-field="id"  class="">
+                            <div class="layui-table-cell ">24320122202844</div>
+                        </td>
+                        <td data-field="username"  class="">
+                            <div class="layui-table-cell">&nbsp;小张&nbsp;</div>
+                        </td>
                     </tr>
                     <tr class="item">
-                        <td>
-                            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                        <td data-field="0"  class="layui-table-col-special">
+                            <div class="layui-table-cell  laytable-cell-checkbox">
+                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                    <i class="layui-icon layui-icon-ok"></i>
+                                </div>
+                            </div>
                         </td>
-                        <td id="id" class="number">24320122202844</td>
-                        <td id="username" class="name">小张</td>
+                        <td data-field="id"  class="">
+                            <div class="layui-table-cell ">24320122202845</div>
+                        </td>
+                        <td data-field="username"  class="">
+                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
+                        </td>
                     </tr>
                     <tr class="item">
-                        <td>
-                            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                        <td data-field="0"  class="layui-table-col-special">
+                            <div class="layui-table-cell  laytable-cell-checkbox">
+                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                    <i class="layui-icon layui-icon-ok"></i>
+                                </div>
+                            </div>
                         </td>
-                        <td id="id" class="number">24320122202844</td>
-                        <td id="username" class="name">小张</td>
+                        <td data-field="id"  class="">
+                            <div class="layui-table-cell ">24320122202846</div>
+                        </td>
+                        <td data-field="username"  class="">
+                            <div class="layui-table-cell">&nbsp;小李&nbsp;</div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
                 <div class="distance4"></div>
                 <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建小组" data-formId="contactForm"/></p>
+             </div>
         </form>
         <div class="distance2"></div>
         <!--
@@ -159,19 +196,19 @@
             layer.msg('展开状态：'+ data.show);
         });
     });
-    layui.use('table', function(){
-        var table = layui.table;
-        table.render({
-            elem: '#member'
-            // ,url:'/demo/table/user/'
-            ,cols: [[
-                {type:'checkbox'}
-                ,{field:'id', width:100, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-            ]]
-            ,page: true
-        });
-    });
+    // layui.use('table', function(){
+    //     var table = layui.table;
+    //     table.render({
+    //         elem: '#member'
+    //         // ,url:'/demo/table/user/'
+    //         ,cols: [[
+    //             {type:'checkbox'}
+    //             ,{field:'id', width:100, title: 'ID', sort: true}
+    //             ,{field:'username', width:80, title: '用户名'}
+    //         ]]
+    //         ,page: true
+    //     });
+    // });
 </script>
 <script>
     layui.use('form', function(){
@@ -179,17 +216,58 @@
 
         //各种基于事件的操作，下面会有进一步介绍
     });
+    $("#searchBtn").bind("click",function () {
+        if($("#username").val()==''||$("#username").val()==null){
+            layer.msg("请输入查找内容") ;
+        }
+        $(".item").fadeOut(2000);
+        $("td:contains("+$("#searchContent").val()+")").parents('.item').fadeIn();
+    });
+
 </script>
 
 <style>
-    @media screen and (max-width:768px){
+    .layui-unselect{
+        margin-right:17px;
+    }
+    div.layui-form-checkbox.layui-unselect{
+        width:auto;
+    }
+
+    .searchDiv{
+        float:right;
+        margin-bottom:-35px;
+        margin-right:0;
+    }
+    .addMember{
+        margin:0 auto;
+        width:39%;
+    }
+
+    @media screen and (min-width:768px) and (max-width:1024px;){
         .margin3{
-            margin-left:35%;
+            margin-left:9%;
+        }
+        .margin2{
+            margin-left:0;
+        }
+        .searchDiv{
+            float:right;
+            margin-bottom:-35px;
+            margin-right:29.5%;
         }
     }
-    @media screen and (min-width:768px){
+    @media screen and (min-width:1024px){
         .margin3{
-            margin-left:44%;
+            margin-left:3%;
+        }
+        .margin2{
+            margin-left:2.5%;
+        }
+        .searchDiv{
+            float:right;
+            margin-bottom:-35px;
+            margin-right:29.5%;
         }
     }
 </style>

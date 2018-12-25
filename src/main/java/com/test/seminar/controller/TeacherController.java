@@ -360,14 +360,6 @@ public class TeacherController {
         return "teacher/course/seminar/score";
     }
 
-    @RequestMapping(value="/course/seminar/progressing")
-    public String progressing(BigInteger seminarId, Model model) {
-        rundSeminarService.beginSeminar(seminarId);
-        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
-        model.addAttribute("seminarControl",seminarControl);
-        return "teacher/course/seminar/progressing";
-    }
-
     @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "teacher/activate"; }
 
@@ -379,21 +371,6 @@ public class TeacherController {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/report_deadline";
-    }
-
-    @RequestMapping(value = "/course/seminar/endSeminar",method = POST)
-    @ResponseBody
-    public ResponseEntity<String> endSeminar(BigInteger seminarId,String deadline,Model model) {
-        SeminarControl mySeminar=seminarService.getSeminarControlBySeminarControlId(seminarId);
-        System.out.println(deadline);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        ParsePosition pos = new ParsePosition(0);
-        Date strtodate = formatter.parse(deadline, pos);
-        System.out.println(strtodate);
-        mySeminar.setReportDDL(strtodate);
-        rundSeminarService.endSeminar(mySeminar.getId());
-        seminarService.updateSeminarControl(mySeminar);
-        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="course/shareSettings")

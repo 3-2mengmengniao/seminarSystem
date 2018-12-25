@@ -6,7 +6,7 @@ public class ShareTeamApplication {
     private BigInteger id;
     private Course mainCourse;
     private Course subCourse;
-    private int status;
+    private Integer status;
 
     public BigInteger getId() {
         return id;

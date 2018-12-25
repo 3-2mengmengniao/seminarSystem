@@ -19,7 +19,7 @@ public class Teacher{
     private BigInteger id;
     private String account;
     private String password;
-    private int active;
+    private Integer active;
     private String teacherName;
     private String email;
     private List<Course> courseList;

@@ -3,19 +3,30 @@ package com.test.seminar.controller;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.Message;
 import com.test.seminar.entity.Question;
+import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.SeminarRoom;
 import com.test.seminar.service.RundSeminarService;
+import com.test.seminar.service.SeminarService;
 import com.test.seminar.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class RunSeminarController {
@@ -26,7 +37,32 @@ public class RunSeminarController {
     private TeamService teamService;
     @Autowired
     public SimpMessagingTemplate template;
+    @Autowired
+    public SeminarService seminarService;
     private Map<BigInteger, SeminarRoom> seminarRoomMap=new HashMap<>();
+
+    @RequestMapping(value="/teacher/course/seminar/progressing")
+    public String progressing(BigInteger seminarId, Model model) {
+        rundSeminarService.beginSeminar(seminarId);
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        return "teacher/course/seminar/progressing";
+    }
+
+    @RequestMapping(value = "/teacher/course/seminar/endSeminar",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> endSeminar(BigInteger seminarId, String deadline, Model model) {
+        SeminarControl mySeminar=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        System.out.println(deadline);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ParsePosition pos = new ParsePosition(0);
+        Date strtodate = formatter.parse(deadline, pos);
+        System.out.println(strtodate);
+        mySeminar.setReportDDL(strtodate);
+        rundSeminarService.endSeminar(mySeminar.getId());
+        seminarService.updateSeminarControl(mySeminar);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
 
     @MessageMapping("/QA")
     @ResponseBody
