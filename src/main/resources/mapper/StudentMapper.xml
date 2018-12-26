@@ -35,8 +35,12 @@
 
     <select id="getStudentNotTeamInCourse" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
-        FROM student,klass_student
-        WHERE klass_student.course_id=#{courseId} and klass_student.student_id=student.id and klass_student.team_id is null
+        FROM student
+        WHERE not exists(
+        select team_student.student_id
+        from klass_student,team_student,klass_team
+        where klass_student.course_id=#{courseId} and team_student.student_id=student.id and klass_team.klass_id=klass_student.klass_id and team_student.team_id=team_student.team_id
+        )
     </select>
 
     <insert id="insertStudent">
