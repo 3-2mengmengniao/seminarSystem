@@ -52,6 +52,7 @@ public interface TeamDao {
      */
     void insertTeam(Team team,BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException;
 
+    void insertCourseClassAndTeamRelation(BigInteger courseClassId,BigInteger teamId);
     /**
      * 更改队伍信息
      * @param team
@@ -102,4 +103,17 @@ public interface TeamDao {
      * @param teamValidApplicationId
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId);
+
+    void deleteCourseClassAndTeamRelationByTeamId(BigInteger teamId);
+
+    Team getTeamByMainCourseClassIdAndTeamSerial(BigInteger courseClassId,Integer teamSerial);
+
+    void insertTeamAndStudentRelation(BigInteger teamId,BigInteger studentId);
+
+    void deleteCourseClassAndTeamRelation(BigInteger teamId,BigInteger courseClassId);
+
+    void deleteTeamAndStudentRelation(BigInteger teamId,BigInteger studentId);
+
+    void deleteTeamAndStudentRelationByTeamId(BigInteger teamId);
+
 }

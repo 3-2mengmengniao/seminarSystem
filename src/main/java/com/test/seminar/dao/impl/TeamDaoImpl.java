@@ -83,11 +83,16 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public void insertCourseClassAndTeamRelation(BigInteger courseClassId, BigInteger teamId) {
+        teamMapper.insertCourseClassAndTeamRelation(courseClassId,teamId);
+    }
+
+    @Override
     public void updateTeam(Team team)throws TeamNotFoundException {
         if(teamMapper.getTeamByTeamId(team.getId())==null) {
             throw new TeamNotFoundException();
         }
-        teamMapper.updateTeamByTeamId(team);
+        teamMapper.updateTeam(team);
     }
 
     @Override
@@ -121,5 +126,35 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId){
         teamMapper.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplicationId);
+    }
+
+    @Override
+    public void deleteCourseClassAndTeamRelationByTeamId(BigInteger teamId) {
+        teamMapper.deleteCourseClassAndTeamRelationByTeamId(teamId);
+    }
+
+    @Override
+    public Team getTeamByMainCourseClassIdAndTeamSerial(BigInteger courseClassId, Integer teamSerial) {
+        return teamMapper.getTeamByMainCourseClassIdAndTeamSerial(courseClassId,teamSerial);
+    }
+
+    @Override
+    public void insertTeamAndStudentRelation(BigInteger teamId, BigInteger studentId) {
+        teamMapper.insertTeamAndStudentRelation(teamId,studentId);
+    }
+
+    @Override
+    public void deleteCourseClassAndTeamRelation(BigInteger teamId, BigInteger courseClassId) {
+        teamMapper.deleteCourseClassAndTeamRelation(teamId,courseClassId);
+    }
+
+    @Override
+    public void deleteTeamAndStudentRelation(BigInteger teamId, BigInteger studentId) {
+        teamMapper.deleteTeamAndStudentRelation(teamId,studentId);
+    }
+
+    @Override
+    public void deleteTeamAndStudentRelationByTeamId(BigInteger teamId) {
+        teamMapper.deleteTeamAndStudentRelationByTeamId(teamId);
     }
 }

@@ -79,4 +79,14 @@ public class CourseClassDaoImpl implements CourseClassDao {
     public CourseClass getCourseClassByTeamId(BigInteger teamId) {
         return courseClassMapper.getCourseClassByTeamId(teamId);
     }
+
+    @Override
+    public void deleteCourseClassAndTeamRelationByCourseClassId(BigInteger courseClassId) {
+        courseClassMapper.deleteCourseClassAndTeamRelationByCourseClassId(courseClassId);
+    }
+
+    @Override
+    public Integer getCourseClassTeamNumber(BigInteger courseClassId) {
+        return courseClassMapper.getCourseClassTeamNumber(courseClassId);
+    }
 }

@@ -62,6 +62,13 @@ public interface CourseClassMapper {
      * @return
      */
     CourseClass getCourseClassBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    /**
+     * 获得某班级下的队伍数量
+     * @param courseClassId
+     * @return
+     */
+    Integer getCourseClassTeamNumber(@Param("courseClassId")BigInteger courseClassId);
     /**
      * 创建新的班级账户
      *
@@ -92,4 +99,5 @@ public interface CourseClassMapper {
      */
     void deleteCourseClassByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
+    void deleteCourseClassAndTeamRelationByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 }
