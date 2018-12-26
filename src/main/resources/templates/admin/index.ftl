@@ -10,9 +10,12 @@
 
     <link rel="stylesheet" href="/adminStatic/css/font.css">
 	<link rel="stylesheet" href="/adminStatic/css/xadmin.css">
+    <link href="/adminStatic/css/pagination.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="/adminStatic/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
+    <#--<script src="/adminStatic/js/jquery.min.js" type="text/javascript"></script>-->
+    <script src="/adminStatic/js/jquery.pagination.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -41,7 +44,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="/admin/teacherList">
+                        <a _href="/admin/teacherList?pageNum=1">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理教师信息</cite>
                         </a>
@@ -69,6 +72,9 @@
             <div class="layui-tab-item layui-show">
                 <iframe src='/admin/teacherList' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
+              <div class="box">
+                  <div id="pagination" class="page center">
+              </div>
           </div>
         </div>
     </div>
@@ -81,6 +87,7 @@
      </div>
      -->
      <!-- 底部结束 -->
+
     <script>
     //百度统计可去掉
     var _hmt = _hmt || [];

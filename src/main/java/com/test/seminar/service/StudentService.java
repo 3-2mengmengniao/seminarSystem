@@ -1,5 +1,6 @@
 package com.test.seminar.service;
 
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Student;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -51,4 +52,6 @@ public interface StudentService {
     List<Student> getAllStudent();
 
     List<Student> getStudentNotTeamInCourse(BigInteger courseId);
+
+    PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize);
 }

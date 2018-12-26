@@ -1,5 +1,7 @@
 package com.test.seminar.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.entity.Student;
@@ -58,5 +60,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getStudentNotTeamInCourse(BigInteger courseId) {
         return studentDao.getStudentNotTeamInCourse(courseId);
+    }
+
+    @Override
+    public PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Student> list = studentDao.getAllStudent();
+        PageInfo<Student> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 }
