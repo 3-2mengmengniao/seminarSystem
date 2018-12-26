@@ -64,6 +64,10 @@ function endSeminar() {
     stompClient.send("/app/endSeminar", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
 }
 
+function comeIn(){
+    stompClient.send("/app/welcome", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
+}
+
 function nextGroup() {
     stompClient.send("/app/nextGroup", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
 }
@@ -89,6 +93,7 @@ function showNext(){
     $(allTr).eq(groupIndex).siblings().removeClass('active');
     window.location.reload();
 }
+
 
     connect();
     $("form").on('submit', function (e) {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -127,8 +128,8 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void upLoadPPT(MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId) throws IOException {
-        File file=saveFile(multipartFile,seminarControlId,teamId,"PPT");
+    public void upLoadPPT(HttpServletRequest request,MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId) throws IOException {
+        File file=saveFile(request,multipartFile,seminarControlId,teamId,"PPT");
         Presentation presentation=presentationDao.getPresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentation.setPptName(multipartFile.getOriginalFilename());
         presentation.setPptUrl(file.getParentFile().getAbsolutePath());
@@ -136,18 +137,18 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void upLoadReport(MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId) throws IOException {
-        File file=saveFile(multipartFile,seminarControlId,teamId,"Report");
+    public void upLoadReport(HttpServletRequest request,MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId) throws IOException {
+        File file=saveFile(request,multipartFile,seminarControlId,teamId,"Report");
         Presentation presentation=presentationDao.getPresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
         presentation.setReportName(multipartFile.getOriginalFilename());
         presentation.setReportUrl(file.getParentFile().getAbsolutePath());
         presentationDao.updatePresentation(presentation);
     }
-    private File saveFile(MultipartFile multipartFile,BigInteger seminarControlId,BigInteger teamId,String type) throws IOException {
-        String path=System.getProperty("user.dir");
+    private File saveFile(HttpServletRequest request, MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId, String type) throws IOException {
+        String path= request.getSession().getServletContext().getRealPath("/");
         File tmpfile = new File(path);
         tmpfile=tmpfile.getParentFile();
-        File file=new File(tmpfile.getPath()+File.separator+"File"+ File.separator+seminarControlId.toString()+File.separator+teamId.toString()+File.separator+type+File.separator+multipartFile.getOriginalFilename());
+        File file=new File(tmpfile.getPath()+"File"+ File.separator+seminarControlId.toString()+File.separator+teamId.toString()+File.separator+type+File.separator+multipartFile.getOriginalFilename());
         if(!file.getParentFile().exists()){
             file.getParentFile().mkdirs();
         }

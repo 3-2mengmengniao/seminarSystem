@@ -55,7 +55,7 @@
 
     <insert id="insertCourseClass">
         insert into klass(course_id,grade,klass_serial,klass_time,klass_location)
-        values(#{courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
+        values(#{courseId},#{courseclass.grade?c},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
     <insert id="insertCourseClassStudentRelation">
@@ -67,7 +67,7 @@
         update klass
         <set>
             <if test="courseClass.grade!=null">
-                grade=#{courseClass.grade},
+                grade=#{courseclass.grade?c},
             </if>
             <if test="courseClass.classSerial!=null">
                 klass_serial=#{courseClass.classSerial},

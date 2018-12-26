@@ -70,7 +70,6 @@
                 <#list seminarList as seminar>
                     <p class="center center-text">${seminar.seminarName}</p>
                 </#list>
-                <p class="center center-text"><a class="button-big button-dark" id="addButton" style="width: 200px;">添加讨论课</a></p>
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>

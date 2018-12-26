@@ -163,7 +163,7 @@
     <div class="distance5"></div>
     <div class="center-navigation">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='#'" >新增共享</h2>
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/course/addShare?courseId=${course.id}'" >新增共享</h2>
         </div>
     </div>
     <div class="distance2"></div>

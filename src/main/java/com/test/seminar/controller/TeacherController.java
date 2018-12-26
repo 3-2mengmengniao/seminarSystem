@@ -136,7 +136,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/activate", method = POST)
     @ResponseBody
-    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
@@ -175,7 +175,8 @@ public class TeacherController {
 
     @RequestMapping(value="/course/seminar/create",method = GET)
     public String createSeminar(BigInteger courseId,Model model) {
-        model.addAttribute("courseId",courseId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course/seminar/create";
     }
 
@@ -380,6 +381,13 @@ public class TeacherController {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         return "teacher/course/shareSettings";
+    }
+
+    @RequestMapping(value="course/addShare")
+    public String addShare(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        return "teacher/course/addShare";
     }
 
 }

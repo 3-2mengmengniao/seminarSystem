@@ -91,7 +91,7 @@
                 <col width="100">
             </colgroup>
             <tbody>
-            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+            <#list 1..<seminarControl.seminarInfo.maxGroup as t>
                 <#if seminarControl.presentationList[t]??>
                     <#if seminarControl.presentationList[t].present==1>
                         <tr class="group active">
@@ -123,6 +123,7 @@
 </body>
 <script src="/scripts/app.js"></script>
 <script>
+    function() { comeIn(); }
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#QAbutton" ).click(function() { sendQuestion(); });
