@@ -1,9 +1,9 @@
-package com.test.seminar.strategy.impl;
+package com.test.seminar.entity.strategy.impl;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
-import com.test.seminar.strategy.Strategy;
+import com.test.seminar.entity.strategy.Strategy;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author wzw
  * date 2018/12/25
  */
-public class ConflictCourseStrategy implements Strategy {
+public class ConflictCourseStrategy extends Strategy {
     private BigInteger id;
     private List<BigInteger> conflictCourseIdList;
 
