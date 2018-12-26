@@ -16,9 +16,6 @@ import java.util.List;
  * date 2018/12/25
  */
 public class TeamAndStrategy implements Strategy {
-    @Autowired
-    CourseDao courseDao;
-
     private BigInteger id;
     List<Pair<String, BigInteger>> strategyNameAndIdList;
 
@@ -37,6 +34,9 @@ public class TeamAndStrategy implements Strategy {
     public void setStrategyNameAndIdList(List<Pair<String, BigInteger>> strategyNameAndIdList) {
         this.strategyNameAndIdList = strategyNameAndIdList;
     }
+
+    @Autowired
+    CourseDao courseDao;
 
     @Override
     public Boolean isValid(Team team) {
