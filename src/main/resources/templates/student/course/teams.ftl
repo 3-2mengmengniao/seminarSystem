@@ -106,7 +106,7 @@
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">未组队学生</h2>
                 <div class="layui-colla-content">
-                    <#list noTeamStudentList as student>
+                    <#list studentNoTeamList as student>
                         <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
                     </#list>
                 </div>

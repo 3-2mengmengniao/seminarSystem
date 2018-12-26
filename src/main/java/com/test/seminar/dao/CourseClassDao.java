@@ -77,4 +77,8 @@ public interface CourseClassDao {
      * @return
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException;
+
+    void deleteCourseClassAndTeamRelationByCourseClassId(BigInteger courseClassId);
+
+    Integer getCourseClassTeamNumber(BigInteger courseClassId);
 }

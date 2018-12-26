@@ -41,6 +41,13 @@
         WHERE klass.course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
 
+    <select id="getCourseClassTeamNumber" resultType="Integer">
+        SELECT count(klass_id)
+        FROM klass_team
+        group by klass_id
+        where klass_id=#{courseClassId}
+    </select>
+
     <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
         select klass.id,grade,klass_serial,klass_time,klass_location
         from klass,klass_team
@@ -84,5 +91,9 @@
 
     <delete id="deleteCourseClassByCourseClassId">
         delete from klass where id=#{courseClassId}
+    </delete>
+
+    <delete id="deleteCourseClassAndTeamRelationByCourseClassId">
+        delete from klass_team where klass_id=#{courseClassId}
     </delete>
 </mapper>

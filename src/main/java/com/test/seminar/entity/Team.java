@@ -15,6 +15,7 @@ public class Team {
     private Serial serial;
     private Student leader;
     private Course course;
+    private CourseClass courseClass;
     private List<Student> memberList;
     private List<Question> questionList;
 
@@ -80,6 +81,18 @@ public class Team {
 
     public Course getCourse() {
         return course;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public CourseClass getCourseClass() {
+        return courseClass;
+    }
+
+    public void setCourseClass(CourseClass courseClass) {
+        this.courseClass = courseClass;
     }
 
     @Override

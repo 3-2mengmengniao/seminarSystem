@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
+import javafx.util.Pair;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,12 +161,13 @@ public class StudentController {
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         model.addAttribute("courseId",courseId);
-        List<Team> teamList= teamService.getTeamByCourseId(courseId);
+        Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
+        List<Team> teamList=teamPair.getKey();
+        List<Student> studentNoTeamList=teamPair.getValue();
         model.addAttribute("teamList",teamList);
+        model.addAttribute("studentNoTeamList",studentNoTeamList);
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         model.addAttribute("myTeam",team);
-        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
-        model.addAttribute("noTeamStudentList",noTeamStudentList);
         return "student/course/teams";
     }
 

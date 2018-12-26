@@ -88,7 +88,7 @@
         <div class="layui-collapse" lay-accordion="" >
             <#list teamList as team>
             <div class="layui-colla-item" style="border:none;">
-                <h2 class="layui-colla-title">${team.courseClass.classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
+                <h2 class="layui-colla-title">${team.serial.getSerial()} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
                     <p class="text-center">组长：</p>
                     <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
@@ -117,7 +117,7 @@
         <div class="layui-colla-item">
             <h2 class="layui-colla-title">未组队学生</h2>
             <div class="layui-colla-content">
-                    <#list noTeamStudentList as student>
+                    <#list studentNoTeamList as student>
                         <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
                     </#list>
             </div>

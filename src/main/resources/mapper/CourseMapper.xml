@@ -12,18 +12,26 @@
         <association property="course" javaType="com.test.seminar.entity.Course" column="id" select="getCourseByCourseId"/>
     </resultMap>
 
-    <resultMap id="memberLimitStrategyResultMap" type="com.test.seminar.strategy.impl.MemberLimitStrategy">
-        <id property="id" column="id"/>
-    </resultMap>
-
-    <resultMap id="courseMemberLimitStrategyResultMap" type="com.test.seminar.strategy.impl.CourseMemberLimitStrategy">
-        <id property="id" column="id"/>
-    </resultMap>
-
     <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.strategy.impl.ConflictCourseStrategy">
         <id property="id" column="id"/>
         <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
+
+    <resultMap id="teamAndStrategyResultMap" type="com.test.seminar.strategy.impl.TeamAndStrategy">
+    <id property="id" column="id"/>
+    <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
+</resultMap>
+
+    <resultMap id="teamOrStrategyResultMap" type="com.test.seminar.strategy.impl.TeamOrStrategy">
+        <id property="id" column="id"/>
+        <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
+    </resultMap>
+
+    <select id="getTeamMainCourseIdBySubCourseId" resultType="BigInteger">
+        select team_main_course_id
+        from course
+        where id=#{subCourseId}
+    </select>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
         select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
@@ -120,17 +128,37 @@
         where course_id=#{courseId}
     </select>
     
-    <select id="getMemberLimitStrategyByStrategyId" resultMap="memberLimitStrategyResultMap">
+    <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.strategy.impl.MemberLimitStrategy">
         select id,min_number,max_number
         from member_limit_strategy
         where id=#{strategyId}
     </select>
+    
+    <update id="updateMemberLimitStrategy">
+        update member_limit_strategy
+        <set>
+            <if test="member_limit_strategy.min_number!=null">
+                min_number=#{member_limit_strategy.min_number},
+            </if>
+            <if test="member_limit_strategy.max_number!=null">
+                max_number=#{member_limit_strategy.max_number},
+            </if>
+        </set>
+    </update>
 
-    <select id="getCourseMemberLimitStrategyByStrategyId" resultMap="courseMemberLimitStrategyResultMap">
+    <delete id="deleteMemberLimitStrategyByStrategyId">
+        delete from member_limit_strategy where id=#{strategyId}
+    </delete>
+
+    <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.strategy.impl.CourseMemberLimitStrategy">
         select id,course_id,min_number,max_number
         from course_member_limit_strategy
         where id=#{strategyId}
     </select>
+
+    <update id="updateCourseMemberLimitStrategy">
+        update
+    </update>
 
     <select id="getCourseIdByConflictCourseStrategyId" resultType="BigInteger">
         select course_id
@@ -139,8 +167,26 @@
     </select>
 
     <select id="getConflictCourseStrategyByStrategyId" resultMap="conflictCourseStrategyResultMap">
-        select id
+        select id,course_id
         from conflict_course_strategy
         where id=#{strategyId}
+    </select>
+
+    <select id="getStrategyPairByTeamAndStrategyId" resultType="com.test.seminar.entity.StrategyPair">
+        select strategy_name,strategy_id
+        from team_and_strategy
+        where id=#{teamAndStrategyId}
+    </select>
+
+    <select id="getTeamAndStrategyByStrategyId" resultMap="teamAndStrategyResultMap">
+        select id,strategy_name,strategy_id
+        from team_and_strategy
+        where id=#{teamAndStrategyId}
+    </select>
+
+    <select id="getTeamOrStrategyByStrategyId" resultMap="teamOrStrategyResultMap">
+        select id,strategy_name,strategy_id
+        from team_or_strategy
+        where id=#{teamAndStrategyId}
     </select>
 </mapper>

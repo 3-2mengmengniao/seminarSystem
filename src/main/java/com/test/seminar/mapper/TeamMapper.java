@@ -110,6 +110,9 @@ public interface TeamMapper {
      */
     void insertTeamValidApplication(@Param("teamValidApplication") TeamValidApplication teamValidApplication, @Param("teamId")BigInteger teamId, @Param("teacherId")BigInteger teacherId);
 
+    void insertCourseClassAndTeamRelation(@Param("courseClassId")BigInteger courseClassId,@Param("teamId")BigInteger teamId);
+
+    void insertTeamAndStudentRelation(@Param("teamId")BigInteger teamId,@Param("studentId")BigInteger studentId);
     /**
      *
      * @param teamValidApplication
@@ -121,4 +124,14 @@ public interface TeamMapper {
      * @param teamValidApplicationId
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
+
+    void deleteCourseClassAndTeamRelation(@Param("teamId")BigInteger teamId,@Param("courseClassId")BigInteger courseClassId);
+
+    void deleteTeamAndStudentRelation(@Param("teamId")BigInteger teamId,@Param("studentId")BigInteger studentId);
+
+    void deleteCourseClassAndTeamRelationByTeamId(@Param("teamId")BigInteger teamId);
+
+    void deleteTeamAndStudentRelationByTeamId(@Param("teamId")BigInteger teamId);
+
+    Team getTeamByMainCourseClassIdAndTeamSerial(@Param("courseClassId")BigInteger courseClassId,@Param("teamSerial")Integer teamSerial);
 }

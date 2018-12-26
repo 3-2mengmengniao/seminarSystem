@@ -5,6 +5,7 @@
         <id property="id" column="id" />
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
+        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="klass_id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByCourseClassId"/>
         <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
         <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
@@ -38,8 +39,19 @@
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
         SELECT team.id,team_name,leader_id,status
-        FROM team,klass_team,team_student,klass
-        WHERE  klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team_student.team_id=klass_team.team_id and team_student.student_id=#{studentId} and team.id=klass_team.team_id
+        FROM team,team_student,course
+        <if test="team_main_course_id==null">
+            WHERE  course.id=#{courseId} and team.course_id=course.id and team_student.team_id=team.id and team_student.student_id=#{studentId}
+        </if>
+        <if test="team_main_course_id!=null">
+            WHERE  course.id=#{courseId} and team.course_id=course.team_main_course_id and team_student.team_id=team.id and team_student.student_id=#{studentId}
+        </if>
+        </select>
+
+    <select id="getTeamByMainCourseClassIdAndTeamSerial" resultMap="teamResultMap">
+        SELECT team.id,team_name,leader_id,status
+        FROM team
+        WHERE  klass_id=#{courseClassId} and team_serial=#{teamSerial}
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
@@ -65,18 +77,44 @@
         values(#{classId},#{courseId},#{team.teamName},#{team.leaderId},#{team.status},#{team.serial.teamSerial},#{team.serial.courseClassSerial})
     </insert>
 
+    <insert id="insertCourseClassAndTeamRelation">
+        insert into klass_team(klass_id,team_id)
+        values(#{classId},#{teamId})
+    </insert>
+
+    <insert id="insertTeamAndStudentRelation">
+        insert into team_student(team_id,student_id)
+        values(#{teamId},#{studentId})
+    </insert>
+
     <update id="updateTeam">
         update team
         <set>
             <if test="team.status!=null">
                 status=#{team.status},
             </if>
-            <if test="team.teamSerial!=null">
-                team_serial=#{team.teamSerial},
+            <if test="team.teamName!=null">
+                team_name=#{team.teamName},
             </if>
         </set>
         where id=#{teamId}
     </update>
+
+    <delete id="deleteCourseClassAndTeamRelation">
+        delete from klass_team where team_id=#{teamId} and klass_id=#{courseClassId}
+    </delete>
+
+    <delete id="deleteCourseClassAndTeamRelationByTeamId">
+        delete from klass_team where team_id=#{teamId}
+    </delete>
+
+    <delete id="deleteTeamAndStudentRelation">
+        delete from team_student where team_id=#{teamId} and student_id=#{studentId}
+    </delete>
+
+    <delete id="deleteTeamAndStudentRelationByTeamId">
+        delete from team_student where team_id=#{teamId}
+    </delete>
 
     <delete id="deleteTeamByTeamId">
         delete from team where id=#{teamId}
