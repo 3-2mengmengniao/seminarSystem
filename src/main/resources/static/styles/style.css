@@ -64,6 +64,29 @@ body{
 	margin-top:16px;
 }
 
+.center-panel{
+	margin-right:-6%;
+	margin-left:-6%;
+	background-color: #fff;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+}
+
+@media screen and (min-width:1024px) {
+	.center-panel{
+		background-color: #fff;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+		margin-right:5%;
+		margin-left:5%;
+	}
+}
+@media screen and (min-width:768px) and (max-width:1024px){
+	.center-panel{
+		background-color: #fff;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+		margin-right:5%;
+		margin-left:5%;
+	}
+}
 
 .landing-navigation{
 	margin:0 auto;

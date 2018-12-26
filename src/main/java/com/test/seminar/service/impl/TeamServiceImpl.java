@@ -78,6 +78,7 @@ public class TeamServiceImpl implements TeamService {
         List<CourseClass> courseClassList=courseClassDao.getCourseClassByCourseId(courseId);
         List<Student> studentList=new ArrayList<>();
         List<BigInteger> studentIdList=new ArrayList<>();
+        List<BigInteger> studentIdInTeamList=new ArrayList<>();
         //获取课程下所有班级的学生名单(Id形式)
         for(CourseClass courseClass:courseClassList){
             for(Team classTeam:courseClass.getTeamList()) {
@@ -90,18 +91,19 @@ public class TeamServiceImpl implements TeamService {
         //将队伍中未选此课程的学生剔除,找出未组队学生
         for(Team team:teamList){
             List<Student> memberList=team.getMemberList();
-            for(Student member:memberList){
-                BigInteger memberId=member.getId();
-                if(studentIdList.contains(memberId)){
-                    studentList.remove(studentDao.getStudentByStudentId(memberId));
-                    studentIdList.remove(memberId);
-                }
-                else{
-                    memberList.remove(member);
-                }
-            }
-            team.setMemberList(memberList);
+            memberList.removeIf(member -> {
+                return !studentIdList.contains(member.getId());
+            });
         }
+        for(Team team:teamList){
+            for(Student student:team.getMemberList()){
+                studentIdInTeamList.add(student.getId());
+            }
+        }
+        studentList.removeIf(student-> {
+            return studentIdInTeamList.contains(student.getId());
+        });
+        teamList.removeIf(team->team.getMemberList().isEmpty());
         Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
         return pair;
     }

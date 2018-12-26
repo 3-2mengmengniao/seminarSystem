@@ -1103,7 +1103,7 @@
         $(".courseLimitation").eq(tempIndex).find(".subPanel").eq(subCount2[tempIndex]).fadeIn();
         subCount2[tempIndex]++;
         // alert(subCount2[tempIndex]);
-    }); 
+    });
 </script>
 
 <script>
