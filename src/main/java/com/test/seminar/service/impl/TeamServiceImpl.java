@@ -88,7 +88,7 @@ public class TeamServiceImpl implements TeamService {
         for(Student student:studentList){
             studentIdList.add(student.getId());
         }
-        //将队伍中未选此课程的学生剔除
+        //将队伍中未选此课程的学生剔除,找出未组队学生
         for(Team team:teamList){
             List<Student> memberList=team.getMemberList();
             memberList.removeIf(member -> {

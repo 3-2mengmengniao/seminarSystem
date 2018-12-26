@@ -1,8 +1,11 @@
-package com.test.seminar.strategy.impl;
+package com.test.seminar.entity.strategy;
 
 import com.test.seminar.entity.Course;
 
+import java.math.BigInteger;
+
 /**
+ * 某课程总策略实体
  * @author wzw
  * date 2018/12/25
  */
@@ -10,7 +13,7 @@ public class TeamStrategy {
     private Course course;
     private Integer strategySerial;
     private String strategyName;
-    private String strategyId;
+    private BigInteger strategyId;
 
     public Course getCourse() {
         return course;
@@ -36,11 +39,11 @@ public class TeamStrategy {
         this.strategyName = strategyName;
     }
 
-    public String getStrategyId() {
+    public BigInteger getStrategyId() {
         return strategyId;
     }
 
-    public void setStrategyId(String strategyId) {
+    public void setStrategyId(BigInteger strategyId) {
         this.strategyId = strategyId;
     }
 }

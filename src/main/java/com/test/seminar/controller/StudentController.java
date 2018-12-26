@@ -313,13 +313,26 @@ public class StudentController {
     @RequestMapping(value="/course/team",method = POST)
     @ResponseBody
     public ResponseEntity<String> createTeam(BigInteger courseId,HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger leaderId=(BigInteger)session.getAttribute("id");
         String data=request.getParameter("members");
         System.out.println(data);
+        Team team=new Team();
+        team.setTeamName(request.getParameter("teamName"));
+        team.setStatus(0);
+        BigInteger classId=new BigInteger(request.getParameter("classId"));
+        team.setCourseClass(courseClassService.getCourseClassByCourseClassId(classId));
+        team.setCourse(courseService.getCourseByCourseId(courseId));
+        List<BigInteger> studentIdList=new ArrayList<>();
+        studentIdList.add(leaderId);
         JSONArray myArray=JSONArray.fromObject(data);
         for(int i=0;i<myArray.size();i++){
-            String classId=(String) myArray.get(i);
-            System.out.println(classId);
+            String id=(String) myArray.get(i);
+            BigInteger studentId=new BigInteger(id);
+            studentIdList.add(studentId);
         }
+        team.setLeader(studentService.getStudentByStudentId(leaderId));
+        teamService.insertTeam(team,studentIdList);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 }
