@@ -103,6 +103,7 @@ public class TeamServiceImpl implements TeamService {
         studentList.removeIf(student-> {
             return studentIdInTeamList.contains(student.getId());
         });
+        teamList.removeIf(team->team.getMemberList().isEmpty());
         Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
         return pair;
     }
