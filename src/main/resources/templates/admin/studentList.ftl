@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="/adminStatic/css/font.css">
     <link rel="stylesheet" href="/adminStatic/css/xadmin.css">
+    <link href="/adminStatic/css/layui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="/adminStatic/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
@@ -17,6 +18,8 @@
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+      <!--<script src="/adminStatic/js/jquery-1.7.2.min.js" type="text/javascript"></script>-->
+      <script src="/adminStatic/js/layui.all.js" type="text/javascript"></script>
     <![endif]-->
   </head>
   
@@ -53,7 +56,7 @@
             <th>操作</th>
         </thead>
         <tbody>
-        <#list studentList as student>
+        <#list pageInfo.list as student>
             <tr class="item">
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
@@ -101,18 +104,37 @@
           <#--</tr>-->
         </tbody>
       </table>
-      <div class="page" style="margin-top:80px;">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
-
+      <#--<div class="page" style="margin-top:80px;">-->
+        <#--<div>-->
+          <#--<a class="prev" href="">&lt;&lt;</a>-->
+          <#--<a class="num" href="">1</a>-->
+          <#--<span class="current">2</span>-->
+          <#--<a class="num" href="">3</a>-->
+          <#--<a class="num" href="">489</a>-->
+          <#--<a class="next" href="">&gt;&gt;</a>-->
+        <#--</div>-->
+      <#--</div>-->
+        <div id="laypage"></div>
     </div>
+        <script>
+            layui.use('laypage', function(){
+                layui.laypage.render({
+                    elem: 'laypage',//元素ID 不要加# 并且只能是ID
+                    count: ${pageInfo.pageNum},//这个是你的总页面
+                    curr: ${pageInfo.pageNum},//这个是你当前的页数，设置好 页面跳转后他会自动选择对应的页码、也就是第几页的背景改变颜色
+                    limit : ${pageInfo.pageSize},//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
+                    limits: [10, 20, 30, 40, 50] //这个是下拉框里显示的option
+                    layout: ['prev', 'page','limit','next'],
+                    jump: function(obj, first){//这个方法是在你选择页数后触发执行，在这里完成当你点击页码后需要向服务请求数据的操作
+                        if(first){ return ; }//如果是第一次不执行
+                        var url = "/admin/studentList";//由于我这里写的是一个公共分页、以下代码量有点多、按照你自已的业务完成以下代码
+                        //拼接分页参数和表单下所有带name属性参数、向后台提交数据、可以实现下一页与搜索的内容同时进行
+                        url += '?pageNum='+obj.curr+'&pageSize='+obj.limit;
+                        window.location.href = url;
+                    }
+                });
+            });
+        </script>
     <script>
         $(function () {
             $("#searchBtn").bind("click",function () {

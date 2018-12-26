@@ -1,5 +1,7 @@
 package com.test.seminar.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.dao.TeacherDao;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -49,5 +51,12 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherDao.getAllTeacher();
     }
 
+    @Override
+    public PageInfo<Teacher> selectTeacherList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Teacher> list = teacherDao.getAllTeacher();
+        PageInfo<Teacher> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
 
 }
