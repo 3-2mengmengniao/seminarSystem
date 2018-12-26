@@ -2,11 +2,13 @@ package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.StrategyPair;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import com.test.seminar.exception.StrategyNotFoundException;
 import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.entity.strategy.impl.*;
@@ -247,5 +249,31 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
         return null;
+    }
+
+    @Override
+    public void insertShareTeamApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId) {
+        courseMapper.insertShareTeamApplication(mainCourseId,subCourseId,subCourseTeacherId);
+    }
+
+    @Override
+    public void deleteShareTeamApplication(BigInteger shareTeamApplicationId) {
+        courseMapper.deleteShareTeamApplication(shareTeamApplicationId);
+    }
+
+    @Override
+    public ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException {
+        ShareTeamApplication shareTeamApplication=courseMapper.getShareTeamApplicationBySubCourseTeacherId(subCourseTeacherId);
+        if(shareTeamApplication==null){
+            throw new ShareTeamApplicationNotFoundException();
+        }
+        return shareTeamApplication;
+    }
+
+    @Override
+    public void createShareTeamAssociation(ShareTeamApplication shareTeamApplication) {
+        BigInteger subCourseId=shareTeamApplication.getSubCourse().getId();
+        BigInteger mainCourseId=shareTeamApplication.getMainCourse().getId();
+        courseMapper.updateCourseTeamMainCourseId(subCourseId,mainCourseId);
     }
 }
