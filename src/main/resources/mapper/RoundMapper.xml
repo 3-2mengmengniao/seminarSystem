@@ -8,12 +8,12 @@
         <result property="reportScoreMethod" column="report_score_method"/>
         <result property="questionScoreMethod" column="question_score_method"/>
         <collection property="seminarInfoList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarInfo" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarInfoByRoundId"/>
-        <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId"/>
+        <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId" fetchType="eager"/>
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
-        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=round_id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId" fetchType="eager"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -81,7 +81,7 @@
     </delete>
 
     <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
-        select team_id,total_score,presentation_score,question_score,report_score
+        select team_id,round_id,total_score,presentation_score,question_score,report_score
         from round_score
         where round_id=#{roundId}
     </select>

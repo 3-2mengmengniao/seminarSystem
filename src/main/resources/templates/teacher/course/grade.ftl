@@ -83,7 +83,7 @@
                     <div class="layui-collapse" lay-accordion="">
                         <#list round.roundScoreList as roundScore>
                             <div class="layui-colla-item">
-                                <h2 class="layui-colla-title">${roundScore.courseClassSerial}-${roundScore.teamSerial}&nbsp&nbsp&nbsp${roundScore.totalScore}分</h2>
+                                <h2 class="layui-colla-title">${roundScore.serial.getSerial()}&nbsp&nbsp&nbsp${roundScore.totalScore}分</h2>
                                 <div class="layui-colla-content ">
                                     <div class="layui-collapse" lay-accordion="">
                                         <#list roundScore.seminarScoreList as seminarScore>
@@ -97,7 +97,7 @@
                                         <div class="layui-colla-item">
                                             <h2 class="layui-colla-title">总成绩</h2>
                                             <div class="layui-colla-content ">
-                                                展示：${roundScore.presentationScore}分&nbsp&nbsp提问：${roundScore.questionScore}分&nbsp&nbsp报告：${roundScore.reportScore}分
+                                                展示：${roundScore.presentationScore}分&nbsp&nbsp提问：${roundScore.questionScore}分&nbsp&nbsp报告：${roundScore.reportScore}分&nbsp&nbsp总分：${roundScore.totalScore}
                                             </div>
                                         </div>
                                     </div>

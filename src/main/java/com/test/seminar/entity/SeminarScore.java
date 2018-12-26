@@ -5,15 +5,15 @@ import java.math.BigInteger;
 public class SeminarScore {
     private BigInteger teamId;
     private Serial serial;
-    private BigInteger seminarInfoName;
+    private String seminarInfoName;
     private double totalScore;
     private double presentationScore;
     private double questionScore;
     private double reportScore;
 
-    public BigInteger getSeminarInfoName() { return seminarInfoName; }
+    public String getSeminarInfoName() { return seminarInfoName; }
 
-    public void setSeminarInfoName(BigInteger seminarInfoName) { this.seminarInfoName = seminarInfoName; }
+    public void setSeminarInfoName(String seminarInfoName) { this.seminarInfoName = seminarInfoName; }
 
     public double getTotalScore() {
         return totalScore;
