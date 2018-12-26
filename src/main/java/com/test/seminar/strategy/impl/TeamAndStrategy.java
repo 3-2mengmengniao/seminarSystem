@@ -1,6 +1,7 @@
 package com.test.seminar.strategy.impl;
 
 import com.test.seminar.dao.CourseDao;
+import com.test.seminar.entity.StrategyPair;
 import com.test.seminar.entity.Team;
 import com.test.seminar.strategy.Strategy;
 import javafx.util.Pair;
@@ -20,7 +21,7 @@ public class TeamAndStrategy implements Strategy {
     CourseDao courseDao;
 
     private BigInteger id;
-    List<Pair<String, BigInteger>> strategyNameAndIdList;
+    List<StrategyPair> strategyNameAndIdList;
 
     public BigInteger getId() {
         return id;
@@ -30,21 +31,21 @@ public class TeamAndStrategy implements Strategy {
         this.id = id;
     }
 
-    public List<Pair<String, BigInteger>> getStrategyNameAndIdList() {
+    public List<StrategyPair> getStrategyNameAndIdList() {
         return strategyNameAndIdList;
     }
 
-    public void setStrategyNameAndIdList(List<Pair<String, BigInteger>> strategyNameAndIdList) {
+    public void setStrategyNameAndIdList(List<StrategyPair> strategyNameAndIdList) {
         this.strategyNameAndIdList = strategyNameAndIdList;
     }
 
     @Override
     public Boolean isValid(Team team) {
         //遍历每一个策略
-        for (Pair<String, BigInteger> strategyNameAndId : strategyNameAndIdList) {
+        for (StrategyPair strategyNameAndId : strategyNameAndIdList) {
             //获得策略类名和Id
-            String strategyName = strategyNameAndId.getKey();
-            BigInteger strategyId = strategyNameAndId.getValue();
+            String strategyName = strategyNameAndId.getStrategyName();
+            BigInteger strategyId = strategyNameAndId.getStrategyId();
             try {
                 //用反射得到获取特定策略的dao层方法
                 String courseDaoMethodName = "get" + strategyName + "ByStrategyId";

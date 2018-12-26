@@ -1,12 +1,10 @@
 package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.TeamDao;
-import com.test.seminar.entity.Student;
-import com.test.seminar.entity.Team;
-import com.test.seminar.entity.Serial;
-import com.test.seminar.entity.TeamValidApplication;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
+import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.StudentMapper;
 import com.test.seminar.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,41 +23,32 @@ public class TeamDaoImpl implements TeamDao {
     TeamMapper teamMapper;
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    CourseMapper courseMapper;
 
-    private void setTeamLeaderAndUpdateMemberList(Team team){
-        for(int i=0;i<team.getMemberList().size();i++){
-            if(team.getMemberList().get(i).getId().equals(team.getLeader().getId())) {
-                team.getMemberList().remove(i);
-                break;
-            }
-        }
-    }
     @Override
     public Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException {
         Team team=teamMapper.getTeamByTeamId(teamId);
         if(team==null) {
             throw new TeamNotFoundException();
         }
-        setTeamLeaderAndUpdateMemberList(team);
         return team;
     }
 
     @Override
     public List<Team> getTeamByCourseId(BigInteger courseId) {
-        List<Team> teamList=teamMapper.getTeamByCourseId(courseId);
-        for(int i=0;i<teamList.size();i++){
-            setTeamLeaderAndUpdateMemberList(teamList.get(i));
-        }
-       return teamList;
+       BigInteger mainCourseId=courseMapper.getTeamMainCourseIdBySubCourseId(courseId);
+       if(mainCourseId==null){
+           return teamMapper.getTeamByCourseId(courseId);
+       }
+       else{
+           return teamMapper.getTeamByCourseId(mainCourseId);
+       }
     }
 
     @Override
     public List<Team> getTeamBySeminarControlId(BigInteger seminarControlId) {
-        List<Team> teamList=teamMapper.getTeamBySeminarControlId(seminarControlId);
-        for(int i=0;i<teamList.size();i++){
-            setTeamLeaderAndUpdateMemberList(teamList.get(i));
-        }
-        return teamList;
+       return teamMapper.getTeamBySeminarControlId(seminarControlId);
     }
 
     @Override
@@ -68,7 +57,6 @@ public class TeamDaoImpl implements TeamDao {
         if(team==null) {
             throw new TeamNotFoundException();
         }
-        setTeamLeaderAndUpdateMemberList(team);
         return team;
     }
 

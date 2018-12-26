@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.sql.SQLTransientException;
 import java.util.List;
 
 /**
@@ -89,6 +90,16 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public void updateMemberLimitStrategy(MemberLimitStrategy memberLimitStrategy){
+        courseMapper.updateMemberLimitStrategy(memberLimitStrategy);
+    }
+
+    @Override
+    public void deleteMemberLimitStrategyByStrategyId(BigInteger strategyId){
+        courseMapper.deleteMemberLimitStrategyByStrategyId(strategyId);
+    }
+
+    @Override
     public CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
         CourseMemberLimitStrategy courseMemberLimitStrategy=courseMapper.getCourseMemberLimitStrategyByStrategyId(strategyId);
         if(courseMemberLimitStrategy==null){
@@ -108,11 +119,19 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public TeamAndStrategy getTeamAndStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+        TeamAndStrategy teamAndStrategy=courseMapper.getTeamAndStrategyByStrategyId(strategyId);
+        if(teamAndStrategy==null){
+            throw new StrategyNotFoundException();
+        }
+        return teamAndStrategy;
     }
 
     @Override
     public TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+        TeamOrStrategy teamOrStrategy=courseMapper.getTeamOrStrategyByStrategyId(strategyId);
+        if(teamOrStrategy==null){
+            throw new StrategyNotFoundException();
+        }
+        return teamOrStrategy;
     }
 }
