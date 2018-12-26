@@ -8,21 +8,21 @@
         <collection property="teamSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeamMainCourseId"/>
     </resultMap>
 
-    <resultMap id="teamStrategyResultMap" type="com.test.seminar.strategy.impl.TeamStrategy">
+    <resultMap id="teamStrategyResultMap" type="com.test.seminar.entity.strategy.TeamStrategy">
         <association property="course" javaType="com.test.seminar.entity.Course" column="id" select="getCourseByCourseId"/>
     </resultMap>
 
-    <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.strategy.impl.ConflictCourseStrategy">
+    <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.entity.strategy.impl.ConflictCourseStrategy">
         <id property="id" column="id"/>
         <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
 
-    <resultMap id="teamAndStrategyResultMap" type="com.test.seminar.strategy.impl.TeamAndStrategy">
+    <resultMap id="teamAndStrategyResultMap" type="com.test.seminar.entity.strategy.impl.TeamAndStrategy">
     <id property="id" column="id"/>
     <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
 </resultMap>
 
-    <resultMap id="teamOrStrategyResultMap" type="com.test.seminar.strategy.impl.TeamOrStrategy">
+    <resultMap id="teamOrStrategyResultMap" type="com.test.seminar.entity.strategy.impl.TeamOrStrategy">
         <id property="id" column="id"/>
         <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
     </resultMap>
@@ -128,7 +128,7 @@
         where course_id=#{courseId}
     </select>
     
-    <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.strategy.impl.MemberLimitStrategy">
+    <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.MemberLimitStrategy">
         select id,min_number,max_number
         from member_limit_strategy
         where id=#{strategyId}
@@ -150,7 +150,7 @@
         delete from member_limit_strategy where id=#{strategyId}
     </delete>
 
-    <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.strategy.impl.CourseMemberLimitStrategy">
+    <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy">
         select id,course_id,min_number,max_number
         from course_member_limit_strategy
         where id=#{strategyId}

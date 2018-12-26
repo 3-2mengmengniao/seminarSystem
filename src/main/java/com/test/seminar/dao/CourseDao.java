@@ -2,7 +2,9 @@ package com.test.seminar.dao;
 
 
 import com.test.seminar.entity.Course;
-import com.test.seminar.strategy.impl.*;
+import com.test.seminar.entity.Team;
+import com.test.seminar.entity.strategy.TeamStrategy;
+import com.test.seminar.entity.strategy.impl.*;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.StrategyNotFoundException;
@@ -124,4 +126,25 @@ public interface CourseDao {
      * @return
      */
     TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略类名，策略id，验证某队伍（teamId）是否符合简单策略
+     * @param team,strategyId,strategyName
+     * @return
+     */
+    Boolean validSimpleStrategyOnTeam(Team team, BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略类名，策略id，验证某队伍（teamId）是否符合复合策略
+     * @param team,strategyId,strategyName
+     * @return
+     */
+    Boolean validCompositStrategyOnTeam(Team team, BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略id获取CompositStrategy
+     * @param strategyId
+     * @return
+     */
+    CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 }

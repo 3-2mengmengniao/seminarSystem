@@ -2,8 +2,8 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.StrategyPair;
-import com.test.seminar.exception.StrategyNotFoundException;
-import com.test.seminar.strategy.impl.*;
+import com.test.seminar.entity.strategy.TeamStrategy;
+import com.test.seminar.entity.strategy.impl.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;

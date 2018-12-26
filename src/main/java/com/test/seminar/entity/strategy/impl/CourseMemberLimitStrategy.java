@@ -1,8 +1,9 @@
-package com.test.seminar.strategy.impl;
+package com.test.seminar.entity.strategy.impl;
 
+import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
-import com.test.seminar.strategy.Strategy;
+import com.test.seminar.entity.strategy.Strategy;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -11,14 +12,19 @@ import java.util.List;
  * @author wzw
  * date 2018/12/25
  */
-public class MemberLimitStrategy implements Strategy {
+public class CourseMemberLimitStrategy extends Strategy {
     private BigInteger id;
+    private BigInteger courseId;
     private Integer minMember;
     private Integer maxMember;
 
     public BigInteger getId() {
         return id;
     }
+
+    public BigInteger getCourseId() { return courseId; }
+
+    public void setCourseId(BigInteger courseId) { this.courseId = courseId; }
 
     public Integer getMinMember() {
         return minMember;
@@ -43,18 +49,29 @@ public class MemberLimitStrategy implements Strategy {
             return false;
         }
 
-        int size = studentList.size();
+        //队伍中属于该课程的人数
+        int count = 0;
+        for (Student student : studentList) {
+            List<Course> courseList = student.getCourseList();
+            for(Course course:courseList){
+                if(course.getId().equals(this.courseId)){
+                    count++;
+                }
+            }
+        }
+
         if(minMember!=null){
-            if(size<minMember){
+            if(count<minMember){
                 return false;
             }
         }
         if(maxMember!=null){
-            if(size>maxMember){
+            if(count>maxMember){
                 return false;
             }
         }
 
         return true;
+
     }
 }
