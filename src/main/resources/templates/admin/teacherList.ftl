@@ -6,11 +6,11 @@
   <title>欢迎页面-X-admin2.0</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="/adminStatic/css/font.css">
   <link rel="stylesheet" href="/adminStatic/css/xadmin.css">
-   <link href="/adminStatic/css/layui.css" rel="stylesheet" type="text/css" />
+   <link href="/adminStatic/css/pagination.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="/adminStatic/layui/layui.js" charset="utf-8"></script>
   <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
@@ -19,11 +19,8 @@
   <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
   <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
   <!--<script src="/adminStatic/js/jquery-1.7.2.min.js" type="text/javascript"></script>-->
-  <script src="/adminStatic/js/layui.all.js" type="text/javascript"></script>
+  <script src="/adminStatic/js/jquery.pagination.js" type="text/javascript"></script>
   <![endif]-->
-    <style>
-        #laypage{ text-align: right; padding-right: 5%; }
-    </style>
 </head>
 
 <body>
@@ -86,7 +83,9 @@
     </#list>
     </tbody>
   </table>
-    <div id="laypage"></div>
+    <div class="box">
+        <div id="pagination" class="page center">
+    </div>
   <#--<div class="page" style="margin-top:80px;">-->
     <#--<div>-->
       <#--<a class="prev" href="">&lt;&lt;</a>-->
@@ -99,25 +98,34 @@
   <#--</div>-->
 
 </div>
-<script>
-    layui.use('laypage', function(){
-        layui.laypage.render({
-            elem: 'laypage',//元素ID 不要加# 并且只能是ID
-            count: ${pageInfo.pageNum},//这个是你的总页面
-            curr: ${pageInfo.pageNum},//这个是你当前的页数，设置好 页面跳转后他会自动选择对应的页码、也就是第几页的背景改变颜色
-            limit : ${pageInfo.pageSize},//这个是每页面显示多少条，页面跳转后他会自动让下拉框里对应的值设为选中状态
-            limits: [10, 20, 30, 40, 50] //这个是下拉框里显示的option
-            layout: ['prev', 'page','limit','next'],
-            jump: function(obj, first){//这个方法是在你选择页数后触发执行，在这里完成当你点击页码后需要向服务请求数据的操作
-                if(first){ return ; }//如果是第一次不执行
-                var url = "/admin/teacherList";//由于我这里写的是一个公共分页、以下代码量有点多、按照你自已的业务完成以下代码
-                //拼接分页参数和表单下所有带name属性参数、向后台提交数据、可以实现下一页与搜索的内容同时进行
-                url += '?pageNum='+obj.curr+'&pageSize='+obj.limit;
-                window.location.href = url;
-            }
+    <script>
+        var pageNum = [[${pageInfo.pageNum}]];
+        var pages = [[${pageInfo.pages}]];
+        var pageSize = [[${pageInfo.pageSize}]];
+        //
+        $("#pagination").pagination({
+            currentPage: pageNum,
+            totalPage: pages,
+            isShow: true,
+            count: pageSize,
+            homePageText: "首页",
+            endPageText: "尾页",
+            prevPageText: "上一页",
+            nextPageText: "下一页",
         });
-    });
-</script>
+        //点击页数
+        $('.next').on('click', function () {
+            pageNum=pageNum+1;
+            window.location.href = encodeURI('/admin/teacherList?pageNum=' + pageNum);
+        });
+
+        $('.prev').on('click', function () {
+            if(pageNum>0)
+                pageNum=pageNum-1;
+            window.location.href = encodeURI('/admin/teacherList?pageNum=' + pageNum);
+        });
+
+    </script>
 <script>
   //搜索教师
   $(function () {
