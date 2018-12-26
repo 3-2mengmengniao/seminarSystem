@@ -72,6 +72,12 @@
         WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
 
+    <select id="getMaxTeamSerialByCourseId" resultType="Integer">
+        SELECT MAX(team_serial)
+        FROM team
+        WHERE course_id=#{courseId}
+    </select>
+
     <insert id="insertTeam">
         insert into team(klass_id,course_id,team_name,leader_id,status,team_serial,klass_serial)
         values(#{classId},#{courseId},#{team.teamName},#{team.leader.id},#{team.status},#{team.serial.teamSerial},#{team.serial.courseClassSerial})

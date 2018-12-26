@@ -145,4 +145,9 @@ public class TeamDaoImpl implements TeamDao {
     public void deleteTeamAndStudentRelationByTeamId(BigInteger teamId) {
         teamMapper.deleteTeamAndStudentRelationByTeamId(teamId);
     }
+
+    @Override
+    public Integer getMaxTeamSerialByCourseId(BigInteger courseId) {
+        return teamMapper.getMaxTeamSerialByCourseId(courseId);
+    }
 }
