@@ -87,7 +87,7 @@ public class TeamDaoImpl implements TeamDao {
         if(teamMapper.getTeamByTeamId(team.getId())==null) {
             throw new TeamNotFoundException();
         }
-        teamMapper.updateTeamByTeamId(team);
+        teamMapper.updateTeam(team);
     }
 
     @Override

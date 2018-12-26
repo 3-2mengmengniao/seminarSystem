@@ -71,7 +71,7 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    void updateTeamByTeamId(@Param("team")Team team);
+    void updateTeam(@Param("team")Team team);
 
     /**
      * 更新某班级下某学生的队伍

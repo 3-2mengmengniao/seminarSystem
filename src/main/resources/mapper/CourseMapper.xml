@@ -18,7 +18,6 @@
 
     <resultMap id="courseMemberLimitStrategyResultMap" type="com.test.seminar.strategy.impl.CourseMemberLimitStrategy">
         <id property="id" column="id"/>
-        <association property="course" javaType="com.test.seminar.entity.Course" column="id" select="getCourseByCourseId"/>
     </resultMap>
 
     <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.strategy.impl.ConflictCourseStrategy">

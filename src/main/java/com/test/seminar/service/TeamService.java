@@ -24,6 +24,8 @@ public interface TeamService {
 
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 
+    List<Team> getTeam(BigInteger courseId);
+
     void addTeamMember(BigInteger teamId,BigInteger studentId);
 
     void deleteTeamMember(BigInteger teamId,BigInteger studentId);
