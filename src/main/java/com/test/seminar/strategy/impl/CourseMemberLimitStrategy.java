@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CourseMemberLimitStrategy implements Strategy {
     private BigInteger id;
-    private Course course;
+    private BigInteger courseId;
     private Integer minMember;
     private Integer maxMember;
 
@@ -23,13 +23,9 @@ public class CourseMemberLimitStrategy implements Strategy {
         return id;
     }
 
-    public Course getCourse() {
-        return course;
-    }
+    public BigInteger getCourseId() { return courseId; }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+    public void setCourseId(BigInteger courseId) { this.courseId = courseId; }
 
     public Integer getMinMember() {
         return minMember;
@@ -59,7 +55,7 @@ public class CourseMemberLimitStrategy implements Strategy {
         for (Student student : studentList) {
             List<Course> courseList = student.getCourseList();
             for(Course course:courseList){
-                if(course.getId().equals(this.course.getId())){
+                if(course.getId().equals(this.courseId)){
                     count++;
                 }
             }

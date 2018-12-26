@@ -79,26 +79,30 @@ public interface CourseMapper {
      * @param courseId
      * @return
      */
-    List<TeamStrategy> getTeamStrategyListByCourseId(BigInteger courseId);
+    List<TeamStrategy> getTeamStrategyListByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
      * 通过策略ID获取MemberLimitStrategy
      * @param strategyId
      * @return
      */
-    MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId);
+    MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
      * @param strategyId
      * @return
      */
-    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId);
+    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
     /**
      * 通过策略ID获取ConflictCourseStrategy
      * @param strategyId
      * @return
      */
-    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId);
+    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
+
+    Course getSubCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 }

@@ -22,7 +22,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/creat-team.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -47,7 +47,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -74,12 +74,12 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm"  id="contactForm">
+        <form class="layui-form contactForm"  id="contactForm" name="${course.id}">
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">小组名称：<span>(required)</span></label>
-                <input type="text" name="courseName" value="" class="contactField requiredField" id="contactNameField"/>
+                <input type="text" name="teamName" value="" class="contactField requiredField" id="teamName"/>
             </div>
-            <div class="formValidationError" id="contactNameFieldError">
+            <div class="formValidationError" id="teamNameError">
                 <div class="static-notification-red tap-dismiss-notification">
                     <p class="uppercase">请填写小组名!</p>
                 </div>
@@ -91,10 +91,14 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label margin2" style="font-weight:bold;font-size:16px;">选择班级:&nbsp;&nbsp;<span style="float: right;opacity: 0.2;">(required)</span></label>
                             <div class="layui-input-block">
-                                <select name="presentationPercentage" lay-filter="aihao">
-                                    <option >2016-(1)</option>
-                                    <option >2016-(2)</option>
-                                    <option selected>2016-(3)</option>
+                                <select name="class" id="classId">
+                                    <#list classList as class>
+                                    <#if class?index==0>
+                                        <option value="${class.id}" selected> ${class.grade?c}-(${class.classSerial})</option>
+                                    <#else>
+                                        <option value="${class.id}"> ${class.grade?c}-(${class.classSerial})</option>
+                                    </#if>
+                                    </#list>
                                 </select>
                             </div>
                         </div>
@@ -107,10 +111,6 @@
                             <input name="searchContent" id="searchContent" type="text" placeholder="请输入学工号/姓名" autocomplete="off" class="layui-input" style="height:35px;width: 170px;display: inline-block;border-radius:8px;">
                             <img style="width:23px;margin-left:-30px;" id="searchBtn" src="/images/搜索.png">
                         </div>
-
-                        <#--<div class="layui-inline">-->
-                            <#--<button name="searchBtn" id="searchBtn" type="button" class="layui-btn"><i class="layui-icon">&#xe615;</i></button>-->
-                        <#--</div>-->
                     </div>
                 </form>
             <label class="field-title contactMessageTextarea margin3" for="contactMessageTextarea">添加成员：</label>
@@ -118,58 +118,60 @@
                 <div class="distance3"></div>
                 <table  id="member" class="layui-table addMember" >
                     <tbody >
+                    <#list noTeamStudentList as student>
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
+                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}">
                                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                     <i class="layui-icon layui-icon-ok"></i>
                                 </div>
                             </div>
                         </td>
                         <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320122202844</div>
+                            <div class="layui-table-cell ">${student.account}</div>
                         </td>
                         <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小张&nbsp;</div>
+                            <div class="layui-table-cell">&nbsp;${student.studentName}&nbsp;</div>
                         </td>
                     </tr>
-                    <tr class="item">
-                        <td data-field="0"  class="layui-table-col-special">
-                            <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
-                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon layui-icon-ok"></i>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320122202845</div>
-                        </td>
-                        <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
-                        </td>
-                    </tr>
-                    <tr class="item">
-                        <td data-field="0"  class="layui-table-col-special">
-                            <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="layTableCheckbox" lay-skin="primary">
-                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon layui-icon-ok"></i>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320122202846</div>
-                        </td>
-                        <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小李&nbsp;</div>
-                        </td>
-                    </tr>
+                    </#list>
+                    <#--<tr class="item">-->
+                        <#--<td data-field="0"  class="layui-table-col-special">-->
+                            <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                                <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                                <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                                    <#--<i class="layui-icon layui-icon-ok"></i>-->
+                                <#--</div>-->
+                            <#--</div>-->
+                        <#--</td>-->
+                        <#--<td data-field="id"  class="">-->
+                            <#--<div class="layui-table-cell ">24320122202845</div>-->
+                        <#--</td>-->
+                        <#--<td data-field="username"  class="">-->
+                            <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr class="item">-->
+                        <#--<td data-field="0"  class="layui-table-col-special">-->
+                            <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                                <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                                <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                                    <#--<i class="layui-icon layui-icon-ok"></i>-->
+                                <#--</div>-->
+                            <#--</div>-->
+                        <#--</td>-->
+                        <#--<td data-field="id"  class="">-->
+                            <#--<div class="layui-table-cell ">24320122202846</div>-->
+                        <#--</td>-->
+                        <#--<td data-field="username"  class="">-->
+                            <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
+                        <#--</td>-->
+                    <#--</tr>-->
                     </tbody>
                 </table>
                 <div class="distance4"></div>
-                <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建小组" data-formId="contactForm"/></p>
+                <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建小组" data-formId="contactForm"/></p>
              </div>
         </form>
         <div class="distance2"></div>

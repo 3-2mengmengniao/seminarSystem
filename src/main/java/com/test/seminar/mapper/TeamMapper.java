@@ -42,6 +42,7 @@ public interface TeamMapper {
      */
     List<Team> getTeamByCourseId(@Param("courseId")BigInteger courseId);
 
+    List<Team> getTeamByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
     /**
      * 查看某讨论课的所有队伍
      * @param seminarControlId
@@ -70,7 +71,7 @@ public interface TeamMapper {
      * @param team
      * @return
      */
-    void updateTeamByTeamId(@Param("team")Team team);
+    void updateTeam(@Param("team")Team team);
 
     /**
      * 更新某班级下某学生的队伍

@@ -26,18 +26,23 @@ jQuery(document).ready(function($) {
     // submit form data starts
     function submitData(currentForm, formType){
         formSubmitted = 'true';
-        var formInput = $('#' + currentForm).serialize();
+        var classId=$("#classId").val();
+        var fd=new FormData($('#contactForm')[0]);
+        var members=JSON.stringify(fd.getAll("members"));
+        console.log($('#teamName').val());
+        console.log(classId);
+        // formInput.append("members",document.getElementsByName("members").value);
+        alert(members);
         var courseId=$('#contactForm').attr("name");
-        console.log(courseId);
         $.ajax(
             {
-                url:$('#' + currentForm).attr('action'),
-                type:'put',
-                data:formInput,
+                url:"/student/course/team?courseId="+courseId,
+                type:'post',
+                data:{"teamName":$('#teamName').val(),"classId":classId,"members":members},
                 success:function(data,status,response){
                     if(response.status=="200"){
                         var info=response.responseText;
-                        window.location.href="/teacher/course/seminarList?courseId="+courseId;
+                        window.location.href="/student/courseList";
                     }
                 },
                 error:function(data,status){
@@ -78,13 +83,6 @@ jQuery(document).ready(function($) {
                 return false;
             };
 
-            if(isNaN($('#order').val()))
-            {
-                $('#order').addClass('fieldHasError');
-                $('#orderError').fadeIn('300');
-                count=count-1;
-                return false;
-            }
 
         });
         if(formSubmitted == 'false' && count===4){

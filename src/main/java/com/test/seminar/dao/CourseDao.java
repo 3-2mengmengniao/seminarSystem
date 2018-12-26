@@ -2,13 +2,10 @@ package com.test.seminar.dao;
 
 
 import com.test.seminar.entity.Course;
-import com.test.seminar.strategy.impl.TeamStrategy;
+import com.test.seminar.strategy.impl.*;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.StrategyNotFoundException;
-import com.test.seminar.strategy.impl.ConflictCourseStrategy;
-import com.test.seminar.strategy.impl.CourseMemberLimitStrategy;
-import com.test.seminar.strategy.impl.MemberLimitStrategy;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -101,4 +98,18 @@ public interface CourseDao {
      * @return
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取TeamAndStrategy
+     * @param strategyId
+     * @return
+     */
+    TeamAndStrategy getTeamAndStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取TeamOrStrategy
+     * @param strategyId
+     * @return
+     */
+    TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 }

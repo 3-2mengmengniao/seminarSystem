@@ -73,7 +73,7 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public Serial getTeamSerialByTeamId(BigInteger teamId) {
+    public Serial getSerialByTeamId(BigInteger teamId) {
         return teamMapper.getSerialByTeamId(teamId);
     }
 
@@ -87,7 +87,7 @@ public class TeamDaoImpl implements TeamDao {
         if(teamMapper.getTeamByTeamId(team.getId())==null) {
             throw new TeamNotFoundException();
         }
-        teamMapper.updateTeamByTeamId(team);
+        teamMapper.updateTeam(team);
     }
 
     @Override

@@ -43,7 +43,7 @@ public interface TeamDao {
      */
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 
-    Serial getTeamSerialByTeamId(BigInteger teamId);
+    Serial getSerialByTeamId(BigInteger teamId);
 
     /**
      * 创建新的队伍信息

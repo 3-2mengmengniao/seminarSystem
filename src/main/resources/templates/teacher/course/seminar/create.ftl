@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<html>
 <head xmlns="http://www.w3.org/1999/html">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
@@ -51,7 +52,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">新建讨论课</h1>
-    <a href="/teacher/course/seminarList?courseId=${courseId}" class="button-close">x</a>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,7 +60,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course/seminar/create?courseId=${courseId}" id="contactForm" name="${courseId}">
+        <form class="layui-form contactForm" action="/teacher/course/seminar/create?courseId=${course.id}" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#c9302c;">该讨论课已被创建！</p>
@@ -85,17 +86,16 @@
             </div>
             <div class="distance3"></div>
             <div class="decoration"></div>
+            <div class="distance3"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课次序号：</label>
-                <div class="layui-input-block">
-                    <select name="seminarSerial" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">6</option>
-                    </select>
+                <div class="layui-input-block" style="width: 100px;margin-left: auto;float: none;">
+                    <input  name="seminarSerial" autocomplete="off" class="layui-input requiredField" id="order">
+                </div>
+            </div>
+            <div class="formValidationError" id="orderError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写正确的讨论课次序号!</p>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -108,12 +108,10 @@
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
                     <select name="roundId" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="-1">无</option>
+                        <option value="-1" selected>无</option>
+                        <#list course.roundList as round>
+                        <option value="${round.id}">${round.roundSerial}</option>
+                        </#list>
                     </select>
                 </div>
             </div>

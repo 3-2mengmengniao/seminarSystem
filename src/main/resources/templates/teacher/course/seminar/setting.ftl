@@ -75,17 +75,16 @@
             </div>
             <div class="distance3"></div>
             <div class="decoration"></div>
+            <div class="distance3"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课次序号：</label>
-                <div class="layui-input-block">
-                    <select name="seminarSerial" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">6</option>
-                    </select>
+                <div class="layui-input-block" style="width: 100px;margin-left: auto;float: none;">
+                    <input  name="seminarSerial" autocomplete="off" class="layui-input requiredField" id="order">
+                </div>
+            </div>
+            <div class="formValidationError" id="orderError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写正确的讨论课次序号!</p>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -98,12 +97,10 @@
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
                     <select name="roundId" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">无</option>
+                        <option value="-1" selected>无</option>
+                        <#list course.roundList as round>
+                        <option value="${round.id}">${round.roundSerial}</option>
+                        </#list>
                     </select>
                 </div>
             </div>

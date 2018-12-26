@@ -14,6 +14,7 @@
         <result property="classTime" column="klass_time"/>
         <result property="classLocation" column="klass_location"/>
         <association property="course" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseClassId"/>
+        <collection property="teamList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByCourseClassId" fetchType="eager"/>
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
@@ -54,7 +55,7 @@
 
     <insert id="insertCourseClass">
         insert into klass(course_id,grade,klass_serial,klass_time,klass_location)
-        values(#{courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
+        values(#{courseId},#{courseclass.grade?c},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
     <insert id="insertCourseClassStudentRelation">
@@ -66,7 +67,7 @@
         update klass
         <set>
             <if test="courseClass.grade!=null">
-                grade=#{courseClass.grade},
+                grade=#{courseclass.grade?c},
             </if>
             <if test="courseClass.classSerial!=null">
                 klass_serial=#{courseClass.classSerial},

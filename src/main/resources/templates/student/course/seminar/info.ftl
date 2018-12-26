@@ -113,7 +113,7 @@
                 <#if enrollment==true>
                 <tr>
                     <td> 报名情况</td>
-                    <td>${seminarControl.courseClass.grade}-（${seminarControl.courseClass.classSerial}）第${order+1}组<a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">修改</a></td>
+                    <td>${seminarControl.courseclass.grade?c}-（${seminarControl.courseClass.classSerial}）第${order+1}组<a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">修改</a></td>
                 </tr>
                  <tr>
                      <td> PPT</td>

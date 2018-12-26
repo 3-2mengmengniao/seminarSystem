@@ -3,7 +3,6 @@
 <mapper namespace="com.test.seminar.mapper.TeamMapper">
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
-        <association property="courseClass" column="id" javaType="com.test.seminar.entity.CourseClass" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByTeamId"/>
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
@@ -53,6 +52,12 @@
         SELECT team.id,team_name,leader_id,status
         FROM attendance,team
         WHERE klass_seminar_id=#{seminarControlId} and team.id=attendance.team_id
+    </select>
+
+    <select id="getTeamByCourseClassId" resultMap="teamResultMap">
+        SELECT id,team_name,leader_id,status
+        FROM klass_team,team
+        WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
 
     <insert id="insertTeam">

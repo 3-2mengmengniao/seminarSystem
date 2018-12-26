@@ -4,6 +4,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -160,8 +162,9 @@ public class StudentController {
         model.addAttribute("courseId",courseId);
         List<Team> teamList= teamService.getTeamByCourseId(courseId);
         model.addAttribute("teamList",teamList);
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        model.addAttribute("myTeam",team);
         List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
-        System.out.println(noTeamStudentList.size());
         model.addAttribute("noTeamStudentList",noTeamStudentList);
         return "student/course/teams";
     }
@@ -295,7 +298,26 @@ public class StudentController {
     public String activate(Model model) { return "student/activate"; }
 
     @RequestMapping(value = "/course/createTeam", method = GET)
-    public String createTeam(Model model) {
+    public String createTeam(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        List<CourseClass> courseClassList=courseClassService.getCourseClassByCourseId(courseId);
+        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("noTeamStudentList",noTeamStudentList);
+        model.addAttribute("classList",courseClassList);
         return "student/course/createTeam";
+    }
+
+    @RequestMapping(value="/course/team",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> createTeam(BigInteger courseId,HttpServletRequest request,Model model) {
+        String data=request.getParameter("members");
+        System.out.println(data);
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String classId=(String) myArray.get(i);
+            System.out.println(classId);
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }
