@@ -1,9 +1,11 @@
 package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.StrategyPair;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.*;
+import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -118,4 +120,34 @@ public interface CourseMapper {
     Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 
     Course getSubCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
+
+    /**
+     *  插入共享分组的请求
+     * @param mainCourseId,subCourseId,subCourseTeacherId
+     */
+    void insertShareTeamApplication(@Param("mainCourseId")BigInteger mainCourseId,@Param("subCourseId")BigInteger subCourseId,@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
+
+    /**
+     *  通过id删除共享分组的请求
+     * @param shareTeamApplicationId
+     */
+    void deleteShareTeamApplication(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
+
+    /**
+     *  通过从课程教师id查看共享分组请求
+     * @param subCourseTeacherId
+     */
+    ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
+
+    /**
+     *  更新课程的共享分组的主课程id
+     * @param subCourseId,mainCourseId
+     */
+    void updateCourseTeamMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
+
+    /**
+     *  更新课程的共享讨论课的主课程id
+     * @param subCourseId,mainCourseId
+     */
+    void updateCourseSeminarMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
 }

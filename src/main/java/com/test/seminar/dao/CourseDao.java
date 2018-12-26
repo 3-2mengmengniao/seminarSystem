@@ -2,11 +2,13 @@ package com.test.seminar.dao;
 
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.*;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
+import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import com.test.seminar.exception.StrategyNotFoundException;
 
 import java.math.BigInteger;
@@ -147,4 +149,28 @@ public interface CourseDao {
      * @return
      */
     CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+
+    /**
+     *  插入共享分组的请求
+     * @param mainCourseId,subCourseId,subCourseTeacherId
+     */
+    void insertShareTeamApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
+
+    /**
+     *  通过id删除共享分组的请求
+     * @param shareTeamApplicationId
+     */
+    void deleteShareTeamApplication(BigInteger shareTeamApplicationId);
+
+    /**
+     *  通过从课程教师id查看共享分组请求
+     * @param subCourseTeacherId
+     */
+    ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
+
+    /**
+     *  从课程教师同意共享分组请求后，建立共享关联
+     * @param shareTeamApplication
+     */
+    void createShareTeamAssociation(ShareTeamApplication shareTeamApplication);
 }
