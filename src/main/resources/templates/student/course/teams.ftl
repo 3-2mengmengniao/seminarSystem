@@ -106,7 +106,7 @@
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">未组队学生</h2>
                 <div class="layui-colla-content">
-                    <#list noTeamStudentList as student>
+                    <#list studentNoTeamList as student>
                         <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
                     </#list>
                 </div>
@@ -116,7 +116,7 @@
     <div class="distance4"></div>
     <div class="center-navigation" style="margin-top:20px;">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam'" >创建小组</h2>
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
         </div>
     </div>
     <div class="distance4"></div>

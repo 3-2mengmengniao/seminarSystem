@@ -1,11 +1,9 @@
 package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.StrategyPair;
 import com.test.seminar.exception.StrategyNotFoundException;
-import com.test.seminar.strategy.impl.ConflictCourseStrategy;
-import com.test.seminar.strategy.impl.CourseMemberLimitStrategy;
-import com.test.seminar.strategy.impl.MemberLimitStrategy;
-import com.test.seminar.strategy.impl.TeamStrategy;
+import com.test.seminar.strategy.impl.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -22,6 +20,12 @@ import java.util.List;
 @Mapper
 @Component
 public interface CourseMapper {
+    /**
+     * 通过从课程ID获取主课程ID
+     * @param subCourseId
+     * @return
+     */
+    BigInteger getTeamMainCourseIdBySubCourseId(@Param("subCourseId")BigInteger subCourseId);
     /**
      * 通过ID获取课程信息
      * @param courseId
@@ -88,6 +92,9 @@ public interface CourseMapper {
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
+    void updateMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
+
+    void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
      * @param strategyId
@@ -101,6 +108,12 @@ public interface CourseMapper {
      * @return
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    StrategyPair getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
+
+    TeamAndStrategy getTeamAndStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    TeamOrStrategy getTeamOrStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
     Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 

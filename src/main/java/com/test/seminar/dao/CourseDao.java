@@ -86,6 +86,18 @@ public interface CourseDao {
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
+     * 修改MemberLimitStrategy信息
+     * @param memberLimitStrategy
+     */
+    void updateMemberLimitStrategy(MemberLimitStrategy memberLimitStrategy);
+
+    /**
+     * 通过策略ID删除MemberLimitStrategy
+     * @param strategyId
+     */
+    void deleteMemberLimitStrategyByStrategyId(BigInteger strategyId);
+
+    /**
      * 通过策略ID获取CourseMemberLimitStrategy
      * @param strategyId
      * @return

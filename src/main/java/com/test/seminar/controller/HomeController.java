@@ -51,20 +51,15 @@ public class HomeController {
 
     @RequestMapping(value = "/forgetPassword", method = POST)
     @ResponseBody
-    public ResponseEntity<String> forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
+    public ResponseEntity<String> forgetPasswordPost(HttpServletRequest request,String account,Model model) {
         HttpSession session = request.getSession();
         //登陆验证
         try {
             Student student = studentService.getStudentByAccount(account);
-            session.setAttribute("id", student.getId());
-            session.setAttribute("usertype","student");
         }
         catch (UserNotFoundException e) {
             try {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
-                session.setAttribute("id", teacher.getId());
-                session.setAttribute("usertype","teacher");
-                System.out.println("teacher");
             }
             catch (UserNotFoundException e2){
                 return new ResponseEntity<>("", HttpStatus.OK);
@@ -75,34 +70,34 @@ public class HomeController {
         return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/modifyPassword", method = GET)
-    public String newPassword(Model model) {
-        return "modifyPassword";
-    }
-
-    @RequestMapping(value = "/modifyPassword", method = POST)
-    @ResponseBody
-    public ResponseEntity<String> newPasswordPost(HttpServletRequest request, @RequestParam(value = "newPsw") String newPsw, @RequestParam(value = "confirmPsw") String confirmPsw, Model model) {
-        HttpSession session = request.getSession();
-        String usertype = (String)session.getAttribute("usertype");
-        BigInteger teacherId;
-        BigInteger studentId;
-        if(usertype.equals("teacher"))
-        {
-            teacherId=(BigInteger)session.getAttribute("id");
-            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
-            teacher.setPassword(newPsw);
-            teacherService.updateTeacherByTeacherId(teacher);
-            return new ResponseEntity<>("", HttpStatus.OK);
-        }
-        else if(usertype.equals("student"))
-        {
-            studentId=(BigInteger)session.getAttribute("id");
-            Student student=studentService.getStudentByStudentId(studentId);
-            student.setPassword(newPsw);
-            studentService.updateStudentByStudent(student);
-            return new ResponseEntity<>("", HttpStatus.OK);
-        }
-        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
-    }
+//    @RequestMapping(value = "/modifyPassword", method = GET)
+//    public String newPassword(Model model) {
+//        return "modifyPassword";
+//    }
+//
+//    @RequestMapping(value = "/modifyPassword", method = POST)
+//    @ResponseBody
+//    public ResponseEntity<String> newPasswordPost(HttpServletRequest request, @RequestParam(value = "newPsw") String newPsw, @RequestParam(value = "confirmPsw") String confirmPsw, Model model) {
+//        HttpSession session = request.getSession();
+//        String usertype = (String)session.getAttribute("usertype");
+//        BigInteger teacherId;
+//        BigInteger studentId;
+//        if(usertype.equals("teacher"))
+//        {
+//            teacherId=(BigInteger)session.getAttribute("id");
+//            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+//            teacher.setPassword(newPsw);
+//            teacherService.updateTeacherByTeacherId(teacher);
+//            return new ResponseEntity<>("", HttpStatus.OK);
+//        }
+//        else if(usertype.equals("student"))
+//        {
+//            studentId=(BigInteger)session.getAttribute("id");
+//            Student student=studentService.getStudentByStudentId(studentId);
+//            student.setPassword(newPsw);
+//            studentService.updateStudentByStudent(student);
+//            return new ResponseEntity<>("", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+//    }
 }

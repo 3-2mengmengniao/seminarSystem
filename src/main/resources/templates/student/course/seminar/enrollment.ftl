@@ -78,7 +78,7 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+            <#list 1..<seminarControl.seminarInfo.maxGroup as t>
                 <#if seminarControl.presentationList[t]??>
                     <tr>
                         <td>第${t+1}组：</td>

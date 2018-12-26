@@ -71,24 +71,29 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public List<Team> getTeam(BigInteger courseId){
-        //获取课程下所有队伍（包含组员列表）
+    public Pair<List<Team>,List<Student>> getTeam(BigInteger courseId){
+        //获取课程下所有队伍
         List<Team> teamList=teamDao.getTeamByCourseId(courseId);
         List<CourseClass> courseClassList=courseClassDao.getCourseClassByCourseId(courseId);
-        List<BigInteger> studentIdList=null;
-        //获取课程下每个班级的学生名单(Id形式)
+        List<Student> studentList=new ArrayList<>();
+        List<BigInteger> studentIdList=new ArrayList<>();
+        //获取课程下所有班级的学生名单(Id形式)
         for(CourseClass courseClass:courseClassList){
-            List<Student> studentList=studentDao.getStudentByCourseClassId(courseClass.getId());
-            for(Student student:studentList){
-                studentIdList.add(student.getId());
+            for(Team classTeam:courseClass.getTeamList()) {
+                studentList.addAll(classTeam.getMemberList());
             }
+        }
+        for(Student student:studentList){
+            studentIdList.add(student.getId());
         }
         //将队伍中未选此课程的学生剔除
         for(Team team:teamList){
             List<Student> memberList=team.getMemberList();
             for(Student member:memberList){
-                if(studentIdList.contains(member.getId())){
-                    continue;
+                BigInteger memberId=member.getId();
+                if(studentIdList.contains(memberId)){
+                    studentList.remove(studentDao.getStudentByStudentId(memberId));
+                    studentIdList.remove(memberId);
                 }
                 else{
                     memberList.remove(member);
@@ -96,7 +101,8 @@ public class TeamServiceImpl implements TeamService {
             }
             team.setMemberList(memberList);
         }
-        return teamList;
+        Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
+        return pair;
     }
 
     @Override

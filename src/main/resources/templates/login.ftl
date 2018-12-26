@@ -111,20 +111,6 @@
     </form>
 </div>
 
-<!--
-<div class="page_footer">
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    <div class="bottom-deco"></div>
-</div>
--->
-
 <script type="text/javascript">
     $(function(){
         $('.form-group').floatingLabel();

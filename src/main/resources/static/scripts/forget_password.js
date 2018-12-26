@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
                 success:function(data,status,response){
                     if(response.status=="200"){
                         var info=response.responseText;
-                        window.location.href="/modifyPassword";
+                        window.location.href="/login";
                     }
                 },
                 error:function(data,status){

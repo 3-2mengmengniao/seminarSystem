@@ -89,7 +89,7 @@
         </div>
         <div id="left-side">
             <ul>
-                <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#list 1..<seminarControl.seminarInfo.maxGroup as t>
                     <#if seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==1>
                     <li class="group active">
                         ${seminarControl.presentationList[t].team.serial.getSerial()}
@@ -106,7 +106,7 @@
             <div id="line" class="one"></div>
         </div>
         <div id="right-side">
-        <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+        <#list 1..<seminarControl.seminarInfo.maxGroup as t>
             <#if seminarControl.presentationList[t]??>
             <div class="group">
                 <div style="height:30px;"></div>
@@ -190,6 +190,7 @@
 
 </script>
 <script>
+    function() { comeIn(); }
     $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');

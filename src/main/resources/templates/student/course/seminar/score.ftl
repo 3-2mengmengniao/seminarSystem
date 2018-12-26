@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <td>报名情况</td>
-                <td>${seminarControl.courseClass.grade}-（${seminarControl.courseClass.classSerial}）第${team.teamSerial}组</td>
+                <td>${seminarControl.courseclass.grade?c}-（${seminarControl.courseClass.classSerial}）第${team.teamSerial}组</td>
             </tr>
             <tr>
                 <td> PPT</td>

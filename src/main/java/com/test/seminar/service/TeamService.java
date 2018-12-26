@@ -1,8 +1,10 @@
 package com.test.seminar.service;
 
+import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
+import javafx.util.Pair;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
@@ -24,7 +26,7 @@ public interface TeamService {
 
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 
-    List<Team> getTeam(BigInteger courseId);
+    Pair<List<Team>,List<Student>> getTeam(BigInteger courseId);
 
     void addTeamMember(BigInteger teamId,BigInteger studentId);
 

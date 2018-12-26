@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
 import com.test.seminar.service.*;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -135,7 +136,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/activate", method = POST)
     @ResponseBody
-    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
@@ -174,7 +175,8 @@ public class TeacherController {
 
     @RequestMapping(value="/course/seminar/create",method = GET)
     public String createSeminar(BigInteger courseId,Model model) {
-        model.addAttribute("courseId",courseId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course/seminar/create";
     }
 
@@ -313,10 +315,11 @@ public class TeacherController {
     @RequestMapping(value="/course/teamList")
     public String teams(BigInteger courseId,Model model) {
         model.addAttribute("courseId",courseId);
-        List<Team> teamList= teamService.getTeamByCourseId(courseId);
+        Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
+        List<Team> teamList=teamPair.getKey();
+        List<Student> studentNoTeamList=teamPair.getValue();
         model.addAttribute("teamList",teamList);
-        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
-        model.addAttribute("noTeamStudentList",noTeamStudentList);
+        model.addAttribute("studentNoTeamList",studentNoTeamList);
         return "teacher/course/teamList";
     }
 
@@ -378,6 +381,13 @@ public class TeacherController {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
         return "teacher/course/shareSettings";
+    }
+
+    @RequestMapping(value="course/addShare")
+    public String addShare(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        return "teacher/course/addShare";
     }
 
 }

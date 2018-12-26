@@ -59,7 +59,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course/seminar/setting?seminarId=${seminar.id}" method="post" id="contactForm" name="${course.id}">
+        <form class="layui-form contactForm" action="/teacher/course/seminar/setting?seminarId=${seminar.id}&courseId=${course.id}" method="post" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#c9302c;">修改失败！</p>
@@ -75,37 +75,32 @@
             </div>
             <div class="distance3"></div>
             <div class="decoration"></div>
+            <div class="distance3"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课次序号：</label>
-                <div class="layui-input-block">
-                    <select name="seminarSerial" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">6</option>
-                    </select>
+                <div class="layui-input-block" style="width: 100px;margin-left: auto;float: none;">
+                    <input  name="seminarSerial" autocomplete="off" class="layui-input requiredField" id="order">
                 </div>
             </div>
-            <div class="decoration"></div>
+            <div class="formValidationError" id="orderError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写正确的讨论课次序号!</p>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课可见：</label>
                 <div class="layui-input-block" style="float: right;">
                     <input type="checkbox" name="seminarVisible" title="可见" checked>
                 </div>
             </div>
-            <div class="decoration"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
                     <select name="roundId" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">无</option>
+                        <option value="-1" selected>无</option>
+                        <#list course.roundList as round>
+                        <option value="${round.id}">${round.roundSerial}</option>
+                        </#list>
                     </select>
                 </div>
             </div>
@@ -124,12 +119,6 @@
                             <option value="7">7</option>
                             <option value="8">8</option>
                         </select>
-                    </div>
-                </div>
-                <div class="layui-form-item margin1 ">
-                    <label class="layui-form-label">报名顺序</label>
-                    <div class="layui-input-block" style="float: right;">
-                        <input type="checkbox" name="serial" title="自定" checked>
                     </div>
                 </div>
                 <div class="layui-form-item margin2">
@@ -157,7 +146,9 @@
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建讨论课" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="submit" class="button-big button-red" id="contactSubmitButton" value="删除讨论课" data-formId="contactForm"/></p>
+            <div class="distance3"></div>
+            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="修改讨论课" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
