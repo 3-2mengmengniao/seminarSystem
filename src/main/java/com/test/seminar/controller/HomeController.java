@@ -8,6 +8,7 @@ import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.service.LoginService;
 import com.test.seminar.service.StudentService;
 import com.test.seminar.service.TeacherService;
+import com.test.seminar.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,9 @@ public class HomeController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    EmailService emailService;
+
     @RequestMapping(value = {"/","/login"}, method = GET)
     public String login(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
@@ -56,10 +60,15 @@ public class HomeController {
         //登陆验证
         try {
             Student student = studentService.getStudentByAccount(account);
+            if(student.getEmail()!=null)
+            {
+                emailService.sendSimpleMessage(student.getEmail(),"password",student.getPassword());
+            }
         }
         catch (UserNotFoundException e) {
             try {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
+                emailService.sendSimpleMessage(teacher.getEmail(),"password",teacher.getPassword());
             }
             catch (UserNotFoundException e2){
                 return new ResponseEntity<>("", HttpStatus.OK);
