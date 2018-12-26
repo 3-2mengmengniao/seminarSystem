@@ -82,26 +82,16 @@ public class TeamServiceImpl implements TeamService {
         for(Team team:teamList){
             List<Student> memberList=team.getMemberList();
             for(Student member:memberList){
-                if(studentIdList.contains(member.getId())){
-                    continue;
+                BigInteger memberId=member.getId();
+                if(studentIdList.contains(memberId)){
+                    studentList.remove(studentDao.getStudentByStudentId(memberId));
+                    studentIdList.remove(memberId);
                 }
                 else{
                     memberList.remove(member);
                 }
             }
             team.setMemberList(memberList);
-        }
-        //将已组队学生删除，获得未组队学生名单
-         for (Student student : studentList){
-            for(Team team:teamList){
-                List<BigInteger> memberIdList =new ArrayList<>();
-                for(Student member:team.getMemberList()){
-                    memberIdList.add(member.getId());
-                }
-                if(memberIdList.contains(student.getId())){
-                    studentIdList.remove(student);
-                }
-            }
         }
         Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
         return pair;
