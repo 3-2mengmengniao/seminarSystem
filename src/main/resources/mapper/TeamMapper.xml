@@ -39,15 +39,9 @@
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
         SELECT team.id,team_name,leader_id,status
-        FROM team,team_student,course
-        WHERE  course.id=#{courseId} and team.course_id=course.id and team_student.team_id=team.id and team_student.student_id=#{studentId}
+        FROM team,team_student
+        WHERE  team.course_id=#{courseId} and team_student.team_id=team.id and team_student.student_id=#{studentId}
         </select>
-
-    <select id="getTeamByStudentIdAndCourseIdForSubCourse" resultMap="teamResultMap">
-        SELECT team.id,team_name,leader_id,status
-        FROM team,team_student,course
-        WHERE  course.id=#{courseId} and team.course_id=course.team_main_course_id and team_student.team_id=team.id and team_student.student_id=#{studentId}
-    </select>
 
     <select id="getTeamByMainCourseClassIdAndTeamSerial" resultMap="teamResultMap">
         SELECT team.id,team_name,leader_id,status

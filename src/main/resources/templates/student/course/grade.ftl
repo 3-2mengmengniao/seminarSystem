@@ -80,7 +80,7 @@
                         <#list round.roundScoreList as roundScore>
                             <#list roundScore.seminarScoreList as seminarScore>
                                             <div class="layui-colla-item">
-                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName} ${roundScore?index}-${seminarScore?index}</h2>
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
                                                 <div class="layui-colla-content ">
                                                     展示：${seminarScore.presentationScore!0}分&nbsp&nbsp提问：${seminarScore.questionScore!0}分&nbsp&nbsp报告：${seminarScore.reportScore!0}分
                                                 </div>
@@ -89,7 +89,7 @@
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">总成绩</h2>
                             <div class="layui-colla-content ">
-                                展示：${roundScore.presentationScore!0}分&nbsp&nbsp提问：${roundScore.questionScore!0}分&nbsp&nbsp报告：${roundScore.reportScore!0}分
+                                展示：${roundScore.presentationScore!0}分&nbsp&nbsp提问：${roundScore.questionScore!0}分&nbsp&nbsp报告：${roundScore.reportScore!0}分&nbsp&nbsp总分：${roundScore.totalScore!0}分
                             </div>
                         </div>
                         </#list>
