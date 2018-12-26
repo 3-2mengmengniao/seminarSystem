@@ -134,4 +134,6 @@ public interface TeamMapper {
     void deleteTeamAndStudentRelationByTeamId(@Param("teamId")BigInteger teamId);
 
     Team getTeamByMainCourseClassIdAndTeamSerial(@Param("courseClassId")BigInteger courseClassId,@Param("teamSerial")Integer teamSerial);
+
+    Integer getMaxTeamSerialByCourseId(@Param("courseId")BigInteger courseId);
 }

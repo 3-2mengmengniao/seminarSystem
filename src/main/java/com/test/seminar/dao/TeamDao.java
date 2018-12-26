@@ -116,4 +116,5 @@ public interface TeamDao {
 
     void deleteTeamAndStudentRelationByTeamId(BigInteger teamId);
 
+    Integer getMaxTeamSerialByCourseId(BigInteger courseId);
 }
