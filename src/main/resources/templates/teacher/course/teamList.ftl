@@ -94,8 +94,9 @@
                     <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
                     <p class="text-center">成员： </p>
                     <#list team.memberList as student>
-                    <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
+                        <#if student.id!=team.leader.id>
+                        <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
+                        </#if>
                     </#list>
                 </div>
             </div>
