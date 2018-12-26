@@ -1,6 +1,7 @@
 package com.test.seminar.dao;
 
 import com.test.seminar.entity.Serial;
+import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.TeamValidApplication;
 import com.test.seminar.exception.RepetitiveRecordException;

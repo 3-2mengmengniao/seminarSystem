@@ -15,12 +15,6 @@
         <association property="team" column="id" javaType="com.test.seminar.entity.Team" select="getTeamByTeamValidApplicationId"/>
     </resultMap>
 
-    <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
-        <id property="id" column="id"/>
-        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareTeamApplicationId"/>
-        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
-    </resultMap>
-
     <resultMap id="SerialResultMap" type="com.test.seminar.entity.Serial">
         <result property="courseClassSerial" column="klass_serial"/>
     </resultMap>
@@ -168,15 +162,5 @@
         delete from team_valid_application where id=#{teamValidApplicationId}
     </delete>
 
-    <select id="getShareTeamApplicationByTeacherId" resultMap="shareTeamResultMap">
-        select
-    </select>
 
-    <select id="getShareTeamApplicationByMainCourseId" resultMap="shareTeamResultMap">
-
-    </select>
-
-    <select id="getShareTeamApplicationBySubCourseId" resultMap="shareTeamResultMap">
-
-    </select>
 </mapper>

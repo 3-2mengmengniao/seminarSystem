@@ -27,6 +27,12 @@
         <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
     </resultMap>
 
+    <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
+        <id property="id" column="id"/>
+        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareTeamApplicationId"/>
+        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
+    </resultMap>
+
     <select id="getTeamMainCourseIdBySubCourseId" resultType="BigInteger">
         select team_main_course_id
         from course
@@ -71,15 +77,15 @@
     </select>
 
     <select id="getMainCourseByShareTeamApplicationId" resultMap="courseResultMap">
-        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course,share_team_application
-        where id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
+        where course.id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
 
     <select id="getSubCourseByShareTeamApplicationId" resultMap="courseResultMap">
-        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course,share_team_application
-        where id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
+        where course.id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
 
     <insert id="insertCourse">
@@ -189,4 +195,40 @@
         from team_or_strategy
         where id=#{teamAndStrategyId}
     </select>
+
+    <insert id="insertShareTeamApplication">
+        insert into share_team_application(main_course_id,sub_course_id,sub_course_teacher_id)
+        values(#{mainCourseId},#{subCourseId},#{subCourseTeacherId})
+    </insert>
+
+
+    <delete id="deleteShareTeamApplication">
+        delete from share_team_application where id=#{shareTeamApplicationId}
+    </delete>
+
+    <select id="getShareTeamApplicationBySubCourseTeacherId" resultMap="shareTeamResultMap">
+        select id
+        from share_team_application
+        where sub_course_teacher_id=#{subCourseTeacherId}
+    </select>
+
+    <update id="updateCourseTeamMainCourseId">
+        update course
+        <set>
+            <if test="mainCourseId!=null">
+                team_main_course_id=#{mainCourseId}
+            </if>
+        </set>
+        where course.id=#{subCourseId}
+    </update>
+
+    <update id="updateCourseSeminarMainCourseId">
+        update course
+        <set>
+            <if test="mainCourseId!=null">
+                seminar_main_course_id=#{mainCourseId}
+            </if>
+        </set>
+        where course.id=#{subCourseId}
+    </update>
 </mapper>
