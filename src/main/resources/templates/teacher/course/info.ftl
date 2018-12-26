@@ -183,7 +183,6 @@
             </table>
             <div style="10px;"></div>
         </div>
-        <div style="height:20px;"></div>
     </div>
     <p style="margin-top:15px;" class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
     <!--
