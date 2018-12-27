@@ -58,12 +58,4 @@ public interface CourseService {
      * @throws CourseNotFoundException
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
-
-    /**
-     * 验证队伍是否合法
-     * @param team
-     * @throws TeamNotFoundException
-     * @return
-     */
-    Boolean isTeamValid(Team team)throws TeamNotFoundException;
 }
