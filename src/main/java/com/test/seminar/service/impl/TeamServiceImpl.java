@@ -84,8 +84,10 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void addTeamMember(BigInteger teamId, BigInteger studentId) {
-        teamDao.insertTeamAndStudentRelation(teamId,studentId);
+    public void addTeamMember(BigInteger teamId, List<BigInteger> studentIdList) {
+        for(BigInteger studentId:studentIdList){
+            teamDao.insertTeamAndStudentRelation(teamId,studentId);
+        }
         Team team=teamDao.getTeamByTeamId(teamId);
         updateTeamAboutShared(team);
         isTeamValid(team);

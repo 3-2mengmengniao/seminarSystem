@@ -29,7 +29,7 @@ public interface TeamService {
 
     Pair<List<Team>,List<Student>> getTeam(BigInteger courseId);
 
-    void addTeamMember(BigInteger teamId,BigInteger studentId);
+    void addTeamMember(BigInteger teamId,List<BigInteger> studentIdList);
 
     void deleteTeamMember(BigInteger teamId,BigInteger studentId);
 

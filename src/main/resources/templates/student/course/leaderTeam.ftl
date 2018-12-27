@@ -45,8 +45,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}</h1>
-            <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}小组详情</h1>
+            <a href="/student/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -101,7 +101,7 @@
                         </td>
                     </#if>
                         <td style="padding:0 0;">
-                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <i class="layui-icon" style="font-size: 25px; color: #1E9FFF; display: inline;margin-top: 3px;">&#xe640;</i>
+                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <i class="deleteMember" name="${student.id}" style="font-size: 25px; color: #1E9FFF; display: inline;margin-top: 3px;">&#xe640;</i>
                         </td>
                 </tr>
                     </#if>
@@ -155,38 +155,6 @@
                         </td>
                     </tr>
                     </#list>
-                    <#--<tr class="item">-->
-                    <#--<td data-field="0"  class="layui-table-col-special">-->
-                    <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                    <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                    <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                    <#--<i class="layui-icon layui-icon-ok"></i>-->
-                    <#--</div>-->
-                    <#--</div>-->
-                    <#--</td>-->
-                    <#--<td data-field="id"  class="">-->
-                    <#--<div class="layui-table-cell ">24320122202845</div>-->
-                    <#--</td>-->
-                    <#--<td data-field="username"  class="">-->
-                    <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
-                    <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr class="item">-->
-                    <#--<td data-field="0"  class="layui-table-col-special">-->
-                    <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                    <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                    <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                    <#--<i class="layui-icon layui-icon-ok"></i>-->
-                    <#--</div>-->
-                    <#--</div>-->
-                    <#--</td>-->
-                    <#--<td data-field="id"  class="">-->
-                    <#--<div class="layui-table-cell ">24320122202846</div>-->
-                    <#--</td>-->
-                    <#--<td data-field="username"  class="">-->
-                    <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
-                    <#--</td>-->
-                    <#--</tr>-->
                     </tbody>
                 </table>
                 </form>
@@ -227,6 +195,61 @@
             }
 
         });
+        $(".deleteMember").bind("click",function () {
+            var studentId=$(this).attr("name");
+            $.ajax(
+                    {
+                        url:'/student/course/team/delete?teamId=${myTeam.id}&studentId='+studentId,
+                        type:'delete',
+                        processData: false,
+                        contentType: false,
+                        success:function(data,status,response){
+                            if(response.status=="200") {
+                                window.location.reload();
+                            }
+                        },
+                        error:function(data){alert('删除失败！');}
+                    }
+            );
+        });
+
+        $("#addButton").bind("click",function () {
+            var fd=new FormData($('#contactForm')[0]);
+            var members=JSON.stringify(fd.getAll("members"));
+            $.ajax(
+                    {
+                        url:"/student/course/team/add",
+                        type:'post',
+                        data:{"teamId":${myTeam.id},"members":members},
+                        success:function(data,status,response){
+                            if(response.status=="200"){
+                                window.location.reload();
+                            }
+                        },
+                        error:function(data,status){
+                            alert("添加失败!");
+                        }
+                    }
+            );
+        });
+
+        $("#deleteButton").bind("click",function () {
+            $.ajax(
+                    {
+                        url:'/student/course/team/disband?teamId=${myTeam.id}',
+                        type:'delete',
+                        processData: false,
+                        contentType: false,
+                        success:function(data,status,response){
+                            if(response.status=="200") {
+                                window.href.location = '/student/teams?courseId=${course.id}';
+                            }
+                        },
+                        error:function(data){alert('删除失败！');}
+                    }
+            );
+        });
+
     </script>
     <style>
         .center-panel {
