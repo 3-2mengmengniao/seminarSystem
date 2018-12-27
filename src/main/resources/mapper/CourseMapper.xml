@@ -17,16 +17,6 @@
         <collection property="conflictCourseIdList" javaType="ArrayList" ofType="java.math.BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
 
-    <resultMap id="teamAndStrategyResultMap" type="com.test.seminar.entity.strategy.impl.TeamAndStrategy">
-    <id property="id" column="id"/>
-    <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
-</resultMap>
-
-    <resultMap id="teamOrStrategyResultMap" type="com.test.seminar.entity.strategy.impl.TeamOrStrategy">
-        <id property="id" column="id"/>
-        <collection property="strategyNameAndIdList" javaType="ArrayList" ofType="com.test.seminar.entity.StrategyPair" column="id" select="getStrategyPairByTeamAndStrategyId"/>
-    </resultMap>
-
     <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
         <id property="id" column="id"/>
         <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareTeamApplicationId"/>
@@ -178,22 +168,16 @@
         where id=#{strategyId}
     </select>
 
-    <select id="getStrategyPairByTeamAndStrategyId" resultType="com.test.seminar.entity.StrategyPair">
+    <select id="getStrategyPairByTeamAndStrategyId" resultType="com.test.seminar.entity.strategy.StrategyPair">
         select strategy_name,strategy_id
         from team_and_strategy
         where id=#{teamAndStrategyId}
     </select>
 
-    <select id="getTeamAndStrategyByStrategyId" resultMap="teamAndStrategyResultMap">
-        select id,strategy_name,strategy_id
-        from team_and_strategy
-        where id=#{teamAndStrategyId}
-    </select>
-
-    <select id="getTeamOrStrategyByStrategyId" resultMap="teamOrStrategyResultMap">
-        select id,strategy_name,strategy_id
+    <select id="getStrategyPairByTeamOrStrategyId" resultType="com.test.seminar.entity.strategy.StrategyPair">
+        select strategy_name,strategy_id
         from team_or_strategy
-        where id=#{teamAndStrategyId}
+        where id=#{teamOrStrategyId}
     </select>
 
     <insert id="insertShareTeamApplication">

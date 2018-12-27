@@ -2,10 +2,10 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareTeamApplication;
-import com.test.seminar.entity.StrategyPair;
+import com.test.seminar.entity.strategy.Strategy;
+import com.test.seminar.entity.strategy.StrategyPair;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.*;
-import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -111,11 +111,9 @@ public interface CourseMapper {
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
-    StrategyPair getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
+    List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
 
-    TeamAndStrategy getTeamAndStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
-    TeamOrStrategy getTeamOrStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+    List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
 
     Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 

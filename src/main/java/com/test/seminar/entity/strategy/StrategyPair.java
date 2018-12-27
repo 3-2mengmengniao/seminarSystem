@@ -1,4 +1,4 @@
-package com.test.seminar.entity;
+package com.test.seminar.entity.strategy;
 
 import java.math.BigInteger;
 
