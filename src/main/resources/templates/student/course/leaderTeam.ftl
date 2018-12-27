@@ -231,7 +231,12 @@
         });
     </script>
     <style>
-
+        .center-panel {
+            /* margin-right: -6%; */
+            /* margin-left: -6%; */
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+        }
         .layui-unselect{
             margin-right:17px;
         }
