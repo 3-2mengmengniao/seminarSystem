@@ -122,7 +122,7 @@
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}">
+                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
                                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
                                     <i class="layui-icon layui-icon-ok"></i>
                                 </div>

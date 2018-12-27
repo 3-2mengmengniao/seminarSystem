@@ -95,14 +95,12 @@ public interface RoundMapper {
 
     /**
      *
-     * @param roundId
-     */
-    void deleteRoundScoreByRoundScoreId(@Param("roundId")BigInteger roundId);
-
-    /**
-     *
      * @param courseId
      * @return
      */
     int getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
+
+    Round getRoundBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    void deleteRoundScoreByRoundId(@Param("roundId")BigInteger roundId);
 }

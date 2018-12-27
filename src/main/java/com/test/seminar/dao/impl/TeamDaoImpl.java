@@ -52,19 +52,14 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId) throws TeamNotFoundException {
-        Team team;
+    public Team getTeamByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId){
         BigInteger mainCourseId=courseMapper.getTeamMainCourseIdBySubCourseId(courseId);
         if(mainCourseId==null){
-            team=teamMapper.getTeamByStudentIdAndCourseId(studentId,courseId);
+            return teamMapper.getTeamByStudentIdAndCourseId(studentId,courseId);
         }
         else{
-            team=teamMapper.getTeamByStudentIdAndCourseId(studentId,mainCourseId);
+            return teamMapper.getTeamByStudentIdAndCourseId(studentId,mainCourseId);
         }
-        if(team==null) {
-            throw new TeamNotFoundException();
-        }
-        return team;
     }
 
     @Override

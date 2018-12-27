@@ -140,5 +140,5 @@ public interface SeminarMapper {
 
     void deleteSeminarScoreBySeminarScoreId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
-    List<SeminarScore> getSeminarScoreByRoundId(@Param("roundId")BigInteger roundId);
+    SeminarScore getSeminarScoreByRoundIdAndTeamId(@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
 }
