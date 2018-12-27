@@ -117,10 +117,12 @@
     <div class="distance4"></div>
     <div class="center-navigation" style="margin-top:20px;">
         <div class="layui-colla-item">
-            <#if myTeam??>
-                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
+            <#if myTeam?? && leader==1>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/leaderTeam?courseId=${courseId}'" >我的小组</h2>
+            <#elseif myTeam??>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/myTeam?courseId=${courseId}'" >我的小组</h2>
             <#else>
-                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='#" >我的小组</h2>
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
             </#if>
         </div>
     </div>
