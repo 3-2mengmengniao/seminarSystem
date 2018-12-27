@@ -134,4 +134,11 @@ public interface CourseDao {
      * @return
      */
     List<Course> getAllCourse();
+
+    /**
+     * 获取轮次对应的课程
+     * @param roundId
+     * @return
+     */
+    Course getCourseByRoundId(BigInteger roundId);
 }

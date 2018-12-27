@@ -103,4 +103,8 @@ public interface RoundMapper {
     Round getRoundBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     void deleteRoundScoreByRoundId(@Param("roundId")BigInteger roundId);
+
+    Integer getEnrollNumBycourseClassIdAndRoundId(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
+
+    void updateEnrollNum(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
 }

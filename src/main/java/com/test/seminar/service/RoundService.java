@@ -58,5 +58,9 @@ public interface RoundService {
      */
     List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
 
-    List<RoundScore> getRoundScoreByTeamId(BigInteger teamId);
+    /**
+     * 更新某一轮的分数
+     * @param roundScore
+     */
+    void updateRoundScore(RoundScore roundScore,BigInteger roundId,BigInteger teamId);
 }

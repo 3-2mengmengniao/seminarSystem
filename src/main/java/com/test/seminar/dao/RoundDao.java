@@ -101,4 +101,8 @@ public interface RoundDao {
     Round getRoundByCourseIdAndRoundSerial(BigInteger courseId, int roundSerial);
 
     List<RoundScore> getRoundScoreByTeamId(BigInteger teamId);
+
+    Integer getEnrollNumBycourseClassIdAndRoundId(BigInteger courseClassId,BigInteger roundId);
+
+    void updateEnrollNum(BigInteger courseClassId,BigInteger roundId);
 }

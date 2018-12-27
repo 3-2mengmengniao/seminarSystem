@@ -142,4 +142,9 @@ public class CourseDaoImpl implements CourseDao {
         }
         return courseList;
     }
+
+    @Override
+    public  Course getCourseByRoundId(BigInteger roundId){
+        return courseMapper.getCourseByRoundId(roundId);
+    }
 }

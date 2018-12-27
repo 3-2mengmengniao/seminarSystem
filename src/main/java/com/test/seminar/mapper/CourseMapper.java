@@ -138,4 +138,11 @@ public interface CourseMapper {
      * @return
      */
     List<Course> getAllCourse();
+
+    /**
+     * 获取轮次对应的课程
+     * @param roundId
+     * @return
+     */
+    Course getCourseByRoundId(@Param("roundId")BigInteger roundId);
 }
