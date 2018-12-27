@@ -2,6 +2,7 @@ package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareSeminarApplication;
 import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -97,10 +98,40 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public List<ShareSeminarApplication> getShareSeminarApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId){
+        return courseMapper.getShareSeminarApplicationBySubCourseTeacherId(subCourseTeacherId);
+    }
+
+    @Override
+    public Course getMainCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId){
+        return courseMapper.getMainCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+    }
+
+    @Override
+    public Course getSubCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId){
+        return courseMapper.getSubCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+    }
+
+    @Override
+    public void insertShareSeminarApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId){
+        courseMapper.insertShareSeminarApplication(mainCourseId,subCourseId,subCourseTeacherId);
+    }
+
+    @Override
     public void createShareTeamAssociation(ShareTeamApplication shareTeamApplication) {
         BigInteger subCourseId=shareTeamApplication.getSubCourse().getId();
         BigInteger mainCourseId=shareTeamApplication.getMainCourse().getId();
         courseMapper.updateCourseTeamMainCourseId(subCourseId,mainCourseId);
+    }
+
+    @Override
+    public void updateCourseTeamMainCourseId(BigInteger subCourseId,BigInteger mainCourseId){
+        courseMapper.updateCourseTeamMainCourseId(subCourseId,mainCourseId);
+    }
+
+    @Override
+    public void updateCourseSeminarMainCourseId(BigInteger subCourseId,BigInteger mainCourseId){
+        courseMapper.updateCourseSeminarMainCourseId(subCourseId,mainCourseId);
     }
 
     @Override

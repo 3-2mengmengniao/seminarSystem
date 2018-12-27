@@ -10,6 +10,7 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.service.CourseService;
 import com.test.seminar.service.TeamService;
+import com.test.seminar.util.EmailService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,8 @@ public class TeamServiceImpl implements TeamService {
     private CourseClassDao courseClassDao;
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public Team getTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
@@ -207,6 +210,18 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public void updateTeamValidApplication(TeamValidApplication teamValidApplication){
         teamDao.updateTeamValidApplication(teamValidApplication);
+        Student student=teamValidApplication.getTeam().getLeader();
+        String to=student.getEmail();
+        String subject="分组审核请求反馈";
+        String text="";
+        //向学生发送邮件
+        if(teamValidApplication.getStatus()==1){
+            text=text+"老师同意了您的分组审核申请";
+        }
+        else{
+            text=text+"老师拒绝了您的分组审核申请";
+        }
+        emailService.sendSimpleMessage(to,subject,text);
         teamDao.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplication.getId());
     }
 }
