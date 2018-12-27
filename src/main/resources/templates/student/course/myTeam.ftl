@@ -45,7 +45,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${course.id}</h1>
             <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -74,7 +74,7 @@
         <div style="height:10px;"></div>
         <div class="center-panel">
             <div style="height:30px;"></div>
-            <h2 class="my-title">1-1 早早鸟</h2>
+            <h2 class="my-title">${myTeam.serial.getSerial()} ${myTeam.teamName}</h2>
             <div style="height:10px;"></div>
             <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
                 <colgroup>
@@ -86,31 +86,40 @@
                         <a style="font-size:15px;">组长：</a>
                     </td>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
+                        <a style="font-size:15px;">${myTeam.leader.account}&emsp;&emsp;${myTeam.leader.studentName}</a>
                     </td>
                 </tr>
+                <#list myTeam.memberList as student>
+                    <#if student.id!=myTeam.leader.id>
                 <tr>
+                    <#if student?index==0 || (myTeam.memberList[0].id==myTeam.leader.id && student?index==1)>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">组员：</a>
+                        </td>
+                    <#else>
+                        <td style="padding:0 0;">
+                        </td>
+                    </#if>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">组员：</a>
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:0 0;">
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
+                        <a style="font-size:15px;">${student.account}&emsp;&emsp;${student.studentName}</a>
                     </td>
                 </tr>
-                <tr>
-                    <td style="padding:0 0;">
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
-                    </td>
-                </tr>
+                    </#if>
+                </#list>
+            <#--<tr>-->
+            <#---->
+            <#--<td style="padding:0 0;">-->
+            <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+            <#--</td>-->
+            <#--</tr>-->
+            <#--<tr>-->
+            <#--<td style="padding:0 0;">-->
+            <#--</td>-->
+            <#--<td style="padding:0 0;">-->
+            <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+            <#--</td>-->
+            <#--</tr>-->
+
             </table>
             <div style="height:20px;"></div>
         </div>
