@@ -89,10 +89,10 @@
                 <h2 class="layui-colla-title">${team.serial.getSerial()} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
                     <p class="text-center">组长：</p>
-                    <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
+                    <p class="text-center">${(team.leader.studentName)!"无"}&nbsp&nbsp&nbsp${(team.leader.account)!""}</p>
                     <p class="text-center">成员： </p>
                     <#list team.memberList as student>
-                    <#if student.id!=team.leader.id>
+                    <#if !(team.leader??) || student.id!=team.leader.id>
                     <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
                     </#if>
                     </#list>
@@ -117,7 +117,11 @@
     <div class="distance4"></div>
     <div class="center-navigation" style="margin-top:20px;">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
+            <#if myTeam??>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
+            <#else>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='#" >我的小组</h2>
+            </#if>
         </div>
     </div>
     <div class="distance4"></div>

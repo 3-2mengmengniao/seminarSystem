@@ -368,7 +368,7 @@
 
         //各种基于事件的操作，下面会有进一步介绍
     });
-    new Function($('.run').text())()
+    new Function($('.run').text())();
 
     //var index = parent.layer.getFrameIndex(window.name);
     //parent.layer.iframeAuto(index);

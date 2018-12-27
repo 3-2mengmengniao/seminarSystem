@@ -45,8 +45,6 @@ public interface StudentDao {
      */
     List<Student> getAllStudent();
 
-    List<Student> getStudentNotTeamInCourse(BigInteger courseId);
-
     /**
      * 创建新的学生账户
      *
@@ -68,4 +66,11 @@ public interface StudentDao {
      * @return
      */
     void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
+
+    /**
+     * 获取课程中未组队学生
+     * @param courseId
+     * @return
+     */
+    List<Student> getStudentNotInTeamByCourseId(BigInteger courseId);
 }
