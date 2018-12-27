@@ -88,7 +88,7 @@
                 <tbody>
                 <#list seminarScoreList as seminarScore>
                     <tr>
-                        <td>${seminarScore.serial.getSerial()}</td>
+                        <#--<td>${seminarScore.serial.getSerial()}</td>-->
                         <td>${seminarScore.presentationScore!""}</td>
                         <td>${seminarScore.questionScore!""}</td>
                         <td>${seminarScore.reportScore!""}</td>

@@ -32,7 +32,6 @@ jQuery(document).ready(function($) {
         console.log($('#teamName').val());
         console.log(classId);
         // formInput.append("members",document.getElementsByName("members").value);
-        alert(members);
         var courseId=$('#contactForm').attr("name");
         $.ajax(
             {
