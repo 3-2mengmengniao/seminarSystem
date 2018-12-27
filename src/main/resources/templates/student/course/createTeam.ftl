@@ -124,7 +124,7 @@
                             <div class="layui-table-cell  laytable-cell-checkbox">
                                 <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
                                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon layui-icon-ok"></i>
+                                     <i class="layui-icon">&#xe605;</i>
                                 </div>
                             </div>
                         </td>
@@ -198,32 +198,19 @@
             layer.msg('展开状态：'+ data.show);
         });
     });
-    // layui.use('table', function(){
-    //     var table = layui.table;
-    //     table.render({
-    //         elem: '#member'
-    //         // ,url:'/demo/table/user/'
-    //         ,cols: [[
-    //             {type:'checkbox'}
-    //             ,{field:'id', width:100, title: 'ID', sort: true}
-    //             ,{field:'username', width:80, title: '用户名'}
-    //         ]]
-    //         ,page: true
-    //     });
-    // });
-</script>
-<script>
     layui.use('form', function(){
         var form = layui.form();
 
         //各种基于事件的操作，下面会有进一步介绍
     });
     $("#searchBtn").bind("click",function () {
-        if($("#username").val()==''||$("#username").val()==null){
+        if($("#searchContent").val()==''||$("#searchContent).val()==null){
             layer.msg("请输入查找内容") ;
         }
-        $(".item").fadeOut(2000);
-        $("td:contains("+$("#searchContent").val()+")").parents('.item').fadeIn();
+        else{
+            $(".item").fadeOut();
+            $("td:contains("+$("#searchContent").val()+")").parents('.item').fadeIn();
+        }
     });
 
 </script>
