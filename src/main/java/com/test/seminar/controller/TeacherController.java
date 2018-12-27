@@ -228,7 +228,7 @@ public class TeacherController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             course.setTeamEndTime(sdf.parse(request.getParameter("teamEndTime")));
-            course.setTeamEndTime(sdf.parse(request.getParameter("teamStartTime")));
+            course.setTeamStartTime(sdf.parse(request.getParameter("teamStartTime")));
         }catch(Exception e)
         {
             System.out.println("时间格式出错！");
