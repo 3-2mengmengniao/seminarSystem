@@ -136,4 +136,6 @@ public interface TeamMapper {
     Team getTeamByMainCourseClassIdAndTeamSerial(@Param("courseClassId")BigInteger courseClassId,@Param("teamSerial")Integer teamSerial);
 
     Integer getMaxTeamSerialByCourseId(@Param("courseId")BigInteger courseId);
+
+    List<Team> getGroupStudentByCourseId(@Param("courseId")BigInteger courseId);
 }
