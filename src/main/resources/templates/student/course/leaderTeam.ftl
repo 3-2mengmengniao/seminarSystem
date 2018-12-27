@@ -46,7 +46,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${course.courseName}小组详情</h1>
-            <a href="/student/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/course/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -101,7 +101,7 @@
                         </td>
                     </#if>
                         <td style="padding:0 0;">
-                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <i class="deleteMember" name="${student.id}" style="font-size: 25px; color: #1E9FFF; display: inline;margin-top: 3px;">&#xe640;</i>
+                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <img class="deleteMember" src="/images/删除.png" name="${student.id}" style="height: 25px;width: 20px; color: #1E9FFF; display: inline;margin: 3px 15px;"/>
                         </td>
                 </tr>
                     </#if>

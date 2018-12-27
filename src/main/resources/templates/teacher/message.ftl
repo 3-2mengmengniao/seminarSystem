@@ -77,73 +77,58 @@
 
 <div class="content">
     <div class="distance3"></div>
+    <#list shareSeminarApplicationList as application>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">J2EE(张老师)的共享请求</h2>
+                <h2 class="layui-colla-title">${application.mainCourse.courseName}的共享讨论课请求</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">J2EE-张老师提出与您的OOAD共享分组</p>
+                    <p class="text-center">${application.mainCourse.courseName}提出与您的${application.subCourse.courseName}共享讨论课</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button name="shareSeminar" class="layui-btn agreeButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="shareSeminar" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
     </div>
+    </#list>
     <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="distance5"></div>
+    <#list shareTeamApplicationList as application>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">OOAD &nbsp 2016(1) 王二的特殊组队请求</h2>
+                <h2 class="layui-colla-title">${application.mainCourse.courseName}的共享分组请求</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">OOAD &nbsp 2016(1) 王二提出了特殊组队请求</p>
+                    <p class="text-center">${application.mainCourse.courseName}提出与您的${application.subCourse.courseName}共享分组</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button class="layui-btn agreeButton" name="shareTeam" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="shareTeam" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
     </div>
+    </#list>
+    <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="distance5"></div>
-    <div class="distance3"></div>
-    <div class="distance3"></div>
-    <div class="distance5"></div>
-    <label style="margin-left: 10%;font-size: 18px;">历史消息：</label>
-    <div class="distance5"></div>
+    <#list teamValidApplicationList as application>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">J2EE(张老师)的共享请求</h2>
+                <h2 class="layui-colla-title">${application.team.course} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}的特殊组队请求</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">您同意了J2EE-张老师提出的与您的OOAD共享分组</p>
+                    <p class="text-center">${application.team.course} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}提出了特殊组队请求，理由如下：</p>
+                    <p class="text-center">${application.reason}</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button name="teamValid" class="layui-btn agreeButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="teamValid" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="distance3"></div>
-    <div class="distance3"></div>
-    <div class="distance5"></div>
-    <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-            <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">OOAD &nbsp 2016(2) 王三的特殊组队请求</h2>
-                <div class="layui-colla-content">
-                    <p class="text-center">您拒绝了 OOAD &nbsp 2016(1) 王二提出的特殊组队请求</p>
-                </div>
-                <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger" style="margin:10px 15px 15px 0;">拒绝</button></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="distance2"></div>
-    <div class="distance"></div>
+    </#list>
 </div>
 <!--
 <div class="decoration"></div>
@@ -182,6 +167,46 @@
             console.log(data.title); //得到当前点击面板的标题区域DOM对象
             console.log(data.content); //得到当前点击面板的内容区域DOM对象
         });
+    });
+</script>
+<script>
+    $(".agreeButton").bind("click",function () {
+        var applicationId=$(this).attr("id");
+        var type=$(this).attr('name');
+        $.ajax(
+                {
+                    url:'/teacher/message/handle',
+                    type:'post',
+                    processData: false,
+                    contentType: false,
+                    data:{"applicationId":applicationId,"status":1,"type":type},
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data){alert('提交失败！');}
+                }
+        );
+    });
+
+    $(".refuseButton").bind("click",function () {
+        var applicationId=$(this).attr("name");
+        $.ajax(
+                {
+                    url:'/teacher/message/handle',
+                    type:'post',
+                    processData: false,
+                    contentType: false,
+                    data:{"applicationId":applicationId,"status":0,"type":type},
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data){alert('提交失败！');}
+                }
+        );
     });
 </script>
 </html>
