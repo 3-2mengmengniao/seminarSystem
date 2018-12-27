@@ -85,4 +85,10 @@ public interface CourseService {
      * @param shareTeamApplication
      */
     void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
+
+    /**
+     * 获取系统中所有课程
+     * @return
+     */
+    List<Course> getAllCourse();
 }
