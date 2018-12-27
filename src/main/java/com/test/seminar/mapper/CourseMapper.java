@@ -2,10 +2,6 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareTeamApplication;
-import com.test.seminar.entity.strategy.Strategy;
-import com.test.seminar.entity.strategy.StrategyPair;
-import com.test.seminar.entity.strategy.TeamStrategy;
-import com.test.seminar.entity.strategy.impl.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -80,41 +76,6 @@ public interface CourseMapper {
      */
     void deleteCourseByCourseId(@Param("courseId")BigInteger courseId);
 
-    /**
-     * 通过课程ID获取课程的分组策略列表
-     * @param courseId
-     * @return
-     */
-    List<TeamStrategy> getTeamStrategyListByCourseId(@Param("courseId")BigInteger courseId);
-
-    /**
-     * 通过策略ID获取MemberLimitStrategy
-     * @param strategyId
-     * @return
-     */
-    MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
-    void updateMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
-
-    void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-    /**
-     * 通过策略ID获取CourseMemberLimitStrategy
-     * @param strategyId
-     * @return
-     */
-    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
-    /**
-     * 通过策略ID获取ConflictCourseStrategy
-     * @param strategyId
-     * @return
-     */
-    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
-    List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
-
-    List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
-
     Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 
     Course getSubCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
@@ -135,7 +96,7 @@ public interface CourseMapper {
      *  通过从课程教师id查看共享分组请求
      * @param subCourseTeacherId
      */
-    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
+    ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
 
     /**
      *  更新课程的共享分组的主课程id
@@ -148,13 +109,6 @@ public interface CourseMapper {
      * @param subCourseId,mainCourseId
      */
     void updateCourseSeminarMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
-
-    /**
-     * 获取strategy下的课程id列表
-     * @param strategyId
-     * @return
-     */
-    List<BigInteger> getCourseIdByConflictCourseStrategyId(@Param("strategyId")BigInteger strategyId);
 
     /**
      * 获取系统中所有课程

@@ -3,6 +3,11 @@ package com.test.seminar.mapper;
 import com.test.seminar.entity.Serial;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.TeamValidApplication;
+import com.test.seminar.entity.strategy.StrategyPair;
+import com.test.seminar.entity.strategy.TeamStrategy;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -135,7 +140,50 @@ public interface TeamMapper {
 
     Team getTeamByMainCourseClassIdAndTeamSerial(@Param("courseClassId")BigInteger courseClassId,@Param("teamSerial")Integer teamSerial);
 
-    Integer getMaxTeamSerialByCourseId(@Param("courseId")BigInteger courseId);
+    Integer getMaxTeamSerialByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
     List<Team> getGroupStudentByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 获取strategy下的课程id列表
+     * @param strategyId
+     * @return
+     */
+    List<BigInteger> getCourseIdByConflictCourseStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    /**
+     * 通过课程ID获取课程的分组策略列表
+     * @param courseId
+     * @return
+     */
+    List<TeamStrategy> getTeamStrategyListByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 通过策略ID获取MemberLimitStrategy
+     * @param strategyId
+     * @return
+     */
+    MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    void updateMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
+
+    void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+    /**
+     * 通过策略ID获取CourseMemberLimitStrategy
+     * @param strategyId
+     * @return
+     */
+    CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    /**
+     * 通过策略ID获取ConflictCourseStrategy
+     * @param strategyId
+     * @return
+     */
+    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
+
+    List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
+
 }

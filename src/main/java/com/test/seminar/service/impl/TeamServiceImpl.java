@@ -4,8 +4,11 @@ import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.*;
+import com.test.seminar.entity.strategy.TeamStrategy;
+import com.test.seminar.entity.strategy.impl.CompositStrategy;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
+import com.test.seminar.service.CourseService;
 import com.test.seminar.service.TeamService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +45,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void insertTeam(Team team,List<BigInteger> memberIdList) throws RepetitiveRecordException {
-        team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseId(team.getCourse().getId())+1);
+        team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseClassId(team.getCourseClass().getId())+1);
         teamDao.insertTeam(team,team.getCourseClass().getId(),team.getCourse().getId());
         team=teamDao.getTeamByMainCourseClassIdAndTeamSerial(team.getCourseClass().getId(),team.getSerial().getTeamSerial());
         teamDao.insertCourseClassAndTeamRelation(team.getCourseClass().getId(),team.getId());
@@ -50,6 +53,7 @@ public class TeamServiceImpl implements TeamService {
             teamDao.insertTeamAndStudentRelation(team.getId(),memberId);
         }
         updateTeamAboutShared(team);
+        isTeamValid(team);
     }
 
     @Override
@@ -81,6 +85,7 @@ public class TeamServiceImpl implements TeamService {
         teamDao.insertTeamAndStudentRelation(teamId,studentId);
         Team team=teamDao.getTeamByTeamId(teamId);
         updateTeamAboutShared(team);
+        isTeamValid(team);
     }
 
     @Override
@@ -88,6 +93,50 @@ public class TeamServiceImpl implements TeamService {
         teamDao.deleteTeamAndStudentRelation(teamId,studentId);
         Team team=teamDao.getTeamByTeamId(teamId);
         updateTeamAboutShared(team);
+        isTeamValid(team);
+    }
+
+    /**
+     * @author wzw
+     * date 2018/12/25
+     */
+    @Override
+    public Boolean isTeamValid(Team team) throws TeamNotFoundException {
+
+        //获取队伍总策略
+        List<TeamStrategy> teamStrategyList = teamDao.getTeamStrategyListByCourseId(team.getCourse().getId());
+
+        //遍历每一个策略
+        for (TeamStrategy teamStrategy : teamStrategyList) {
+            //获得策略类名
+            String strategyName = teamStrategy.getStrategyName();
+            try {
+                //判断该策略是否为复合策略
+                Class strategyClass = Class.forName(strategyName);
+                Boolean isCompositStrategy = CompositStrategy.class.isAssignableFrom(strategyClass);
+
+                Boolean result = null;
+                if (isCompositStrategy) {
+                    //复合策略验证
+                    result = teamDao.validCompositStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
+                } else {
+                    //简单策略验证
+                    result = teamDao.validSimpleStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
+                }
+
+                //只要有一个策略没满足，就返回false
+                if (!result) {
+                    team.setStatus(0);
+                    teamDao.updateTeam(team);
+                    return false;
+                }
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //所有策略都满足，返回true
+        return true;
     }
 
     private void updateTeamAboutShared(Team team){
@@ -100,7 +149,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     private void updateTeamSubCourseTeamRelation(Course course, Team team){
-        CourseClass currentCourseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(team.getLeader().getId(),course.getId());
+        CourseClass currentCourseClass=courseClassDao.getCourseClassByTeamIdAndCourseId(team.getId(),course.getId());
         if(currentCourseClass!=null){
             teamDao.deleteCourseClassAndTeamRelation(team.getId(),currentCourseClass.getId());
         }
@@ -110,7 +159,11 @@ public class TeamServiceImpl implements TeamService {
             memberBelongCourseClassMap.put(courseClass.getId(),0);
         }
         for(Student student:team.getMemberList()){
-            BigInteger studentCourseClassId=courseClassDao.getCourseClassByStudentIdAndCourseId(student.getId(),course.getId()).getId();
+            CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(student.getId(),course.getId());
+            if(courseClass==null) {
+                continue;
+            }
+            BigInteger studentCourseClassId=courseClass.getId();
             Integer count=memberBelongCourseClassMap.get(studentCourseClassId);
             count=count+1;
             memberBelongCourseClassMap.put(studentCourseClassId,count);
@@ -119,6 +172,10 @@ public class TeamServiceImpl implements TeamService {
         Collections.sort(mapList, (o1, o2) -> (o2.getValue() - o1.getValue()));
         List<BigInteger> maxMemberCourseClassList=new ArrayList<>();
         Integer maxMemberCount=mapList.get(0).getValue();
+        //无人在这个课程下
+        if(maxMemberCount==0) {
+            return;
+        }
         for(Map.Entry<BigInteger,Integer> mapItem:mapList){
             if(mapItem.getValue()<=maxMemberCount){
                 maxMemberCourseClassList.add(mapItem.getKey());
@@ -132,7 +189,7 @@ public class TeamServiceImpl implements TeamService {
             for(BigInteger maxMemberCourseClassId:maxMemberCourseClassList){
                 courseClassTeamNumberList.add(new Pair<>(maxMemberCourseClassId,courseClassDao.getCourseClassTeamNumber(maxMemberCourseClassId)));
             }
-            Collections.sort(courseClassTeamNumberList, (o1, o2) -> (o1.getValue() - o2.getValue()));
+            Collections.sort(courseClassTeamNumberList, Comparator.comparingInt(Pair::getValue));
             teamDao.insertCourseClassAndTeamRelation(courseClassTeamNumberList.get(0).getKey(),team.getId());
         }
     }

@@ -57,7 +57,6 @@ public class SeminarServiceImpl implements SeminarService {
         List<Course> subCourseList=courseDao.getCourseBySeminarMainCourseId(courseId);
         if(subCourseList!=null){
             for(Course course:subCourseList){
-
             }
         }
     }

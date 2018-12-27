@@ -6,12 +6,13 @@ import com.test.seminar.entity.SeminarControl;
 import com.test.seminar.entity.Serial;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 public interface RundSeminarService {
 
     SeminarControl beginSeminar(BigInteger seminarControlId);
 
-    void endSeminar(BigInteger seminarControlId);
+    void endSeminar(BigInteger seminarControlId,Date strtodate);
 
     void selectQuestion(BigInteger seminarControlId);
 

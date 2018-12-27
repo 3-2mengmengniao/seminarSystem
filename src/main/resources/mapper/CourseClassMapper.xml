@@ -41,10 +41,15 @@
         WHERE klass.course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
 
+    <select id="getCourseClassByTeamIdAndCourseId" resultMap="courseClassResultMap">
+        SELECT klass.id,grade,klass_serial,klass_time,klass_location
+        FROM klass,klass_team
+        WHERE klass.course_id=#{courseId} and klass_team.team_id=#{teamId} and klass.id=klass_team.klass_id
+    </select>
+
     <select id="getCourseClassTeamNumber" resultType="Integer">
         SELECT count(klass_id)
         FROM klass_team
-        group by klass_id
         where klass_id=#{courseClassId}
     </select>
 

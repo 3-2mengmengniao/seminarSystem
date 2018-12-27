@@ -1,6 +1,5 @@
 package com.test.seminar.controller;
 
-import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.*;
 import com.test.seminar.service.RundSeminarService;
 import com.test.seminar.service.SeminarService;
@@ -29,12 +28,17 @@ public class RunSeminarController {
     @Autowired
     private RundSeminarService rundSeminarService;
     @Autowired
-    private TeamService teamService;
-    @Autowired
     public SimpMessagingTemplate template;
     @Autowired
     public SeminarService seminarService;
 
+    /**
+     * 进入讨论课
+     * @param seminarId
+     * @param status 0表示第一次进入，即开始，将在服务器端初始化数据。1表示普通的进入
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/teacher/course/seminar/progressing")
     public String progressing(BigInteger seminarId, int status,Model model) {
         SeminarControl seminarControl;
@@ -48,19 +52,28 @@ public class RunSeminarController {
         return "teacher/course/seminar/progressing";
     }
 
+    /**
+     * 结束讨论课
+     * @param seminarId 要结束的讨论课ID（班级下）
+     * @param deadline 报告截止日期
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/teacher/course/seminar/endSeminar",method = POST)
     @ResponseBody
     public ResponseEntity<String> endSeminar(BigInteger seminarId, String deadline, Model model) {
-        SeminarControl mySeminar=seminarService.getSeminarControlBySeminarControlId(seminarId);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ParsePosition pos = new ParsePosition(0);
         Date strtodate = formatter.parse(deadline, pos);
-        mySeminar.setReportDDL(strtodate);
-        rundSeminarService.endSeminar(mySeminar.getId());
-        seminarService.updateSeminarControl(mySeminar);
+        rundSeminarService.endSeminar(seminarId,strtodate);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
+    /**
+     *前端提问
+     * @param message 内部有seminarId,teamId,studentId
+     * @throws Exception
+     */
     @MessageMapping("/QA")
     @ResponseBody
     public void addQuestion(Message message) throws Exception {
@@ -70,6 +83,10 @@ public class RunSeminarController {
         template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
     }
 
+    /**
+     * 下组展示
+     * @param message 需要用到seminarId属性
+     */
     @MessageMapping("/nextGroup")
     @ResponseBody
     public void nextGroup(Message message){
@@ -80,6 +97,11 @@ public class RunSeminarController {
         template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
     }
 
+    /**
+     * 抽取问题，如果后台无问题，无效
+     * @param message 需要用到seminarId
+     * @throws Exception
+     */
     @MessageMapping("/selectQuestion")
     @ResponseBody
     public void selectQuestion(Message message) throws Exception{

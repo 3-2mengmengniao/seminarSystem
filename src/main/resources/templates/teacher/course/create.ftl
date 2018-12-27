@@ -1148,11 +1148,11 @@
             line=$(this).index();
             $(this).find('select option:selected').each(function(){
                 memberArray[line][tempMemberCount]=$(this).attr("value");
-                // alert(memberArray[line][tempMemberCount]);
+                alert(memberArray[line][tempMemberCount]);
                 tempMemberCount++;
+                if()
             });
             // memberArray[tempMemberCount]=$(this).find('select option:selected').attr("value");
-            // alert(memberArray[tempMemberCount]);
         });
 
         $(".courseLimitation.courseShow").each(function(){
@@ -1161,7 +1161,7 @@
             $(this).find('.subPanel.subCourseShow').each(function(){
                 tempCourseCount=$(this).index();
                 courseArray[line][tempCourseCount]=$(this).find('select option:selected').attr("value");
-                // alert(courseArray[line][tempCourseCount]);
+                alert(courseArray[line][tempCourseCount]);
                 tempCourseCount++;
             });
         });

@@ -34,10 +34,12 @@ public class CourseClassDaoImpl implements CourseClassDao {
     @Override
     public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
         CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-        if(courseClass==null) {
-            throw new CourseClassNotFoundException();
-        }
         return courseClass;
+    }
+
+    @Override
+    public CourseClass getCourseClassByTeamIdAndCourseId(BigInteger teamId, BigInteger courseId) {
+        return courseClassMapper.getCourseClassByTeamIdAndCourseId(teamId,courseId);
     }
 
     @Override

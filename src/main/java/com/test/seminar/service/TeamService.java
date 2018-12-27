@@ -33,7 +33,15 @@ public interface TeamService {
 
     void deleteTeamMember(BigInteger teamId,BigInteger studentId);
 
-    void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId);
+    /**
+     * 验证队伍是否合法
+     * @param team
+     * @throws TeamNotFoundException
+     * @return
+     */
+    Boolean isTeamValid(Team team)throws TeamNotFoundException;
+
+    void insertTeamValidApplication(TeamValidApplication teamValidApplication, BigInteger teamId, BigInteger teacherId);
 
     List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId);
 

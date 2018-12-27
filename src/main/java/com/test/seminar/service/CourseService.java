@@ -2,6 +2,7 @@ package com.test.seminar.service;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareTeamApplication;
+import com.test.seminar.entity.Team;
 import com.test.seminar.exception.*;
 
 import java.math.BigInteger;
@@ -56,13 +57,6 @@ public interface CourseService {
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
 
-    /**
-     * 验证队伍是否合法
-     * @param teamId
-     * @throws TeamNotFoundException
-     * @return
-     */
-    Boolean isTeamValid(BigInteger teamId)throws TeamNotFoundException;
 
     /**
      * 发送共享分组请求
