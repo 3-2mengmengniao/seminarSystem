@@ -1,6 +1,7 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.Team;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
@@ -60,9 +61,9 @@ public interface CourseService {
 
     /**
      * 验证队伍是否合法
-     * @param teamId
+     * @param team
      * @throws TeamNotFoundException
      * @return
      */
-    Boolean isTeamValid(BigInteger teamId)throws TeamNotFoundException;
+    Boolean isTeamValid(Team team)throws TeamNotFoundException;
 }

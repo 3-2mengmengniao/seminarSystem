@@ -78,10 +78,10 @@
         WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
 
-    <select id="getMaxTeamSerialByCourseId" resultType="Integer">
+    <select id="getMaxTeamSerialByCourseClassId" resultType="Integer">
         SELECT MAX(team_serial)
-        FROM team
-        WHERE course_id=#{courseId}
+        FROM team,klass_team
+        WHERE klass_team.klass_id=#{courseClassId} and team.id=klass_team.team_id
     </select>
 
     <select id="getGroupStudentByCourseId" resultMap="teamNotLoadResultMap">

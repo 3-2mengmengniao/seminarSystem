@@ -100,4 +100,6 @@ public interface CourseClassMapper {
     void deleteCourseClassByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
     void deleteCourseClassAndTeamRelationByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
+
+    CourseClass getCourseClassByTeamIdAndCourseId(@Param("teamId")BigInteger teamId,@Param("courseId")BigInteger courseId);
 }

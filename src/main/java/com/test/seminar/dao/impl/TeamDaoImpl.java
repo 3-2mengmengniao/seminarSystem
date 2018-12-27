@@ -149,8 +149,8 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public Integer getMaxTeamSerialByCourseId(BigInteger courseId) {
-        return teamMapper.getMaxTeamSerialByCourseId(courseId);
+    public Integer getMaxTeamSerialByCourseClassId(BigInteger courseClassId) {
+        return teamMapper.getMaxTeamSerialByCourseClassId(courseClassId);
     }
 
     @Override

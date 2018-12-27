@@ -9,6 +9,7 @@ import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
+import com.test.seminar.service.CourseService;
 import com.test.seminar.service.TeamService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class TeamServiceImpl implements TeamService {
     private CourseClassDao courseClassDao;
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private CourseService courseService;
 
     @Override
     public Team getTeamByTeamId(BigInteger teamId) throws TeamNotFoundException {
@@ -45,7 +48,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void insertTeam(Team team,List<BigInteger> memberIdList) throws RepetitiveRecordException {
-        team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseId(team.getCourse().getId())+1);
+        team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseClassId(team.getCourseClass().getId())+1);
         teamDao.insertTeam(team,team.getCourseClass().getId(),team.getCourse().getId());
         team=teamDao.getTeamByMainCourseClassIdAndTeamSerial(team.getCourseClass().getId(),team.getSerial().getTeamSerial());
         teamDao.insertCourseClassAndTeamRelation(team.getCourseClass().getId(),team.getId());
@@ -53,6 +56,7 @@ public class TeamServiceImpl implements TeamService {
             teamDao.insertTeamAndStudentRelation(team.getId(),memberId);
         }
         updateTeamAboutShared(team);
+        courseService.isTeamValid(team);
     }
 
     @Override
@@ -90,6 +94,7 @@ public class TeamServiceImpl implements TeamService {
         teamDao.insertTeamAndStudentRelation(teamId,studentId);
         Team team=teamDao.getTeamByTeamId(teamId);
         updateTeamAboutShared(team);
+        courseService.isTeamValid(team);
     }
 
     @Override
@@ -97,6 +102,7 @@ public class TeamServiceImpl implements TeamService {
         teamDao.deleteTeamAndStudentRelation(teamId,studentId);
         Team team=teamDao.getTeamByTeamId(teamId);
         updateTeamAboutShared(team);
+        courseService.isTeamValid(team);
     }
 
     private void updateTeamAboutShared(Team team){
@@ -109,7 +115,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     private void updateTeamSubCourseTeamRelation(Course course, Team team){
-        CourseClass currentCourseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(team.getLeader().getId(),course.getId());
+        CourseClass currentCourseClass=courseClassDao.getCourseClassByTeamIdAndCourseId(team.getId(),course.getId());
         if(currentCourseClass!=null){
             teamDao.deleteCourseClassAndTeamRelation(team.getId(),currentCourseClass.getId());
         }
@@ -119,7 +125,10 @@ public class TeamServiceImpl implements TeamService {
             memberBelongCourseClassMap.put(courseClass.getId(),0);
         }
         for(Student student:team.getMemberList()){
-            BigInteger studentCourseClassId=courseClassDao.getCourseClassByStudentIdAndCourseId(student.getId(),course.getId()).getId();
+            CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(student.getId(),course.getId());
+            if(courseClass==null)
+                continue;
+            BigInteger studentCourseClassId=courseClass.getId();
             Integer count=memberBelongCourseClassMap.get(studentCourseClassId);
             count=count+1;
             memberBelongCourseClassMap.put(studentCourseClassId,count);
@@ -128,6 +137,9 @@ public class TeamServiceImpl implements TeamService {
         Collections.sort(mapList, (o1, o2) -> (o2.getValue() - o1.getValue()));
         List<BigInteger> maxMemberCourseClassList=new ArrayList<>();
         Integer maxMemberCount=mapList.get(0).getValue();
+        //无人在这个课程下
+        if(maxMemberCount==0)
+            return;
         for(Map.Entry<BigInteger,Integer> mapItem:mapList){
             if(mapItem.getValue()<=maxMemberCount){
                 maxMemberCourseClassList.add(mapItem.getKey());
@@ -141,7 +153,7 @@ public class TeamServiceImpl implements TeamService {
             for(BigInteger maxMemberCourseClassId:maxMemberCourseClassList){
                 courseClassTeamNumberList.add(new Pair<>(maxMemberCourseClassId,courseClassDao.getCourseClassTeamNumber(maxMemberCourseClassId)));
             }
-            Collections.sort(courseClassTeamNumberList, (o1, o2) -> (o1.getValue() - o2.getValue()));
+            Collections.sort(courseClassTeamNumberList, Comparator.comparingInt(Pair::getValue));
             teamDao.insertCourseClassAndTeamRelation(courseClassTeamNumberList.get(0).getKey(),team.getId());
         }
     }

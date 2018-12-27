@@ -58,9 +58,7 @@ public class CourseServiceImpl implements CourseService {
      * date 2018/12/25
      */
     @Override
-    public Boolean isTeamValid(BigInteger teamId) throws TeamNotFoundException {
-        //获取队伍
-        Team team = teamDao.getTeamByTeamId(teamId);
+    public Boolean isTeamValid(Team team) throws TeamNotFoundException {
 
         //获取队伍总策略
         List<TeamStrategy> teamStrategyList = courseDao.getTeamStrategyListByCourseId(team.getCourse().getId());
@@ -85,6 +83,8 @@ public class CourseServiceImpl implements CourseService {
 
                 //只要有一个策略没满足，就返回false
                 if (!result) {
+                    team.setStatus(0);
+                    teamDao.updateTeam(team);
                     return false;
                 }
             } catch (ClassNotFoundException e) {
