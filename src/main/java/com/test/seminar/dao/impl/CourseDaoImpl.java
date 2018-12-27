@@ -12,6 +12,8 @@ import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import com.test.seminar.exception.StrategyNotFoundException;
 import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.entity.strategy.impl.*;
+import com.test.seminar.mapper.TeacherMapper;
+import com.test.seminar.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,8 @@ import java.util.List;
 public class CourseDaoImpl implements CourseDao {
     @Autowired
     CourseMapper courseMapper;
+    @Autowired
+    TeacherMapper teacherMapper;
     @Autowired
     CourseDao courseDao;
 
@@ -246,8 +250,8 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException {
-        ShareTeamApplication shareTeamApplication=courseMapper.getShareTeamApplicationBySubCourseTeacherId(subCourseTeacherId);
+    public List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException {
+        List<ShareTeamApplication> shareTeamApplication=courseMapper.getShareTeamApplicationBySubCourseTeacherId(subCourseTeacherId);
         if(shareTeamApplication==null){
             throw new ShareTeamApplicationNotFoundException();
         }
@@ -274,5 +278,14 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public void deleteConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
 
+    }
+
+    @Override
+    public List<Course> getAllCourse(){
+        List<Course> courseList=courseMapper.getAllCourse();
+        for(Course course:courseList){
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
     }
 }

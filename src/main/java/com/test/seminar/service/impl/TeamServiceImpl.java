@@ -3,10 +3,7 @@ package com.test.seminar.service.impl;
 import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.dao.TeamDao;
-import com.test.seminar.entity.Course;
-import com.test.seminar.entity.CourseClass;
-import com.test.seminar.entity.Student;
-import com.test.seminar.entity.Team;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 import com.test.seminar.service.TeamService;
@@ -138,5 +135,21 @@ public class TeamServiceImpl implements TeamService {
             Collections.sort(courseClassTeamNumberList, (o1, o2) -> (o1.getValue() - o2.getValue()));
             teamDao.insertCourseClassAndTeamRelation(courseClassTeamNumberList.get(0).getKey(),team.getId());
         }
+    }
+
+    @Override
+    public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
+        teamDao.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
+    }
+
+    @Override
+    public List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId){
+        return teamDao.getTeamValidApplicationByTeacherId(teacherId);
+    }
+
+    @Override
+    public void updateTeamValidApplication(TeamValidApplication teamValidApplication){
+        teamDao.updateTeamValidApplication(teamValidApplication);
+        teamDao.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplication.getId());
     }
 }

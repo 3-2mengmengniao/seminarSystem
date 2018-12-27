@@ -1,10 +1,8 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Course;
-import com.test.seminar.exception.CourseNotFoundException;
-import com.test.seminar.exception.RepetitiveRecordException;
-import com.test.seminar.exception.TeamNotFoundException;
-import com.test.seminar.exception.UserNotFoundException;
+import com.test.seminar.entity.ShareTeamApplication;
+import com.test.seminar.exception.*;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -65,4 +63,26 @@ public interface CourseService {
      * @return
      */
     Boolean isTeamValid(BigInteger teamId)throws TeamNotFoundException;
+
+    /**
+     * 发送共享分组请求
+     * @param mainCourseId
+     * @param subCourseId
+     * @param subCourseTeacherId
+     */
+    void insertShareTeamApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
+
+    /**
+     * 通过从课程教师id查看共享分组请求
+     * @param subCourseTeacherId
+     * @return
+     * @throws ShareTeamApplicationNotFoundException
+     */
+    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
+
+    /**
+     * 教师处理共享分组请求
+     * @param shareTeamApplication
+     */
+    void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
 }
