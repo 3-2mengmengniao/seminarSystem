@@ -178,6 +178,8 @@ public class TeacherController {
 
     @RequestMapping(value="/course/create",method = GET)
     public String createCourse(Model model) {
+        List<Course> courseList=courseService.getAllCourse();
+        model.addAttribute("courseList",courseList);
         return "teacher/course/create";
     }
 
@@ -422,7 +424,22 @@ public class TeacherController {
     public String activate(Model model) { return "teacher/activate"; }
 
     @RequestMapping(value = "/message",method = GET)
-    public String message(Model model) { return "teacher/message"; }
+    public String message(Model model) {
+//        List<TeamValidApplication> teamValidApplicationList=teamService.getTeamValidApplicationByTeacherId(teacherId);
+//        List<ShareTeamApplication> shareTeamApplicationList=courseService.getShareTeamApplicationBySubCourseTeacherId(teacherId);
+//        List<ShareSeminarApplication> shareSeminarApplicationList=courseService.getShareSeminarApplicationBySubCourseTeacherId(teacherId);
+//        if(shareTeamApplicationList!=null){
+//            //显示
+//        }
+//        if(shareSeminarApplicationList!=null){
+//            //显示
+//        }
+//        //老师点了拒绝或同意之后
+//        teamService.updateTeamValidApplication(teamValidApplication);
+//        courseService.updateShareTeamApplication(shareTeamApplication);
+//        courseService.updateShareSeminarApplication(shareSeminarApplication);
+        return "teacher/message";
+    }
 
     @RequestMapping(value = "/course/seminar/report_deadline",method = GET)
     public String deadline(BigInteger seminarId,Model model) {

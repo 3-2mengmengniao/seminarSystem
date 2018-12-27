@@ -52,7 +52,7 @@
         <form class="layui-form contactForm" method="post" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#d44950;">该课程已被创建！</p>
+                    <p style="color:#d44950;">课程创建失败！</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -156,11 +156,11 @@
                     <label class="layui-form-label">小组人数下限</label>
                     <div class="layui-input-block">
                         <select name="minTeamMember" lay-filter="aihao">
-                            <option value="3" selected>3人</option>
+                            <option value="1" selected>1人</option>
+                            <option value="2">2人</option>
+                            <option value="3">3人</option>
                             <option value="4">4人</option>
                             <option value="5">5人</option>
-                            <option value="6">6人</option>
-                            <option value="7">7人</option>
                         </select>
                     </div>
                 </div>
@@ -199,9 +199,9 @@
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
                                 <option value="0" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -223,12 +223,52 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
                                 <option value="2" >2人</option>
                                 <option value="3" selected>3人</option>
                                 <option value="4">4人</option>
                                 <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
                                 <option value="6">6人</option>
                                 <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -240,10 +280,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -251,11 +291,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -263,11 +305,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -279,10 +321,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -290,11 +332,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -302,11 +346,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -318,10 +362,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -329,11 +373,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -341,11 +387,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -357,10 +403,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -368,11 +414,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -380,11 +428,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -396,10 +444,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -407,11 +455,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -419,11 +469,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -435,10 +485,10 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -446,11 +496,13 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
                             </select>
                         </div>
                     </div>
@@ -458,50 +510,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="my-decoration"></div>
-                </div>
-                <div class="memberLimitation">
-                    <div class="distance3"></div>
-                    <div class="layui-form-item margin2 ">
-                        <label class="my-form-label">选修课程</label>
-                        <div class="my-layui-input">
-                            <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
-                                <option value="4">.NET(王美红)</option>
-                                <option value="5">J2EE</option>
-                                <option value="6">.NET(林坤辉)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="my-form-label">选修人数上限</label>
-                        <div class="my-layui-input">
-                            <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item margin2 ">
-                        <label class="my-form-label">选修人数下限</label>
-                        <div class="my-layui-input">
-                            <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
                             </select>
                         </div>
                     </div>
@@ -531,51 +544,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -591,51 +604,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -651,51 +664,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -711,51 +724,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -771,51 +784,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -831,51 +844,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -891,51 +904,51 @@
                     <div>
                         <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
                             <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
-                                <select  name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                             <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
                                 <select name="optionCourse" lay-filter="aihao">
-                                    <option value="3" selected>无</option>
-                                    <option value="4">.NET(王美红)</option>
-                                    <option value="5">J2EE</option>
-                                    <option value="6">.NET(林坤辉)</option>
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
                                 </select>
                             </div>
                         </div>
@@ -1154,6 +1167,20 @@
     var tempCourseCount=0;
     var line;
     $('#contactSubmitButton').click(function(){
+        if($('#contactNameField').val() == '' || $('#contactNameField').val() == $('#contactNameField').attr('data-dummy')){
+            // $(this).val($(this).attr('data-dummy'));
+            // $(this).focus();
+            $('#contactNameField').addClass('fieldHasError');
+            $('#contactNameFieldError').fadeIn(300);
+            return false;
+        };
+        if($('#contactMessageTextarea').val() == '' || $('#contactMessageTextarea').val() == $('#contactMessageTextarea').attr('data-dummy')){
+            // $(this).val($(this).attr('data-dummy'));
+            // $(this).focus();
+            $('#contactMessageTextarea').addClass('fieldHasError');
+            $('#contactMessageTextareaError').fadeIn(300);
+            return false;
+        };
         $(".memberLimitation.memberShow").each(function(){
             line=$(this).index();
             memberArray[line]=[];
@@ -1178,7 +1205,6 @@
             });
         });
         var conflicts=JSON.stringify(courseArray);
-        alert(conflicts);
         var fd=new FormData($('#contactForm')[0]);
         var courseName=fd.get("courseName");
         var introduction=fd.get("introduction");

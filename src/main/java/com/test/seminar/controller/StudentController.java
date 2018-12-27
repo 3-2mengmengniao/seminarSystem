@@ -168,6 +168,12 @@ public class StudentController {
         model.addAttribute("studentNoTeamList",studentNoTeamList);
         Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
         model.addAttribute("myTeam",team);
+        int leader=0;
+        if(team!=null && team.getLeader().getId().equals(studentId))
+        {
+            leader=1;
+        }
+        model.addAttribute("leader",leader);
         return "student/course/teams";
     }
 
@@ -344,12 +350,29 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/myTeam")
-    public String myTeam(BigInteger courseId,Model model) {
+    public String myTeam(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("myTeam",team);
+        model.addAttribute("myId",studentId);
         return "student/course/myTeam";
     }
 
     @RequestMapping(value = "/course/leaderTeam", method = GET)
-    public String leaderTeam(BigInteger courseId,Model model) {
+    public String leaderTeam(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
+        Team team=teamService.getTeamByStudentIdAndCourseId(studentId,courseId);
+        Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
+        List<Student> studentNoTeamList=teamPair.getValue();
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("myTeam",team);
+        model.addAttribute("myId",studentId);
+        model.addAttribute("noTeamStudentList",studentNoTeamList);
         return "student/course/leaderTeam";
     }
 }

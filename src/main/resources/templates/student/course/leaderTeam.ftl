@@ -45,7 +45,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -74,7 +74,7 @@
         <div style="height:10px;"></div>
         <div class="center-panel">
             <div style="height:30px;"></div>
-            <h2 class="my-title">1-1 早早鸟</h2>
+            <h2 class="my-title">${myTeam.serial.getSerial()} ${myTeam.teamName}</h2>
             <div style="height:10px;"></div>
             <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
                 <colgroup>
@@ -86,113 +86,111 @@
                         <a style="font-size:15px;">组长：</a>
                     </td>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
+                        <a style="font-size:15px;">${myTeam.leader.account}&emsp;&emsp;${myTeam.leader.studentName}</a>
                     </td>
                 </tr>
+                <#list myTeam.memberList as student>
+                    <#if student.id!=myTeam.leader.id>
                 <tr>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">组员：</a>
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
-                    </td>
+                    <#if student?index==0 || (myTeam.memberList[0].id==myTeam.leader.id && student?index==1)>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">组员：</a>
+                        </td>
+                    <#else>
+                        <td style="padding:0 0;">
+                        </td>
+                    </#if>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <i class="layui-icon" style="font-size: 25px; color: #1E9FFF; display: inline;margin-top: 3px;">&#xe640;</i>
+                        </td>
                 </tr>
-                <tr>
-                    <td style="padding:0 0;">
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:0 0;">
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>
-                    </td>
-                </tr>
+                    </#if>
+                </#list>
+                <#--<tr>-->
+                    <#---->
+                    <#--<td style="padding:0 0;">-->
+                        <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+                    <#--</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td style="padding:0 0;">-->
+                    <#--</td>-->
+                    <#--<td style="padding:0 0;">-->
+                        <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+                    <#--</td>-->
+                <#--</tr>-->
+
             </table>
+
             <div style="height:20px;"></div>
             <label class="field-title contactMessageTextarea" >添加成员：</label>
             <form name="filterForm" id="filterForm" class="layui-form" style="display: inline-block" onkeydown="if(event.keyCode===13){return false;}">
                 <div class="layui-form-item" >
                     <div class="searchDiv">
                         <input name="searchContent" id="searchContent" type="text" placeholder="请输入学工号/姓名" autocomplete="off" class="layui-input" style="height:35px;width: 170px;display: inline-block;border-radius:8px;">
-                        <img style="width:23px;" id="searchBtn" src="/images/搜索.png">
+                        <img style="width:23px;margin-left:-30px;" id="searchBtn" src="/images/搜索.png">
                     </div>
                 </div>
             </form>
-
             <div class="layui-table-box">
                 <div class="distance3"></div>
+                <form class="layui-form contactForm"  id="contactForm" name="${course.id}">
                 <table  id="member" class="layui-table addMember" >
                     <tbody >
+                    <#list noTeamStudentList as student>
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
                                 <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
                                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon">&#xe605;</i>
+                                    <i class="layui-icon layui-icon-ok"></i>
                                 </div>
                             </div>
                         </td>
                         <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320162202877</div>
+                            <div class="layui-table-cell ">${student.account}</div>
                         </td>
                         <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
+                            <div class="layui-table-cell">&nbsp;${student.studentName}&nbsp;</div>
                         </td>
                     </tr>
-                    <tr class="item">
-                        <td data-field="0"  class="layui-table-col-special">
-                            <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
-                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon">&#xe605;</i>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320162202877</div>
-                        </td>
-                        <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
-                        </td>
-                    </tr>
-                    <tr class="item">
-                        <td data-field="0"  class="layui-table-col-special">
-                            <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
-                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon">&#xe605;</i>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320162202877</div>
-                        </td>
-                        <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
-                        </td>
-                    </tr>
-                    <tr class="item">
-                        <td data-field="0"  class="layui-table-col-special">
-                            <div class="layui-table-cell  laytable-cell-checkbox">
-                                <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
-                                <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                    <i class="layui-icon">&#xe605;</i>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-field="id"  class="">
-                            <div class="layui-table-cell ">24320162202877</div>
-                        </td>
-                        <td data-field="username"  class="">
-                            <div class="layui-table-cell">&nbsp;小刘&nbsp;</div>
-                        </td>
-                    </tr>
+                    </#list>
+                    <#--<tr class="item">-->
+                    <#--<td data-field="0"  class="layui-table-col-special">-->
+                    <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                    <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                    <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                    <#--<i class="layui-icon layui-icon-ok"></i>-->
+                    <#--</div>-->
+                    <#--</div>-->
+                    <#--</td>-->
+                    <#--<td data-field="id"  class="">-->
+                    <#--<div class="layui-table-cell ">24320122202845</div>-->
+                    <#--</td>-->
+                    <#--<td data-field="username"  class="">-->
+                    <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
+                    <#--</td>-->
+                    <#--</tr>-->
+                    <#--<tr class="item">-->
+                    <#--<td data-field="0"  class="layui-table-col-special">-->
+                    <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                    <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                    <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                    <#--<i class="layui-icon layui-icon-ok"></i>-->
+                    <#--</div>-->
+                    <#--</div>-->
+                    <#--</td>-->
+                    <#--<td data-field="id"  class="">-->
+                    <#--<div class="layui-table-cell ">24320122202846</div>-->
+                    <#--</td>-->
+                    <#--<td data-field="username"  class="">-->
+                    <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
+                    <#--</td>-->
+                    <#--</tr>-->
                     </tbody>
                 </table>
+                </form>
+                <div class="distance4"></div>
             </div>
             <div style="height:20px;"></div>
         </div>

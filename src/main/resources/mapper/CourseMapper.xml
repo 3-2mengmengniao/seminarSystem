@@ -16,6 +16,12 @@
         <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
     </resultMap>
 
+    <resultMap id="shareSeminarResultMap" type="com.test.seminar.entity.ShareSeminarApplication">
+        <id property="id" column="id"/>
+        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareSeminarApplicationId"/>
+        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareSeminarApplicationId"/>
+    </resultMap>
+
     <select id="getTeamMainCourseIdBySubCourseId" resultType="java.math.BigInteger">
         select team_main_course_id
         from course
@@ -120,6 +126,12 @@
         delete from course where id=#{courseId}
     </delete>
 
+    <select id="getShareTeamApplicationBySubCourseTeacherId" resultMap="shareTeamResultMap">
+        select id
+        from share_team_application
+        where sub_course_teacher_id=#{subCourseTeacherId}
+    </select>
+
     <insert id="insertShareTeamApplication">
         insert into share_team_application(main_course_id,sub_course_id,sub_course_teacher_id)
         values(#{mainCourseId},#{subCourseId},#{subCourseTeacherId})
@@ -130,11 +142,33 @@
         delete from share_team_application where id=#{shareTeamApplicationId}
     </delete>
 
-    <select id="getShareTeamApplicationBySubCourseTeacherId" resultMap="shareTeamResultMap">
+    <select id="getShareSeminarApplicationBySubCourseTeacherId" resultMap="shareSeminarResultMap">
         select id
-        from share_team_application
+        from share_seminar_application
         where sub_course_teacher_id=#{subCourseTeacherId}
     </select>
+
+    <select id="getMainCourseByShareSeminarApplicationId" resultMap="courseResultMap">
+        select course.id as id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_seminar_application
+        where course.id=share_seminar_application.main_course_id and share_seminar_application.id=#{shareSeminarApplicationId}
+    </select>
+
+    <select id="getSubCourseByShareSeminarApplicationId" resultMap="courseResultMap">
+        select course.id as id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_seminar_application
+        where course.id=share_seminar_application.sub_course_id and share_seminar_application.id=#{shareSeminarApplicationId}
+    </select>
+
+    <insert id="insertShareSeminarApplication">
+        insert into share_Seminar_application(main_course_id,sub_course_id,sub_course_teacher_id)
+        values(#{mainCourseId},#{subCourseId},#{subCourseTeacherId})
+    </insert>
+
+
+    <delete id="deleteShareSeminarApplication">
+        delete from share_Seminar_application where id=#{shareTeamApplicationId}
+    </delete>
 
     <update id="updateCourseTeamMainCourseId">
         update course

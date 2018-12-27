@@ -1,6 +1,7 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareSeminarApplication;
 import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
@@ -65,9 +66,29 @@ public interface CourseService {
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
 
+    /**
+     * 发送共享讨论课请求
+     * @param mainCourseId
+     * @param subCourseId
+     * @param subCourseTeacherId
+     */
+    void insertShareSeminarApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
 
     /**
-     * 发送共享分组请求
+     * 通过从课程教师id查看共享讨论课请求
+     * @param subCourseTeacherId
+     * @return
+     */
+    List<ShareSeminarApplication> getShareSeminarApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId);
+
+    /**
+     * 教师处理共享讨论课请求
+     * @param shareSeminarApplication
+     */
+    void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
+
+    /**
+     * 发送共享讨论课请求
      * @param mainCourseId
      * @param subCourseId
      * @param subCourseTeacherId

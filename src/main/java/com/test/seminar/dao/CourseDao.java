@@ -2,6 +2,7 @@ package com.test.seminar.dao;
 
 
 import com.test.seminar.entity.Course;
+import com.test.seminar.entity.ShareSeminarApplication;
 import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.strategy.TeamStrategy;
@@ -91,13 +92,42 @@ public interface CourseDao {
      *  通过从课程教师id查看共享分组请求
      * @param subCourseTeacherId
      */
-    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
+    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId);
+
+    /**
+     *  通过从课程教师id查看共享分组请求
+     * @param subCourseTeacherId
+     */
+    List<ShareSeminarApplication> getShareSeminarApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId);
+
+    Course getMainCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId);
+
+    Course getSubCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId);
+
+    /**
+     *  插入共享讨论课的请求
+     * @param mainCourseId,subCourseId,subCourseTeacherId
+     */
+    void insertShareSeminarApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
 
     /**
      *  从课程教师同意共享分组请求后，建立共享关联
      * @param shareTeamApplication
      */
     void createShareTeamAssociation(ShareTeamApplication shareTeamApplication);
+
+    /**
+     *  更新课程的共享讨论课的主课程id
+     * @param subCourseId,mainCourseId
+     */
+    void updateCourseTeamMainCourseId(BigInteger subCourseId,BigInteger mainCourseId);
+
+    /**
+     *  更新课程的共享讨论课的主课程id
+     * @param subCourseId,mainCourseId
+     */
+    void updateCourseSeminarMainCourseId(BigInteger subCourseId,BigInteger mainCourseId);
+
 
     /**
      * 获取系统下所有课程

@@ -102,9 +102,9 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
-            <div class="decoration"></div>
+                <div class="decoration"></div>
                 <form name="filterForm" id="filterForm" class="layui-form" style="display: inline-block" onkeydown="if(event.keyCode===13){return false;}">
                     <div class="layui-form-item" >
                         <div class="searchDiv">
@@ -113,19 +113,19 @@
                         </div>
                     </div>
                 </form>
-            <label class="field-title contactMessageTextarea margin3" for="contactMessageTextarea">添加成员：</label>
-            <div class="layui-table-box">
-                <div class="distance3"></div>
-                <table  id="member" class="layui-table addMember" >
-                    <tbody >
+                <label class="field-title contactMessageTextarea margin3" for="contactMessageTextarea">添加成员：</label>
+                <div class="layui-table-box">
+                    <div class="distance3"></div>
+                    <table  id="member" class="layui-table addMember" >
+                        <tbody >
                     <#list noTeamStudentList as student>
-                    <#if student.id!=myId>
+                        <#if student.id!=myId>
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
                                 <input type="checkbox" name="members" lay-skin="primary" value="${student.id}"/>
                                 <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
-                                     <i class="layui-icon">&#xe605;</i>
+                                    <i class="layui-icon layui-icon-ok"></i>
                                 </div>
                             </div>
                         </td>
@@ -136,45 +136,45 @@
                             <div class="layui-table-cell">&nbsp;${student.studentName}&nbsp;</div>
                         </td>
                     </tr>
-                    </#if>
+                        </#if>
                     </#list>
-                    <#--<tr class="item">-->
+                        <#--<tr class="item">-->
                         <#--<td data-field="0"  class="layui-table-col-special">-->
-                            <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                                <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                                <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                                    <#--<i class="layui-icon layui-icon-ok"></i>-->
-                                <#--</div>-->
-                            <#--</div>-->
+                        <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                        <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                        <#--<i class="layui-icon layui-icon-ok"></i>-->
+                        <#--</div>-->
+                        <#--</div>-->
                         <#--</td>-->
                         <#--<td data-field="id"  class="">-->
-                            <#--<div class="layui-table-cell ">24320122202845</div>-->
+                        <#--<div class="layui-table-cell ">24320122202845</div>-->
                         <#--</td>-->
                         <#--<td data-field="username"  class="">-->
-                            <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
+                        <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
                         <#--</td>-->
-                    <#--</tr>-->
-                    <#--<tr class="item">-->
+                        <#--</tr>-->
+                        <#--<tr class="item">-->
                         <#--<td data-field="0"  class="layui-table-col-special">-->
-                            <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                                <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                                <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                                    <#--<i class="layui-icon layui-icon-ok"></i>-->
-                                <#--</div>-->
-                            <#--</div>-->
+                        <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
+                        <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
+                        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
+                        <#--<i class="layui-icon layui-icon-ok"></i>-->
+                        <#--</div>-->
+                        <#--</div>-->
                         <#--</td>-->
                         <#--<td data-field="id"  class="">-->
-                            <#--<div class="layui-table-cell ">24320122202846</div>-->
+                        <#--<div class="layui-table-cell ">24320122202846</div>-->
                         <#--</td>-->
                         <#--<td data-field="username"  class="">-->
-                            <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
+                        <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
                         <#--</td>-->
-                    <#--</tr>-->
-                    </tbody>
-                </table>
-                <div class="distance4"></div>
-                <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建小组" data-formId="contactForm"/></p>
-             </div>
+                        <#--</tr>-->
+                        </tbody>
+                    </table>
+                    <div class="distance4"></div>
+                    <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建小组" data-formId="contactForm"/></p>
+                </div>
         </form>
         <div class="distance2"></div>
         <!--
@@ -194,27 +194,37 @@
     layui.use(['element', 'layer'], function(){
         var element = layui.element();
         var layer = layui.layer;
-
         //监听折叠
         element.on('collapse(test)', function(data){
             layer.msg('展开状态：'+ data.show);
         });
     });
+    // layui.use('table', function(){
+    //     var table = layui.table;
+    //     table.render({
+    //         elem: '#member'
+    //         // ,url:'/demo/table/user/'
+    //         ,cols: [[
+    //             {type:'checkbox'}
+    //             ,{field:'id', width:100, title: 'ID', sort: true}
+    //             ,{field:'username', width:80, title: '用户名'}
+    //         ]]
+    //         ,page: true
+    //     });
+    // });
+</script>
+<script>
     layui.use('form', function(){
         var form = layui.form();
-
         //各种基于事件的操作，下面会有进一步介绍
     });
     $("#searchBtn").bind("click",function () {
-        if($("#searchContent").val()==''||$("#searchContent).val()==null){
+        if($("#username").val()==''||$("#username").val()==null){
             layer.msg("请输入查找内容") ;
         }
-        else{
-            $(".item").fadeOut();
-            $("td:contains("+$("#searchContent").val()+")").parents('.item').fadeIn();
-        }
+        $(".item").fadeOut(2000);
+        $("td:contains("+$("#searchContent").val()+")").parents('.item').fadeIn();
     });
-
 </script>
 
 <style>
@@ -224,7 +234,6 @@
     div.layui-form-checkbox.layui-unselect{
         width:auto;
     }
-
     .searchDiv{
         float:right;
         margin-bottom:-35px;
@@ -234,7 +243,6 @@
         margin:0 auto;
         width:39%;
     }
-
     @media screen and (min-width:768px) and (max-width:1024px;){
         .margin3{
             margin-left:9%;
