@@ -104,4 +104,6 @@ public interface CourseDao {
      * @return
      */
     List<Course> getAllCourse();
+
+    Course getCourseByCourseNameAndTeacherId(String courseName,BigInteger teacherId);
 }

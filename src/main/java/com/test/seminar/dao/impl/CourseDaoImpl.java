@@ -111,4 +111,9 @@ public class CourseDaoImpl implements CourseDao {
         }
         return courseList;
     }
+
+    @Override
+    public Course getCourseByCourseNameAndTeacherId(String courseName, BigInteger teacherId) {
+        return courseMapper.getCourseByCourseNameAndTeacherId(courseName,teacherId);
+    }
 }

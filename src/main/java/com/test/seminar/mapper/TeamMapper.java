@@ -10,6 +10,7 @@ import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
 import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -186,4 +187,33 @@ public interface TeamMapper {
 
     List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
 
+    /**
+     * 获得组队与策略表的Id最大值
+     * @return
+     */
+    BigInteger getMaxTeamAndStrategyId();
+
+    /**
+     * 获得组队或表的Id最大值
+     * @return
+     */
+    BigInteger getMaxTeamOrStrategyId();
+
+    /**
+     * 获得冲突课程策略表的Id最大值
+     * @return
+     */
+    BigInteger getMaxConflictCourseStrategyId();
+
+    void insertTeamStrategy(@Param("courseId")BigInteger courseId,@Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
+
+    void insertTeamAndStrategy(@Param("id")BigInteger id, @Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
+
+    void insertTeamOrStrategy(@Param("id")BigInteger id, @Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
+
+    void insertConflictCourseStrategy(@Param("id")BigInteger id,@Param("courseId")BigInteger courseId);
+
+    void insertCourseMemberLimitStrategy(@Param("courseMemberLimitStrategy")CourseMemberLimitStrategy courseMemberLimitStrategy);
+
+    void insertMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
 }

@@ -116,6 +116,38 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public void insetTeamStrategy(BigInteger courseId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose) {
+        BigInteger id;
+        for(ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyArrayList){
+            id=teamMapper.getMaxConflictCourseStrategyId().add(new BigInteger("1"));
+            for(BigInteger conflictCourseId:conflictCourseStrategy.getConflictCourseIdList()){
+                teamMapper.insertConflictCourseStrategy(id,conflictCourseId);
+            }
+            teamMapper.insertTeamStrategy(courseId,"ConflictCourseStrategy",id);
+        }
+        teamMapper.insertMemberLimitStrategy(thisCourse);
+        id=teamMapper.getMaxTeamAndStrategyId().add(new BigInteger("1"));
+        teamMapper.insertTeamAndStrategy(id,"MemberLimitStrategy",thisCourse.getId());
+        if(choose==0){
+            BigInteger andId=teamMapper.getMaxTeamAndStrategyId().and(new BigInteger("1"));
+            for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
+                teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
+                teamMapper.insertTeamAndStrategy(andId,"CourseMemberLimitStrategy",courseMemberLimitStrategy.getId());
+            }
+            teamMapper.insertTeamAndStrategy(id,"TeamAndStrategy",andId);
+        }
+        else {
+            BigInteger orId=teamMapper.getMaxTeamOrStrategyId().and(new BigInteger("1"));
+            for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
+                teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
+                teamMapper.insertTeamAndStrategy(orId,"CourseMemberLimitStrategy",courseMemberLimitStrategy.getId());
+            }
+            teamMapper.insertTeamAndStrategy(id,"TeamOrStrategy",orId);
+        }
+        teamMapper.insertTeamStrategy(courseId,"TeamAndStrategy",id);
+    }
+
+    @Override
     public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
         teamMapper.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
     }
