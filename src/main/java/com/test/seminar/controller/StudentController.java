@@ -185,7 +185,7 @@ public class StudentController {
         return "student/course/grade";
     }
 
-    @RequestMapping(value="/course/seminar/info")
+    @RequestMapping(value="/course/seminar/info",method = POST)
     public String seminarInfo(HttpServletRequest request,BigInteger classId,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
         model.addAttribute("seminarControl",seminarControl);
@@ -212,7 +212,7 @@ public class StudentController {
         return "student/course/seminar/info";
     }
 
-    @RequestMapping(value="/course/seminar/score")
+    @RequestMapping(value="/course/seminar/score",method = POST)
     public String seminarScore(HttpServletRequest request,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
@@ -229,7 +229,7 @@ public class StudentController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/course/seminar/enrollment")
+    @RequestMapping(value="/course/seminar/enrollment",method = POST)
     public String enrollmentInfo(HttpServletRequest request,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
@@ -253,7 +253,7 @@ public class StudentController {
         return "student/course/seminar/enrollment";
     }
 
-    @RequestMapping(value="/course/seminar/run")
+    @RequestMapping(value="/course/seminar/run",method = POST)
     public String seminarRun(HttpServletRequest request,BigInteger seminarId,Model model) {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
@@ -300,11 +300,14 @@ public class StudentController {
     public String activate(Model model) { return "student/activate"; }
 
     @RequestMapping(value = "/course/createTeam", method = GET)
-    public String createTeam(BigInteger courseId,Model model) {
+    public String createTeam(HttpServletRequest request,BigInteger courseId,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger studentId=(BigInteger)session.getAttribute("id");
         Course course=courseService.getCourseByCourseId(courseId);
         List<CourseClass> courseClassList=courseClassService.getCourseClassByCourseId(courseId);
         Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
         List<Student> studentNoTeamList=teamPair.getValue();
+        model.addAttribute("myId",studentId);
         model.addAttribute("course",course);
         model.addAttribute("noTeamStudentList",studentNoTeamList);
         model.addAttribute("classList",courseClassList);

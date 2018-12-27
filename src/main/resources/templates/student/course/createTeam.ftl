@@ -119,6 +119,7 @@
                 <table  id="member" class="layui-table addMember" >
                     <tbody >
                     <#list noTeamStudentList as student>
+                    <#if student.id!=myId>
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
@@ -135,6 +136,7 @@
                             <div class="layui-table-cell">&nbsp;${student.studentName}&nbsp;</div>
                         </td>
                     </tr>
+                    </#if>
                     </#list>
                     <#--<tr class="item">-->
                         <#--<td data-field="0"  class="layui-table-col-special">-->

@@ -99,21 +99,30 @@
                     <td>${seminarControl.seminarInfo.introduction}</td>
                 </tr>
                 <tr>
+                    <td>课程情况</td>
+                    <td>
                     <#if seminarControl.seminarStatus==0>
-                        <td>课程情况</td>
-                        <td>未开始   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                        未开始
                     <#elseif seminarControl.seminarStatus==1>
-                         <td>课程情况</td>
-                         <td>进行中   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                        进行中
                     <#else>
-                         <td>课程情况</td>
-                         <td>已结束   <a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">查看信息</a></td>
+                         已结束
                     </#if>
+                        <form action="/student/course/seminar/enrollment" method="post" style="display: inline;margin-left: 20px;">
+                            <input type="hidden" name="seminarId" value="${seminarControl.id}">
+                            <input type="submit" value="查看信息" style="display: inline;margin-left: 20px;border:none;background:none;">
+                        </form>
+                    </td>
                 </tr>
                 <#if enrollment==true>
                 <tr>
                     <td> 报名情况</td>
-                    <td>${seminarControl.courseclass.grade?c}-（${seminarControl.courseClass.classSerial}）第${order+1}组<a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" style="display: inline;margin-left: 20px;">修改</a></td>
+                    <td>${seminarControl.courseClass.grade?c}-（${seminarControl.courseClass.classSerial}）第${order+1}组
+                        <form action="/student/course/seminar/enrollment" method="post" style="display: inline;margin-left: 20px;">
+                            <input type="hidden" name="seminarId" value="${seminarControl.id}">
+                            <input type="submit" value="修改" style="display: inline;margin-left: 20px;border:none;background:none;">
+                        </form>
+                    </td>
                 </tr>
                  <tr>
                      <td> PPT</td>
@@ -139,14 +148,22 @@
         <div class="distance"></div>
         <div id="layerDemo">
         <#if enrollment==false && seminarControl.seminarStatus==0>
-            <p class="center center-text "><a href="/student/course/seminar/enrollment?seminarId=${seminarControl.id}" class="button-return button-turqoise">报名</a>
+            <form action="/student/course/seminar/enrollment" method="post">
+                <input type="hidden" name="seminarId" value="${seminarControl.id}">
+                <p class="center center-text"><button type="submit" class="layui-btn button-return button-turqoise">报名</button></p>
+            </form>
         </#if>
         <#if seminarControl.seminarStatus==1>
-            <p class="center center-text "><a href="/student/course/seminar/run?seminarId=${seminarControl.id}" class="button-return button-turqoise">进入讨论课</a></p>
+        <form action="/student/course/seminar/run" method="post">
+            <input type="hidden" name="seminarId" value="${seminarControl.id}">
+            <p class="center center-text"><button type="submit"  class="layui-btn button-return button-turqoise">进入讨论课</button></p>
+        </form>
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus==2>
-            <p class="center center-text "><a href="/student/course/seminar/score?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看成绩</a></p>
-
+        <form action="/student/course/seminar/score" method="post">
+            <input type="hidden" name="seminarId" value="${seminarControl.id}">
+            <p class="center center-text"><button type="submit" class="layui-btn button-return button-turqoise">查看成绩</button></p>
+        </form>
         </#if>
         <#if enrollment==true && seminarControl.seminarStatus!=2>
         <p class="center center-text"><button data-method="notice" class="layui-btn button-return button-turqoise">PPT提交</button></p>
