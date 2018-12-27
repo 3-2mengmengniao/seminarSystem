@@ -4,6 +4,9 @@ import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareSeminarApplication;
 import com.test.seminar.entity.ShareTeamApplication;
 import com.test.seminar.entity.Team;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import com.test.seminar.exception.*;
 
 import java.math.BigInteger;
@@ -38,11 +41,16 @@ public interface CourseService {
     List<Course> getCourseByStudentId(BigInteger studentId);
 
     /**
-     * 创建新的课程
-     * @param Course
+     *
+     * @param course
+     * @param teacherId
+     * @param conflictCourseStrategyArrayList
+     * @param courseMemberLimitStrategyList
+     * @param thisCourse
+     * @param choose
      * @throws RepetitiveRecordException
      */
-    void insertCourse(Course Course,BigInteger teacherId)throws RepetitiveRecordException;
+    void insertCourse(Course course, BigInteger teacherId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse,Integer choose)throws RepetitiveRecordException;
 
     /**
      * 更改课程信息

@@ -127,6 +127,8 @@ public interface TeamDao {
 
     List<Team> getGroupStudentByCourseId(BigInteger courseId);
 
+    void insetTeamStrategy(BigInteger courseId,List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose);
+
     /**
      * 通过课程ID获取课程的分组策略列表
      * @param courseId

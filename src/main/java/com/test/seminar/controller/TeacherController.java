@@ -264,7 +264,7 @@ public class TeacherController {
             conflictCourseStrategyArrayList.add(conflictCourse);
         }
         Integer choose=Integer.valueOf(request.getParameter("choose"));
-        System.out.println(choose);
+        courseService.insertCourse(course,teacherId,conflictCourseStrategyArrayList,courseMemberLimitStrategyList,thisCourse,choose);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

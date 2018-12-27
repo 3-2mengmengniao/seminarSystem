@@ -138,4 +138,6 @@ public interface CourseMapper {
      * @return
      */
     List<Course> getAllCourse();
+
+    Course getCourseByCourseNameAndTeacherId(@Param("courseName")String courseName, @Param("teacherId")BigInteger teacherId);
 }

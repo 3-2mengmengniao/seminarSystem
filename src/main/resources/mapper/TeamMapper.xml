@@ -102,12 +102,14 @@
         student.id as my_student_id,
         student_name,
         account
-        FROM team,student,team_student,klass_team,klass
-        WHERE klass.course_id=#{courseId}
-        and student.id=team_student.student_id
+        FROM team,student,team_student
+        WHERE student.id=team_student.student_id
         and team.id=team_student.team_id
-        and klass_team.klass_id=klass.id
-        and klass_team.team_id=team.id
+        and student.id in (
+        select student_id
+        from klass_student
+        where course_id=#{courseId}
+        )
     </select>
 
     <insert id="insertTeam">
@@ -257,5 +259,50 @@
         from team_or_strategy
         where id=#{teamOrStrategyId}
     </select>
+
+    <select id="getMaxTeamAndStrategyId" resultType="Integer">
+        select max(id)
+        from team_and_strategy
+    </select>
+
+    <select id="getMaxTeamOrStrategyId" resultType="Integer">
+        select max(id)
+        from team_and_strategy
+    </select>
+
+    <select id="getMaxConflictCourseStrategyId" resultType="Integer">
+        select max(id)
+        from team_and_strategy
+    </select>
+
+    <insert id="insertTeamStrategy">
+        insert into team_strategy(course_id,strategy_name,strategy_id)
+        value (#{courseId},#{strategyName},#{strategyId})
+    </insert>
+
+    <insert id="insertTeamAndStrategy">
+        insert into team_and_strategy(id,strategy_name,strategy_id)
+        value (#{id},#{strategyName},#{strategyId})
+    </insert>
+
+    <insert id="insertTeamOrStrategy">
+        insert into team_or_strategy(id,strategy_name,strategy_id)
+        value (#{id},#{strategyName},#{strategyId})
+    </insert>
+
+    <insert id="insertConflictCourseStrategy">
+        insert into conflict_course_strategy(id,course_id)
+        value (#{id},#{courseId})
+    </insert>
+
+    <insert id="insertCourseMemberLimitStrategy" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into course_member_limit_strategy(course_id,min_member,max_member)
+        value (#{courseMemberLimitStrategy.courseId},#{courseMemberLimitStrategy.minMember},#{courseMemberLimitStrategy.maxMember})
+    </insert>
+
+    <insert id="insertMemberLimitStrategy" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into member_limit_strategy(min_member,max_member)
+        value (#{memberLimitStrategy.minMember},#{memberLimitStrategy.maxMember})
+    </insert>
 
 </mapper>
