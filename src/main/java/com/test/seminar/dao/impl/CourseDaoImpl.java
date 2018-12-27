@@ -3,7 +3,7 @@ package com.test.seminar.dao.impl;
 import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareTeamApplication;
-import com.test.seminar.entity.StrategyPair;
+import com.test.seminar.entity.strategy.StrategyPair;
 import com.test.seminar.entity.Team;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.exception.CourseNotFoundException;
@@ -98,11 +98,6 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public void updateMemberLimitStrategy(MemberLimitStrategy memberLimitStrategy) {
-        courseMapper.updateMemberLimitStrategy(memberLimitStrategy);
-    }
-
-    @Override
     public void deleteMemberLimitStrategyByStrategyId(BigInteger strategyId) {
         courseMapper.deleteMemberLimitStrategyByStrategyId(strategyId);
     }
@@ -123,24 +118,6 @@ public class CourseDaoImpl implements CourseDao {
             throw new StrategyNotFoundException();
         }
         return conflictCourseStrategy;
-    }
-
-    @Override
-    public TeamAndStrategy getTeamAndStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        TeamAndStrategy teamAndStrategy = courseMapper.getTeamAndStrategyByStrategyId(strategyId);
-        if (teamAndStrategy == null) {
-            throw new StrategyNotFoundException();
-        }
-        return teamAndStrategy;
-    }
-
-    @Override
-    public TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        TeamOrStrategy teamOrStrategy = courseMapper.getTeamOrStrategyByStrategyId(strategyId);
-        if (teamOrStrategy == null) {
-            throw new StrategyNotFoundException();
-        }
-        return teamOrStrategy;
     }
 
     @Override
@@ -247,8 +224,15 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        return null;
+    public CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId,String strategyName) throws StrategyNotFoundException {
+        CompositStrategy compositStrategy=new CompositStrategy();
+        if(strategyName.equals("TeamAndStrategy")){
+            compositStrategy.setStrategyNameAndIdList(courseMapper.getStrategyPairByTeamAndStrategyId(strategyId));
+        }
+        if(strategyName.equals("TeamOrStrategy")){
+            compositStrategy.setStrategyNameAndIdList(courseMapper.getStrategyPairByTeamOrStrategyId(strategyId));
+        }
+        return compositStrategy;
     }
 
     @Override
@@ -275,5 +259,20 @@ public class CourseDaoImpl implements CourseDao {
         BigInteger subCourseId=shareTeamApplication.getSubCourse().getId();
         BigInteger mainCourseId=shareTeamApplication.getMainCourse().getId();
         courseMapper.updateCourseTeamMainCourseId(subCourseId,mainCourseId);
+    }
+
+    @Override
+    public void deleteTeamStrategyListByCourseId(BigInteger courseId) throws StrategyNotFoundException {
+
+    }
+
+    @Override
+    public void deleteCourseMemberLimitStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+
+    }
+
+    @Override
+    public void deleteConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
+
     }
 }

@@ -81,4 +81,6 @@ public interface CourseClassDao {
     void deleteCourseClassAndTeamRelationByCourseClassId(BigInteger courseClassId);
 
     Integer getCourseClassTeamNumber(BigInteger courseClassId);
+
+    CourseClass getCourseClassByTeamIdAndCourseId(BigInteger teamId,BigInteger courseId);
 }

@@ -68,4 +68,36 @@
         SELECT id,account,password,is_active,student_name,email
         FROM student
     </select>
+
+    <select id="getStudentNotInTeamByCourseId" resultMap="studentResultMap">
+        select id,account,password,is_active,student_name,email
+        from student,
+             klass_student
+        where klass_student.course_id = #{courseId}
+          and id = klass_student.student_id
+          and id not in
+              (select team_student.student_id
+               from team_student,
+                    klass_student,
+                    klass_team
+               where klass_student.course_id = #{courseId}
+                 and klass_team.klass_id = klass_student.klass_id
+                 and team_student.team_id = klass_team.team_id)
+    </select>
+
+    <select id="getStudentNotInTeamByCourseIdForSubCourse" resultMap="studentResultMap">
+        select id,account,password,is_active,student_name,email
+        from student,
+             klass_student
+        where klass_student.course_id = #{courseId}
+          and id = klass_student.student_id
+          and id not in
+              (select team_student.student_id
+               from team_student,
+                    klass_student,
+                    klass_team
+               where klass_student.course_id = #{mainCourseId}
+                 and klass_team.klass_id = klass_student.klass_id
+                 and team_student.team_id = klass_team.team_id)
+    </select>
 </mapper>

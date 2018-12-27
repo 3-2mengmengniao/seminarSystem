@@ -6,6 +6,7 @@ import com.test.seminar.entity.Student;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.mapper.CourseClassMapper;
+import com.test.seminar.mapper.CourseMapper;
 import com.test.seminar.mapper.StudentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,8 @@ public class StudentDaoImpl implements StudentDao {
     StudentMapper studentMapper;
     @Autowired
     CourseClassMapper courseClassMapper;
+    @Autowired
+    CourseMapper courseMapper;
 
     @Override
     public Student getStudentByStudentId(BigInteger studentId) throws UserNotFoundException {
@@ -49,11 +52,6 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public List<Student> getStudentNotTeamInCourse(BigInteger courseId) {
-        return studentMapper.getStudentNotTeamInCourse(courseId);
-    }
-
-    @Override
     public List<Student> getAllStudent() {
         return studentMapper.getAllStudent();
     }
@@ -77,5 +75,16 @@ public class StudentDaoImpl implements StudentDao {
             throw new UserNotFoundException();
         }
         studentMapper.deleteStudentByStudentId(studentId);
+    }
+
+    @Override
+    public List<Student> getStudentNotInTeamByCourseId(BigInteger courseId){
+        BigInteger mainCourseId=courseMapper.getTeamMainCourseIdBySubCourseId(courseId);
+        if(mainCourseId==null){
+            return studentMapper.getStudentNotInTeamByCourseId(courseId);
+        }
+        else{
+            return studentMapper.getStudentNotInTeamByCourseIdForSubCourse(courseId,mainCourseId);
+        }
     }
 }

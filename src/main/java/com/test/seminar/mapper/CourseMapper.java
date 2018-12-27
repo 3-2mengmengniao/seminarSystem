@@ -2,10 +2,10 @@ package com.test.seminar.mapper;
 
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareTeamApplication;
-import com.test.seminar.entity.StrategyPair;
+import com.test.seminar.entity.strategy.Strategy;
+import com.test.seminar.entity.strategy.StrategyPair;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.*;
-import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -23,11 +23,11 @@ import java.util.List;
 @Component
 public interface CourseMapper {
     /**
-     * 通过从课程ID获取主课程ID
-     * @param subCourseId
+     * 通过从课程id获取主课程id
+     * @param courseId
      * @return
      */
-    BigInteger getTeamMainCourseIdBySubCourseId(@Param("subCourseId")BigInteger subCourseId);
+    BigInteger getTeamMainCourseIdBySubCourseId(@Param("courseId")BigInteger courseId);
     /**
      * 通过ID获取课程信息
      * @param courseId
@@ -111,11 +111,9 @@ public interface CourseMapper {
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
-    StrategyPair getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
+    List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
 
-    TeamAndStrategy getTeamAndStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
-    TeamOrStrategy getTeamOrStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+    List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
 
     Course getMainCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 
@@ -150,4 +148,11 @@ public interface CourseMapper {
      * @param subCourseId,mainCourseId
      */
     void updateCourseSeminarMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
+
+    /**
+     * 获取strategy下的课程id列表
+     * @param strategyId
+     * @return
+     */
+    List<BigInteger> getCourseIdByConflictCourseStrategyId(@Param("strategyId")BigInteger strategyId);
 }

@@ -83,51 +83,51 @@ public interface CourseDao {
     List<TeamStrategy> getTeamStrategyListByCourseId(BigInteger courseId)throws StrategyNotFoundException;
 
     /**
-     * 通过策略ID获取MemberLimitStrategy
+     * 通过课程ID删除课程的分组策略列表
+     * @param courseId
+     * @return
+     */
+    void deleteTeamStrategyListByCourseId(BigInteger courseId)throws StrategyNotFoundException;
+
+    /**
+     * 通过策略ID获取队伍人数限制
      * @param strategyId
      * @return
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
-     * 修改MemberLimitStrategy信息
-     * @param memberLimitStrategy
-     */
-    void updateMemberLimitStrategy(MemberLimitStrategy memberLimitStrategy);
-
-    /**
-     * 通过策略ID删除MemberLimitStrategy
+     * 通过策略ID删除队伍人数限制
      * @param strategyId
      */
     void deleteMemberLimitStrategyByStrategyId(BigInteger strategyId);
 
     /**
-     * 通过策略ID获取CourseMemberLimitStrategy
+     * 通过策略ID获取队伍选课人数限制
      * @param strategyId
      * @return
      */
     CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
-     * 通过策略ID获取ConflictCourseStrategy
+     * 删除课程队伍选课人数限制
+     * @param strategyId
+     * @throws StrategyNotFoundException
+     */
+    void deleteCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    /**
+     * 通过策略ID获取冲突课程限制
      * @param strategyId
      * @return
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
-     * 通过策略ID获取TeamAndStrategy
+     * 通过策略ID删除冲突课程限制
      * @param strategyId
      * @return
      */
-    TeamAndStrategy getTeamAndStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
-
-    /**
-     * 通过策略ID获取TeamOrStrategy
-     * @param strategyId
-     * @return
-     */
-    TeamOrStrategy getTeamOrStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    void deleteConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略类名，策略id，验证某队伍（teamId）是否符合简单策略
@@ -148,7 +148,7 @@ public interface CourseDao {
      * @param strategyId
      * @return
      */
-    CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
+    CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId,String strategyName)throws StrategyNotFoundException;
 
     /**
      *  插入共享分组的请求

@@ -117,5 +117,7 @@ public interface TeamDao {
 
     void deleteTeamAndStudentRelationByTeamId(BigInteger teamId);
 
-    Integer getMaxTeamSerialByCourseId(BigInteger courseId);
+    Integer getMaxTeamSerialByCourseClassId(BigInteger courseClassId);
+
+    List<Team> getGroupStudentByCourseId(BigInteger courseId);
 }

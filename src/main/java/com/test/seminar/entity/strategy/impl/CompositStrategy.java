@@ -1,7 +1,7 @@
 package com.test.seminar.entity.strategy.impl;
 
 
-import com.test.seminar.entity.StrategyPair;
+import com.test.seminar.entity.strategy.StrategyPair;
 import com.test.seminar.entity.strategy.Strategy;
 
 import java.math.BigInteger;

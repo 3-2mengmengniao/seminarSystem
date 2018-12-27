@@ -10,6 +10,23 @@
         <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
 
+    <resultMap id="teamNotLoadResultMap" type="com.test.seminar.entity.Team">
+        <id property="id" column="id" />
+        <result property="teamName" column="team_name"/>
+        <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial">
+            <result property="courseClassSerial" column="klass_serial"/>
+            <result property="teamSerial" column="team_serial"/>
+        </association>
+        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="klass_id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByCourseClassId"/>
+        <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
+        <collection property="memberList" ofType="com.test.seminar.entity.Student">
+            <id property="id" column="my_student_id"/>
+            <result property="account" column="account"/>
+            <result property="studentName" column="student_name"/>
+        </collection>
+    </resultMap>
+
     <resultMap id="teamValidResultMap" type="com.test.seminar.entity.TeamValidApplication">
         <id property="id" column="id"/>
         <association property="team" column="id" javaType="com.test.seminar.entity.Team" select="getTeamByTeamValidApplicationId"/>
@@ -61,10 +78,27 @@
         WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
 
-    <select id="getMaxTeamSerialByCourseId" resultType="Integer">
+    <select id="getMaxTeamSerialByCourseClassId" resultType="Integer">
         SELECT MAX(team_serial)
-        FROM team
-        WHERE course_id=#{courseId}
+        FROM team,klass_team
+        WHERE klass_team.klass_id=#{courseClassId} and team.id=klass_team.team_id
+    </select>
+
+    <select id="getGroupStudentByCourseId" resultMap="teamNotLoadResultMap">
+        SELECT team.id,
+        team_name,
+        team.klass_serial,
+        team.team_serial,
+        leader_id,
+        student.id as my_student_id,
+        student_name,
+        account
+        FROM team,student,team_student,klass_team,klass
+        WHERE klass.course_id=#{courseId}
+        and student.id=team_student.student_id
+        and team.id=team_student.team_id
+        and klass_team.klass_id=klass.id
+        and klass_team.team_id=team.id
     </select>
 
     <insert id="insertTeam">

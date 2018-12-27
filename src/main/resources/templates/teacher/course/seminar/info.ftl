@@ -117,7 +117,7 @@
         <div class="distance4"></div>
         <p class="center center-text "><a href="/teacher/course/seminar/score?seminarId=${seminarControl.id}" class="button-return button-turqoise">查看成绩</a></p>
         <#elseif seminarControl.seminarStatus==0>
-        <p class="center center-text "><a href="/teacher/course/seminar/setting?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.id}" class="button-return button-blue">修改讨论课</a></p>
+        <p class="center center-text "><a href="/teacher/course/seminar/setting?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}" class="button-return button-blue">修改讨论课</a></p>
         <p class="center center-text "><a href="/teacher/course/seminar/progressing?seminarId=${seminarControl.id}&status=0" class="button-return button-turqoise">开始讨论课</a></p>
         <#else>
         <p class="center center-text "><a href="/teacher/course/seminar/progressing?seminarId=${seminarControl.id}&status=1" class="button-return button-turqoise">进入讨论课</a></p>
