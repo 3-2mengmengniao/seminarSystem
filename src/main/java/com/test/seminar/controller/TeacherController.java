@@ -3,8 +3,14 @@ package com.test.seminar.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
+import com.test.seminar.entity.strategy.*;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import com.test.seminar.service.*;
 import javafx.util.Pair;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -171,7 +177,9 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course/create",method = GET)
-    public String createCourse(Model model) { return "teacher/course/create"; }
+    public String createCourse(Model model) {
+        return "teacher/course/create";
+    }
 
     @RequestMapping(value="/course/seminar/create",method = GET)
     public String createSeminar(BigInteger courseId,Model model) {
@@ -192,10 +200,56 @@ public class TeacherController {
 
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
-    public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model,Course course) {
+    public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        courseService.insertCourse(course,teacherId);
+        System.out.println(request.getParameter("courseName"));
+        Course course=new Course();
+        course.setCourseName(request.getParameter("courseName"));
+        course.setIntroduction(request.getParameter("introduction"));
+        course.setPresentationPercentage(Integer.valueOf(request.getParameter("presentationPercentage")));
+        course.setQuestionPercentage(Integer.valueOf(request.getParameter("questionPercentage")));
+        course.setReportPercentage(Integer.valueOf(request.getParameter("reportPercentage")));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            course.setTeamEndTime(sdf.parse(request.getParameter("teamEndTime")));
+            course.setTeamEndTime(sdf.parse(request.getParameter("teamStartTime")));
+        }catch(Exception e)
+        {
+            System.out.println("时间格式出错！");
+        }
+        MemberLimitStrategy thisCourse=new MemberLimitStrategy();
+        thisCourse.setMinMember(Integer.valueOf(request.getParameter("minTeamMember")));
+        thisCourse.setMaxMember(Integer.valueOf(request.getParameter("maxTeamMember")));
+        List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=new ArrayList<>();
+        String members=request.getParameter("members");
+        JSONArray myArray=JSONArray.fromObject(members);
+        for(int i=0;i<myArray.size();i++){
+            JSONArray secondArray=(JSONArray)myArray.get(i);
+            CourseMemberLimitStrategy optionCourse=new CourseMemberLimitStrategy();
+            BigInteger cid=new BigInteger((String)secondArray.get(0));
+            optionCourse.setCourseId(cid);
+            optionCourse.setMaxMember( Integer.valueOf((String)secondArray.get(1)));
+            optionCourse.setMinMember( Integer.valueOf((String)secondArray.get(2)));
+            courseMemberLimitStrategyList.add(optionCourse);
+        }
+        List<ConflictCourseStrategy> conflictCourseStrategyArrayList=new ArrayList<>();
+        String conflicts=request.getParameter("conflicts");
+        JSONArray conflictsArray=JSONArray.fromObject(conflicts);
+        for(int i=0;i<conflictsArray.size();i++){
+            JSONArray secondArray=(JSONArray)conflictsArray.get(i);
+            ConflictCourseStrategy conflictCourse=new ConflictCourseStrategy();
+            List<BigInteger> courseIdList=new ArrayList<>();
+            for(int j=0;j<secondArray.size();j++) {
+                String tmp=(String)secondArray.get(j);
+                BigInteger cid=new BigInteger(tmp);
+                courseIdList.add(cid);
+            }
+            conflictCourse.setConflictCourseIdList(courseIdList);
+            conflictCourseStrategyArrayList.add(conflictCourse);
+        }
+        Integer choose=Integer.valueOf(request.getParameter("choose"));
+        System.out.println(choose);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

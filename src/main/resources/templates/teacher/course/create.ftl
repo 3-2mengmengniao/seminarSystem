@@ -19,7 +19,6 @@
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/creat-course.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -517,9 +516,9 @@
             <div id="numberRules" class="layui-form-item margin2 ">
                 <label class="layui-form-label">选修课人数要求：</label>
                 <div class="layui-input-block">
-                    <select name="minTeamMember" lay-filter="aihao">
-                        <option value="3" selected>均满足</option>
-                        <option value="4">仅一个满足</option>
+                    <select name="choose" lay-filter="aihao">
+                        <option value="0" selected>均满足</option>
+                        <option value="1">仅一个满足</option>
                     </select>
                 </div>
             </div>
@@ -955,7 +954,7 @@
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
@@ -1092,6 +1091,26 @@
 </script>
 <script>
 
+        $('#formSuccessMessageWrap').hide(0);
+        $('.formValidationError').fadeOut(0);
+
+        // fields focus function starts
+        $('input[type="text"], input[type="password"], textarea').focus(function () {
+            if ($(this).val() == $(this).attr('data-dummy')) {
+                $(this).val('');
+            }
+            ;
+        });
+        // fields focus function ends
+
+        // fields blur function starts
+        $('input, textarea').blur(function () {
+            if ($(this).val() == '') {
+                $(this).val($(this).attr('data-dummy'));
+            }
+            ;
+        });
+
     $(".courseLimitation").hide();
     $(".subPanel").hide();
     $(".memberLimitation").hide();
@@ -1132,39 +1151,79 @@
     //数组初始化
     var memberArray = []; //二维数组，外层为每个课程组员人数要求，内层为课程号、人数上限、人数下限
     var courseArray = []; //二维数组，外层为每个课程冲突组，内层为每个组内包含的课程号
-    for(var k=0;k<8;k++){
-        memberArray[k]=[];
-        courseArray[k]=[];
-        for(var j=0;j<3;j++){
-            memberArray[k][j]=0;
-            courseArray[k][j]=0;
-        }
-    }
+    // for(var k=0;k<8;k++){
+    //     memberArray[k]=[];
+    //     courseArray[k]=[];
+    //     for(var j=0;j<3;j++){
+    //         memberArray[k][j]=0;
+    //         courseArray[k][j]=0;
+    //     }
+    // }
     var tempMemberCount=0;
     var tempCourseCount=0;
     var line;
     $('#contactSubmitButton').click(function(){
         $(".memberLimitation.memberShow").each(function(){
             line=$(this).index();
+            memberArray[line]=[];
+            tempMemberCount=0;
             $(this).find('select option:selected').each(function(){
                 memberArray[line][tempMemberCount]=$(this).attr("value");
-                // alert(memberArray[line][tempMemberCount]);
                 tempMemberCount++;
             });
             // memberArray[tempMemberCount]=$(this).find('select option:selected').attr("value");
             // alert(memberArray[tempMemberCount]);
         });
 
+        var members=JSON.stringify(memberArray);
         $(".courseLimitation.courseShow").each(function(){
             // alert("进入课程冲突");
             line=$(this).index();
+            courseArray[line]=[];
+            tempCourseCount=0;
             $(this).find('.subPanel.subCourseShow').each(function(){
                 tempCourseCount=$(this).index();
                 courseArray[line][tempCourseCount]=$(this).find('select option:selected').attr("value");
-                // alert(courseArray[line][tempCourseCount]);
                 tempCourseCount++;
             });
         });
+        var conflicts=JSON.stringify(courseArray);
+        alert(conflicts);
+        var fd=new FormData($('#contactForm')[0]);
+        var courseName=fd.get("courseName");
+        var introduction=fd.get("introduction");
+        var presentationPercentage=fd.get("presentationPercentage");
+        var questionPercentage=fd.get("questionPercentage");
+        var reportPercentage=fd.get("reportPercentage");
+        var maxTeamMember=fd.get("maxTeamMember");
+        var minTeamMember=fd.get("minTeamMember");
+        var teamStartTime=fd.get("teamStartTime");
+        var teamEndTime=fd.get("teamEndTime");
+        var choose=fd.get("choose");
+
+        $.ajax(
+                {
+                    url:"/teacher/course",
+                    type:'post',
+                    data:{"members":members,"conflicts":conflicts,"courseName":courseName,"introduction":introduction,
+                    "presentationPercentage":presentationPercentage,"questionPercentage":questionPercentage,
+                     "reportPercentage":reportPercentage,"maxTeamMember":maxTeamMember,"minTeamMember":minTeamMember,
+                    "teamStartTime":teamStartTime,"teamEndTime":teamEndTime,"choose":choose},
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            var info=response.responseText;
+                            window.location.href="/teacher/courseList";
+                        }
+                    },
+                    error:function(data,status){
+                        console.log(data);
+                        console.log(status);
+                        $('#formSuccessMessageWrap').fadeIn(500);
+                        formSubmitted = 'false';
+                    }
+                }
+        );
+
     });
 </script>
 
