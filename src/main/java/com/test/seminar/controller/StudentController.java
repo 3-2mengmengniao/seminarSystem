@@ -303,9 +303,10 @@ public class StudentController {
     public String createTeam(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         List<CourseClass> courseClassList=courseClassService.getCourseClassByCourseId(courseId);
-        List<Student> noTeamStudentList=studentService.getStudentNotTeamInCourse(courseId);
+        Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
+        List<Student> studentNoTeamList=teamPair.getValue();
         model.addAttribute("course",course);
-        model.addAttribute("noTeamStudentList",noTeamStudentList);
+        model.addAttribute("noTeamStudentList",studentNoTeamList);
         model.addAttribute("classList",courseClassList);
         return "student/course/createTeam";
     }
@@ -332,6 +333,9 @@ public class StudentController {
             studentIdList.add(studentId);
         }
         team.setLeader(studentService.getStudentByStudentId(leaderId));
+        Serial serial=new Serial();
+        serial.setCourseClassSerial(team.getCourseClass().getClassSerial());
+        team.setSerial(serial);
         teamService.insertTeam(team,studentIdList);
         return new ResponseEntity<>("", HttpStatus.OK);
     }

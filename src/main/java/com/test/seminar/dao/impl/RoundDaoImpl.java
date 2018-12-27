@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,14 +41,10 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId){
         List<Round> roundList=roundMapper.getRoundByCourseId(courseId);
-        for(int i=0;i<roundList.size();i++){
-            List<RoundScore> roundScoreList=roundList.get(i).getRoundScoreList();
-            for(int j=0;j<roundScoreList.size();j++){
-                if(roundScoreList.get(j).getTeamId().equals(teamId)==false){
-                    roundScoreList.remove(j);
-                    j--;
-                }
-            }
+        for(Round round:roundList){
+            round.getRoundScoreList().removeIf(roundScore-> {
+                return !roundScore.getTeamId().equals(teamId);
+            });
         }
         return roundList;
     }
