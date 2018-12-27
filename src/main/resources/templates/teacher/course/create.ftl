@@ -199,7 +199,7 @@
                         <label class="my-form-label">选修课程</label>
                         <div class="my-layui-input">
                             <select name="optionCourse" lay-filter="aihao">
-                                <option value="3" selected>无</option>
+                                <option value="0" selected>无</option>
                                 <option value="4">.NET(王美红)</option>
                                 <option value="5">J2EE</option>
                                 <option value="6">.NET(林坤辉)</option>
@@ -210,6 +210,8 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
                                 <option value="4">4人</option>
                                 <option value="5" selected>5人</option>
                                 <option value="6">6人</option>
@@ -222,6 +224,7 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
                                 <option value="3" selected>3人</option>
                                 <option value="4">4人</option>
                                 <option value="5">5人</option>
@@ -249,11 +252,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -261,11 +264,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -288,11 +291,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -300,11 +303,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -327,11 +330,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -339,11 +342,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -366,11 +369,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -378,11 +381,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -405,11 +408,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -417,11 +420,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -444,11 +447,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -456,11 +459,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -483,11 +486,11 @@
                         <label class="my-form-label">选修人数上限</label>
                         <div class="my-layui-input">
                             <select name="maxTeamMember" lay-filter="aihao">
-                                <option value="4">4人</option>
-                                <option value="5" selected>5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
-                                <option value="8">8人</option>
+                                <option value="4">4</option>
+                                <option value="5" selected>5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                         </div>
                     </div>
@@ -495,11 +498,11 @@
                         <label class="my-form-label">选修人数下限</label>
                         <div class="my-layui-input">
                             <select name="minTeamMember" lay-filter="aihao">
-                                <option value="3" selected>3人</option>
-                                <option value="4">4人</option>
-                                <option value="5">5人</option>
-                                <option value="6">6人</option>
-                                <option value="7">7人</option>
+                                <option value="3" selected>3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
                         </div>
                     </div>
@@ -968,6 +971,22 @@
     </div>
 </div>
 <style>
+    @media screen and (min-width: 768px) and (max-width:1024px){
+        .layui-form-item .layui-inline {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 10%;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .layui-form-item .layui-inline {
+            display: block;
+            margin-right: -70px;
+            margin-left: 50px;
+            margin-bottom: 10px;
+            clear: both;
+        }
+    }
     .memberLimitation{
         background-color: #fff;
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
@@ -1082,18 +1101,23 @@
     //count1,count2,subCount2Y用于记录已用的下拉框index
     //需要传给后端的为：0~index的下拉框数据，
     //因为Index后的下拉框仍被隐藏，未投入使用
+
     var count1=0;
     $('#addBtn1').click(function(){
-        $(".memberLimitation").eq(count1).fadeIn();
+        var currentLimit=$(".memberLimitation").eq(count1);
+        $(currentLimit).fadeIn();
+        $(currentLimit).addClass("memberShow");
         if(count1==1){
             $("#numberRules").fadeIn();
         }
+
         count1++;
     });
     //添加课程冲突组
     var count2=0;
     $('#addBtn2').click(function(){
         $(".courseLimitation").eq(count2).fadeIn();
+        $(".courseLimitation").eq(count2).addClass("courseShow");
         count2++;
     });
     //课程冲突组中，添加课程
@@ -1101,8 +1125,46 @@
     $('.sub-addBtn2').click(function(){
         var tempIndex=$(this).parents().parents().index();//第tempIndex个冲突课程组的按钮，发起新增课程请求
         $(".courseLimitation").eq(tempIndex).find(".subPanel").eq(subCount2[tempIndex]).fadeIn();
+        $(".courseLimitation").eq(tempIndex).find(".subPanel").eq(subCount2[tempIndex]).addClass("subCourseShow");
         subCount2[tempIndex]++;
         // alert(subCount2[tempIndex]);
+    });
+    //数组初始化
+    var memberArray = []; //二维数组，外层为每个课程组员人数要求，内层为课程号、人数上限、人数下限
+    var courseArray = []; //二维数组，外层为每个课程冲突组，内层为每个组内包含的课程号
+    for(var k=0;k<8;k++){
+        memberArray[k]=[];
+        courseArray[k]=[];
+        for(var j=0;j<3;j++){
+            memberArray[k][j]=0;
+            courseArray[k][j]=0;
+        }
+    }
+    var tempMemberCount=0;
+    var tempCourseCount=0;
+    var line;
+    $('#contactSubmitButton').click(function(){
+        $(".memberLimitation.memberShow").each(function(){
+            line=$(this).index();
+            $(this).find('select option:selected').each(function(){
+                memberArray[line][tempMemberCount]=$(this).attr("value");
+                // alert(memberArray[line][tempMemberCount]);
+                tempMemberCount++;
+            });
+            // memberArray[tempMemberCount]=$(this).find('select option:selected').attr("value");
+            // alert(memberArray[tempMemberCount]);
+        });
+
+        $(".courseLimitation.courseShow").each(function(){
+            // alert("进入课程冲突");
+            line=$(this).index();
+            $(this).find('.subPanel.subCourseShow').each(function(){
+                tempCourseCount=$(this).index();
+                courseArray[line][tempCourseCount]=$(this).find('select option:selected').attr("value");
+                // alert(courseArray[line][tempCourseCount]);
+                tempCourseCount++;
+            });
+        });
     });
 </script>
 

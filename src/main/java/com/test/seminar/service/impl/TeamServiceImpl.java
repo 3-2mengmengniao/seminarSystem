@@ -48,7 +48,6 @@ public class TeamServiceImpl implements TeamService {
         team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseId(team.getCourse().getId())+1);
         teamDao.insertTeam(team,team.getCourseClass().getId(),team.getCourse().getId());
         team=teamDao.getTeamByMainCourseClassIdAndTeamSerial(team.getCourseClass().getId(),team.getSerial().getTeamSerial());
-        System.out.println(team.getCourseClass().getId());
         teamDao.insertCourseClassAndTeamRelation(team.getCourseClass().getId(),team.getId());
         for(BigInteger memberId:memberIdList){
             teamDao.insertTeamAndStudentRelation(team.getId(),memberId);
@@ -80,9 +79,7 @@ public class TeamServiceImpl implements TeamService {
         List<Student> studentInList=new ArrayList<>();
         //获取课程下所有班级的学生名单(Id形式)
         for(CourseClass courseClass:courseClassList){
-            for(Team classTeam:courseClass.getTeamList()) {
-                studentList.addAll(classTeam.getMemberList());
-            }
+            studentList.addAll(studentDao.getStudentByCourseClassId(courseClass.getId()));
         }
         Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
         return pair;
@@ -132,7 +129,7 @@ public class TeamServiceImpl implements TeamService {
         List<BigInteger> maxMemberCourseClassList=new ArrayList<>();
         Integer maxMemberCount=mapList.get(0).getValue();
         for(Map.Entry<BigInteger,Integer> mapItem:mapList){
-            if(mapItem.getValue()<maxMemberCount){
+            if(mapItem.getValue()<=maxMemberCount){
                 maxMemberCourseClassList.add(mapItem.getKey());
             }
         }

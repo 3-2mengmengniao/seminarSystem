@@ -5,7 +5,7 @@
         <id property="id" column="id" />
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
-        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="team.klass_id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByCourseClassId"/>
+        <association property="courseClass" javaType="com.test.seminar.entity.CourseClass" column="klass_id" select="com.test.seminar.mapper.CourseClassMapper.getCourseClassByCourseClassId"/>
         <collection property="questionList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Question" select="com.test.seminar.mapper.QuestionMapper.getQuestionByTeamId"/>
         <collection property="memberList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByTeamId"/>
     </resultMap>
@@ -37,7 +37,7 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,team.klass_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team
         WHERE id=#{teamId}
     </select>
@@ -49,31 +49,31 @@
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT id,team.klass_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team,team_student
         WHERE  team.course_id=#{courseId} and team_student.team_id=team.id and team_student.student_id=#{studentId}
         </select>
 
     <select id="getTeamByMainCourseClassIdAndTeamSerial" resultMap="teamResultMap">
-        SELECT id,team.klass_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team
         WHERE  klass_id=#{courseClassId} and team_serial=#{teamSerial}
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT team.id,team_name,leader_id,status
+        SELECT team.id as id,team.klass_id as klass_id,team_name,leader_id,status
         FROM team,klass,klass_team
         WHERE klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team.id=klass_team.team_id
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT team.id,team_name,leader_id,status
+        SELECT team.id as id,klass_id,team_name,leader_id,status
         FROM attendance,team
         WHERE klass_seminar_id=#{seminarControlId} and team.id=attendance.team_id
     </select>
 
     <select id="getTeamByCourseClassId" resultMap="teamResultMap">
-        SELECT id,team_name,leader_id,status
+        SELECT id,team.klass_id as klass_id,team_name,leader_id,status
         FROM klass_team,team
         WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
@@ -174,7 +174,7 @@
 
     <insert id="insertTeamValidApplication">
         insert into team_valid_application(team_id,teacher_id,reason,status)
-        values (#{team_id},#{teacher_id},#{teamValidApplication.reason},#{teamValidApplication.status})
+        values (#{teamId},#{teacherId},#{teamValidApplication.reason},#{teamValidApplication.status})
     </insert>
 
     <update id="updateTeamValidApplication">

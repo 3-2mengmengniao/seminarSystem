@@ -28,7 +28,7 @@ public interface TeamDao {
      * @param courseId
      * @return
      */
-    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId) throws TeamNotFoundException;
+    Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
 
     /**
      * 查看某课程的所有队伍

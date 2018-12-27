@@ -14,7 +14,7 @@
 
     <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.entity.strategy.impl.ConflictCourseStrategy">
         <id property="id" column="id"/>
-        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
+        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="java.math.BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
 
     <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
@@ -23,7 +23,7 @@
         <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
     </resultMap>
 
-    <select id="getTeamMainCourseIdBySubCourseId" resultType="BigInteger">
+    <select id="getTeamMainCourseIdBySubCourseId" resultType="java.math.BigInteger">
         select team_main_course_id
         from course
         where id=#{subCourseId}
@@ -95,10 +95,10 @@
             <if test="course.presentationPercentage!=null">
                 presentation_percentage=#{course.presentationPercentage},
             </if>
-            <if test="course.question_percentage!=null">
+            <if test="course.questionPercentage!=null">
                 question_percentage=#{course.questionPercentage},
             </if>
-            <if test="course.report_percentage!=null">
+            <if test="course.reportPercentage!=null">
                 report_percentage=#{course.reportPercentage},
             </if>
             <if test="course.courseName!=null">
