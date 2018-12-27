@@ -102,12 +102,14 @@
         student.id as my_student_id,
         student_name,
         account
-        FROM team,student,team_student,klass_team,klass
-        WHERE klass.course_id=#{courseId}
-        and student.id=team_student.student_id
+        FROM team,student,team_student
+        WHERE student.id=team_student.student_id
         and team.id=team_student.team_id
-        and klass_team.klass_id=klass.id
-        and klass_team.team_id=team.id
+        and student.id in (
+        select student_id
+        from klass_student
+        where course_id=#{courseId}
+        )
     </select>
 
     <insert id="insertTeam">
