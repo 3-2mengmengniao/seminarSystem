@@ -55,7 +55,7 @@ public class SeminarScore {
         return serial;
     }
 
-    public void setSerial(Serial teamSerial) {
+    public void setSerial(Serial serial) {
         this.serial = serial;
     }
 }

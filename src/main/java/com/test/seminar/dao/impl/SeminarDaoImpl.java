@@ -112,7 +112,7 @@ public class SeminarDaoImpl implements SeminarDao {
     public List<SeminarScore> getSeminarScoreBySeminarControlId(BigInteger seminarControlId) {
         List<SeminarScore> seminarScoreList=seminarMapper.getSeminarScoreBySeminarControlId(seminarControlId);
         for(int i=0;i<seminarScoreList.size();i++){
-            seminarScoreList.get(i).setSerial(teamMapper.getSerialByTeamId(seminarScoreList.get(i).getTeamId()));
+            System.out.println(teamMapper.getSerialByTeamId(seminarScoreList.get(i).getTeamId()));
         }
         return seminarScoreList;
     }

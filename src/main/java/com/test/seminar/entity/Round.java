@@ -17,6 +17,12 @@ public class Round {
     private List<SeminarInfo> seminarInfoList;
     private List<RoundScore> roundScoreList;
 
+    public Round() {
+        presentationScoreMethod=0;
+        reportScoreMethod=0;
+        questionScoreMethod=0;
+    }
+
     public BigInteger getId() { return id; }
 
     public int getRoundSerial() {
