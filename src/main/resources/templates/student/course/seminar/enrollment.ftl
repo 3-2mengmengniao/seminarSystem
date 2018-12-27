@@ -47,7 +47,11 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
-            <a href="/student/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <img id="button-back-image-2" src="/images/icons/展开.png">
+            <form id="postForm" action="/student/course/seminar/info" method="post">
+                <input type="hidden" value="${seminarControl.seminarInfo.id}" name="seminarId">
+                <input type="hidden" value="${seminarControl.courseClass.id}" name="classId">
+            </form>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -113,6 +117,9 @@
 
 </body>
 <script>
+    $('#button-back-image-2').click(function () {
+        $('#postForm').submit();
+    });
     $('.registerButton').click(function(){
         var t=$(this).attr("name");
         alert(t);

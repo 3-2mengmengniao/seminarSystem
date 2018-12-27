@@ -37,14 +37,14 @@ public class RunSeminarController {
 
     @RequestMapping(value="/teacher/course/seminar/progressing")
     public String progressing(BigInteger seminarId, int status,Model model) {
+        SeminarControl seminarControl;
         if(status==0){
-            SeminarControl seminarControl=rundSeminarService.beginSeminar(seminarId);
-            model.addAttribute("seminarControl",seminarControl);
+            seminarControl=rundSeminarService.beginSeminar(seminarId);
         }
         else{
-            SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
-            model.addAttribute("seminarControl",seminarControl);
+            seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         }
+            model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/progressing";
     }
 

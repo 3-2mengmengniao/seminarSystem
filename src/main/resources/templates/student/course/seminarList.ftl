@@ -82,7 +82,11 @@
                             <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                         <#list round.seminarInfoList as seminar>
                         <div class="layui-colla-content center-text">
-                            <a href="/student/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${seminar?index+1}&emsp;${seminar.seminarName}</a>
+                            <form action="/student/course/seminar/info" method="post">
+                                <input type="hidden" value="${seminar.id}" name="seminarId">
+                                <input type="hidden" value="${class.id}" name="classId">
+                                <input type="submit" value="${seminar?index+1}&emsp;${seminar.seminarName}" style="border:none;background:none;">
+                            </form>
                         </div>
                         </#list>
                         </div>

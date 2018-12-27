@@ -47,7 +47,11 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课</h1>
-            <a href="/student/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <img id="button-back-image-2" src="/images/icons/展开.png">
+            <form id="postForm" action="/student/course/seminar/info" method="post">
+                <input type="hidden" value="${seminarControl.seminarInfo.id}" name="seminarId">
+                <input type="hidden" value="${seminarControl.courseClass.id}" name="classId">
+            </form>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -96,7 +100,7 @@
             </tr>
             <tr>
                 <td>报名情况</td>
-                <td>${seminarControl.courseclass.grade?c}-（${seminarControl.courseClass.classSerial}）第${team.teamSerial}组</td>
+                <td>${seminarControl.courseClass.grade?c}-（${seminarControl.courseClass.classSerial}）第${team.serial.teamSerial}组</td>
             </tr>
             <tr>
                 <td> PPT</td>
@@ -125,4 +129,9 @@
 
 
 </body>
+<script>
+    $('#button-back-image-2').click(function () {
+        $('#postForm').submit();
+    });
+</script>
 </html>
