@@ -26,6 +26,8 @@ public class Course {
     private List<Course> seminarSubCourseList;
     private List<Round> roundList;
     private BigInteger teamMainCourseId;
+    private BigInteger seminarMainCourseId;
+    private BigInteger teacherId;
 
     public BigInteger getId() {
         return id;
@@ -110,4 +112,12 @@ public class Course {
     public BigInteger getTeamMainCourseId() { return teamMainCourseId; }
 
     public void setTeamMainCourseId(BigInteger teamMainCourseId) { this.teamMainCourseId = teamMainCourseId; }
+
+    public BigInteger getSeminarMainCourseId() { return seminarMainCourseId; }
+
+    public void setSeminarMainCourseId(BigInteger seminarMainCourseId) { this.seminarMainCourseId = seminarMainCourseId; }
+
+    public BigInteger getTeacherId() { return teacherId; }
+
+    public void setTeacherId(BigInteger teacherId) { this.teacherId = teacherId; }
 }

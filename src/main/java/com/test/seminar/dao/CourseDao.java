@@ -91,11 +91,17 @@ public interface CourseDao {
      *  通过从课程教师id查看共享分组请求
      * @param subCourseTeacherId
      */
-    ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
+    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
 
     /**
      *  从课程教师同意共享分组请求后，建立共享关联
      * @param shareTeamApplication
      */
     void createShareTeamAssociation(ShareTeamApplication shareTeamApplication);
+
+    /**
+     * 获取系统下所有课程
+     * @return
+     */
+    List<Course> getAllCourse();
 }

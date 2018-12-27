@@ -3,10 +3,7 @@ package com.test.seminar.service.impl;
 import com.test.seminar.dao.CourseClassDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.dao.TeamDao;
-import com.test.seminar.entity.Course;
-import com.test.seminar.entity.CourseClass;
-import com.test.seminar.entity.Student;
-import com.test.seminar.entity.Team;
+import com.test.seminar.entity.*;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.CompositStrategy;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -163,8 +160,9 @@ public class TeamServiceImpl implements TeamService {
         }
         for(Student student:team.getMemberList()){
             CourseClass courseClass=courseClassDao.getCourseClassByStudentIdAndCourseId(student.getId(),course.getId());
-            if(courseClass==null)
+            if(courseClass==null) {
                 continue;
+            }
             BigInteger studentCourseClassId=courseClass.getId();
             Integer count=memberBelongCourseClassMap.get(studentCourseClassId);
             count=count+1;
@@ -175,8 +173,9 @@ public class TeamServiceImpl implements TeamService {
         List<BigInteger> maxMemberCourseClassList=new ArrayList<>();
         Integer maxMemberCount=mapList.get(0).getValue();
         //无人在这个课程下
-        if(maxMemberCount==0)
+        if(maxMemberCount==0) {
             return;
+        }
         for(Map.Entry<BigInteger,Integer> mapItem:mapList){
             if(mapItem.getValue()<=maxMemberCount){
                 maxMemberCourseClassList.add(mapItem.getKey());
@@ -193,5 +192,21 @@ public class TeamServiceImpl implements TeamService {
             Collections.sort(courseClassTeamNumberList, Comparator.comparingInt(Pair::getValue));
             teamDao.insertCourseClassAndTeamRelation(courseClassTeamNumberList.get(0).getKey(),team.getId());
         }
+    }
+
+    @Override
+    public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
+        teamDao.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
+    }
+
+    @Override
+    public List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId){
+        return teamDao.getTeamValidApplicationByTeacherId(teacherId);
+    }
+
+    @Override
+    public void updateTeamValidApplication(TeamValidApplication teamValidApplication){
+        teamDao.updateTeamValidApplication(teamValidApplication);
+        teamDao.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplication.getId());
     }
 }

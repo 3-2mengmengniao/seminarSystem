@@ -96,7 +96,7 @@ public interface CourseMapper {
      *  通过从课程教师id查看共享分组请求
      * @param subCourseTeacherId
      */
-    ShareTeamApplication getShareTeamApplicationBySubCourseTeacherId(@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
+    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(@Param("subCourseTeacherId")BigInteger subCourseTeacherId);
 
     /**
      *  更新课程的共享分组的主课程id
@@ -110,4 +110,9 @@ public interface CourseMapper {
      */
     void updateCourseSeminarMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
 
+    /**
+     * 获取系统中所有课程
+     * @return
+     */
+    List<Course> getAllCourse();
 }
