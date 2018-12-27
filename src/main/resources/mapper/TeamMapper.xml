@@ -14,7 +14,7 @@
         <id property="id" column="id" />
         <result property="teamName" column="team_name"/>
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
-        <association property="serial" javaType="Serial">
+        <association property="serial" javaType="com.test.seminar.entity.Serial">
             <result property="courseClassSerial" column="klass_serial"/>
             <result property="teamSerial" column="team_serial"/>
         </association>

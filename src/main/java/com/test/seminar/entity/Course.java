@@ -25,6 +25,7 @@ public class Course {
     private List<Course> teamSubCourseList;
     private List<Course> seminarSubCourseList;
     private List<Round> roundList;
+    private BigInteger teamMainCourseId;
 
     public BigInteger getId() {
         return id;
@@ -99,4 +100,14 @@ public class Course {
     public void setRoundList(List<Round> roundList) {
         this.roundList = roundList;
     }
+
+    public void setPresentationPercentage(Integer presentationPercentage) { this.presentationPercentage = presentationPercentage; }
+
+    public void setQuestionPercentage(Integer questionPercentage) { this.questionPercentage = questionPercentage; }
+
+    public void setReportPercentage(Integer reportPercentage) { this.reportPercentage = reportPercentage; }
+
+    public BigInteger getTeamMainCourseId() { return teamMainCourseId; }
+
+    public void setTeamMainCourseId(BigInteger teamMainCourseId) { this.teamMainCourseId = teamMainCourseId; }
 }

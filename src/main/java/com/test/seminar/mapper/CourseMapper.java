@@ -23,11 +23,11 @@ import java.util.List;
 @Component
 public interface CourseMapper {
     /**
-     * 通过从课程ID获取主课程ID
-     * @param subCourseId
+     * 通过从课程id获取主课程id
+     * @param courseId
      * @return
      */
-    BigInteger getTeamMainCourseIdBySubCourseId(@Param("subCourseId")BigInteger subCourseId);
+    BigInteger getTeamMainCourseIdBySubCourseId(@Param("courseId")BigInteger courseId);
     /**
      * 通过ID获取课程信息
      * @param courseId
@@ -148,4 +148,11 @@ public interface CourseMapper {
      * @param subCourseId,mainCourseId
      */
     void updateCourseSeminarMainCourseId(@Param("subCourseId")BigInteger subCourseId,@Param("mainCourseId")BigInteger mainCourseId);
+
+    /**
+     * 获取strategy下的课程id列表
+     * @param strategyId
+     * @return
+     */
+    List<BigInteger> getCourseIdByConflictCourseStrategyId(@Param("strategyId")BigInteger strategyId);
 }

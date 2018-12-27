@@ -58,11 +58,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getStudentNotTeamInCourse(BigInteger courseId) {
-        return studentDao.getStudentNotTeamInCourse(courseId);
-    }
-
-    @Override
     public PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<Student> list = studentDao.getAllStudent();

@@ -14,7 +14,7 @@
         <result property="classTime" column="klass_time"/>
         <result property="classLocation" column="klass_location"/>
         <association property="course" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseClassId"/>
-        <collection property="teamList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByCourseClassId" fetchType="eager"/>
+        <collection property="teamList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByCourseClassId"/>
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
@@ -36,7 +36,7 @@
     </select>
 
     <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
-        SELECT klass.id,grade,klass_serial,klass_time,klass_location
+        SELECT klass.id as id,grade,klass_serial,klass_time,klass_location
         FROM klass,klass_student
         WHERE klass.course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
     </select>
@@ -49,13 +49,13 @@
     </select>
 
     <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
-        select klass.id,grade,klass_serial,klass_time,klass_location
+        select klass.id as id,grade,klass_serial,klass_time,klass_location
         from klass,klass_team
         where klass_team.team_id=#{teamId} and klass_team.klass_id=klass.id
     </select>
 
     <select id="getCourseClassBySeminarControlId" resultMap="courseClassResultMap">
-        select klass.id,grade,klass_serial,klass_time,klass_location
+        select klass.id as id,klass.id,grade,klass_serial,klass_time,klass_location
         from klass,klass_seminar
         where klass_seminar.id=#{seminarControlId} and klass_seminar.klass_id=klass.id
     </select>

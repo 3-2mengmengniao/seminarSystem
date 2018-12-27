@@ -74,13 +74,7 @@ public class TeamServiceImpl implements TeamService {
     public Pair<List<Team>,List<Student>> getTeam(BigInteger courseId){
         //获取课程下所有队伍
         List<Team> teamList=teamDao.getGroupStudentByCourseId(courseId);
-        List<CourseClass> courseClassList=courseClassDao.getCourseClassByCourseId(courseId);
-        List<Student> studentList=new ArrayList<>();
-        List<Student> studentInList=new ArrayList<>();
-        //获取课程下所有班级的学生名单(Id形式)
-        for(CourseClass courseClass:courseClassList){
-            studentList.addAll(studentDao.getStudentByCourseClassId(courseClass.getId()));
-        }
+        List<Student> studentList=studentDao.getStudentNotInTeamByCourseId(courseId);
         Pair<List<Team>,List<Student>> pair=new Pair<>(teamList,studentList);
         return pair;
     }
