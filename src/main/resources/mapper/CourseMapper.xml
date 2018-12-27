@@ -3,18 +3,10 @@
 <mapper namespace="com.test.seminar.mapper.CourseMapper">
     <resultMap id="courseResultMap" type="com.test.seminar.entity.Course">
         <id property="id" column="id"/>
+        <result property="teamMainCourseId" column="team_main_course_id"/>
         <collection property="roundList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Round" select="com.test.seminar.mapper.RoundMapper.getRoundByCourseId"/>
         <collection property="seminarSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseBySeminarMainCourseId"/>
         <collection property="teamSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeamMainCourseId"/>
-    </resultMap>
-
-    <resultMap id="teamStrategyResultMap" type="com.test.seminar.entity.strategy.TeamStrategy">
-        <association property="course" javaType="com.test.seminar.entity.Course" column="id" select="getCourseByCourseId"/>
-    </resultMap>
-
-    <resultMap id="conflictCourseStrategyResultMap" type="com.test.seminar.entity.strategy.impl.ConflictCourseStrategy">
-        <id property="id" column="id"/>
-        <collection property="conflictCourseIdList" javaType="ArrayList" ofType="java.math.BigInteger" column="id" select="getCourseIdByConflictCourseStrategyId"/>
     </resultMap>
 
     <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
@@ -26,7 +18,7 @@
     <select id="getTeamMainCourseIdBySubCourseId" resultType="java.math.BigInteger">
         select team_main_course_id
         from course
-        where id=#{subCourseId}
+        where id=#{courseId}
     </select>
 
     <select id="getCourseByCourseId" resultMap="courseResultMap">
@@ -36,44 +28,44 @@
     </select>
 
     <select id="getCourseByCourseClassId" resultMap="courseResultMap">
-        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select course.id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course,klass
         where klass.id=#{courseClassId} and course.id=klass.course_id
     </select>
 
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select id,team_main_course_id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        SELECT course.id as id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         FROM course,klass_student
         WHERE student_id=#{studentId} AND klass_student.course_id=course.id
 
     </select>
 
     <select id="getCourseByTeamMainCourseId" resultMap="courseResultMap">
-        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where team_main_course_id=#{teamMainCourseId}
     </select>
 
     <select id="getCourseBySeminarMainCourseId" resultMap="courseResultMap">
-        select id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where seminar_main_course_id=#{seminarMainCourseId}
     </select>
 
     <select id="getMainCourseByShareTeamApplicationId" resultMap="courseResultMap">
-        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select course.id as id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course,share_team_application
         where course.id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
 
     <select id="getSubCourseByShareTeamApplicationId" resultMap="courseResultMap">
-        select course.id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        select course.id as id,team_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course,share_team_application
         where course.id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
@@ -108,7 +100,10 @@
                 team_start_time=#{course.teamStartTime},
             </if>
             <if test="course.teamEndTime!=null">
-                team_end_time=#{course.teamEndTime}
+                team_end_time=#{course.teamEndTime},
+            </if>
+            <if test="course.teamMainCourseId!=null">
+                team_main_course_id=#{course.teamMainCourseId}
             </if>
         </set>
         where id=#{course.id}
@@ -117,68 +112,6 @@
     <delete id="deleteCourseByCourseId">
         delete from course where id=#{courseId}
     </delete>
-
-    <select id="getTeamStrategyListByCourseId" resultMap="teamStrategyResultMap">
-        select course_id,strategy_serial,strategy_name,strategy_id
-        from team_strategy
-        where course_id=#{courseId}
-    </select>
-    
-    <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.MemberLimitStrategy">
-        select id,min_number,max_number
-        from member_limit_strategy
-        where id=#{strategyId}
-    </select>
-    
-    <update id="updateMemberLimitStrategy">
-        update member_limit_strategy
-        <set>
-            <if test="member_limit_strategy.min_number!=null">
-                min_number=#{member_limit_strategy.min_number},
-            </if>
-            <if test="member_limit_strategy.max_number!=null">
-                max_number=#{member_limit_strategy.max_number},
-            </if>
-        </set>
-    </update>
-
-    <delete id="deleteMemberLimitStrategyByStrategyId">
-        delete from member_limit_strategy where id=#{strategyId}
-    </delete>
-
-    <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy">
-        select id,course_id,min_number,max_number
-        from course_member_limit_strategy
-        where id=#{strategyId}
-    </select>
-
-    <update id="updateCourseMemberLimitStrategy">
-        update
-    </update>
-
-    <select id="getCourseIdByConflictCourseStrategyId" resultType="BigInteger">
-        select course_id
-        from conflict_course_strategy
-        where id=#{strategyId}
-    </select>
-
-    <select id="getConflictCourseStrategyByStrategyId" resultMap="conflictCourseStrategyResultMap">
-        select id,course_id
-        from conflict_course_strategy
-        where id=#{strategyId}
-    </select>
-
-    <select id="getStrategyPairByTeamAndStrategyId" resultType="com.test.seminar.entity.strategy.StrategyPair">
-        select strategy_name,strategy_id
-        from team_and_strategy
-        where id=#{teamAndStrategyId}
-    </select>
-
-    <select id="getStrategyPairByTeamOrStrategyId" resultType="com.test.seminar.entity.strategy.StrategyPair">
-        select strategy_name,strategy_id
-        from team_or_strategy
-        where id=#{teamOrStrategyId}
-    </select>
 
     <insert id="insertShareTeamApplication">
         insert into share_team_application(main_course_id,sub_course_id,sub_course_teacher_id)

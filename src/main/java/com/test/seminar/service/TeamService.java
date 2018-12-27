@@ -31,4 +31,12 @@ public interface TeamService {
     void addTeamMember(BigInteger teamId,BigInteger studentId);
 
     void deleteTeamMember(BigInteger teamId,BigInteger studentId);
+
+    /**
+     * 验证队伍是否合法
+     * @param team
+     * @throws TeamNotFoundException
+     * @return
+     */
+    Boolean isTeamValid(Team team)throws TeamNotFoundException;
 }

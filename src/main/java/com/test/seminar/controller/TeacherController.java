@@ -405,6 +405,7 @@ public class TeacherController {
         SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
         model.addAttribute("seminarControl",seminarControl);
         List<SeminarScore> seminarScoreList=seminarService.getSeminarScoreBySeminarControlId(seminarId);
+        System.out.println(seminarId);
         model.addAttribute("seminarScoreList",seminarScoreList);
         return "teacher/course/seminar/score";
     }

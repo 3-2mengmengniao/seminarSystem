@@ -46,8 +46,9 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     }
 
     @Override
-    public void endSeminar(BigInteger seminarControlId) {
+    public void endSeminar(BigInteger seminarControlId,Date strtodate) {
         SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        seminarControl.setReportDDL(strtodate);
         seminarControl.setSeminarStatus(2);
         for(Presentation presentation:seminarControl.getPresentationList()){
             if(presentation.getPresent()==1){

@@ -51,7 +51,5 @@ public interface StudentService {
 
     List<Student> getAllStudent();
 
-    List<Student> getStudentNotTeamInCourse(BigInteger courseId);
-
     PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize);
 }

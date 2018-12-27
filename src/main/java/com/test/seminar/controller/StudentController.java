@@ -342,4 +342,14 @@ public class StudentController {
         teamService.insertTeam(team,studentIdList);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
+
+    @RequestMapping(value="/course/myTeam")
+    public String myTeam(BigInteger courseId,Model model) {
+        return "student/course/myTeam";
+    }
+
+    @RequestMapping(value = "/course/leaderTeam", method = GET)
+    public String leaderTeam(BigInteger courseId,Model model) {
+        return "student/course/leaderTeam";
+    }
 }

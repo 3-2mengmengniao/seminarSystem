@@ -1078,49 +1078,41 @@
     .margin2{
         margin-bottom: 10px;
     }
-
 </style>
 <!--<div class="bottom-deco"></div>-->
 <script src="/layui/layui.js"></script>
 <script>
     layui.use('form', function(){
         var form = layui.form();
-
         //各种基于事件的操作，下面会有进一步介绍
     });
 </script>
 <script>
-
-        $('#formSuccessMessageWrap').hide(0);
-        $('.formValidationError').fadeOut(0);
-
-        // fields focus function starts
-        $('input[type="text"], input[type="password"], textarea').focus(function () {
-            if ($(this).val() == $(this).attr('data-dummy')) {
-                $(this).val('');
-            }
-            ;
-        });
-        // fields focus function ends
-
-        // fields blur function starts
-        $('input, textarea').blur(function () {
-            if ($(this).val() == '') {
-                $(this).val($(this).attr('data-dummy'));
-            }
-            ;
-        });
-
+    $('#formSuccessMessageWrap').hide(0);
+    $('.formValidationError').fadeOut(0);
+    // fields focus function starts
+    $('input[type="text"], input[type="password"], textarea').focus(function () {
+        if ($(this).val() == $(this).attr('data-dummy')) {
+            $(this).val('');
+        }
+        ;
+    });
+    // fields focus function ends
+    // fields blur function starts
+    $('input, textarea').blur(function () {
+        if ($(this).val() == '') {
+            $(this).val($(this).attr('data-dummy'));
+        }
+        ;
+    });
     $(".courseLimitation").hide();
     $(".subPanel").hide();
     $(".memberLimitation").hide();
     $("#numberRules").hide();
-
     //添加选课人数限制
     //count1,count2,subCount2Y用于记录已用的下拉框index
     //需要传给后端的为：0~index的下拉框数据，
     //因为Index后的下拉框仍被隐藏，未投入使用
-
     var count1=0;
     $('#addBtn1').click(function(){
         var currentLimit=$(".memberLimitation").eq(count1);
@@ -1129,7 +1121,6 @@
         if(count1==1){
             $("#numberRules").fadeIn();
         }
-
         count1++;
     });
     //添加课程冲突组
@@ -1174,7 +1165,6 @@
             // memberArray[tempMemberCount]=$(this).find('select option:selected').attr("value");
             // alert(memberArray[tempMemberCount]);
         });
-
         var members=JSON.stringify(memberArray);
         $(".courseLimitation.courseShow").each(function(){
             // alert("进入课程冲突");
@@ -1200,15 +1190,14 @@
         var teamStartTime=fd.get("teamStartTime");
         var teamEndTime=fd.get("teamEndTime");
         var choose=fd.get("choose");
-
         $.ajax(
                 {
                     url:"/teacher/course",
                     type:'post',
                     data:{"members":members,"conflicts":conflicts,"courseName":courseName,"introduction":introduction,
-                    "presentationPercentage":presentationPercentage,"questionPercentage":questionPercentage,
-                     "reportPercentage":reportPercentage,"maxTeamMember":maxTeamMember,"minTeamMember":minTeamMember,
-                    "teamStartTime":teamStartTime,"teamEndTime":teamEndTime,"choose":choose},
+                        "presentationPercentage":presentationPercentage,"questionPercentage":questionPercentage,
+                        "reportPercentage":reportPercentage,"maxTeamMember":maxTeamMember,"minTeamMember":minTeamMember,
+                        "teamStartTime":teamStartTime,"teamEndTime":teamEndTime,"choose":choose},
                     success:function(data,status,response){
                         if(response.status=="200"){
                             var info=response.responseText;
@@ -1223,22 +1212,17 @@
                     }
                 }
         );
-
     });
 </script>
 
 <script>
-
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
         //日期时间选择器
         laydate.render({
             elem: '#test5'
             ,type: 'datetime'
         });
-
-
         //自定义重要日
         laydate.render({
             elem: '#test18'
@@ -1256,7 +1240,6 @@
                 }
             }
         });
-
         //限定可选日期
         var ins22 = laydate.render({
             elem: '#test-limit1'
@@ -1266,14 +1249,12 @@
                 ins22.hint('日期可选值设定在 <br> 2016-10-14 到 2080-10-14');
             }
         });
-
         //前后若干天可选，这里以7天为例
         laydate.render({
             elem: '#test-limit2'
             ,min: -7
             ,max: 7
         });
-
         //限定可选时间
         laydate.render({
             elem: '#test-limit3'
@@ -1282,7 +1263,6 @@
             ,max: '17:30:00'
             ,btns: ['clear', 'confirm']
         });
-
         //同时绑定多个
         lay('.test-item').each(function(){
             laydate.render({
@@ -1290,14 +1270,12 @@
                 ,trigger: 'click'
             });
         });
-
         //初始赋值
         laydate.render({
             elem: '#test19'
             ,value: '1989-10-14'
             ,isInitValue: true
         });
-
         //选中后的回调
         laydate.render({
             elem: '#test20'
@@ -1305,7 +1283,6 @@
                 layer.alert('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //日期切换的回调
         laydate.render({
             elem: '#test21'
@@ -1313,13 +1290,11 @@
                 layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //墨绿主题
         laydate.render({
             elem: '#test29'
             ,theme: 'molv'
         });
-
     });
 </script>
 

@@ -48,8 +48,6 @@ public interface StudentMapper {
      */
     List<Student> getAllStudent();
 
-    List<Student> getStudentNotTeamInCourse(@Param("courseId")BigInteger courseId);
-
     /**
      * 创建新的学生账户
      *
@@ -73,4 +71,13 @@ public interface StudentMapper {
      * @return
      */
     void deleteStudentByStudentId(@Param("studentId") BigInteger studentId);
+
+    /**
+     * 获取课程中的未组队学生
+     * @param courseId
+     * @return
+     */
+    List<Student> getStudentNotInTeamByCourseId(@Param("courseId")BigInteger courseId);
+
+    List<Student> getStudentNotInTeamByCourseIdForSubCourse(@Param("courseId")BigInteger courseId,@Param("mainCourseId")BigInteger mainCourseId);
 }
