@@ -90,7 +90,22 @@
                                             <div class="layui-colla-item">
                                                 <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
                                                 <div class="layui-colla-content ">
-                                                    展示：${seminarScore.presentationScore!0}分&nbsp&nbsp提问：${seminarScore.questionScore!0}分&nbsp&nbsp报告：${seminarScore.reportScore!0}分
+                                                    <img class="edit-score" src="/images/灰色修改.png"></img>
+                                                    <div>展示：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;"  value="${seminarScore.presentationScore!0}">
+                                                        </div>
+                                                    </div>
+                                                    <div>提问：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;" value="${seminarScore.questionScore!0}">
+                                                        </div>
+                                                    </div>
+                                                    <div>报告：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled class="layui-input layui-disabled" style="width:40px;margin-left:50px;margin-top:-30px;"    value="${seminarScore.reportScore!0}">
+                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </#list>
@@ -134,8 +149,55 @@
 
 
 <!--<div class="bottom-deco"></div>-->
+<script>
+    $("img.edit-score").on("click",function(){
+        if($(this).hasClass("edit-score")){
+            $(this).attr("src","/images/灰色保存.png");
+            $(this).nextAll().find(".layui-input").each(function(){
+                $(this).removeAttr("disabled");
+                $(this).removeClass("layui-disabled");
+            });
+            $(this).removeClass("edit-score");
+            $(this).addClass("save-score");
+        }
+       else{
+            $(this).attr("src","/images/灰色修改.png");
 
+            $(this).nextAll().find(".layui-input").each(function(){
+                $(this).attr("disabled","disabled");
+                $(this).addClass("layui-disabled");
+            });
+            $(this).removeClass("save-score");
+            $(this).addClass("edit-score");
+        }
+    });
+    // $("img.save-score").on("click",function(){
+    //     $(this).attr("src","/images/灰色修改.png");
+    //     $(this).parents().parents().find(".layui-input").each(function(){
+    //         $(this).attr("disabled","disabled");
+    //         $(this).addClass("layui-disabled");
+    //     });
+    //     $(this).removeClass("save-score");
+    //     $(this).addClass("edit-score");
+    // });
+</script>
 <style>
+    .edit-score{
+        z-index:9999;
+        width: 40px;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-right: 15%;
+        float: right;
+     }
+    .save-score{
+        z-index:9999;
+        width: 40px;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-right: 15%;
+        float: right;
+    }
     @media screen and (max-width:768px){
         .margin3{
             margin-left:35%;
