@@ -16,7 +16,7 @@ public interface QuestionDao {
     Question getQuestionByPresentationIdAndTeamId(BigInteger presentationId,BigInteger teamId);
 
 
-    void insertQuestion(Question question,BigInteger seminarControlId,BigInteger presentationId,BigInteger studentId, BigInteger teamId);
+    void insertQuestion(Question question);
 
     void updateQuestion(Question question);
 
