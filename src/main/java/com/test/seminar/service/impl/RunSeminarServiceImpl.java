@@ -72,7 +72,9 @@ public class RunSeminarServiceImpl implements RunSeminarService {
         Map<String,Integer> currentWeightMap=new HashMap<>();
         Presentation activePresentation=getActivePresentation(seminarControl);
         for(Question question:activePresentation.getQuestionList()){
-            currentWeightMap.put(question.getSerial().getSerial(),weightMap.get(question.getSerial().getSerial()));
+            if(question.getSelected()==0){
+                currentWeightMap.put(question.getSerial().getSerial(),weightMap.get(question.getSerial().getSerial()));
+            }
         }
         //查找最大权重的问题
         List<Map.Entry<String,Integer>> mapList = new ArrayList(currentWeightMap.entrySet());
