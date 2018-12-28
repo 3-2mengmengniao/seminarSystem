@@ -124,39 +124,6 @@
                         <col width="100" >
                         <col width="200" >
                     </colgroup>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
                 </table>
                 <div style="height:20px;"></div>
             </div>
@@ -194,12 +161,12 @@
     var outputScore="";
     outputScore=	"<tr>\n"+
             "\t\t<td style=\"padding:0 10px;\">\n"+
-            "\t\t\t\t<a style=\"font-size:17px;margin-top:-15px;\">1-1&nbsp;小红</a>\n"+
+            "\t\t\t\t<a style=\"font-size:17px;margin-top:-30px;\">1-1&nbsp;小红</a>\n"+
             "\t\t</td>\n"+
             " \t\t<td style=\"padding:0 10px;\">\n"+
             " \t\t\t\t<div class=\"form-group floating-control-group formFieldWrap\">\n"+
             " \t\t\t\t\t\t<input style=\"margin-bottom:3px;font-size:15px;padding-top:10px;\" type=\"text\"  autocomplete=\"off\" class=\"my-form-control contactField requiredField\"  placeholder=\"请输入成绩 \">\n"+
-            "\t\t\t\t\t\t<div title=\"提交\" style=\"z-index: 999;\" ><img style=\"width:27px;top:-35px;right:-40%;cursor:pointer;\" src=\"/images/提交.png\"></div>\n"+
+            "\t\t\t\t\t\t<img title=\"提交\" style=\"width:27px;top:-35px;right:-40%;cursor:pointer;\" src=\"/images/提交.png\">\n"+
             " \t\t\t\t</div>\n"+
             "\t\t</td>\n"+
             "</tr>";
