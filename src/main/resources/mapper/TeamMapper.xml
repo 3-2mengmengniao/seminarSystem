@@ -202,7 +202,7 @@
     </delete>
 
     <select id="getTeamStrategyListByCourseId" resultMap="teamStrategyResultMap">
-        select course_id,strategy_serial,strategy_name,strategy_id
+        select course_id,strategy_name,strategy_id
         from team_strategy
         where course_id=#{courseId}
     </select>
@@ -313,5 +313,4 @@
         insert into member_limit_strategy(min_member,max_member)
         value (#{memberLimitStrategy.minMember},#{memberLimitStrategy.maxMember})
     </insert>
-
 </mapper>
