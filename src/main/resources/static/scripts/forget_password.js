@@ -36,6 +36,7 @@ jQuery(document).ready(function($) {
                     if(response.status=="200"){
                         var info=response.responseText;
                         window.location.href="/login";
+
                     }
                 },
                 error:function(data,status){

@@ -20,6 +20,8 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -112,6 +114,11 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId){
         return teamMapper.getTeamValidApplicationByTeacherId(teacherId);
+    }
+
+    @Override
+    public TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId){
+        return  teamMapper.getTeamValidApplicationByApplicationId(applicationId);
     }
 
     @Override
@@ -347,6 +354,113 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public void getSimpleStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String strategyName,HashMap result) {
+        try {
+            //用反射得到获取特定策略的dao层方法
+            String teamDaoMethodName = "get" + strategyName + "ByStrategyId";
+            Method teamDaoMethod = TeamDao.class.getMethod(teamDaoMethodName, BigInteger.class);
+
+            //得到特定策略的对象
+            Object strategy = teamDaoMethod.invoke(teamDao, strategyId);
+
+            if(strategyName.equals("MemberLimitStrategy")){
+                result.put(2,strategy);
+            }
+            if(strategyName.equals("CourseMemberLimitStrategy")){
+                if(!result.keySet().contains(1)){
+                    List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=new ArrayList<>();
+                    courseMemberLimitStrategyList.add((CourseMemberLimitStrategy)strategy);
+                    result.put(1,courseMemberLimitStrategyList);
+                }
+                else{
+                    ((List<CourseMemberLimitStrategy>)(result.get(1))).add((CourseMemberLimitStrategy)strategy);
+                }
+            }
+            if(strategyName.equals("ConflictCourseStrategy")){
+                if(!result.keySet().contains(0)){
+                    List<ConflictCourseStrategy> conflictCourseStrategyList=new ArrayList<>();
+                    conflictCourseStrategyList.add((ConflictCourseStrategy)strategy);
+                    result.put(0,conflictCourseStrategyList);
+                }
+                else{
+                    ((List<ConflictCourseStrategy>)(result.get(0))).add((ConflictCourseStrategy)strategy);
+                }
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void getCompositStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String strategyName,HashMap result){
+
+        try {
+            //用反射得到获取复合策略的dao层方法
+            String teamDaoMethodName = "getCompositStrategyByStrategyId";
+            Method teamDaoMethod = TeamDao.class.getMethod(teamDaoMethodName, BigInteger.class,String.class);
+
+            //得到复合策略的对象
+            CompositStrategy compositStrategy = (CompositStrategy)teamDaoMethod.invoke(teamDao, strategyId, strategyName);
+
+
+            //得到复合策略中的策略列表
+            List<StrategyPair> strategyNameAndIdList=compositStrategy.getStrategyNameAndIdList();
+
+            //遍历每一个策略
+            for (StrategyPair strategyPair : strategyNameAndIdList) {
+                String name = strategyPair.getStrategyName();
+                BigInteger id=strategyPair.getStrategyId();
+
+                //判断该策略是否为复合策略
+                Boolean isCompositStrategy = false;
+                if(name.equals("TeamAndStrategy")||name.equals("TeamOrStrategy")){
+                    isCompositStrategy=true;
+                }
+
+                if (isCompositStrategy) {
+                    //复合策略验证
+                    teamDao.getCompositStrategyOnTeam(courseId,id,name,result);
+                } else {
+                    //简单策略验证
+                    teamDao.getSimpleStrategyOnTeam(courseId,id,name,result);
+                }
+
+                //根据复合策略的类型判断
+                if (strategyName.equals("TeamAndStrategy")) {
+                    if(!result.keySet().contains(3)){
+                        List<Integer> chooseList=new ArrayList<>();
+                        chooseList.add(0);
+                        result.put(3,chooseList);
+                    }
+                    else{
+                        ((List<Integer>)(result.get(3))).add(0);
+                    }
+                }
+                else{
+                    if(!result.keySet().contains(3)){
+                        List<Integer> chooseList=new ArrayList<>();
+                        chooseList.add(1);
+                        result.put(3,chooseList);
+                    }
+                    else{
+                        ((List<Integer>)(result.get(3))).add(1);
+                    }
+                }
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId,String strategyName) throws StrategyNotFoundException {
         CompositStrategy compositStrategy=new CompositStrategy();
         if(strategyName.equals("TeamAndStrategy")){
@@ -357,7 +471,6 @@ public class TeamDaoImpl implements TeamDao {
         }
         return compositStrategy;
     }
-
 
     @Override
     public void deleteTeamStrategyListByCourseId(BigInteger courseId) throws StrategyNotFoundException {

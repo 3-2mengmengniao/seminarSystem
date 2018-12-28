@@ -47,7 +47,7 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team
         WHERE id=#{teamId}
     </select>
@@ -59,31 +59,31 @@
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team,team_student
         WHERE  team.course_id=#{courseId} and team_student.team_id=team.id and team_student.student_id=#{studentId}
         </select>
 
     <select id="getTeamByMainCourseClassIdAndTeamSerial" resultMap="teamResultMap">
-        SELECT id,klass_id,course_id,team_name,leader_id,status
+        SELECT id,klass_id,team_name,leader_id,status
         FROM team
         WHERE  klass_id=#{courseClassId} and team_serial=#{teamSerial}
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT team.id as id,team.klass_id as klass_id,team.course_id,team_name,leader_id,status
+        SELECT team.id as id,team.klass_id as klass_id,team_name,leader_id,status
         FROM team,klass,klass_team
         WHERE klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team.id=klass_team.team_id
     </select>
 
     <select id="getTeamBySeminarControlId" resultMap="teamResultMap">
-        SELECT team.id as id,klass_id,team.course_id,team_name,leader_id,status
+        SELECT team.id as id,klass_id,team_name,leader_id,status
         FROM attendance,team
         WHERE klass_seminar_id=#{seminarControlId} and team.id=attendance.team_id
     </select>
 
     <select id="getTeamByCourseClassId" resultMap="teamResultMap">
-        SELECT id,team.klass_id as klass_id,team.course_id,team_name,leader_id,status
+        SELECT id,team.klass_id as klass_id,team_name,leader_id,status
         FROM klass_team,team
         WHERE klass_team.team_id=team.id and klass_team.klass_id=#{courseClassId}
     </select>
@@ -103,14 +103,12 @@
         student.id as my_student_id,
         student_name,
         account
-        FROM team,student,team_student
-        WHERE student.id=team_student.student_id
+        FROM team,student,team_student,klass_team,klass
+        WHERE klass.course_id=#{courseId}
+        and student.id=team_student.student_id
         and team.id=team_student.team_id
-        and student.id in (
-        select student_id
-        from klass_student
-        where course_id=#{courseId}
-        )
+        and klass_team.klass_id=klass.id
+        and klass_team.team_id=team.id
     </select>
 
     <insert id="insertTeam">
@@ -138,7 +136,7 @@
                 team_name=#{team.teamName},
             </if>
         </set>
-        where id=#{team.id}
+        where id=#{teamId}
     </update>
 
     <delete id="deleteCourseClassAndTeamRelation">
@@ -210,17 +208,29 @@
     </select>
 
     <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.MemberLimitStrategy">
-        select id,min_member,max_member
+        select id,min_number,max_number
         from member_limit_strategy
         where id=#{strategyId}
     </select>
+
+    <update id="updateMemberLimitStrategy">
+        update member_limit_strategy
+        <set>
+            <if test="member_limit_strategy.min_number!=null">
+                min_number=#{member_limit_strategy.min_number},
+            </if>
+            <if test="member_limit_strategy.max_number!=null">
+                max_number=#{member_limit_strategy.max_number},
+            </if>
+        </set>
+    </update>
 
     <delete id="deleteMemberLimitStrategyByStrategyId">
         delete from member_limit_strategy where id=#{strategyId}
     </delete>
 
     <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy">
-        select id,course_id,min_member,max_member
+        select id,course_id,min_number,max_number
         from course_member_limit_strategy
         where id=#{strategyId}
     </select>
@@ -232,7 +242,7 @@
     </select>
 
     <select id="getConflictCourseStrategyByStrategyId" resultMap="conflictCourseStrategyResultMap">
-        select id
+        select id,course_id
         from conflict_course_strategy
         where id=#{strategyId}
     </select>
@@ -303,5 +313,4 @@
         insert into member_limit_strategy(min_member,max_member)
         value (#{memberLimitStrategy.minMember},#{memberLimitStrategy.maxMember})
     </insert>
-
 </mapper>

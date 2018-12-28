@@ -82,12 +82,6 @@ public interface CourseService {
     List<ShareSeminarApplication> getShareSeminarApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId);
 
     /**
-     * 教师处理共享讨论课请求
-     * @param shareSeminarApplication
-     */
-    void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
-
-    /**
      * 发送共享讨论课请求
      * @param mainCourseId
      * @param subCourseId
@@ -104,14 +98,15 @@ public interface CourseService {
     List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
 
     /**
-     * 教师处理共享分组请求
-     * @param shareTeamApplication
-     */
-    void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
-
-    /**
      * 获取系统中所有课程
      * @return
      */
     List<Course> getAllCourse();
+
+    /**
+     *
+     * @param courseId
+     * @return
+     */
+    List<Course> getAvailableCourseForShare(BigInteger courseId);
 }

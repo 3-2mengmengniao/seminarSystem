@@ -120,4 +120,20 @@
     <delete id="deleteRoundScoreByRoundId">
         delete from round_score where round_id=#{roundId}
     </delete>
+
+    <select id="getEnrollNumBycourseClassIdAndRoundId" resultType="Integer">
+        select enroll_number
+        from klass_round
+        where klass_id=#{courseClassId} and round_id=#{roundId}
+    </select>
+
+    <update id="updateEnrollNum">
+        update klass_round
+        <set>
+            <if test="enrollNum!=null">
+                enroll_number=#{enrollNum}
+            </if>
+        </set>
+        where klass_id=#{courseClassId} and round_id=#{roundId}
+    </update>
 </mapper>
