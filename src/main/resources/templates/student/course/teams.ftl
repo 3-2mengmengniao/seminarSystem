@@ -128,10 +128,10 @@
     </div>
     <div class="distance4"></div>
     <div class="distance4"></div>
-    <div class="distance4"></div>
     <button onclick="window.location.href='/student/courseList'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
 </div>
-
+<div class="distance4"></div>
+<div class="distance4"></div>
 
 <!--
 <div class="decoration"></div>
