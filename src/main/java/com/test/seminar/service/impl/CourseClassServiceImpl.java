@@ -30,9 +30,10 @@ public class CourseClassServiceImpl implements CourseClassService {
     }
 
     @Override
-    public void insertCourseClass(CourseClass courseClass, BigInteger courseId)throws RepetitiveRecordException {
+    public void insertCourseClass(CourseClass courseClass, BigInteger courseId,MultipartFile file)throws RepetitiveRecordException {
         courseClassDao.insertCourseClass(courseClass,courseId);
         courseClass=courseClassDao.getCourseClassByCourseIdAndSerial(courseId,courseClass.getClassSerial());
+        uploadStudentExcel(file,courseClass.getId(),courseId);
         //根据讨论课信息创建
         List<Round> roundList=courseClass.getCourse().getRoundList();
         for(Round round:roundList){

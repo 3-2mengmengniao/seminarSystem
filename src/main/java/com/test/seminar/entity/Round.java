@@ -16,6 +16,7 @@ public class Round {
     private Integer questionScoreMethod;
     private List<SeminarInfo> seminarInfoList;
     private List<RoundScore> roundScoreList;
+    private List<CourseClassRound> courseClassRoundList;
 
     public Round() {
         presentationScoreMethod=0;
@@ -62,4 +63,32 @@ public class Round {
     public List<RoundScore> getRoundScoreList() { return roundScoreList; }
 
     public void setRoundScoreList(List<RoundScore> roundScoreList) { this.roundScoreList = roundScoreList; }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public void setRoundSerial(Integer roundSerial) {
+        this.roundSerial = roundSerial;
+    }
+
+    public void setPresentationScoreMethod(Integer presentationScoreMethod) {
+        this.presentationScoreMethod = presentationScoreMethod;
+    }
+
+    public void setReportScoreMethod(Integer reportScoreMethod) {
+        this.reportScoreMethod = reportScoreMethod;
+    }
+
+    public void setQuestionScoreMethod(Integer questionScoreMethod) {
+        this.questionScoreMethod = questionScoreMethod;
+    }
+
+    public List<CourseClassRound> getCourseClassRoundList() {
+        return courseClassRoundList;
+    }
+
+    public void setCourseClassRoundList(List<CourseClassRound> courseClassRoundList) {
+        this.courseClassRoundList = courseClassRoundList;
+    }
 }
