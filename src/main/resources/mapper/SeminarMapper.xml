@@ -183,6 +183,11 @@
         delete from seminar_score where klass_seminar_id=#{seminarScoreId} and team_id=#{teamId}
     </delete>
 
+    <delete id="deleteSeminarControlByRoundId">
+        delete from klass_seminar where klass_seminar.klass_id=klass_round.klass_id and klass_round.round_id=#{roundId}
+    </delete>
 
-
+    <delete id="deleteSeminarInfoByRoundId">
+        delete from seminar where seminar.round_id=#{roundId}
+    </delete>
 </mapper>

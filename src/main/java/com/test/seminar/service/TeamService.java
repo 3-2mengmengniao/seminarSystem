@@ -58,4 +58,11 @@ public interface TeamService {
      * @param shareTeamApplication
      */
     void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
+
+    /**
+     * 取消分组共享
+     * @param mainCourse
+     * @param subCourse
+     */
+    void cancelTeamShare(Course mainCourse,Course subCourse);
 }

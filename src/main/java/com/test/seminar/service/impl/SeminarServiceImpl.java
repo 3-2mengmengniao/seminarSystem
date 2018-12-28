@@ -199,6 +199,15 @@ public class SeminarServiceImpl implements SeminarService {
         if(shareSeminarApplication.getStatus()==1){
             //更新从课程的主课程id
             courseDao.updateCourseSeminarMainCourseId(shareSeminarApplication.getSubCourse().getId(),shareSeminarApplication.getMainCourse().getId());
+            //删除从课程原有讨论课
+            List<Round> originalRoundList=roundDao.getRoundByCourseId(shareSeminarApplication.getSubCourse().getId());
+            if(null!=originalRoundList){
+                for(Round round:originalRoundList) {
+                    seminarDao.deleteSeminarControlByRoundId(round.getId());
+                    seminarDao.deleteSeminarInfoByRoundId(round.getId());
+                    roundDao.deleteRoundByRoundId(round.getId());
+                }
+            }
             //向从课程插入主课程下的讨论课
             Course mainCourse=courseDao.getCourseByCourseId(shareSeminarApplication.getMainCourse().getId());
             List<Round> roundList=mainCourse.getRoundList();
@@ -217,5 +226,18 @@ public class SeminarServiceImpl implements SeminarService {
         //发送邮件，删除共享请求
         emailService.sendSimpleMessage(to,subject,text);
         courseDao.deleteShareTeamApplication(shareSeminarApplication.getId());
+    }
+
+    @Override
+    public void cancelSeminarShare(Course mainCourse,Course subCourse){
+        //取消讨论课共享，删除讨论课
+        List<Round> originalRoundList=roundDao.getRoundByCourseId(subCourse.getId());
+        for(Round round:originalRoundList) {
+            seminarDao.deleteSeminarControlByRoundId(round.getId());
+            seminarDao.deleteSeminarInfoByRoundId(round.getId());
+            roundDao.deleteRoundByRoundId(round.getId());
+        }
+        courseDao.updateCourseTeamMainCourseId(subCourse.getId(),null);
+
     }
 }

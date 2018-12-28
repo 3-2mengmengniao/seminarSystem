@@ -153,4 +153,14 @@ public class SeminarDaoImpl implements SeminarDao {
         }
         seminarControl.setPresentationList(presentationListReconstruct);
     }
+
+    @Override
+    public void deleteSeminarControlByRoundId(BigInteger roundId){
+        seminarMapper.deleteSeminarControlByRoundId(roundId);
+    }
+
+    @Override
+    public void deleteSeminarInfoByRoundId(BigInteger roundId){
+        seminarMapper.deleteSeminarInfoByRoundId(roundId);
+    }
 }
