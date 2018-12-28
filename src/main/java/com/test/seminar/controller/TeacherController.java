@@ -178,7 +178,7 @@ public class TeacherController {
 
     @RequestMapping(value="/course/create",method = GET)
     public String createCourse(Model model) {
-        List<Course> courseList=courseService.getAvailableCourseForShare();
+        List<Course> courseList=courseService.getAllCourse();
         model.addAttribute("courseList",courseList);
         return "teacher/course/create";
     }

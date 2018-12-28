@@ -175,6 +175,15 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public  List<Course> getAllCourse(){
+        List<Course> courseList=courseMapper.getAllCourse();
+        for(Course course:courseList){
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
+    }
+
+    @Override
     public List<Course> getAvailableCourseForShare(BigInteger courseId){
         List<Course> courseList=courseMapper.getAvailableCourseForShare(courseId);
         for(Course course:courseList){

@@ -136,6 +136,13 @@ public interface CourseDao {
      * 获取系统下所有课程
      * @return
      */
+    List<Course> getAllCourse();
+
+    /**
+     * 获取未向该课程发起共享的课程
+     * @param courseId
+     * @return
+     */
     List<Course> getAvailableCourseForShare(BigInteger courseId);
 
     /**
