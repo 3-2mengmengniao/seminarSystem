@@ -63,9 +63,13 @@ public class RoundServiceImpl implements RoundService {
         Round round=roundDao.getRoundByRoundId(roundId);
         Course course=courseDao.getCourseByRoundId(roundId);
         List<Double> presentationScore=new ArrayList();
+        List<Double> questionScore=new ArrayList();
+        List<Double> reportScore=new ArrayList();
 
         for(SeminarScore seminarScore:seminarScoreList){
             presentationScore.add(seminarScore.getPresentationScore());
+            questionScore.add(seminarScore.getQuestionScore());
+            reportScore.add(seminarScore.getReportScore());
         }
 
         switch (round.getPresentationScoreMethod()){
@@ -76,12 +80,31 @@ public class RoundServiceImpl implements RoundService {
                 roundScore.setPresentationScore(sum/enrollNumber);
             }
             case 1: {
-
-                roundScore.setPresentationScore(Collections.max(seminarScoreList));
+                roundScore.setPresentationScore(Collections.max(presentationScore));
             }
         }
-        round.getQuestionScoreMethod();
-        round.getReportScoreMethod();
-
+        switch (round.getQuestionScoreMethod()){
+            //最高分
+            case 0: {
+                double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getQuestionScore).sum();
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                roundScore.setQuestionScore(sum/enrollNumber);
+            }
+            case 1: {
+                roundScore.setQuestionScore(Collections.max(questionScore));
+            }
+        }
+        switch (round.getReportScoreMethod()){
+            //最高分
+            case 0: {
+                double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).sum();
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                roundScore.setReportScore(sum/enrollNumber);
+            }
+            case 1: {
+                roundScore.setReportScore(Collections.max(reportScore));
+            }
+        }
+        roundScore.setTotalScore(course.getPresentationPercentage()*roundScore.getPresentationScore()+course.getQuestionPercentage()*roundScore.getQuestionScore()+course.getReportPercentage()*roundScore.getReportScore());
     }
 }

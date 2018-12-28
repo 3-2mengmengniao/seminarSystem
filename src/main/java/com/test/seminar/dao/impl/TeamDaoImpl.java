@@ -116,6 +116,11 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId){
+        return  teamMapper.getTeamValidApplicationByApplicationId(applicationId);
+    }
+
+    @Override
     public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
         teamMapper.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
     }

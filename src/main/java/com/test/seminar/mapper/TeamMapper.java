@@ -124,6 +124,7 @@ public interface TeamMapper {
      */
     void updateTeamValidApplication(@Param("teamValidApplication")TeamValidApplication teamValidApplication);
 
+    TeamValidApplication getTeamValidApplicationByApplicationId(@Param("applicationId")BigInteger applicationId);
     /**
      *
      * @param teamValidApplicationId

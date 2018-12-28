@@ -175,6 +175,12 @@
         where teacher_id=#{teacherId}
     </select>
 
+    <select id="getTeamValidApplicationByApplicationId" resultMap="teamValidResultMap">
+        select id,team_id,reason,status
+        from team_valid_application
+        where id=#{teamValidApplicationId}
+    </select>
+
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
         select team.id,team_name,leader_id,status
         from team,team_valid_application
@@ -257,5 +263,4 @@
         from team_or_strategy
         where id=#{teamOrStrategyId}
     </select>
-
 </mapper>

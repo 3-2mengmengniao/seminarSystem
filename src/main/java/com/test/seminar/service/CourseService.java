@@ -105,5 +105,5 @@ public interface CourseService {
      * 获取系统中所有课程
      * @return
      */
-    List<Course> getAllCourse();
+    List<Course> getAvailableCourseForShare(BigInteger courseId);
 }

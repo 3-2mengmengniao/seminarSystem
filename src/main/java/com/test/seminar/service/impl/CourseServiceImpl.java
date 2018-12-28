@@ -122,7 +122,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourse(){
-        return courseDao.getAllCourse();
+    public List<Course> getAvailableCourseForShare(BigInteger courseId){
+        return courseDao.getAvailableCourseForShare(courseId);
     }
 }

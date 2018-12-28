@@ -104,6 +104,9 @@ public interface CourseDao {
 
     Course getSubCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId);
 
+    ShareTeamApplication getShareTeamApplicationByApplicationId(BigInteger applicationId);
+
+    ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId);
     /**
      *  插入共享讨论课的请求
      * @param mainCourseId,subCourseId,subCourseTeacherId
@@ -133,7 +136,7 @@ public interface CourseDao {
      * 获取系统下所有课程
      * @return
      */
-    List<Course> getAllCourse();
+    List<Course> getAvailableCourseForShare(BigInteger courseId);
 
     /**
      * 获取轮次对应的课程
