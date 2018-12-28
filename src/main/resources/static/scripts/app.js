@@ -38,7 +38,8 @@ function connect() {
             }
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (question) {
-            console.log(question);
+            console.log(question.teamId);
+            alert(question.teamId);
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/endSeminar', function (greeting) {
             if(user=="student")

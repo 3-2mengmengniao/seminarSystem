@@ -1,5 +1,7 @@
 package com.test.seminar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigInteger;
 
 /**
@@ -7,6 +9,7 @@ import java.math.BigInteger;
  * @date 2018/11/28
  */
 
+@JsonIgnoreProperties
 public class Question {
     private BigInteger id;
     private BigInteger seminarControlId;

@@ -95,7 +95,7 @@ public class RunSeminarController {
         runSeminarService.nextPresentation(seminarControlId);
         Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
         Presentation currentPresentation= runSeminarService.getCurrentPresentation(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",currentPresentation);
+        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",currentPresentation.getTeam().getSerial().getSerial()+"正在展示");
         template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
     }
 
@@ -130,7 +130,7 @@ public class RunSeminarController {
         Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
         Question selectQuestion= runSeminarService.getSelectQuestion(seminarControlId);
         if(null!=selectQuestion){
-            template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion",selectQuestion);
+            template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion",new QuestionDTO selectQuestion);
         }
         template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
     }
