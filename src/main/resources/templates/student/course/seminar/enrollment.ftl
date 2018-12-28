@@ -121,7 +121,6 @@
     });
     $('.registerButton').click(function(){
         var t=$(this).attr("name");
-        alert(t);
         $.ajax({
             type: "POST", // 使用post方式
             url: "/student/course/seminar/info/register?teamId=${team.id}&seminarId=${seminarControl.id}&order="+t,
@@ -131,7 +130,7 @@
                     }
             },
             error: function(result){
-                alert("报名失败！");
+                layer.alert("报名失败！",{icon:5});
             }
         });
     });

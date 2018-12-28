@@ -170,7 +170,7 @@
                             error:function(data,status){
                                 console.log(data);
                                 console.log(status);
-                                alert("修改失败");
+                                layer.msg("修改失败",function(){});
                                 console.log("error");
                             }
                         }
@@ -226,7 +226,7 @@
                         error:function(data,status){
                             console.log(data);
                             console.log(status);
-                            alert("修改失败");
+                            layer.msg("修改失败",function(){});
                             console.log("error");
                         }
                     }

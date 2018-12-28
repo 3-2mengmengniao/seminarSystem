@@ -337,7 +337,7 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            alert("共享关系未找到！");
+                            layer.msg("共享关系未找到！",function(){});
                         }
                     }
                 }
@@ -357,7 +357,7 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            alert("共享关系未找到！");
+                            layer.msg("共享关系未找到！",function(){});
                         }
                     }
                 }

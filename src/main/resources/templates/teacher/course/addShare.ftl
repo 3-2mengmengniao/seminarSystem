@@ -16,7 +16,6 @@
     <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
      <script type="text/javascript" src="/scripts/jquery.js"></script>
@@ -30,9 +29,6 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery-1.8.3.min.js" ></script>
-    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.fr.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
 
 
@@ -68,9 +64,9 @@
             <div >
                 <div class="distance3"></div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">共享类型</label>
+                    <label class="layui-form-label ">共享类型</label>
                     <div class="layui-input-block" >
-                        <select name="type">
+                        <select name="type" class="type">
                             <option value="1">共享讨论课</option>
                             <option value="2" selected>共享分组</option>
                         </select>
@@ -95,7 +91,7 @@
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建共享" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="layui-btn" id="contactSubmitButton" value="创建共享" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
@@ -120,6 +116,14 @@
     });
 </script>
 <script>
+    //禁止共享讨论课(value=2)
+    $(function(){
+        var choose=$('select.type option:selected').attr("value");
+        if(choose=="2"){
+            $("input.layui-btn").addClass("layui-btn-disabled");
+        }
+    });
+
     $('#formSuccessMessageWrap').hide(0);
     $('.formValidationError').fadeOut(0);
 

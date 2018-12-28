@@ -121,7 +121,6 @@ jQuery(document).ready(function($) {
         var flag2=validateForm($(this).attr('data-formId'));
         if(flag2==true)
         {
-            alert(flag2);
             return true;
         }
         return false;

@@ -121,7 +121,7 @@
 <script>
     <#if message??>
         window.onload = function () {
-            alert("${message}")
+            layer.msg("${message}",function(){});
         };
     </#if>
     //隐藏text block，显示password block

@@ -152,7 +152,7 @@
                             window.location.href='/student/course/teams?courseId=${course.id}';
                         }
                     },
-                    error:function(data){alert('退组失败！');}
+                    error:function(data){layer.alert("退组失败!",{icon:5});}
                 }
         );
     });
