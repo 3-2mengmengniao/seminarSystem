@@ -5,6 +5,9 @@ import com.test.seminar.dao.TeacherDao;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.*;
 import com.test.seminar.entity.strategy.impl.CompositStrategy;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
@@ -45,8 +48,10 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void insertCourse(Course course, BigInteger teacherId) throws RepetitiveRecordException {
-        courseDao.insertCourse(course, teacherId);
+    public void insertCourse(Course course, BigInteger teacherId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose)throws RepetitiveRecordException{
+        courseDao.insertCourse(course,teacherId);
+        course=courseDao.getCourseByCourseNameAndTeacherId(course.getCourseName(),teacherId);
+        teamDao.insetTeamStrategy(course.getId(),conflictCourseStrategyArrayList, courseMemberLimitStrategyList, thisCourse, choose);
     }
 
     @Override

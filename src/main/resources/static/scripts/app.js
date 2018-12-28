@@ -24,6 +24,7 @@ function connect() {
             stompClient.send("/app/buildRoom", {}, JSON.stringify({"seminarId": $("#seminarId").attr("name")}));
             send=true;
         }
+        comeIn();
         console.log('Connected: ' + frame);
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/addQuestion', function (greeting) {
             console.log("enter");
@@ -86,11 +87,11 @@ function showGreeting(message) {
 }
 
 function showNext(){
-    var currentTr=$('tr.group').filter('.active').next();
-    var groupIndex= $(currentTr).index();
-    var allTr= $('tr.group');
-    $(allTr).eq(groupIndex).addClass('active');
-    $(allTr).eq(groupIndex).siblings().removeClass('active');
+    // var currentTr=$('tr.group').filter('.active').next();
+    // var groupIndex= $(currentTr).index();
+    // var allTr= $('tr.group');
+    // $(allTr).eq(groupIndex).addClass('active');
+    // $(allTr).eq(groupIndex).siblings().removeClass('active');
     window.location.reload();
 }
 

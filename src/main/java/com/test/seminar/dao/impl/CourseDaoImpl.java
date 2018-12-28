@@ -13,8 +13,6 @@ import com.test.seminar.mapper.TeacherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -181,6 +179,11 @@ public class CourseDaoImpl implements CourseDao {
             course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
         }
         return courseList;
+    }
+
+    @Override
+    public Course getCourseByCourseNameAndTeacherId(String courseName, BigInteger teacherId) {
+        return courseMapper.getCourseByCourseNameAndTeacherId(courseName,teacherId);
     }
 
     @Override

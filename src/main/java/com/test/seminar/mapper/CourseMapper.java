@@ -155,4 +155,6 @@ public interface CourseMapper {
      * @return
      */
     Course getCourseByRoundId(@Param("roundId")BigInteger roundId);
+
+    Course getCourseByCourseNameAndTeacherId(@Param("courseName")String courseName, @Param("teacherId")BigInteger teacherId);
 }

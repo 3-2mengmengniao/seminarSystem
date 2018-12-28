@@ -1,6 +1,5 @@
 package com.test.seminar.dao.impl;
 
-import com.test.seminar.dao.CourseDao;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.*;
 import com.test.seminar.entity.strategy.StrategyPair;
@@ -121,6 +120,38 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public void insetTeamStrategy(BigInteger courseId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose) {
+        BigInteger id;
+        for(ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyArrayList){
+            id=teamMapper.getMaxConflictCourseStrategyId().add(new BigInteger("1"));
+            for(BigInteger conflictCourseId:conflictCourseStrategy.getConflictCourseIdList()){
+                teamMapper.insertConflictCourseStrategy(id,conflictCourseId);
+            }
+            teamMapper.insertTeamStrategy(courseId,"ConflictCourseStrategy",id);
+        }
+        teamMapper.insertMemberLimitStrategy(thisCourse);
+        id=teamMapper.getMaxTeamAndStrategyId().add(new BigInteger("1"));
+        teamMapper.insertTeamAndStrategy(id,"MemberLimitStrategy",teamMapper.getMaxMemberLimitStrategyId());
+        if(choose==0){
+            BigInteger andId=teamMapper.getMaxTeamAndStrategyId().and(new BigInteger("1"));
+            for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
+                teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
+                teamMapper.insertTeamAndStrategy(andId,"CourseMemberLimitStrategy",teamMapper.getMaxCourseMemberLimitStrategyId());
+            }
+            teamMapper.insertTeamAndStrategy(id,"TeamAndStrategy",andId);
+        }
+        else {
+            BigInteger orId=teamMapper.getMaxTeamOrStrategyId().and(new BigInteger("1"));
+            for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
+                teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
+                teamMapper.insertTeamAndStrategy(orId,"CourseMemberLimitStrategy",courseMemberLimitStrategy.getId());
+            }
+            teamMapper.insertTeamAndStrategy(id,"TeamOrStrategy",orId);
+        }
+        teamMapper.insertTeamStrategy(courseId,"TeamAndStrategy",id);
+    }
+
+    @Override
     public void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId){
         teamMapper.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
     }
@@ -209,7 +240,8 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        ConflictCourseStrategy conflictCourseStrategy = teamMapper.getConflictCourseStrategyByStrategyId(strategyId);
+        ConflictCourseStrategy conflictCourseStrategy=new ConflictCourseStrategy();
+        conflictCourseStrategy.setConflictCourseIdList(teamMapper.getCourseIdByConflictCourseStrategyId(strategyId));
         if (conflictCourseStrategy == null) {
             throw new StrategyNotFoundException();
         }
@@ -220,14 +252,14 @@ public class TeamDaoImpl implements TeamDao {
     public Boolean validSimpleStrategyOnTeam(Team team, BigInteger strategyId, String strategyName) throws StrategyNotFoundException {
         try {
             //用反射得到获取特定策略的dao层方法
-            String courseDaoMethodName = "get" + strategyName + "ByStrategyId";
-            Method courseDaoMethod = CourseDao.class.getMethod(courseDaoMethodName, BigInteger.class);
+            String teamDaoMethodName = "get" + strategyName + "ByStrategyId";
+            Method teamDaoMethod = TeamDao.class.getMethod(teamDaoMethodName, BigInteger.class);
 
             //得到特定策略的对象
-            Object strategy = courseDaoMethod.invoke(teamDao, strategyId);
+            Object strategy = teamDaoMethod.invoke(teamDao, strategyId);
 
             //得到特定策略类的isValid方法
-            Class strategyClass = Class.forName(strategyName);
+            Class strategyClass = Class.forName("com.test.seminar.entity.strategy.impl."+strategyName);
             Method isValid = strategyClass.getMethod("isValid", Team.class);
 
             //调用特定策略类的isValid方法
@@ -255,11 +287,11 @@ public class TeamDaoImpl implements TeamDao {
 
         try {
             //用反射得到获取复合策略的dao层方法
-            String courseDaoMethodName = "getCompositStrategyByStrategyId";
-            Method courseDaoMethod = CourseDao.class.getMethod(courseDaoMethodName, BigInteger.class);
+            String teamDaoMethodName = "getCompositStrategyByStrategyId";
+            Method teamDaoMethod = TeamDao.class.getMethod(teamDaoMethodName, BigInteger.class,String.class);
 
             //得到复合策略的对象
-            CompositStrategy compositStrategy = (CompositStrategy)courseDaoMethod.invoke(teamDao, strategyId);
+            CompositStrategy compositStrategy = (CompositStrategy)teamDaoMethod.invoke(teamDao, strategyId, strategyName);
 
             //得到复合策略中的策略列表
             List<StrategyPair> strategyNameAndIdList=compositStrategy.getStrategyNameAndIdList();
@@ -270,8 +302,10 @@ public class TeamDaoImpl implements TeamDao {
                 BigInteger id=strategyPair.getStrategyId();
 
                 //判断该策略是否为复合策略
-                Class strategyClass = Class.forName(name);
-                Boolean isCompositStrategy = CompositStrategy.class.isAssignableFrom(strategyClass);
+                Boolean isCompositStrategy = false;
+                if(name.equals("TeamAndStrategy")||name.equals("TeamOrStrategy")){
+                    isCompositStrategy=true;
+                }
 
                 Boolean result;
                 if (isCompositStrategy) {
@@ -310,8 +344,6 @@ public class TeamDaoImpl implements TeamDao {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

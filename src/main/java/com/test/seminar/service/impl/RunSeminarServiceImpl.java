@@ -182,8 +182,9 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         Integer weight;
         List<Question> questionList=seminarControl.getQuestionList();
         for(Question oldQuestion:questionList){
-            if(!weightMap.keySet().contains(oldQuestion.getSerial().getSerial()))
+            if(!weightMap.keySet().contains(oldQuestion.getSerial().getSerial())){
                 continue;
+            }
             weight=weightMap.get(oldQuestion.getSerial().getSerial());
             if(oldQuestion.getSelected()==1){
                 weight+=select;

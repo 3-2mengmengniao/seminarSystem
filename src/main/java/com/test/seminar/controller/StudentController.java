@@ -177,6 +177,20 @@ public class StudentController {
         return "student/course/teams";
     }
 
+    @RequestMapping(value="/course/team/disband",method = DELETE)
+    @ResponseBody
+    public ResponseEntity<String> disband(BigInteger teamId,Model model) {
+        teamService.deleteTeamByTeamId(teamId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/team/delete",method = DELETE)
+    @ResponseBody
+    public ResponseEntity<String> deleteMember(BigInteger teamId,BigInteger studentId,Model model) {
+        teamService.deleteTeamMember(teamId,studentId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/course/grade")
     public String groupScore(HttpServletRequest request,BigInteger courseId,Model model) {
         HttpSession session = request.getSession();
@@ -230,6 +244,7 @@ public class StudentController {
     }
 
     @RequestMapping(value="/course/seminar/info/register",method = POST)
+    @ResponseBody
     public ResponseEntity<String> seminarRegister(int order,BigInteger teamId,BigInteger seminarId, Model model) {
         seminarService.insertPresentation(order,seminarId,teamId);
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -346,6 +361,39 @@ public class StudentController {
         serial.setCourseClassSerial(team.getCourseClass().getClassSerial());
         team.setSerial(serial);
         teamService.insertTeam(team,studentIdList);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/team/add",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> createTeam(HttpServletRequest request,Model model) {
+        String data=request.getParameter("members");
+        System.out.println(data);
+        BigInteger teamId=new BigInteger(request.getParameter("teamId"));
+        List<BigInteger> studentIdList=new ArrayList<>();
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String id=(String) myArray.get(i);
+            BigInteger studentId=new BigInteger(id);
+            studentIdList.add(studentId);
+        }
+        teamService.addTeamMember(teamId,studentIdList);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/team/application",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> teamApplication(HttpServletRequest request,Model model) {
+        String data=request.getParameter("reason");
+        System.out.println(data);
+        BigInteger teamId=new BigInteger(request.getParameter("teamId"));
+        TeamValidApplication teamValidApplication=new TeamValidApplication();
+        teamValidApplication.setReason(data);
+        Team team=teamService.getTeamByTeamId(teamId);
+        teamValidApplication.setTeam(team);
+        teamValidApplication.setStatus(0);
+        BigInteger teacherId=new BigInteger(request.getParameter("teacherId"));
+        teamService.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

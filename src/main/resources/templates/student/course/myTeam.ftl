@@ -45,8 +45,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.id}</h1>
-            <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${course.courseName}小组详情</h1>
+            <a href="/student/course/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -137,6 +137,24 @@
         element.on('collapse(test)', function(data){
             layer.msg('展开状态：'+ data.show);
         });
+    });
+</script>
+<script>
+    $("#deleteButton").bind("click",function () {
+        $.ajax(
+                {
+                    url:'/student/course/team/delete?teamId=${myTeam.id}&studentId=${myId}',
+                    type:'delete',
+                    processData: false,
+                    contentType: false,
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.href='/student/course/teams?courseId=${course.id}';
+                        }
+                    },
+                    error:function(data){alert('退组失败！');}
+                }
+        );
     });
 </script>
 <style>

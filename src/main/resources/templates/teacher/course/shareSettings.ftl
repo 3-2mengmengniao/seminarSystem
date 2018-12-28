@@ -47,7 +47,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -77,10 +77,11 @@
 
 <div class="content">
     <div class="distance3"></div>
+    <#list course.seminarSubCourseList as subCourse>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">J2EE(邱老师)</h2>
+                <h2 class="layui-colla-title">${subCourse.courseName}</h2>
                 <div class="layui-colla-content">
                     <table class="layui-table" style="margin:0;border:none;">
                         <tbody>
@@ -110,7 +111,7 @@
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
@@ -118,10 +119,58 @@
     <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="distance5"></div>
+    </#list>
+    <#list course.teamSubCourseList as subCourse>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">J2EE(邱老师)</h2>
+                <h2 class="layui-colla-title">${subCourse.courseName}</h2>
+                <div class="layui-colla-content">
+                    <table class="layui-table" style="margin:0;border:none;">
+                        <tbody>
+                        <tr class="item">
+                            <td width="150" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-index" style="margin-top:-5px;">共享类型：</a>
+                            </td>
+                            <td width="100" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;">共享分组</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-colla-content">
+                    <table class="layui-table" style="margin:0;border:none;">
+                        <tbody>
+                        <tr class="item">
+                            <td width="150" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-index" style="margin-top:-5px;">共享情况：</a>
+                            </td>
+                            <td width="100" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;">主课程</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-colla-content">
+                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="distance3"></div>
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    </#list>
+    <#if seminarMainCourse??>
+    <div class="distance3"></div>
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item layui-anim layui-anim-fadein">
+                <h2 class="layui-colla-title">${seminarMainCourse.courseName}</h2>
                 <div class="layui-colla-content">
                     <table class="layui-table" style="margin:0;border:none;">
                         <tbody>
@@ -144,23 +193,69 @@
                                 <a class="my-navigation layui-anim layui-anim-fadein my-index" style="margin-top:-5px;">共享情况：</a>
                             </td>
                             <td width="100" style="border: none;margin:0;">
-                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;">主课程</a>
+                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;">从课程</a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
     </div>
     <div class="distance3"></div>
-
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    </#if>
+    <#if teamMainCourse??>
     <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="distance5"></div>
+    <div class="center-navigation">
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item layui-anim layui-anim-fadein">
+                <h2 class="layui-colla-title">${teamMainCourse.courseName}</h2>
+                <div class="layui-colla-content">
+                    <table class="layui-table" style="margin:0;border:none;">
+                        <tbody>
+                        <tr class="item">
+                            <td width="150" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-index" style="margin-top:-5px;">共享类型：</a>
+                            </td>
+                            <td width="100" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;"> 共享分组</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-colla-content">
+                    <table class="layui-table" style="margin:0;border:none;">
+                        <tbody>
+                        <tr class="item">
+                            <td width="150" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-index" style="margin-top:-5px;">共享情况：</a>
+                            </td>
+                            <td width="100" style="border: none;margin:0;">
+                                <a class="my-navigation layui-anim layui-anim-fadein my-content" style="margin-top:-5px;">从课程</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="layui-colla-content">
+                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="distance3"></div>
+    <div class="distance3"></div>
+    <div class="distance5"></div>
+    </#if>
+    <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-colla-item">
             <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/teacher/course/addShare?courseId=${course.id}'" >新增共享</h2>
@@ -181,6 +276,26 @@
 </div>
 -->
 <!--<div class="bottom-deco"></div>-->
+<script>
+    <#--$(".cancelButton").bind("click",function () {-->
+        <#--$.ajax(-->
+                <#--{-->
+                    <#--url:"/teacher/course/application/cancel",-->
+                    <#--type:'post',-->
+                    <#--data:{},-->
+                    <#--success:function(data,status,response){-->
+                        <#--if(response.status=="200"){-->
+                            <#--alert("共享请求已成功发送！");-->
+                            <#--window.location.href='/teacher/course/shareSettings?courseId=${myCourse.id}';-->
+                        <#--}-->
+                    <#--},-->
+                    <#--error:function(data,status){-->
+                        <#--alert("添加失败!");-->
+                    <#--}-->
+                <#--}-->
+        <#--);-->
+    <#--});-->
+</script>
 <style>
     .my-index{
         margin-top: -5px;

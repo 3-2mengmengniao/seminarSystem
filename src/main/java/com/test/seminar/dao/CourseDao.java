@@ -138,6 +138,8 @@ public interface CourseDao {
      */
     List<Course> getAllCourse();
 
+    Course getCourseByCourseNameAndTeacherId(String courseName,BigInteger teacherId);
+
     /**
      * 获取未向该课程发起共享的课程
      * @param courseId

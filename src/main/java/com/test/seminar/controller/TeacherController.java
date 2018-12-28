@@ -199,6 +199,38 @@ public class TeacherController {
         return "teacher/course/seminar/setting";
     }
 
+    @RequestMapping(value="/message/handle",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationHandle(HttpServletRequest request,Model model) {
+        BigInteger applicationId=new BigInteger((String)request.getParameter("applicationId"));
+        String type=request.getParameter("type");
+        Integer status=Integer.valueOf(request.getParameter("status"));
+        if(type=="shareTeam")
+        {
+
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/application/add",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationAdd(HttpServletRequest request,Model model) {
+        BigInteger mainCourseId=new BigInteger(request.getParameter("mainCourseId"));
+        BigInteger subCourseId=new BigInteger(request.getParameter("subCourseId"));
+        Integer type=Integer.valueOf(request.getParameter("type"));
+        Course subCourse=courseService.getCourseByCourseId(subCourseId);
+        if(type==1)
+        {
+            courseService.insertShareSeminarApplication(mainCourseId,subCourseId,subCourse.getTeacherId());
+        }
+        else if(type==2)
+        {
+            courseService.insertShareTeamApplication(mainCourseId,subCourseId,subCourse.getTeacherId());
+
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
 
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
@@ -215,7 +247,7 @@ public class TeacherController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             course.setTeamEndTime(sdf.parse(request.getParameter("teamEndTime")));
-            course.setTeamEndTime(sdf.parse(request.getParameter("teamStartTime")));
+            course.setTeamStartTime(sdf.parse(request.getParameter("teamStartTime")));
         }catch(Exception e)
         {
             System.out.println("时间格式出错！");
@@ -251,7 +283,7 @@ public class TeacherController {
             conflictCourseStrategyArrayList.add(conflictCourse);
         }
         Integer choose=Integer.valueOf(request.getParameter("choose"));
-        System.out.println(choose);
+        courseService.insertCourse(course,teacherId,conflictCourseStrategyArrayList,courseMemberLimitStrategyList,thisCourse,choose);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -424,10 +456,15 @@ public class TeacherController {
     public String activate(Model model) { return "teacher/activate"; }
 
     @RequestMapping(value = "/message",method = GET)
-    public String message(Model model) {
-//        List<TeamValidApplication> teamValidApplicationList=teamService.getTeamValidApplicationByTeacherId(teacherId);
-//        List<ShareTeamApplication> shareTeamApplicationList=courseService.getShareTeamApplicationBySubCourseTeacherId(teacherId);
-//        List<ShareSeminarApplication> shareSeminarApplicationList=courseService.getShareSeminarApplicationBySubCourseTeacherId(teacherId);
+    public String message(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        List<TeamValidApplication> teamValidApplicationList=teamService.getTeamValidApplicationByTeacherId(teacherId);
+        List<ShareTeamApplication> shareTeamApplicationList=courseService.getShareTeamApplicationBySubCourseTeacherId(teacherId);
+        List<ShareSeminarApplication> shareSeminarApplicationList=courseService.getShareSeminarApplicationBySubCourseTeacherId(teacherId);
+        model.addAttribute("teamValidApplicationList",teamValidApplicationList);
+        model.addAttribute("shareTeamApplicationList",shareTeamApplicationList);
+        model.addAttribute("shareSeminarApplicationList",shareSeminarApplicationList);
 //        if(shareTeamApplicationList!=null){
 //            //显示
 //        }
@@ -452,13 +489,23 @@ public class TeacherController {
     public String shareSettings(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        if(course.getSeminarMainCourseId()!=null)
+        {
+            model.addAttribute("seminarMainCourse",courseService.getCourseByCourseId(course.getSeminarMainCourseId()));
+        }
+        if(course.getTeamMainCourseId()!=null)
+        {
+            model.addAttribute("teamMainCourse",courseService.getCourseByCourseId(course.getTeamMainCourseId()));
+        }
         return "teacher/course/shareSettings";
     }
 
     @RequestMapping(value="course/addShare")
     public String addShare(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
+        model.addAttribute("myCourse",course);
+        List<Course> courseList=courseService.getAllCourse();
+        model.addAttribute("courseList",courseList);
         return "teacher/course/addShare";
     }
 
