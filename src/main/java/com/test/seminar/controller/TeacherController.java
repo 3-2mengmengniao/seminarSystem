@@ -304,7 +304,7 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/create",method = PUT)
     @ResponseBody
     public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,
-                                                    String seminarVisible,BigInteger roundId) {
+                                                    String seminarVisible,Integer roundSerial) {
         if(seminarVisible.equals("on"))
         {
             seminarInfo.setVisible(1);
@@ -312,14 +312,15 @@ public class TeacherController {
         else{
             seminarInfo.setVisible(0);
         }
-        seminarService.insertSeminarInfo(seminarInfo,courseId,roundId);
+        System.out.println(roundSerial);
+        seminarService.insertSeminarInfo(seminarInfo,courseId,roundSerial);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/seminar/setting",method = PUT)
     @ResponseBody
     public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
-                                                     String seminarVisible,BigInteger roundId,BigInteger courseId) {
+                                                     String seminarVisible,Integer roundSerial,BigInteger courseId) {
         SeminarInfo seminarInfoOld=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         if(seminarVisible.equals("on"))
         {
@@ -333,7 +334,7 @@ public class TeacherController {
         seminarInfoOld.setRegistrationStartTime(seminarInfo.getRegistrationStartTime());
         seminarInfoOld.setSeminarSerial(seminarInfo.getSeminarSerial());
         seminarService.deleteSeminarInfoBySeminarInfoId(seminarInfoOld.getId());
-        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundId);
+        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundSerial);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

@@ -96,10 +96,10 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
-                    <select name="roundId" lay-filter="aihao">
+                    <select name="roundSerial" lay-filter="aihao">
                         <option value="-1" selected>无</option>
                         <#list course.roundList as round>
-                        <option value="${round.id}">${round.roundSerial}</option>
+                        <option value="${round.roundSerial}">${round.roundSerial}</option>
                         </#list>
                     </select>
                 </div>
