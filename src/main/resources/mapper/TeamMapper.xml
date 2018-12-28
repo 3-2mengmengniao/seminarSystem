@@ -171,7 +171,7 @@
     </update>
 
     <select id="getTeamValidApplicationByTeacherId" resultMap="teamValidResultMap">
-        select id,team_id,reason,status
+        select id,team_id,teacher_id,reason,status
         from team_valid_application
         where teacher_id=#{teacherId}
     </select>
@@ -259,27 +259,27 @@
         where id=#{teamOrStrategyId}
     </select>
 
-    <select id="getMaxTeamAndStrategyId" resultType="BigInteger">
+    <select id="getMaxTeamAndStrategyId" resultType="java.math.BigInteger">
         select max(id)
         from team_and_strategy
     </select>
 
-    <select id="getMaxTeamOrStrategyId" resultType="BigInteger">
+    <select id="getMaxTeamOrStrategyId" resultType="java.math.BigInteger">
         select max(id)
         from team_or_strategy
     </select>
 
-    <select id="getMaxConflictCourseStrategyId" resultType="BigInteger">
+    <select id="getMaxConflictCourseStrategyId" resultType="java.math.BigInteger">
         select max(id)
         from conflict_course_strategy
     </select>
 
-    <select id="getMaxMemberLimitStrategyId" resultType="BigInteger">
+    <select id="getMaxMemberLimitStrategyId" resultType="java.math.BigInteger">
         select max(id)
         from member_limit_strategy
     </select>
 
-    <select id="getMaxCourseMemberLimitStrategyId" resultType="BigInteger">
+    <select id="getMaxCourseMemberLimitStrategyId" resultType="java.math.BigInteger">
         select max(id)
         from course_member_limit_strategy
     </select>
@@ -313,4 +313,10 @@
         insert into member_limit_strategy(min_member,max_member)
         value (#{memberLimitStrategy.minMember},#{memberLimitStrategy.maxMember})
     </insert>
+
+    <select id="getTeamValidApplicationByApplicationId" resultMap="teamValidResultMap">
+        select id,team_id,teacher_id,reason,status
+        from team_valid_application
+        where id=#{applicationId}
+    </select>
 </mapper>

@@ -67,6 +67,9 @@ public interface RoundDao {
      */
     List<RoundScore> getRoundScoreByRoundId(BigInteger roundId);
 
+    RoundScore getRoundScoreByRoundIdAndTeamId(BigInteger roundId,BigInteger teamId);
+
+
     /**
      *
      * @param roundScore
@@ -105,4 +108,7 @@ public interface RoundDao {
     Integer getEnrollNumBycourseClassIdAndRoundId(BigInteger courseClassId,BigInteger roundId);
 
     void updateEnrollNum(BigInteger courseClassId,BigInteger roundId);
+
+    BigInteger getRoundIdBySeminarControlId(BigInteger seminarControlId);
+
 }

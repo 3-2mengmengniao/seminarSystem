@@ -89,6 +89,8 @@ public interface RoundMapper {
      */
     List<RoundScore> getRoundScoreByTeamId(@Param("teamId")BigInteger teamId);
 
+    RoundScore getRoundScoreByRoundIdAndTeamId(@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
+
     /**
      *
      * @param roundScore
@@ -115,4 +117,6 @@ public interface RoundMapper {
     Integer getEnrollNumBycourseClassIdAndRoundId(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
 
     void updateEnrollNum(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
+
+    BigInteger getRoundIdBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 }
