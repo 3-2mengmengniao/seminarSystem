@@ -7,6 +7,7 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
 import com.test.seminar.exception.SeminarInfoNotFoundException;
 import com.test.seminar.service.SeminarService;
+import com.test.seminar.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +32,10 @@ public class SeminarServiceImpl implements SeminarService {
     private PresentationDao presentationDao;
     @Autowired
     private CourseDao courseDao;
+    @Autowired
+    private TeacherDao teacherDao;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -38,16 +43,21 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,BigInteger roundId) throws RepetitiveRecordException {
-        if(roundId.equals(new BigInteger("-1")))
+    public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,Integer roundSerial) throws RepetitiveRecordException {
+        if(roundSerial.equals(new BigInteger("-1")))
         {
+//            Round round = new Round();
+//            round.setRoundSerial(roundDao.getMaxRoundSerialByCourseId(courseId)+1);
+//            roundDao.insertRound(round,courseId);
+//            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
+//            roundId=round.getId();
             Round round = new Round();
-            round.setRoundSerial(roundDao.getMaxRoundSerialByCourseId(courseId)+1);
+            roundSerial=roundDao.getMaxRoundSerialByCourseId(courseId)+1;
+            round.setRoundSerial(roundSerial);
             roundDao.insertRound(round,courseId);
-            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
-            roundId=round.getId();
-
         }
+        Round round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,roundSerial);
+        BigInteger roundId=round.getId();
         seminarDao.insertSeminarInfo(seminarInfo,roundId,courseId);
         seminarInfo = seminarDao.getSeminarInfoBySeminarNameAndCourseId(seminarInfo.getSeminarName(),courseId);
         List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
@@ -58,7 +68,30 @@ public class SeminarServiceImpl implements SeminarService {
         List<Course> subCourseList=courseDao.getCourseBySeminarMainCourseId(courseId);
         if(subCourseList!=null){
             for(Course course:subCourseList){
+                insertSeminarInfoToSubCourse(seminarInfo,course.getId(),roundSerial);
             }
+        }
+    }
+
+    private void insertSeminarInfoToSubCourse(SeminarInfo seminarInfo,BigInteger courseId,Integer roundSerial){
+        Integer maxRoundSerial=roundDao.getMaxRoundSerialByCourseId(courseId);
+        if(maxRoundSerial==null||!maxRoundSerial.equals(roundSerial))
+        {
+            Round round = new Round();
+            if(!maxRoundSerial.equals(roundSerial)) {
+                roundSerial = roundDao.getMaxRoundSerialByCourseId(courseId) + 1;
+            }
+            round.setRoundSerial(roundSerial);
+            roundDao.insertRound(round,courseId);
+        }
+        Round round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,roundSerial);
+        BigInteger roundId=round.getId();
+        seminarDao.insertSeminarInfo(seminarInfo,roundId,courseId);
+        seminarInfo = seminarDao.getSeminarInfoBySeminarNameAndCourseId(seminarInfo.getSeminarName(),courseId);
+        List<CourseClass>courseClassList = courseClassDao.getCourseClassByCourseId(courseId);
+        for(CourseClass courseClass:courseClassList){
+            SeminarControl seminarControl = new SeminarControl();
+            seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
         }
     }
 
@@ -154,5 +187,35 @@ public class SeminarServiceImpl implements SeminarService {
         }
         multipartFile.transferTo(file);
         return file;
+    }
+
+    @Override
+    public void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication){
+        Teacher teacher=teacherDao.getTeacherByTeacherId(shareSeminarApplication.getSubCourse().getTeacherId());
+        String to=teacher.getEmail();
+        String subject="共享组队请求反馈";
+        String text="";
+        //同意请求，编辑同意邮件
+        if(shareSeminarApplication.getStatus()==1){
+            //更新从课程的主课程id
+            courseDao.updateCourseSeminarMainCourseId(shareSeminarApplication.getSubCourse().getId(),shareSeminarApplication.getMainCourse().getId());
+            //向从课程插入主课程下的讨论课
+            Course mainCourse=courseDao.getCourseByCourseId(shareSeminarApplication.getMainCourse().getId());
+            List<Round> roundList=mainCourse.getRoundList();
+            for(Round round:roundList){
+                Integer roundSerial=round.getRoundSerial();
+                for(SeminarInfo seminarInfo:round.getSeminarInfoList()){
+                    insertSeminarInfoToSubCourse(seminarInfo,shareSeminarApplication.getSubCourse().getId(),roundSerial);
+                }
+            }
+            text=text+teacher.getTeacherName()+"同意了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
+        }
+        //拒绝请求，编辑拒绝邮件
+        else{
+            text=text+teacher.getTeacherName()+"拒绝了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
+        }
+        //发送邮件，删除共享请求
+        emailService.sendSimpleMessage(to,subject,text);
+        courseDao.deleteShareTeamApplication(shareSeminarApplication.getId());
     }
 }

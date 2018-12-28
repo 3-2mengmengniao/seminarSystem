@@ -1,9 +1,6 @@
 package com.test.seminar.service;
 
-import com.test.seminar.entity.Round;
-import com.test.seminar.entity.SeminarControl;
-import com.test.seminar.entity.SeminarInfo;
-import com.test.seminar.entity.SeminarScore;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.HaveEnrollException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.SeminarControlNotFoundException;
@@ -36,9 +33,9 @@ public interface SeminarService {
      * @param seminarInfo
      * @throws RepetitiveRecordException
      */
-    void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger courseId, BigInteger roundId) throws RepetitiveRecordException;
+    void insertSeminarInfo(SeminarInfo seminarInfo, BigInteger courseId,Integer roundSerial) throws RepetitiveRecordException;
 
-    /**
+   /**
      * 更改讨论课信息
      *
      * @param seminarInfo
@@ -106,4 +103,10 @@ public interface SeminarService {
     void upLoadPPT(HttpServletRequest request, MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
 
     void upLoadReport(HttpServletRequest request,MultipartFile multipartFile, BigInteger seminarControlId, BigInteger teamId) throws IOException;
+
+    /**
+     * 教师处理共享讨论课请求
+     * @param shareSeminarApplication
+     */
+    void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
 }
