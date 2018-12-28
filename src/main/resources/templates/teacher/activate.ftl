@@ -63,7 +63,6 @@
     <form action="/teacher/activate" method="post" class="contactForm" id="contactForm">
         <fieldset>
             <p>
-            <p class="notes">默认验证邮箱：qiulaoshi@xmu.edu.cn</p>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">新密码:<span>(required)</span></label>
                 <input type="password" name="newPsw" value="" class="contactField requiredField" id="contactNameField" placeholder="请输入新密码"/>

@@ -117,8 +117,6 @@
 </div>
 
 <div class="distance2"> </div>
-<div class="distance2"> </div>
-<p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
 
 <div class="distance2"> </div>
 <div class="distance4"> </div>

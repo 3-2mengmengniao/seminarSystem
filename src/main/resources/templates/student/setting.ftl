@@ -84,7 +84,7 @@
         账户密码<br>
         <div class="text-decoration"></div>
         <div class="distance4"></div>
-        通知时间间隔
+        管理员邮箱：429823225@qq.com
         <div class="text-decoration"></div>
         <div class="distance4"></div>
         <div class="distance"></div>
@@ -108,17 +108,7 @@
             <div class="distance3"></div>
             <img class="right-image" src="/images/修改.png" onclick="window.location.href='/student/modifyPassword'">
         </div>
-    <div class="dropdown">
-        <button class="my-btn btn1-default dropdown-toggle" type="button1" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            6小时一次
-            <span class="caret1"></span>
-        </button>
-        <ul class="my-dropmenu dropdown-menu2" aria-labelledby="dropdownMenu1">
-            <li class="bootstrap"><a href="#">1小时一次</a></li>
-            <li class="bootstrap"><a href="#">3小时一次</a></li>
-            <li class="bootstrap"><a href="#">5小时一次</a></li>
-        </ul>
-    </div>
+
 
 <!--<div class="bottom-deco"></div>-->
 
