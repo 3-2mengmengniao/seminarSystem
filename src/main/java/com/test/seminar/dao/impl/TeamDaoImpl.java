@@ -146,7 +146,7 @@ public class TeamDaoImpl implements TeamDao {
             BigInteger orId=teamMapper.getMaxTeamOrStrategyId().and(new BigInteger("1"));
             for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
                 teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
-                teamMapper.insertTeamAndStrategy(orId,"CourseMemberLimitStrategy",courseMemberLimitStrategy.getId());
+                teamMapper.insertTeamAndStrategy(orId,"CourseMemberLimitStrategy",teamMapper.getMaxCourseMemberLimitStrategyId());
             }
             teamMapper.insertTeamAndStrategy(id,"TeamOrStrategy",orId);
         }

@@ -208,7 +208,7 @@
     </select>
 
     <select id="getMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.MemberLimitStrategy">
-        select id,min_number,max_number
+        select id,min_member,max_member
         from member_limit_strategy
         where id=#{strategyId}
     </select>
@@ -216,11 +216,11 @@
     <update id="updateMemberLimitStrategy">
         update member_limit_strategy
         <set>
-            <if test="member_limit_strategy.min_number!=null">
-                min_number=#{member_limit_strategy.min_number},
+            <if test="member_limit_strategy.min_member!=null">
+                min_member=#{member_limit_strategy.min_member},
             </if>
-            <if test="member_limit_strategy.max_number!=null">
-                max_number=#{member_limit_strategy.max_number},
+            <if test="member_limit_strategy.max_member!=null">
+                max_member=#{member_limit_strategy.max_member},
             </if>
         </set>
     </update>
@@ -230,7 +230,7 @@
     </delete>
 
     <select id="getCourseMemberLimitStrategyByStrategyId" resultType="com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy">
-        select id,course_id,min_number,max_number
+        select id,course_id,min_member,max_member
         from course_member_limit_strategy
         where id=#{strategyId}
     </select>

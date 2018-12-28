@@ -29,10 +29,7 @@ import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author hatake
@@ -173,6 +170,35 @@ public class TeacherController {
     public String courseInfo(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        HashMap hashMap=teamService.getStrategyByCourseId(courseId);
+        List<ConflictCourseStrategy> conflictCourseStrategyList=(List<ConflictCourseStrategy>)hashMap.get(0);
+        List<List<Course>> conflictCourses=new ArrayList<List<Course>>();
+        for(int i=0;i<conflictCourseStrategyList.size();i++)
+        {
+            List<BigInteger> courseIdList=conflictCourseStrategyList.get(i).getConflictCourseIdList();
+            List<Course> courseList=new ArrayList<>();
+            for(int j=0;j<courseIdList.size();j++)
+            {
+                courseList.add(courseService.getCourseByCourseId(courseIdList.get(j)));
+                System.out.println(courseService.getCourseByCourseId(courseIdList.get(j)).getCourseName());
+            }
+            conflictCourses.add(courseList);
+        }
+        model.addAttribute("conflictCourses",conflictCourses);
+        List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=(List<CourseMemberLimitStrategy>)hashMap.get(1);
+        List<Course> optionCourses=new ArrayList<>();
+        for(int i=0;i<courseMemberLimitStrategyList.size();i++)
+        {
+            optionCourses.add(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()));
+            System.out.println(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()).getCourseName());
+        }
+        model.addAttribute("optionCourses",optionCourses);
+        model.addAttribute("memberLimit",courseMemberLimitStrategyList);
+        MemberLimitStrategy thisCourse=(MemberLimitStrategy)hashMap.get(2);
+        model.addAttribute("thisCourse",thisCourse);
+        List<Integer> chooses=(List<Integer>)hashMap.get(3);
+        Integer choose=chooses.get(1);
+        model.addAttribute("choose",choose);
         return "teacher/course/info";
     }
 
