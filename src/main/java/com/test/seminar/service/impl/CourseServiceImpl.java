@@ -93,4 +93,15 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> getAvailableCourseForShare(BigInteger courseId){
         return courseDao.getAvailableCourseForShare(courseId);
     }
+
+    @Override
+    public ShareTeamApplication getShareTeamApplicationByApplicationId(BigInteger applicationId){
+        return  courseDao.getShareTeamApplicationByApplicationId(applicationId);
+    }
+
+    @Override
+    public ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId){
+        return  courseDao.getShareSeminarApplicationByApplicationId(applicationId);
+    }
+
 }

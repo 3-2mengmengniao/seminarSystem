@@ -229,7 +229,7 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
-    public void cancelSeminarShare(Course mainCourse,Course subCourse){
+    public void cancelSeminarShare(Course subCourse){
         //取消讨论课共享，删除讨论课
         List<Round> originalRoundList=roundDao.getRoundByCourseId(subCourse.getId());
         for(Round round:originalRoundList) {

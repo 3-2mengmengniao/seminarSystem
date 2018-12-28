@@ -61,8 +61,14 @@ public interface TeamService {
 
     /**
      * 取消分组共享
-     * @param mainCourse
      * @param subCourse
      */
-    void cancelTeamShare(Course mainCourse,Course subCourse);
+    void cancelTeamShare(Course subCourse);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId);
 }

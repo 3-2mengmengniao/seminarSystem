@@ -116,5 +116,5 @@ public interface SeminarService {
      * @param mainCourse
      * @param subCourse
      */
-    void cancelSeminarShare(Course mainCourse,Course subCourse);
+    void cancelSeminarShare(Course subCourse);
 }

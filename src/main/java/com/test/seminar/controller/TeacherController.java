@@ -205,11 +205,65 @@ public class TeacherController {
         BigInteger applicationId=new BigInteger((String)request.getParameter("applicationId"));
         String type=request.getParameter("type");
         Integer status=Integer.valueOf(request.getParameter("status"));
-        if(type=="shareTeam")
-        {
+        boolean isTeam=("team".equals(type));
+        boolean isSeminar=("seminar".equals(type));
+        boolean isVali=("validate".equals(type));
+        if(status==0) {
+            if(isTeam) {
+                ShareTeamApplication shareTeamApplication=courseService.getShareTeamApplicationByApplicationId(applicationId);
+                shareTeamApplication.setStatus(0);
+                teamService.updateShareTeamApplication(shareTeamApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if(isSeminar){
+                ShareSeminarApplication shareSeminarApplication=courseService.getShareSeminarApplicationByApplicationId(applicationId);
+                shareSeminarApplication.setStatus(0);
+                seminarService.updateShareSeminarApplication(shareSeminarApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if(isVali){
+                TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
+                teamValidApplication.setStatus(1);
+                teamService.updateTeamValidApplication(teamValidApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
 
         }
-        return new ResponseEntity<>("", HttpStatus.OK);
+        else if(isTeam||isSeminar)
+        {
+            BigInteger courseId=new BigInteger(request.getParameter("courseId"));
+            Course course=courseService.getCourseByCourseId(courseId);
+            if(isTeam&&null!=course.getTeamMainCourseId())
+            {
+                return new ResponseEntity<>("", HttpStatus.CONFLICT);
+            }
+            if(isSeminar&&null!=course.getSeminarMainCourseId())
+            {
+                return new ResponseEntity<>("", HttpStatus.CONFLICT);
+            }
+            if(isTeam)
+            {
+                ShareTeamApplication shareTeamApplication=courseService.getShareTeamApplicationByApplicationId(applicationId);
+                shareTeamApplication.setStatus(1);
+                teamService.updateShareTeamApplication(shareTeamApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if (isSeminar) {
+                ShareSeminarApplication shareSeminarApplication=courseService.getShareSeminarApplicationByApplicationId(applicationId);
+                shareSeminarApplication.setStatus(1);
+                seminarService.updateShareSeminarApplication(shareSeminarApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+
+            }
+
+        }
+        else if(isVali){
+            TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
+            teamValidApplication.setStatus(1);
+            teamService.updateTeamValidApplication(teamValidApplication);
+            return new ResponseEntity<>("", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value="/course/application/add",method = POST)
@@ -226,6 +280,24 @@ public class TeacherController {
         else if(type==2)
         {
             courseService.insertShareTeamApplication(mainCourseId,subCourseId,subCourse.getTeacherId());
+
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/application/cancel",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationCancel(HttpServletRequest request,Model model) {
+        BigInteger subCourseId=new BigInteger(request.getParameter("courseId"));
+        String type=request.getParameter("type");
+        Course subCourse=courseService.getCourseByCourseId(subCourseId);
+        if("team".equals(type))
+        {
+            teamService.cancelTeamShare(subCourse);
+        }
+        else if("seminar".equals(type))
+        {
+            seminarService.cancelSeminarShare(subCourse);
 
         }
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -469,16 +541,6 @@ public class TeacherController {
         model.addAttribute("teamValidApplicationList",teamValidApplicationList);
         model.addAttribute("shareTeamApplicationList",shareTeamApplicationList);
         model.addAttribute("shareSeminarApplicationList",shareSeminarApplicationList);
-//        if(shareTeamApplicationList!=null){
-//            //显示
-//        }
-//        if(shareSeminarApplicationList!=null){
-//            //显示
-//        }
-//        //老师点了拒绝或同意之后
-//        teamService.updateTeamValidApplication(teamValidApplication);
-//        courseService.updateShareTeamApplication(shareTeamApplication);
-//        courseService.updateShareSeminarApplication(shareSeminarApplication);
         return "teacher/message";
     }
 

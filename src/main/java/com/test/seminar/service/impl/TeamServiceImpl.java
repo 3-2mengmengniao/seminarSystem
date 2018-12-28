@@ -291,7 +291,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public void cancelTeamShare(Course mainCourse,Course subCourse){
+    public void cancelTeamShare(Course subCourse){
         //取消分组共享，删除分组关联
         List<Team> originTeamList=teamDao.getTeamByCourseId(subCourse.getId());
         for(Team team:originTeamList){
@@ -300,5 +300,10 @@ public class TeamServiceImpl implements TeamService {
             }
         }
         courseDao.updateCourseTeamMainCourseId(subCourse.getId(),null);
+    }
+
+    @Override
+    public TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId){
+        return teamDao.getTeamValidApplicationByApplicationId(applicationId);
     }
 }
