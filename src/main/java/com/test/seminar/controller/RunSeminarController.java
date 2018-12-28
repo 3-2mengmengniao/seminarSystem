@@ -93,7 +93,8 @@ public class RunSeminarController {
         BigInteger seminarControlId=message.getSeminarId();
         rundSeminarService.nextPresentation(seminarControlId);
         Integer count=rundSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup","OK");
+        Serial presentationTeamSerial=rundSeminarService.getPresentationTeamSerial(seminarControlId);
+        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",presentationTeamSerial.getSerial()+"正在展示");
         template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
     }
 

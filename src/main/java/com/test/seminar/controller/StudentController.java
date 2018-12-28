@@ -381,6 +381,22 @@ public class StudentController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
+    @RequestMapping(value="/course/team/application",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> teamApplication(HttpServletRequest request,Model model) {
+        String data=request.getParameter("reason");
+        System.out.println(data);
+        BigInteger teamId=new BigInteger(request.getParameter("teamId"));
+        TeamValidApplication teamValidApplication=new TeamValidApplication();
+        teamValidApplication.setReason(data);
+        Team team=teamService.getTeamByTeamId(teamId);
+        teamValidApplication.setTeam(team);
+        teamValidApplication.setStatus(0);
+        BigInteger teacherId=new BigInteger(request.getParameter("teacherId"));
+        teamService.insertTeamValidApplication(teamValidApplication,teamId,teacherId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/myTeam")
     public String myTeam(HttpServletRequest request,BigInteger courseId,Model model) {
         HttpSession session = request.getSession();

@@ -71,12 +71,12 @@ public class HomeController {
                 emailService.sendSimpleMessage(teacher.getEmail(),"password",teacher.getPassword());
             }
             catch (UserNotFoundException e2){
-                return new ResponseEntity<>("", HttpStatus.OK);
+                return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>("", HttpStatus.OK);
 
         }
-        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
 //    @RequestMapping(value = "/modifyPassword", method = GET)
