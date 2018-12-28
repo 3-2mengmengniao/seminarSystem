@@ -36,10 +36,12 @@ function connect() {
             {
                 showNext();
             }
+            showNotation(greeting);
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/selectQuestion', function (question) {
-            console.log(question.teamId);
-            alert(question.teamId);
+            console.log(question);
+                selectQ(question);
+
         });
         stompClient.subscribe('/user/'+$("#seminarId").attr("name")+'/endSeminar', function (greeting) {
             if(user=="student")
@@ -49,6 +51,45 @@ function connect() {
         });
     });
 }
+
+function selectQ(question){
+    var q=JSON.parse(question.body);
+    var teamId=q.teamId;
+    var classSerial=q.courseClassSerial;
+    var teamSerial=q.teamSerial;
+    var studentName=q.studentName;
+    var qid=q.id;
+    var greeting=classSerial+"-"+teamSerial+"&nbsp&nbsp"+studentName+"正在提问";
+    showNotation(greeting);
+    outputScore=	"<tr>\n"+
+        "\t\t<td style=\"padding:0 10px;\">\n"+
+        "\t\t\t\t<a style=\"font-size:17px;margin-top:-30px;\">"+classSerial+"-"+teamSerial+"&nbsp;"+studentName+"</a>\n"+
+        "\t\t</td>\n"+
+        " \t\t<td style=\"padding:0 10px;\">\n"+
+        " \t\t\t\t<div class=\"form-group floating-control-group formFieldWrap\">\n"+
+        "\t\t\t\t\t\t<form class=\"form-group floating-control-group formFieldWrap\" method=\"post\" action=\"/teacher/course/seminar/questionScore?questionId="+qid+"\" target='frame2'>"+
+        " \t\t\t\t\t\t<input style=\"margin-bottom:3px;font-size:15px;padding-top:10px;\" type=\"text\" name='score' autocomplete=\"off\" class=\"my-form-control contactField requiredField\"  placeholder=\"请输入成绩 \">\n"+
+        "\t\t\t\t\t\t<input type=\"submit\" style=\"border:none;background:none;z-index: 9999;width:27px;top:-35px;right:-40%;cursor:pointer;\">\n"+
+        " \t\t\t\t</form><iframe name=\"frame2\" frameborder=\"0\" id=\"frame2\" style=\"display: none;\"></iframe>\n"+
+        " \t\t\t\t</div>\n"+
+        "\t\t</td>\n"+
+        "</tr>";
+    var allDiv= $('div.group');
+    var groupIndex=$('li.group').filter('.active').index();
+    $("table.append-col").eq(groupIndex).append(outputScore);
+    $.each($(allDiv),function(){
+        if($(this).index()<groupIndex){
+            var divHeight=$(this).height();
+            // alert(divHeight);
+            $(this).css('margin-top','-'+divHeight+'px');
+        }
+        if($(this).index()>groupIndex){
+            var divHeight=$(this).height()-20;
+            // alert(divHeight);
+            $(this).css('margin-top','-'+divHeight+'px');
+        }
+    })
+};
 
 function disconnect() {
     if (stompClient !== null) {
@@ -85,6 +126,11 @@ function endFunction() {
 function showGreeting(message) {
     console.log(message.body);
     $("#greetings").html(message.body);
+}
+
+function showNotation(message) {
+    console.log(message.body);
+    $("#notation").html(message.body);
 }
 
 function showNext(){

@@ -552,11 +552,19 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course/seminar/presentationScore",method = POST)
-    public String presentationScore(BigInteger presentationId, Model model) {
+    @ResponseBody
+    public ResponseEntity<String> presentationScore(BigInteger presentationId, Double score,Model model) {
+        System.out.println(presentationId);
+        System.out.println(score);
 
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
 
-
-        return "teacher/course/seminar/score";
+    @RequestMapping(value="/course/seminar/questionScore",method = POST)
+    public ResponseEntity<String> questionScore(BigInteger questionId, Double score,Model model) {
+        System.out.println(questionId);
+        System.out.println(score);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/activate",method = GET)

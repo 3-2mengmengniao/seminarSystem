@@ -81,7 +81,7 @@ public class RunSeminarController {
         BigInteger seminarControlId=message.getSeminarId();
         runSeminarService.addQuestion(seminarControlId,message.getTeamId(),message.getStudentId());
         Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count.toString()+"人已提问");
     }
 
     /**
@@ -96,7 +96,7 @@ public class RunSeminarController {
         Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
         Presentation currentPresentation= runSeminarService.getCurrentPresentation(seminarControlId);
         template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",currentPresentation.getTeam().getSerial().getSerial()+"正在展示");
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count.toString()+"人已提问");
     }
 
     /**
@@ -130,8 +130,8 @@ public class RunSeminarController {
         Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
         Question selectQuestion= runSeminarService.getSelectQuestion(seminarControlId);
         if(null!=selectQuestion){
-            template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion",new QuestionDTO selectQuestion);
+            template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion",new QuestionDTO(selectQuestion));
         }
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count.toString()+"人已提问");
     }
 }

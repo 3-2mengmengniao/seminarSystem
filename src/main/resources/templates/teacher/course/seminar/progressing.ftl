@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
@@ -113,11 +113,12 @@
             <div class="group">
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
-                <form class="form-group floating-control-group formFieldWrap" action="/teacher/course/seminar/presentationScore?presentationId=${seminarControl.presentationList[t].id}">
+                <form class="form-group floating-control-group formFieldWrap" target="frame1" method="post" action="/teacher/course/seminar/presentationScore?presentationId=${seminarControl.presentationList[t].id}" >
                     <input style="margin-bottom:3px;font-size:15px;padding-top:10px;z-index:99;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩" name="score">
-                    <img title="提交" style="width:27px;top:-35px;right:-80%;cursor:pointer;" src="/images/提交.png">
                 <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                    <input title="提交" type="submit" style="border:none;background:none;z-index: 9999;width:27px;top:-35px;right:-80%;cursor:pointer;"/>
                 </form>
+                <iframe name="frame1" frameborder="0" id="frame" style="display: none;"></iframe>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
                 <table  class="append-col layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
@@ -143,9 +144,7 @@
     <p class="center center-text"><button class="button-big button-red" id="endButton" >结束讨论课</button></p>
 </div>
 
-<styles>
 
-</styles>
 <!--<div class="bottom-deco"></div>-->
 <script>
     layui.use(['element', 'layer'], function(){
@@ -158,6 +157,13 @@
     });
 </script>
 <script>
+    function submitForm() {
+        var id=$(this).attr("name");
+        alert(id);
+        $('#'+id).submit();
+    }
+</script>
+<script>
     //点击增加提问
     var outputScore="";
     outputScore=	"<tr>\n"+
@@ -165,29 +171,50 @@
             "\t\t\t\t<a style=\"font-size:17px;margin-top:-30px;\">1-1&nbsp;小红</a>\n"+
             "\t\t</td>\n"+
             " \t\t<td style=\"padding:0 10px;\">\n"+
-            " \t\t\t\t<div class=\"form-group floating-control-group formFieldWrap\">\n"+
+            " \t\t\t\t<form class=\"form-group floating-control-group formFieldWrap\" target='frame1'>\n"+
             " \t\t\t\t\t\t<input style=\"margin-bottom:3px;font-size:15px;padding-top:10px;\" type=\"text\"  autocomplete=\"off\" class=\"my-form-control contactField requiredField\"  placeholder=\"请输入成绩 \">\n"+
-            "\t\t\t\t\t\t<img title=\"提交\" style=\"width:27px;top:-35px;right:-40%;cursor:pointer;\" src=\"/images/提交.png\">\n"+
-            " \t\t\t\t</div>\n"+
+            "\t\t\t\t\t\t<img title=\"提交\" style=\"border:none;background:none;z-index: 9999;width:27px;top:-35px;right:-80%;cursor:pointer;\">\n"+
+            " \t\t\t\tM</form></div>\n"+
             "\t\t</td>\n"+
             "</tr>";
-    $("#select").click(function(){
-        var allDiv= $('div.group');
-        var groupIndex=$('li.group').filter('.active').index();
-        $("table.append-col").eq(groupIndex).append(outputScore);
-        $.each($(allDiv),function(){
-            if($(this).index()<groupIndex){
-                var divHeight=$(this).height();
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
-            }
-            if($(this).index()>groupIndex){
-                var divHeight=$(this).height()-20;
-                // alert(divHeight);
-                $(this).css('margin-top','-'+divHeight+'px');
-            }
-        })
-    });
+    // function selectQ(question){
+    //     var q=JSON.parse(question.body);
+    //     var teamId=q.teamId;
+    //     alert("enter");
+    //     alert(teamId);
+    //     var classSerial=q.courseClassSerial;
+    //     var teamSerial=q.teamSerial;
+    //     var studentName=q.studentName;
+    //     var qid=q.id;
+    //     outputScore=	"<tr>\n"+
+    //             "\t\t<td style=\"padding:0 10px;\">\n"+
+    //             "\t\t\t\t<a style=\"font-size:17px;margin-top:-30px;\">"+classSerial+"-"+teamSerial+"&nbsp;"+studentName+"</a>\n"+
+    //             "\t\t</td>\n"+
+    //             " \t\t<td style=\"padding:0 10px;\">\n"+
+    //             " \t\t\t\t<div class=\"form-group floating-control-group formFieldWrap\">\n"+
+    //             "\t\t\t\t\t\t<form class=\"form-group floating-control-group formFieldWrap\" method=\"post\" action=\"/teacher/course/seminar/questionScore?questionId="+qid+"\">"+
+    //             " \t\t\t\t\t\t<input style=\"margin-bottom:3px;font-size:15px;padding-top:10px;\" type=\"text\"  autocomplete=\"off\" class=\"my-form-control contactField requiredField\"  placeholder=\"请输入成绩 \">\n"+
+    //             "\t\t\t\t\t\t<input type=\"submit\" style=\"border:none;background:none;z-index: 9999;width:27px;top:-35px;right:-40%;cursor:pointer;\">\n"+
+    //             " \t\t\t\t</form>\n"+
+    //             " \t\t\t\t</div>\n"+
+    //             "\t\t</td>\n"+
+    //             "</tr>";
+    //     var allDiv= $('div.group');
+    //     var groupIndex=$('li.group').filter('.active').index();
+    //     $("table.append-col").eq(groupIndex).append(outputScore);
+    //     $.each($(allDiv),function(){
+    //         if($(this).index()<groupIndex){
+    //             var divHeight=$(this).height();
+    //             // alert(divHeight);
+    //             $(this).css('margin-top','-'+divHeight+'px');
+    //         }
+    //         if($(this).index()>groupIndex){
+    //             var divHeight=$(this).height()-20;
+    //             // alert(divHeight);
+    //             $(this).css('margin-top','-'+divHeight+'px');
+    //         }
+    //     })
+    // };
 //表单失去焦点提交
     $("my-form-control").blur(function(){
         if($(this).val()!=null||$(this).val()!=''){
