@@ -23,6 +23,7 @@
     
     <resultMap id="seminarScoreResultMap" type="com.test.seminar.entity.SeminarScore">
         <result property="teamId" column="team_id"/>
+        <result property="seminarControlId" column="klass_seminar_id"/>
         <result property="seminarInfoName" column="seminar_name"/>
         <result property="totalScore" column="total_score"/>
         <result property="presentationScore" column="presentation_score"/>
@@ -132,25 +133,25 @@
     </select>
 
     <select id="getSeminarScoreBySeminarControlIdAndTeamId" resultMap="seminarScoreResultMap">
-        select total_score,presentation_score,question_score,report_score
+        select klass_seminar_id,total_score,presentation_score,question_score,report_score
         from seminar_score
         where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreByTeamId" resultMap="seminarScoreResultMap">
-        select total_score,presentation_score,question_score,report_score
+        select klass_seminar_id,total_score,presentation_score,question_score,report_score
         from seminar_score
         where team_id=#{teamId}
     </select>
 
     <select id="getSeminarScoreBySeminarControlId" resultMap="seminarScoreResultMap">
-        select team_id,total_score,presentation_score,question_score,report_score
+        select klass_seminar_id,team_id,total_score,presentation_score,question_score,report_score
         from seminar_score
         where klass_seminar_id=#{seminarControlId}
     </select>
 
     <select id="getSeminarScoreByRoundIdAndTeamId" resultMap="seminarScoreResultMap">
-        select seminar_name,team_id,total_score,presentation_score,question_score,report_score
+        select klass_seminar_id,seminar_name,team_id,total_score,presentation_score,question_score,report_score
         from seminar,klass_seminar,seminar_score
         where seminar.round_id=#{roundId} and klass_seminar.seminar_id=seminar.id and seminar_score.klass_seminar_id=klass_seminar.id and seminar_score.team_id=#{teamId}
     </select>

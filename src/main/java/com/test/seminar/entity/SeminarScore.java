@@ -6,6 +6,7 @@ public class SeminarScore {
     private BigInteger teamId;
     private Serial serial;
     private String seminarInfoName;
+    private BigInteger seminarControlId;
     private Double totalScore;
     private Double presentationScore;
     private Double questionScore;
@@ -65,4 +66,8 @@ public class SeminarScore {
     public void setSerial(Serial serial) {
         this.serial = serial;
     }
+
+    public BigInteger getSeminarControlId() { return seminarControlId; }
+
+    public void setSeminarControlId(BigInteger seminarControlId) { this.seminarControlId = seminarControlId; }
 }
