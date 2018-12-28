@@ -184,7 +184,8 @@
         </div>
         -->
 </div>
-
+<div style="20px;"></div>
+<div style="20px;"></div>
 <script>
     $('#deleteButton').click(function(){
         $.ajax({

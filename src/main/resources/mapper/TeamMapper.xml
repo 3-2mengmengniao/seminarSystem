@@ -47,7 +47,7 @@
     </resultMap>
 
     <select id="getTeamByTeamId" resultMap="teamResultMap">
-        SELECT id,klass_id,team_name,leader_id,status
+        SELECT id,klass_id,course_id,team_name,leader_id,status
         FROM team
         WHERE id=#{teamId}
     </select>
@@ -59,13 +59,13 @@
     </select>
 
     <select id="getTeamByStudentIdAndCourseId" resultMap="teamResultMap">
-        SELECT id,klass_id,team_name,leader_id,status
+        SELECT id,klass_id,course_id,team_name,leader_id,status
         FROM team,team_student
         WHERE  team.course_id=#{courseId} and team_student.team_id=team.id and team_student.student_id=#{studentId}
         </select>
 
     <select id="getTeamByMainCourseClassIdAndTeamSerial" resultMap="teamResultMap">
-        SELECT id,klass_id,team_name,leader_id,status
+        SELECT id,klass_id,course_id,team_name,leader_id,status
         FROM team
         WHERE  klass_id=#{courseClassId} and team_serial=#{teamSerial}
     </select>
@@ -136,7 +136,7 @@
                 team_name=#{team.teamName},
             </if>
         </set>
-        where id=#{teamId}
+        where id=#{team.id}
     </update>
 
     <delete id="deleteCourseClassAndTeamRelation">

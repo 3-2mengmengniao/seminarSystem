@@ -141,6 +141,10 @@ public class TeamServiceImpl implements TeamService {
                 team.setStatus(0);
                 teamDao.updateTeam(team);
                 return false;
+            }else{
+                team.setStatus(1);
+                teamDao.updateTeam(team);
+                return false;
             }
         }
 
