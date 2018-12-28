@@ -76,16 +76,6 @@
                     <p class="uppercase">请填写正确的邮箱格式！</p>
                 </div>
             </div>
-            <div class="formTextareaWrap">
-                <label class="field-title contactEmailField" for="contactEmailField">验证码:</label>
-                <button id="vali_button" type="button">获取验证码</button>
-                <input name="validation" class="contactField requiredField" id="contactEmailField"  placeholder="请输入验证码"/>
-            </div>
-            <div class="formValidationError" id="contactEmailFieldError">
-                <div class="static-notification-red tap-dismiss-notification">
-                    <p class="uppercase">请填写验证码!</p>
-                </div>
-            </div>
             <div class="distance2"></div>
             <p class="center center-text"><input type="submit" class="buttonWrap button button-dark button-big contactSubmitButton" id="contactSubmitButton" value="确认提交" data-formId="contactForm"/></p>
             <div class="distance3"></div>
