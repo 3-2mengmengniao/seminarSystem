@@ -252,26 +252,4 @@ public class TeamServiceImpl implements TeamService {
         emailService.sendSimpleMessage(to,subject,text);
         courseDao.deleteShareTeamApplication(shareTeamApplication.getId());
     }
-
-    @Override
-    public void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication){
-        Teacher teacher=teacherDao.getTeacherByTeacherId(shareSeminarApplication.getSubCourse().getTeacherId());
-        String to=teacher.getEmail();
-        String subject="共享组队请求反馈";
-        String text="";
-        //同意请求，编辑同意邮件
-        if(shareSeminarApplication.getStatus()==1){
-            //更新从课程的主课程id
-            courseDao.updateCourseSeminarMainCourseId(shareSeminarApplication.getSubCourse().getId(),shareSeminarApplication.getMainCourse().getId());
-            //向从课程插入主课程下的讨论课
-            text=text+teacher.getTeacherName()+"同意了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
-        }
-        //拒绝请求，编辑拒绝邮件
-        else{
-            text=text+teacher.getTeacherName()+"拒绝了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
-        }
-        //发送邮件，删除共享请求
-        emailService.sendSimpleMessage(to,subject,text);
-        courseDao.deleteShareTeamApplication(shareSeminarApplication.getId());
-    }
 }

@@ -50,10 +50,4 @@ public interface TeamService {
      * @param shareTeamApplication
      */
     void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
-
-    /**
-     * 教师处理共享讨论课请求
-     * @param shareSeminarApplication
-     */
-    void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
 }
