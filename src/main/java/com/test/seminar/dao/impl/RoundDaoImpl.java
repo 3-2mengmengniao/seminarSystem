@@ -82,6 +82,11 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
+    public RoundScore getRoundScoreByRoundIdAndTeamId(BigInteger roundId,BigInteger teamId){
+        return roundMapper.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
+    }
+
+    @Override
     public void insertRoundScore(RoundScore roundScore) {
         roundMapper.insertRoundScore(roundScore);
     }
@@ -119,5 +124,10 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public void updateEnrollNum(BigInteger courseClassId,BigInteger roundId){
         roundMapper.updateEnrollNum(courseClassId,roundId);
+    }
+
+    @Override
+    public BigInteger getRoundIdBySeminarControlId(BigInteger seminarControlId){
+        return roundMapper.getRoundIdBySeminarControlId(seminarControlId);
     }
 }

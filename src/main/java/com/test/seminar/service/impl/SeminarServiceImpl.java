@@ -35,6 +35,8 @@ public class SeminarServiceImpl implements SeminarService {
     @Autowired
     private TeacherDao teacherDao;
     @Autowired
+    private TeamDao teamDao;
+    @Autowired
     private EmailService emailService;
 
     @Override
@@ -238,6 +240,138 @@ public class SeminarServiceImpl implements SeminarService {
             roundDao.deleteRoundByRoundId(round.getId());
         }
         courseDao.updateCourseTeamMainCourseId(subCourse.getId(),null);
+    }
 
+    private void updateRoundScore(BigInteger roundId,BigInteger teamId){
+        RoundScore roundScore=roundDao.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
+        //若本轮分数尚无记录，插入记录并重新获取包含讨论课分数的轮次分数
+        if(null==roundScore){
+            roundScore=new RoundScore();
+            roundDao.insertRoundScore(roundScore);
+            roundScore=roundDao.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
+        }
+        List<SeminarScore> seminarScoreList=roundScore.getSeminarScoreList();
+        Round round=roundDao.getRoundByRoundId(roundId);
+        Course course=courseDao.getCourseByRoundId(roundId);
+        List<Double> questionScore=new ArrayList();
+
+        for(SeminarScore seminarScore:seminarScoreList){
+            questionScore.add(seminarScore.getQuestionScore());
+        }
+
+        switch (round.getPresentationScoreMethod()){
+            //平均分
+            case 0: {
+                Double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getPresentationScore).sum();
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                roundScore.setPresentationScore(sum/enrollNumber);
+                break;
+            }
+            //最高分
+            case 1: {
+                Double presentation_score=seminarScoreList.stream().mapToDouble(SeminarScore::getPresentationScore).max().getAsDouble();
+                if(presentation_score!=null) {
+                    roundScore.setPresentationScore(presentation_score);
+                }
+                else{
+                    roundScore.setPresentationScore(Double.valueOf(0));
+                }
+                break;
+            }
+            default:
+        }
+        switch (round.getQuestionScoreMethod()){
+            //平均分
+            case 0: {
+                int count=0;
+                Double sum=Double.valueOf(0);
+                for(int i=0;i<seminarScoreList.size();i++){
+                    Double question_score=seminarScoreList.get(i).getQuestionScore();
+                    if(question_score!=null){
+                        sum+=question_score;
+                        count++;
+                    }
+                }
+                if(count!=0) {
+                    roundScore.setQuestionScore(sum / count);
+                }
+                else{
+                    roundScore.setQuestionScore(Double.valueOf(0));
+                }
+                break;
+            }
+            //最高分
+            case 1: {
+                Double question_score=seminarScoreList.stream().mapToDouble(SeminarScore::getQuestionScore).max().getAsDouble();
+                if(question_score!=null) {
+                    roundScore.setQuestionScore(question_score);
+                }
+                else{
+                    roundScore.setQuestionScore(Double.valueOf(0));
+                }
+                break;
+            }
+            default:
+        }
+        switch (round.getReportScoreMethod()){
+            //平均分
+            case 0: {
+                Double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).sum();
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                roundScore.setReportScore(sum/enrollNumber);
+                break;
+            }
+            case 1: {
+                Double report_score=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).max().getAsDouble();
+                if(report_score!=null) {
+                    roundScore.setReportScore(report_score);
+                }
+                else{
+                    roundScore.setReportScore(Double.valueOf(0));
+                }
+                break;
+            }
+            default:
+        }
+        roundScore.setTotalScore(course.getPresentationPercentage()*roundScore.getPresentationScore()+course.getQuestionPercentage()*roundScore.getQuestionScore()+course.getReportPercentage()*roundScore.getReportScore());
+        roundDao.updateRoundScore(roundScore,roundId,teamId);
+    }
+
+    @Override
+    public void updateSeminarScore(Double presentationScore,Double questionScore,Double reportScore,BigInteger seminarControlId,BigInteger teamId){
+        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
+        if(null==seminarScore){
+            seminarScore=new SeminarScore();
+            seminarScore.setPresentationScore(presentationScore);
+            seminarScore.setQuestionScore(questionScore);
+            seminarScore.setReportScore(reportScore);
+            seminarDao.insertSeminarScore(seminarScore,seminarControlId,teamId);
+        }
+        else {
+            seminarScore.setPresentationScore(presentationScore);
+            seminarScore.setQuestionScore(questionScore);
+            seminarScore.setReportScore(reportScore);
+            seminarDao.updateSeminarScore(seminarScore, seminarControlId, teamId);
+        }
+        BigInteger roundId=roundDao.getRoundIdBySeminarControlId(seminarControlId);
+        //更新该轮总分
+        updateRoundScore(roundId,teamId);
+    }
+
+    @Override
+    public void updateSeminarScoreForQuestion(Double questionScore,BigInteger seminarControlId,BigInteger teamId){
+        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
+        if(null==seminarScore){
+            seminarScore=new SeminarScore();
+            seminarScore.setQuestionScore(questionScore);
+            seminarDao.insertSeminarScore(seminarScore,seminarControlId,teamId);
+        }
+        else {
+            seminarScore.setQuestionScore(questionScore);
+            seminarDao.updateSeminarScore(seminarScore, seminarControlId, teamId);
+        }
+        BigInteger roundId=roundDao.getRoundIdBySeminarControlId(seminarControlId);
+        //更新该轮总分
+        updateRoundScore(roundId,teamId);
     }
 }

@@ -162,7 +162,6 @@
         }
        else{
             $(this).attr("src","/images/灰色修改.png");
-
             $(this).nextAll().find(".layui-input").each(function(){
                 $(this).attr("disabled","disabled");
                 $(this).addClass("layui-disabled");

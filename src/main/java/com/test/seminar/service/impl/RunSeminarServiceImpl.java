@@ -6,7 +6,7 @@ import com.test.seminar.dao.QuestionDao;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.dao.TeamDao;
 import com.test.seminar.entity.*;
-import com.test.seminar.service.RundSeminarService;
+import com.test.seminar.service.RunSeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 @Service
-public class RunSeminarServiceImpl implements RundSeminarService {
+public class RunSeminarServiceImpl implements RunSeminarService {
 
     @Autowired
     private SeminarDao seminarDao;
@@ -38,6 +38,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
             if(presentation!=null){
                 presentation.setPresent(1);
                 seminarRoomMap.get(seminarControlId).setCurrentPresentation(presentation);
+                seminarRoomMap.get(seminarControlId).setTeamIdList(new ArrayList<>());
                 presentationDao.updatePresentation(presentation);
                 break;
             }
@@ -89,6 +90,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         weightMap.put(selectTeamSerial,newWeight);
         seminarRoomMap.get(seminarControl.getId()).decCount();
         seminarRoom.setSelectQuestion(selectQuestion);
+        seminarRoom.getTeamIdList().remove(selectQuestion.getTeamId());
     }
 
     @Override
@@ -105,10 +107,15 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         }
         Map<String,Integer> weightMap=seminarRoomMap.get(seminarControlId).getWeightMap();
         String serial=teamDao.getSerialByTeamId(teamId).getSerial();
-        questionDao.insertQuestion(question,seminarControlId,presentationId,studentId,teamId);
+        question.setStudentId(studentId);
+        question.setTeamId(teamId);
+        question.setPresentationId(presentationId);
+        question.setSeminarControlId(seminarControlId);
+        questionDao.insertQuestion(question);
         Integer newWeight=weightMap.get(serial)+20;
         weightMap.put(serial,newWeight);
         seminarRoomMap.get(seminarControl.getId()).incCount();
+        seminarRoomMap.get(seminarControl.getId()).getTeamIdList().add(teamId);
     }
 
     @Override
@@ -136,6 +143,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
             }
         }
         seminarRoomMap.get(seminarControl.getId()).setCountZero();
+        seminarRoomMap.get(seminarControl.getId()).getTeamIdList().clear();
     }
 
     @Override
@@ -156,6 +164,11 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     @Override
     public Presentation getCurrentPresentation(BigInteger seminarControlId) {
         return seminarRoomMap.get(seminarControlId).getCurrentPresentation();
+    }
+
+    @Override
+    public List<BigInteger> getTeamIdInQuestion(BigInteger seminarControlId) {
+        return seminarRoomMap.get(seminarControlId).getTeamIdList();
     }
 
     private SeminarRoom buildSeminarRoomBySeminarControlId(SeminarControl seminarControl) {

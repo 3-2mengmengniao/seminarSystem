@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 public class SeminarRoom {
@@ -9,6 +10,7 @@ public class SeminarRoom {
     private Map<String,Integer> weightMap;
     private Question selectQuestion;
     private Presentation currentPresentation;
+    private List<BigInteger> teamIdList;
 
     public SeminarRoom() {
         this.count = 0;
@@ -56,5 +58,13 @@ public class SeminarRoom {
 
     public void setCurrentPresentation(Presentation currentPresentation) {
         this.currentPresentation = currentPresentation;
+    }
+
+    public List<BigInteger> getTeamIdList() {
+        return teamIdList;
+    }
+
+    public void setTeamIdList(List<BigInteger> teamIdList) {
+        this.teamIdList = teamIdList;
     }
 }

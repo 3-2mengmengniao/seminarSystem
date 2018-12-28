@@ -115,6 +115,7 @@
                 <h1>展示成绩</h1>
                 <form class="form-group floating-control-group formFieldWrap" action="/teacher/course/seminar/presentationScore?presentationId=${seminarControl.presentationList[t].id}">
                     <input style="margin-bottom:3px;font-size:15px;padding-top:10px;z-index:99;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩" name="score">
+                    <img title="提交" style="width:27px;top:-35px;right:-80%;cursor:pointer;" src="/images/提交.png">
                 <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                 </form>
                 <div style="height:20px;"></div>
