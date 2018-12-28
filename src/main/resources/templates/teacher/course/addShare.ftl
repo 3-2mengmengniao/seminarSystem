@@ -25,7 +25,6 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/creat-course.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -52,7 +51,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">新增共享</h1>
-    <a href="/teacher/course/shareSettings?courseId=${course.id}" class="button-close">x</a>
+    <a href="/teacher/course/shareSettings?courseId=${myCourse.id}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -71,27 +70,32 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">共享类型</label>
                     <div class="layui-input-block" >
-                        <select name="maxTeamMember">
-                            <option value="4">共享讨论课</option>
-                            <option value="5" selected>共享分组</option>
+                        <select name="type">
+                            <option value="1">共享讨论课</option>
+                            <option value="2" selected>共享分组</option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-form-item margin1 ">
                     <label class="layui-form-label">共享对象</label>
                     <div class="layui-input-block">
-                        <select name="minTeamMember">
-                            <option value="3" selected>软件工程(林坤辉)</option>
-                            <option value="4">软件工程(王美红)</option>
-                            <option value="5">.NET</option>
-                            <option value="6">J2EE</option>
+                        <select name="subCourse">
+                            <#list courseList as course>
+                            <#if course.id!=myCourse.id>
+                            <#if course?index==0||(courseList[0].id==myCourse.id && course?index==1)>
+                                <option value="${course.id}" selected>${course.courseName}</option>
+                            <#else>
+                                <option value="${course.id}">${course.courseName}</option>
+                            </#if>
+                            </#if>
+                            </#list>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建共享" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建共享" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
@@ -113,6 +117,47 @@
         var form = layui.form();
 
         //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+<script>
+    $('#formSuccessMessageWrap').hide(0);
+    $('.formValidationError').fadeOut(0);
+
+    // fields focus function starts
+    $('input[type="text"], input[type="password"], textarea').focus(function(){
+        if($(this).val() == $(this).attr('data-dummy')){
+            $(this).val('');
+        };
+    });
+    // fields focus function ends
+
+    // fields blur function starts
+    $('input, textarea').blur(function(){
+        if($(this).val() == ''){
+            $(this).val($(this).attr('data-dummy'));
+        };
+    });
+    $("#contactSubmitButton").bind("click",function () {
+        var fd=new FormData($('#contactForm')[0]);
+        var subCourse=fd.get("subCourse");
+        alert(subCourse);
+        var type=fd.get("type");
+        $.ajax(
+                {
+                    url:"/teacher/course/application/add",
+                    type:'post',
+                    data:{"mainCourseId":${myCourse.id},"subCourseId":subCourse,"type":type},
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            alert("共享请求已成功发送！");
+                            window.location.href='/teacher/course/shareSettings?courseId=${myCourse.id}';
+                        }
+                    },
+                    error:function(data,status){
+                        alert("添加失败!");
+                    }
+                }
+        );
     });
 </script>
 

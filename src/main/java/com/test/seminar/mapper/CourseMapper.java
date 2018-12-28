@@ -81,6 +81,8 @@ public interface CourseMapper {
 
     Course getSubCourseByShareTeamApplicationId(@Param("shareTeamApplicationId")BigInteger shareTeamApplicationId);
 
+    ShareTeamApplication getShareTeamApplicationByApplicationId(@Param("applicationId")BigInteger applicationId);
+
     /**
      *  插入共享分组的请求
      * @param mainCourseId,subCourseId,subCourseTeacherId
@@ -109,6 +111,7 @@ public interface CourseMapper {
 
     Course getSubCourseByShareSeminarApplicationId(@Param("shareTeamApplicationId")BigInteger shareSeminarApplicationId);
 
+    ShareSeminarApplication getShareSeminarApplicationByApplicationId(@Param("applicationId")BigInteger applicationId);
     /**
      *  插入共享讨论课的请求
      * @param mainCourseId,subCourseId,subCourseTeacherId
@@ -138,6 +141,20 @@ public interface CourseMapper {
      * @return
      */
     List<Course> getAllCourse();
+
+    /**
+     * 获取未向该课程发起共享的课程
+     * @param courseId
+     * @return
+     */
+    List<Course> getAvailableCourseForShare(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 获取轮次对应的课程
+     * @param roundId
+     * @return
+     */
+    Course getCourseByRoundId(@Param("roundId")BigInteger roundId);
 
     Course getCourseByCourseNameAndTeacherId(@Param("courseName")String courseName, @Param("teacherId")BigInteger teacherId);
 }

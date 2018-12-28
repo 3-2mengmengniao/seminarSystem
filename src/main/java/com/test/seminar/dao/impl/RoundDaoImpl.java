@@ -110,4 +110,14 @@ public class RoundDaoImpl implements RoundDao {
     public List<RoundScore> getRoundScoreByTeamId(BigInteger teamId) {
         return roundMapper.getRoundScoreByTeamId(teamId);
     }
+
+    @Override
+    public Integer getEnrollNumBycourseClassIdAndRoundId(BigInteger courseClassId,BigInteger roundId){
+        return roundMapper.getEnrollNumBycourseClassIdAndRoundId(courseClassId,roundId);
+    }
+
+    @Override
+    public void updateEnrollNum(BigInteger courseClassId,BigInteger roundId){
+        roundMapper.updateEnrollNum(courseClassId,roundId);
+    }
 }

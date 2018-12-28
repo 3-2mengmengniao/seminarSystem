@@ -100,6 +100,8 @@ public interface TeamDao {
      */
     void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId);
 
+
+    TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId);
     /**
      *
      * @param teamValidApplication

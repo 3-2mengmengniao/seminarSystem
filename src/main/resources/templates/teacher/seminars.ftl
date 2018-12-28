@@ -89,7 +89,6 @@
 </#list>
     <div class="distance2"></div>
     <div class="distance2"></div>
-<p class="center center-text"><a href="/teacher/seminars" class="button-return button-red">返回正在进行的讨论课</a></p>
 
     <!--
     <div class="decoration"></div>

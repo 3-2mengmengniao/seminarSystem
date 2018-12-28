@@ -1,8 +1,6 @@
 package com.test.seminar.service;
 
-import com.test.seminar.entity.Student;
-import com.test.seminar.entity.Team;
-import com.test.seminar.entity.TeamValidApplication;
+import com.test.seminar.entity.*;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.TeamNotFoundException;
 import javafx.util.Pair;
@@ -54,4 +52,16 @@ public interface TeamService {
      * @return 元素依次是List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, List<Integer> chooseList
      */
     HashMap getStrategyByCourseId(BigInteger courseId);
+
+    /**
+     * 教师处理共享分组请求
+     * @param shareTeamApplication
+     */
+    void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
+
+    /**
+     * 教师处理共享讨论课请求
+     * @param shareSeminarApplication
+     */
+    void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
 }

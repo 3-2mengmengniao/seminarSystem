@@ -117,6 +117,11 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
+    public TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId){
+        return  teamMapper.getTeamValidApplicationByApplicationId(applicationId);
+    }
+
+    @Override
     public void insetTeamStrategy(BigInteger courseId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose) {
         BigInteger id;
         for(ConflictCourseStrategy conflictCourseStrategy:conflictCourseStrategyArrayList){

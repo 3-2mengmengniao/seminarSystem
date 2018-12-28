@@ -4,6 +4,7 @@ import com.test.seminar.dao.CourseDao;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.ShareSeminarApplication;
 import com.test.seminar.entity.ShareTeamApplication;
+import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.CourseNotFoundException;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.ShareTeamApplicationNotFoundException;
@@ -31,6 +32,8 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public Course getCourseByCourseId(BigInteger courseId) throws CourseNotFoundException {
         Course course = courseMapper.getCourseByCourseId(courseId);
+        Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+        course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
         if (course == null) {
             throw new CourseNotFoundException();
         }
@@ -39,22 +42,42 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public List<Course> getCourseByTeacherId(BigInteger teacherId) {
-        return courseMapper.getCourseByTeacherId(teacherId);
+        List<Course> courseList=courseMapper.getCourseByTeacherId(teacherId);
+        for(Course course:courseList){
+            Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
     }
 
     @Override
     public List<Course> getCourseByStudentId(BigInteger studentId) {
-        return courseMapper.getCourseByStudentId(studentId);
+        List<Course> courseList=courseMapper.getCourseByStudentId(studentId);
+        for(Course course:courseList){
+            Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
     }
 
     @Override
     public List<Course> getCourseBySeminarMainCourseId(BigInteger seminarMainCourseId) {
-        return courseMapper.getCourseBySeminarMainCourseId(seminarMainCourseId);
+        List<Course> courseList=courseMapper.getCourseBySeminarMainCourseId(seminarMainCourseId);
+        for(Course course:courseList){
+            Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
     }
 
     @Override
     public List<Course> getCourseByTeamMainCourseId(BigInteger teamMainCourseId) {
-        return courseMapper.getCourseByTeamMainCourseId(teamMainCourseId);
+        List<Course> courseList=courseMapper.getCourseByTeamMainCourseId(teamMainCourseId);
+        for(Course course:courseList){
+            Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
     }
 
     @Override
@@ -75,6 +98,17 @@ public class CourseDaoImpl implements CourseDao {
         }
         courseMapper.deleteCourseByCourseId(courseId);
     }
+
+    @Override
+    public ShareTeamApplication getShareTeamApplicationByApplicationId(BigInteger applicationId){
+        return courseMapper.getShareTeamApplicationByApplicationId(applicationId);
+    }
+
+    @Override
+    public ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId){
+        return courseMapper.getShareSeminarApplicationByApplicationId(applicationId);
+    }
+
 
     @Override
     public void insertShareTeamApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId) {
@@ -102,12 +136,18 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public Course getMainCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId){
-        return courseMapper.getMainCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+        Course course = courseMapper.getMainCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+        Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+        course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        return course;
     }
 
     @Override
     public Course getSubCourseByShareSeminarApplicationId(BigInteger shareSeminarApplicationId){
-        return courseMapper.getSubCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+        Course course = courseMapper.getSubCourseByShareSeminarApplicationId(shareSeminarApplicationId);
+        Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+        course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        return course;
     }
 
     @Override
@@ -133,7 +173,7 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public List<Course> getAllCourse(){
+    public  List<Course> getAllCourse(){
         List<Course> courseList=courseMapper.getAllCourse();
         for(Course course:courseList){
             course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
@@ -144,5 +184,22 @@ public class CourseDaoImpl implements CourseDao {
     @Override
     public Course getCourseByCourseNameAndTeacherId(String courseName, BigInteger teacherId) {
         return courseMapper.getCourseByCourseNameAndTeacherId(courseName,teacherId);
+    }
+
+    @Override
+    public List<Course> getAvailableCourseForShare(BigInteger courseId){
+        List<Course> courseList=courseMapper.getAvailableCourseForShare(courseId);
+        for(Course course:courseList){
+            course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        }
+        return courseList;
+    }
+
+    @Override
+    public  Course getCourseByRoundId(BigInteger roundId){
+        Course course = courseMapper.getCourseByRoundId(roundId);
+        Teacher teacher=teacherMapper.getTeacherByTeacherId(course.getTeacherId());
+        course.setCourseName(course.getCourseName()+'('+teacherMapper.getTeacherByTeacherId(course.getTeacherId()).getTeacherName()+')');
+        return course;
     }
 }

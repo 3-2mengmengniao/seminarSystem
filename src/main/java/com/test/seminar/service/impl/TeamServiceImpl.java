@@ -1,8 +1,6 @@
 package com.test.seminar.service.impl;
 
-import com.test.seminar.dao.CourseClassDao;
-import com.test.seminar.dao.StudentDao;
-import com.test.seminar.dao.TeamDao;
+import com.test.seminar.dao.*;
 import com.test.seminar.entity.*;
 import com.test.seminar.entity.strategy.TeamStrategy;
 import com.test.seminar.entity.strategy.impl.CompositStrategy;
@@ -22,6 +20,10 @@ import java.util.*;
 public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamDao teamDao;
+    @Autowired
+    private TeacherDao teacherDao;
+    @Autowired
+    private CourseDao courseDao;
     @Autowired
     private CourseClassDao courseClassDao;
     @Autowired
@@ -248,5 +250,53 @@ public class TeamServiceImpl implements TeamService {
         }
         emailService.sendSimpleMessage(to,subject,text);
         teamDao.deleteTeamValidApplicationByTeamValidApplicationId(teamValidApplication.getId());
+    }
+
+    @Override
+    public void updateShareTeamApplication(ShareTeamApplication shareTeamApplication){
+        Teacher teacher=teacherDao.getTeacherByTeacherId(shareTeamApplication.getSubCourse().getTeacherId());
+        String to=teacher.getEmail();
+        String subject="共享组队请求反馈";
+        String text="";
+        //同意请求，编辑同意邮件
+        if(shareTeamApplication.getStatus()==1){
+            //更新从课程的主课程id
+            courseDao.updateCourseTeamMainCourseId(shareTeamApplication.getSubCourse().getId(),shareTeamApplication.getMainCourse().getId());
+            //向从课程插入主课程下的组队，更新klass_team表
+            List<Team> teamList=teamDao.getTeamByCourseId(shareTeamApplication.getMainCourse().getId());
+            for(Team team:teamList){
+                updateTeamSubCourseTeamRelation(shareTeamApplication.getSubCourse(),team);
+            }
+            text=text+teacher.getTeacherName()+"同意了您对"+shareTeamApplication.getMainCourse().getCourseName()+"课程的共享分组请求";
+        }
+        //拒绝请求，编辑拒绝邮件
+        else{
+            text=text+teacher.getTeacherName()+"拒绝了您对"+shareTeamApplication.getMainCourse().getCourseName()+"课程的共享分组请求";
+        }
+        //发送邮件，删除共享请求
+        emailService.sendSimpleMessage(to,subject,text);
+        courseDao.deleteShareTeamApplication(shareTeamApplication.getId());
+    }
+
+    @Override
+    public void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication){
+        Teacher teacher=teacherDao.getTeacherByTeacherId(shareSeminarApplication.getSubCourse().getTeacherId());
+        String to=teacher.getEmail();
+        String subject="共享组队请求反馈";
+        String text="";
+        //同意请求，编辑同意邮件
+        if(shareSeminarApplication.getStatus()==1){
+            //更新从课程的主课程id
+            courseDao.updateCourseSeminarMainCourseId(shareSeminarApplication.getSubCourse().getId(),shareSeminarApplication.getMainCourse().getId());
+            //向从课程插入主课程下的讨论课
+            text=text+teacher.getTeacherName()+"同意了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
+        }
+        //拒绝请求，编辑拒绝邮件
+        else{
+            text=text+teacher.getTeacherName()+"拒绝了您对"+shareSeminarApplication.getMainCourse().getCourseName()+"课程的共享讨论课请求";
+        }
+        //发送邮件，删除共享请求
+        emailService.sendSimpleMessage(to,subject,text);
+        courseDao.deleteShareTeamApplication(shareSeminarApplication.getId());
     }
 }
