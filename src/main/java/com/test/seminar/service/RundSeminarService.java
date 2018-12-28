@@ -3,7 +3,6 @@ package com.test.seminar.service;
 import com.test.seminar.entity.Presentation;
 import com.test.seminar.entity.Question;
 import com.test.seminar.entity.SeminarControl;
-import com.test.seminar.entity.Serial;
 
 import java.math.BigInteger;
 import java.util.Date;
@@ -26,7 +25,7 @@ public interface RundSeminarService {
 
     Integer getQuestionNumberWaitToSelect(BigInteger seminarControlId);
 
-    Serial getQuestionTeamSerial(BigInteger seminarControlId);
+    Question getSelectQuestion(BigInteger seminarControlId);
 
-    Serial getPresentationTeamSerial(BigInteger seminarControlId);
+    Presentation getCurrentPresentation(BigInteger seminarControlId);
 }

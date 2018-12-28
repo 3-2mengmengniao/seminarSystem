@@ -64,4 +64,11 @@ public interface TeamService {
      * @param subCourse
      */
     void cancelTeamShare(Course subCourse);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId);
 }

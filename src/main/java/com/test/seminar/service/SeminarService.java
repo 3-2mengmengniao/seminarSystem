@@ -110,7 +110,6 @@ public interface SeminarService {
      */
     void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
 
-
     /**
      * 取消讨论课共享
      * @param subCourse

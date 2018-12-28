@@ -360,6 +360,18 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public void updateSeminarScoreForQuestion(Double questionScore,BigInteger seminarControlId,BigInteger teamId){
-
+        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
+        if(null==seminarScore){
+            seminarScore=new SeminarScore();
+            seminarScore.setQuestionScore(questionScore);
+            seminarDao.insertSeminarScore(seminarScore,seminarControlId,teamId);
+        }
+        else {
+            seminarScore.setQuestionScore(questionScore);
+            seminarDao.updateSeminarScore(seminarScore, seminarControlId, teamId);
+        }
+        BigInteger roundId=roundDao.getRoundIdBySeminarControlId(seminarControlId);
+        //更新该轮总分
+        updateRoundScore(roundId,teamId);
     }
 }

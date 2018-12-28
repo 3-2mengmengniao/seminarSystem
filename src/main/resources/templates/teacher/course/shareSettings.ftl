@@ -111,7 +111,7 @@
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelSeminarButton" name="${subCourse.id}" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelTeamButton" name="${subCourse.id}" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelSeminarButton" name="${seminarMainCourse.id}" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
@@ -246,7 +246,7 @@
                     </table>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn cancelButton" style="margin-top:10px;">取消共享</button></p>
+                    <p class="center center-text "><button class="layui-btn cancelTeamButton" name="${course.id}" style="margin-top:10px;">取消共享</button></p>
                 </div>
             </div>
         </div>
@@ -311,7 +311,6 @@
         margin-bottom: -5px;
     }
 </style>
-</body>
 <script>
     //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
@@ -323,4 +322,47 @@
         });
     });
 </script>
+<script>
+    $(".cancelSeminarButton").bind("click",function () {
+        var courseId=$(this).attr('name');
+        $.ajax(
+                {
+                    url:'/teacher/application/cancel',
+                    type:'post',
+                    data:{"type":"seminar","courseId":courseId}
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data,status,response){
+                        if(response.status=="404") {
+                            alert("共享关系未找到！");
+                        }
+                    }
+                }
+        );
+    });
+    $(".cancelTeamButton").bind("click",function () {
+        var courseId=$(this).attr('name');
+        $.ajax(
+                {
+                    url:'/teacher/application/cancel',
+                    type:'post',
+                    data:{"type":"team","courseId":courseId}
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data,status,response){
+                        if(response.status=="404") {
+                            alert("共享关系未找到！");
+                        }
+                    }
+                }
+        );
+    });
+</script>
+</body>
 </html>

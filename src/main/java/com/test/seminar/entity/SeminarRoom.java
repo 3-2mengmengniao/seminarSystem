@@ -7,8 +7,8 @@ public class SeminarRoom {
 
     private Integer count;
     private Map<String,Integer> weightMap;
-    private Serial questionTeam;
-    private Serial presentationTeam;
+    private Question selectQuestion;
+    private Presentation currentPresentation;
 
     public SeminarRoom() {
         this.count = 0;
@@ -42,19 +42,19 @@ public class SeminarRoom {
         this.weightMap = weightMap;
     }
 
-    public Serial getQuestionTeam() {
-        return questionTeam;
+    public Question getSelectQuestion() {
+        return selectQuestion;
     }
 
-    public void setQuestionTeam(Serial questionTeam) {
-        this.questionTeam = questionTeam;
+    public void setSelectQuestion(Question selectQuestion) {
+        this.selectQuestion = selectQuestion;
     }
 
-    public Serial getPresentationTeam() {
-        return presentationTeam;
+    public Presentation getCurrentPresentation() {
+        return currentPresentation;
     }
 
-    public void setPresentationTeam(Serial presentationTeam) {
-        this.presentationTeam = presentationTeam;
+    public void setCurrentPresentation(Presentation currentPresentation) {
+        this.currentPresentation = currentPresentation;
     }
 }

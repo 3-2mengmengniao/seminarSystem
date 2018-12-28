@@ -212,4 +212,8 @@ public interface TeamMapper {
     BigInteger getMaxMemberLimitStrategyId();
 
     BigInteger getMaxCourseMemberLimitStrategyId();
+
+    List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
+
+    void updateMemberLimitStrategy(@Param("memberLimitStrategy") MemberLimitStrategy memberLimitStrategy);
 }

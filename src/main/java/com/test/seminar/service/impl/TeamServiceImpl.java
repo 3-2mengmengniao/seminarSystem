@@ -301,4 +301,9 @@ public class TeamServiceImpl implements TeamService {
         }
         courseDao.updateCourseTeamMainCourseId(subCourse.getId(),null);
     }
+
+    @Override
+    public TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId){
+        return teamDao.getTeamValidApplicationByApplicationId(applicationId);
+    }
 }

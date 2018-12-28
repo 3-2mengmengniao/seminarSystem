@@ -109,4 +109,19 @@ public interface CourseService {
      * @return
      */
     List<Course> getAvailableCourseForShare(BigInteger courseId);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    ShareTeamApplication getShareTeamApplicationByApplicationId(BigInteger applicationId);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId);
+
 }
