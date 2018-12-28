@@ -141,8 +141,6 @@
 
         <div class="distance"></div>
         <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
-        <div class="distance4"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
             <!--
         <div class="decoration"></div>
         <div class="footer">

@@ -138,38 +138,6 @@
                     </tr>
                         </#if>
                     </#list>
-                        <#--<tr class="item">-->
-                        <#--<td data-field="0"  class="layui-table-col-special">-->
-                        <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                        <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                        <#--<i class="layui-icon layui-icon-ok"></i>-->
-                        <#--</div>-->
-                        <#--</div>-->
-                        <#--</td>-->
-                        <#--<td data-field="id"  class="">-->
-                        <#--<div class="layui-table-cell ">24320122202845</div>-->
-                        <#--</td>-->
-                        <#--<td data-field="username"  class="">-->
-                        <#--<div class="layui-table-cell">&nbsp;小刘&nbsp;</div>-->
-                        <#--</td>-->
-                        <#--</tr>-->
-                        <#--<tr class="item">-->
-                        <#--<td data-field="0"  class="layui-table-col-special">-->
-                        <#--<div class="layui-table-cell  laytable-cell-checkbox">-->
-                        <#--<input type="checkbox" name="layTableCheckbox" lay-skin="primary">-->
-                        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary">-->
-                        <#--<i class="layui-icon layui-icon-ok"></i>-->
-                        <#--</div>-->
-                        <#--</div>-->
-                        <#--</td>-->
-                        <#--<td data-field="id"  class="">-->
-                        <#--<div class="layui-table-cell ">24320122202846</div>-->
-                        <#--</td>-->
-                        <#--<td data-field="username"  class="">-->
-                        <#--<div class="layui-table-cell">&nbsp;小李&nbsp;</div>-->
-                        <#--</td>-->
-                        <#--</tr>-->
                         </tbody>
                     </table>
                     <div class="distance4"></div>
