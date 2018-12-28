@@ -303,7 +303,7 @@ public class TeacherController {
     @RequestMapping(value="/course/seminar/create",method = PUT)
     @ResponseBody
     public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,
-                                                    String seminarVisible,BigInteger roundId) {
+                                                    String seminarVisible,Integer roundSerial) {
         if(seminarVisible.equals("on"))
         {
             seminarInfo.setVisible(1);
@@ -311,14 +311,15 @@ public class TeacherController {
         else{
             seminarInfo.setVisible(0);
         }
-        seminarService.insertSeminarInfo(seminarInfo,courseId,roundId);
+        System.out.println(roundSerial);
+        seminarService.insertSeminarInfo(seminarInfo,courseId,roundSerial);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/seminar/setting",method = PUT)
     @ResponseBody
     public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
-                                                     String seminarVisible,BigInteger roundId,BigInteger courseId) {
+                                                     String seminarVisible,Integer roundSerial,BigInteger courseId) {
         SeminarInfo seminarInfoOld=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
         if(seminarVisible.equals("on"))
         {
@@ -332,7 +333,7 @@ public class TeacherController {
         seminarInfoOld.setRegistrationStartTime(seminarInfo.getRegistrationStartTime());
         seminarInfoOld.setSeminarSerial(seminarInfo.getSeminarSerial());
         seminarService.deleteSeminarInfoBySeminarInfoId(seminarInfoOld.getId());
-        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundId);
+        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundSerial);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -389,12 +390,16 @@ public class TeacherController {
 
     @RequestMapping(value="/course/roundSetting",method = PATCH)
     @ResponseBody
-    public ResponseEntity<String> roundSettingPost(BigInteger roundId,int presentationScoreMethod,int reportScoreMethod,
-                                   int questionScoreMethod,Model model) {
-        Round round=roundService.getRoundByRoundId(roundId);
-        round.setPresentationScoreMethod(presentationScoreMethod);
-        round.setQuestionScoreMethod(questionScoreMethod);
-        round.setReportScoreMethod(reportScoreMethod);
+    public ResponseEntity<String> roundSettingPost(HttpServletRequest request,Model model) {
+        Round round=roundService.getRoundByRoundId(new BigInteger(request.getParameter("roundId")));
+        round.setPresentationScoreMethod(Integer.valueOf(request.getParameter("presentationScoreMethod")));
+        round.setQuestionScoreMethod(Integer.valueOf(request.getParameter("questionScoreMethod")));
+        round.setReportScoreMethod(Integer.valueOf(request.getParameter("reportScoreMethod")));
+        String data=request.getParameter("enrollment");
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String tmp=(String) myArray.get(i);
+        }
         roundService.updateRound(round);
         return new ResponseEntity<>("", HttpStatus.OK);
     }

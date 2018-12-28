@@ -119,44 +119,11 @@
                 </form>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
-                <table  class="layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
+                <table  class="append-col layui-table" lay-skin="line" style="border:none;border-width:0 0;" >
                     <colgroup>
                         <col width="100" >
                         <col width="200" >
                     </colgroup>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding:0 10px;">
-                            <a style="font-size:17px;margin-top:-15px;">1-1&nbsp;小红</a>
-                        </td>
-                        <td style="padding:0 10px;">
-                            <div class="form-group floating-control-group formFieldWrap">
-                                <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
-                            </div>
-                        </td>
-                    </tr>
                 </table>
                 <div style="height:20px;"></div>
             </div>
@@ -190,6 +157,42 @@
     });
 </script>
 <script>
+    //点击增加提问
+    var outputScore="";
+    outputScore=	"<tr>\n"+
+            "\t\t<td style=\"padding:0 10px;\">\n"+
+            "\t\t\t\t<a style=\"font-size:17px;margin-top:-30px;\">1-1&nbsp;小红</a>\n"+
+            "\t\t</td>\n"+
+            " \t\t<td style=\"padding:0 10px;\">\n"+
+            " \t\t\t\t<div class=\"form-group floating-control-group formFieldWrap\">\n"+
+            " \t\t\t\t\t\t<input style=\"margin-bottom:3px;font-size:15px;padding-top:10px;\" type=\"text\"  autocomplete=\"off\" class=\"my-form-control contactField requiredField\"  placeholder=\"请输入成绩 \">\n"+
+            "\t\t\t\t\t\t<img title=\"提交\" style=\"width:27px;top:-35px;right:-40%;cursor:pointer;\" src=\"/images/提交.png\">\n"+
+            " \t\t\t\t</div>\n"+
+            "\t\t</td>\n"+
+            "</tr>";
+    $("#select").click(function(){
+        var allDiv= $('div.group');
+        var groupIndex=$('li.group').filter('.active').index();
+        $("table.append-col").eq(groupIndex).append(outputScore);
+        $.each($(allDiv),function(){
+            if($(this).index()<groupIndex){
+                var divHeight=$(this).height();
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+            if($(this).index()>groupIndex){
+                var divHeight=$(this).height()-20;
+                // alert(divHeight);
+                $(this).css('margin-top','-'+divHeight+'px');
+            }
+        })
+    });
+//表单失去焦点提交
+    $("my-form-control").blur(function(){
+        if($(this).val()!=null||$(this).val()!=''){
+            alert($(this).val());
+        }
+    });
     $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');
@@ -513,24 +516,49 @@
             font-weight:800;
         }
     }
-    #wrapper {
-        width: 95%;
-        margin: auto;
-        background-color: #fff;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: left;
-        -webkit-justify-content: left;
-        -ms-flex-pack: left;
-        justify-content: left;
-        overflow:hidden;
+    @media screen and (max-width:768px){
+        #wrapper {
+            width: 95%;
+            margin: auto;
+            min-height:490px;
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: left;
+            -webkit-justify-content: left;
+            -ms-flex-pack: left;
+            justify-content: left;
+            overflow:hidden;
+        }
+    }
+    @media screen and (min-width:768px){
+        #wrapper {
+            width: 95%;
+            margin: auto;
+            min-height:400px;
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: left;
+            -webkit-justify-content: left;
+            -ms-flex-pack: left;
+            justify-content: left;
+            overflow:hidden;
+        }
     }
     #left-side {
         height: 100%;

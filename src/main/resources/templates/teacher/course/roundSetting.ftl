@@ -24,7 +24,6 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/roundSetting.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -51,7 +50,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">第${round.roundSerial}轮</h1>
-    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,7 +58,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course/roundSetting?roundId=${round.id}" id="contactForm" name="${course.id}">
+        <form class="layui-form contactForm" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#c9302c;">轮次设置失败！</p>
@@ -80,9 +79,21 @@
                     <label class="layui-form-label">展示</label>
                     <div class="layui-input-block">
                         <select name="presentationScoreMethod" lay-filter="aihao">
+                            <#if round.presentationScoreMethod==0>
                             <option value="0" selected>最高分</option>
+                            <#else>
+                            <option value="0">最高分</option>
+                            </#if>
+                            <#if round.presentationScoreMethod==1>
+                            <option value="1" selected>平均分</option>
+                            <#else>
                             <option value="1">平均分</option>
+                            </#if>
+                            <#if round.presentationScoreMethod==2>
+                            <option value="2" selected>最低分</option>
+                            <#else>
                             <option value="2">最低分</option>
+                            </#if>
                         </select>
                     </div>
                 </div>
@@ -90,9 +101,21 @@
                     <label class="layui-form-label">提问</label>
                     <div class="layui-input-block">
                         <select name="questionScoreMethod" lay-filter="aihao">
+                            <#if round.questionScoreMethod==0>
                             <option value="0" selected>最高分</option>
+                            <#else>
+                            <option value="0">最高分</option>
+                            </#if>
+                            <#if round.questionScoreMethod==1>
+                            <option value="1" selected>平均分</option>
+                            <#else>
                             <option value="1">平均分</option>
+                            </#if>
+                            <#if round.questionScoreMethod==2>
+                            <option value="2" selected>最低分</option>
+                            <#else>
                             <option value="2">最低分</option>
+                            </#if>
                         </select>
                     </div>
                 </div>
@@ -100,9 +123,21 @@
                     <label class="layui-form-label">报告</label>
                     <div class="layui-input-block">
                         <select name="reportScoreMethod" lay-filter="aihao">
+                            <#if round.reportScoreMethod==0>
                             <option value="0" selected>最高分</option>
+                            <#else>
+                            <option value="0">最高分</option>
+                            </#if>
+                            <#if round.reportScoreMethod==1>
+                            <option value="1" selected>平均分</option>
+                            <#else>
                             <option value="1">平均分</option>
+                            </#if>
+                            <#if round.reportScoreMethod==2>
+                            <option value="2" selected>最低分</option>
+                            <#else>
                             <option value="2">最低分</option>
+                            </#if>
                         </select>
                     </div>
                 </div>
@@ -118,7 +153,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">${class.grade?c}-(${class.classSerial})</label>
                         <div class="layui-input-block">
-                            <select name="maxTeamMember" lay-filter="aihao">
+                            <select name="enrollment" lay-filter="aihao">
                                 <option value="1">1</option>
                                 <option value="2" selected>2</option>
                                 <option value="3">3</option>
@@ -128,19 +163,10 @@
                 </#list>
             </div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="修改" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="修改" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
-        <!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    -->
+
     </div>
 </div>
 <!--<div class="bottom-deco"></div>-->
@@ -150,6 +176,54 @@
         var form = layui.form();
 
         //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+<script>
+    var $ = jQuery.noConflict();
+    var formSubmitted = 'false';
+
+    $('#formSuccessMessageWrap').hide(0);
+    $('.formValidationError').fadeOut(0);
+
+    // fields focus function starts
+    $('input[type="text"], input[type="password"], textarea').focus(function(){
+        if($(this).val() == $(this).attr('data-dummy')){
+            $(this).val('');
+        };
+    });
+    // fields focus function ends
+
+    // fields blur function starts
+    $('input, textarea').blur(function(){
+        if($(this).val() == ''){
+            $(this).val($(this).attr('data-dummy'));
+        };
+    });
+
+    $("#contactSubmitButton").bind("click",function () {
+        var fd=new FormData($('#contactForm')[0]);
+        var enrollment=JSON.stringify(fd.getAll("enrollment"));
+        var presentationScoreMethod=fd.get("presentationScoreMethod");
+        var questionScoreMethod=fd.get("questionScoreMethod");
+        var reportScoreMethod=fd.get("reportScoreMethod");
+        alert(enrollment);
+        $.ajax(
+                {
+                    url:"/teacher/course/roundSetting",
+                    type:'patch',
+                    data:{"enrollment":enrollment,"reportScoreMethod":reportScoreMethod,"roundId":${round.id},
+                        "presentationScoreMethod":presentationScoreMethod,"questionScoreMethod":questionScoreMethod},
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data,status){
+                        $('#formSuccessMessageWrap').fadeIn(500);
+                        formSubmitted = 'false';
+                    }
+                }
+        );
     });
 </script>
 

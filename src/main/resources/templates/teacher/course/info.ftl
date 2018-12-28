@@ -42,7 +42,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">${course.courseName}</h1>
-    <a href="/teacher/courseList" class="button-close">x</a>
+    <a href="/teacher/courseList" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="decoration"></div>
 
