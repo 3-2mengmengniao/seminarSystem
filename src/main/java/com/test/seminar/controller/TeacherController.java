@@ -247,7 +247,7 @@ public class TeacherController {
             }
             if(isVali){
                 TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
-                teamValidApplication.setStatus(1);
+                teamValidApplication.setStatus(0);
                 teamService.updateTeamValidApplication(teamValidApplication);
                 return new ResponseEntity<>("", HttpStatus.OK);
             }
