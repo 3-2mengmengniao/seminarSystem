@@ -54,7 +54,7 @@
                               error:function(data,status){
                                   console.log(data);
                                   console.log(status);
-                                  alert("账号密码错误！");
+                                  layer.msg("账号密码错误！",function(){});
                                   console.log("error");
                               }
                           }

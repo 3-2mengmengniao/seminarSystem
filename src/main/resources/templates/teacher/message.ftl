@@ -188,10 +188,10 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            alert("请求未找到！");
+                            layer.alert("请求未找到！",{icon:5});
                         }
                         else if(response.status=="409"){
-                            alert("从课程无法接受其他共享！");
+                            layer.alert("从课程无法接受其他共享！",{icon:5});
                         }
                     }
                 }
@@ -213,10 +213,10 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            alert("请求未找到！");
+                            layer.alert("请求未找到！",{icon:5});
                         }
                         else if(response.status=="409"){
-                            alert("从课程无法接受其他共享！");
+                            layer.alert("从课程无法接受其他共享！",{icon:5});
                         }
                     }
                 }
@@ -238,7 +238,7 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                           alert("请求未找到！");
+                            layer.alert("请求未找到！",{icon:5});
                         }
                     }
                 }
@@ -299,7 +299,7 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            alert("请求未找到！");
+                            layer.alert("请求未找到！",{icon:5});
                         }
                     }
                 }

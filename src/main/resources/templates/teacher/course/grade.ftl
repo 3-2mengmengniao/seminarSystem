@@ -22,7 +22,6 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -90,22 +89,24 @@
                                             <div class="layui-colla-item">
                                                 <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
                                                 <div class="layui-colla-content ">
-                                                    <img class="edit-score" src="/images/灰色修改.png"></img>
+                                                    <form method="post" action="/teacher/course/grade?seminarControlId=${seminarScore.seminarControlId}&teamId=${seminarScore.teamId}" id="${seminarScore.seminarControlId}+${seminarScore.teamId}">
+                                                    <img name="${seminarScore.seminarControlId}+${seminarScore.teamId}" class="edit-score" src="/images/灰色修改.png"></img>
                                                     <div>展示：&emsp;&emsp;&emsp;&emsp;分
                                                         <div>
-                                                            <input disabled class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;"  value="${seminarScore.presentationScore!0}">
+                                                            <input disabled name="presentationScore" class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;"  value="${seminarScore.presentationScore!0}">
                                                         </div>
                                                     </div>
                                                     <div>提问：&emsp;&emsp;&emsp;&emsp;分
                                                         <div>
-                                                            <input disabled class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;" value="${seminarScore.questionScore!0}">
+                                                            <input disabled name="questionScore" class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;" value="${seminarScore.questionScore!0}">
                                                         </div>
                                                     </div>
                                                     <div>报告：&emsp;&emsp;&emsp;&emsp;分
                                                         <div>
-                                                            <input disabled class="layui-input layui-disabled" style="width:40px;margin-left:50px;margin-top:-30px;"    value="${seminarScore.reportScore!0}">
+                                                            <input disabled name="reportScore" class="layui-input layui-disabled" style="width:40px;margin-left:50px;margin-top:-30px;"    value="${seminarScore.reportScore!0}">
                                                          </div>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </#list>
@@ -131,7 +132,6 @@
 
     <div class="distance2"> </div>
     <div class="distance2"> </div>
-<button onclick="window.location.href='#'"  class="uploadButton layui-btn layui-btn-mini margin3" >导出成绩</button>
 
     <div class="distance2"> </div>
     <div class="distance4"> </div>
@@ -161,6 +161,9 @@
             $(this).addClass("save-score");
         }
        else{
+           var id=$(this).attr("name");
+           alert(id);
+            $('#'+id).submit();
             $(this).attr("src","/images/灰色修改.png");
             $(this).nextAll().find(".layui-input").each(function(){
                 $(this).attr("disabled","disabled");

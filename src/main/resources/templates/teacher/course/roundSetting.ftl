@@ -206,7 +206,6 @@
         var presentationScoreMethod=fd.get("presentationScoreMethod");
         var questionScoreMethod=fd.get("questionScoreMethod");
         var reportScoreMethod=fd.get("reportScoreMethod");
-        alert(enrollment);
         $.ajax(
                 {
                     url:"/teacher/course/roundSetting",
