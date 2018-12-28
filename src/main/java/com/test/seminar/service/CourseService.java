@@ -124,4 +124,7 @@ public interface CourseService {
      */
     ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId);
 
+    void deleteShareTeamApplication(BigInteger shareTeamApplicationId);
+
+    void deleteShareSeminarApplication(BigInteger shareSeminarApplicationId);
 }

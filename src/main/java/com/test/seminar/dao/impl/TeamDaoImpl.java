@@ -284,8 +284,6 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public Boolean validCompositStrategyOnTeam(Team team, BigInteger strategyId, String strategyName) throws StrategyNotFoundException {
-        String TeamAndStrategy = "TeamAndStrategy";
-        String TeamOrStrategy = "TeamOrStrategy";
 
         try {
             //用反射得到获取复合策略的dao层方法
@@ -319,12 +317,12 @@ public class TeamDaoImpl implements TeamDao {
                 }
 
                 //根据复合策略的类型判断
-                if (TeamAndStrategy.equals(strategyName)) {
+                if (strategyName.equals("TeamAndStrategy")) {
                     //如果是and则一个策略不满足就返回false
                     if (!result) {
                         return false;
                     }
-                } else if (TeamOrStrategy.equals(strategyName)) {
+                } else{
                     //如果是or则一个策略满足就返回true
                     if (result) {
                         return true;
@@ -333,11 +331,11 @@ public class TeamDaoImpl implements TeamDao {
             }
 
             //遍历完所有策略后，根据复合策略的类型判断
-            if (TeamAndStrategy.equals(strategyName)) {
+            if (strategyName.equals("TeamAndStrategy")) {
                 //如果是and且所有策略都符合返回true
                 return true;
 
-            } else if (TeamOrStrategy.equals(strategyName)) {
+            } else{
                 //如果是or且所有策略都不符合返回false
                 return false;
             }
