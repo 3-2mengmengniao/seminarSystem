@@ -104,4 +104,13 @@ public class CourseServiceImpl implements CourseService {
         return  courseDao.getShareSeminarApplicationByApplicationId(applicationId);
     }
 
+    @Override
+    public void deleteShareTeamApplication(BigInteger shareTeamApplicationId){
+        courseDao.deleteShareTeamApplication(shareTeamApplicationId);
+    }
+
+    @Override
+    public void deleteShareSeminarApplication(BigInteger shareSeminarApplicationId){
+        courseDao.deleteShareSeminarApplication(shareSeminarApplicationId);
+    }
 }

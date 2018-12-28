@@ -88,6 +88,8 @@ public interface CourseDao {
      */
     void deleteShareTeamApplication(BigInteger shareTeamApplicationId);
 
+    void deleteShareSeminarApplication(BigInteger shareSeminarApplicationId);
+
     /**
      *  通过从课程教师id查看共享分组请求
      * @param subCourseTeacherId

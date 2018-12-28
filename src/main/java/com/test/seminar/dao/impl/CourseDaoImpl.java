@@ -121,6 +121,11 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
+    public void deleteShareSeminarApplication(BigInteger shareSeminarApplicationId){
+        courseMapper.deleteShareSeminarApplication(shareSeminarApplicationId);
+    }
+
+    @Override
     public List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException {
         List<ShareTeamApplication> shareTeamApplication=courseMapper.getShareTeamApplicationBySubCourseTeacherId(subCourseTeacherId);
         if(shareTeamApplication==null){
