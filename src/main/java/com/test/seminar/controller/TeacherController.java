@@ -440,7 +440,17 @@ public class TeacherController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/course/grade")
+    @RequestMapping(value="/course/grade",method = POST)
+    public String changeGrade(@PathVariable BigInteger seminarControlId,BigInteger teamId,Double presentationScore,
+                                              Double questionScore,Double reportScore,Model model) {
+        System.out.println(seminarControlId);
+        System.out.println(questionScore);
+        seminarService.updateSeminarScore(presentationScore,questionScore,reportScore,seminarControlId,teamId);
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarControlId);
+        return "redirect:/teacher/course/grade?courseId="+seminarControl.getCourseClass().getCourse().getId();
+    }
+
+    @RequestMapping(value="/course/grade",method = GET)
     public String groupScore(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
