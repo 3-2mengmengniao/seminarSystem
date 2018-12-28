@@ -131,16 +131,7 @@
             <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="修改" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
-        <!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    -->
+
     </div>
 </div>
 <!--<div class="bottom-deco"></div>-->
