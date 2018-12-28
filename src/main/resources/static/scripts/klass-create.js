@@ -32,7 +32,6 @@ jQuery(document).ready(function($) {
         formInput.append("file", $('#excelUpload')[0].files[0]);
         console.log(formInput.get("file"));
         var courseId=$('#contactForm').attr("name");
-        alert(courseId);
         $.ajax(
             {
                 url:"/teacher/course/klass/create?courseId="+courseId,

@@ -3,14 +3,12 @@ package com.test.seminar.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
-import com.test.seminar.entity.strategy.*;
 import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
 import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
 import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import com.test.seminar.service.*;
 import javafx.util.Pair;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -61,7 +58,7 @@ public class TeacherController {
     StudentService studentService;
 
     @Autowired
-    RundSeminarService rundSeminarService;
+    RunSeminarService rundSeminarService;
 
 //    @Autowired
 //    FileService fileService;

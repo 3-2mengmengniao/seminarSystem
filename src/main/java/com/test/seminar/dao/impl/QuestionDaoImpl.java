@@ -36,8 +36,8 @@ public class QuestionDaoImpl implements QuestionDao {
     }
 
     @Override
-    public void insertQuestion(Question question, BigInteger seminarControlId, BigInteger presentationId, BigInteger studentId, BigInteger teamId) {
-        questionMapper.insertQuestion(question,seminarControlId,presentationId,studentId,teamId);
+    public void insertQuestion(Question question) {
+        questionMapper.insertQuestion(question);
     }
 
     @Override

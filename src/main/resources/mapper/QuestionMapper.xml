@@ -33,9 +33,12 @@
         where attendance_id=#{presentationId}
     </select>
 
-    <insert id="insertQuestion">
+    <insert id="insertQuestion" parameterType="com.test.seminar.entity.Question">
+        <selectKey keyColumn="id" keyProperty="id" resultType="java.math.BigInteger" order="AFTER">
+            select last_insert_id()
+        </selectKey>
         insert into question(klass_seminar_id,attendance_id,team_id,student_id,is_selected,score)
-        values(#{seminarControlId},#{presentationId},#{teamId},#{studentId},#{question.selected},#{question.score})
+        values(#{seminarControlId},#{presentationId},#{teamId},#{studentId},#{selected},#{score})
     </insert>
 
     <update id="updateQuestion">

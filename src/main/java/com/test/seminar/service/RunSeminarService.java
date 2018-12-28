@@ -6,8 +6,9 @@ import com.test.seminar.entity.SeminarControl;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
-public interface RundSeminarService {
+public interface RunSeminarService {
 
     SeminarControl beginSeminar(BigInteger seminarControlId);
 
@@ -28,4 +29,6 @@ public interface RundSeminarService {
     Question getSelectQuestion(BigInteger seminarControlId);
 
     Presentation getCurrentPresentation(BigInteger seminarControlId);
+
+    List<BigInteger> getTeamIdInQuestion(BigInteger seminarControlId);
 }

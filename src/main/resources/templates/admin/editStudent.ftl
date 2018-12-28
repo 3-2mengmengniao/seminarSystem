@@ -94,7 +94,7 @@
                           error:function(data,status){
                               console.log(data);
                               console.log(status);
-                              alert("修改失败");
+                              layer.alert("修改失败",{icon:5});
                               console.log("error");
                           }
                       }

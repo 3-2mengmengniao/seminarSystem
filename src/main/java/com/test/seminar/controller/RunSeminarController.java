@@ -1,7 +1,7 @@
 package com.test.seminar.controller;
 
 import com.test.seminar.entity.*;
-import com.test.seminar.service.RundSeminarService;
+import com.test.seminar.service.RunSeminarService;
 import com.test.seminar.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class RunSeminarController {
 
     @Autowired
-    private RundSeminarService rundSeminarService;
+    private RunSeminarService runSeminarService;
     @Autowired
     public SimpMessagingTemplate template;
     @Autowired
@@ -41,7 +41,7 @@ public class RunSeminarController {
     public String progressing(BigInteger seminarId, int status,Model model) {
         SeminarControl seminarControl;
         if(status==0){
-            seminarControl=rundSeminarService.beginSeminar(seminarId);
+            seminarControl= runSeminarService.beginSeminar(seminarId);
         }
         else{
             seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
@@ -63,7 +63,7 @@ public class RunSeminarController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ParsePosition pos = new ParsePosition(0);
         Date strtodate = formatter.parse(deadline, pos);
-        rundSeminarService.endSeminar(seminarId,strtodate);
+        runSeminarService.endSeminar(seminarId,strtodate);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -75,10 +75,13 @@ public class RunSeminarController {
     @MessageMapping("/QA")
     @ResponseBody
     public void addQuestion(Message message) throws Exception {
+        if(runSeminarService.getTeamIdInQuestion(message.getSeminarId()).contains(message.getTeamId())){
+            return;
+        }
         BigInteger seminarControlId=message.getSeminarId();
-        rundSeminarService.addQuestion(seminarControlId,message.getTeamId(),message.getStudentId());
-        Integer count=rundSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
+        runSeminarService.addQuestion(seminarControlId,message.getTeamId(),message.getStudentId());
+        Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
     }
 
     /**
@@ -89,11 +92,11 @@ public class RunSeminarController {
     @ResponseBody
     public void nextGroup(Message message){
         BigInteger seminarControlId=message.getSeminarId();
-        rundSeminarService.nextPresentation(seminarControlId);
-        Integer count=rundSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
-        Presentation currentPresentation=rundSeminarService.getCurrentPresentation(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",currentPresentation.getTeam().getSerial().getSerial()+"正在展示");
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
+        runSeminarService.nextPresentation(seminarControlId);
+        Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
+        Presentation currentPresentation= runSeminarService.getCurrentPresentation(seminarControlId);
+        template.convertAndSendToUser(seminarControlId.toString(),"/nextGroup",currentPresentation);
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
     }
 
     /**
@@ -104,10 +107,10 @@ public class RunSeminarController {
     @MessageMapping("/selectQuestion")
     @ResponseBody
     public void selectQuestion(Message message) throws Exception{
-        if(rundSeminarService.getQuestionNumberWaitToSelect(message.getSeminarId())==0) {
+        if(runSeminarService.getQuestionNumberWaitToSelect(message.getSeminarId())==0) {
             return;
         }
-        rundSeminarService.selectQuestion(message.getSeminarId());
+        runSeminarService.selectQuestion(message.getSeminarId());
         sendQuestionMessage(message.getSeminarId());
     }
 
@@ -120,12 +123,15 @@ public class RunSeminarController {
     @MessageMapping("/welcome")
     public void welcome(Message message){
         sendQuestionMessage(message.getSeminarId());
+        //template.convertAndSendToUser(message.getSeminarId().toString(),);
     }
 
     private void sendQuestionMessage(BigInteger seminarControlId){
-        Integer count=rundSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
-        Question selectQuestion=rundSeminarService.getSelectQuestion(seminarControlId);
-        template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion","当前"+selectQuestion.getSerial().getSerial()+"正在提问");
-        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", "目前"+count.toString()+"人已提问");
+        Integer count= runSeminarService.getQuestionNumberWaitToSelect(seminarControlId);
+        Question selectQuestion= runSeminarService.getSelectQuestion(seminarControlId);
+        if(null!=selectQuestion){
+            template.convertAndSendToUser(seminarControlId.toString(),"/selectQuestion",selectQuestion);
+        }
+        template.convertAndSendToUser(seminarControlId.toString(),"/addQuestion", count);
     }
 }
