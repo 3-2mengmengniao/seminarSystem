@@ -37,7 +37,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         for(Presentation presentation:presentationList){
             if(presentation!=null){
                 presentation.setPresent(1);
-                seminarRoomMap.get(seminarControlId).setPresentationTeam(presentation.getTeam().getSerial());
+                seminarRoomMap.get(seminarControlId).setCurrentPresentation(presentation);
                 presentationDao.updatePresentation(presentation);
                 break;
             }
@@ -85,7 +85,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         Integer newWeight=weightMap.get(selectTeamSerial)-200;
         weightMap.put(selectTeamSerial,newWeight);
         seminarRoomMap.get(seminarControl.getId()).decCount();
-        seminarRoom.setQuestionTeam(selectQuestion.getSerial());
+        seminarRoom.setSelectQuestion(selectQuestion);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class RunSeminarServiceImpl implements RundSeminarService {
             if(presentation!=null){
                 if(flag){
                     presentation.setPresent(1);
-                    seminarRoomMap.get(seminarControlId).setPresentationTeam(presentation.getTeam().getSerial());
+                    seminarRoomMap.get(seminarControlId).setCurrentPresentation(presentation);
                     presentationDao.updatePresentation(presentation);
                     break;
                 }
@@ -146,13 +146,13 @@ public class RunSeminarServiceImpl implements RundSeminarService {
     }
 
     @Override
-    public Serial getQuestionTeamSerial(BigInteger seminarControlId) {
-        return seminarRoomMap.get(seminarControlId).getQuestionTeam();
+    public Question getSelectQuestion(BigInteger seminarControlId) {
+        return seminarRoomMap.get(seminarControlId).getSelectQuestion();
     }
 
     @Override
-    public Serial getPresentationTeamSerial(BigInteger seminarControlId) {
-        return seminarRoomMap.get(seminarControlId).getPresentationTeam();
+    public Presentation getCurrentPresentation(BigInteger seminarControlId) {
+        return seminarRoomMap.get(seminarControlId).getCurrentPresentation();
     }
 
     private SeminarRoom buildSeminarRoomBySeminarControlId(SeminarControl seminarControl) {

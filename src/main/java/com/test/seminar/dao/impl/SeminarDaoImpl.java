@@ -149,7 +149,7 @@ public class SeminarDaoImpl implements SeminarDao {
             presentationListReconstruct.add(null);
         }
         for (Presentation presentation : presentationList) {
-            presentationListReconstruct.add(presentation.getTeamOrder()-1,presentation);
+            presentationListReconstruct.set(presentation.getTeamOrder()-1,presentation);
         }
         seminarControl.setPresentationList(presentationListReconstruct);
     }

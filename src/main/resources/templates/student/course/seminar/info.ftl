@@ -28,9 +28,6 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
-    <script src="/scripts/sockjs.js"></script>
-    <script src="/scripts/stomp.js"></script>
-    <script src="/scripts/app.js"></script>
 
 
 
