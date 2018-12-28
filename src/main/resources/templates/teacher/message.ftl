@@ -181,7 +181,7 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"seminar","courseId":courseId}
+                    data:{"applicationId":applicationId,"status":1,"type":"seminar","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
@@ -206,7 +206,7 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"team","courseId":courseId}
+                    data:{"applicationId":applicationId,"status":1,"type":"team","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
@@ -231,7 +231,7 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"validate"}
+                    data:{"applicationId":applicationId,"status":1,"type":"validate"},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();

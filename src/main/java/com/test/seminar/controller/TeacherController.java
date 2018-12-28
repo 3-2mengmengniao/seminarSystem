@@ -180,7 +180,6 @@ public class TeacherController {
             for(int j=0;j<courseIdList.size();j++)
             {
                 courseList.add(courseService.getCourseByCourseId(courseIdList.get(j)));
-                System.out.println(courseService.getCourseByCourseId(courseIdList.get(j)).getCourseName());
             }
             conflictCourses.add(courseList);
         }
@@ -190,7 +189,6 @@ public class TeacherController {
         for(int i=0;i<courseMemberLimitStrategyList.size();i++)
         {
             optionCourses.add(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()));
-            System.out.println(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()).getCourseName());
         }
         model.addAttribute("optionCourses",optionCourses);
         model.addAttribute("memberLimit",courseMemberLimitStrategyList);
