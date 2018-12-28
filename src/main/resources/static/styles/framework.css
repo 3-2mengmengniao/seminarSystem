@@ -1453,7 +1453,7 @@ table tr:hover td{
 @media screen and (min-width:768px){
 	.static-notification-red p{
 		font-size:14px;
-		margin-top:-10px;
+		margin-top:10px;
 		margin-bottom:10px;
 		margin-left:31%;
 	}
@@ -1462,7 +1462,7 @@ table tr:hover td{
 @media screen and (min-width:1024px){
 	.static-notification-red p{
 		font-size:14px;
-		margin-top:-10px;
+		margin-top:10px;
 		margin-bottom:10px;
 		margin-left:31%;
 	}

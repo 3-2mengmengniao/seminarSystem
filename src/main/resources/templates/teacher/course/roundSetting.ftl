@@ -51,7 +51,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">第${round.roundSerial}轮</h1>
-    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
