@@ -56,6 +56,7 @@ public class TeamServiceImpl implements TeamService {
             teamDao.insertTeamAndStudentRelation(team.getId(),memberId);
         }
         updateTeamAboutShared(team);
+        team.getCourse();
         isTeamValid(team);
     }
 
@@ -115,28 +116,25 @@ public class TeamServiceImpl implements TeamService {
         for (TeamStrategy teamStrategy : teamStrategyList) {
             //获得策略类名
             String strategyName = teamStrategy.getStrategyName();
-            try {
-                //判断该策略是否为复合策略
-                Class strategyClass = Class.forName(strategyName);
-                Boolean isCompositStrategy = CompositStrategy.class.isAssignableFrom(strategyClass);
+            Boolean isCompositStrategy = false;
+            if(strategyName.equals("TeamAndStrategy")||strategyName.equals("TeamOrStrategy")){
+                isCompositStrategy=true;
+            }
 
-                Boolean result = null;
-                if (isCompositStrategy) {
-                    //复合策略验证
-                    result = teamDao.validCompositStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
-                } else {
-                    //简单策略验证
-                    result = teamDao.validSimpleStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
-                }
+            Boolean result;
+            if (isCompositStrategy) {
+                //复合策略验证
+                result = teamDao.validCompositStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
+            } else {
+                //简单策略验证
+                result = teamDao.validSimpleStrategyOnTeam(team, teamStrategy.getStrategyId(), strategyName);
+            }
 
-                //只要有一个策略没满足，就返回false
-                if (!result) {
-                    team.setStatus(0);
-                    teamDao.updateTeam(team);
-                    return false;
-                }
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            //只要有一个策略没满足，就返回false
+            if (!result) {
+                team.setStatus(0);
+                teamDao.updateTeam(team);
+                return false;
             }
         }
 

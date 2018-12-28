@@ -166,8 +166,6 @@ public interface TeamMapper {
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
-    void updateMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
-
     void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
