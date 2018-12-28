@@ -6,30 +6,37 @@ public class SeminarScore {
     private BigInteger teamId;
     private Serial serial;
     private String seminarInfoName;
-    private double totalScore;
-    private double presentationScore;
-    private double questionScore;
-    private double reportScore;
+    private Double totalScore;
+    private Double presentationScore;
+    private Double questionScore;
+    private Double reportScore;
+
+    public SeminarScore() {
+        totalScore=Double.valueOf(0);
+        presentationScore=Double.valueOf(0);
+        questionScore=Double.valueOf(0);
+        reportScore=Double.valueOf(0);
+    }
 
     public String getSeminarInfoName() { return seminarInfoName; }
 
     public void setSeminarInfoName(String seminarInfoName) { this.seminarInfoName = seminarInfoName; }
 
-    public double getTotalScore() {
-        return totalScore;
-    }
+    public Double getTotalScore() { return totalScore; }
 
-    public double getPresentationScore() {
-        return presentationScore;
-    }
+    public void setTotalScore(Double totalScore) { this.totalScore = totalScore; }
 
-    public double getQuestionScore() {
-        return questionScore;
-    }
+    public Double getPresentationScore() { return presentationScore; }
 
-    public double getReportScore() {
-        return reportScore;
-    }
+    public void setPresentationScore(Double presentationScore) { this.presentationScore = presentationScore; }
+
+    public Double getQuestionScore() { return questionScore; }
+
+    public void setQuestionScore(Double questionScore) { this.questionScore = questionScore; }
+
+    public Double getReportScore() { return reportScore; }
+
+    public void setReportScore(Double reportScore) { this.reportScore = reportScore; }
 
     public void setTotalScore(double totalScore) {
         this.totalScore = totalScore;

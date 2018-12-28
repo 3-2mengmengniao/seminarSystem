@@ -104,6 +104,12 @@
         where team_id=#{teamId}
     </select>
 
+    <select id="getRoundScoreByRoundIdAndTeamId" resultMap="RoundScoreResultMap">
+        select team_id,total_score,presentation_score,question_score,report_score
+        from round_score
+        where team_id=#{teamId} and round_id=#{roundId}
+    </select>
+
     <insert id="insertRoundScore">
         insert into round_score(total_score,presentation_score,question_score,report_score)
         values (#{roundScore.totalScore},#{roundScore.presentationScore},#{roundScore.questionScore},#{roundScore.reportScore})
@@ -147,4 +153,10 @@
         </set>
         where klass_id=#{courseClassId} and round_id=#{roundId}
     </update>
+
+    <select id="getRoundIdBySeminarControlId" resultType="java.math.BigInteger">
+        select seminar.round_id
+        from seminar,klass_seminar
+        where klass_seminar.id=#{SeminarControlId} and klass_seminar.seminar_id=seminar.id
+    </select>
 </mapper>
