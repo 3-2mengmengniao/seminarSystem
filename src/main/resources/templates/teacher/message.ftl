@@ -23,7 +23,6 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -86,7 +85,7 @@
                     <p class="text-center">${application.mainCourse.courseName}提出与您的${application.subCourse.courseName}共享讨论课</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button name="${application.subCourse.id}" class="layui-btn agreeSeminarButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="shareSeminar" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button name="${application.subCourse.id}" class="layui-btn agreeSeminarButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseSeminarButton" name="shareSeminar" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
@@ -104,7 +103,7 @@
                     <p class="text-center">${application.mainCourse.courseName}提出与您的${application.subCourse.courseName}共享分组</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button class="layui-btn agreeTeamButton" name="${application.subCourse.id}" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="shareTeam" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button class="layui-btn agreeTeamButton" name="${application.subCourse.id}" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseTeamButton" name="shareTeam" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
@@ -124,7 +123,7 @@
                     <p class="text-center">${application.reason}</p>
                 </div>
                 <div class="layui-colla-content">
-                    <p class="center center-text "><button name="teamValid" class="layui-btn agreeValiButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseButton" name="teamValid" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
+                    <p class="center center-text "><button name="Valid" class="layui-btn agreeValiButton" id="${application.id}" style="margin:10px 15px 15px 0">同意</button><button class="layui-btn layui-btn-danger refuseValiButton" name="teamValid" id="${application.id}" style="margin:10px 15px 15px 0;">拒绝</button></p>
                 </div>
             </div>
         </div>
@@ -181,7 +180,7 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"seminar","courseId":courseId}
+                    data:{"applicationId":applicationId,"status":1,"type":"seminar","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
@@ -206,7 +205,7 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"team","courseId":courseId}
+                    data:{"applicationId":applicationId,"status":1,"type":"team","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
@@ -226,12 +225,12 @@
 
     $(".agreeValiButton").bind("click",function () {
         var applicationId=$(this).attr("id");
-        var type=$(this).attr('name');
+        var courseId=$(this).attr('name');
         $.ajax(
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":1,"type":"validate"}
+                    data:{"applicationId":applicationId,"status":1,"type":"validate"},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
@@ -246,13 +245,53 @@
         );
     });
 
-    $(".refuseButton").bind("click",function () {
-        var applicationId=$(this).attr("name");
+    $(".refuseSeminarButton").bind("click",function () {
+        var applicationId=$(this).attr("id");
         $.ajax(
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    data:{"applicationId":applicationId,"status":0,"type":type},
+                    data:{"applicationId":applicationId,"status":0,"type":"seminar"},
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data,status,response){
+                        if(response.status=="404") {
+                            alert("请求未找到！");
+                        }
+                    }
+                }
+        );
+    });
+    $(".refuseTeamButton").bind("click",function () {
+        var applicationId=$(this).attr("id");
+        $.ajax(
+                {
+                    url:'/teacher/message/handle',
+                    type:'post',
+                    data:{"applicationId":applicationId,"status":0,"type":"team"},
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.reload();
+                        }
+                    },
+                    error:function(data,status,response){
+                        if(response.status=="404") {
+                            alert("请求未找到！");
+                        }
+                    }
+                }
+        );
+    });
+    $(".refuseValiButton").bind("click",function () {
+        var applicationId=$(this).attr("id");
+        $.ajax(
+                {
+                    url:'/teacher/message/handle',
+                    type:'post',
+                    data:{"applicationId":applicationId,"status":0,"type":"validate"},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();

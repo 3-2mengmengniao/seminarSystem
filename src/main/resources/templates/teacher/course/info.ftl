@@ -85,14 +85,6 @@
                     <col width="200" >
                 </colgroup>
                 <tr>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">小组人数：</a>
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">6~8人</a>
-                    </td>
-                </tr>
-                <tr>
                     <td style="padding:0 0;"><a style="font-size:15px;">组队开始时间：</a>
                     </td>
                     <td style="padding:0 0;">
@@ -131,7 +123,7 @@
                         <a style="font-size:15px;">小组总人数：(含组长)</a>
                     </td>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">6~8人</a>
+                        <a style="font-size:15px;">${thisCourse.getMinMember()}~${thisCourse.getMaxMember()}人</a>
                     </td>
                 </tr>
             </table>
@@ -141,45 +133,41 @@
                     <col width="200" >
                     <col width="100" >
                 </colgroup>
-                <tr>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">J2EE(邱明):</a>
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">6~8人</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding:0 0;"> <a style="font-size:15px;">.Net(杨律青):</a>
-                    </td>
-                    <td style="padding:0 0;">
-                        <a style="font-size:15px;">6~8人</a>
-                    </td>
-                </tr>
+                <#list memberLimit as strategy>
+                    <tr>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">${optionCourses[strategy?index].courseName}:</a>
+                        </td>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">${strategy.getMinMember()}~${strategy.getMaxMember()}人</a>
+                        </td>
+                    </tr>
+                </#list>
                 <tr>
                     <td style="padding:0 0;">
                         <a style="font-size:15px;">选修课程人数要求：</a>
                     </td>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">均满足</a>
+                        <#if choose==0>
+                            <a style="font-size:15px;">均满足</a>
+                         <#else>
+                            <a style="font-size:15px;">任一满足</a>
+                        </#if>
                     </td>
                 </tr>
             </table>
             <div style="10px;"></div>
             <h3 class="my-title">冲突课程</h3>
             <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <#list conflictCourses as courseList>
                 <tr>
                     <td style="padding:0 0;">
-                        <span style="font-size:13px;">J2EE(邱明）</span>
-                        <span style="font-size:13px;">.Net(杨律青）</span>
+                        <#list courseList as oneCourse>
+                            <span style="font-size:13px;">${oneCourse.courseName}</span>
+                        </#list>
                     </td>
                 </tr>
-                <tr>
-                    <td style="padding:0 0;">
-                        <span style="font-size:13px;">J2EE(邱明）</span>
-                        <span style="font-size:13px;">.Net(杨律青）</span>
-                    </td>
-                </tr>
+                </#list>
             </table>
             <div style="10px;"></div>
         </div>

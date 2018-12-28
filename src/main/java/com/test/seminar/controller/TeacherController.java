@@ -26,8 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author hatake
@@ -168,6 +167,33 @@ public class TeacherController {
     public String courseInfo(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        HashMap hashMap=teamService.getStrategyByCourseId(courseId);
+        List<ConflictCourseStrategy> conflictCourseStrategyList=(List<ConflictCourseStrategy>)hashMap.get(0);
+        List<List<Course>> conflictCourses=new ArrayList<List<Course>>();
+        for(int i=0;i<conflictCourseStrategyList.size();i++)
+        {
+            List<BigInteger> courseIdList=conflictCourseStrategyList.get(i).getConflictCourseIdList();
+            List<Course> courseList=new ArrayList<>();
+            for(int j=0;j<courseIdList.size();j++)
+            {
+                courseList.add(courseService.getCourseByCourseId(courseIdList.get(j)));
+            }
+            conflictCourses.add(courseList);
+        }
+        model.addAttribute("conflictCourses",conflictCourses);
+        List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=(List<CourseMemberLimitStrategy>)hashMap.get(1);
+        List<Course> optionCourses=new ArrayList<>();
+        for(int i=0;i<courseMemberLimitStrategyList.size();i++)
+        {
+            optionCourses.add(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()));
+        }
+        model.addAttribute("optionCourses",optionCourses);
+        model.addAttribute("memberLimit",courseMemberLimitStrategyList);
+        MemberLimitStrategy thisCourse=(MemberLimitStrategy)hashMap.get(2);
+        model.addAttribute("thisCourse",thisCourse);
+        List<Integer> chooses=(List<Integer>)hashMap.get(3);
+        Integer choose=chooses.get(1);
+        model.addAttribute("choose",choose);
         return "teacher/course/info";
     }
 
@@ -218,7 +244,7 @@ public class TeacherController {
             }
             if(isVali){
                 TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
-                teamValidApplication.setStatus(1);
+                teamValidApplication.setStatus(0);
                 teamService.updateTeamValidApplication(teamValidApplication);
                 return new ResponseEntity<>("", HttpStatus.OK);
             }

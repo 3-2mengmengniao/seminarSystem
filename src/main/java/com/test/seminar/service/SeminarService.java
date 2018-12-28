@@ -110,11 +110,28 @@ public interface SeminarService {
      */
     void updateShareSeminarApplication(ShareSeminarApplication shareSeminarApplication);
 
-
     /**
      * 取消讨论课共享
-     * @param mainCourse
      * @param subCourse
      */
     void cancelSeminarShare(Course subCourse);
-}
+
+ /**
+  * 修改讨论课分数
+  * @param presentationScore
+  * @param questionScore
+  * @param reportScore
+  * @param seminarControlId
+  * @param teamId
+  */
+    void updateSeminarScore(Double presentationScore,Double questionScore,Double reportScore,BigInteger seminarControlId,BigInteger teamId);
+
+ /**
+  * 修改提问分
+  * @param questionScore
+  * @param seminarControlId
+  * @param teamId
+  */
+ void updateSeminarScoreForQuestion(Double questionScore,BigInteger seminarControlId,BigInteger teamId);
+
+ }
