@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
@@ -90,7 +91,7 @@
         </div>
         <div id="left-side">
             <ul>
-                <#list 1..<seminarControl.seminarInfo.maxGroup as t>
+                <#list 0..<seminarControl.seminarInfo.maxGroup as t>
                     <#if seminarControl.presentationList[t]?? && seminarControl.presentationList[t].present==1>
                     <li class="group active">
                         ${seminarControl.presentationList[t].team.serial.getSerial()}
@@ -107,14 +108,14 @@
             <div id="line" class="one"></div>
         </div>
         <div id="right-side">
-        <#list 1..<seminarControl.seminarInfo.maxGroup as t>
+        <#list 0..<seminarControl.seminarInfo.maxGroup as t>
             <#if seminarControl.presentationList[t]??>
             <div class="group">
                 <div style="height:30px;"></div>
                 <h1>展示成绩</h1>
                 <form class="form-group floating-control-group formFieldWrap" action="/teacher/course/seminar/presentationScore?presentationId=${seminarControl.presentationList[t].id}">
                     <input style="margin-bottom:3px;font-size:15px;padding-top:10px;z-index:99;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩" name="score">
-                    <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                 </form>
                 <div style="height:20px;"></div>
                 <h1>提问</h1>
@@ -130,7 +131,7 @@
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
                                 <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -141,7 +142,7 @@
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
                                 <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -152,7 +153,7 @@
                         <td style="padding:0 10px;">
                             <div class="form-group floating-control-group formFieldWrap">
                                 <input style="margin-bottom:3px;font-size:13px;padding-top:15px;" type="text"  autocomplete="off" class="my-form-control contactField requiredField"  placeholder="请输入成绩 " name="score">
-                                <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
+                            <#--<button type="submit" class="uploadButton layui-btn layui-btn-mini" style="margin-left: 10px;">提交</button>-->
                             </div>
                         </td>
                     </tr>
@@ -160,7 +161,7 @@
                 <div style="height:20px;"></div>
             </div>
             </#if>
-            </#list>
+        </#list>
         </div>
     </div>
     <div class="center center-text ">
@@ -182,16 +183,13 @@
     layui.use(['element', 'layer'], function(){
         var element = layui.element();
         var layer = layui.layer;
-
         //监听折叠
         element.on('collapse(test)', function(data){
             layer.msg('展开状态：'+ data.show);
         });
     });
-
 </script>
 <script>
-    function() { comeIn(); }
     $("#right-side").children(":first").addClass('active');
     $('li.group').click(function(){
         $(this).addClass('active');
@@ -214,7 +212,6 @@
             }
         })
     })
-
     $('#restart').click(function(){
         $('#runner').runner('reset');
         var currentLi=$('li.group').filter('.active').next();
@@ -249,7 +246,6 @@
                     scrollbar: true
                 });
             }
-
         }
         else{
             $(currentLi).addClass('active');
@@ -274,15 +270,11 @@
         }
         nextGroup();
     })
-
     $( "#select" ).click(function() { selectQuestion(); });
-
     $( "#endButton" ).click(function() {
         endSeminar();
-
         window.location.href="/teacher/course/seminar/score?seminarId=${seminarControl.id}";
     });
-
     $('#timeMonitor').click(function(){
         var btnId=$(this).children('img').attr('id');
         if(btnId=='startBtn'){
@@ -309,7 +301,6 @@
         }
     })
     $('#runner').runner({
-
         milliseconds: false,
         format: function millisecondsToString(milliseconds) {
             var oneHour = 3600000;
@@ -319,69 +310,52 @@
             var minutes = 0;
             var hours = 0;
             var result;
-
             if (milliseconds >= oneHour) {
                 hours = Math.floor(milliseconds / oneHour);
             }
-
             milliseconds = hours > 0 ? (milliseconds - hours * oneHour) : milliseconds;
-
             if (milliseconds >= oneMinute) {
                 minutes = Math.floor(milliseconds / oneMinute);
             }
-
             milliseconds = minutes > 0 ? (milliseconds - minutes * oneMinute) : milliseconds;
-
             if (milliseconds >= oneSecond) {
                 seconds = Math.floor(milliseconds / oneSecond);
             }
-
             milliseconds = seconds > 0 ? (milliseconds - seconds * oneSecond) : milliseconds;
-
             if (hours > 0) {
                 result = (hours > 9 ? hours : "0" + hours) + ":";
             } else {
                 result = "00:";
             }
-
             if (minutes > 0) {
                 result += (minutes > 9 ? minutes : "0" + minutes) + ":";
             } else {
                 result += "00:";
             }
-
             if (seconds > 0) {
                 result += (seconds > 9 ? seconds : "0" + seconds);
             } else {
                 result += "00";
             }
-
             return result;
         }
-
     });
-
 </script>
 <script>
     layui.use('form', function(){
         var form = layui.form();
-
         //各种基于事件的操作，下面会有进一步介绍
     });
     new Function($('.run').text())();
-
     //var index = parent.layer.getFrameIndex(window.name);
     //parent.layer.iframeAuto(index);
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
         //日期时间选择器
         laydate.render({
             elem: '#test5'
             ,type: 'datetime'
         });
-
-
         //自定义重要日
         laydate.render({
             elem: '#test18'
@@ -399,7 +373,6 @@
                 }
             }
         });
-
         //限定可选日期
         var ins22 = laydate.render({
             elem: '#test-limit1'
@@ -409,14 +382,12 @@
                 ins22.hint('日期可选值设定在 <br> 2016-10-14 到 2080-10-14');
             }
         });
-
         //前后若干天可选，这里以7天为例
         laydate.render({
             elem: '#test-limit2'
             ,min: -7
             ,max: 7
         });
-
         //限定可选时间
         laydate.render({
             elem: '#test-limit3'
@@ -425,7 +396,6 @@
             ,max: '17:30:00'
             ,btns: ['clear', 'confirm']
         });
-
         //同时绑定多个
         lay('.test-item').each(function(){
             laydate.render({
@@ -433,14 +403,12 @@
                 ,trigger: 'click'
             });
         });
-
         //初始赋值
         laydate.render({
             elem: '#test19'
             ,value: '1989-10-14'
             ,isInitValue: true
         });
-
         //选中后的回调
         laydate.render({
             elem: '#test20'
@@ -448,7 +416,6 @@
                 layer.alert('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //日期切换的回调
         laydate.render({
             elem: '#test21'
@@ -456,13 +423,11 @@
                 layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //墨绿主题
         laydate.render({
             elem: '#test29'
             ,theme: 'molv'
         });
-
     });
 </script>
 <style type="text/css">
@@ -471,21 +436,18 @@
         border-spacing: 0;
         font-size: 14px;
     }
-
     #startBtn{
         width:23px;
         height:23px;
         margin-top: -128px;
         margin-left: 105%;
     }
-
     #stopBtn{
         width:23px;
         height:23px;
         margin-top: -128px;
         margin-left: 105%;
     }
-
     #runner{
         font-size: 19px;
         margin-top: -27.5%;
@@ -493,14 +455,12 @@
         position: absolute;
         color: #009688;
     }
-
     .my-padding-left{
         padding-left:40%;
     }
     .layui-table[lay-skin=line] td,.layui-table[lay-skin=line] th {
         border-width:0 0;
     }
-
     .my-form-control::placeholder{
         font-size:18px;
         text-align:center;
@@ -514,14 +474,12 @@
         background-color: #eee;
         font-family: 'Raleway';
     }
-
     ul, li {
         margin: 0;
         padding: 0;
         list-style: none;
         font-size:18px;
     }
-
     .center-title{
         position:absolute;
         top:20px;
@@ -529,7 +487,6 @@
         font-weight:800;
     }
     .thick {font-weight: bold}
-
     @media screen and (max-width:768px){
         ul{
             padding: 0;
@@ -548,7 +505,6 @@
             font-weight:800;
         }
     }
-
     @media screen and (max-width:1024px) and (min-width:768px){
         .center-title{
             position:absolute;
@@ -557,7 +513,6 @@
             font-weight:800;
         }
     }
-
     #wrapper {
         width: 95%;
         margin: auto;
@@ -577,7 +532,6 @@
         justify-content: left;
         overflow:hidden;
     }
-
     #left-side {
         height: 100%;
         width: 10%;
@@ -596,7 +550,6 @@
         -ms-flex-pack: center;
         justify-content: center;
     }
-
     @media screen and  (min-width:768px){
         #left-side {
             height: 100%;
@@ -633,7 +586,6 @@
     #left-side ul li.active:hover > .icon {
         fill: #009688;
     }
-
     #border {
         height: 288px;
         margin-top: -15%;
@@ -676,14 +628,12 @@
         -webkit-transition: all .4s ease-in-out;
         transition: all .4s ease-in-out;
     }
-
     #right-side {
         /*height: 350px;*/
         margin-top: 28%;
         width: 90%;
         overflow:hidden;
     }
-
     @media screen and (min-width:768px) and (max-width:1024px){
         #right-side {
             /*height: 350px;*/
@@ -692,7 +642,6 @@
             overflow:hidden;
         }
     }
-
     @media screen and (min-width:1024px){
         #right-side {
             /*height: 350px;*/
@@ -731,7 +680,6 @@
     .active{
         z-index:99;
     }
-
     #right-side h1 {
         font-weight: 500;
         font-size: 22px;
