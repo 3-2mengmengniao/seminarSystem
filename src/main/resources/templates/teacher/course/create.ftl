@@ -1,28 +1,20 @@
 <!DOCTYPE HTML>
-<head xmlns="http://www.w3.org/1999/html">
+<head >
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
+    <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.magicmove.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
 
 
@@ -41,7 +33,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">新建课程</h1>
-    <a href="/teacher/courseList" class="button-close">x</a>
+    <a href="/teacher/courseList" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -987,7 +979,7 @@
         .layui-form-item .layui-inline {
             margin-bottom: 5px;
             margin-right: 10px;
-            margin-left: 10%;
+            margin-left: 11%;
         }
     }
     @media screen and (max-width: 768px){
@@ -997,6 +989,14 @@
             margin-left: 50px;
             margin-bottom: 10px;
             clear: both;
+        }
+    }
+
+    @media screen and (min-width: 1024px){
+        .layui-form-item .layui-inline {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 17%;
         }
     }
     .memberLimitation{
