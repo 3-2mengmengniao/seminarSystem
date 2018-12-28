@@ -9,12 +9,17 @@
         <result property="questionScoreMethod" column="question_score_method"/>
         <collection property="seminarInfoList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarInfo" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarInfoByRoundId"/>
         <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId"/>
+        <collection property="courseClassRoundList" javaType="ArrayList" ofType="com.test.seminar.entity.CourseClassRound" column="id" select="getCourseClassRound"/>
     </resultMap>
 
     <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
         <result property="teamId" column="team_id"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
+    </resultMap>
+
+    <resultMap id="courseClassRoundMap" type="com.test.seminar.entity.CourseClassRound">
+        <result property="courseClassId" column="klass_id"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
@@ -27,6 +32,12 @@
         SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE id=#{roundId}
+    </select>
+
+    <select id="getCourseClassRound" resultMap="courseClassRoundMap">
+        select klass_id,enroll_number
+        from klass_round
+        where round_id=#{roundId}
     </select>
 
     <select id="getRoundSerialBySeminarInfoId" resultType="Integer">

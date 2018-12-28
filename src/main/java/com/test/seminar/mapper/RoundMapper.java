@@ -1,5 +1,6 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.CourseClassRound;
 import com.test.seminar.entity.Round;
 import com.test.seminar.entity.RoundScore;
 import com.test.seminar.entity.SeminarScore;
@@ -32,6 +33,13 @@ public interface RoundMapper {
      * @return
      */
     List<Round> getRoundByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 根据轮次Id获得班级轮次信息
+     * @param roundId
+     * @return
+     */
+    List<CourseClassRound> getCourseClassRound(@Param("roundId")BigInteger roundId);
 
     /**
      *

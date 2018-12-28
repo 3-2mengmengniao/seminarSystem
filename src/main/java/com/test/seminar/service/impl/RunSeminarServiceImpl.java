@@ -51,6 +51,9 @@ public class RunSeminarServiceImpl implements RundSeminarService {
         seminarControl.setReportDDL(strtodate);
         seminarControl.setSeminarStatus(2);
         for(Presentation presentation:seminarControl.getPresentationList()){
+            if(null == presentation){
+                continue;
+            }
             if(presentation.getPresent()==1){
                 presentation.setPresent(0);
                 presentationDao.updatePresentation(presentation);
