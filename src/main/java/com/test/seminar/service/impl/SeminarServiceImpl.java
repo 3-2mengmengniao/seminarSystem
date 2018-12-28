@@ -340,17 +340,22 @@ public class SeminarServiceImpl implements SeminarService {
     @Override
     public void updateSeminarScore(Double presentationScore,Double questionScore,Double reportScore,BigInteger seminarControlId,BigInteger teamId){
         SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(seminarControlId,teamId);
+        SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
+        Course course=seminarControl.getCourseClass().getCourse();
+        Double totalScore=course.getPresentationPercentage()*presentationScore+course.getQuestionPercentage()*questionScore+course.getReportPercentage()*reportScore;
         if(null==seminarScore){
             seminarScore=new SeminarScore();
             seminarScore.setPresentationScore(presentationScore);
             seminarScore.setQuestionScore(questionScore);
             seminarScore.setReportScore(reportScore);
+            seminarScore.setTotalScore(totalScore);
             seminarDao.insertSeminarScore(seminarScore,seminarControlId,teamId);
         }
         else {
             seminarScore.setPresentationScore(presentationScore);
             seminarScore.setQuestionScore(questionScore);
             seminarScore.setReportScore(reportScore);
+            seminarScore.setTotalScore(totalScore);
             seminarDao.updateSeminarScore(seminarScore, seminarControlId, teamId);
         }
         BigInteger roundId=roundDao.getRoundIdBySeminarControlId(seminarControlId);
