@@ -8,7 +8,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 /**
- * 复合策略的父类
+ * 复合策略
  * @author wzw
  * date 2018/12/25
  */
