@@ -50,7 +50,11 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void insertTeam(Team team,List<BigInteger> memberIdList) throws RepetitiveRecordException {
-        team.getSerial().setTeamSerial(teamDao.getMaxTeamSerialByCourseClassId(team.getCourseClass().getId())+1);
+        Integer maxSerial=teamDao.getMaxTeamSerialByCourseClassId(team.getCourseClass().getId());
+        if(null==maxSerial){
+            maxSerial=0;
+        }
+        team.getSerial().setTeamSerial(maxSerial+1);
         teamDao.insertTeam(team,team.getCourseClass().getId(),team.getCourse().getId());
         team=teamDao.getTeamByMainCourseClassIdAndTeamSerial(team.getCourseClass().getId(),team.getSerial().getTeamSerial());
         teamDao.insertCourseClassAndTeamRelation(team.getCourseClass().getId(),team.getId());
@@ -184,6 +188,9 @@ public class TeamServiceImpl implements TeamService {
             teamDao.deleteCourseClassAndTeamRelation(team.getId(),currentCourseClass.getId());
         }
         List<CourseClass> courseClassList=courseClassDao.getCourseClassByCourseId(course.getId());
+        if(courseClassList.size()==0){
+            return;
+        }
         Map<BigInteger,Integer> memberBelongCourseClassMap=new HashMap<>();
         for(CourseClass courseClass:courseClassList){
             memberBelongCourseClassMap.put(courseClass.getId(),0);
