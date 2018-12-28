@@ -139,6 +139,24 @@
         });
     });
 </script>
+<script>
+    $("#deleteButton").bind("click",function () {
+        $.ajax(
+                {
+                    url:'/student/course/team/delete?teamId=${myTeam.id}&studentId=${myId}',
+                    type:'delete',
+                    processData: false,
+                    contentType: false,
+                    success:function(data,status,response){
+                        if(response.status=="200") {
+                            window.location.href='/student/course/teams?courseId=${course.id}';
+                        }
+                    },
+                    error:function(data){alert('退组失败！');}
+                }
+        );
+    });
+</script>
 <style>
     @media screen and (max-width:768px){
         .margin3{

@@ -109,10 +109,11 @@
             </div>
         </div>
     </div>
-    </#list>
     <div class="distance3"></div>
     <div class="distance3"></div>
     <div class="distance5"></div>
+    </#list>
+
     <#list teamValidApplicationList as application>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
@@ -128,6 +129,9 @@
             </div>
         </div>
     </div>
+    <div class="distance3"></div>
+    <div class="distance3"></div>
+    <div class="distance5"></div>
     </#list>
 </div>
 <!--
@@ -177,8 +181,6 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    processData: false,
-                    contentType: false,
                     data:{"applicationId":applicationId,"status":1,"type":type},
                     success:function(data,status,response){
                         if(response.status=="200") {
@@ -196,8 +198,6 @@
                 {
                     url:'/teacher/message/handle',
                     type:'post',
-                    processData: false,
-                    contentType: false,
                     data:{"applicationId":applicationId,"status":0,"type":type},
                     success:function(data,status,response){
                         if(response.status=="200") {

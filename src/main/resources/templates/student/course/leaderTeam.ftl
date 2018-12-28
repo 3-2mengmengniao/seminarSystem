@@ -192,7 +192,21 @@
                 value: '',
                 title: '申请理由'
             }, function(value,index){
-                alert(value);
+                $.ajax(
+                        {
+                            url:"/student/course/team/application",
+                            type:'post',
+                            data:{"teamId":${myTeam.id},"reason":value,"teacherId":${course.teacherId},
+                            success:function(data,status,response){
+                                if(response.status=="200"){
+                                    alert("申请已提交！");
+                                }
+                            },
+                            error:function(data,status){
+                                alert("添加失败!");
+                            }
+                        }
+                );
                 layer.close(index);
             });
         });
@@ -253,7 +267,7 @@
                         contentType: false,
                         success:function(data,status,response){
                             if(response.status=="200") {
-                                window.href.location = '/student/teams?courseId=${course.id}';
+                                window.location.href = '/student/course/teams?courseId=${course.id}';
                             }
                         },
                         error:function(data){alert('删除失败！');}
