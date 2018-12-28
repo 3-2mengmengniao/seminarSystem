@@ -14,6 +14,7 @@ import com.test.seminar.exception.StrategyNotFoundException;
 import com.test.seminar.exception.TeamNotFoundException;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -204,4 +205,7 @@ public interface TeamDao {
      */
     CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
 
+    void getCompositStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String strategyName,HashMap result);
+
+    void getSimpleStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String  strategyName,HashMap result);
 }

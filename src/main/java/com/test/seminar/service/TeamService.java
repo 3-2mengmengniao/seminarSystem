@@ -9,6 +9,7 @@ import javafx.util.Pair;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
 
 public interface TeamService {
@@ -46,4 +47,11 @@ public interface TeamService {
     List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId);
 
     void updateTeamValidApplication(TeamValidApplication teamValidApplication);
+
+    /**
+     * 获得某课程的所有规则
+     * @param courseId
+     * @return 元素依次是List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, List<Integer> chooseList
+     */
+    HashMap getStrategyByCourseId(BigInteger courseId);
 }

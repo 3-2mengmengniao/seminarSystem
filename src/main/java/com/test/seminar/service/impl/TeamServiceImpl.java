@@ -142,6 +142,31 @@ public class TeamServiceImpl implements TeamService {
         return true;
     }
 
+    @Override
+    public HashMap getStrategyByCourseId(BigInteger courseId) {
+        HashMap result=new HashMap();
+        //获取队伍总策略
+        List<TeamStrategy> teamStrategyList = teamDao.getTeamStrategyListByCourseId(courseId);
+
+        //遍历每一个策略
+        for (TeamStrategy teamStrategy : teamStrategyList) {
+            //获得策略类名
+            String strategyName = teamStrategy.getStrategyName();
+            Boolean isCompositStrategy = false;
+            if(strategyName.equals("TeamAndStrategy")||strategyName.equals("TeamOrStrategy")){
+                isCompositStrategy=true;
+            }
+            if (isCompositStrategy) {
+                //复合策略验证
+                teamDao.getCompositStrategyOnTeam(courseId, teamStrategy.getStrategyId(), strategyName,result);
+            } else {
+                //简单策略验证
+                teamDao.getSimpleStrategyOnTeam(courseId, teamStrategy.getStrategyId(), strategyName,result);
+            }
+        }
+        return result;
+    }
+
     private void updateTeamAboutShared(Team team){
         List<Course> courseList=team.getCourseClass().getCourse().getTeamSubCourseList();
         if(courseList!=null){
