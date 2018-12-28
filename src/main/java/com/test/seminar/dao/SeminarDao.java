@@ -137,4 +137,16 @@ public interface SeminarDao {
      * @param teamId
      */
     void deleteSeminarScoreBySeminarScoreId(BigInteger seminarControlId,BigInteger teamId);
+
+    /**
+     *
+     * @param roundId
+     */
+    void deleteSeminarControlByRoundId(BigInteger roundId);
+
+    /**
+     *
+     * @param roundId
+     */
+    void deleteSeminarInfoByRoundId(BigInteger roundId);
 }

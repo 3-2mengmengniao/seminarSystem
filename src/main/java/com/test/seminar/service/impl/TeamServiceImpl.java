@@ -260,6 +260,18 @@ public class TeamServiceImpl implements TeamService {
         String text="";
         //同意请求，编辑同意邮件
         if(shareTeamApplication.getStatus()==1){
+            //删除原有分组
+            List<Team> originTeamList=teamDao.getTeamByCourseId(shareTeamApplication.getSubCourse().getId());
+            for(Team team:originTeamList){
+                for(CourseClass courseClass:courseClassDao.getCourseClassByCourseId(shareTeamApplication.getSubCourse().getId())){
+                    teamDao.deleteCourseClassAndTeamRelation(team.getId(),courseClass.getId());
+                }
+                //如果本身有主课程，不能删掉主课程的team
+                if(shareTeamApplication.getSubCourse().getTeamMainCourseId()==null) {
+                    teamDao.deleteTeamAndStudentRelationByTeamId(team.getId());
+                    teamDao.deleteTeamByTeamId(team.getId());
+                }
+            }
             //更新从课程的主课程id
             courseDao.updateCourseTeamMainCourseId(shareTeamApplication.getSubCourse().getId(),shareTeamApplication.getMainCourse().getId());
             //向从课程插入主课程下的组队，更新klass_team表
@@ -276,5 +288,17 @@ public class TeamServiceImpl implements TeamService {
         //发送邮件，删除共享请求
         emailService.sendSimpleMessage(to,subject,text);
         courseDao.deleteShareTeamApplication(shareTeamApplication.getId());
+    }
+
+    @Override
+    public void cancelTeamShare(Course mainCourse,Course subCourse){
+        //取消分组共享，删除分组关联
+        List<Team> originTeamList=teamDao.getTeamByCourseId(subCourse.getId());
+        for(Team team:originTeamList){
+            for(CourseClass courseClass:courseClassDao.getCourseClassByCourseId(subCourse.getId())){
+                teamDao.deleteCourseClassAndTeamRelation(team.getId(),courseClass.getId());
+            }
+        }
+        courseDao.updateCourseTeamMainCourseId(subCourse.getId(),null);
     }
 }

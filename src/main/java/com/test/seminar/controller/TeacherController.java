@@ -296,8 +296,7 @@ public class TeacherController {
     @RequestMapping(value="/course/klass/create",method = POST)
     @ResponseBody
     public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass,MultipartFile file) {
-        System.out.println(file);
-        courseClassService.insertCourseClass(courseClass,courseId);
+        courseClassService.insertCourseClass(courseClass,courseId,file);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
