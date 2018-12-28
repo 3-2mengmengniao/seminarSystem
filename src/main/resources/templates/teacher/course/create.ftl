@@ -173,19 +173,19 @@
                     <label class="layui-form-label moveUp">组队开始时间</label>
                 </div>
                 <div class="distance6"></div>
-                <div class="layui-form-item">
+                <div class="layui-form-item margin2">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">组队截止时间</label>
+                </div>
                     <div class="formValidationError" id="test5Error">
                         <div class="static-notification-red tap-dismiss-notification">
                             <p class="uppercase">请填写组队相关时间</p>
                         </div>
                     </div>
-                </div>
             </div>
             <div class="decoration"></div>
             <div class="distance3"></div>
