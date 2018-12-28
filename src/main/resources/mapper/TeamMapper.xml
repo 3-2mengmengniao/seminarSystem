@@ -232,7 +232,7 @@
     </select>
 
     <select id="getConflictCourseStrategyByStrategyId" resultMap="conflictCourseStrategyResultMap">
-        select id,course_id
+        select id
         from conflict_course_strategy
         where id=#{strategyId}
     </select>
@@ -249,19 +249,29 @@
         where id=#{teamOrStrategyId}
     </select>
 
-    <select id="getMaxTeamAndStrategyId" resultType="Integer">
+    <select id="getMaxTeamAndStrategyId" resultType="BigInteger">
         select max(id)
         from team_and_strategy
     </select>
 
-    <select id="getMaxTeamOrStrategyId" resultType="Integer">
+    <select id="getMaxTeamOrStrategyId" resultType="BigInteger">
         select max(id)
-        from team_and_strategy
+        from team_or_strategy
     </select>
 
-    <select id="getMaxConflictCourseStrategyId" resultType="Integer">
+    <select id="getMaxConflictCourseStrategyId" resultType="BigInteger">
         select max(id)
-        from team_and_strategy
+        from conflict_course_strategy
+    </select>
+
+    <select id="getMaxMemberLimitStrategyId" resultType="BigInteger">
+        select max(id)
+        from member_limit_strategy
+    </select>
+
+    <select id="getMaxCourseMemberLimitStrategyId" resultType="BigInteger">
+        select max(id)
+        from course_member_limit_strategy
     </select>
 
     <insert id="insertTeamStrategy">

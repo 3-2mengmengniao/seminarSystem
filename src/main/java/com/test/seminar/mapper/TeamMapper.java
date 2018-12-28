@@ -174,13 +174,6 @@ public interface TeamMapper {
      */
     CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
-    /**
-     * 通过策略ID获取ConflictCourseStrategy
-     * @param strategyId
-     * @return
-     */
-    ConflictCourseStrategy getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
-
     List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
 
     List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
@@ -214,4 +207,8 @@ public interface TeamMapper {
     void insertCourseMemberLimitStrategy(@Param("courseMemberLimitStrategy")CourseMemberLimitStrategy courseMemberLimitStrategy);
 
     void insertMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
+
+    BigInteger getMaxMemberLimitStrategyId();
+
+    BigInteger getMaxCourseMemberLimitStrategyId();
 }

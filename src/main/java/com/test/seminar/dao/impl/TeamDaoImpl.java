@@ -126,12 +126,12 @@ public class TeamDaoImpl implements TeamDao {
         }
         teamMapper.insertMemberLimitStrategy(thisCourse);
         id=teamMapper.getMaxTeamAndStrategyId().add(new BigInteger("1"));
-        teamMapper.insertTeamAndStrategy(id,"MemberLimitStrategy",thisCourse.getId());
+        teamMapper.insertTeamAndStrategy(id,"MemberLimitStrategy",teamMapper.getMaxMemberLimitStrategyId());
         if(choose==0){
             BigInteger andId=teamMapper.getMaxTeamAndStrategyId().and(new BigInteger("1"));
             for(CourseMemberLimitStrategy courseMemberLimitStrategy:courseMemberLimitStrategyList){
                 teamMapper.insertCourseMemberLimitStrategy(courseMemberLimitStrategy);
-                teamMapper.insertTeamAndStrategy(andId,"CourseMemberLimitStrategy",courseMemberLimitStrategy.getId());
+                teamMapper.insertTeamAndStrategy(andId,"CourseMemberLimitStrategy",teamMapper.getMaxCourseMemberLimitStrategyId());
             }
             teamMapper.insertTeamAndStrategy(id,"TeamAndStrategy",andId);
         }
@@ -235,7 +235,8 @@ public class TeamDaoImpl implements TeamDao {
 
     @Override
     public ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId) throws StrategyNotFoundException {
-        ConflictCourseStrategy conflictCourseStrategy = teamMapper.getConflictCourseStrategyByStrategyId(strategyId);
+        ConflictCourseStrategy conflictCourseStrategy=new ConflictCourseStrategy();
+        conflictCourseStrategy.setConflictCourseIdList(teamMapper.getCourseIdByConflictCourseStrategyId(strategyId));
         if (conflictCourseStrategy == null) {
             throw new StrategyNotFoundException();
         }

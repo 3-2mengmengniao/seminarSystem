@@ -16,6 +16,10 @@ public class MemberLimitStrategy extends Strategy {
     private Integer minMember;
     private Integer maxMember;
 
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
     public BigInteger getId() {
         return id;
     }
