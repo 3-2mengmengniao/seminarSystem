@@ -364,7 +364,7 @@ public class StudentController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/student/course/team/add",method = POST)
+    @RequestMapping(value="/course/team/add",method = POST)
     @ResponseBody
     public ResponseEntity<String> createTeam(HttpServletRequest request,Model model) {
         String data=request.getParameter("members");

@@ -46,7 +46,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${course.courseName}小组详情</h1>
-            <a href="/student/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/student/course/teams?courseId=${course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -86,7 +86,7 @@
                         <a style="font-size:15px;">组长：</a>
                     </td>
                     <td style="padding:0 0;">
-                        <a style="font-size:15px;">${myTeam.leader.account}&emsp;&emsp;${myTeam.leader.studentName}</a>
+                        <a style="font-size:15px;">${myTeam.leader.account}&emsp;${myTeam.leader.studentName}</a>
                     </td>
                 </tr>
                 <#list myTeam.memberList as student>
@@ -101,7 +101,7 @@
                         </td>
                     </#if>
                         <td style="padding:0 0;">
-                            <a style="font-size:15px;display: inline;">${student.account}&emsp;&emsp;${student.studentName}</a> <i class="deleteMember" name="${student.id}" style="font-size: 25px; color: #1E9FFF; display: inline;margin-top: 3px;">&#xe640;</i>
+                            <a style="font-size:15px;display: inline;">${student.account}&emsp;${student.studentName}</a> <img class="deleteMember" src="/images/删除.png" name="${student.id}" />
                         </td>
                 </tr>
                     </#if>
@@ -109,14 +109,14 @@
                 <#--<tr>-->
                     <#---->
                     <#--<td style="padding:0 0;">-->
-                        <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+                        <#--<a style="font-size:15px;">24320162202877&emsp;小刘</a>-->
                     <#--</td>-->
                 <#--</tr>-->
                 <#--<tr>-->
                     <#--<td style="padding:0 0;">-->
                     <#--</td>-->
                     <#--<td style="padding:0 0;">-->
-                        <#--<a style="font-size:15px;">24320162202877&emsp;&emsp;小刘</a>-->
+                        <#--<a style="font-size:15px;">24320162202877&emsp;小刘</a>-->
                     <#--</td>-->
                 <#--</tr>-->
 
@@ -165,8 +165,9 @@
         <div style="height:15px;"></div>
         <div style="height:15px;"></div>
         <p class="center center-text">
-            <button class="layui-btn " style="background-color:#d44950;margin-right:20%;" id="deleteButton" >解散小组</button>
-            <button class="layui-btn"  id="addButton" >添加组员</button>
+            <button class="my-width layui-btn margin-right" style="background-color:#d44950;" id="deleteButton" >解散小组</button>
+            <button class="my-width  layui-btn margin-right" id="groupVerify" >提交审核</button>
+            <button class="my-width  layui-btn"  id="addButton" >添加组员</button>
         </p>
     </div>
 
@@ -184,6 +185,16 @@
             var form = layui.form();
 
             //各种基于事件的操作，下面会有进一步介绍
+        });
+        $("#groupVerify").click(function(){
+            layer.prompt({
+                formType: 0,
+                value: '',
+                title: '申请理由'
+            }, function(value,index){
+                alert(value);
+                layer.close(index);
+            });
         });
         $("#searchBtn").bind("click",function () {
             if($("#searchContent").val()==''||$("#searchContent").val()==null){
@@ -252,6 +263,23 @@
 
     </script>
     <style>
+        .deleteMember{
+            height: 22px;
+            width: 17px;
+            color: #1E9FFF;
+            display: inline;
+            margin: 3px 15px;
+        }
+
+        .my-width{
+            width:30%;
+            padding-left:13px;
+        }
+
+
+        .margin-right{
+            margin-right:0;
+        }
         .center-panel {
             /* margin-right: -6%; */
             /* margin-left: -6%; */
@@ -281,12 +309,27 @@
         }
 
         @media screen and (min-width:768px) and (max-width:1024px){
+            .margin-right{
+                margin-right:15%;
+            }
+
+            .deleteMember{
+                height: 25px;
+                width: 20px;
+                color: #1E9FFF;
+                display: inline;
+                margin: 3px 15px;
+            }
             .searchDiv{
                 float: right;
                 margin-bottom: -43px;
                 margin-right: 19.5%;
                 margin-left: 120px;
             }
+            .my-width{
+                width:15%;
+            }
+
             #searchBtn{
                 width: 23px;
                 margin-left: 140px;
@@ -298,6 +341,19 @@
             }
         }
         @media screen and (min-width:1024px){
+            .margin-right{
+                margin-right:15%;
+            }
+            .deleteMember{
+                height: 25px;
+                width: 20px;
+                color: #1E9FFF;
+                display: inline;
+                margin: 3px 15px;
+            }
+            .my-width{
+                width:10%;
+            }
             .searchDiv{
                 float: right;
                 margin-bottom: -25px;

@@ -50,7 +50,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void insertCourse(Course course, BigInteger teacherId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose)throws RepetitiveRecordException{
         courseDao.insertCourse(course,teacherId);
-        course=courseDao.getCourseByCourseNameAndTeacherId(course.getCourseName(),course.getTeacherId());
+        course=courseDao.getCourseByCourseNameAndTeacherId(course.getCourseName(),teacherId);
         teamDao.insetTeamStrategy(course.getId(),conflictCourseStrategyArrayList, courseMemberLimitStrategyList, thisCourse, choose);
     }
 
