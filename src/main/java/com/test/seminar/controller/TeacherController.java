@@ -471,10 +471,14 @@ public class TeacherController {
     public String courseSeminar(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
-        List<Round> roundList= course.getRoundList();
-        model.addAttribute("roundList",roundList);
-        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
-        model.addAttribute("courseClassList",courseClasses);
+        try {
+            List<Round> roundList = course.getRoundList();
+            model.addAttribute("roundList", roundList);
+        }catch (Exception e){
+            System.out.println("catch exception!");
+        }
+        List<CourseClass> courseClasses = courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList", courseClasses);
         return "teacher/course/seminarList";
     }
 
