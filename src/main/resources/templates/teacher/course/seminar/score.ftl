@@ -44,8 +44,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}讨论课成绩</h1>
-            <a href="/teacher/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课成绩</h1>
+            <a href="/teacher/course/seminar/info?seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -86,50 +86,61 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1-1</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-2</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-3</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-4</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
-                <tr>
-                    <td>1-5</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                    <td>5.0</td>
-                </tr>
+                <#list seminarScoreList as seminarScore>
+                    <tr>
+                        <td>${seminarScore.serial.getSerial()}</td>
+                        <td>${seminarScore.presentationScore!""}</td>
+                        <td>${seminarScore.questionScore!""}</td>
+                        <td>${seminarScore.reportScore!""}</td>
+                        <td>${seminarScore.totalScore!""}</td>
+                    </tr>
+                </#list>
+                <#--<#if seminarControl.seminarScoreList??>-->
+                <#--<#list seminarControl.seminarScoreList as seminarScore>-->
+                    <#--<tr>-->
+                        <#--<td>1-1</td>-->
+                        <#--<td>${seminarScore.presentationScore!""}</td>-->
+                        <#--<td>${seminarScore.questionScore!""}</td>-->
+                        <#--<td>${seminarScore.reportScore!""}</td>-->
+                        <#--<td>${seminarScore.totalScore!""}</td>-->
+                    <#--</tr>-->
+                <#--</#list>-->
+                <#--</#if>-->
+                <#--<tr>-->
+                    <#--<td>1-2</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-3</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-4</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
+                <#--<tr>-->
+                    <#--<td>1-5</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                    <#--<td>5.0</td>-->
+                <#--</tr>-->
                 </tbody>
 
             </table>
         </div>
 
         <div class="distance"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
-        <div class="distance4"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
+        <p class="center center-text"><a href="/teacher/course/seminar/info?seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-return button-turqoise">确认</a></p>
             <!--
         <div class="decoration"></div>
         <div class="footer">

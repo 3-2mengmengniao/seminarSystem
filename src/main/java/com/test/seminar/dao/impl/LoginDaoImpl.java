@@ -38,7 +38,7 @@ public class LoginDaoImpl implements LoginDao {
     }
 
     @Override
-    public Admin adminLogin(String account, String password) {
-        return loginMapper.adminLogin(account,password);
+    public Admin adminLogin(String account) {
+        return loginMapper.adminLogin(account);
     }
 }

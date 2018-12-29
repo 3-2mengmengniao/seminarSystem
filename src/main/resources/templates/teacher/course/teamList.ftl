@@ -88,13 +88,15 @@
         <div class="layui-collapse" lay-accordion="" >
             <#list teamList as team>
             <div class="layui-colla-item" style="border:none;">
-                <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
+                <h2 class="layui-colla-title">${team.serial.getSerial()} &nbsp&nbsp&nbsp${team.teamName}</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">组长：${leaderList[team?index].studentName}</p>
-                    <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
-                    <#list studentList[team?index] as student>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
+                    <p class="text-center">组长：</p>
+                    <p class="text-center">${team.leader.studentName}&nbsp&nbsp&nbsp${team.leader.account}</p>
+                    <p class="text-center">成员： </p>
+                    <#list team.memberList as student>
+                        <#if student.id!=team.leader.id>
+                        <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
+                        </#if>
                     </#list>
                 </div>
             </div>
@@ -111,10 +113,23 @@
         </div>
     </div>
 </div>
+<div class="center-navigation">
+    <div class="layui-collapse" lay-accordion="">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title">未组队学生</h2>
+            <div class="layui-colla-content">
+                    <#list studentNoTeamList as student>
+                        <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
+                    </#list>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="distance4"></div>
 <div class="distance4"></div>
 <button onclick="window.location.href='/teacher/courseList'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
-
+<div class="distance4"></div>
+<div class="distance4"></div>
 
 <!--
 <div class="decoration"></div>

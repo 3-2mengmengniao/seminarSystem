@@ -46,8 +46,12 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}</h1>
-            <a href="/student/course/seminar/info?courseId=${course.id}&seminarId=${seminarInfo.id}&classId=${classId}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
+            <img id="button-back-image-2" src="/images/icons/展开.png">
+            <form id="postForm" action="/student/course/seminar/info" method="post">
+                <input type="hidden" value="${seminarControl.seminarInfo.id}" name="seminarId">
+                <input type="hidden" value="${seminarControl.courseClass.id}" name="classId">
+            </form>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -78,39 +82,59 @@
                 <col width="200">
             </colgroup>
             <tbody>
-            <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;">1-1业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;">1-2业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;">1-3业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;">1-4业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第五组：</td>
-                <td style="color:#009688;">1-5业务流程.ppt</td>
-            </tr>
-            <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;">1-6业务流程.ppt</td>
-            </tr>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <tr>
+                        <td>第${t+1}组：</td>
+                        <#if seminarControl.seminarStatus==0 && seminarControl.presentationList[t].pptName??>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;${seminarControl.presentationList[t].pptName}</td>
+                        <#elseif seminarControl.presentationList[t].pptName??>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;<a>${seminarControl.presentationList[t].pptName}</a></td>
+                        <#else>
+                            <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;未提交</td>
+                        </#if>
+                    </tr>
+                <#else>
+                <tr>
+                    <td>第${t+1}组：</td>
+                    <#if seminarControl.seminarStatus==0>
+                        <td style="color:#009688;"><a class="registerButton" name="${t+1}">未报名</a></td>
+                    <#else>
+                    <td style="color:#009688;">未报名</td>
+                    </#if>
+                </tr>
+                </#if>
+            </#list>
             </tbody>
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
     </div>
 </div>
-
 <!--<div class="bottom-deco"></div>-->
 
 
 </body>
+<script>
+    $('#button-back-image-2').click(function () {
+        $('#postForm').submit();
+    });
+    $('.registerButton').click(function(){
+        var t=$(this).attr("name");
+        $.ajax({
+            type: "POST", // 使用post方式
+            url: "/student/course/seminar/info/register?teamId=${team.id}&seminarId=${seminarControl.id}&order="+t,
+            success: function(data,status,response){
+                    if(response.status=="200"){
+                        window.location.reload();
+                    }
+            },
+            error: function(result){
+                layer.alert("报名失败！",{icon:5});
+            }
+        });
+    });
+
+
+</script>
 </html>

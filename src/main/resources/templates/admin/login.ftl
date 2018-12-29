@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="stylesheet" href="/admin/css/font.css">
-	<link rel="stylesheet" href="/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/adminStatic/css/font.css">
+	<link rel="stylesheet" href="/adminStatic/css/xadmin.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/admin/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/admin/js/xadmin.js"></script>
+    <script src="/adminStatic/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
 
 </head>
 <body class="login-bg">
@@ -20,8 +20,8 @@
     <div class="login layui-anim layui-anim-up">
         <div class="message">翻转课堂管理平台-管理登录</div>
         <div id="darkbannerwrap"></div>
-        <form method="post" class="layui-form" >
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" autocomplete="off">
+        <form method="post" class="layui-form" id="loginForm">
+            <input name="account" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" autocomplete="off">
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
@@ -39,7 +39,27 @@
               //   });
               //监听提交
               form.on('submit(login)', function(data){
-                  location.href='/admin/index'
+                  var formInput = $('#loginForm').serialize();
+                  $.ajax(
+                          {
+                              url:"/admin/login",
+                              type:'post',
+                              data:formInput,
+                              success:function(data,status,response){
+
+                                  if(response.status=="200"){
+                                      window.location.href="/admin/index";
+                                  }
+                              },
+                              error:function(data,status){
+                                  console.log(data);
+                                  console.log(status);
+                                  layer.msg("账号密码错误！",function(){});
+                                  console.log("error");
+                              }
+                          }
+                  );
+
                 // alert(888)
                /* layer.msg(JSON.stringify(data.field),function(){
                     location.href='index.ftl'
@@ -55,15 +75,5 @@
 
     
     <!-- 底部结束 -->
-    <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
 </body>
 </html>

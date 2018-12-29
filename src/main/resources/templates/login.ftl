@@ -78,7 +78,7 @@
             <#--</div>-->
             <div class="form-group floating-control-group formFieldWrap">
                 <label for="txtFloatingUsername" style="z-index:9999;font-size:18px;">教工号/学工号</label>
-                <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="text" name="username" autocomplete="off" class="my-form-control contactField requiredField" id="contactNameField"  placeholder="Enter Username">
+                <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="text" name="account" autocomplete="off" class="my-form-control contactField requiredField" id="contactNameField"  placeholder="Enter Username">
             </div>
             <div class="formValidationError" id="contactNameFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -93,7 +93,7 @@
             <div class="form-group floating-control-group formFieldWrap">
                 <label for="txtFloatingPassword" style="z-index:9999;font-size:18px;">密码</label>
                 <input style="margin-bottom:3px;padding-left:13px;font-size:15px;padding-top:10px;" type="password" name="password" autocomplete="off" class="my-form-control contactField requiredField" id="contactEmailField" placeholder="Enter Password">
-                <span style="font-size: 15px;margin-left: 15px;padding-bottom: 10px;color:rgb(0,0,0,0.4);">默认密码为123456</span>
+                <span class="pswtips" style="font-size: 15px;margin-left: 15px;padding-bottom: 10px;color:rgb(0,0,0,0.4);">默认密码为123456</span>
             </div>
             <div class="formValidationError" id="contactEmailFieldError">
                 <div class="static-notification-red tap-dismiss-notification">
@@ -111,20 +111,6 @@
     </form>
 </div>
 
-<!--
-<div class="page_footer">
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    <div class="bottom-deco"></div>
-</div>
--->
-
 <script type="text/javascript">
     $(function(){
         $('.form-group').floatingLabel();
@@ -135,7 +121,7 @@
 <script>
     <#if message??>
         window.onload = function () {
-            alert("${message}")
+            layer.msg("${message}",function(){});
         };
     </#if>
     //隐藏text block，显示password block

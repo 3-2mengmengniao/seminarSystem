@@ -29,6 +29,12 @@ public interface TeacherDao {
      */
     Teacher getTeacherByAccount(String account);
 
+
+    /**
+     * @return
+     */
+    List<Teacher> getAllTeacher();
+
     /**
      * 创建新的老师账户
      *
@@ -50,9 +56,4 @@ public interface TeacherDao {
      * @return
      */
     void deleteTeacherByTeacherId(BigInteger teacherId)throws UserNotFoundException;
-
-    /**
-     * @return
-     */
-    List<Teacher> getAllTeacher();
 }

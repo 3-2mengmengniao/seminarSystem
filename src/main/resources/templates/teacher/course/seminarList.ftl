@@ -74,18 +74,18 @@
 </div>
 
 <div class="content">
-	<#list seminarList as round>
+	<#list roundList as round>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第${round?index+1}轮</h2>
+                <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                 <div class="layui-colla-content">
-                    <a href="/teacher/course/roundSetting?courseId=${course.id}&roundId=${roundList[round?index].id}" style="line-height: 40px;font-size: 18px;padding: 0 15px 0 65px!important;">该轮轮次设置</a>
+                    <a href="/teacher/course/roundSetting?courseId=${course.id}&roundId=${round.id}" style="line-height: 40px;font-size: 18px;padding: 0 15px 0 65px!important;">该轮轮次设置</a>
                     <div class="layui-collapse" lay-accordion="">
-                    <#list round as seminar>
+                    <#list round.seminarInfoList as seminar>
                         <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">${seminar?index+1}&emsp;${seminar.seminarName}</h2>
+                            <h2 class="layui-colla-title">第${seminar.seminarSerial}次&emsp;${seminar.seminarName}</h2>
                             <#list courseClassList as class>
                             <div class="layui-colla-content center-text">
                                 <a href="/teacher/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${class.grade?c}-(${class.classSerial})</a>

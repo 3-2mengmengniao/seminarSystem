@@ -3,8 +3,11 @@ package com.test.seminar;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication //(exclude = {DataSourceAutoConfiguration.class}// )
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
+@SpringBootApplication
 @MapperScan("com.test.seminar.mapper")
 public class SeminarApplication {
 

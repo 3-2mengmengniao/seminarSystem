@@ -28,37 +28,6 @@ public interface StudentDao {
      * @return
      */
     Student getStudentByAccount(String account);
-
-    /**
-     * 创建新的学生账户
-     *
-     * @param student
-     * @return 新建学生的ID
-     */
-    void insertStudent(Student student)throws RepetitiveRecordException;
-
-    /**
-     * 创建新的学生账户
-     *
-     * @param studentList
-     * @return 新建学生的ID
-     */
-    void insertStudentByStudentList(List<Student> studentList);
-
-    /**
-     * 更改学生信息
-     *
-     * @param student
-     * @return
-     */
-    void updateStudentByStudentId(Student student)throws UserNotFoundException;
-
-    /**
-     * @param studentId
-     * @return
-     */
-    void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
-
     /**
      * @param teamId
      * @return
@@ -75,4 +44,33 @@ public interface StudentDao {
      * @return
      */
     List<Student> getAllStudent();
+
+    /**
+     * 创建新的学生账户
+     *
+     * @param student
+     * @return 新建学生的ID
+     */
+    void insertStudent(Student student)throws RepetitiveRecordException;
+
+    /**
+     * 更改学生信息
+     *
+     * @param student
+     * @return
+     */
+    void updateStudentByStudent(Student student)throws UserNotFoundException;
+
+    /**
+     * @param studentId
+     * @return
+     */
+    void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
+
+    /**
+     * 获取课程中未组队学生
+     * @param courseId
+     * @return
+     */
+    List<Student> getStudentNotInTeamByCourseId(BigInteger courseId);
 }

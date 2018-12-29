@@ -28,6 +28,9 @@
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
+    <script src="/scripts/sockjs.js"></script>
+    <script src="/scripts/stomp.js"></script>
+
 
 
 </head>
@@ -46,8 +49,8 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
-            <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}</h1>
+            <a href="/student/course/seminarList?courseId=${seminarControl.courseClass.course.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -75,37 +78,34 @@
 
 <div class="content">
     <div class="distance4"></div>
+    <h2 class="center-text" id="notation">1-1组正在展示 <span id="greetings">当前有0人提问</span></h2>
+    <span id="teamId" name="${myTeam.id}"></span>
+    <span id="seminarId" name="${seminarControl.id}"></span>
+    <span id="studentId" name="${studentId}"></span>
+    <span id="usertype" name="student"></span>
+    <div class="distance"></div>
     <div class="center-navigation">
         <table class="layui-table" lay-skin="nob">
             <colgroup>
                 <col width="100">
-                <col width="200">
+                <col width="100">
             </colgroup>
             <tbody>
-            <tr>
-                <td>第一组：</td>
-                <td style="color:#009688;text-align: center;">1-1</td>
-            </tr>
-            <tr>
-                <td>第二组：</td>
-                <td style="color:#009688;text-align: center;">1-2</td>
-            </tr>
-            <tr>
-                <td>第三组：</td>
-                <td style="color:#009688;text-align: center;">1-3</td>
-            </tr>
-            <tr>
-                <td>第四组：</td>
-                <td style="color:#009688;text-align: center;">1-4</td>
-            </tr>
-            <tr>
-                <td>第五组：</td>
-                <td style="color:#009688;text-align: center;">1-5</td>
-            </tr>
-            <tr>
-                <td>第六组：</td>
-                <td style="color:#009688;text-align: center;">1-6</td>
-            </tr>
+            <#list 0..<seminarControl.seminarInfo.maxGroup as t>
+                <#if seminarControl.presentationList[t]??>
+                    <#if seminarControl.presentationList[t].present==1>
+                        <tr class="group active">
+                            <td class="active">第${t+1}组：</td>
+                            <td class="active">${seminarControl.presentationList[t].team.serial.getSerial()}</td>
+                        </tr>
+                    <#else>
+                        <tr class="group">
+                            <td>第${t+1}组：</td>
+                            <td>${seminarControl.presentationList[t].team.serial.getSerial()}</td>
+                        </tr>
+                    </#if>
+                </#if>
+            </#list>
             </tbody>
         </table>
         <div class="distance4"></div>
@@ -115,10 +115,25 @@
 
 <div class="distance4"></div>
 <div class="distance"></div>
-<p class="center center-text"><a href="#" class="button-return button-turqoise">Q&A</a></p>
+<p class="center center-text"><button type="button" class="button-return button-turqoise" id="QAbutton">Q&A</button></p>
 <div class="distance"></div>
 <!--<div class="bottom-deco"></div>-->
 
 
 </body>
+<script src="/scripts/app.js"></script>
+<script>
+    $( "#connect" ).click(function() { connect(); });
+    $( "#disconnect" ).click(function() { disconnect(); });
+    $( "#QAbutton" ).click(function() { sendQuestion(); });
+
+</script>
+<style>
+    .active{
+        color:darkred;
+    }
+    .normal{
+        color:#009688;
+    }
+</style>
 </html>

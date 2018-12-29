@@ -1,38 +1,20 @@
 <!DOCTYPE HTML>
-<head xmlns="http://www.w3.org/1999/html">
+<head >
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <title></title>
 
     <link href="/styles/style.css"     		rel="stylesheet" type="text/css">
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
-    <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/styles/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
-    <script type="text/javascript" src="/scripts/colorbox.js"></script>
-    <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/creat-course.js"></script>
-    <script type="text/javascript" src="/scripts/custom.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
-    <script type="text/javascript" src="/scripts/jquery-1.8.3.min.js" ></script>
-    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-datetimepicker.fr.js"></script>
     <script type="text/javascript" src="/layui/layui.js"></script>
 
 
@@ -51,7 +33,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">新建课程</h1>
-    <a href="/teacher/courseList" class="button-close">x</a>
+    <a href="/teacher/courseList" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,10 +41,10 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="/teacher/course" method="post" id="contactForm">
+        <form class="layui-form contactForm" method="post" id="contactForm">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
-                    <p style="color:#d44950;">该课程已被创建！</p>
+                    <p style="color:#d44950;">课程创建失败！</p>
                 </div>
             </div>
             <div class="formFieldWrap">
@@ -166,11 +148,11 @@
                     <label class="layui-form-label">小组人数下限</label>
                     <div class="layui-input-block">
                         <select name="minTeamMember" lay-filter="aihao">
-                            <option value="3" selected>3人</option>
+                            <option value="1" selected>1人</option>
+                            <option value="2">2人</option>
+                            <option value="3">3人</option>
                             <option value="4">4人</option>
                             <option value="5">5人</option>
-                            <option value="6">6人</option>
-                            <option value="7">7人</option>
                         </select>
                     </div>
                 </div>
@@ -183,22 +165,801 @@
                     <label class="layui-form-label moveUp">组队开始时间</label>
                 </div>
                 <div class="distance6"></div>
-                <div class="layui-form-item">
+                <div class="layui-form-item margin2">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
                             <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">组队截止时间</label>
+                </div>
                     <div class="formValidationError" id="test5Error">
                         <div class="static-notification-red tap-dismiss-notification">
                             <p class="uppercase">请填写组队相关时间</p>
                         </div>
                     </div>
+            </div>
+            <div class="decoration"></div>
+            <div class="distance3"></div>
+            <label id="memberLimit" class="field-title contactMessageTextarea" for="contactMessageTextarea">组内选修课程人数：<span>(required)</span></label>
+
+            <div class="memberLimit">
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
+                </div>
+                <div class="memberLimitation">
+                    <div class="distance3"></div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修课程</label>
+                        <div class="my-layui-input">
+                            <select name="optionCourse" lay-filter="aihao">
+                                <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="my-form-label">选修人数上限</label>
+                        <div class="my-layui-input">
+                            <select name="maxTeamMember" lay-filter="aihao">
+                                <option value="2" >2人</option>
+                                <option value="3" >3人</option>
+                                <option value="4">4人</option>
+                                <option value="5" selected>5人</option>
+                                <option value="6">6人</option>
+                                <option value="7">7人</option>
+                                <option value="8">8人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item margin2 ">
+                        <label class="my-form-label">选修人数下限</label>
+                        <div class="my-layui-input">
+                            <select name="minTeamMember" lay-filter="aihao">
+                                <option value="1" >1人</option>
+                                <option value="2" >2人</option>
+                                <option value="3" selected>3人</option>
+                                <option value="4">4人</option>
+                                <option value="5">5人</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="my-decoration"></div>
                 </div>
             </div>
+            <p class="center center-text">
+                <button type="button" id="addBtn1" class="layui-btn">
+                    <i class="layui-icon">&#xe608;</i> 新增
+                </button>
+            </p>
+            <div id="numberRules" class="layui-form-item margin2 ">
+                <label class="layui-form-label">选修课人数要求：</label>
+                <div class="layui-input-block">
+                    <select name="choose" lay-filter="aihao">
+                        <option value="0" selected>均满足</option>
+                        <option value="1">仅一个满足</option>
+                    </select>
+                </div>
+            </div>
+            <div class="decoration"></div>
+            <div class="distance3"></div>
+            <label id="courseLimit" class="field-title contactMessageTextarea" for="contactMessageTextarea">冲突课程：<span>(required)</span></label>
+            <div class="courseLimit">
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <div class="courseLimitation">
+                    <div class="distance3"></div>
+                    <div>
+                        <div class="layui-row" style="margin-right:25px;margin-bottom:10px;">
+                            <div  style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                            <div   style="margin-bottom:8px;" class="subPanel layui-col-xs6 layui-col-sm4 layui-col-md4">
+                                <select name="optionCourse" lay-filter="aihao">
+                                    <option value="0" selected>无</option>
+                                <#list courseList as course>
+                                    <option value="${course.id}">${course.courseName}</option>
+                                </#list>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="center center-text">
+                        <button style="margin-bottom:20px;" type="button" class="layui-btn sub-addBtn2">
+                            <i class="layui-icon">&#xe608;</i> 新增
+                        </button>
+                    </p>
+                </div>
+                <p class="center center-text">
+                    <button type="button" id="addBtn2" class="layui-btn">
+                        <i class="layui-icon">&#xe608;</i> 新增
+                    </button>
+                </p>
+            </div>
+            <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="创建课程" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
@@ -213,27 +974,281 @@
     -->
     </div>
 </div>
+<style>
+    @media screen and (min-width: 768px) and (max-width:1024px){
+        .layui-form-item .layui-inline {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 11%;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .layui-form-item .layui-inline {
+            display: block;
+            margin-right: -70px;
+            margin-left: 50px;
+            margin-bottom: 10px;
+            clear: both;
+        }
+    }
+
+    @media screen and (min-width: 1024px){
+        .layui-form-item .layui-inline {
+            margin-bottom: 5px;
+            margin-right: 10px;
+            margin-left: 17%;
+        }
+    }
+    .memberLimitation{
+        background-color: #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+    }
+    .courseLimitation{
+        background-color: #fff;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+    }
+    .my-layui-input{
+        margin-right:5%;
+    }
+    .my-form-label{
+        float: left;
+        display: block;
+        padding-left: 8%;
+        /* padding: 9px 95px; */
+        font-weight: 400;
+        line-height: 20px;
+        text-align: right;
+        margin-bottom:-20px;
+    }
+    @media screen and (min-width:1024px) {
+        .memberLimitation{
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            margin-right:25%;
+            margin-left:25%;
+        }
+        .courseLimitation{
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            margin-right:25%;
+            margin-left:25%;
+        }
+        .my-layui-input{
+            margin-right:10%;
+        }
+        .my-form-label{
+            float: left;
+            display: block;
+            padding-left: 8%;
+            /* padding: 9px 95px; */
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+            margin-bottom:-20px;
+        }
+    }
+    @media screen and (min-width:768px) and (max-width:1024px){
+        .memberLimitation{
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            margin-right:25%;
+            margin-left:25%;
+        }
+        .courseLimitation{
+            background-color: #fff;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12), 0 3px 5px rgba(0, 0, 0, 0.24);
+            margin-right:25%;
+            margin-left:25%;
+        }
+        .my-layui-input{
+            margin-right:10%;
+        }
+        .my-form-label{
+            float: left;
+            display: block;
+            padding-left: 8%;
+            /* padding: 9px 95px; */
+            font-weight: 400;
+            line-height: 20px;
+            text-align: right;
+            margin-bottom:-20px;
+        }
+    }
+    .layui-input-block {
+        margin-left: 110px;
+        min-height: 36px;
+    }
+    .my-decoration{
+        height: 1px;
+        background-color: rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+        display: block;
+        clear: both;
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .margin2{
+        margin-bottom: 10px;
+    }
+</style>
 <!--<div class="bottom-deco"></div>-->
 <script src="/layui/layui.js"></script>
 <script>
     layui.use('form', function(){
         var form = layui.form();
-
         //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>
+<script>
+    $('#formSuccessMessageWrap').hide(0);
+    $('.formValidationError').fadeOut(0);
+    // fields focus function starts
+    $('input[type="text"], input[type="password"], textarea').focus(function () {
+        if ($(this).val() == $(this).attr('data-dummy')) {
+            $(this).val('');
+        }
+        ;
+    });
+    // fields focus function ends
+    // fields blur function starts
+    $('input, textarea').blur(function () {
+        if ($(this).val() == '') {
+            $(this).val($(this).attr('data-dummy'));
+        }
+        ;
+    });
+    $(".courseLimitation").hide();
+    $(".subPanel").hide();
+    $(".memberLimitation").hide();
+    $("#numberRules").hide();
+    //添加选课人数限制
+    //count1,count2,subCount2Y用于记录已用的下拉框index
+    //需要传给后端的为：0~index的下拉框数据，
+    //因为Index后的下拉框仍被隐藏，未投入使用
+    var count1=0;
+    $('#addBtn1').click(function(){
+        var currentLimit=$(".memberLimitation").eq(count1);
+        $(currentLimit).fadeIn();
+        $(currentLimit).addClass("memberShow");
+        if(count1==1){
+            $("#numberRules").fadeIn();
+        }
+        count1++;
+    });
+    //添加课程冲突组
+    var count2=0;
+    $('#addBtn2').click(function(){
+        $(".courseLimitation").eq(count2).fadeIn();
+        $(".courseLimitation").eq(count2).addClass("courseShow");
+        count2++;
+    });
+    //课程冲突组中，添加课程
+    var subCount2=[0,0,0,0,0,0];
+    $('.sub-addBtn2').click(function(){
+        var tempIndex=$(this).parents().parents().index();//第tempIndex个冲突课程组的按钮，发起新增课程请求
+        $(".courseLimitation").eq(tempIndex).find(".subPanel").eq(subCount2[tempIndex]).fadeIn();
+        $(".courseLimitation").eq(tempIndex).find(".subPanel").eq(subCount2[tempIndex]).addClass("subCourseShow");
+        subCount2[tempIndex]++;
+        // alert(subCount2[tempIndex]);
+    });
+    //数组初始化
+    var memberArray = []; //二维数组，外层为每个课程组员人数要求，内层为课程号、人数上限、人数下限
+    var courseArray = []; //二维数组，外层为每个课程冲突组，内层为每个组内包含的课程号
+    // for(var k=0;k<8;k++){
+    //     memberArray[k]=[];
+    //     courseArray[k]=[];
+    //     for(var j=0;j<3;j++){
+    //         memberArray[k][j]=0;
+    //         courseArray[k][j]=0;
+    //     }
+    // }
+    var tempMemberCount=0;
+    var tempCourseCount=0;
+    var line;
+    $('#contactSubmitButton').click(function(){
+        if($('#contactNameField').val() == '' || $('#contactNameField').val() == $('#contactNameField').attr('data-dummy')){
+            // $(this).val($(this).attr('data-dummy'));
+            // $(this).focus();
+            $('#contactNameField').addClass('fieldHasError');
+            $('#contactNameFieldError').fadeIn(300);
+            return false;
+        };
+        if($('#contactMessageTextarea').val() == '' || $('#contactMessageTextarea').val() == $('#contactMessageTextarea').attr('data-dummy')){
+            // $(this).val($(this).attr('data-dummy'));
+            // $(this).focus();
+            $('#contactMessageTextarea').addClass('fieldHasError');
+            $('#contactMessageTextareaError').fadeIn(300);
+            return false;
+        };
+        $(".memberLimitation.memberShow").each(function(){
+            line=$(this).index();
+            memberArray[line]=[];
+            tempMemberCount=0;
+            $(this).find('select option:selected').each(function(){
+                memberArray[line][tempMemberCount]=$(this).attr("value");
+                tempMemberCount++;
+            });
+            // memberArray[tempMemberCount]=$(this).find('select option:selected').attr("value");
+            // alert(memberArray[tempMemberCount]);
+        });
+        var members=JSON.stringify(memberArray);
+        $(".courseLimitation.courseShow").each(function(){
+            // alert("进入课程冲突");
+            line=$(this).index();
+            courseArray[line]=[];
+            tempCourseCount=0;
+            $(this).find('.subPanel.subCourseShow').each(function(){
+                tempCourseCount=$(this).index();
+                courseArray[line][tempCourseCount]=$(this).find('select option:selected').attr("value");
+                tempCourseCount++;
+            });
+        });
+        var conflicts=JSON.stringify(courseArray);
+        var fd=new FormData($('#contactForm')[0]);
+        var courseName=fd.get("courseName");
+        var introduction=fd.get("introduction");
+        var presentationPercentage=fd.get("presentationPercentage");
+        var questionPercentage=fd.get("questionPercentage");
+        var reportPercentage=fd.get("reportPercentage");
+        var maxTeamMember=fd.get("maxTeamMember");
+        var minTeamMember=fd.get("minTeamMember");
+        var teamStartTime=fd.get("teamStartTime");
+        var teamEndTime=fd.get("teamEndTime");
+        var choose=fd.get("choose");
+        $.ajax(
+                {
+                    url:"/teacher/course",
+                    type:'post',
+                    data:{"members":members,"conflicts":conflicts,"courseName":courseName,"introduction":introduction,
+                        "presentationPercentage":presentationPercentage,"questionPercentage":questionPercentage,
+                        "reportPercentage":reportPercentage,"maxTeamMember":maxTeamMember,"minTeamMember":minTeamMember,
+                        "teamStartTime":teamStartTime,"teamEndTime":teamEndTime,"choose":choose},
+                    success:function(data,status,response){
+                        if(response.status=="200"){
+                            var info=response.responseText;
+                            window.location.href="/teacher/courseList";
+                        }
+                    },
+                    error:function(data,status){
+                        console.log(data);
+                        console.log(status);
+                        $('#formSuccessMessageWrap').fadeIn(500);
+                        formSubmitted = 'false';
+                    }
+                }
+        );
     });
 </script>
 
 <script>
     layui.use('laydate', function(){
         var laydate = layui.laydate;
-
         //日期时间选择器
         laydate.render({
             elem: '#test5'
             ,type: 'datetime'
         });
-
-
         //自定义重要日
         laydate.render({
             elem: '#test18'
@@ -251,7 +1266,6 @@
                 }
             }
         });
-
         //限定可选日期
         var ins22 = laydate.render({
             elem: '#test-limit1'
@@ -261,14 +1275,12 @@
                 ins22.hint('日期可选值设定在 <br> 2016-10-14 到 2080-10-14');
             }
         });
-
         //前后若干天可选，这里以7天为例
         laydate.render({
             elem: '#test-limit2'
             ,min: -7
             ,max: 7
         });
-
         //限定可选时间
         laydate.render({
             elem: '#test-limit3'
@@ -277,7 +1289,6 @@
             ,max: '17:30:00'
             ,btns: ['clear', 'confirm']
         });
-
         //同时绑定多个
         lay('.test-item').each(function(){
             laydate.render({
@@ -285,14 +1296,12 @@
                 ,trigger: 'click'
             });
         });
-
         //初始赋值
         laydate.render({
             elem: '#test19'
             ,value: '1989-10-14'
             ,isInitValue: true
         });
-
         //选中后的回调
         laydate.render({
             elem: '#test20'
@@ -300,7 +1309,6 @@
                 layer.alert('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //日期切换的回调
         laydate.render({
             elem: '#test21'
@@ -308,13 +1316,11 @@
                 layer.msg('你选择的日期是：' + value + '<br><br>获得的对象是' + JSON.stringify(date));
             }
         });
-
         //墨绿主题
         laydate.render({
             elem: '#test29'
             ,theme: 'molv'
         });
-
     });
 </script>
 

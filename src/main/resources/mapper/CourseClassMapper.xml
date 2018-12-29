@@ -9,31 +9,77 @@
     <!-- #{xxx}是参数的名称，参数会被填到这个位置 -->
     <resultMap id="courseClassResultMap" type="com.test.seminar.entity.CourseClass">
         <id property="id" column="id"/>
-        <result property="courseId" column="course_id"/>
         <result property="grade" column="grade"/>
         <result property="classSerial" column="klass_serial"/>
         <result property="classTime" column="klass_time"/>
         <result property="classLocation" column="klass_location"/>
+        <association property="course" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseClassId"/>
+        <collection property="teamList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Team" select="com.test.seminar.mapper.TeamMapper.getTeamByCourseClassId"/>
     </resultMap>
 
     <select id="getCourseClassByCourseClassId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
+        SELECT id,grade,klass_serial,klass_time,klass_location
         FROM klass
         WHERE id=#{courseClassId}
     </select>
 
+    <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
+        SELECT id,grade,klass_serial,klass_time,klass_location
+        FROM klass
+        WHERE course_id=#{courseId}
+    </select>
+
+    <select id="getCourseClassByCourseIdAndSerial" resultMap="courseClassResultMap">
+        SELECT id,grade,klass_serial,klass_time,klass_location
+        FROM klass
+        WHERE course_id=#{courseId} and klass_serial=#{serial}
+    </select>
+
+    <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
+        SELECT klass.id as id,grade,klass_serial,klass_time,klass_location
+        FROM klass,klass_student
+        WHERE klass.course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
+    </select>
+
+    <select id="getCourseClassByTeamIdAndCourseId" resultMap="courseClassResultMap">
+        SELECT klass.id,grade,klass_serial,klass_time,klass_location
+        FROM klass,klass_team
+        WHERE klass.course_id=#{courseId} and klass_team.team_id=#{teamId} and klass.id=klass_team.klass_id
+    </select>
+
+    <select id="getCourseClassTeamNumber" resultType="Integer">
+        SELECT count(klass_id)
+        FROM klass_team
+        where klass_id=#{courseClassId}
+    </select>
+
+    <select id="getCourseClassByTeamId" resultMap="courseClassResultMap">
+        select klass.id as id,grade,klass_serial,klass_time,klass_location
+        from klass,klass_team
+        where klass_team.team_id=#{teamId} and klass_team.klass_id=klass.id
+    </select>
+
+    <select id="getCourseClassBySeminarControlId" resultMap="courseClassResultMap">
+        select klass.id as id,klass.id,grade,klass_serial,klass_time,klass_location
+        from klass,klass_seminar
+        where klass_seminar.id=#{seminarControlId} and klass_seminar.klass_id=klass.id
+    </select>
+
     <insert id="insertCourseClass">
-        insert into klass(course_id,grade,klass_serial,klass_time,klass_location) values(#{courseClass.courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
+        insert into klass(course_id,grade,klass_serial,klass_time,klass_location)
+        values(#{courseId},#{courseClass.grade},#{courseClass.classSerial},#{courseClass.classTime},#{courseClass.classLocation})
     </insert>
 
-    <update id="updateCourseClassByCourseClassId">
+    <insert id="insertCourseClassStudentRelation">
+        insert into klass_student(klass_id,student_id,course_id)
+        values(#{courseClassId},#{studentId},#{courseId})
+    </insert>
+
+    <update id="updateCourseClassByCourseClass">
         update klass
         <set>
-            <if test="courseClass.courseId!=null">
-                course_id=#{courseClass.courseId},
-            </if>
             <if test="courseClass.grade!=null">
-                grade=#{courseClass.grade},
+                grade=#{courseclass.grade?c},
             </if>
             <if test="courseClass.classSerial!=null">
                 klass_serial=#{courseClass.classSerial},
@@ -52,20 +98,7 @@
         delete from klass where id=#{courseClassId}
     </delete>
 
-    <select id="getCourseClassByCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
-        FROM klass
-        WHERE course_id=#{courseId}
-    </select>
-
-    <select id="getCourseClassByStudentIdAndCourseId" resultMap="courseClassResultMap">
-        SELECT id,course_id,grade,klass_serial,klass_time,klass_location
-        FROM klass,klass_student
-        WHERE course_id=#{courseId} and klass_student.student_id=#{studentId} and klass.id=klass_student.klass_id
-    </select>
-
-    <insert id="insertCourseClassStudentRelation">
-        insert into klass_student(klass_id,student_id,course_id)
-        values(#{courseClassId},#{studentId},#{courseId})
-    </insert>
+    <delete id="deleteCourseClassAndTeamRelationByCourseClassId">
+        delete from klass_team where klass_id=#{courseClassId}
+    </delete>
 </mapper>

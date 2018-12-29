@@ -24,7 +24,7 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/creat-course.js"></script>
+    <script type="text/javascript" src="/scripts/creat-seminar.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -51,7 +51,7 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">修改讨论课</h1>
-    <a href="/teacher/course/seminarList?courseId=${courseId}" class="button-close">x</a>
+    <a href="/teacher/course/seminarList?courseId=${course.id}" class="button-close">x</a>
 </div>
 <div class="distace3"></div>
 <div class="decoration"></div>
@@ -59,7 +59,7 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="container no-bottom">
-        <form class="layui-form contactForm" action="#" method="post" id="contactForm">
+        <form class="layui-form contactForm" action="/teacher/course/seminar/setting?seminarId=${seminar.id}&courseId=${course.id}" method="post" id="contactForm" name="${course.id}">
             <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
                 <div class="static-notification-green tap-dismiss-notification">
                     <p style="color:#c9302c;">修改失败！</p>
@@ -67,45 +67,40 @@
             </div>
             <div class="formFieldWrap">
                 <label class="field-title contactNameField" for="contactNameField">讨论课主题：<span>(required)</span></label>
-                <p>业务流程分析</p>
+                <p>${seminar.seminarName}</p>
             </div>
             <div class="formTextareaWrap">
                 <label class="field-title contactNameField" for="contactMessageTextarea">讨论课内容：<span>(required)</span></label>
-                <p>界面导航图和所有界面原型设计</p>
+                <p>${seminar.introduction}</p>
             </div>
             <div class="distance3"></div>
             <div class="decoration"></div>
+            <div class="distance3"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课次序号：</label>
-                <div class="layui-input-block">
-                    <select name="presentationPercentage" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">6</option>
-                    </select>
+                <div class="layui-input-block" style="width: 100px;margin-left: auto;float: none;">
+                    <input  name="seminarSerial" autocomplete="off" class="layui-input requiredField" id="order">
                 </div>
             </div>
-            <div class="decoration"></div>
+            <div class="formValidationError" id="orderError">
+                <div class="static-notification-red tap-dismiss-notification">
+                    <p class="uppercase">请填写正确的讨论课次序号!</p>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">讨论课可见：</label>
                 <div class="layui-input-block" style="float: right;">
-                    <input type="checkbox" name="like[read]" title="可见" checked>
+                    <input type="checkbox" name="seminarVisible" title="可见" checked>
                 </div>
             </div>
-            <div class="decoration"></div>
             <div class="layui-form-item">
                 <label class="layui-form-label">所属round：</label>
                 <div class="layui-input-block">
-                    <select name="presentationPercentage" lay-filter="aihao">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5" selected>5</option>
-                        <option value="6">无</option>
+                    <select name="roundSerial" lay-filter="aihao">
+                        <option value="-1" selected>无</option>
+                        <#list course.roundList as round>
+                        <option value="${round.roundSerial}">${round.roundSerial}</option>
+                        </#list>
                     </select>
                 </div>
             </div>
@@ -113,11 +108,23 @@
             <div class="decoration"></div>
             <div class="distance3"></div>
             <div>
+                <div class="distance3"></div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报名小组数</label>
+                    <div class="layui-input-block">
+                        <select name="maxGroup" lay-filter="aihao">
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="layui-form-item margin2">
-                    <div class="distance3"></div>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input name="teamStartTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="registrationStartTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">展示报名开始时间</label>
@@ -126,40 +133,22 @@
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input name="teamEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                            <input name="registrationEndTime" type="text" class="layui-input requiredField" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
                         </div>
                     </div>
                     <label class="layui-form-label moveUp">展示报名截止时间</label>
                     <div class="formValidationError" id="test5Error">
                         <div class="static-notification-red tap-dismiss-notification">
-                            <p class="uppercase">请填写展示报名相关时间！</p>
+                            <p class="uppercase">请填写展示报名相关时间</p>
                         </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">报名小组数</label>
-                    <div class="layui-input-block">
-                        <select name="presentationPercentage" lay-filter="aihao">
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5" selected>5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">报名顺序：</label>
-                    <div class="layui-input-block" style="float: right;">
-                        <input type="checkbox" name="like[read]" title="自定" checked>
-                    </div>
-                </div>
-
-                <div class="distance4"></div>
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="创建讨论课" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-red" id="contactSubmitButton" value="删除讨论课" data-formId="contactForm"/></p>
+            <div class="distance3"></div>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="修改讨论课" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--

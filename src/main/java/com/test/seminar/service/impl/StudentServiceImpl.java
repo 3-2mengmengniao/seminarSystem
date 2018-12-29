@@ -1,5 +1,7 @@
 package com.test.seminar.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.dao.SeminarDao;
 import com.test.seminar.dao.StudentDao;
 import com.test.seminar.entity.Student;
@@ -11,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Service
 public class StudentServiceImpl implements StudentService {
     @Autowired
@@ -27,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudentByStudentId(Student student) throws UserNotFoundException {
-        studentDao.updateStudentByStudentId(student);
+    public void updateStudentByStudent(Student student) throws UserNotFoundException {
+        studentDao.updateStudentByStudent(student);
     }
 
     @Override
@@ -53,5 +58,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getAllStudent() {
         return studentDao.getAllStudent();
+    }
+
+    @Override
+    public PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Student> list = studentDao.getAllStudent();
+        PageInfo<Student> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 }

@@ -4,59 +4,113 @@
     <resultMap id="courseResultMap" type="com.test.seminar.entity.Course">
         <id property="id" column="id"/>
         <result property="teacherId" column="teacher_id"/>
-        <result property="introduction" column="introduction"/>
-        <result property="presentationPercentage" column="presentation_percentage"/>
-        <result property="questionPercentage" column="question_percentage"/>
-        <result property="reportPercentage" column="report_percentage"/>
-        <result property="courseName" column="course_name"/>
-        <result property="teamStartTime" column="team_start_time"/>
-        <result property="teamEndTime" column="team_end_time"/>
         <result property="teamMainCourseId" column="team_main_course_id"/>
-        <result property="teamMainCourseId" column="seminar_main_course_id"/>
+        <result property="seminarMainCourseId" column="seminar_main_course_id"/>
+        <collection property="roundList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Round" select="com.test.seminar.mapper.RoundMapper.getRoundByCourseId"/>
+        <collection property="seminarSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseBySeminarMainCourseId"/>
+        <collection property="teamSubCourseList" column="id" javaType="ArrayList" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByTeamMainCourseId"/>
     </resultMap>
 
-    <select id="getCourseByCourseId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
+    <resultMap id="shareTeamResultMap" type="com.test.seminar.entity.ShareTeamApplication">
+        <id property="id" column="id"/>
+        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareTeamApplicationId"/>
+        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareTeamApplicationId"/>
+    </resultMap>
+
+    <resultMap id="shareSeminarResultMap" type="com.test.seminar.entity.ShareSeminarApplication">
+        <id property="id" column="id"/>
+        <association property="mainCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getMainCourseByShareSeminarApplicationId"/>
+        <association property="subCourse" column="id" javaType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getSubCourseByShareSeminarApplicationId"/>
+    </resultMap>
+
+    <select id="getTeamMainCourseIdBySubCourseId" resultType="java.math.BigInteger">
+        select team_main_course_id
         from course
         where id=#{courseId}
     </select>
 
+    <select id="getCourseByCourseNameAndTeacherId" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+        where course_name=#{courseName} and teacher_id=#{teacherId}
+    </select>
+
+    <select id="getCourseByCourseId" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+        where id=#{courseId}
+    </select>
+
+    <select id="getCourseByCourseClassId" resultMap="courseResultMap">
+        select course.id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,klass
+        where klass.id=#{courseClassId} and course.id=klass.course_id
+    </select>
+
     <select id="getCourseByTeacherId" resultMap="courseResultMap">
-        select id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
         from course
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getCourseByStudentId" resultMap="courseResultMap">
-        SELECT course.id,teacher_id,course.introduction,presentation_percentage,question_percentage,report_percentage,course.course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id
-        FROM course,klass,klass_student
-        WHERE student_id=#{studentId} AND klass_student.klass_id=klass.id AND klass.course_id=course.id;
+        SELECT course.id as id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        FROM course,klass_student
+        WHERE student_id=#{studentId} AND klass_student.course_id=course.id
+
+    </select>
+
+    <select id="getCourseByRoundId" resultMap="courseResultMap">
+        select course.id as id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from round,course
+        where round.id=#{roundId} and round.course_id=course.id
+    </select>
+
+    <select id="getCourseByTeamMainCourseId" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+        where team_main_course_id=#{teamMainCourseId}
+    </select>
+
+    <select id="getCourseBySeminarMainCourseId" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+        where seminar_main_course_id=#{seminarMainCourseId}
+    </select>
+
+    <select id="getMainCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select course.id as id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where course.id=share_team_application.main_course_id and share_team_application.id=#{shareTeamApplicationId}
+    </select>
+
+    <select id="getSubCourseByShareTeamApplicationId" resultMap="courseResultMap">
+        select course.id as id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_team_application
+        where course.id=share_team_application.sub_course_id and share_team_application.id=#{shareTeamApplicationId}
     </select>
 
     <insert id="insertCourse">
         insert into course(teacher_id,introduction,presentation_percentage,question_percentage,
-        report_percentage,course_name,team_start_time,team_end_time,team_main_course_id,seminar_main_course_id)
-        values(#{course.teacherId},#{course.introduction},
+        report_percentage,course_name,team_start_time,team_end_time)
+        values(#{teacherId},#{course.introduction},
         #{course.presentationPercentage},#{course.questionPercentage},#{course.reportPercentage},
-        #{course.courseName},#{course.teamStartTime},#{course.teamEndTime},#{course.teamMainCourseId},#{course.seminarMainCourseId})
+        #{course.courseName},#{course.teamStartTime},#{course.teamEndTime})
     </insert>
 
     <update id="updateCourseByCourseId">
         update course
         <set>
-            <if test="course.teacherId!=null">
-                teacher_id=#{course.teacherId},
-            </if>
             <if test="course.introduction!=null">
                 introduction=#{course.introduction},
             </if>
             <if test="course.presentationPercentage!=null">
                 presentation_percentage=#{course.presentationPercentage},
             </if>
-            <if test="course.question_percentage!=null">
+            <if test="course.questionPercentage!=null">
                 question_percentage=#{course.questionPercentage},
             </if>
-            <if test="course.report_percentage!=null">
+            <if test="course.reportPercentage!=null">
                 report_percentage=#{course.reportPercentage},
             </if>
             <if test="course.courseName!=null">
@@ -66,13 +120,10 @@
                 team_start_time=#{course.teamStartTime},
             </if>
             <if test="course.teamEndTime!=null">
-                team_end_time=#{course.teamEndTime}
+                team_end_time=#{course.teamEndTime},
             </if>
             <if test="course.teamMainCourseId!=null">
-                team_main_course_id=#{course.teamMainCourseId},
-            </if>
-            <if test="course.seminarMainCourseId!=null">
-                seminar_main_course_id=#{course.seminarMainCourseId}
+                team_main_course_id=#{course.teamMainCourseId}
             </if>
         </set>
         where id=#{course.id}
@@ -81,4 +132,91 @@
     <delete id="deleteCourseByCourseId">
         delete from course where id=#{courseId}
     </delete>
+
+    <select id="getShareTeamApplicationByApplicationId" resultMap="shareTeamResultMap">
+        select id,main_course_id,sub_course_id,sub_course_teacher_id,status
+        from share_team_application
+        where id=#{applicationId}
+    </select>
+
+    <select id="getShareTeamApplicationBySubCourseTeacherId" resultMap="shareTeamResultMap">
+        select id,main_course_id,sub_course_id,sub_course_teacher_id,status
+        from share_team_application
+        where sub_course_teacher_id=#{subCourseTeacherId}
+    </select>
+
+    <insert id="insertShareTeamApplication">
+        insert into share_team_application(main_course_id,sub_course_id,sub_course_teacher_id)
+        values(#{mainCourseId},#{subCourseId},#{subCourseTeacherId})
+    </insert>
+
+
+    <delete id="deleteShareTeamApplication">
+        delete from share_team_application where id=#{shareTeamApplicationId}
+    </delete>
+
+    <select id="getShareSeminarApplicationByApplicationId" resultMap="shareTeamResultMap">
+        select id,main_course_id,sub_course_id,sub_course_teacher_id,status
+        from share_seminar_application
+        where id=#{applicationId}
+    </select>
+
+    <select id="getShareSeminarApplicationBySubCourseTeacherId" resultMap="shareSeminarResultMap">
+        select id,main_course_id,sub_course_id,sub_course_teacher_id,status
+        from share_seminar_application
+        where sub_course_teacher_id=#{subCourseTeacherId}
+    </select>
+
+    <select id="getMainCourseByShareSeminarApplicationId" resultMap="courseResultMap">
+        select course.id as id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_seminar_application
+        where course.id=share_seminar_application.main_course_id and share_seminar_application.id=#{shareSeminarApplicationId}
+    </select>
+
+    <select id="getSubCourseByShareSeminarApplicationId" resultMap="courseResultMap">
+        select course.id as id,teacher_id,team_main_course_id,seminar_main_course_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course,share_seminar_application
+        where course.id=share_seminar_application.sub_course_id and share_seminar_application.id=#{shareSeminarApplicationId}
+    </select>
+
+    <insert id="insertShareSeminarApplication">
+        insert into share_Seminar_application(main_course_id,sub_course_id,sub_course_teacher_id)
+        values(#{mainCourseId},#{subCourseId},#{subCourseTeacherId})
+    </insert>
+
+
+    <delete id="deleteShareSeminarApplication">
+        delete from share_Seminar_application where id=#{shareTeamApplicationId}
+    </delete>
+
+    <update id="updateCourseTeamMainCourseId">
+        update course
+        <set>
+            <if test="mainCourseId!=null">
+                team_main_course_id=#{mainCourseId}
+            </if>
+        </set>
+        where course.id=#{subCourseId}
+    </update>
+
+    <update id="updateCourseSeminarMainCourseId">
+        update course
+        <set>
+            <if test="mainCourseId!=null">
+                seminar_main_course_id=#{mainCourseId}
+            </if>
+        </set>
+        where course.id=#{subCourseId}
+    </update>
+
+    <select id="getAllCourse" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+    </select>
+
+    <select id="getAvailableCourseForShare" resultMap="courseResultMap">
+        select id,teacher_id,team_main_course_id,seminar_main_course_id,teacher_id,introduction,presentation_percentage,question_percentage,report_percentage,course_name,team_start_time,team_end_time
+        from course
+        where course.team_main_course_id!=#{courseId} and course.seminar_main_course_id!=#{courseId}
+    </select>
 </mapper>

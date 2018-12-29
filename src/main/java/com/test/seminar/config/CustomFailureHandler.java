@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
+
 @Component
 public class CustomFailureHandler implements AuthenticationFailureHandler{
 

@@ -1,5 +1,6 @@
 package com.test.seminar.service.impl;
 
+import com.test.seminar.dao.LoginDao;
 import com.test.seminar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,10 @@ import com.test.seminar.entity.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 
 @Service(value = "userServiceImpl")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -42,16 +47,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 List<GrantedAuthority> list = new ArrayList<>();
                 list.add(new SimpleGrantedAuthority("ROLE_TEACHER"));
                 String password=passwordEncoder.encode(teacher.getPassword());
-                org.springframework.security.core.userdetails.User auth_teacher = new org.springframework.security.core.userdetails.User(teacher.getAccount(),password,list);
-                return auth_teacher;
+                org.springframework.security.core.userdetails.User authTeacher = new org.springframework.security.core.userdetails.User(teacher.getAccount(),password,list);
+                return authTeacher;
             }
         }
         else{
             List<GrantedAuthority> list = new ArrayList<>();
             list.add(new SimpleGrantedAuthority("ROLE_STUDENT"));
             String password=passwordEncoder.encode(student.getPassword());
-            org.springframework.security.core.userdetails.User auth_student = new org.springframework.security.core.userdetails.User(student.getAccount(),password,list);
-            return auth_student;
+            org.springframework.security.core.userdetails.User authStudent = new org.springframework.security.core.userdetails.User(student.getAccount(),password,list);
+            return authStudent;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.test.seminar.service;
 
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -47,4 +48,6 @@ public interface TeacherService {
     Teacher getTeacherByAccount(String account);
 
     List<Teacher> getAllTeacher();
+
+    PageInfo<Teacher> selectTeacherList(Integer pageNum, Integer pageSize);
 }

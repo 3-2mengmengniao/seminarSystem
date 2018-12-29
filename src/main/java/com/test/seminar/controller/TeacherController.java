@@ -3,7 +3,12 @@ package com.test.seminar.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import com.test.seminar.entity.*;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
 import com.test.seminar.service.*;
+import javafx.util.Pair;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+/**
+ * @author hatake
+ * @date 2018/11/20
+ */
 
 @Controller
 @RequestMapping("/teacher")
@@ -49,7 +58,10 @@ public class TeacherController {
     StudentService studentService;
 
     @Autowired
-    FileService fileService;
+    RunSeminarService rundSeminarService;
+
+//    @Autowired
+//    FileService fileService;
 
     @RequestMapping(value = "/index")
     public String home(Model model,HttpSession session) {
@@ -124,7 +136,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/activate", method = POST)
     @ResponseBody
-    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "validation") String validation,Model model) {
+    public ResponseEntity<String> activatePost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
@@ -147,7 +159,7 @@ public class TeacherController {
     @RequestMapping(value="/course/klassList",method = POST)
     public String classInfoPost(BigInteger courseId, BigInteger classId, MultipartFile file) {
         System.out.println(file);
-        fileService.uploadStudentExcel(file,classId,courseId);
+        courseClassService.uploadStudentExcel(file,classId,courseId);
         return "redirect:/teacher/course/klassList?courseId="+courseId;
     }
 
@@ -155,26 +167,216 @@ public class TeacherController {
     public String courseInfo(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        HashMap hashMap=teamService.getStrategyByCourseId(courseId);
+        List<ConflictCourseStrategy> conflictCourseStrategyList=(List<ConflictCourseStrategy>)hashMap.get(0);
+        List<List<Course>> conflictCourses=new ArrayList<List<Course>>();
+        for(int i=0;i<conflictCourseStrategyList.size();i++)
+        {
+            List<BigInteger> courseIdList=conflictCourseStrategyList.get(i).getConflictCourseIdList();
+            List<Course> courseList=new ArrayList<>();
+            for(int j=0;j<courseIdList.size();j++)
+            {
+                courseList.add(courseService.getCourseByCourseId(courseIdList.get(j)));
+            }
+            conflictCourses.add(courseList);
+        }
+        model.addAttribute("conflictCourses",conflictCourses);
+        List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=(List<CourseMemberLimitStrategy>)hashMap.get(1);
+        List<Course> optionCourses=new ArrayList<>();
+        for(int i=0;i<courseMemberLimitStrategyList.size();i++)
+        {
+            optionCourses.add(courseService.getCourseByCourseId(courseMemberLimitStrategyList.get(i).getCourseId()));
+        }
+        model.addAttribute("optionCourses",optionCourses);
+        model.addAttribute("memberLimit",courseMemberLimitStrategyList);
+        MemberLimitStrategy thisCourse=(MemberLimitStrategy)hashMap.get(2);
+        model.addAttribute("thisCourse",thisCourse);
+        List<Integer> chooses=(List<Integer>)hashMap.get(3);
+        Integer choose=chooses.get(1);
+        model.addAttribute("choose",choose);
         return "teacher/course/info";
     }
 
     @RequestMapping(value="/course/create",method = GET)
-    public String createCourse(Model model) { return "teacher/course/create"; }
+    public String createCourse(Model model) {
+        List<Course> courseList=courseService.getAllCourse();
+        model.addAttribute("courseList",courseList);
+        return "teacher/course/create";
+    }
 
     @RequestMapping(value="/course/seminar/create",method = GET)
     public String createSeminar(BigInteger courseId,Model model) {
-        model.addAttribute("courseId",courseId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
         return "teacher/course/seminar/create";
     }
 
+    @RequestMapping(value="/course/seminar/setting",method = GET)
+    public String seminarSetting(BigInteger courseId,BigInteger seminarId,Model model) {
+        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        model.addAttribute("seminar",seminarInfo);
+        return "teacher/course/seminar/setting";
+    }
+
+    @RequestMapping(value="/message/handle",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationHandle(HttpServletRequest request,Model model) {
+        BigInteger applicationId=new BigInteger((String)request.getParameter("applicationId"));
+        String type=request.getParameter("type");
+        Integer status=Integer.valueOf(request.getParameter("status"));
+        boolean isTeam=("team".equals(type));
+        boolean isSeminar=("seminar".equals(type));
+        boolean isVali=("validate".equals(type));
+        if(status==0) {
+            if(isTeam) {
+                ShareTeamApplication shareTeamApplication=courseService.getShareTeamApplicationByApplicationId(applicationId);
+                shareTeamApplication.setStatus(0);
+                teamService.updateShareTeamApplication(shareTeamApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if(isSeminar){
+                ShareSeminarApplication shareSeminarApplication=courseService.getShareSeminarApplicationByApplicationId(applicationId);
+                shareSeminarApplication.setStatus(0);
+                seminarService.updateShareSeminarApplication(shareSeminarApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if(isVali){
+                TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
+                teamValidApplication.setStatus(0);
+                teamService.updateTeamValidApplication(teamValidApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+
+        }
+        else if(isTeam||isSeminar)
+        {
+            BigInteger courseId=new BigInteger(request.getParameter("courseId"));
+            Course course=courseService.getCourseByCourseId(courseId);
+            if(isTeam&&null!=course.getTeamMainCourseId())
+            {
+                return new ResponseEntity<>("", HttpStatus.CONFLICT);
+            }
+            if(isSeminar&&null!=course.getSeminarMainCourseId())
+            {
+                return new ResponseEntity<>("", HttpStatus.CONFLICT);
+            }
+            if(isTeam)
+            {
+                ShareTeamApplication shareTeamApplication=courseService.getShareTeamApplicationByApplicationId(applicationId);
+                shareTeamApplication.setStatus(1);
+                teamService.updateShareTeamApplication(shareTeamApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+            if (isSeminar) {
+                ShareSeminarApplication shareSeminarApplication=courseService.getShareSeminarApplicationByApplicationId(applicationId);
+                shareSeminarApplication.setStatus(1);
+                seminarService.updateShareSeminarApplication(shareSeminarApplication);
+                return new ResponseEntity<>("", HttpStatus.OK);
+
+            }
+
+        }
+        else if(isVali){
+            TeamValidApplication teamValidApplication=teamService.getTeamValidApplicationByApplicationId(applicationId);
+            teamValidApplication.setStatus(1);
+            teamService.updateTeamValidApplication(teamValidApplication);
+            return new ResponseEntity<>("", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(value="/course/application/add",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationAdd(HttpServletRequest request,Model model) {
+        BigInteger mainCourseId=new BigInteger(request.getParameter("mainCourseId"));
+        BigInteger subCourseId=new BigInteger(request.getParameter("subCourseId"));
+        Integer type=Integer.valueOf(request.getParameter("type"));
+        Course subCourse=courseService.getCourseByCourseId(subCourseId);
+        if(type==1)
+        {
+            courseService.insertShareSeminarApplication(mainCourseId,subCourseId,subCourse.getTeacherId());
+        }
+        else if(type==2)
+        {
+            courseService.insertShareTeamApplication(mainCourseId,subCourseId,subCourse.getTeacherId());
+
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/application/cancel",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> applicationCancel(HttpServletRequest request,Model model) {
+        BigInteger subCourseId=new BigInteger(request.getParameter("courseId"));
+        String type=request.getParameter("type");
+        Course subCourse=courseService.getCourseByCourseId(subCourseId);
+        if("team".equals(type))
+        {
+            teamService.cancelTeamShare(subCourse);
+        }
+        else if("seminar".equals(type))
+        {
+            seminarService.cancelSeminarShare(subCourse);
+
+        }
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+
     @RequestMapping(value="/course",method = POST)
     @ResponseBody
-    public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model,Course course) {
+    public ResponseEntity<String> createCoursePost(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         BigInteger teacherId=(BigInteger)session.getAttribute("id");
-        course.setTeacherId(teacherId);
-        System.out.println(course.getCourseName());
-        courseService.insertCourse(course);
+        System.out.println(request.getParameter("courseName"));
+        Course course=new Course();
+        course.setCourseName(request.getParameter("courseName"));
+        course.setIntroduction(request.getParameter("introduction"));
+        course.setPresentationPercentage(Integer.valueOf(request.getParameter("presentationPercentage")));
+        course.setQuestionPercentage(Integer.valueOf(request.getParameter("questionPercentage")));
+        course.setReportPercentage(Integer.valueOf(request.getParameter("reportPercentage")));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            course.setTeamEndTime(sdf.parse(request.getParameter("teamEndTime")));
+            course.setTeamStartTime(sdf.parse(request.getParameter("teamStartTime")));
+        }catch(Exception e)
+        {
+            System.out.println("时间格式出错！");
+        }
+        MemberLimitStrategy thisCourse=new MemberLimitStrategy();
+        thisCourse.setMinMember(Integer.valueOf(request.getParameter("minTeamMember")));
+        thisCourse.setMaxMember(Integer.valueOf(request.getParameter("maxTeamMember")));
+        List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=new ArrayList<>();
+        String members=request.getParameter("members");
+        JSONArray myArray=JSONArray.fromObject(members);
+        for(int i=0;i<myArray.size();i++){
+            JSONArray secondArray=(JSONArray)myArray.get(i);
+            CourseMemberLimitStrategy optionCourse=new CourseMemberLimitStrategy();
+            BigInteger cid=new BigInteger((String)secondArray.get(0));
+            optionCourse.setCourseId(cid);
+            optionCourse.setMaxMember( Integer.valueOf((String)secondArray.get(1)));
+            optionCourse.setMinMember( Integer.valueOf((String)secondArray.get(2)));
+            courseMemberLimitStrategyList.add(optionCourse);
+        }
+        List<ConflictCourseStrategy> conflictCourseStrategyArrayList=new ArrayList<>();
+        String conflicts=request.getParameter("conflicts");
+        JSONArray conflictsArray=JSONArray.fromObject(conflicts);
+        for(int i=0;i<conflictsArray.size();i++){
+            JSONArray secondArray=(JSONArray)conflictsArray.get(i);
+            ConflictCourseStrategy conflictCourse=new ConflictCourseStrategy();
+            List<BigInteger> courseIdList=new ArrayList<>();
+            for(int j=0;j<secondArray.size();j++) {
+                String tmp=(String)secondArray.get(j);
+                BigInteger cid=new BigInteger(tmp);
+                courseIdList.add(cid);
+            }
+            conflictCourse.setConflictCourseIdList(courseIdList);
+            conflictCourseStrategyArrayList.add(conflictCourse);
+        }
+        Integer choose=Integer.valueOf(request.getParameter("choose"));
+        courseService.insertCourse(course,teacherId,conflictCourseStrategyArrayList,courseMemberLimitStrategyList,thisCourse,choose);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -186,9 +388,47 @@ public class TeacherController {
 
     @RequestMapping(value="/course/klass/create",method = POST)
     @ResponseBody
-    public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass) {
-        courseClass.setCourseId(courseId);
-        courseClassService.insertCourseClass(courseClass);
+    public ResponseEntity<String> createClassPost(BigInteger courseId,Model model,CourseClass courseClass,MultipartFile file) {
+        courseClassService.insertCourseClass(courseClass,courseId,file);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/seminar/create",method = PUT)
+    @ResponseBody
+    public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,
+                                                    String seminarVisible,Integer roundSerial) {
+        String value="on";
+        if(value.equals(seminarVisible))
+        {
+            seminarInfo.setVisible(1);
+        }
+        else{
+            seminarInfo.setVisible(0);
+        }
+        System.out.println(roundSerial);
+        seminarService.insertSeminarInfo(seminarInfo,courseId,roundSerial);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/seminar/setting",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
+                                                     String seminarVisible,Integer roundSerial,BigInteger courseId) {
+        SeminarInfo seminarInfoOld=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
+        String value="on";
+        if(value.equals(seminarVisible))
+        {
+            seminarInfoOld.setVisible(1);
+        }
+        else{
+            seminarInfoOld.setVisible(0);
+        }
+        seminarInfoOld.setMaxGroup(seminarInfo.getMaxGroup());
+        seminarInfoOld.setRegistrationEndTime(seminarInfo.getRegistrationEndTime());
+        seminarInfoOld.setRegistrationStartTime(seminarInfo.getRegistrationStartTime());
+        seminarInfoOld.setSeminarSerial(seminarInfo.getSeminarSerial());
+        seminarService.deleteSeminarInfoBySeminarInfoId(seminarInfoOld.getId());
+        seminarService.insertSeminarInfo(seminarInfoOld,courseId,roundSerial);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
@@ -199,8 +439,24 @@ public class TeacherController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/course/grade")
-    public String groupScore(Model model) {
+    @RequestMapping(value="/course/grade",method = POST)
+    public String changeGrade(@PathVariable BigInteger seminarControlId,BigInteger teamId,Double presentationScore,
+                                              Double questionScore,Double reportScore,Model model) {
+        System.out.println(seminarControlId);
+        System.out.println(questionScore);
+        seminarService.updateSeminarScore(presentationScore,questionScore,reportScore,seminarControlId,teamId);
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarControlId);
+        return "redirect:/teacher/course/grade?courseId="+seminarControl.getCourseClass().getCourse().getId();
+    }
+
+    @RequestMapping(value="/course/grade",method = GET)
+    public String groupScore(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("course",course);
+        List<Team> teamList=teamService.getTeamByCourseId(courseId);
+        model.addAttribute("teamList",teamList);
+        List<Round> roundList=roundService.getRoundByCourseId(courseId);
+        model.addAttribute("roundList",roundList);
         return "teacher/course/grade";
     }
 
@@ -215,19 +471,21 @@ public class TeacherController {
 
     @RequestMapping(value="/course/seminarList")
     public String courseSeminar(BigInteger courseId,Model model) {
-        List<Round> roundList= roundService.getRoundByCourseId(courseId);
-        model.addAttribute("roundList",roundList);
-        List<List<SeminarInfo>> seminarList = seminarService.getSeminarInfoByRoundList(roundList);
-        model.addAttribute("seminarList",seminarList);
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
-        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
-        model.addAttribute("courseClassList",courseClasses);
+        try {
+            List<Round> roundList = course.getRoundList();
+            model.addAttribute("roundList", roundList);
+        }catch (Exception e){
+            System.out.println("catch exception!");
+        }
+        List<CourseClass> courseClasses = courseClassService.getCourseClassByCourseId(courseId);
+        model.addAttribute("courseClassList", courseClasses);
         return "teacher/course/seminarList";
     }
 
-    @RequestMapping(value="/course/roundSetting")
-    public String roundSetting(BigInteger courseId,BigInteger roundId,Model model) {
+    @RequestMapping(value="/course/roundSetting",method = GET)
+    public String roundSetting(BigInteger roundId,BigInteger courseId,Model model) {
         Round round=roundService.getRoundByRoundId(roundId);
         model.addAttribute("round",round);
         List<SeminarInfo> seminarList = seminarService.getSeminarInfoByRoundId(roundId);
@@ -239,103 +497,144 @@ public class TeacherController {
         return "teacher/course/roundSetting";
     }
 
+    @RequestMapping(value="/course/roundSetting",method = PATCH)
+    @ResponseBody
+    public ResponseEntity<String> roundSettingPost(HttpServletRequest request,Model model) {
+        BigInteger courseId=new BigInteger(request.getParameter("courseId"));
+        System.out.println(courseId);
+        Round round=roundService.getRoundByRoundId(new BigInteger(request.getParameter("roundId")));
+        round.setPresentationScoreMethod(Integer.valueOf(request.getParameter("presentationScoreMethod")));
+        round.setQuestionScoreMethod(Integer.valueOf(request.getParameter("questionScoreMethod")));
+        round.setReportScoreMethod(Integer.valueOf(request.getParameter("reportScoreMethod")));
+        String data=request.getParameter("enrollment");
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        HashMap<BigInteger,Integer> map=new HashMap<BigInteger,Integer>();
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String tmp=(String) myArray.get(i);
+            map.put(courseClasses.get(i).getId(),Integer.valueOf(tmp));
+        }
+        roundService.updateRound(round);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/teamList")
     public String teams(BigInteger courseId,Model model) {
         model.addAttribute("courseId",courseId);
-        List<Team> teamList= teamService.getTeamByCourseId(courseId);
+        Pair<List<Team>,List<Student>> teamPair= teamService.getTeam(courseId);
+        List<Team> teamList=teamPair.getKey();
+        List<Student> studentNoTeamList=teamPair.getValue();
         model.addAttribute("teamList",teamList);
-        List<List<Student>> studentList=new LinkedList<List<Student>>();
-        List<Student> leaderList=new ArrayList();
-        List<CourseClass> classList=new ArrayList<>();
-        for( int i = 0 ; i < teamList.size() ; i++) {
-            BigInteger teamId=teamList.get(i).getId();
-            List<Student> teamStudents= studentService.getStudentByTeamId(teamId);
-            studentList.add(teamStudents);
-            Student leader=studentService.getStudentByStudentId(teamList.get(i).getLeaderId());
-            leaderList.add(leader);
-            BigInteger classId=teamList.get(i).getClassId();
-            CourseClass teamClass=courseClassService.getCourseClassByCourseClassId(classId);
-            classList.add(teamClass);
-        }
-        model.addAttribute("studentList",studentList);
-        model.addAttribute("leaderList",leaderList);
-        model.addAttribute("classList",classList);
+        model.addAttribute("studentNoTeamList",studentNoTeamList);
         return "teacher/course/teamList";
     }
 
     @RequestMapping(value="/course/seminar/info")
-    public String seminarInfo(BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-            SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-            SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-            model.addAttribute("seminarInfo",seminarInfo);
-            BigInteger roundId=seminarInfo.getRoundId();
-            Round round=roundService.getRoundByRoundId(roundId);
-            model.addAttribute("round",round);
-            Course course=courseService.getCourseByCourseId(courseId);
-            model.addAttribute("course",course);
-            model.addAttribute("classId",classId);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
+    public String seminarInfo(BigInteger classId,BigInteger seminarId, Model model) {
+        SeminarControl seminarControl = seminarService.getSeminarControlByClassIdAndSeminarInfoId(classId, seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/info";
     }
 
-    @RequestMapping(value="/course/seminar/enrollment")
-    public String enrollmentInfo(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-        SeminarControl seminarControl = seminarService.getSemniarControlByClassIdAndSeminarInfoId(classId, seminarId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        BigInteger roundId=seminarInfo.getRoundId();
-        Round round=roundService.getRoundByRoundId(roundId);
-        model.addAttribute("round",round);
-        Course course=courseService.getCourseByCourseId(courseId);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("status",seminarControl.getSeminarStatus());
-        return "teacher/course/seminar/enrollment";
+
+
+    @RequestMapping(value="/course/seminar/enrollList")
+    public String enrollmentInfo(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        return "teacher/course/seminar/enrollList";
     }
 
     @RequestMapping(value="/course/seminar/report")
-    public String report(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-        Course course=courseService.getCourseByCourseId(courseId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("seminarId",seminarId);
+    public String report(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
         return "teacher/course/seminar/report";
     }
 
     @RequestMapping(value="/course/seminar/score")
-    public String seminarScore(HttpServletRequest request,BigInteger courseId, BigInteger classId,BigInteger seminarId, Model model) {
-        Course course=courseService.getCourseByCourseId(courseId);
-        SeminarInfo seminarInfo=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        model.addAttribute("seminarInfo",seminarInfo);
-        model.addAttribute("course",course);
-        model.addAttribute("classId",classId);
-        model.addAttribute("seminarId",seminarId);
+    public String seminarScore(BigInteger seminarId, Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        List<SeminarScore> seminarScoreList=seminarService.getSeminarScoreBySeminarControlId(seminarId);
+        System.out.println(seminarId);
+        model.addAttribute("seminarScoreList",seminarScoreList);
         return "teacher/course/seminar/score";
     }
 
-    @RequestMapping(value="/report_download")
-    public String reportDownload(Model model) {
-        return "teacher/report_download";
+    @RequestMapping(value="/course/seminar/reportScore",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> reportScore(HttpServletRequest request,Model model) {
+        String data=request.getParameter("reportScore");
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String tmp=(String) myArray.get(i);
+            System.out.println(tmp);
+        }
+        String seminarId=request.getParameter("seminarId");
+        System.out.println(seminarId);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/report_score")
-    public String reportScore(Model model) {
-        return "teacher/report_score";
+    @RequestMapping(value="/course/seminar/presentationScore",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> presentationScore(BigInteger presentationId, Double score,Model model) {
+        seminarService.updatePresentationScore(presentationId,score);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/course/seminar/questionScore",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> questionScore(BigInteger questionId, Double score,Model model) {
+        seminarService.updateQuestionScore(questionId,score);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/activate",method = GET)
     public String activate(Model model) { return "teacher/activate"; }
 
     @RequestMapping(value = "/message",method = GET)
-    public String message(Model model) { return "teacher/message"; }
+    public String message(HttpServletRequest request,Model model) {
+        HttpSession session = request.getSession();
+        BigInteger teacherId=(BigInteger)session.getAttribute("id");
+        List<TeamValidApplication> teamValidApplicationList=teamService.getTeamValidApplicationByTeacherId(teacherId);
+        List<ShareTeamApplication> shareTeamApplicationList=courseService.getShareTeamApplicationBySubCourseTeacherId(teacherId);
+        List<ShareSeminarApplication> shareSeminarApplicationList=courseService.getShareSeminarApplicationBySubCourseTeacherId(teacherId);
+        model.addAttribute("teamValidApplicationList",teamValidApplicationList);
+        model.addAttribute("shareTeamApplicationList",shareTeamApplicationList);
+        model.addAttribute("shareSeminarApplicationList",shareSeminarApplicationList);
+        return "teacher/message";
+    }
+
+    @RequestMapping(value = "/course/seminar/report_deadline",method = GET)
+    public String deadline(BigInteger seminarId,Model model) {
+        SeminarControl seminarControl=seminarService.getSeminarControlBySeminarControlId(seminarId);
+        model.addAttribute("seminarControl",seminarControl);
+        return "teacher/course/seminar/report_deadline";
+    }
 
     @RequestMapping(value="course/shareSettings")
     public String shareSettings(BigInteger courseId,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
+        if(course.getSeminarMainCourseId()!=null)
+        {
+            model.addAttribute("seminarMainCourse",courseService.getCourseByCourseId(course.getSeminarMainCourseId()));
+        }
+        if(course.getTeamMainCourseId()!=null)
+        {
+            model.addAttribute("teamMainCourse",courseService.getCourseByCourseId(course.getTeamMainCourseId()));
+        }
         return "teacher/course/shareSettings";
+    }
+
+    @RequestMapping(value="course/addShare")
+    public String addShare(BigInteger courseId,Model model) {
+        Course course=courseService.getCourseByCourseId(courseId);
+        model.addAttribute("myCourse",course);
+        List<Course> courseList=courseService.getAllCourse();
+        model.addAttribute("courseList",courseList);
+        return "teacher/course/addShare";
     }
 
 }

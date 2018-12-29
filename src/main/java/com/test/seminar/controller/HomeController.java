@@ -8,7 +8,10 @@ import com.test.seminar.exception.UserNotFoundException;
 import com.test.seminar.service.LoginService;
 import com.test.seminar.service.StudentService;
 import com.test.seminar.service.TeacherService;
+import com.test.seminar.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigInteger;
 
+/**
+ * @author hatake
+ * @date 2018/11/20
+ */
 
 @Controller
 public class HomeController {
@@ -31,91 +38,15 @@ public class HomeController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    EmailService emailService;
+
     @RequestMapping(value = {"/","/login"}, method = GET)
     public String login(HttpServletRequest request,Model model) {
         HttpSession session = request.getSession();
         session.invalidate();
             return "login";
     }
-
-//    @RequestMapping(value = "/login", method = POST)
-//    @ResponseBody
-//    public String loginPost(HttpServletRequest request, @RequestParam(value = "contactNameField") String account, @RequestParam(value = "contactEmailField") String password, Model model)  {
-//        //获得session
-//        HttpSession session = request.getSession();
-//        //登陆验证
-//        try {
-//            Student student = loginService.studentLogin(account, password);
-//            session.setAttribute("usertype", "student");
-//            session.setAttribute("id", student.getId());
-//            session.setAttribute("account", student.getAccount());
-//            session.setAttribute("name", student.getStudentName());
-//            model.addAttribute("account", student.getAccount());
-//            model.addAttribute("name", student.getStudentName());
-//        }
-//       catch (UserNotFoundException e) {
-//            try {
-//                Teacher teacher = loginService.teacherLogin(account, password);
-//                session.setAttribute("usertype", "teacher");
-//                session.setAttribute("id", teacher.getId());
-//                session.setAttribute("account", teacher.getAccount());
-//                session.setAttribute("name", teacher.getTeacherName());
-//                model.addAttribute("account", teacher.getAccount());
-//                model.addAttribute("name", teacher.getTeacherName());
-//            }
-//            catch (UserNotFoundException e2){
-//                String status = "404";
-//                return status;
-//            }
-//           String status = "200";
-//           return status;
-//
-//           }
-//        String status = "204";
-//        return status;
-//    }
-
-//    @RequestMapping(value = "/vali_psw", method = GET)
-//    public String valiPsw(HttpServletRequest request,Model model) {
-//        HttpSession session = request.getSession();
-//        String usertype=(String)session.getAttribute("usertype");
-//        model.addAttribute("usertype",usertype);
-//        return "vali_psw";
-//    }
-
-
-
-//    @RequestMapping(value = "/email-modify", method = POST)
-//    @ResponseBody
-//    public String emailModifyPost(HttpServletRequest request,@RequestParam(value = "email") String email, @RequestParam(value = "validation") String validation,Model model) {
-//        HttpSession session = request.getSession();
-//        String usertype=(String)session.getAttribute("usertype");
-//        if(usertype.equals("teacher"))
-//        {
-//            BigInteger teacherId=(BigInteger)session.getAttribute("id");
-//            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
-//            teacher.setEmail(email);
-//            teacherService.updateTeacherByTeacherId(teacher);
-//            String status="200";
-//            return status;
-//        }
-//        else if(usertype.equals("student"))
-//        {
-//            BigInteger studentId=(BigInteger)session.getAttribute("id");
-//            Student student=studentService.getStudentByStudentId(studentId);
-//            student.setEmail(email);
-//            studentService.updateStudentByStudentId(student);
-//            String status="204";
-//            return status;
-//        }
-//        String status="404";
-//        return status;
-//    }
-
-//    @RequestMapping(value = "/email-modify", method = GET)
-//    public String emailModify(Model model) {
-//        return "email-modify";
-//    }
 
     @RequestMapping(value = "/forgetPassword", method = GET)
     public String forgetPassword(Model model) {
@@ -124,59 +55,58 @@ public class HomeController {
 
     @RequestMapping(value = "/forgetPassword", method = POST)
     @ResponseBody
-    public String forgetPasswordPost(HttpServletRequest request,String account,String validation,Model model) {
+    public ResponseEntity<String> forgetPasswordPost(HttpServletRequest request,String account,Model model) {
         HttpSession session = request.getSession();
         //登陆验证
         try {
             Student student = studentService.getStudentByAccount(account);
-            session.setAttribute("id", student.getId());
+            if(student.getEmail()!=null)
+            {
+                emailService.sendSimpleMessage(student.getEmail(),"password",student.getPassword());
+            }
         }
         catch (UserNotFoundException e) {
             try {
                 Teacher teacher = teacherService.getTeacherByAccount(account);
-                session.setAttribute("id", teacher.getId());
+                emailService.sendSimpleMessage(teacher.getEmail(),"password",teacher.getPassword());
             }
             catch (UserNotFoundException e2){
-                String status = "404";
-                return status;
+                return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
             }
-            String status = "200";
-            return status;
+            return new ResponseEntity<>("", HttpStatus.OK);
 
         }
-        String stauts="204";
-        return stauts;
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/modifyPassword", method = GET)
-    public String newPassword(Model model) {
-        return "modifyPassword";
-    }
-
-    @RequestMapping(value = "/modifyPassword", method = POST)
-    @ResponseBody
-    public String newPasswordPost(HttpServletRequest request,@RequestParam(value = "newPsw") String newPsw,@RequestParam(value = "confirmPsw") String confirmPsw,Model model) {
-        HttpSession session = request.getSession();
-        String usertype = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().toLowerCase();
-        String status="404";
-        if(usertype.equals("teacher"))
-        {
-            BigInteger teacherId=(BigInteger)session.getAttribute("id");
-            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
-            teacher.setPassword(newPsw);
-            teacherService.updateTeacherByTeacherId(teacher);
-            status="200";
-            return status;
-        }
-        else if(usertype.equals("student"))
-        {
-            BigInteger studentId=(BigInteger)session.getAttribute("id");
-            Student student=studentService.getStudentByStudentId(studentId);
-            student.setPassword(newPsw);
-            studentService.updateStudentByStudentId(student);
-            status="204";
-            return status;
-        }
-        return status;
-    }
+//    @RequestMapping(value = "/modifyPassword", method = GET)
+//    public String newPassword(Model model) {
+//        return "modifyPassword";
+//    }
+//
+//    @RequestMapping(value = "/modifyPassword", method = POST)
+//    @ResponseBody
+//    public ResponseEntity<String> newPasswordPost(HttpServletRequest request, @RequestParam(value = "newPsw") String newPsw, @RequestParam(value = "confirmPsw") String confirmPsw, Model model) {
+//        HttpSession session = request.getSession();
+//        String usertype = (String)session.getAttribute("usertype");
+//        BigInteger teacherId;
+//        BigInteger studentId;
+//        if(usertype.equals("teacher"))
+//        {
+//            teacherId=(BigInteger)session.getAttribute("id");
+//            Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);
+//            teacher.setPassword(newPsw);
+//            teacherService.updateTeacherByTeacherId(teacher);
+//            return new ResponseEntity<>("", HttpStatus.OK);
+//        }
+//        else if(usertype.equals("student"))
+//        {
+//            studentId=(BigInteger)session.getAttribute("id");
+//            Student student=studentService.getStudentByStudentId(studentId);
+//            student.setPassword(newPsw);
+//            studentService.updateStudentByStudent(student);
+//            return new ResponseEntity<>("", HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+//    }
 }

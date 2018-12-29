@@ -2,14 +2,19 @@ package com.test.seminar.dao.impl;
 
 import com.test.seminar.dao.RoundDao;
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
+import com.test.seminar.entity.SeminarScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 import com.test.seminar.mapper.RoundMapper;
+import com.test.seminar.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhenweiwang
@@ -19,27 +24,6 @@ import java.util.List;
 public class RoundDaoImpl implements RoundDao {
     @Autowired
     RoundMapper roundMapper;
-
-    @Override
-    public void insertRound(Round round)throws RepetitiveRecordException {
-        roundMapper.insertRound(round);
-    }
-
-    @Override
-    public void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
-        if(roundMapper.getRoundByRoundId(roundId)==null) {
-            throw new RoundNotFoundException();
-        }
-        roundMapper.deleteRoundByRoundId(roundId);
-    }
-
-    @Override
-    public void updateRound(Round round)throws RoundNotFoundException {
-        if(roundMapper.getRoundByRoundId(round.getId())==null) {
-            throw new RoundNotFoundException();
-        }
-        roundMapper.updateRound(round);
-    }
 
     @Override
     public Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
@@ -53,5 +37,105 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public List<Round> getRoundByCourseId(BigInteger courseId) {
         return roundMapper.getRoundByCourseId(courseId);
+    }
+
+    @Override
+    public List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId){
+        List<Round> roundList=roundMapper.getRoundByCourseId(courseId);
+        for(Round round:roundList){
+            round.getRoundScoreList().removeIf(roundScore-> {
+                return !roundScore.getTeamId().equals(teamId);
+            });
+        }
+        return roundList;
+    }
+
+    @Override
+    public int getRoundSerialBySeminarInfoId(BigInteger seminarInfoId){
+        return roundMapper.getRoundSerialBySeminarInfoId(seminarInfoId);
+    }
+
+
+    @Override
+    public void insertRound(Round round, BigInteger courseId)throws RepetitiveRecordException {
+        roundMapper.insertRound(round,courseId);
+    }
+
+    @Override
+    public void updateRound(Round round)throws RoundNotFoundException {
+        if(roundMapper.getRoundByRoundId(round.getId())==null) {
+            throw new RoundNotFoundException();
+        }
+        roundMapper.updateRound(round);
+    }
+
+    @Override
+    public void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {
+        if(roundMapper.getRoundByRoundId(roundId)==null) {
+            throw new RoundNotFoundException();
+        }
+        roundMapper.deleteRoundByRoundId(roundId);
+    }
+
+    @Override
+    public List<RoundScore> getRoundScoreByRoundId(BigInteger roundId) {
+        return roundMapper.getRoundScoreByRoundId(roundId);
+    }
+
+    @Override
+    public RoundScore getRoundScoreByRoundIdAndTeamId(BigInteger roundId,BigInteger teamId){
+        return roundMapper.getRoundScoreByRoundIdAndTeamId(roundId,teamId);
+    }
+
+    @Override
+    public void insertRoundScore(RoundScore roundScore) {
+        roundMapper.insertRoundScore(roundScore);
+    }
+
+    @Override
+    public void updateRoundScore(RoundScore roundScore,BigInteger roundId,BigInteger teamId) {
+        roundMapper.updateRoundScore(roundScore,roundId,teamId);
+    }
+
+    @Override
+    public void deleteRoundScoreByRoundId(BigInteger roundId) {
+        roundMapper.deleteRoundScoreByRoundId(roundId);
+    }
+
+    @Override
+    public Integer getMaxRoundSerialByCourseId(BigInteger courseId) {
+        return roundMapper.getMaxRoundSerialByCourseId(courseId);
+    }
+
+    @Override
+    public Round getRoundByCourseIdAndRoundSerial(BigInteger courseId,int roundSerial){
+        return roundMapper.getRoundByCourseIdAndRoundSerial(courseId,roundSerial);
+    }
+
+    @Override
+    public List<RoundScore> getRoundScoreByTeamId(BigInteger teamId) {
+        return roundMapper.getRoundScoreByTeamId(teamId);
+    }
+
+    @Override
+    public Integer getEnrollNumBycourseClassIdAndRoundId(BigInteger courseClassId,BigInteger roundId){
+        return roundMapper.getEnrollNumBycourseClassIdAndRoundId(courseClassId,roundId);
+    }
+
+    @Override
+    public void updateEnrollNum(BigInteger courseClassId,BigInteger roundId){
+        roundMapper.updateEnrollNum(courseClassId,roundId);
+    }
+
+    @Override
+    public BigInteger getRoundIdBySeminarControlId(BigInteger seminarControlId){
+        return roundMapper.getRoundIdBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public void updateCourseClassRound(BigInteger roundId, Map<BigInteger, Integer> courseClassMap) {
+        for(BigInteger courseClassId:courseClassMap.keySet()){
+             roundMapper.updateCourseClassRound(roundId,courseClassId,courseClassMap.get(courseClassId));
+        }
     }
 }

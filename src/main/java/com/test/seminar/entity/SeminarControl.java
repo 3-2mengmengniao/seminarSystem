@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -12,31 +13,22 @@ import java.util.Date;
 
 public class SeminarControl {
     private BigInteger id;
-    private BigInteger classId;
-    private BigInteger seminarInfoId;
-    private int seminarStatus;
+    private Integer seminarStatus;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reportDDL;
     private SeminarInfo seminarInfo;
+    private List<Presentation> presentationList;
+    private List<Question> questionList;
+    private CourseClass courseClass;
+    private List<SeminarScore> seminarScoreList;
+    private Round round;
+
+    public SeminarControl() {
+        seminarStatus=0;
+    }
 
     public BigInteger getId() {
         return id;
-    }
-
-    public BigInteger getClassId() {
-        return classId;
-    }
-
-    public void setClassId(BigInteger classId) {
-        this.classId = classId;
-    }
-
-    public BigInteger getSeminarInfoId() {
-        return seminarInfoId;
-    }
-
-    public void setSeminarInfoId(BigInteger seminarInfoId) {
-        this.seminarInfoId = seminarInfoId;
     }
 
     public int getSeminarStatus() {
@@ -61,5 +53,29 @@ public class SeminarControl {
 
     public void setSeminarInfo(SeminarInfo seminarInfo) {
         this.seminarInfo = seminarInfo;
+    }
+
+    public List<Presentation> getPresentationList() { return presentationList; }
+
+    public void setPresentationList(List<Presentation> presentationList) { this.presentationList = presentationList; }
+
+    public List<Question> getQuestionList() { return questionList; }
+
+    public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
+
+    public CourseClass getCourseClass() { return courseClass; }
+
+    public void setCourseClass(CourseClass courseClass) { this.courseClass = courseClass; }
+
+    public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
+
+    public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
+
+    public Round getRound() {
+        return round;
+    }
+
+    public void setRound(Round round) {
+        this.round = round;
     }
 }

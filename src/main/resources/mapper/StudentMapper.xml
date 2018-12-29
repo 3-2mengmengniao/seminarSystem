@@ -4,12 +4,10 @@
 
     <resultMap id="studentResultMap" type="com.test.seminar.entity.Student">
         <id property="id" column="id" />
-        <result property="account" column="account"/>
-        <result property="password" column="password"/>
         <result property="active" column="is_active"/>
-        <result property="studentName" column="student_name"/>
-        <result property="email" column="email"/>
+        <collection property="courseList" javaType="ArrayList" column="id" ofType="com.test.seminar.entity.Course" select="com.test.seminar.mapper.CourseMapper.getCourseByStudentId"/>
     </resultMap>
+
 
     <select id="getStudentByStudentId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
@@ -25,8 +23,8 @@
 
     <select id="getStudentByTeamId" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
-        FROM student,klass_student
-        WHERE klass_student.team_id=#{teamId} and klass_student.student_id=student.id
+        FROM student,team_student
+        WHERE team_student.team_id=#{teamId} and team_student.student_id=student.id
     </select>
 
     <select id="getStudentByCourseClassId" resultMap="studentResultMap">
@@ -40,7 +38,7 @@
         values(#{student.account},#{student.password},#{student.active},#{student.studentName},#{student.email})
     </insert>
 
-    <update id="updateStudentByStudentId">
+    <update id="updateStudentByStudent">
         update student
         <set>
             <if test="student.account!=null">
@@ -69,5 +67,37 @@
     <select id="getAllStudent" resultMap="studentResultMap">
         SELECT id,account,password,is_active,student_name,email
         FROM student
+    </select>
+
+    <select id="getStudentNotInTeamByCourseId" resultMap="studentResultMap">
+        select id,account,password,is_active,student_name,email
+        from student,
+             klass_student
+        where klass_student.course_id = #{courseId}
+          and id = klass_student.student_id
+          and id not in
+              (select team_student.student_id
+               from team_student,
+                    klass_student,
+                    klass_team
+               where klass_student.course_id = #{courseId}
+                 and klass_team.klass_id = klass_student.klass_id
+                 and team_student.team_id = klass_team.team_id)
+    </select>
+
+    <select id="getStudentNotInTeamByCourseIdForSubCourse" resultMap="studentResultMap">
+        select id,account,password,is_active,student_name,email
+        from student,
+             klass_student
+        where klass_student.course_id = #{courseId}
+          and id = klass_student.student_id
+          and id not in
+              (select team_student.student_id
+               from team_student,
+                    klass_student,
+                    klass_team
+               where klass_student.course_id = #{mainCourseId}
+                 and klass_team.klass_id = klass_student.klass_id
+                 and team_student.team_id = klass_team.team_id)
     </select>
 </mapper>

@@ -1,11 +1,13 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Round;
+import com.test.seminar.entity.RoundScore;
 import com.test.seminar.exception.RepetitiveRecordException;
 import com.test.seminar.exception.RoundNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author cxh
@@ -18,7 +20,7 @@ public interface RoundService {
      * @param round
      * @throws RepetitiveRecordException
      */
-    void insertRound(Round round) throws RepetitiveRecordException;
+    void insertRound(Round round, BigInteger courseId) throws RepetitiveRecordException;
 
     /**
      * 删除轮次
@@ -48,4 +50,14 @@ public interface RoundService {
      * @return
      */
     List<Round> getRoundByCourseId(BigInteger courseId);
+
+    /**
+     * 得到包含筛选过队伍的RoundScore的轮次信息
+     * @param courseId
+     * @param teamId
+     * @return
+     */
+    List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
+
+    void updateCourseClassRound(BigInteger roundId, Map<BigInteger,Integer> courseClassMap);
 }

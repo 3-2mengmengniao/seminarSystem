@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.seminar.mapper.QuestionMapper">
+
+    <resultMap id="questionResultMap" type="com.test.seminar.entity.Question">
+        <id property="id" column="id" />
+        <result property="teamId" column="team_id"/>
+        <result property="selected" column="is_selected"/>
+        <result property="seminarControlId" column="klass_seminar_id"/>
+        <association property="student" javaType="com.test.seminar.entity.Student" column="student_id" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
+    </resultMap>
+
+    <select id="getQuestionBySeminarControlId" resultMap="questionResultMap">
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
+        from question
+        where klass_seminar_id=#{seminarConrtolId}
+    </select>
+
+    <select id="getQuestionByQuestionId" resultMap="questionResultMap">
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
+        from question
+        where id=#{questionId}
+    </select>
+
+    <select id="getQuestionByTeamId" resultMap="questionResultMap">
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
+        from question
+        where team_id=#{teamId}
+    </select>
+
+    <select id="getQuestionByPresentationIdAndTeamId" resultMap="questionResultMap">
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
+        from question
+        where team_id=#{teamId} and attendance_id=#{presentationId}
+    </select>
+
+    <select id="getQuestionByPresentationId" resultMap="questionResultMap">
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
+        from question
+        where attendance_id=#{presentationId}
+    </select>
+
+    <insert id="insertQuestion" parameterType="com.test.seminar.entity.Question">
+        <selectKey keyColumn="id" keyProperty="id" resultType="java.math.BigInteger" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into question(klass_seminar_id,attendance_id,team_id,student_id,is_selected,score)
+        values(#{seminarControlId},#{presentationId},#{teamId},#{studentId},#{selected},#{score})
+    </insert>
+
+    <update id="updateQuestion">
+        update question
+        <set>
+            <if test="question.selected!=null">
+                is_selected=#{question.selected},
+            </if>
+            <if test="question.score!=null">
+                score=#{question.score},
+            </if>
+        </set>
+        where id=#{question.id}
+    </update>
+
+    <delete id="deleteQuestionByQuestionId">
+        delete from question where id=#{questionId}
+    </delete>
+</mapper>

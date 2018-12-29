@@ -4,7 +4,6 @@ import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.UserNotFoundException;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * @author zhenweiwang
@@ -35,5 +34,5 @@ public interface LoginDao {
      * @param password  密码
      * @return com.test.seminar.entity.Admin
      */
-    Admin adminLogin(String account, String password);
+    Admin adminLogin(String account);
 }

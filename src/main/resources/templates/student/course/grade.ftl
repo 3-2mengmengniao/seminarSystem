@@ -69,36 +69,36 @@
 </div>
 
 <div class="content">
+<#list roundList as round>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第一轮</h2>
+                <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                 <div class="layui-colla-content">
                     <div class="layui-collapse" lay-accordion="">
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">用例分析</h2>
-                            <div class="layui-colla-content ">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                            </div>
-                        </div>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">界面原型</h2>
-                            <div class="layui-colla-content ">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                            </div>
-                        </div>
+                        <#list round.roundScoreList as roundScore>
+                            <#list roundScore.seminarScoreList as seminarScore>
+                                            <div class="layui-colla-item">
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
+                                                <div class="layui-colla-content ">
+                                                    展示：${seminarScore.presentationScore!0}分&nbsp&nbsp提问：${seminarScore.questionScore!0}分&nbsp&nbsp报告：${seminarScore.reportScore!0}分
+                                                </div>
+                                            </div>
+                            </#list>
                         <div class="layui-colla-item">
                             <h2 class="layui-colla-title">总成绩</h2>
                             <div class="layui-colla-content ">
-                                展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                                展示：${roundScore.presentationScore!0}分&nbsp&nbsp提问：${roundScore.questionScore!0}分&nbsp&nbsp报告：${roundScore.reportScore!0}分&nbsp&nbsp总分：${roundScore.totalScore!0}分
                             </div>
                         </div>
+                        </#list>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </#list>
     <div class="distance3"></div>
 
     <div class="distance2"></div>
@@ -117,8 +117,6 @@
 </div>
 
 <div class="distance2"> </div>
-<div class="distance2"> </div>
-<p class="center center-text"><a href="#" class="button-return button-dark">导出成绩</a></p>
 
 <div class="distance2"> </div>
 <div class="distance4"> </div>

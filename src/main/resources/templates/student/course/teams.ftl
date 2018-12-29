@@ -86,13 +86,15 @@
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">${classList[team?index].classSerial}-${team.teamSerial} &nbsp&nbsp&nbsp${team.teamName}</h2>
+                <h2 class="layui-colla-title">${team.serial.getSerial()} &nbsp&nbsp&nbsp${team.teamName}&nbsp&nbsp&nbsp</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">组长：${leaderList[team?index].studentName}</p>
-                    <p class="text-center">成员：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </p>
-                    <#list studentList[team?index] as student>
-                    <p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
-                    <#--<p class="text-center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李晓霞</p>-->
+                    <p class="text-center">组长：</p>
+                    <p class="text-center">${(team.leader.studentName)!"无"}&nbsp&nbsp&nbsp${(team.leader.account)!""}</p>
+                    <p class="text-center">成员： </p>
+                    <#list team.memberList as student>
+                    <#if !(team.leader??) || student.id!=team.leader.id>
+                    <p class="text-center"> ${student.studentName}&nbsp&nbsp&nbsp${student.account}</p>
+                    </#if>
                     </#list>
                 </div>
             </div>
@@ -105,10 +107,9 @@
             <div class="layui-colla-item">
                 <h2 class="layui-colla-title">未组队学生</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">24320162202001 &nbsp&nbsp&nbsp 罗小黑</p>
-                    <p class="text-center">24320162202002 &nbsp&nbsp&nbsp 刘晓波</p>
-                    <p class="text-center">24320162202003 &nbsp&nbsp&nbsp 王洪</p>
-                    <p class="text-center">24320162202004 &nbsp&nbsp&nbsp 李晓霞</p>
+                    <#list studentNoTeamList as student>
+                        <p class="text-center">${student.account} &nbsp&nbsp&nbsp ${student.studentName}</p>
+                    </#list>
                 </div>
             </div>
         </div>
@@ -116,15 +117,21 @@
     <div class="distance4"></div>
     <div class="center-navigation" style="margin-top:20px;">
         <div class="layui-colla-item">
-            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='#'" >创建小组</h2>
+            <#if myTeam?? && leader==1>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/leaderTeam?courseId=${courseId}'" >我的小组</h2>
+            <#elseif myTeam??>
+                <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/myTeam?courseId=${courseId}'" >我的小组</h2>
+            <#else>
+            <h2 class="layui-colla-title my-navigation2"  onclick="window.location.href='/student/course/createTeam?courseId=${courseId}'" >创建小组</h2>
+            </#if>
         </div>
     </div>
     <div class="distance4"></div>
     <div class="distance4"></div>
-    <div class="distance4"></div>
     <button onclick="window.location.href='/student/courseList'"  class="uploadButton layui-btn layui-btn-mini margin3" >返回</button>
 </div>
-
+<div class="distance4"></div>
+<div class="distance4"></div>
 
 <!--
 <div class="decoration"></div>

@@ -1,6 +1,7 @@
 package com.test.seminar.service.impl;
 
 import com.test.seminar.dao.LoginDao;
+import com.test.seminar.entity.Admin;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.UserNotFoundException;

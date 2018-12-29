@@ -22,6 +22,27 @@ public class CourseClassDaoImpl implements CourseClassDao {
     private CourseClassMapper courseClassMapper;
 
     @Override
+    public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
+        return courseClassMapper.getCourseClassByCourseId(courseId);
+    }
+
+    @Override
+    public CourseClass getCourseClassByCourseIdAndSerial(BigInteger courseId, int serial) {
+        return courseClassMapper.getCourseClassByCourseIdAndSerial(courseId,serial);
+    }
+
+    @Override
+    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
+        CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
+        return courseClass;
+    }
+
+    @Override
+    public CourseClass getCourseClassByTeamIdAndCourseId(BigInteger teamId, BigInteger courseId) {
+        return courseClassMapper.getCourseClassByTeamIdAndCourseId(teamId,courseId);
+    }
+
+    @Override
     public CourseClass getCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException {
         CourseClass courseClass=courseClassMapper.getCourseClassByCourseClassId(courseClassId);
         if(courseClass==null){
@@ -31,16 +52,21 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
-    public void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException {
-        courseClassMapper.insertCourseClass(courseClass);
+    public void insertCourseClass(CourseClass courseClass, BigInteger courseId) throws RepetitiveRecordException {
+        courseClassMapper.insertCourseClass(courseClass,courseId);
     }
 
     @Override
-    public void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException{
+    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
+        courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
+    }
+
+    @Override
+    public void updateCourseClassByCourseClass(CourseClass courseClass) throws CourseClassNotFoundException{
         if(courseClassMapper.getCourseClassByCourseClassId(courseClass.getId())==null) {
             throw new CourseClassNotFoundException();
         }
-        courseClassMapper.updateCourseClassByCourseClassId(courseClass);
+        courseClassMapper.updateCourseClassByCourseClass(courseClass);
     }
 
     @Override
@@ -52,21 +78,17 @@ public class CourseClassDaoImpl implements CourseClassDao {
     }
 
     @Override
-    public List<CourseClass> getCourseClassByCourseId(BigInteger courseId) {
-        return courseClassMapper.getCourseClassByCourseId(courseId);
+    public CourseClass getCourseClassByTeamId(BigInteger teamId) {
+        return courseClassMapper.getCourseClassByTeamId(teamId);
     }
 
     @Override
-    public CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException{
-        CourseClass courseClass=courseClassMapper.getCourseClassByStudentIdAndCourseId(studentId,courseId);
-        if(courseClass==null) {
-            throw new CourseClassNotFoundException();
-        }
-        return courseClass;
+    public void deleteCourseClassAndTeamRelationByCourseClassId(BigInteger courseClassId) {
+        courseClassMapper.deleteCourseClassAndTeamRelationByCourseClassId(courseClassId);
     }
 
     @Override
-    public void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId) {
-        courseClassMapper.insertCourseClassStudentRelation(courseClassId,studentId,courseId);
+    public Integer getCourseClassTeamNumber(BigInteger courseClassId) {
+        return courseClassMapper.getCourseClassTeamNumber(courseClassId);
     }
 }

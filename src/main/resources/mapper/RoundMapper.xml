@@ -3,36 +3,84 @@
 <mapper namespace="com.test.seminar.mapper.RoundMapper">
     <resultMap id="roundResultMap" type="com.test.seminar.entity.Round">
         <id property="id" column="id" />
-        <result property="courseId" column="course_id"/>
         <result property="roundSerial" column="round_serial"/>
         <result property="presentationScoreMethod" column="presentation_score_method"/>
         <result property="reportScoreMethod" column="report_score_method"/>
         <result property="questionScoreMethod" column="question_score_method"/>
+        <collection property="seminarInfoList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarInfo" column="id" select="com.test.seminar.mapper.SeminarMapper.getSeminarInfoByRoundId"/>
+        <collection property="roundScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.RoundScore" column="id" select="getRoundScoreByRoundId"/>
+        <collection property="courseClassRoundList" javaType="ArrayList" ofType="com.test.seminar.entity.CourseClassRound" column="id" select="getCourseClassRound"/>
+    </resultMap>
+
+    <resultMap id="RoundScoreResultMap" type="com.test.seminar.entity.RoundScore">
+        <result property="teamId" column="team_id"/>
+        <association property="serial" javaType="com.test.seminar.entity.Serial" column="team_id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
+        <collection property="seminarScoreList" javaType="ArrayList" ofType="com.test.seminar.entity.SeminarScore" column="{roundId=id,teamId=team_id}" select="com.test.seminar.mapper.SeminarMapper.getSeminarScoreByRoundIdAndTeamId"/>
+    </resultMap>
+
+    <resultMap id="courseClassRoundMap" type="com.test.seminar.entity.CourseClassRound">
+        <result property="courseClassId" column="klass_id"/>
     </resultMap>
 
     <select id="getRoundByCourseId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE course_id=#{courseId}
     </select>
 
     <select id="getRoundByRoundId" resultMap="roundResultMap">
-        SELECT id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method
+        SELECT id,round_serial,presentation_score_method,report_score_method,question_score_method
         FROM round
         WHERE id=#{roundId}
     </select>
 
+    <select id="getCourseClassRound" resultMap="courseClassRoundMap">
+        select klass_id,enroll_number
+        from klass_round
+        where round_id=#{roundId}
+    </select>
+
+    <update id="updateCourseClassRound">
+        update klass_round
+        <set>
+            klass_id=#{courseClassId},
+            round_id=#{roundId},
+            enroll_number=#{enrollNumber}
+        </set>
+    </update>
+
+    <select id="getRoundSerialBySeminarInfoId" resultType="Integer">
+    select round_serial
+    from round,seminar
+    where seminar.id=#{seminarInfoId} and seminar.round_id=round.id
+    </select>
+
+    <select id="getRoundBySeminarControlId" resultMap="roundResultMap">
+    select round.id as id,round_serial,presentation_score_method,report_score_method,question_score_method
+    from round,seminar,klass_seminar
+    where klass_seminar.id=#{seminarControlId} and seminar.round_id=round.id and seminar.id=klass_seminar.seminar_id
+    </select>
+
+    <select id="getRoundByCourseIdAndRoundSerial" resultMap="roundResultMap">
+      select id,round_serial,presentation_score_method,report_score_method,question_score_method
+      FROM round
+      WHERE course_id=#{courseId} and round_serial=#{roundSerial}
+    </select>
+
+    <select id="getMaxRoundSerialByCourseId" resultType="Integer">
+        SELECT MAX(round_serial)
+        FROM round
+        WHERE course_id=#{courseId}
+    </select>
+
     <insert id="insertRound">
-        insert into round(id,course_id,round_serial,presentation_score_method,report_score_method,question_score_method)
-        values(#{round.courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})
+        insert into round(course_id,round_serial,presentation_score_method,report_score_method,question_score_method)
+        values(#{courseId},#{round.roundSerial},#{round.presentationScoreMethod},#{round.reportScoreMethod},#{round.questionScoreMethod})
     </insert>
 
     <update id="updateRound">
         update round
         <set>
-            <if test="round.courseId!=null">
-                course_id=#{round.courseId},
-            </if>
             <if test="round.roundSerial!=null">
                 round_serial=#{round.roundSerial},
             </if>
@@ -52,4 +100,72 @@
     <delete id="deleteRoundByRoundId">
         delete from round where id=#{roundId}
     </delete>
+
+    <select id="getRoundScoreByRoundId" resultMap="RoundScoreResultMap">
+        select team_id,round_id as id,total_score,presentation_score,question_score,report_score
+        from round_score
+        where round_id=#{roundId}
+    </select>
+
+    <select id="getRoundScoreByTeamId" resultMap="RoundScoreResultMap">
+        select team_id,total_score,presentation_score,question_score,report_score
+        from round_score
+        where team_id=#{teamId}
+    </select>
+
+    <select id="getRoundScoreByRoundIdAndTeamId" resultMap="RoundScoreResultMap">
+        select team_id,total_score,presentation_score,question_score,report_score
+        from round_score
+        where team_id=#{teamId} and round_id=#{roundId}
+    </select>
+
+    <insert id="insertRoundScore">
+        insert into round_score(total_score,presentation_score,question_score,report_score)
+        values (#{roundScore.totalScore},#{roundScore.presentationScore},#{roundScore.questionScore},#{roundScore.reportScore})
+    </insert>
+
+    <update id="updateRoundScore">
+        update round_score
+        <set>
+            <if test="roundScore.totalScore!=null">
+                total_score=#{roundScore.totalScore},
+            </if>
+            <if test="roundScore.presentationScore!=null">
+                prensentation_score=#{roundScore.presentationScore},
+            </if>
+            <if test="roundScore.questionScore!=null">
+                question_score=#{roundScore.questionScore},
+            </if>
+            <if test="roundScore.reportScore!=null">
+                report_score=#{roundScore.reportScore},
+            </if>
+        </set>
+          where round_id=#{roundId} and team_id=#{teamId}
+    </update>
+
+    <delete id="deleteRoundScoreByRoundId">
+        delete from round_score where round_id=#{roundId}
+    </delete>
+
+    <select id="getEnrollNumBycourseClassIdAndRoundId" resultType="Integer">
+        select enroll_number
+        from klass_round
+        where klass_id=#{courseClassId} and round_id=#{roundId}
+    </select>
+
+    <update id="updateEnrollNum">
+        update klass_round
+        <set>
+            <if test="enrollNum!=null">
+                enroll_number=#{enrollNum}
+            </if>
+        </set>
+        where klass_id=#{courseClassId} and round_id=#{roundId}
+    </update>
+
+    <select id="getRoundIdBySeminarControlId" resultType="java.math.BigInteger">
+        select seminar.round_id
+        from seminar,klass_seminar
+        where klass_seminar.id=#{SeminarControlId} and klass_seminar.seminar_id=seminar.id
+    </select>
 </mapper>

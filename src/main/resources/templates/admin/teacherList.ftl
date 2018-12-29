@@ -6,17 +6,20 @@
   <title>欢迎页面-X-admin2.0</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8" />
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="/admin/css/font.css">
-  <link rel="stylesheet" href="/admin/css/xadmin.css">
+  <link rel="stylesheet" href="/adminStatic/css/font.css">
+  <link rel="stylesheet" href="/adminStatic/css/xadmin.css">
+   <link href="/adminStatic/css/pagination.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/admin/layui/layui.js" charset="utf-8"></script>
-  <script type="text/javascript" src="/admin/js/xadmin.js"></script>
+  <script type="text/javascript" src="/adminStatic/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
   <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
   <!--[if lt IE 9]>
   <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
   <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <!--<script src="/adminStatic/js/jquery-1.7.2.min.js" type="text/javascript"></script>-->
+  <script src="/adminStatic/js/jquery.pagination.js" type="text/javascript"></script>
   <![endif]-->
 </head>
 
@@ -54,7 +57,7 @@
       <th>操作</th>
     </thead>
     <tbody >
-    <#list teacherList as teacher>
+    <#list pageInfo.list as teacher>
     <tr class="item">
       <td>
         <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
@@ -78,42 +81,51 @@
       </td>
     </tr>
     </#list>
-    <#--<tr class="item">-->
-      <#--<td>-->
-        <#--<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>-->
-      <#--</td>-->
-      <#--<td class="number">2017004022</td>-->
-      <#--<td class="name">张老师</td>-->
-      <#--<td class="email">123432642@qq.com</td>-->
-      <#--<!--<td class="td-status">-->
-        <#--<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>&ndash;&gt;-->
-      <#--<td class="td-manage">-->
-
-        <#--<a title="编辑"  onclick="x_admin_show('编辑','/admin/editTeacher','460','450')" href="javascript:;" style="margin-right:5px;font-size:25px;">-->
-          <#--<i class="layui-icon">&#xe642;</i>-->
-        <#--</a>-->
-        <#--<a title="重置密码" onclick="member_renew(this,'要重置的id')" href="javascript:;"  style="margin-right:5px;font-size:15px;">-->
-          <#--<i class="iconfont" style="font-size:13px;">&#xe6aa;</i>-->
-        <#--</a>-->
-        <#--<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;"  style="margin-right:5px;font-size:25px;">-->
-          <#--<i class="layui-icon" >&#xe640;</i>-->
-        <#--</a>-->
-      <#--</td>-->
-    <#--</tr>-->
     </tbody>
   </table>
-  <div class="page" style="margin-top:80px;">
-    <div>
-      <a class="prev" href="">&lt;&lt;</a>
-      <a class="num" href="">1</a>
-      <span class="current">2</span>
-      <a class="num" href="">3</a>
-      <a class="num" href="">489</a>
-      <a class="next" href="">&gt;&gt;</a>
+    <div class="box">
+        <div id="pagination" class="page center">
     </div>
-  </div>
+  <#--<div class="page" style="margin-top:80px;">-->
+    <#--<div>-->
+      <#--<a class="prev" href="">&lt;&lt;</a>-->
+      <#--<a class="num" href="">1</a>-->
+      <#--<span class="current">2</span>-->
+      <#--<a class="num" href="">3</a>-->
+      <#--<a class="num" href="">489</a>-->
+      <#--<a class="next" href="">&gt;&gt;</a>-->
+    <#--</div>-->
+  <#--</div>-->
 
 </div>
+    <script>
+        var pageNum = [[${pageInfo.pageNum}]];
+        var pages = [[${pageInfo.pages}]];
+        var pageSize = [[${pageInfo.pageSize}]];
+        //
+        $("#pagination").pagination({
+            currentPage: pageNum,
+            totalPage: pages,
+            isShow: true,
+            count: pageSize,
+            homePageText: "首页",
+            endPageText: "尾页",
+            prevPageText: "上一页",
+            nextPageText: "下一页",
+        });
+        //点击页数
+        $('.next').on('click', function () {
+            pageNum=pageNum+1;
+            window.location.href = encodeURI('/admin/teacherList?pageNum=' + pageNum);
+        });
+
+        $('.prev').on('click', function () {
+            if(pageNum>0)
+                pageNum=pageNum-1;
+            window.location.href = encodeURI('/admin/teacherList?pageNum=' + pageNum);
+        });
+
+    </script>
 <script>
   //搜索教师
   $(function () {
@@ -158,7 +170,7 @@
                             error:function(data,status){
                                 console.log(data);
                                 console.log(status);
-                                alert("修改失败");
+                                layer.msg("修改失败",function(){});
                                 console.log("error");
                             }
                         }
@@ -214,7 +226,7 @@
                         error:function(data,status){
                             console.log(data);
                             console.log(status);
-                            alert("修改失败");
+                            layer.msg("修改失败",function(){});
                             console.log("error");
                         }
                     }

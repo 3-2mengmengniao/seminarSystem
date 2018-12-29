@@ -16,7 +16,7 @@
     <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
@@ -46,7 +46,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">${course.courseName}&nbsp;${class.grade?c}-(${class.classSerial})</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/student/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -54,7 +54,7 @@
     </div>
     <div class="decoration"></div>
 
-    <div class="navigation" style="right:0%;margin-top:-5px;">
+    <div class="navigation">
         <div class="corner-deco"></div>
         <div class="navigation-wrapper">
             <div class="navigation-item">
@@ -72,44 +72,32 @@
 <div class="content">
     <div class="distance3"></div>
     <div class="center-navigation">
-    <div class="layui-collapse" lay-accordion="">
-        <div class="layui-colla-item">
-            <h2 class="layui-colla-title">讨论课信息</h2>
-            <div class="layui-colla-content">
-                <div class="layui-collapse" lay-accordion="">
-                    <#list seminarList as round>
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title">第${round?index+1}轮</h2>
-                        <#list round as seminar>
+        <div class="layui-collapse" lay-accordion="">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">讨论课信息</h2>
+                <div class="layui-colla-content">
+                    <div class="layui-collapse" lay-accordion="">
+                    <#list roundList as round>
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
+                        <#list round.seminarInfoList as seminar>
                         <div class="layui-colla-content center-text">
-                            <a href="/student/course/seminar/info?seminarId=${seminar.id}&classId=${class.id}">${seminar?index+1}&emsp;${seminar.seminarName}</a>
+                            <form action="/student/course/seminar/info" method="post">
+                                <input type="hidden" value="${seminar.id}" name="seminarId">
+                                <input type="hidden" value="${class.id}" name="classId">
+                                <input type="submit" value="${seminar?index+1}&emsp;${seminar.seminarName}" style="border:none;background:none;">
+                            </form>
                         </div>
                         </#list>
-                    </div>
+                        </div>
                     </#list>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
     <div class="distance3"></div>
-    <div class="distance5"></div>
-    <!--
-    <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-             <div class="layui-colla-item">
-                 <h2 class="layui-colla-title">已报名的讨论课</h2>
-                     <div class="layui-colla-content center-text">
-                         <p>代码检查</p>
-                     </div>
-                     <div class="layui-colla-content center-text">
-                         <p>对象模型设计</p>
-                     </div>
-            </div>
-         </div>
-    </div>
-    -->
-</div>
+    <div class="distance4"></div>
     <div class="distance2"> </div>
     <div class="distance"> </div>
     <!--
@@ -126,9 +114,7 @@
 
 
 <!--<div class="bottom-deco"></div>-->
-
 <script>
-    sessionStorage.setItem('course',${course});
     layui.use(['element', 'layer'], function(){
         var element = layui.element();
         var layer = layui.layer;

@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -10,23 +11,28 @@ import java.math.BigInteger;
 public class Presentation {
     private BigInteger id;
     private BigInteger seminarControlId;
-    private BigInteger teamId;
-    private int teamOrder;
-    private int present;
+    private Team team;
+    private List<Question> questionList;
+    private Integer teamOrder;
+    private Integer present;
     private String reportName;
     private String reportUrl;
     private String pptName;
     private String pptUrl;
 
+    public Presentation(){
+        this.present=0;
+    }
+
     public BigInteger getId() {return id; }
 
-    public BigInteger getSeminarControlId() {return seminarControlId; }
+    public Team getTeam() { return team; }
 
-    public void setSeminarControlId(BigInteger seminarControlId) {this.seminarControlId = seminarControlId; }
+    public void setTeam(Team team) { this.team = team; }
 
-    public BigInteger getTeamId() {return teamId; }
+    public List<Question> getQuestionList() { return questionList; }
 
-    public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
+    public void setQuestionList(List<Question> questionList) { this.questionList = questionList; }
 
     public int getPresent() {return present; }
 
@@ -70,5 +76,21 @@ public class Presentation {
 
     public void setPptUrl(String pptUrl) {
         this.pptUrl = pptUrl;
+    }
+
+    public BigInteger getSeminarControlId() {
+        return seminarControlId;
+    }
+
+    public void setSeminarControlId(BigInteger seminarControlId) {
+        this.seminarControlId = seminarControlId;
+    }
+
+    public void setTeamOrder(Integer teamOrder) {
+        this.teamOrder = teamOrder;
+    }
+
+    public void setPresent(Integer present) {
+        this.present = present;
     }
 }

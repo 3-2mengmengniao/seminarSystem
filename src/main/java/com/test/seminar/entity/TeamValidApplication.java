@@ -2,32 +2,23 @@ package com.test.seminar.entity;
 
 import java.math.BigInteger;
 
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class TeamValidApplication {
     private BigInteger id;
-    private BigInteger teamId;
-    private BigInteger teacherId;
+    private Team team;
     private String reason;
-    private int status;
+    private Integer status;
 
     public BigInteger getId() {
         return id;
     }
 
-    public BigInteger getTeamId() {
-        return teamId;
-    }
+    public Team getTeam() { return team; }
 
-    public void setTeamId(BigInteger teamId) {
-        this.teamId = teamId;
-    }
-
-    public BigInteger getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(BigInteger teacherId) {
-        this.teacherId = teacherId;
-    }
+    public void setTeam(Team team) { this.team = team; }
 
     public String getReason() {
         return reason;

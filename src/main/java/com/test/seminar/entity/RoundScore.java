@@ -1,60 +1,45 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
-
+import java.util.List;
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class RoundScore {
-    private BigInteger roundId;
     private BigInteger teamId;
-    private double total_score;
-    private double presentation_score;
-    private double question_score;
-    private double report_score;
+    private Serial serial;
+    private List<SeminarScore> seminarScoreList;
+    private Double totalScore;
+    private Double presentationScore;
+    private Double questionScore;
+    private Double reportScore;
 
-    public BigInteger getRoundId() {
-        return roundId;
-    }
+    public BigInteger getTeamId() { return teamId; }
 
-    public BigInteger getTeamId() {
-        return teamId;
-    }
+    public void setTeamId(BigInteger teamId) { this.teamId = teamId; }
 
-    public double getTotal_score() {
-        return total_score;
-    }
+    public Double getTotalScore() { return totalScore; }
 
-    public double getPresentation_score() {
-        return presentation_score;
-    }
+    public void setTotalScore(Double totalScore) { this.totalScore = totalScore; }
 
-    public double getQuestion_score() {
-        return question_score;
-    }
+    public Double getPresentationScore() { return presentationScore; }
 
-    public double getReport_score() {
-        return report_score;
-    }
+    public void setPresentationScore(Double presentationScore) { this.presentationScore = presentationScore; }
 
-    public void setRoundId(BigInteger roundId) {
-        this.roundId = roundId;
-    }
+    public Double getQuestionScore() { return questionScore; }
 
-    public void setTeamId(BigInteger teamId) {
-        this.teamId = teamId;
-    }
+    public void setQuestionScore(Double questionScore) { this.questionScore = questionScore; }
 
-    public void setTotal_score(double total_score) {
-        this.total_score = total_score;
-    }
+    public Double getReportScore() { return reportScore; }
 
-    public void setPresentation_score(double presentation_score) {
-        this.presentation_score = presentation_score;
-    }
+    public void setReportScore(Double reportScore) { this.reportScore = reportScore; }
 
-    public void setQuestion_score(double question_score) {
-        this.question_score = question_score;
-    }
+    public Serial getSerial() { return serial; }
 
-    public void setReport_score(double report_score) {
-        this.report_score = report_score;
-    }
+    public void setSerial(Serial serial) { this.serial = serial; }
+
+    public List<SeminarScore> getSeminarScoreList() { return seminarScoreList; }
+
+    public void setSeminarScoreList(List<SeminarScore> seminarScoreList) { this.seminarScoreList = seminarScoreList; }
 }

@@ -1,5 +1,7 @@
 package com.test.seminar.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.dao.TeacherDao;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -10,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Service
 public class TeacherServiceImpl implements TeacherService {
     @Autowired
@@ -48,4 +53,13 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> getAllTeacher() {
         return teacherDao.getAllTeacher();
     }
+
+    @Override
+    public PageInfo<Teacher> selectTeacherList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Teacher> list = teacherDao.getAllTeacher();
+        PageInfo<Teacher> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
 }

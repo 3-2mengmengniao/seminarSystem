@@ -5,53 +5,60 @@ import com.test.seminar.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Configuration
-@EnableWebSecurity
+@Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserServiceImpl userServiceImpl;
+    private final CustomSuccessHandler customSuccessHandler;
+    private final CustomFailureHandler customFailureHandler;
+    private final UnauthorizedEntryPoint unauthorizedEntryPoint;
 
     @Autowired
-    CustomSuccessHandler customSuccessHandler;
-
-    @Autowired
-    CustomFailureHandler customFailureHandler;
-
-    @Autowired
-    UserServiceImpl userServiceImpl;
+    public WebSecurityConfig(UserServiceImpl userServiceImpl, CustomFailureHandler customFailureHandler, CustomSuccessHandler customSuccessHandler, UnauthorizedEntryPoint unauthorizedEntryPoint) {
+        this.userServiceImpl = userServiceImpl;
+        this.customFailureHandler = customFailureHandler;
+        this.customSuccessHandler = customSuccessHandler;
+        this.unauthorizedEntryPoint = unauthorizedEntryPoint;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //Page Filter
         http.authorizeRequests()
-                .antMatchers("/student/**").access("hasRole('STUDENT')")
-                .antMatchers("/teacher/**").access("hasRole('TEACHER')" )
-                .and()
-                .formLogin().loginPage("/login").loginProcessingUrl("/login")
+                .antMatchers("/student/**").hasRole("STUDENT")
+                .antMatchers("/teacher/**").hasRole("TEACHER");
+        //User log config
+        http.formLogin()
+                .loginPage("/login").loginProcessingUrl("/login")
+                .usernameParameter("account").passwordParameter("password")
                 .successHandler(customSuccessHandler).failureHandler(customFailureHandler)
-                .usernameParameter("username").passwordParameter("password")
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
                 .permitAll();
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
 
-                //解决非thymeleaf的form表单提交被拦截问题
-                http.csrf().disable();
-                http.headers().frameOptions().sameOrigin();
+        //Disable CSRF security
+        http.csrf().disable();
+        //Enable iframe
+        http.headers().frameOptions().sameOrigin();
+        //Enable Ajax login fail exception handler
+        http.exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userServiceImpl).passwordEncoder(new BCryptPasswordEncoder());;
+        auth.userDetailsService(userServiceImpl);
     }
-
-
 
 }

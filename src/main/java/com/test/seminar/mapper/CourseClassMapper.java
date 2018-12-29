@@ -1,5 +1,6 @@
 package com.test.seminar.mapper;
 
+import com.test.seminar.entity.Course;
 import com.test.seminar.entity.CourseClass;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,34 +26,27 @@ public interface CourseClassMapper {
     CourseClass getCourseClassByCourseClassId(@Param("courseClassId") BigInteger courseClassId);
 
     /**
-     * 创建新的班级账户
-     *
-     * @param courseClass
-     * @return
-     */
-    void insertCourseClass(@Param("courseClass")CourseClass courseClass);
-
-    /**
-     * 更改班级信息
-     *
-     * @param courseClass
-     * @return
-     */
-    void updateCourseClassByCourseClassId(@Param("courseClass")CourseClass courseClass);
-
-    /**
-     * @param courseClassId
-     * @return
-     */
-    void deleteCourseClassByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
-
-    /**
      * 获取某课程下的所有班级
      *
      * @param courseId
      * @return
      */
     List<CourseClass> getCourseClassByCourseId(@Param("courseId")BigInteger courseId);
+
+    /**
+     * 找到某课程的第serial个班级
+     * @param courseId
+     * @param serial
+     * @return
+     */
+    CourseClass getCourseClassByCourseIdAndSerial(@Param("courseId")BigInteger courseId,@Param("serial")int serial);
+
+    /**
+     *
+     * @param teamId
+     * @return
+     */
+    CourseClass getCourseClassByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 获取某课程下某学生的班级
@@ -63,6 +57,27 @@ public interface CourseClassMapper {
     CourseClass getCourseClassByStudentIdAndCourseId(@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
 
     /**
+     *
+     * @param seminarControlId
+     * @return
+     */
+    CourseClass getCourseClassBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    /**
+     * 获得某班级下的队伍数量
+     * @param courseClassId
+     * @return
+     */
+    Integer getCourseClassTeamNumber(@Param("courseClassId")BigInteger courseClassId);
+    /**
+     * 创建新的班级账户
+     *
+     * @param courseClass
+     * @return
+     */
+    void insertCourseClass(@Param("courseClass")CourseClass courseClass,@Param("courseId")BigInteger courseId);
+
+    /**
      * @param courseClassId
      * @param studentId
      * @param courseId
@@ -70,4 +85,21 @@ public interface CourseClassMapper {
      */
     void insertCourseClassStudentRelation(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId,@Param("courseId")BigInteger courseId);
 
+    /**
+     * 更改班级信息
+     *
+     * @param courseClass
+     * @return
+     */
+    void updateCourseClassByCourseClass(@Param("courseClass")CourseClass courseClass);
+
+    /**
+     * @param courseClassId
+     * @return
+     */
+    void deleteCourseClassByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
+
+    void deleteCourseClassAndTeamRelationByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
+
+    CourseClass getCourseClassByTeamIdAndCourseId(@Param("teamId")BigInteger teamId,@Param("courseId")BigInteger courseId);
 }

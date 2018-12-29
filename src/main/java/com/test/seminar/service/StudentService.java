@@ -1,5 +1,6 @@
 package com.test.seminar.service;
 
+import com.github.pagehelper.PageInfo;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Student;
 import com.test.seminar.exception.RepetitiveRecordException;
@@ -35,7 +36,7 @@ public interface StudentService {
      * @param student
      * @throws UserNotFoundException
      */
-    void updateStudentByStudentId(Student student)throws UserNotFoundException;
+    void updateStudentByStudent(Student student)throws UserNotFoundException;
 
     /**
      *
@@ -49,4 +50,6 @@ public interface StudentService {
     Student getStudentByAccount(String acoount)throws UserNotFoundException;
 
     List<Student> getAllStudent();
+
+    PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize);
 }

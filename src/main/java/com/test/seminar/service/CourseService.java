@@ -1,9 +1,13 @@
 package com.test.seminar.service;
 
 import com.test.seminar.entity.Course;
-import com.test.seminar.exception.CourseNotFoundException;
-import com.test.seminar.exception.RepetitiveRecordException;
-import com.test.seminar.exception.UserNotFoundException;
+import com.test.seminar.entity.ShareSeminarApplication;
+import com.test.seminar.entity.ShareTeamApplication;
+import com.test.seminar.entity.Team;
+import com.test.seminar.entity.strategy.impl.ConflictCourseStrategy;
+import com.test.seminar.entity.strategy.impl.CourseMemberLimitStrategy;
+import com.test.seminar.entity.strategy.impl.MemberLimitStrategy;
+import com.test.seminar.exception.*;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -37,11 +41,16 @@ public interface CourseService {
     List<Course> getCourseByStudentId(BigInteger studentId);
 
     /**
-     * 创建新的课程
-     * @param Course
+     *
+     * @param course
+     * @param teacherId
+     * @param conflictCourseStrategyArrayList
+     * @param courseMemberLimitStrategyList
+     * @param thisCourse
+     * @param choose
      * @throws RepetitiveRecordException
      */
-    void insertCourse(Course Course)throws RepetitiveRecordException;
+    void insertCourse(Course course, BigInteger teacherId, List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse,Integer choose)throws RepetitiveRecordException;
 
     /**
      * 更改课程信息
@@ -56,4 +65,66 @@ public interface CourseService {
      * @throws CourseNotFoundException
      */
     void deleteCourseByCourseId(BigInteger courseId)throws CourseNotFoundException;
+
+    /**
+     * 发送共享讨论课请求
+     * @param mainCourseId
+     * @param subCourseId
+     * @param subCourseTeacherId
+     */
+    void insertShareSeminarApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
+
+    /**
+     * 通过从课程教师id查看共享讨论课请求
+     * @param subCourseTeacherId
+     * @return
+     */
+    List<ShareSeminarApplication> getShareSeminarApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId);
+
+    /**
+     * 发送共享讨论课请求
+     * @param mainCourseId
+     * @param subCourseId
+     * @param subCourseTeacherId
+     */
+    void insertShareTeamApplication(BigInteger mainCourseId,BigInteger subCourseId,BigInteger subCourseTeacherId);
+
+    /**
+     * 通过从课程教师id查看共享分组请求
+     * @param subCourseTeacherId
+     * @return
+     * @throws ShareTeamApplicationNotFoundException
+     */
+    List<ShareTeamApplication> getShareTeamApplicationBySubCourseTeacherId(BigInteger subCourseTeacherId) throws ShareTeamApplicationNotFoundException;
+
+    /**
+     * 获取系统中所有课程
+     * @return
+     */
+    List<Course> getAllCourse();
+
+    /**
+     *
+     * @param courseId
+     * @return
+     */
+    List<Course> getAvailableCourseForShare(BigInteger courseId);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    ShareTeamApplication getShareTeamApplicationByApplicationId(BigInteger applicationId);
+
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
+    ShareSeminarApplication getShareSeminarApplicationByApplicationId(BigInteger applicationId);
+
+    void deleteShareTeamApplication(BigInteger shareTeamApplicationId);
+
+    void deleteShareSeminarApplication(BigInteger shareSeminarApplicationId);
 }

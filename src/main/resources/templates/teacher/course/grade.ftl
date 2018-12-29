@@ -22,7 +22,6 @@
     <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
     <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
@@ -45,7 +44,7 @@
 <div class="content">
     <div class="header">
         <div class="navigation-back">
-            <h1 class="navigation-back">OOAD</h1>
+            <h1 class="navigation-back">${course.courseName}</h1>
             <a href="/teacher/courseList" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
@@ -73,147 +72,66 @@
 </div>
 
 <div class="content">
+    <#list roundList as round>
     <div class="distance3"></div>
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第一轮</h2>
+                <h2 class="layui-colla-title">第${round.roundSerial}轮</h2>
                 <div class="layui-colla-content">
                     <div class="layui-collapse" lay-accordion="">
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content ">
-                                <div class="layui-collapse" lay-accordion="">
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content">
-
-                                <div class="layui-collapse" lay-accordion="">
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
+                        <#list round.roundScoreList as roundScore>
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">${roundScore.serial.getSerial()}&nbsp&nbsp&nbsp${roundScore.totalScore!0}分</h2>
+                                <div class="layui-colla-content ">
+                                    <div class="layui-collapse" lay-accordion="">
+                                        <#list roundScore.seminarScoreList as seminarScore>
+                                            <div class="layui-colla-item">
+                                                <h2 class="layui-colla-title">${seminarScore.seminarInfoName}</h2>
+                                                <div class="layui-colla-content ">
+                                                    <form method="post" action="/teacher/course/grade?seminarControlId=${seminarScore.seminarControlId}&teamId=${seminarScore.teamId}" id="${seminarScore.seminarControlId}+${seminarScore.teamId}">
+                                                    <img name="${seminarScore.seminarControlId}+${seminarScore.teamId}" class="edit-score" src="/images/灰色修改.png"></img>
+                                                    <div>展示：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled name="presentationScore" class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;"  value="${seminarScore.presentationScore!0}">
+                                                        </div>
+                                                    </div>
+                                                    <div>提问：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled name="questionScore" class="layui-input layui-disabled"  style="width:40px;margin-left:50px;margin-top:-30px;" value="${seminarScore.questionScore!0}">
+                                                        </div>
+                                                    </div>
+                                                    <div>报告：&emsp;&emsp;&emsp;&emsp;分
+                                                        <div>
+                                                            <input disabled name="reportScore" class="layui-input layui-disabled" style="width:40px;margin-left:50px;margin-top:-30px;"    value="${seminarScore.reportScore!0}">
+                                                         </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </#list>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">总成绩</h2>
+                                            <div class="layui-colla-content ">
+                                                展示：${roundScore.presentationScore!0}分&nbsp&nbsp提问：${roundScore.questionScore!0}分&nbsp&nbsp报告：${roundScore.reportScore!0}分&nbsp&nbsp总分：${roundScore.totalScore!0}分
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </#list>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="distance4"></div>
-    <div class="center-navigation">
-        <div class="layui-collapse" lay-accordion="">
-            <div class="layui-colla-item">
-                <h2 class="layui-colla-title">第二轮</h2>
-                <div class="layui-colla-content ">
-                    <div class="layui-collapse" lay-accordion="">
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-1&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content ">
-
-                                <div class="layui-collapse" lay-accordion="">
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="layui-colla-item">
-                            <h2 class="layui-colla-title">1-2&nbsp&nbsp&nbsp4.5分</h2>
-                            <div class="layui-colla-content ">
-
-                                <div class="layui-collapse" lay-accordion="">
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">用例分析</h2>
-                                        <div class="layui-colla-content ">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">界面原型</h2>
-                                        <div class="layui-colla-content">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                    <div class="layui-colla-item">
-                                        <h2 class="layui-colla-title">总成绩</h2>
-                                        <div class="layui-colla-content l">
-                                            展示：4.5分&nbsp&nbsp提问：4.5分&nbsp&nbsp报告：4.5分
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </#list>
 </div>
 
 
-
-
-
-
-
-
     <div class="distance2"> </div>
     <div class="distance2"> </div>
-<button onclick="window.location.href='#'"  class="uploadButton layui-btn layui-btn-mini margin3" >导出成绩</button>
 
     <div class="distance2"> </div>
     <div class="distance4"> </div>
@@ -231,8 +149,57 @@
 
 
 <!--<div class="bottom-deco"></div>-->
-
+<script>
+    $("img.edit-score").on("click",function(){
+        if($(this).hasClass("edit-score")){
+            $(this).attr("src","/images/灰色保存.png");
+            $(this).nextAll().find(".layui-input").each(function(){
+                $(this).removeAttr("disabled");
+                $(this).removeClass("layui-disabled");
+            });
+            $(this).removeClass("edit-score");
+            $(this).addClass("save-score");
+        }
+       else{
+           var id=$(this).attr("name");
+           alert(id);
+            $('#'+id).submit();
+            $(this).attr("src","/images/灰色修改.png");
+            $(this).nextAll().find(".layui-input").each(function(){
+                $(this).attr("disabled","disabled");
+                $(this).addClass("layui-disabled");
+            });
+            $(this).removeClass("save-score");
+            $(this).addClass("edit-score");
+        }
+    });
+    // $("img.save-score").on("click",function(){
+    //     $(this).attr("src","/images/灰色修改.png");
+    //     $(this).parents().parents().find(".layui-input").each(function(){
+    //         $(this).attr("disabled","disabled");
+    //         $(this).addClass("layui-disabled");
+    //     });
+    //     $(this).removeClass("save-score");
+    //     $(this).addClass("edit-score");
+    // });
+</script>
 <style>
+    .edit-score{
+        z-index:9999;
+        width: 40px;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-right: 15%;
+        float: right;
+     }
+    .save-score{
+        z-index:9999;
+        width: 40px;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-right: 15%;
+        float: right;
+    }
     @media screen and (max-width:768px){
         .margin3{
             margin-left:35%;

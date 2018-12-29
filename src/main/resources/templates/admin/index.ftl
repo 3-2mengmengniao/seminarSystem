@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin2.0</title>
+	<title>后台登录 | 讨论课管理系统</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="stylesheet" href="/admin/css/font.css">
-	<link rel="stylesheet" href="/admin/css/xadmin.css">
+    <link rel="stylesheet" href="/adminStatic/css/font.css">
+	<link rel="stylesheet" href="/adminStatic/css/xadmin.css">
+    <link href="/adminStatic/css/pagination.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/admin/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/admin/js/xadmin.js"></script>
+    <script src="/adminStatic/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/adminStatic/js/xadmin.js"></script>
+    <#--<script src="/adminStatic/js/jquery.min.js" type="text/javascript"></script>-->
+    <script src="/adminStatic/js/jquery.pagination.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -41,7 +44,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="/admin/teacherList">
+                        <a _href="/admin/teacherList?pageNum=1">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理教师信息</cite>
                         </a>
@@ -69,6 +72,9 @@
             <div class="layui-tab-item layui-show">
                 <iframe src='/admin/teacherList' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
+              <div class="box">
+                  <div id="pagination" class="page center">
+              </div>
           </div>
         </div>
     </div>
@@ -81,6 +87,7 @@
      </div>
      -->
      <!-- 底部结束 -->
+
     <script>
     //百度统计可去掉
     var _hmt = _hmt || [];

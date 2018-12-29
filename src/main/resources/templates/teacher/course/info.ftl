@@ -11,21 +11,16 @@
     <link href="/styles/framework.css" 		rel="stylesheet" type="text/css">
     <link href="/styles/owl.carousel.css" 	 rel="stylesheet" type="text/css">
     <link href="/styles/owl.theme.css" 		rel="stylesheet" type="text/css">
-    <link href="/styles/swipebox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/colorbox.css"		 rel="stylesheet" type="text/css">
-    <link href="/styles/bootstrap.css"		 rel="stylesheet" type="text/css">
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
 
-     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.swipebox.js"></script>
-    <script type="text/javascript" src="/scripts/colorbox.js"></script>
     <script type="text/javascript" src="/scripts/snap.js"></script>
-    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/courseDelete.js"></script>
     <script type="text/javascript" src="/scripts/custom.js"></script>
     <script type="text/javascript" src="/scripts/framework.js"></script>
     <script type="text/javascript" src="/scripts/framework.launcher.js"></script>
-    <script type="text/javascript" src="/scripts/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js" charset="utf-8"></script>
 
 
     <!--<div class="bottom-deco"></div>-->
@@ -47,67 +42,198 @@
 <div class="top-deco"></div>
 <div class="navigation-back">
     <h1 class="navigation-back">${course.courseName}</h1>
-    <a href="/teacher/courseList" class="button-close">x</a>
+    <a href="/teacher/courseList" class="button-close" style="margin-top:-45px;">x</a>
 </div>
 <div class="decoration"></div>
 
 <div class="content">
     <div class="center-navigation">
-    <div class="container no-bottom">
-        <div class="distance3"></div>
-        <h3 class="margin3">课程要求</h3>
-        <p class="margin3">
-            ${course.introduction}
-        </p>
-        <h3 class="margin3">成绩计算规则</h3>
-        <p class="margin3">
-            课堂展示    ${course.presentationPercentage}%<br>
-            课堂提问    ${course.questionPercentage}%<br>
-            课堂报告    ${course.reportPercentage}%<br>
-        </p>
-        <h3 class="margin3">分组规则</h3>
-        <p class="margin4">
-            小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6~8人<br>
-            组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>
-            组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>
-        </p>
-        <div class="distance"></div>
-        <p class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
+        <div class="center-panel">
+            <div class="distance3"></div>
+            <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <colgroup>
+                    <col width="100" >
+                    <col width="200" >
+                </colgroup>
+                <tr>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">成绩计算规则:</a>
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">课堂展示    ${course.presentationPercentage}%</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:0 0;">
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">课堂提问    ${course.questionPercentage}%</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:0 0;">
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">课堂报告    ${course.reportPercentage}%</a>
+                    </td>
+                </tr>
+            </table>
+            <h3 class="my-title">分组规则</h3>
+            <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <colgroup>
+                    <col width="150" >
+                    <col width="200" >
+                </colgroup>
+                <tr>
+                    <td style="padding:0 0;"><a style="font-size:15px;">组队开始时间：</a>
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:0 0;"><a style="font-size:15px;">组队截止时间：</a>
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;"> ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}</a>
+                    </td>
+                </tr>
+            </table>
+            <div style="height:20px;"></div>
+            <!--</p>-->
+            <!--<h2 class="my-title">分组规则</h2>-->
+            <!--<p class="margin4">-->
+            <!--小组人数：&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;6~8人<br>-->
+            <!--组队开始时间：&emsp; &emsp;${course.teamStartTime?string('yyyy-MM-dd HH:mm:ss')}<br>-->
+            <!--组队截止时间：&emsp;&emsp; ${course.teamEndTime?string('yyyy-MM-dd HH:mm:ss')}<br>-->
+            <!--</p>-->
+            <!--<div class="distance"></div>-->
+        </div>
+        <div class="center-panel" style="margin-top:15px;">
+            <div class="distance3"></div>
+            <h2 class="my-title" style="margin-bottom:15px;">组队要求</h2>
+            <h3 class="my-title">组员基本要求</h3>
+            <table  class="info-table layui-table" style="border:none;border-width:0 0;" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <colgroup>
+                    <col width="200" >
+                    <col width="100" >
+                </colgroup>
+                <tr>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">小组总人数：(含组长)</a>
+                    </td>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">${thisCourse.getMinMember()}~${thisCourse.getMaxMember()}人</a>
+                    </td>
+                </tr>
+            </table>
+            <h3 class="my-title">组内选修课程人数：</h3>
+            <table  class="info-table layui-table" style="border:none;border-width:0 0;" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <colgroup>
+                    <col width="200" >
+                    <col width="100" >
+                </colgroup>
+                <#list memberLimit as strategy>
+                    <tr>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">${optionCourses[strategy?index].courseName}:</a>
+                        </td>
+                        <td style="padding:0 0;">
+                            <a style="font-size:15px;">${strategy.getMinMember()}~${strategy.getMaxMember()}人</a>
+                        </td>
+                    </tr>
+                </#list>
+                <tr>
+                    <td style="padding:0 0;">
+                        <a style="font-size:15px;">选修课程人数要求：</a>
+                    </td>
+                    <td style="padding:0 0;">
+                        <#if choose==0>
+                            <a style="font-size:15px;">均满足</a>
+                         <#else>
+                            <a style="font-size:15px;">任一满足</a>
+                        </#if>
+                    </td>
+                </tr>
+            </table>
+            <div style="10px;"></div>
+            <h3 class="my-title">冲突课程</h3>
+            <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
+                <#list conflictCourses as courseList>
+                <tr>
+                    <td style="padding:0 0;">
+                        <#list courseList as oneCourse>
+                            <span style="font-size:13px;">${oneCourse.courseName}</span>
+                        </#list>
+                    </td>
+                </tr>
+                </#list>
+            </table>
+            <div style="10px;"></div>
+        </div>
     </div>
-    </div>
-<!--
-    <div class="decoration"></div>
-    <div class="footer">
-        <div class="clear"></div>
-        <p class="copyright">
-            Copyright @2018 developed by Group 3-2.<br>
-            All Rights Reserved
-        </p>
-    </div>
-    -->
+    <p style="margin-top:15px;" class="center center-text"><button class="button-big button-red" id="deleteButton" >删除课程</button></p>
+    <!--
+        <div class="decoration"></div>
+        <div class="footer">
+            <div class="clear"></div>
+            <p class="copyright">
+                Copyright @2018 developed by Group 3-2.<br>
+                All Rights Reserved
+            </p>
+        </div>
+        -->
 </div>
-
+<div style="20px;"></div>
+<div style="20px;"></div>
 <script>
     $('#deleteButton').click(function(){
         $.ajax({
             type: "DELETE",
             url: "/teacher/course/${course.id}",
-            success: function(data){
-                if(data==="200")
+            success: function(data,status,response){
+                if(response.status=="200")
                     window.location.href="/teacher/courseList";
                 else if(data==="404")
-                    alert("课程不存在");
+                    layer.msg("课程不存在",function(){});
             }
         });
     });
 </script>
 <style>
+
+    .info-table{
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        width:90%;
+        background-color:#fff;
+        border:none;
+        border-width:0 0;
+    }
+    .my-title{
+        text-align:center;
+        font-weight:bold;
+    }
+    .my-content{
+        text-align:center;
+        margin-left:10%;
+        margin-right:10%;
+    }
     @media screen and (max-width:768px){
         .margin3{
-             margin-left:20%;
-         }
+            margin-left:20%;
+        }
         .margin4{
-            margin-left:10%;
+            margin-left:13%;
+        }
+        .info-table{
+            margin-left:auto;
+            margin-right:auto;
+            width:90%;
+            background-color:#fff;
+            border:none;
+            border-width:0 0;
         }
     }
     @media screen and (min-width:768px){
@@ -115,7 +241,15 @@
             text-align:center;
         }
         .margin4{
-            margin-left:37%;
+            margin-left:33%;
+        }
+        .info-table{
+            margin-left:25%;
+            margin-right:20%;
+            width:65%;
+            background-color:#fff;
+            border:none;
+            border-width:0 0;
         }
     }
 </style>

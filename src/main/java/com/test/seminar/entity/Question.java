@@ -1,5 +1,7 @@
 package com.test.seminar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigInteger;
 
 /**
@@ -7,50 +9,29 @@ import java.math.BigInteger;
  * @date 2018/11/28
  */
 
+@JsonIgnoreProperties
 public class Question {
     private BigInteger id;
-    private BigInteger teamId;
-    private BigInteger presentationId;
-    private BigInteger studentId;
     private BigInteger seminarControlId;
-    private int selected;
+    private BigInteger presentationId;
+    private BigInteger teamId;
+    private BigInteger studentId;
+    private Student student;
+    private Integer selected;
     private double score;
+    private Serial serial;
+
+    public Question() {
+        selected=0;
+    }
 
     public BigInteger getId() {
         return id;
     }
 
-    public BigInteger getTeamId() {
-        return teamId;
-    }
+    public Student getStudent() { return student; }
 
-    public void setTeamId(BigInteger teamId) {
-        this.teamId = teamId;
-    }
-
-    public BigInteger getPresentationId() {
-        return presentationId;
-    }
-
-    public void setPresentationId(BigInteger presentationId) {
-        this.presentationId = presentationId;
-    }
-
-    public BigInteger getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(BigInteger studentId) {
-        this.studentId = studentId;
-    }
-
-    public BigInteger getSeminarControlId() {
-        return seminarControlId;
-    }
-
-    public void setSeminarControlId(BigInteger seminarControlId) {
-        this.seminarControlId = seminarControlId;
-    }
+    public void setStudent(Student student) { this.student = student; }
 
     public int getSelected() {
         return selected;
@@ -66,5 +47,53 @@ public class Question {
 
     public void setScore(double score) {
         this.score = score;
+    }
+
+    public Serial getSerial() {
+        return serial;
+    }
+
+    public void setSerial(Serial serial) {
+        this.serial = serial;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public BigInteger getSeminarControlId() {
+        return seminarControlId;
+    }
+
+    public void setSeminarControlId(BigInteger seminarControlId) {
+        this.seminarControlId = seminarControlId;
+    }
+
+    public BigInteger getPresentationId() {
+        return presentationId;
+    }
+
+    public void setPresentationId(BigInteger presentationId) {
+        this.presentationId = presentationId;
+    }
+
+    public BigInteger getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(BigInteger teamId) {
+        this.teamId = teamId;
+    }
+
+    public BigInteger getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(BigInteger studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
     }
 }

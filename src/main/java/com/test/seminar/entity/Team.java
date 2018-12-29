@@ -10,32 +10,33 @@ import java.util.List;
 
 public class Team {
     private BigInteger id;
-    private BigInteger classId;
-    private BigInteger courseId;
     private String teamName;
-    private BigInteger leaderId;
-    private int status;
-    private int teamSerial;
-    private List<RoundScore> roundScores;
+    private Integer status;
+    private Serial serial;
+    private Student leader;
+    private Course course;
+    private CourseClass courseClass;
+    private List<Student> memberList;
+    private List<Question> questionList;
 
     public BigInteger getId() {
         return id;
     }
 
-    public BigInteger getClassId() {
-        return classId;
+    public void setId(BigInteger id) {
+        this.id = id;
     }
 
-    public void setClassId(BigInteger classId) {
-        this.classId = classId;
+    public Serial getSerial() {
+        return serial;
     }
 
-    public BigInteger getCourseId() {
-        return courseId;
+    public void setSerial(Serial serial) {
+        this.serial = serial;
     }
 
-    public void setCourseId(BigInteger courseId) {
-        this.courseId = courseId;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public String getTeamName() {
@@ -46,28 +47,48 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public BigInteger getLeaderId() {
-        return leaderId;
+    public Student getLeader() {
+        return leader;
     }
 
-    public void setLeaderId(BigInteger leaderId) {
-        this.leaderId = leaderId;
-    }
-
-    public int getTeamSerial() {
-        return teamSerial;
-    }
-
-    public void setTeamSerial(int teamSerial) {
-        this.teamSerial = teamSerial;
+    public void setLeader(Student leader) {
+        this.leader = leader;
     }
 
     public int getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
+    }
+
+    public List<Student> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<Student> memberList) {
+        this.memberList = memberList;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public CourseClass getCourseClass() {
+        return courseClass;
+    }
+
+    public void setCourseClass(CourseClass courseClass) {
+        this.courseClass = courseClass;
     }
 
     @Override

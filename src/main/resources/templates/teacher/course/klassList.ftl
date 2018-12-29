@@ -105,7 +105,6 @@
         console.log(ttt)
         var currentForm="form"+id;
         var postPath=$('#' + currentForm).attr('action');
-        alert(postPath);
         $.ajax(
                 {
                     url:postPath,

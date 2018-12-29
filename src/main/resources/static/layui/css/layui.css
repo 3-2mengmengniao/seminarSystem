@@ -59,12 +59,12 @@ a.my-navigation{
     }
     .layui-form-item .layui-input-inline{
         display: block;
-        /* float: none; */
+        float: none;
         left: -3px;
         width: 50%;
         margin-top: -40px;
         margin-left: 50%;
-        /* margin: 0 0 10px 112px; */
+        margin: 0 0 10px 112px;
     }
 
     .moveUp{

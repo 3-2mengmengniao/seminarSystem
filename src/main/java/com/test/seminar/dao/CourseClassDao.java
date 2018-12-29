@@ -7,7 +7,42 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author cxh
+ * @date 2018/11/28
+ */
+
 public interface CourseClassDao {
+    /**
+     * 获取某课程下的所有班级
+     * @param courseId
+     * @return
+     */
+    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+
+    /**
+     * 找到某课程的第serial个班级
+     * @param courseId
+     * @param serial
+     * @return
+     */
+    CourseClass getCourseClassByCourseIdAndSerial(BigInteger courseId,int serial);
+
+
+    /**
+     * 获取某课程下某个队伍的班级
+     * @param teamId
+     * @return
+     */
+    CourseClass getCourseClassByTeamId(BigInteger teamId);
+
+    /**
+     * 获取某课程下某学生的班级
+     * @param studentId
+     * @param courseId
+     * @return
+     */
+    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws CourseClassNotFoundException;
 
     /**
      * 通过ID获取班级信息
@@ -23,7 +58,14 @@ public interface CourseClassDao {
      * @throws RepetitiveRecordException
      * @return
      */
-    void insertCourseClass(CourseClass courseClass) throws RepetitiveRecordException;
+    void insertCourseClass(CourseClass courseClass, BigInteger courseId) throws RepetitiveRecordException;
+
+    /**
+     * @param courseClassId
+     * @param studentId
+     * @return
+     */
+    void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId);
 
     /**
      * 更改班级信息
@@ -31,7 +73,7 @@ public interface CourseClassDao {
      * @throws CourseClassNotFoundException
      * @return
      */
-    void updateCourseClassByCourseClassId(CourseClass courseClass) throws CourseClassNotFoundException;
+    void updateCourseClassByCourseClass(CourseClass courseClass) throws CourseClassNotFoundException;
 
     /**
      *
@@ -41,25 +83,9 @@ public interface CourseClassDao {
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId) throws CourseClassNotFoundException;
 
-    /**
-     * 获取某课程下的所有班级
-     * @param courseId
-     * @return
-     */
-    List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+    void deleteCourseClassAndTeamRelationByCourseClassId(BigInteger courseClassId);
 
-    /**
-     * 获取某课程下某学生的班级
-     * @param studentId
-     * @param courseId
-     * @return
-     */
-    CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId)throws CourseClassNotFoundException;
+    Integer getCourseClassTeamNumber(BigInteger courseClassId);
 
-    /**
-     * @param courseClassId
-     * @param studentId
-     * @return
-     */
-    void insertCourseClassStudentRelation(BigInteger courseClassId, BigInteger studentId, BigInteger courseId);
+    CourseClass getCourseClassByTeamIdAndCourseId(BigInteger teamId,BigInteger courseId);
 }

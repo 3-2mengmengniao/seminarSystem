@@ -1,6 +1,7 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author yuyingzhu
@@ -9,22 +10,15 @@ import java.math.BigInteger;
 
 public class CourseClass {
     private BigInteger id;
-    private BigInteger courseId;
-    private int grade;
-    private int classSerial;
+    private Integer grade;
+    private Integer classSerial;
     private String classTime;
     private String classLocation;
+    private Course course;
+    private List<Team> teamList;
 
     public BigInteger getId() {
         return id;
-    }
-
-    public BigInteger getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(BigInteger courseId) {
-        this.courseId = courseId;
     }
 
     public int getGrade() {
@@ -57,5 +51,21 @@ public class CourseClass {
 
     public void setClassLocation(String classLocation) {
         this.classLocation = classLocation;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public List<Team> getTeamList() {
+        return teamList;
+    }
+
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
     }
 }
