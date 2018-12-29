@@ -146,9 +146,9 @@
             </div>
             <div class="decoration"></div>
             <div class="distance4"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-red" id="contactSubmitButton" value="删除讨论课" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-red" id="contactSubmitButton" value="删除讨论课" data-formId="contactForm"/></p>
             <div class="distance3"></div>
-            <p class="center center-text"><input type="submit" class="button-big button-dark" id="contactSubmitButton" value="修改讨论课" data-formId="contactForm"/></p>
+            <p class="center center-text"><input type="button" class="button-big button-dark" id="contactSubmitButton" value="修改讨论课" data-formId="contactForm"/></p>
         </form>
         <div class="distance2"></div>
         <!--
