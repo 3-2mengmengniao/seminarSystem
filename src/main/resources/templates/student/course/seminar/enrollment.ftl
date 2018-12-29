@@ -110,7 +110,7 @@
         <div class="distance4"></div>
         <div class="distance"></div>
         <#if enrollment==true>
-        <button type="button" class="deleteButton layui-btn layui-btn-mini" id="deleteButton"  style="margin-left:50px;background-color: #C0392B">删除班级</button>
+        <button type="button" class="deleteButton layui-btn layui-btn-mini" id="deleteButton"  style="margin-left:50px;background-color: #C0392B">取消报名</button>
         </#if>
     </div>
 </div>
