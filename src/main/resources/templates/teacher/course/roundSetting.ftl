@@ -97,6 +97,7 @@
                         </select>
                     </div>
                 </div>
+                <input type="hidden" value="${course.id}" name="courseId">
                 <div class="layui-form-item">
                     <label class="layui-form-label">提问</label>
                     <div class="layui-input-block">
@@ -154,9 +155,21 @@
                         <label class="layui-form-label">${class.grade?c}-(${class.classSerial})</label>
                         <div class="layui-input-block">
                             <select name="enrollment" lay-filter="aihao">
-                                <option value="1">1</option>
-                                <option value="2" selected>2</option>
-                                <option value="3">3</option>
+                                <#if round.courseClassRoundList[class?index]==0>
+                            <option value="0" selected>最高分</option>
+                                <#else>
+                            <option value="0">最高分</option>
+                                </#if>
+                            <#if round.courseClassRoundList[class?index]==0>
+                            <option value="1" selected>平均分</option>
+                            <#else>
+                            <option value="1">平均分</option>
+                            </#if>
+                            <#if round.courseClassRoundList[class?index]==0>
+                            <option value="2" selected>最低分</option>
+                            <#else>
+                            <option value="2">最低分</option>
+                            </#if>
                             </select>
                         </div>
                     </div>
@@ -206,11 +219,12 @@
         var presentationScoreMethod=fd.get("presentationScoreMethod");
         var questionScoreMethod=fd.get("questionScoreMethod");
         var reportScoreMethod=fd.get("reportScoreMethod");
+        var courseId=fd.get("courseId");
         $.ajax(
                 {
                     url:"/teacher/course/roundSetting",
                     type:'patch',
-                    data:{"enrollment":enrollment,"reportScoreMethod":reportScoreMethod,"roundId":${round.id},
+                    data:{"enrollment":enrollment,"reportScoreMethod":reportScoreMethod,"roundId":${round.id},"courseId":courseId,
                         "presentationScoreMethod":presentationScoreMethod,"questionScoreMethod":questionScoreMethod},
                     success:function(data,status,response){
                         if(response.status=="200"){

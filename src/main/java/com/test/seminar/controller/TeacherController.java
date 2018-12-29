@@ -494,14 +494,19 @@ public class TeacherController {
     @RequestMapping(value="/course/roundSetting",method = PATCH)
     @ResponseBody
     public ResponseEntity<String> roundSettingPost(HttpServletRequest request,Model model) {
+        BigInteger courseId=new BigInteger(request.getParameter("courseId"));
+        System.out.println(courseId);
         Round round=roundService.getRoundByRoundId(new BigInteger(request.getParameter("roundId")));
         round.setPresentationScoreMethod(Integer.valueOf(request.getParameter("presentationScoreMethod")));
         round.setQuestionScoreMethod(Integer.valueOf(request.getParameter("questionScoreMethod")));
         round.setReportScoreMethod(Integer.valueOf(request.getParameter("reportScoreMethod")));
         String data=request.getParameter("enrollment");
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        HashMap<BigInteger,Integer> map=new HashMap<BigInteger,Integer>();
         JSONArray myArray=JSONArray.fromObject(data);
         for(int i=0;i<myArray.size();i++){
             String tmp=(String) myArray.get(i);
+            map.put(courseClasses.get(i).getId(),Integer.valueOf(tmp));
         }
         roundService.updateRound(round);
         return new ResponseEntity<>("", HttpStatus.OK);
@@ -551,19 +556,31 @@ public class TeacherController {
         return "teacher/course/seminar/score";
     }
 
+    @RequestMapping(value="/course/seminar/reportScore",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> reportScore(HttpServletRequest request,Model model) {
+        String data=request.getParameter("reportScore");
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String tmp=(String) myArray.get(i);
+            System.out.println(tmp);
+        }
+        String seminarId=request.getParameter("seminarId");
+        System.out.println(seminarId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/seminar/presentationScore",method = POST)
     @ResponseBody
     public ResponseEntity<String> presentationScore(BigInteger presentationId, Double score,Model model) {
-        System.out.println(presentationId);
-        System.out.println(score);
-
+        seminarService.updatePresentationScore(presentationId,score);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @RequestMapping(value="/course/seminar/questionScore",method = POST)
+    @ResponseBody
     public ResponseEntity<String> questionScore(BigInteger questionId, Double score,Model model) {
-        System.out.println(questionId);
-        System.out.println(score);
+        seminarService.updateQuestionScore(questionId,score);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 

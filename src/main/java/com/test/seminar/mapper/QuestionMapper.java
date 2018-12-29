@@ -31,4 +31,6 @@ public interface QuestionMapper {
     void updateQuestion(@Param("question")Question question);
 
     void deleteQuestionByQuestionId(@Param("questionId")BigInteger questionId);
+
+    Question getQuestionByQuestionId(@Param("questionId") BigInteger questionId);
 }

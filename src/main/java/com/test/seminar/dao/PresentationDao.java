@@ -34,4 +34,7 @@ public interface PresentationDao {
     void deletePresentationByPresentationId(BigInteger presentationId);
 
     void deletePresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
+
+    Presentation getPresentationByPresentationId(BigInteger presentationId);
+
 }

@@ -80,8 +80,8 @@
             <span id="seminarId" name="${seminarControl.id}"></span>
             <span id="usertype" name="teacher"></span>
             <h1 class="thick">业务流程分析</h1>
-            <p style="font-size:16px;" id="greetings">当前已有5人提问</p>
-            <p style="color:#009688;font-size:17px;margin-left:-33px;" id="notation">1-1组已展示</p>
+            <p style="font-size:16px;" id="greetings"></p>
+            <p style="color:#009688;font-size:17px;margin-left:-33px;" id="notation"></p>
             <div>
                 <span id="runner"></span><br><br>
                 <div>

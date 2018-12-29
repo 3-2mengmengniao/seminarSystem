@@ -38,6 +38,8 @@ public class SeminarServiceImpl implements SeminarService {
     private TeamDao teamDao;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private QuestionDao questionDao;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {
@@ -388,5 +390,21 @@ public class SeminarServiceImpl implements SeminarService {
         BigInteger roundId=roundDao.getRoundIdBySeminarControlId(seminarControlId);
         //更新该轮总分
         updateRoundScore(roundId,teamId);
+    }
+
+    @Override
+    public void updateQuestionScore(BigInteger questionId, Double score) {
+        Question question=questionDao.getQuestionByQuestionId(questionId);
+        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(question.getSeminarControlId(),question.getTeamId());
+        seminarScore.setQuestionScore(score);
+        seminarDao.updateSeminarScore(seminarScore,question.getSeminarControlId(),question.getTeamId());
+    }
+
+    @Override
+    public void updatePresentationScore(BigInteger presentationId, Double score) {
+        Presentation presentation=presentationDao.getPresentationByPresentationId(presentationId);
+        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(presentation.getSeminarControlId(),presentation.getTeam().getId());
+        seminarScore.setQuestionScore(score);
+        seminarDao.updateSeminarScore(seminarScore,presentation.getSeminarControlId(),presentation.getTeam().getId());
     }
 }
