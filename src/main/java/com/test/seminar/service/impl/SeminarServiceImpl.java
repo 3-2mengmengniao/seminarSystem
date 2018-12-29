@@ -266,11 +266,20 @@ public class SeminarServiceImpl implements SeminarService {
             questionScore.add(seminarScore.getQuestionScore());
         }
 
+        updatePresentationScoreForRoundScore(roundScore,round,seminarScoreList,teamId);
+        updateQuestionScoreForRoundScore(roundScore,round,seminarScoreList);
+        updateReportScoreForRoundScore(roundScore,round,seminarScoreList,teamId);
+
+        roundScore.setTotalScore(course.getPresentationPercentage()*roundScore.getPresentationScore()+course.getQuestionPercentage()*roundScore.getQuestionScore()+course.getReportPercentage()*roundScore.getReportScore());
+        roundDao.updateRoundScore(roundScore,roundId,teamId);
+    }
+
+    private void updatePresentationScoreForRoundScore(RoundScore roundScore, Round round, List<SeminarScore> seminarScoreList, BigInteger teamId){
         switch (round.getPresentationScoreMethod()){
             //平均分
             case 0: {
                 Double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getPresentationScore).sum();
-                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),round.getId());
                 roundScore.setPresentationScore(sum/enrollNumber);
                 break;
             }
@@ -287,6 +296,9 @@ public class SeminarServiceImpl implements SeminarService {
             }
             default:
         }
+    }
+
+    private void updateQuestionScoreForRoundScore(RoundScore roundScore,Round round,List<SeminarScore>seminarScoreList){
         switch (round.getQuestionScoreMethod()){
             //平均分
             case 0: {
@@ -320,11 +332,14 @@ public class SeminarServiceImpl implements SeminarService {
             }
             default:
         }
+    }
+
+    private void updateReportScoreForRoundScore(RoundScore roundScore, Round round, List<SeminarScore> seminarScoreList, BigInteger teamId){
         switch (round.getReportScoreMethod()){
             //平均分
             case 0: {
                 Double sum=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).sum();
-                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),roundId);
+                Integer enrollNumber=roundDao.getEnrollNumBycourseClassIdAndRoundId(teamDao.getTeamByTeamId(teamId).getCourseClass().getId(),round.getId());
                 roundScore.setReportScore(sum/enrollNumber);
                 break;
             }
@@ -340,8 +355,6 @@ public class SeminarServiceImpl implements SeminarService {
             }
             default:
         }
-        roundScore.setTotalScore(course.getPresentationPercentage()*roundScore.getPresentationScore()+course.getQuestionPercentage()*roundScore.getQuestionScore()+course.getReportPercentage()*roundScore.getReportScore());
-        roundDao.updateRoundScore(roundScore,roundId,teamId);
     }
 
     @Override
@@ -389,17 +402,30 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public void updateQuestionScore(BigInteger questionId, Double score) {
-        Question question=questionDao.getQuestionByQuestionId(questionId);
-        SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(question.getSeminarControlId(),question.getTeamId());
-        seminarScore.setQuestionScore(score);
-        seminarDao.updateSeminarScore(seminarScore,question.getSeminarControlId(),question.getTeamId());
+        Question question = questionDao.getQuestionByQuestionId(questionId);
+        SeminarScore seminarScore = seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(question.getSeminarControlId(), question.getTeamId());
+        if (null == seminarScore) {
+            seminarScore = new SeminarScore();
+            seminarScore.setQuestionScore(score);
+            seminarDao.insertSeminarScore(seminarScore, question.getSeminarControlId(), question.getTeamId());
+        } else {
+            seminarScore.setPresentationScore(score);
+            seminarDao.updateSeminarScore(seminarScore, question.getSeminarControlId(), question.getTeamId());
+        }
     }
 
     @Override
     public void updatePresentationScore(BigInteger presentationId, Double score) {
         Presentation presentation=presentationDao.getPresentationByPresentationId(presentationId);
         SeminarScore seminarScore=seminarDao.getSeminarScoreBySeminarControlIdAndTeamId(presentation.getSeminarControlId(),presentation.getTeam().getId());
-        seminarScore.setQuestionScore(score);
+        if(null==seminarScore){
+            seminarScore=new SeminarScore();
+            seminarScore.setPresentationScore(score);
+            seminarDao.insertSeminarScore(seminarScore,presentation.getSeminarControlId(),presentation.getTeam().getId());
+        }
+        else{
+        seminarScore.setPresentationScore(score);
         seminarDao.updateSeminarScore(seminarScore,presentation.getSeminarControlId(),presentation.getTeam().getId());
+        }
     }
 }

@@ -145,9 +145,12 @@ public class StudentController {
     public String courseSeminar(BigInteger courseId, HttpServletRequest request,Model model) {
         Course course=courseService.getCourseByCourseId(courseId);
         model.addAttribute("course",course);
-        List<Round> roundList= course.getRoundList();
-        model.addAttribute("roundList",roundList);
-        System.out.println(roundList.get(0).getSeminarInfoList().size());
+        try {
+            List<Round> roundList = course.getRoundList();
+            model.addAttribute("roundList", roundList);
+        }catch (Exception e){
+            System.out.println("catch e");
+        }
         HttpSession session = request.getSession();
         BigInteger studentId=(BigInteger)session.getAttribute("id");
         model.addAttribute("studentId",studentId);
