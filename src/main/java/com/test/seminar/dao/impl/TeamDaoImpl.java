@@ -31,11 +31,9 @@ import java.util.List;
 @Component
 public class TeamDaoImpl implements TeamDao {
     @Autowired
-    TeamMapper teamMapper;
+    private TeamMapper teamMapper;
     @Autowired
-    StudentMapper studentMapper;
-    @Autowired
-    CourseMapper courseMapper;
+    private CourseMapper courseMapper;
     @Autowired
     private TeamDao teamDao;
 

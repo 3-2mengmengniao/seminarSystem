@@ -21,11 +21,9 @@ import java.util.List;
 @Component
 public class StudentDaoImpl implements StudentDao {
     @Autowired
-    StudentMapper studentMapper;
+    private StudentMapper studentMapper;
     @Autowired
-    CourseClassMapper courseClassMapper;
-    @Autowired
-    CourseMapper courseMapper;
+    private CourseMapper courseMapper;
 
     @Override
     public Student getStudentByStudentId(BigInteger studentId) throws UserNotFoundException {

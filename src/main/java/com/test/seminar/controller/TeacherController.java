@@ -57,12 +57,6 @@ public class TeacherController {
     @Autowired
     StudentService studentService;
 
-    @Autowired
-    RunSeminarService rundSeminarService;
-
-//    @Autowired
-//    FileService fileService;
-
     @RequestMapping(value = "/index")
     public String home(Model model,HttpSession session) {
         User user = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());

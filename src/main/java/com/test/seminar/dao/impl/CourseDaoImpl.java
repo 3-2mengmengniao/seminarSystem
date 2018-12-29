@@ -23,11 +23,9 @@ import java.util.List;
 @Component
 public class CourseDaoImpl implements CourseDao {
     @Autowired
-    CourseMapper courseMapper;
+    private CourseMapper courseMapper;
     @Autowired
-    TeacherMapper teacherMapper;
-    @Autowired
-    CourseDao courseDao;
+    private TeacherMapper teacherMapper;
 
     @Override
     public Course getCourseByCourseId(BigInteger courseId) throws CourseNotFoundException {

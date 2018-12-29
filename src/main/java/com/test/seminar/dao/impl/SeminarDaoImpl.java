@@ -20,15 +20,13 @@ import java.util.List;
 @Component
 public class SeminarDaoImpl implements SeminarDao {
     @Autowired
-    SeminarMapper seminarMapper;
+    private SeminarMapper seminarMapper;
     @Autowired
-    RoundMapper roundMapper;
+    private RoundMapper roundMapper;
     @Autowired
-    CourseMapper courseMapper;
+    private PresentationMapper presentationMapper;
     @Autowired
-    PresentationMapper presentationMapper;
-    @Autowired
-    TeamMapper teamMapper;
+    private TeamMapper teamMapper;
 
     @Override
     public SeminarInfo getSeminarInfoBySeminarInfoId(BigInteger seminarInfoId) throws SeminarInfoNotFoundException {

@@ -27,10 +27,6 @@ public class CourseServiceImpl implements CourseService {
     private CourseDao courseDao;
     @Autowired
     private TeamDao teamDao;
-    @Autowired
-    private TeacherDao teacherDao;
-    @Autowired
-    private EmailService emailService;
 
     @Override
     public Course getCourseByCourseId(BigInteger courseId) throws CourseNotFoundException {

@@ -23,7 +23,7 @@ import java.util.Map;
 @Component
 public class RoundDaoImpl implements RoundDao {
     @Autowired
-    RoundMapper roundMapper;
+    private RoundMapper roundMapper;
 
     @Override
     public Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException {

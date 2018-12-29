@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class PresentationDaoImpl implements PresentationDao {
     @Autowired
-    PresentationMapper presentationMapper;
+    private PresentationMapper presentationMapper;
 
     @Override
     public void insertPresentation(Presentation presentation, BigInteger seminarControlId,BigInteger teamId) {

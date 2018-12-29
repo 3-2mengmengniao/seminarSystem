@@ -22,10 +22,6 @@ public class RoundServiceImpl implements RoundService {
 
     @Autowired
     private RoundDao roundDao;
-    @Autowired
-    private CourseDao courseDao;
-    @Autowired
-    private TeamDao teamDao;
 
     @Override
     public void insertRound(Round round,BigInteger courseId) throws RepetitiveRecordException {

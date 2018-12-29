@@ -5,7 +5,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Teacher;
 import com.test.seminar.exception.UserNotFoundException;
-import com.test.seminar.service.LoginService;
 import com.test.seminar.service.StudentService;
 import com.test.seminar.service.TeacherService;
 import com.test.seminar.util.EmailService;
@@ -29,8 +28,6 @@ import java.math.BigInteger;
 
 @Controller
 public class HomeController {
-    @Autowired
-    LoginService loginService;
 
     @Autowired
     TeacherService teacherService;
