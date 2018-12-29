@@ -43,14 +43,6 @@ public class SeminarScore {
         this.totalScore = totalScore;
     }
 
-    public void setPresentationScore(double presentationScore) {
-        this.presentationScore = presentationScore;
-    }
-
-    public void setQuestionScore(double questionScore) {
-        this.questionScore = questionScore;
-    }
-
     public void setReportScore(double reportScore) {
         this.reportScore = reportScore;
     }

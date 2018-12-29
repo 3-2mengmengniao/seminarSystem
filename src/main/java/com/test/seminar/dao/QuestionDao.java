@@ -22,4 +22,5 @@ public interface QuestionDao {
 
     void deleteQuestionByQuestionId(BigInteger questionId);
 
+    Question getQuestionByQuestionId(BigInteger questionId);
 }

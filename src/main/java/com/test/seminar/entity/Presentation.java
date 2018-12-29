@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Presentation {
     private BigInteger id;
+    private BigInteger seminarControlId;
     private Team team;
     private List<Question> questionList;
     private Integer teamOrder;
@@ -75,5 +76,21 @@ public class Presentation {
 
     public void setPptUrl(String pptUrl) {
         this.pptUrl = pptUrl;
+    }
+
+    public BigInteger getSeminarControlId() {
+        return seminarControlId;
+    }
+
+    public void setSeminarControlId(BigInteger seminarControlId) {
+        this.seminarControlId = seminarControlId;
+    }
+
+    public void setTeamOrder(Integer teamOrder) {
+        this.teamOrder = teamOrder;
+    }
+
+    public void setPresent(Integer present) {
+        this.present = present;
     }
 }

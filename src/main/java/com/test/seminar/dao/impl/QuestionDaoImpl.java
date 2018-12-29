@@ -49,4 +49,9 @@ public class QuestionDaoImpl implements QuestionDao {
     public void deleteQuestionByQuestionId(BigInteger questionId) {
         questionMapper.deleteQuestionByQuestionId(questionId);
     }
+
+    @Override
+    public Question getQuestionByQuestionId(BigInteger questionId) {
+        return questionMapper.getQuestionByQuestionId(questionId);
+    }
 }
