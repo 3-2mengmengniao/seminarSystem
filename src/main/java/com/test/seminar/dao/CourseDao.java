@@ -67,7 +67,7 @@ public interface CourseDao {
      * @param course
      * @return
      */
-    void updateCourseByCourseId(Course course)throws CourseNotFoundException;
+    void updateCourse(Course course)throws CourseNotFoundException;
 
     /**
      * 删除课程

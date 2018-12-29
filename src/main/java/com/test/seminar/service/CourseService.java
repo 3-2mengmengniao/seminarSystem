@@ -57,7 +57,7 @@ public interface CourseService {
      * @param course
      * @throws CourseNotFoundException
      */
-    void updateCourseByCourseId(Course course)throws CourseNotFoundException;
+    void updateCourse(Course course)throws CourseNotFoundException;
 
     /**
      * 删除课程

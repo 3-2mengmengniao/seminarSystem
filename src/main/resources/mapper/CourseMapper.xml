@@ -98,7 +98,7 @@
         #{course.courseName},#{course.teamStartTime},#{course.teamEndTime})
     </insert>
 
-    <update id="updateCourseByCourseId">
+    <update id="updateCourse">
         update course
         <set>
             <if test="course.introduction!=null">
@@ -192,11 +192,9 @@
     <update id="updateCourseTeamMainCourseId">
         update course
         <set>
-            <if test="mainCourseId!=null">
-                team_main_course_id=#{mainCourseId}
-            </if>
+             team_main_course_id=#{mainCourseId}
         </set>
-        where course.id=#{subCourseId}
+        where id=#{subCourseId}
     </update>
 
     <update id="updateCourseSeminarMainCourseId">
