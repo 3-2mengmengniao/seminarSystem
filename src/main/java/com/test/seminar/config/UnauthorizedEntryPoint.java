@@ -7,7 +7,10 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Component
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
     @Override

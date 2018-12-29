@@ -15,7 +15,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.*;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Service
 public class TeamServiceImpl implements TeamService {
     @Autowired
@@ -123,7 +126,9 @@ public class TeamServiceImpl implements TeamService {
             //获得策略类名
             String strategyName = teamStrategy.getStrategyName();
             Boolean isCompositStrategy = false;
-            if(strategyName.equals("TeamAndStrategy")||strategyName.equals("TeamOrStrategy")){
+            String teamAndValue="TeamAndStrategy";
+            String teamOrValue="TeamOrStrategy";
+            if(teamAndValue.equals(strategyName)||teamOrValue.equals(strategyName)){
                 isCompositStrategy=true;
             }
 
@@ -163,7 +168,9 @@ public class TeamServiceImpl implements TeamService {
             //获得策略类名
             String strategyName = teamStrategy.getStrategyName();
             Boolean isCompositStrategy = false;
-            if(strategyName.equals("TeamAndStrategy")||strategyName.equals("TeamOrStrategy")){
+            String teamAndStrategyValue="TeamAndStrategy";
+            String teamOrStrategyValue="TeamOrStrategy";
+            if(teamAndStrategyValue.equals(strategyName)||teamOrStrategyValue.equals(strategyName)){
                 isCompositStrategy=true;
             }
             if (isCompositStrategy) {

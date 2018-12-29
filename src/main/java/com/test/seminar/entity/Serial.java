@@ -1,5 +1,8 @@
 package com.test.seminar.entity;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class Serial {
     private Integer courseClassSerial;
     private Integer teamSerial;

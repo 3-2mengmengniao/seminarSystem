@@ -3,7 +3,10 @@ package com.test.seminar.entity;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class SeminarRoom {
 
     private Integer count;

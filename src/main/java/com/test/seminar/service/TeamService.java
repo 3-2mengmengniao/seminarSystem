@@ -9,7 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public interface TeamService {
 
     Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;

@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 
 @Service(value = "userServiceForAdminImpl")
 public class UserServiceForAdminImpl implements UserServiceForAdmin, UserDetailsService {

@@ -5,6 +5,11 @@ import com.test.seminar.entity.Question;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
+
 public interface QuestionDao {
 
     List<Question> getQuestionBySeminarControlId(BigInteger seminarControlId);

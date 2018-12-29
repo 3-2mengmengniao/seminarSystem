@@ -18,7 +18,10 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Service
 public class SeminarServiceImpl implements SeminarService {
 
@@ -142,14 +145,14 @@ public class SeminarServiceImpl implements SeminarService {
 
     @Override
     public List<List<SeminarInfo>> getSeminarInfoByRoundList(List<Round> roundList) {
-        List<List<SeminarInfo>> SeminarInfoOrderByRoundId= new ArrayList<List<SeminarInfo>>();
+        List<List<SeminarInfo>> seminarInfoOrderByRoundId= new ArrayList<List<SeminarInfo>>();
         List<SeminarInfo> temp;
         for(int i=0;i<roundList.size();i++)
         {
             temp=getSeminarInfoByRoundId(roundList.get(i).getId());
-            SeminarInfoOrderByRoundId.add(i,temp);
+            seminarInfoOrderByRoundId.add(i,temp);
         }
-        return SeminarInfoOrderByRoundId;
+        return seminarInfoOrderByRoundId;
     }
 
     @Override
@@ -285,9 +288,9 @@ public class SeminarServiceImpl implements SeminarService {
             }
             //最高分
             case 1: {
-                Double presentation_score=seminarScoreList.stream().mapToDouble(SeminarScore::getPresentationScore).max().getAsDouble();
-                if(presentation_score!=null) {
-                    roundScore.setPresentationScore(presentation_score);
+                Double presentationScore=seminarScoreList.stream().mapToDouble(SeminarScore::getPresentationScore).max().getAsDouble();
+                if(presentationScore!=null) {
+                    roundScore.setPresentationScore(presentationScore);
                 }
                 else{
                     roundScore.setPresentationScore(Double.valueOf(0));
@@ -305,9 +308,9 @@ public class SeminarServiceImpl implements SeminarService {
                 int count=0;
                 Double sum=Double.valueOf(0);
                 for(int i=0;i<seminarScoreList.size();i++){
-                    Double question_score=seminarScoreList.get(i).getQuestionScore();
-                    if(question_score!=null){
-                        sum+=question_score;
+                    Double questionScore=seminarScoreList.get(i).getQuestionScore();
+                    if(questionScore!=null){
+                        sum+=questionScore;
                         count++;
                     }
                 }
@@ -321,9 +324,9 @@ public class SeminarServiceImpl implements SeminarService {
             }
             //最高分
             case 1: {
-                Double question_score=seminarScoreList.stream().mapToDouble(SeminarScore::getQuestionScore).max().getAsDouble();
-                if(question_score!=null) {
-                    roundScore.setQuestionScore(question_score);
+                Double questionScore=seminarScoreList.stream().mapToDouble(SeminarScore::getQuestionScore).max().getAsDouble();
+                if(questionScore!=null) {
+                    roundScore.setQuestionScore(questionScore);
                 }
                 else{
                     roundScore.setQuestionScore(Double.valueOf(0));
@@ -344,9 +347,9 @@ public class SeminarServiceImpl implements SeminarService {
                 break;
             }
             case 1: {
-                Double report_score=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).max().getAsDouble();
-                if(report_score!=null) {
-                    roundScore.setReportScore(report_score);
+                Double reporScore=seminarScoreList.stream().mapToDouble(SeminarScore::getReportScore).max().getAsDouble();
+                if(reporScore!=null) {
+                    roundScore.setReportScore(reporScore);
                 }
                 else{
                     roundScore.setReportScore(Double.valueOf(0));

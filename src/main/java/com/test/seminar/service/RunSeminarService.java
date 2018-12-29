@@ -7,7 +7,10 @@ import com.test.seminar.entity.SeminarControl;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public interface RunSeminarService {
 
     SeminarControl beginSeminar(BigInteger seminarControlId);

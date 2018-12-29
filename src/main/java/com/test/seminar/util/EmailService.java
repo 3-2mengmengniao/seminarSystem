@@ -7,6 +7,11 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
+
 @Service
 public class EmailService{
 

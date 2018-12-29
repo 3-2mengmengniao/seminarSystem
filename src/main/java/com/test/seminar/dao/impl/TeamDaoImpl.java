@@ -303,7 +303,10 @@ public class TeamDaoImpl implements TeamDao {
 
                 //判断该策略是否为复合策略
                 Boolean isCompositStrategy = false;
-                if(name.equals("TeamAndStrategy")||name.equals("TeamOrStrategy")){
+                String andValue="TeamAndStrategy";
+                String orValue="TeamOrStrategy";
+
+                if(andValue.equals(name)||orValue.equals(name)){
                     isCompositStrategy=true;
                 }
 
@@ -317,7 +320,8 @@ public class TeamDaoImpl implements TeamDao {
                 }
 
                 //根据复合策略的类型判断
-                if (strategyName.equals("TeamAndStrategy")) {
+                String andStrategy="TeamAndStrategy";
+                if (andStrategy.equals(strategyName)) {
                     //如果是and则一个策略不满足就返回false
                     if (!result) {
                         return false;
@@ -331,7 +335,8 @@ public class TeamDaoImpl implements TeamDao {
             }
 
             //遍历完所有策略后，根据复合策略的类型判断
-            if (strategyName.equals("TeamAndStrategy")) {
+            String andStrategy="TeamAndStrategy";
+            if (andStrategy.equals(strategyName)) {
                 //如果是and且所有策略都符合返回true
                 return true;
 
@@ -360,11 +365,12 @@ public class TeamDaoImpl implements TeamDao {
 
             //得到特定策略的对象
             Object strategy = teamDaoMethod.invoke(teamDao, strategyId);
-
-            if(strategyName.equals("MemberLimitStrategy")){
+            String limitValue="MemberLimitStrategy";
+            if(limitValue.equals(strategyName)){
                 result.put(2,strategy);
             }
-            if(strategyName.equals("CourseMemberLimitStrategy")){
+            String value="CourseMemberLimitStrategy";
+            if(value.equals(strategyName)){
                 if(!result.keySet().contains(1)){
                     List<CourseMemberLimitStrategy> courseMemberLimitStrategyList=new ArrayList<>();
                     courseMemberLimitStrategyList.add((CourseMemberLimitStrategy)strategy);
@@ -374,7 +380,8 @@ public class TeamDaoImpl implements TeamDao {
                     ((List<CourseMemberLimitStrategy>)(result.get(1))).add((CourseMemberLimitStrategy)strategy);
                 }
             }
-            if(strategyName.equals("ConflictCourseStrategy")){
+            String cousesStrategyValue="ConflictCourseStrategy";
+            if(cousesStrategyValue.equals(strategyName)){
                 if(!result.keySet().contains(0)){
                     List<ConflictCourseStrategy> conflictCourseStrategyList=new ArrayList<>();
                     conflictCourseStrategyList.add((ConflictCourseStrategy)strategy);
@@ -415,7 +422,9 @@ public class TeamDaoImpl implements TeamDao {
 
                 //判断该策略是否为复合策略
                 Boolean isCompositStrategy = false;
-                if(name.equals("TeamAndStrategy")||name.equals("TeamOrStrategy")){
+                String andStrategyValue="TeamAndStrategy";
+                String orStrategyValue="TeamOrStrategy";
+                if(andStrategyValue.equals(name)||orStrategyValue.equals(name)){
                     isCompositStrategy=true;
                 }
 
@@ -428,7 +437,8 @@ public class TeamDaoImpl implements TeamDao {
                 }
 
                 //根据复合策略的类型判断
-                if (strategyName.equals("TeamAndStrategy")) {
+                String teamValue="TeamAndStrategy";
+                if (teamValue.equals(strategyName)) {
                     if(!result.keySet().contains(3)){
                         List<Integer> chooseList=new ArrayList<>();
                         chooseList.add(0);
@@ -461,10 +471,12 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId,String strategyName) throws StrategyNotFoundException {
         CompositStrategy compositStrategy=new CompositStrategy();
-        if(strategyName.equals("TeamAndStrategy")){
+        String teamAndStrategyValue="TeamAndStrategy";
+        String teamOrStrategyValue="TeamOrStrategy";
+        if(teamAndStrategyValue.equals(strategyName)){
             compositStrategy.setStrategyNameAndIdList(teamMapper.getStrategyPairByTeamAndStrategyId(strategyId));
         }
-        if(strategyName.equals("TeamOrStrategy")){
+        if(teamOrStrategyValue.equals(strategyName)){
             compositStrategy.setStrategyNameAndIdList(teamMapper.getStrategyPairByTeamOrStrategyId(strategyId));
         }
         return compositStrategy;

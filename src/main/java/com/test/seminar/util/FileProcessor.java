@@ -20,20 +20,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
+
 public class FileProcessor {
-    //总行数
+    /**总行数*/
     private int totalRows = 0;
-    //总条数
+    /**总条数*/
     private int totalCells = 0;
-    //错误信息接收器
+    /**错误信息接收器*/
     private String errorMsg;
-    //构造方法
+    /**构造方法*/
     public FileProcessor(){}
-    //获取总行数
+    /**获取总行数*/
     public int getTotalRows()  { return totalRows;}
-    //获取总列数
+    /**获取总列数*/
     public int getTotalCells() {  return totalCells;}
-    //获取错误信息
+    /**获取错误信息*/
     public String getErrorInfo() { return errorMsg; }
 
 
@@ -55,7 +60,8 @@ public class FileProcessor {
     public boolean validateExcel(String filePath){
         Boolean excel2003=isExcel2003(filePath);
         Boolean excel2007=isExcel2007(filePath);
-        if (filePath == null || !(excel2003 || excel2007)){
+        boolean notexcel=filePath == null || !(excel2003 || excel2007);
+        if (notexcel){
             errorMsg = "文件名不是excel格式";
             return false;
         }
@@ -68,21 +74,21 @@ public class FileProcessor {
      * @return
      */
     public List<Student> getExcelInfo(MultipartFile mFile) throws IOException {
-        //初始化客户信息的集合
+        /**初始化客户信息的集合*/
         List<Student> studentList=new ArrayList<Student>();
         try{
-            //验证文件名是否合格
+            /**验证文件名是否合格*/
             if(!validateExcel(mFile.getOriginalFilename())){
                 System.out.println(mFile.getName());
                 return null;
             }
-            //根据文件名判断文件是2003版本还是2007版本
+            /**根据文件名判断文件是2003版本还是2007版本*/
             boolean isExcel2003 = true;
             if(isExcel2007(mFile.getOriginalFilename())){
                 isExcel2003 = false;
             }
-            //根据新建的文件实例化输入流
-            //根据excel里面的内容读取客户信息
+            /**根据新建的文件实例化输入流*/
+            /**根据excel里面的内容读取客户信息*/
             studentList = getExcelInfo(mFile, isExcel2003);
         }catch(Exception e){
             e.printStackTrace();
@@ -101,14 +107,14 @@ public class FileProcessor {
         try{
             /** 根据版本选择创建Workbook的方式 */
             Workbook wb = null;
-            //当excel是2003时
+            /**EXCEL是2003时*/
             if(isExcel2003){
                 wb = new HSSFWorkbook(mFile.getInputStream());
             }
-            else{//当excel是2007时
+            else{/**EXCEL是2007时*/
                 wb = new XSSFWorkbook(mFile.getInputStream());
             }
-            //读取Excel里面客户的信息
+            /**读取Excel里面客户的信息*/
             studentList=readExcelValue(wb);
         }
         catch (IOException e)  {
@@ -122,31 +128,26 @@ public class FileProcessor {
      * @return
      */
     private List<Student> readExcelValue(@NotNull Workbook wb){
-        //得到第一个shell
+        /**得到第一个shell*/
         Sheet sheet=wb.getSheetAt(0);
 
-        //得到Excel的行数
         this.totalRows=sheet.getPhysicalNumberOfRows();
 
-        //得到Excel的列数(前提是有行数)
         if(totalRows>=1 && sheet.getRow(0) != null){
             this.totalCells=sheet.getRow(0).getPhysicalNumberOfCells();
         }
 
         List<Student> studentList=new ArrayList<Student>();
         Student student;
-        //循环Excel行数,从第二行开始。标题不入库
         for(int r=2;r<totalRows;r++){
             Row row = sheet.getRow(r);
             if (row == null){ continue;}
             student = new Student();
 
-            //循环Excel的列
             for(int c = 0; c <this.totalCells; c++){
                 Cell cell = row.getCell(c);
                 if (null != cell){
                     if(c==0){
-                        //trim去掉英文空格，replace去掉中文空格
                         student.setAccount(cell.getStringCellValue().trim().replaceAll("\\u00A0",""));
                     }else if(c==1){
                         student.setStudentName(cell.getStringCellValue().trim().replaceAll("\\u00A0",""));
@@ -155,18 +156,17 @@ public class FileProcessor {
             }
             student.setPassword("123456");
             student.setActive(0);
-            //添加客户
             studentList.add(student);
         }
         return studentList;
     }
 
-    // @描述：是否是2003的excel，返回true是2003
+    /**@描述：是否是2003的excel，返回true是2003*/
     private boolean isExcel2003(String filePath)  {
         return filePath.matches("^.+\\.(?i)(xls)$");
     }
 
-    //@描述：是否是2007的excel，返回true是2007
+    /**@描述：是否是2007的excel，返回true是2007*/
     private boolean isExcel2007(String filePath)  {
         return filePath.matches("^.+\\.(?i)(xlsx)$");
     }

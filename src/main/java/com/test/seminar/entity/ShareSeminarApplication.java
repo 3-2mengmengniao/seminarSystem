@@ -1,7 +1,10 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class ShareSeminarApplication {
     private BigInteger id;
     private Course mainCourse;

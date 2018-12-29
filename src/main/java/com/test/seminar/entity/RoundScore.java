@@ -2,7 +2,10 @@ package com.test.seminar.entity;
 
 import java.math.BigInteger;
 import java.util.List;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class RoundScore {
     private BigInteger teamId;
     private Serial serial;

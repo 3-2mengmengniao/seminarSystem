@@ -397,7 +397,8 @@ public class TeacherController {
     @ResponseBody
     public ResponseEntity<String> createSeminarPost(BigInteger courseId,Model model,SeminarInfo seminarInfo,
                                                     String seminarVisible,Integer roundSerial) {
-        if(seminarVisible.equals("on"))
+        String value="on";
+        if(value.equals(seminarVisible))
         {
             seminarInfo.setVisible(1);
         }
@@ -414,7 +415,8 @@ public class TeacherController {
     public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
                                                      String seminarVisible,Integer roundSerial,BigInteger courseId) {
         SeminarInfo seminarInfoOld=seminarService.getSeminarInfoBySeminarInfoId(seminarId);
-        if(seminarVisible.equals("on"))
+        String value="on";
+        if(value.equals(seminarVisible))
         {
             seminarInfoOld.setVisible(1);
         }

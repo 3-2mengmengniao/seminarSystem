@@ -19,7 +19,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Controller
 public class RunSeminarController {
 

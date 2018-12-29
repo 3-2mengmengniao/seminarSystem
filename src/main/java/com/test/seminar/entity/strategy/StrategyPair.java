@@ -1,7 +1,10 @@
 package com.test.seminar.entity.strategy;
 
 import java.math.BigInteger;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 public class StrategyPair {
     private String strategyName;
     private BigInteger strategyId;

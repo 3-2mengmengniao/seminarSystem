@@ -30,7 +30,7 @@ public interface CourseClassDao {
 
 
     /**
-     *
+     * 获取某课程下某个队伍的班级
      * @param teamId
      * @return
      */

@@ -6,6 +6,10 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 
 @Configuration
 @EnableWebSocketMessageBroker

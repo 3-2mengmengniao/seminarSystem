@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.*;
-
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 @Service
 public class RunSeminarServiceImpl implements RunSeminarService {
 

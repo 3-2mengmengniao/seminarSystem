@@ -1,6 +1,10 @@
 package com.test.seminar.entity;
 
 import java.math.BigInteger;
+/**
+ * @author xmr
+ * @date 2018/11/28
+ */
 
 public class QuestionDTO {
     private BigInteger id;
@@ -65,5 +69,17 @@ public class QuestionDTO {
 
     public void setTeamSerial(Integer teamSerial) {
         this.teamSerial = teamSerial;
+    }
+
+    @Override
+    public String toString() {
+        return "QuestionDTO{" +
+                "id=" + id +
+                ", studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", teamId=" + teamId +
+                ", courseClassSerial=" + courseClassSerial +
+                ", teamSerial=" + teamSerial +
+                '}';
     }
 }
