@@ -12,31 +12,31 @@
     </resultMap>
 
     <select id="getQuestionBySeminarControlId" resultMap="questionResultMap">
-        select id,team_id,klass_seminar,student_id,is_selected,score
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
         from question
         where klass_seminar_id=#{seminarConrtolId}
     </select>
 
     <select id="getQuestionByQuestionId" resultMap="questionResultMap">
-        select id,team_id,klass_seminar,student_id,is_selected,score
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
         from question
         where id=#{questionId}
     </select>
 
     <select id="getQuestionByTeamId" resultMap="questionResultMap">
-        select id,team_id,klass_seminar,student_id,is_selected,score
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
         from question
         where team_id=#{teamId}
     </select>
 
     <select id="getQuestionByPresentationIdAndTeamId" resultMap="questionResultMap">
-        select id,team_id,klass_seminar,student_id,is_selected,score
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
         from question
         where team_id=#{teamId} and attendance_id=#{presentationId}
     </select>
 
     <select id="getQuestionByPresentationId" resultMap="questionResultMap">
-        select id,team_id,klass_seminar,student_id,is_selected,score
+        select id,team_id,klass_seminar_id,student_id,is_selected,score
         from question
         where attendance_id=#{presentationId}
     </select>
