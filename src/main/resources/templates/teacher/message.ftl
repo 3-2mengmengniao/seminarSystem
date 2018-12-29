@@ -117,9 +117,9 @@
     <div class="center-navigation">
         <div class="layui-collapse" lay-accordion="">
             <div class="layui-colla-item layui-anim layui-anim-fadein">
-                <h2 class="layui-colla-title">${application.team.course} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}的特殊组队请求</h2>
+                <h2 class="layui-colla-title">${application.team.course.courseName} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}的特殊组队请求</h2>
                 <div class="layui-colla-content">
-                    <p class="text-center">${application.team.course} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}提出了特殊组队请求，理由如下：</p>
+                    <p class="text-center">${application.team.course.courseName} &nbsp ${application.team.serial.getSerial()} ${application.team.leader.studentName}提出了特殊组队请求，理由如下：</p>
                     <p class="text-center">${application.reason}</p>
                 </div>
                 <div class="layui-colla-content">
@@ -190,7 +190,7 @@
                         if(response.status=="404") {
                             layer.alert("请求未找到！",{icon:5});
                         }
-                        else if(response.status=="409"){
+                        else{
                             layer.alert("从课程无法接受其他共享！",{icon:5});
                         }
                     }
@@ -213,10 +213,10 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            layer.alert("请求未找到！",{icon:5});
+                            alert("请求未找到！");
                         }
-                        else if(response.status=="409"){
-                            layer.alert("从课程无法接受其他共享！",{icon:5});
+                        else{
+                            alert("从课程无法接受其他共享！");
                         }
                     }
                 }
@@ -237,9 +237,7 @@
                         }
                     },
                     error:function(data,status,response){
-                        if(response.status=="404") {
-                            layer.alert("请求未找到！",{icon:5});
-                        }
+                            alert("请求未找到！");
                     }
                 }
         );
@@ -299,7 +297,7 @@
                     },
                     error:function(data,status,response){
                         if(response.status=="404") {
-                            layer.alert("请求未找到！",{icon:5});
+                            alert("请求未找到！");
                         }
                     }
                 }

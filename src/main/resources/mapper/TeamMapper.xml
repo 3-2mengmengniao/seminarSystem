@@ -179,7 +179,7 @@
     </select>
 
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
-        select team.id,team_name,leader_id,team_valid_application.status
+        select team.id,team_name,leader_id,course_id,team_serial,klass_serial,team_valid_application.status
         from team,team_valid_application
         where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
     </select>

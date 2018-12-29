@@ -28,7 +28,7 @@
     <select id="getPresentationByPresentationId" resultMap="presentationResultMap">
         select id,team_id,klass_seminar_id,team_order,is_present,report_name,report_url,ppt_name,ppt_url
         from  attendance
-        where id=#{presemtationId}
+        where id=#{presentationId}
     </select>
 
     <select id="getPresentationBySeminarControlIdAndTeamOrder" resultMap="presentationResultMap">
