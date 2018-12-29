@@ -8,6 +8,7 @@ import com.test.seminar.exception.RoundNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author cxh
@@ -111,4 +112,5 @@ public interface RoundDao {
 
     BigInteger getRoundIdBySeminarControlId(BigInteger seminarControlId);
 
+    void updateCourseClassRound(BigInteger roundId, Map<BigInteger,Integer> courseClassMap);
 }
