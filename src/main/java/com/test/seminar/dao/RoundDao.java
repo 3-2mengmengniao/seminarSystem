@@ -93,7 +93,7 @@ public interface RoundDao {
      * @param courseId
      * @return
      */
-    int getMaxRoundSerialByCourseId(BigInteger courseId);
+    Integer getMaxRoundSerialByCourseId(BigInteger courseId);
 
     /**
      *
