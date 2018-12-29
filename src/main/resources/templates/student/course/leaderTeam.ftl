@@ -135,9 +135,10 @@
             <div class="layui-table-box">
                 <div class="distance3"></div>
                 <form class="layui-form contactForm"  id="contactForm" name="${course.id}">
-                <table  id="member" class="layui-table addMember" >
-                    <tbody >
+                    <table  id="member" class="layui-table addMember" >
+                        <tbody >
                     <#list noTeamStudentList as student>
+                        <#if student.id!=myId>
                     <tr class="item">
                         <td data-field="0"  class="layui-table-col-special">
                             <div class="layui-table-cell  laytable-cell-checkbox">
@@ -154,9 +155,10 @@
                             <div class="layui-table-cell">&nbsp;${student.studentName}&nbsp;</div>
                         </td>
                     </tr>
+                        </#if>
                     </#list>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 </form>
                 <div class="distance4"></div>
             </div>
@@ -170,6 +172,7 @@
             <button class="my-width  layui-btn"  id="addButton" >添加组员</button>
         </p>
     </div>
+</div>
 
     <script>
         layui.use(['element', 'layer'], function(){
@@ -196,7 +199,7 @@
                         {
                             url:"/student/course/team/application",
                             type:'post',
-                            data:{"teamId":${myTeam.id},"reason":value,"teacherId":${course.teacherId},
+                            data:{"teamId":${myTeam.id},"reason":value,"teacherId":${course.teacherId}},
                             success:function(data,status,response){
                                 if(response.status=="200"){
                                     alert("申请已提交！");

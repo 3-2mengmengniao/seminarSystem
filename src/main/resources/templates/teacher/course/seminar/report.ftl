@@ -78,6 +78,7 @@
                 <colgroup>
                     <col width="100">
                     <col width="200">
+                    <col width="100">
                 </colgroup>
                 <tbody>
             <#list 0..<seminarControl.seminarInfo.maxGroup as t>
@@ -89,11 +90,13 @@
                         <#else>
                             <td style="color:#009688;">${seminarControl.presentationList[t].team.serial.getSerial()}&nbsp;&nbsp;未提交</td>
                         </#if>
+                        <td><input type="text" value="${seminarControl.seminarScoreList[t].reportScore!"0"}" style="width:50px; "/></td>
                     </tr>
                 <#else>
                 <tr>
                     <td>第${t+1}组：</td>
                     <td style="color:#009688;">未报名</td>
+                    <td><input type="text" value="${seminarControl.seminarScoreList[t].reportScore!"0"} style="width:50px; "/></td>
                 </tr>
                 </#if>
             </#list>
@@ -105,8 +108,7 @@
 
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">批量下载</a></p>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
+        <p class="center center-text"><a href="#" class="button-return button-turqoise">修改</a></p>
         <div class="distance"></div>
         <!--
         <div class="decoration"></div>
