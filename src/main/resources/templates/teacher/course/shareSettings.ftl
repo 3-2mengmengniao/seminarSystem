@@ -276,7 +276,7 @@
 </div>
 -->
 <!--<div class="bottom-deco"></div>-->
-<script>
+<#--<script>-->
     <#--$(".cancelButton").bind("click",function () {-->
         <#--$.ajax(-->
                 <#--{-->
@@ -286,7 +286,7 @@
                     <#--success:function(data,status,response){-->
                         <#--if(response.status=="200"){-->
                             <#--alert("共享请求已成功发送！");-->
-                            <#--window.location.href='/teacher/course/shareSettings?courseId=${myCourse.id}';-->
+                            <#--window.location.href='/teacher/course/shareSettings?courseId=${course.id}';-->
                         <#--}-->
                     <#--},-->
                     <#--error:function(data,status){-->
@@ -295,7 +295,7 @@
                 <#--}-->
         <#--);-->
     <#--});-->
-</script>
+<#--</script>-->
 <style>
     .my-index{
         margin-top: -5px;
@@ -327,18 +327,17 @@
         var courseId=$(this).attr('name');
         $.ajax(
                 {
-                    url:'/teacher/application/cancel',
+                    url:'/teacher/course/application/cancel',
                     type:'post',
-                    data:{"type":"seminar","courseId":courseId}
+                    data:{"type":"seminar","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
                         }
                     },
                     error:function(data,status,response){
-                        if(response.status=="404") {
-                            layer.msg("共享关系未找到！",function(){});
-                        }
+                        alert("共享关系未找到!");
+
                     }
                 }
         );
@@ -347,18 +346,16 @@
         var courseId=$(this).attr('name');
         $.ajax(
                 {
-                    url:'/teacher/application/cancel',
+                    url:'/teacher/course/application/cancel',
                     type:'post',
-                    data:{"type":"team","courseId":courseId}
+                    data:{"type":"team","courseId":courseId},
                     success:function(data,status,response){
                         if(response.status=="200") {
                             window.location.reload();
                         }
                     },
                     error:function(data,status,response){
-                        if(response.status=="404") {
-                            layer.msg("共享关系未找到！",function(){});
-                        }
+                            alert("共享关系未找到!");
                     }
                 }
         );

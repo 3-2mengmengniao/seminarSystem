@@ -73,7 +73,7 @@
     </select>
 
     <select id="getTeamByCourseId" resultMap="teamResultMap">
-        SELECT team.id as id,team.klass_id as klass_id,team_name,leader_id,klass_serial,team_serial,status,course_id
+        SELECT team.id as id,team.klass_id as klass_id,team_name,leader_id,team.klass_serial as klass_serial,team_serial,status,team.course_id as course_id
         FROM team,klass,klass_team
         WHERE klass.course_id=#{courseId} and klass_team.klass_id=klass.id and team.id=klass_team.team_id
     </select>
@@ -99,7 +99,7 @@
     <select id="getGroupStudentByCourseId" resultMap="teamNotLoadResultMap">
         SELECT team.id,
         team_name,
-        team.klass_serial,
+        team.klass_serial as klass_serial,
         team.team_serial,
         leader_id,
         student.id as my_student_id,
@@ -179,7 +179,7 @@
     </select>
 
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
-        select team.id,team_name,leader_id,course_id,team_serial,klass_serial,team_valid_application.status
+        select team.id as id,team_name,leader_id,course_id,team_serial,klass_serial,team_valid_application.status
         from team,team_valid_application
         where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
     </select>

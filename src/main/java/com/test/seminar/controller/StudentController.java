@@ -253,6 +253,13 @@ public class StudentController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
+    @RequestMapping(value="/course/seminar/info/cancel",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> seminarCancel(BigInteger teamId,BigInteger seminarId, Model model) {
+        seminarService.deletePresentationBySeminarControlIdAndTeamId(seminarId,teamId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/seminar/enrollment",method = POST)
     public String enrollmentInfo(HttpServletRequest request,BigInteger seminarId, Model model) {
         SeminarControl seminarControl = seminarService.getSeminarControlBySeminarControlId(seminarId);

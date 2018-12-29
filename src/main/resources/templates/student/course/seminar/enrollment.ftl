@@ -109,6 +109,9 @@
         </table>
         <div class="distance4"></div>
         <div class="distance"></div>
+        <#if enrollment==true>
+        <button type="button" class="deleteButton layui-btn layui-btn-mini" id="deleteButton"  style="margin-left:50px;background-color: #C0392B">取消报名</button>
+        </#if>
     </div>
 </div>
 <!--<div class="bottom-deco"></div>-->
@@ -131,6 +134,21 @@
             },
             error: function(result){
                 layer.alert("报名失败！",{icon:5});
+            }
+        });
+    });
+    $('#deleteButton').click(function(){
+        var t=$(this).attr("name");
+        $.ajax({
+            type: "POST", // 使用post方式
+            url: "/student/course/seminar/info/cancel?teamId=${team.id}&seminarId=${seminarControl.id}",
+            success: function(data,status,response){
+                if(response.status=="200"){
+                    window.location.reload();
+                }
+            },
+            error: function(result){
+                layer.alert("取消报名失败！",{icon:5});
             }
         });
     });

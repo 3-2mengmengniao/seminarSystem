@@ -68,7 +68,7 @@ public interface CourseMapper {
      * @param course
      * @return
      */
-    void updateCourseByCourseId(@Param("course")Course course);
+    void updateCourse(@Param("course")Course course);
 
     /**
      *

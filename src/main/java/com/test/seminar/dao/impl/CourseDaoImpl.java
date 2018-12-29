@@ -84,8 +84,8 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public void updateCourseByCourseId(Course course) throws CourseNotFoundException {
-        courseMapper.updateCourseByCourseId(course);
+    public void updateCourse(Course course) throws CourseNotFoundException {
+        courseMapper.updateCourse(course);
     }
 
     @Override
