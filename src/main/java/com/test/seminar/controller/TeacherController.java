@@ -494,14 +494,19 @@ public class TeacherController {
     @RequestMapping(value="/course/roundSetting",method = PATCH)
     @ResponseBody
     public ResponseEntity<String> roundSettingPost(HttpServletRequest request,Model model) {
+        BigInteger courseId=new BigInteger(request.getParameter("courseId"));
+        System.out.println(courseId);
         Round round=roundService.getRoundByRoundId(new BigInteger(request.getParameter("roundId")));
         round.setPresentationScoreMethod(Integer.valueOf(request.getParameter("presentationScoreMethod")));
         round.setQuestionScoreMethod(Integer.valueOf(request.getParameter("questionScoreMethod")));
         round.setReportScoreMethod(Integer.valueOf(request.getParameter("reportScoreMethod")));
         String data=request.getParameter("enrollment");
+        List<CourseClass> courseClasses=courseClassService.getCourseClassByCourseId(courseId);
+        HashMap<BigInteger,Integer> map=new HashMap<BigInteger,Integer>();
         JSONArray myArray=JSONArray.fromObject(data);
         for(int i=0;i<myArray.size();i++){
             String tmp=(String) myArray.get(i);
+            map.put(courseClasses.get(i).getId(),Integer.valueOf(tmp));
         }
         roundService.updateRound(round);
         return new ResponseEntity<>("", HttpStatus.OK);
