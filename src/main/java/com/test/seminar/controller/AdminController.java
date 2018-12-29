@@ -47,22 +47,6 @@ public class AdminController {
         return "admin/index";
     }
 
-//    @RequestMapping(value ="/admin/teacherList", method = GET)
-//    public String teacherList(HttpServletResponse response,Model model) {
-//        List<Teacher> teacherList=teacherService.getAllTeacher();
-//        model.addAttribute("teacherList",teacherList);
-//        response.addHeader("x-frame-options","SAMEORIGIN");
-//        return "admin/teacherList";
-//    }
-
-//    @RequestMapping(value ="/admin/studentList", method = GET)
-//    public String studentList(HttpServletResponse response,Model model) {
-//        List<Student> studentList=studentService.getAllStudent();
-//        model.addAttribute("studentList",studentList);
-//        response.addHeader("x-frame-options","SAMEORIGIN");
-//        return "admin/studentList";
-//    }
-
     @RequestMapping(value ="/admin/editTeacher", method = GET)
     public String editTeacher(HttpServletResponse response, BigInteger teacherId, Model model) {
         Teacher teacher=teacherService.getTeacherByTeacherId(teacherId);

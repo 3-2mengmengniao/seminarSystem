@@ -7,6 +7,11 @@ import com.test.seminar.exception.RepetitiveRecordException;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author cxh
+ * @date 2018/11/28
+ */
+
 public interface CourseClassDao {
     /**
      * 获取某课程下的所有班级

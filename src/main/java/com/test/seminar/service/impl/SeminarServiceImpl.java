@@ -50,11 +50,6 @@ public class SeminarServiceImpl implements SeminarService {
     public void insertSeminarInfo(SeminarInfo seminarInfo,BigInteger courseId,Integer roundSerial) throws RepetitiveRecordException {
         if(roundSerial.equals(-1))
         {
-//            Round round = new Round();
-//            round.setRoundSerial(roundDao.getMaxRoundSerialByCourseId(courseId)+1);
-//            roundDao.insertRound(round,courseId);
-//            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
-//            roundId=round.getId();
             Round round = new Round();
             roundSerial=roundDao.getMaxRoundSerialByCourseId(courseId);
             if(null==roundSerial){

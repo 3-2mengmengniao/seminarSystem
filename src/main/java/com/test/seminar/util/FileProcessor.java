@@ -53,7 +53,9 @@ public class FileProcessor {
      * @return
      */
     public boolean validateExcel(String filePath){
-        if (filePath == null || !(isExcel2003(filePath) || isExcel2007(filePath))){
+        Boolean excel2003=isExcel2003(filePath);
+        Boolean excel2007=isExcel2007(filePath);
+        if (filePath == null || !(excel2003 || excel2007)){
             errorMsg = "文件名不是excel格式";
             return false;
         }
@@ -136,7 +138,7 @@ public class FileProcessor {
         //循环Excel行数,从第二行开始。标题不入库
         for(int r=2;r<totalRows;r++){
             Row row = sheet.getRow(r);
-            if (row == null) continue;
+            if (row == null){ continue;}
             student = new Student();
 
             //循环Excel的列
