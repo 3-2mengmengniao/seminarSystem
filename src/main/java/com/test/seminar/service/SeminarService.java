@@ -134,4 +134,18 @@ public interface SeminarService {
   */
  void updateSeminarScoreForQuestion(Double questionScore,BigInteger seminarControlId,BigInteger teamId);
 
+ /**
+  * 更新提问得分
+  * @param questionId
+  * @param score
+  */
+ void updateQuestionScore(BigInteger questionId,Double score);
+
+ /**
+  * 更新展示得分
+  * @param presentationId
+  * @param score
+  */
+ void updatePresentationScore(BigInteger presentationId,Double score);
+
  }

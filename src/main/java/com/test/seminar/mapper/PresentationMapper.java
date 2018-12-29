@@ -32,4 +32,6 @@ public interface PresentationMapper {
     Presentation getPresentationBySeminarControlIdAndTeamId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
     void deletePresentationBySeminarControlIdAndTeamId(@Param("seminarControlId") BigInteger seminarControlId,@Param("teamId") BigInteger teamId);
+
+    Presentation getPresentationByPresentationId(@Param("presentationId")BigInteger presentationId);
 }
