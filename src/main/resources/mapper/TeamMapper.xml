@@ -3,6 +3,7 @@
 <mapper namespace="com.test.seminar.mapper.TeamMapper">
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
+        <result property="status" column="status"/>
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <association property="course" javaType="com.test.seminar.entity.Course" column="course_id" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseId"/>

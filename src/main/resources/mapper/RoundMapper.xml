@@ -40,6 +40,15 @@
         where round_id=#{roundId}
     </select>
 
+    <update id="updateCourseClassRound">
+        update klass_round
+        <set>
+            klass_id=#{courseClassId},
+            round_id=#{roundId},
+            enroll_number=#{enrollNumber}
+        </set>
+    </update>
+
     <select id="getRoundSerialBySeminarInfoId" resultType="Integer">
     select round_serial
     from round,seminar

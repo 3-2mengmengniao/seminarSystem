@@ -7,6 +7,7 @@ import com.test.seminar.exception.RoundNotFoundException;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author cxh
@@ -58,5 +59,5 @@ public interface RoundService {
      */
     List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
 
-
+    void updateCourseClassRound(BigInteger roundId, Map<BigInteger,Integer> courseClassMap);
 }

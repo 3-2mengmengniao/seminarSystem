@@ -119,4 +119,6 @@ public interface RoundMapper {
     void updateEnrollNum(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
 
     BigInteger getRoundIdBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
+
+    void updateCourseClassRound(@Param("roundId")BigInteger roundId,@Param("courseClassId")BigInteger courseClassId,@Param("enrollNumber")Integer enrollNumber);
 }
