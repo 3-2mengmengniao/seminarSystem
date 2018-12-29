@@ -73,7 +73,7 @@
 
 <div class="content">
     <div class="container no-bottom text-list">
-        <form>
+        <form id="contactForm">
         <div class="center-navigation">
             <table class="layui-table" lay-skin="nob">
                 <colgroup>
@@ -97,7 +97,7 @@
                 <tr>
                     <td>第${t+1}组：</td>
                     <td style="color:#009688;">未报名</td>
-                    <td><input type="text" name="reportScore" value="${seminarControl.seminarScoreList[t].reportScore!"0"} style="width:50px; "/></td>
+                    <td><input type="text" name="reportScore" value="${(seminarControl.seminarScoreList[t].reportScore)!" "}" style="width:50px; "/></td>
                 </tr>
                 </#if>
             </#list>
@@ -110,7 +110,7 @@
 
         <div class="distance4"></div>
         <div class="distance"></div>
-        <p class="center center-text"><button href="#" type="button" id="submitButton" class="button-return button-turqoise">修改</button></p>
+        <p class="center center-text"><button type="button" id="submitButton" class="button-return button-turqoise">修改</button></p>
         </form>
         <div class="distance"></div>
         <!--
@@ -130,20 +130,26 @@
 
 <script>
     $('#submitButton').click(function(){
+        alert("enter");
         var fd=new FormData($('#contactForm')[0]);
         var reportScores=JSON.stringify(fd.getAll("reportScore"));
         alert(reportScores);
         $.ajax(
                 {
-                    url:"/teacher/course/seminar/reportScore",
-                    type:'post',
-                    data:{"reportScore":reportScores,"seminarId":${seminarControl.id},
-                    success:function(data){alert("您已成功提交！")},
-                    error:function(data){alert("提交失败");}
+                    url: "/teacher/course/seminar/reportScore",
+                    type: 'post',
+                    data: {"reportScore": reportScores, "seminarId":${seminarControl.id}},
+                        success: function (data) {
+                            alert("您已成功提交！")
+                        },
+                        error: function (data) {
+                            alert("提交失败");
+                        }
                 }
         );
         return false;
     });
+
 </script>
 </body>
 </html>

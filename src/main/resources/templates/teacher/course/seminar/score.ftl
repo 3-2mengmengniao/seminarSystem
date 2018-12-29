@@ -45,7 +45,7 @@
     <div class="header">
         <div class="navigation-back">
             <h1 class="navigation-back">${seminarControl.courseClass.course.courseName}讨论课成绩</h1>
-            <a href="/teacher/course/seminar/info?courseId=${seminarControl.courseClass.course.id}&seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
+            <a href="/teacher/course/seminar/info?seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-back"><img id="button-back-image-2" src="/images/icons/展开.png"></a>
         </div>
         <a href="#" class="sub-go-menu"></a>
         <a href="#" class="sub-go-back"></a>
@@ -140,7 +140,7 @@
         </div>
 
         <div class="distance"></div>
-        <p class="center center-text"><a href="#" class="button-return button-turqoise">确认</a></p>
+        <p class="center center-text"><a href="/teacher/course/seminar/info?seminarId=${seminarControl.seminarInfo.id}&classId=${seminarControl.courseClass.id}" class="button-return button-turqoise">确认</a></p>
             <!--
         <div class="decoration"></div>
         <div class="footer">
