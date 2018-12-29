@@ -551,6 +551,20 @@ public class TeacherController {
         return "teacher/course/seminar/score";
     }
 
+    @RequestMapping(value="/course/seminar/reportScore",method = POST)
+    @ResponseBody
+    public ResponseEntity<String> reportScore(HttpServletRequest request,Model model) {
+        String data=request.getParameter("reportScore");
+        JSONArray myArray=JSONArray.fromObject(data);
+        for(int i=0;i<myArray.size();i++){
+            String tmp=(String) myArray.get(i);
+            System.out.println(tmp);
+        }
+        String seminarId=request.getParameter("seminarId");
+        System.out.println(seminarId);
+        return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
     @RequestMapping(value="/course/seminar/presentationScore",method = POST)
     @ResponseBody
     public ResponseEntity<String> presentationScore(BigInteger presentationId, Double score,Model model) {
@@ -561,6 +575,7 @@ public class TeacherController {
     }
 
     @RequestMapping(value="/course/seminar/questionScore",method = POST)
+    @ResponseBody
     public ResponseEntity<String> questionScore(BigInteger questionId, Double score,Model model) {
         System.out.println(questionId);
         System.out.println(score);
