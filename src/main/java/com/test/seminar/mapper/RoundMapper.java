@@ -108,7 +108,7 @@ public interface RoundMapper {
      * @param courseId
      * @return
      */
-    int getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
+    Integer getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
 
     Round getRoundBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 

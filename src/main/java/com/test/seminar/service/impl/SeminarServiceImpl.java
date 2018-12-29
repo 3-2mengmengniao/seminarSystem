@@ -54,7 +54,11 @@ public class SeminarServiceImpl implements SeminarService {
 //            round=roundDao.getRoundByCourseIdAndRoundSerial(courseId,round.getRoundSerial());
 //            roundId=round.getId();
             Round round = new Round();
-            roundSerial=roundDao.getMaxRoundSerialByCourseId(courseId)+1;
+            roundSerial=roundDao.getMaxRoundSerialByCourseId(courseId);
+            if(null==roundSerial){
+                roundSerial=0;
+            }
+            roundSerial++;
             round.setRoundSerial(roundSerial);
             roundDao.insertRound(round,courseId);
         }
@@ -75,14 +79,20 @@ public class SeminarServiceImpl implements SeminarService {
         }
     }
 
-    private void insertSeminarInfoToSubCourse(SeminarInfo seminarInfo,BigInteger courseId,Integer roundSerial){
+    private void insertSeminarInfoToSubCourse(SeminarInfo seminarInfo,BigInteger courseId,Integer roundSerial) {
         Integer maxRoundSerial=roundDao.getMaxRoundSerialByCourseId(courseId);
-        if(maxRoundSerial==null||!maxRoundSerial.equals(roundSerial))
-        {
+        if(null==maxRoundSerial){
             Round round = new Round();
-            if(!maxRoundSerial.equals(roundSerial)) {
-                roundSerial = roundDao.getMaxRoundSerialByCourseId(courseId) + 1;
+            round.setRoundSerial(roundSerial);
+            roundDao.insertRound(round,courseId);
+        }
+        else if(!maxRoundSerial.equals(roundSerial)) {
+            Round round = new Round();
+            roundSerial = roundDao.getMaxRoundSerialByCourseId(courseId);
+            if(null==roundSerial){
+                roundSerial=0;
             }
+            roundSerial+= 1;
             round.setRoundSerial(roundSerial);
             roundDao.insertRound(round,courseId);
         }
@@ -95,7 +105,7 @@ public class SeminarServiceImpl implements SeminarService {
             SeminarControl seminarControl = new SeminarControl();
             seminarDao.insertSeminarControl(seminarControl,courseClass.getId(),seminarInfo.getId());
         }
-    }
+}
 
     @Override
     public void updateSeminarInfoBySeminarInfoId(SeminarInfo seminarInfo,BigInteger roundId) throws SeminarInfoNotFoundException {

@@ -102,7 +102,7 @@ public class RoundDaoImpl implements RoundDao {
     }
 
     @Override
-    public int getMaxRoundSerialByCourseId(BigInteger courseId) {
+    public Integer getMaxRoundSerialByCourseId(BigInteger courseId) {
         return roundMapper.getMaxRoundSerialByCourseId(courseId);
     }
 
