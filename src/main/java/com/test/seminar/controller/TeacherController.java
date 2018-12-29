@@ -409,7 +409,7 @@ public class TeacherController {
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/course/seminar/setting",method = PUT)
+    @RequestMapping(value="/course/seminar/setting",method = POST)
     @ResponseBody
     public ResponseEntity<String> seminarSettingPost(BigInteger seminarId,Model model,SeminarInfo seminarInfo,
                                                      String seminarVisible,Integer roundSerial,BigInteger courseId) {

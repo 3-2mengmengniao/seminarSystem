@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zhenweiwang
@@ -129,5 +130,12 @@ public class RoundDaoImpl implements RoundDao {
     @Override
     public BigInteger getRoundIdBySeminarControlId(BigInteger seminarControlId){
         return roundMapper.getRoundIdBySeminarControlId(seminarControlId);
+    }
+
+    @Override
+    public void updateCourseClassRound(BigInteger roundId, Map<BigInteger, Integer> courseClassMap) {
+        for(BigInteger courseClassId:courseClassMap.keySet()){
+             roundMapper.updateCourseClassRound(roundId,courseClassId,courseClassMap.get(courseClassId));
+        }
     }
 }

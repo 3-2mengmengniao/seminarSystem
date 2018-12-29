@@ -3,6 +3,7 @@
 <mapper namespace="com.test.seminar.mapper.TeamMapper">
     <resultMap id="teamResultMap" type="com.test.seminar.entity.Team">
         <id property="id" column="id" />
+        <result property="status" column="status"/>
         <association property="leader" column="leader_id" javaType="com.test.seminar.entity.Student" select="com.test.seminar.mapper.StudentMapper.getStudentByStudentId"/>
         <association property="serial" javaType="com.test.seminar.entity.Serial" column="id" select="com.test.seminar.mapper.TeamMapper.getSerialByTeamId"/>
         <association property="course" javaType="com.test.seminar.entity.Course" column="course_id" select="com.test.seminar.mapper.CourseMapper.getCourseByCourseId"/>
@@ -30,6 +31,7 @@
 
     <resultMap id="teamValidResultMap" type="com.test.seminar.entity.TeamValidApplication">
         <id property="id" column="id"/>
+        <result property="status" column="team_valid_application.status"/>
         <association property="team" column="id" javaType="com.test.seminar.entity.Team" select="getTeamByTeamValidApplicationId"/>
     </resultMap>
 
@@ -171,13 +173,13 @@
     </update>
 
     <select id="getTeamValidApplicationByTeacherId" resultMap="teamValidResultMap">
-        select id,team_id,teacher_id,reason,status
+        select id,team_id,teacher_id,reason,team_valid_application.status
         from team_valid_application
         where teacher_id=#{teacherId}
     </select>
 
     <select id="getTeamByTeamValidApplicationId" resultMap="teamResultMap">
-        select team.id,team_name,leader_id,status
+        select team.id,team_name,leader_id,team_valid_application.status
         from team,team_valid_application
         where team_valid_application.id=#{teamValidApplicationId} and team.id=team_valid_application.team_id
     </select>
@@ -315,7 +317,7 @@
     </insert>
 
     <select id="getTeamValidApplicationByApplicationId" resultMap="teamValidResultMap">
-        select id,team_id,teacher_id,reason,status
+        select id,team_id,teacher_id,reason,team_valid_application.status
         from team_valid_application
         where id=#{applicationId}
     </select>

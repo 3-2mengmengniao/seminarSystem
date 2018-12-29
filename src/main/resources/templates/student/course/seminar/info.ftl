@@ -132,9 +132,17 @@
                 <tr >
                     <td> 书面报告</td>
                     <#if seminarControl.presentationList[order].reportName??>
-                    <td>已提交<span href="#" style="display: inline;margin-left: 20px;">截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span></td>
+                    <td>已提交<span href="#" style="display: inline;margin-left: 20px;">
+                        <#if seminarControl.reportDDL??>
+                            截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span>
+                        </#if>
+                    </td>
                     <#else>
-                    <td>未提交<span href="#" style="display: inline;margin-left: 20px;">截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span></td>
+                    <td>未提交<span href="#" style="display: inline;margin-left: 20px;">
+                        <#if seminarControl.reportDDL??>
+                            截止时间：${seminarControl.reportDDL?string('yyyy-MM-dd HH:mm:ss')}</span>
+                        </#if>
+                    </td>
                     </#if>
                 </tr>
                 </#if>

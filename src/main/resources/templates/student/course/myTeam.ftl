@@ -74,7 +74,7 @@
         <div style="height:10px;"></div>
         <div class="center-panel">
             <div style="height:30px;"></div>
-            <h2 class="my-title">${myTeam.serial.getSerial()} ${myTeam.teamName}</h2>
+            <h2 class="my-title">${myTeam.serial.getSerial()} ${myTeam.teamName} &nbsp&nbsp&nbsp </h2>
             <div style="height:10px;"></div>
             <table  class="info-table layui-table" style="border:none;border-width:0 0;" lay-size="lg" lay-skin="line"  >
                 <colgroup>
