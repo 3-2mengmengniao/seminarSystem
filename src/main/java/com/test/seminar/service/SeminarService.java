@@ -148,4 +148,10 @@ public interface SeminarService {
   */
  void updatePresentationScore(BigInteger presentationId,Double score);
 
+ /**
+  * 删除报名
+  * @param seminarControlId
+  * @param teamId
+  */
+ void deletePresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId,BigInteger teamId);
  }

@@ -567,7 +567,6 @@ public class TeacherController {
         JSONArray myArray=JSONArray.fromObject(data);
         for(int i=0;i<myArray.size();i++){
             String tmp=(String) myArray.get(i);
-            System.out.println(tmp);
         }
         String seminarId=request.getParameter("seminarId");
         System.out.println(seminarId);

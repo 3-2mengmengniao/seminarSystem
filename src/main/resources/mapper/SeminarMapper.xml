@@ -168,7 +168,7 @@
                 total_score=#{seminarScore.totalScore},
             </if>
             <if test="seminarScore.presentationScore!=null">
-                prensentation_score=#{seminarScore.presentationScore},
+                presentation_score=#{seminarScore.presentationScore},
             </if>
             <if test="seminarScore.questionScore!=null">
                 question_score=#{seminarScore.questionScore},
@@ -177,7 +177,7 @@
                 report_score=#{seminarScore.reportScore},
             </if>
         </set>
-          where klass_seminar_id=#{seminarScoreId} and team_id=#{teamId}
+          where klass_seminar_id=#{seminarControlId} and team_id=#{teamId}
     </update>
 
     <delete id="deleteSeminarScoreBySeminarScoreId">

@@ -130,10 +130,8 @@
 
 <script>
     $('#submitButton').click(function(){
-        alert("enter");
         var fd=new FormData($('#contactForm')[0]);
         var reportScores=JSON.stringify(fd.getAll("reportScore"));
-        alert(reportScores);
         $.ajax(
                 {
                     url: "/teacher/course/seminar/reportScore",

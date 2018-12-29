@@ -238,6 +238,11 @@ public class SeminarServiceImpl implements SeminarService {
     }
 
     @Override
+    public void deletePresentationBySeminarControlIdAndTeamId(BigInteger seminarControlId, BigInteger teamId) {
+        presentationDao.deletePresentationBySeminarControlIdAndTeamId(seminarControlId,teamId);
+    }
+
+    @Override
     public void cancelSeminarShare(Course subCourse){
         //取消讨论课共享，删除讨论课
         List<Round> originalRoundList=roundDao.getRoundByCourseId(subCourse.getId());
@@ -409,7 +414,7 @@ public class SeminarServiceImpl implements SeminarService {
             seminarScore.setQuestionScore(score);
             seminarDao.insertSeminarScore(seminarScore, question.getSeminarControlId(), question.getTeamId());
         } else {
-            seminarScore.setPresentationScore(score);
+            seminarScore.setQuestionScore(score);
             seminarDao.updateSeminarScore(seminarScore, question.getSeminarControlId(), question.getTeamId());
         }
     }

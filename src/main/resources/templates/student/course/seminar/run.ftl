@@ -78,11 +78,13 @@
 
 <div class="content">
     <div class="distance4"></div>
-    <h2 class="center-text" id="notation">1-1组正在展示 <span id="greetings">当前有0人提问</span></h2>
+    <h2 class="center-text" id="notation"></h2>
+    <span id="greetings" class="center-text" style="margin-left: auto;">当前有0人提问</span>
     <span id="teamId" name="${myTeam.id}"></span>
     <span id="seminarId" name="${seminarControl.id}"></span>
     <span id="studentId" name="${studentId}"></span>
     <span id="usertype" name="student"></span>
+    <h1 class="thick text-center">${seminarControl.seminarInfo.seminarName}</h1>
     <div class="distance"></div>
     <div class="center-navigation">
         <table class="layui-table" lay-skin="nob">
