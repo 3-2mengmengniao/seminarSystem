@@ -17,47 +17,53 @@ public interface RoundService {
 
     /**
      * 创建新轮次
-     * @param round
-     * @throws RepetitiveRecordException
+     * @param round round
+     * @param courseId course id
+     * @throws RepetitiveRecordException repetitive record found
      */
     void insertRound(Round round, BigInteger courseId) throws RepetitiveRecordException;
 
     /**
      * 删除轮次
-     * @param roundId
-     * @throws RoundNotFoundException
+     * @param roundId round id
+     * @throws RoundNotFoundException round not found
      */
     void deleteRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 
     /**
      * 更新轮次信息
-     * @param round
-     * @throws RoundNotFoundException
+     * @param round round
+     * @throws RoundNotFoundException round not found
      */
     void updateRound(Round round)throws RoundNotFoundException;
 
     /**
      * 通过轮次ID获得轮次信息
-     * @param roundId
-     * @return
-     * @throws RoundNotFoundException
+     * @param roundId round id
+     * @return round
+     * @throws RoundNotFoundException round not found
      */
     Round getRoundByRoundId(BigInteger roundId)throws RoundNotFoundException;
 
     /**
      * 根据课程ID获得本课程的所有轮次信息
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @return List<round>
      */
     List<Round> getRoundByCourseId(BigInteger courseId);
 
     /**
      * 得到包含筛选过队伍的RoundScore的轮次信息
-     * @param courseId
-     * @param teamId
-     * @return
+     * @param courseId course id
+     * @param teamId team id
+     * @return List<round>
      */
     List<Round> getRoundByCourseId(BigInteger courseId,BigInteger teamId);
 
+    /**
+     * 更新班级轮次
+     * @param roundId round id
+     * @param courseClassMap course class map
+     */
     void updateCourseClassRound(BigInteger roundId, Map<BigInteger,Integer> courseClassMap);
 }

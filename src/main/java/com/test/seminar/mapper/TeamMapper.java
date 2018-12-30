@@ -26,93 +26,96 @@ public interface TeamMapper {
     /**
      * 通过ID获取队伍信息
      *
-     * @param teamId
-     * @return
+     * @param teamId team id
+     * @return Team
      */
     Team getTeamByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 以学生ID和课程ID获取学生本课程的组队信息
      *
-     * @param studentId
-     * @param courseId
-     * @return
+     * @param studentId student id
+     * @param courseId course id
+     * @return Team
      */
     Team getTeamByStudentIdAndCourseId(@Param("studentId") BigInteger studentId, @Param("courseId") BigInteger courseId);
 
     /**
      * 查看某课程的所有队伍
      *
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @return List<Team>
      */
     List<Team> getTeamByCourseId(@Param("courseId")BigInteger courseId);
 
     List<Team> getTeamByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
     /**
      * 查看某讨论课的所有队伍
-     * @param seminarControlId
-     * @return
+     * @param seminarControlId seminar control id
+     * @return List<Team>
      */
     List<Team> getTeamBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
      *
-     * @param teamId
-     * @return
+     * @param teamId team id
+     * @return Serial
      */
     Serial getSerialByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
      * 创建新的队伍信息
      *
-     * @param team
-     * @return
+     * @param team team
+     * @param courseClassId course class id
+     * @param courseId course id
      */
     void insertTeam(@Param("team")Team team, @Param("courseClassId")BigInteger courseClassId,@Param("courseId")BigInteger courseId);
 
     /**
      * 更改队伍信息
      *
-     * @param team
-     * @return
+     * @param team team
      */
     void updateTeam(@Param("team")Team team);
 
     /**
      * 更新某班级下某学生的队伍
-     * @param courseClassId
-     * @param studentId
-     * @param teamId
-     * @return
+     * @param courseClassId course class id
+     * @param studentId student id
+     * @param teamId team id
      */
     void updateCourseClassStudentTeamId(@Param("courseClassId")BigInteger courseClassId,@Param("studentId")BigInteger studentId,@Param("teamId")BigInteger teamId);
 
     /**
-     * @param teamId
-     * @return
+     * 通过id删除team
+     *
+     * @param teamId team id
      */
     void deleteTeamByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
+     * 通过教师id获取组队审核申请
      *
-     * @param teacherId
-     * @return
+     * @param teacherId teacher id
+     * @return List<TeamValidApplication>
      */
     List<TeamValidApplication> getTeamValidApplicationByTeacherId(@Param("teacherId")BigInteger teacherId);
 
     /**
+     * 通过组队审核申请id获取小组
      *
-     * @param teamValidApplicationId
-     * @return
+     * @param teamValidApplicationId team valid application id
+     * @return Team
      */
     Team getTeamByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
 
     /**
+     * 插入组队审核申请
      *
-     * @param teamValidApplication
-     * @param teamId
-     * @param teacherId
+     * @param teamValidApplication team valid applicaiont
+     * @param teamId team id
+     * @param teacherId teacher id
      */
     void insertTeamValidApplication(@Param("teamValidApplication") TeamValidApplication teamValidApplication, @Param("teamId")BigInteger teamId, @Param("teacherId")BigInteger teacherId);
 
@@ -120,15 +123,17 @@ public interface TeamMapper {
 
     void insertTeamAndStudentRelation(@Param("teamId")BigInteger teamId,@Param("studentId")BigInteger studentId);
     /**
+     *更新组队审核申请
      *
-     * @param teamValidApplication
+     * @param teamValidApplication team valid application
      */
     void updateTeamValidApplication(@Param("teamValidApplication")TeamValidApplication teamValidApplication);
 
     TeamValidApplication getTeamValidApplicationByApplicationId(@Param("applicationId")BigInteger applicationId);
     /**
+     * 通过id删除组队审核申请
      *
-     * @param teamValidApplicationId
+     * @param teamValidApplicationId team valid application id
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
 
@@ -148,30 +153,30 @@ public interface TeamMapper {
 
     /**
      * 获取strategy下的课程id列表
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return List<BigInteger>
      */
     List<BigInteger> getCourseIdByConflictCourseStrategyId(@Param("strategyId")BigInteger strategyId);
 
     /**
      * 通过课程ID获取课程的分组策略列表
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @return List<TeamStrategy>
      */
     List<TeamStrategy> getTeamStrategyListByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
      * 通过策略ID获取MemberLimitStrategy
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return MemberLimitStrategy
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
     void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return CourseMemberLimitStrategy
      */
     CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
@@ -180,20 +185,21 @@ public interface TeamMapper {
     List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
 
     /**
+     *
      * 获得组队与策略表的Id最大值
-     * @return
+     * @return BigInteger
      */
     BigInteger getMaxTeamAndStrategyId();
 
     /**
      * 获得组队或表的Id最大值
-     * @return
+     * @return BigInteger
      */
     BigInteger getMaxTeamOrStrategyId();
 
     /**
      * 获得冲突课程策略表的Id最大值
-     * @return
+     * @return BigInteger
      */
     BigInteger getMaxConflictCourseStrategyId();
 

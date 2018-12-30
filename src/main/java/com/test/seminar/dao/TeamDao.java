@@ -24,30 +24,31 @@ import java.util.List;
 public interface TeamDao {
     /**
      * 通过ID获取队伍信息
-     * @param teamId
-     * @return
+     * @param teamId team id
+     * @return Team
+     * @throws TeamNotFoundException team not found
      */
     Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;
 
     /**
      * 以学生ID和课程ID获取学生本课程的组队信息
-     * @param studentId
-     * @param courseId
-     * @return
+     * @param studentId student id
+     * @param courseId course id
+     * @return Team
      */
     Team getTeamByStudentIdAndCourseId(BigInteger studentId,BigInteger courseId);
 
     /**
      * 查看某课程的所有队伍
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @return List<Team>
      */
     List<Team> getTeamByCourseId(BigInteger courseId);
 
     /**
      * 查看某讨论课的所有队伍
-     * @param seminarControlId
-     * @return
+     * @param seminarControlId seminar control id
+     * @return List<Team>
      */
     List<Team> getTeamBySeminarControlId(BigInteger seminarControlId);
 
@@ -55,62 +56,71 @@ public interface TeamDao {
 
     /**
      * 创建新的队伍信息
-     * @param team
-     * @return
+     * @param team team
+     * @param courseId course id
+     * @param courseClassId course class id
+     * @throws RepetitiveRecordException repetitive record found
      */
     void insertTeam(Team team,BigInteger courseClassId,BigInteger courseId)throws RepetitiveRecordException;
 
     void insertCourseClassAndTeamRelation(BigInteger courseClassId,BigInteger teamId);
     /**
      * 更改队伍信息
-     * @param team
-     * @return
+     * @param team team
+     * @throws TeamNotFoundException team not found
      */
     void updateTeam(Team team)throws TeamNotFoundException;
 
     /**
      * 更新某班级下某学生的队伍
-     * @param courseClassId
-     * @param studentId
-     * @param teamId
-     * @return
+     * @param courseClassId course class id
+     * @param studentId student id
+     * @param teamId team id
      */
     void updateCourseClassStudentTeamId(BigInteger courseClassId,BigInteger studentId,BigInteger teamId);
 
 
     /**
+     * 通过小组id删除小组
      *
-     * @param teamId
-     * @return
+     * @param teamId team id
+     * @throws TeamNotFoundException team not found
      */
     void deleteTeamByTeamId(BigInteger teamId) throws TeamNotFoundException;
 
     /**
      * 根据老师ID获取老师对应的所有课程的学生发送的申请
-     * @param teacherId
-     * @return
+     * @param teacherId teacher id
+     * @return List<TeamValidApplication>
      */
     List<TeamValidApplication> getTeamValidApplicationByTeacherId(BigInteger teacherId);
 
     /**
+     * 插入组队验证申请
      *
-     * @param teamValidApplication
-     * @param teamId
-     * @param teacherId
+     * @param teamValidApplication team valid application
+     * @param teamId team id
+     * @param teacherId teacher id
      */
     void insertTeamValidApplication(TeamValidApplication teamValidApplication,BigInteger teamId,BigInteger teacherId);
 
-
+    /**
+     * 通过id获取队伍验证申请
+     * @param applicationId application id
+     * @return TeamValidApplication
+     */
     TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId);
     /**
+     * 更新组队审核申请
      *
-     * @param teamValidApplication
+     * @param teamValidApplication team valid application
      */
     void updateTeamValidApplication(TeamValidApplication teamValidApplication);
 
     /**
+     * 通过id删除组队审核申请
      *
-     * @param teamValidApplicationId
+     * @param teamValidApplicationId team valid application id
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId);
 
@@ -134,76 +144,86 @@ public interface TeamDao {
 
     /**
      * 通过课程ID获取课程的分组策略列表
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @return List<TeamStrategy>
+     *@throws StrategyNotFoundException strategy not found
      */
     List<TeamStrategy> getTeamStrategyListByCourseId(BigInteger courseId)throws StrategyNotFoundException;
 
     /**
      * 通过课程ID删除课程的分组策略列表
-     * @param courseId
-     * @return
+     * @param courseId course id
+     * @throws StrategyNotFoundException strategy not found
      */
     void deleteTeamStrategyListByCourseId(BigInteger courseId)throws StrategyNotFoundException;
 
     /**
      * 通过策略ID获取队伍人数限制
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return MemberLimitStrategy
+     * @throws StrategyNotFoundException strategy not found
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略ID删除队伍人数限制
-     * @param strategyId
+     * @param strategyId strategy id
      */
     void deleteMemberLimitStrategyByStrategyId(BigInteger strategyId);
 
     /**
      * 通过策略ID获取队伍选课人数限制
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return CourseMemberLimitStrategy
+     * @throws StrategyNotFoundException strategy not found
      */
     CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 删除课程队伍选课人数限制
-     * @param strategyId
-     * @throws StrategyNotFoundException
+     * @param strategyId strategy id
+     * @throws StrategyNotFoundException strategy not found
      */
     void deleteCourseMemberLimitStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
     /**
      * 通过策略ID获取冲突课程限制
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return ConflictCourseStrategy
+     * @throws StrategyNotFoundException strategy not found
      */
     ConflictCourseStrategy getConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略ID删除冲突课程限制
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @throws StrategyNotFoundException strategy not found
      */
     void deleteConflictCourseStrategyByStrategyId(BigInteger strategyId)throws StrategyNotFoundException;
 
     /**
      * 通过策略类名，策略id，验证某队伍（teamId）是否符合简单策略
-     * @param team,strategyId,strategyName
-     * @return
+     * @param team team
+     * @param strategyId strategy id
+     * @param strategyName strategy name
+     * @return Boolean
+     * @throws StrategyNotFoundException strategy not found
      */
     Boolean validSimpleStrategyOnTeam(Team team, BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
 
     /**
      * 通过策略类名，策略id，验证某队伍（teamId）是否符合复合策略
-     * @param team,strategyId,strategyName
-     * @return
+     * @param team team
+     * @param strategyId strategy id
+     * @param strategyName strategy name
+     * @return Boolean
+     * @throws StrategyNotFoundException strategy not found
      */
     Boolean validCompositStrategyOnTeam(Team team, BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
 
     /**
      * 通过策略id获取CompositStrategy
-     * @param strategyId
-     * @return
+     * @param strategyId strategy id
+     * @return CompositStrategy
      */
     CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
 

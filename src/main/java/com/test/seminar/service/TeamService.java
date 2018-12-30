@@ -10,6 +10,11 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author cxh
+ * date 2018/11/30
+ */
+
 public interface TeamService {
 
     Team getTeamByTeamId(BigInteger teamId)throws TeamNotFoundException;
@@ -34,9 +39,9 @@ public interface TeamService {
 
     /**
      * 验证队伍是否合法
-     * @param team
-     * @throws TeamNotFoundException
-     * @return
+     * @param team team
+     * @throws TeamNotFoundException team not found exception
+     * @return Boolean
      */
     Boolean isTeamValid(Team team)throws TeamNotFoundException;
 
@@ -48,27 +53,27 @@ public interface TeamService {
 
     /**
      * 获得某课程的所有规则
-     * @param courseId
+     * @param courseId course id
      * @return 元素依次是List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, List<Integer> chooseList
      */
     HashMap getStrategyByCourseId(BigInteger courseId);
 
     /**
      * 教师处理共享分组请求
-     * @param shareTeamApplication
+     * @param shareTeamApplication share team application
      */
     void updateShareTeamApplication(ShareTeamApplication shareTeamApplication);
 
     /**
      * 取消分组共享
-     * @param subCourse
+     * @param subCourse sub course
      */
     void cancelTeamShare(Course subCourse);
 
     /**
      *
-     * @param applicationId
-     * @return
+     * @param applicationId application id
+     * @return TeamValidApplication
      */
     TeamValidApplication getTeamValidApplicationByApplicationId(BigInteger applicationId);
 }

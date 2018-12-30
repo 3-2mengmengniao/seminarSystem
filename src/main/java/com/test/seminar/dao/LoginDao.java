@@ -13,17 +13,18 @@ public interface LoginDao {
 
     /**
      * 学生登录
-     * @param account
-     * @param password
-     * @return
+     * @param account account
+     * @param password password
+     * @return Student
+     * @throws UserNotFoundException user not found
      */
     Student studentLogin(String account, String password)throws UserNotFoundException;
 
     /**
      * 教师登录
-     * @param account
-     * @param password
-     * @return
+     * @param account account
+     * @param password password
+     * @return Teacher
      */
     Teacher teacherLogin(String account, String password);
 
@@ -31,7 +32,6 @@ public interface LoginDao {
      * 根据账号密码查询管理员
      *
      * @param account   账号
-     * @param password  密码
      * @return com.test.seminar.entity.Admin
      */
     Admin adminLogin(String account);

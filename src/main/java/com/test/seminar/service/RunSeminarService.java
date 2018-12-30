@@ -18,11 +18,7 @@ public interface RunSeminarService {
 
     void addQuestion(BigInteger seminarControlId,BigInteger teamId,BigInteger studentId);
 
-    void updateQuestion(Question question);
-
     void nextPresentation(BigInteger seminarControlId);
-
-    void updatePresentation(Presentation presentation);
 
     Integer getQuestionNumberWaitToSelect(BigInteger seminarControlId);
 

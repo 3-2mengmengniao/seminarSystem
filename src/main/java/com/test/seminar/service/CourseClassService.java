@@ -17,45 +17,64 @@ public interface CourseClassService {
 
     /**
      * 获取班级
-     * @param courseClassId
-     * @return
+     * @param courseClassId course class id
+     * @throws CourseClassNotFoundException course class not found
+     * @return CourseClass
      */
     CourseClass getCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException;
 
-
     /**
-     * 添加班级
-     * @param courseClass
+     * 插入班级
+     *
+     * @param courseClass course class
+     * @param courseId course id
+     * @param file file
+     * @throws RepetitiveRecordException repetitive record found
      */
     void insertCourseClass(CourseClass courseClass, BigInteger courseId, MultipartFile file)throws RepetitiveRecordException;
 
 
     /**
      * 更新班级
-     * @param courseClass
+     * @param courseClass course class
+     * @throws CourseClassNotFoundException course class not found
      */
     void updateCourseClassByCourseClass( CourseClass courseClass) throws CourseClassNotFoundException;
 
 
     /**
      * 删除班级
-     * @param courseClassId
+     *
+     * @param courseClassId course class id
+     * @throws CourseClassNotFoundException course class not found
      */
     void deleteCourseClassByCourseClassId(BigInteger courseClassId)throws CourseClassNotFoundException;
 
 
     /**
      * 获取某课程下的所有班级
-     * @param courseId
+     * @param courseId course id
      * @return 班级列表
      */
     List<CourseClass> getCourseClassByCourseId(BigInteger courseId);
+
+    /**
+     * 通过学生和课程id获取学生该课程所在班级
+     *
+     * @param studentId student id
+     * @param courseId course id
+     * @return CourseClass
+     * @throws CourseClassNotFoundException course class not found
+     */
 
     CourseClass getCourseClassByStudentIdAndCourseId(BigInteger studentId, BigInteger courseId)throws CourseClassNotFoundException;
 
     /**
      * 输入Excel文件导入学生，不会读取非excel文件
-     * @param file
+     *
+     * @param file file
+     * @param courseClassId course class id
+     * @param courseId course id
      */
     void uploadStudentExcel(MultipartFile file, BigInteger courseClassId, BigInteger courseId);
 }
