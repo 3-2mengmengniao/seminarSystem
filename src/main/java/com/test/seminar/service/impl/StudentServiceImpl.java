@@ -24,11 +24,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void insertStudent(Student student) throws RepetitiveRecordException {
-        studentDao.insertStudent(student);
-    }
-
-    @Override
     public void updateStudentByStudent(Student student) throws UserNotFoundException {
         studentDao.updateStudentByStudent(student);
     }
@@ -36,11 +31,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudentByStudentId(BigInteger studentId) throws UserNotFoundException {
         studentDao.deleteStudentByStudentId(studentId);
-    }
-
-    @Override
-    public List<Student> getStudentByTeamId(BigInteger teamId) {
-        return studentDao.getStudentByTeamId(teamId);
     }
 
     @Override

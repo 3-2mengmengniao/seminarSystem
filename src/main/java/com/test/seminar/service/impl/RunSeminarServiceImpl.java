@@ -121,11 +121,6 @@ public class RunSeminarServiceImpl implements RunSeminarService {
     }
 
     @Override
-    public void updateQuestion(Question question) {
-        questionDao.updateQuestion(question);
-    }
-
-    @Override
     public void nextPresentation(BigInteger seminarControlId) {
         SeminarControl seminarControl=seminarDao.getSeminarControlBySeminarControlId(seminarControlId);
         boolean flag=false;
@@ -146,11 +141,6 @@ public class RunSeminarServiceImpl implements RunSeminarService {
         }
         seminarRoomMap.get(seminarControl.getId()).setCountZero();
         seminarRoomMap.get(seminarControl.getId()).getTeamIdList().clear();
-    }
-
-    @Override
-    public void updatePresentation(Presentation presentation) {
-        presentationDao.updatePresentation(presentation);
     }
 
     @Override
@@ -217,6 +207,9 @@ public class RunSeminarServiceImpl implements RunSeminarService {
     private Presentation getActivePresentation(SeminarControl seminarControl){
         Presentation activePresentation=new Presentation();
         for(Presentation presentation:seminarControl.getPresentationList()){
+            if(null==presentation){
+                continue;
+            }
             if(presentation.getPresent()==1){
                 activePresentation=presentation;
                 break;

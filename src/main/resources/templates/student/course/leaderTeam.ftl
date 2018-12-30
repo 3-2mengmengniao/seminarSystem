@@ -168,7 +168,9 @@
         <div style="height:15px;"></div>
         <p class="center center-text">
             <button class="my-width layui-btn margin-right" style="background-color:#d44950;" id="deleteButton" >解散小组</button>
+            <#if myTeam.status==0>
             <button class="my-width  layui-btn margin-right" id="groupVerify" >提交审核</button>
+            </#if>
             <button class="my-width  layui-btn"  id="addButton" >添加组员</button>
         </p>
     </div>

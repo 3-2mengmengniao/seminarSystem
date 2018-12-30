@@ -28,14 +28,14 @@ public interface SeminarMapper {
     SeminarInfo getSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
-     *
+     *根据ID获得讨论课信息
      * @param seminarControlId
      * @return
      */
     SeminarInfo getSeminarInfoBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
-     *
+     *根据ID获得讨论课
      * @param seminarControlId
      * @return
      */
@@ -64,7 +64,7 @@ public interface SeminarMapper {
      */
     SeminarInfo getSeminarInfoBySeminarNameAndCourseId(@Param("seminarName")String seminarName,@Param("courseId")BigInteger courseId);
     /**
-     *
+     *创建讨论课
      * @param seminarControl
      */
     void insertSeminarControl(@Param("seminarControl")SeminarControl seminarControl,@Param("classId")BigInteger classId, @Param("seminarInfoId")BigInteger seminarInfoId);
@@ -84,33 +84,33 @@ public interface SeminarMapper {
     void updateSeminarInfo(@Param("seminarInfo")SeminarInfo seminarInfo,@Param("roundId")BigInteger roundId);
 
     /**
-     *
+     *更新讨论课
      * @param seminarControl
      */
     void updateSeminarControl(@Param("seminarControl")SeminarControl seminarControl);
 
     /**
-     *
+     *删除讨论课信息
      * @param seminarInfoId
      * @return
      */
     void deleteSeminarInfoBySeminarInfoId(@Param("seminarInfoId")BigInteger seminarInfoId);
 
     /**
-     *
+     *删除讨论课
      * @param seminarControlId
      */
     void deleteSeminarControlBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
-     *
+     *获得某讨论课下的所有成绩
      * @param seminarControlId
      * @return
      */
     List<SeminarScore> getSeminarScoreBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
     /**
-     *
+     *获得某讨论课下某组的成绩
      * @param seminarControlId
      * @param teamId
      * @return
@@ -118,31 +118,50 @@ public interface SeminarMapper {
     SeminarScore getSeminarScoreBySeminarControlIdAndTeamId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
     /**
-     *
+     *获得某队伍的所有讨论课成绩
      * @param teamId
      * @return
      */
     List<SeminarScore> getSeminarScoreByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
-     *
+     *创建讨论课分数
      * @param seminarScore
      */
     void insertSeminarScore(@Param("seminarScore")SeminarScore seminarScore,@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
     /**
-     *
+     *更新讨论课分数
      * @param seminarScore
      * @param seminarControlId
      * @param teamId
      */
     void updateSeminarScore(@Param("seminarScore")SeminarScore seminarScore,@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
+    /**
+     * 删除讨论课分数
+     * @param seminarControlId
+     * @param teamId
+     */
     void deleteSeminarScoreBySeminarScoreId(@Param("seminarControlId")BigInteger seminarControlId,@Param("teamId")BigInteger teamId);
 
+    /**
+     * 获得某轮某组的所有讨论课成绩
+     * @param roundId
+     * @param teamId
+     * @return
+     */
     List<SeminarScore> getSeminarScoreByRoundIdAndTeamId(@Param("roundId")BigInteger roundId,@Param("teamId")BigInteger teamId);
 
+    /**
+     * 删除某轮下的所有讨论课
+     * @param roundId
+     */
     void deleteSeminarControlByRoundId(@Param("roundId")BigInteger roundId);
 
+    /**
+     * 删除某轮下的所有讨论课信息
+     * @param roundId
+     */
     void deleteSeminarInfoByRoundId(@Param("roundId")BigInteger roundId);
 }

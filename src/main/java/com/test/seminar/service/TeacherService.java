@@ -17,7 +17,7 @@ import java.util.List;
 public interface TeacherService {
 
     /**
-     *
+     *根据Id获得老师
      * @param teacherId
      * @return
      * @throws UserNotFoundException
@@ -25,29 +25,44 @@ public interface TeacherService {
     Teacher getTeacherByTeacherId(BigInteger teacherId)throws UserNotFoundException;
 
     /**
-     *
+     *创建老师
      * @param teacher
      * @throws RepetitiveRecordException
      */
     void insertTeacher(Teacher teacher)throws RepetitiveRecordException;
 
     /**
-     *
+     *更新老师信息
      * @param teacher
      * @throws UserNotFoundException
      */
     void updateTeacherByTeacherId( Teacher teacher)throws UserNotFoundException;
 
     /**
-     *
+     *删除老师
      * @param teacherId
      * @throws UserNotFoundException
      */
     void deleteTeacherByTeacherId(BigInteger teacherId)throws UserNotFoundException;
 
+    /**
+     * 根据账号获得老师
+     * @param account
+     * @return
+     */
     Teacher getTeacherByAccount(String account);
 
+    /**
+     * 获得所有老师
+     * @return
+     */
     List<Teacher> getAllTeacher();
 
+    /**
+     * 分页获得老师
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     PageInfo<Teacher> selectTeacherList(Integer pageNum, Integer pageSize);
 }

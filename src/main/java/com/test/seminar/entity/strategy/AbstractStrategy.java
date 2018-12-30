@@ -7,6 +7,6 @@ import com.test.seminar.entity.Team;
  * @author wzw
  * date 2018/12/25
  */
-public abstract class Strategy {
+public abstract class AbstractStrategy {
    public Boolean isValid(Team team){return null;};
 }

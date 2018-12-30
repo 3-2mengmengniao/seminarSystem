@@ -124,22 +124,69 @@ public interface TeamDao {
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(BigInteger teamValidApplicationId);
 
+    /**
+     * 删除课程和队伍的联系
+     * @param teamId
+     */
     void deleteCourseClassAndTeamRelationByTeamId(BigInteger teamId);
 
+    /**
+     * 获得主课程的第teamSerial个队伍
+     * @param courseClassId
+     * @param teamSerial
+     * @return
+     */
     Team getTeamByMainCourseClassIdAndTeamSerial(BigInteger courseClassId,Integer teamSerial);
 
+    /**
+     * 创建队伍和学生的关系
+     * @param teamId
+     * @param studentId
+     */
     void insertTeamAndStudentRelation(BigInteger teamId,BigInteger studentId);
 
+    /**
+     * 删除课程和队伍的联系
+     * @param teamId
+     * @param courseClassId
+     */
     void deleteCourseClassAndTeamRelation(BigInteger teamId,BigInteger courseClassId);
 
+    /**
+     * 删除队伍和学生的关系
+     * @param teamId
+     * @param studentId
+     */
     void deleteTeamAndStudentRelation(BigInteger teamId,BigInteger studentId);
 
+    /**
+     * 删除某个队伍和下属学生的关系
+     * @param teamId
+     */
     void deleteTeamAndStudentRelationByTeamId(BigInteger teamId);
 
+    /**
+     * 获得某课程的队伍序列号的最大值
+     * @param courseClassId
+     * @return
+     */
     Integer getMaxTeamSerialByCourseClassId(BigInteger courseClassId);
 
+    /**
+     * 获得某课程下的组队列表
+     * @param courseId
+     * @return
+     */
     List<Team> getGroupStudentByCourseId(BigInteger courseId);
 
+    /**
+     * 创建分组策略
+     * @param courseId
+     * @param conflictCourseStrategyArrayList
+     * @param courseMemberLimitStrategyList
+     * @param thisCourse
+     * @param choose
+     */
     void insetTeamStrategy(BigInteger courseId,List<ConflictCourseStrategy> conflictCourseStrategyArrayList, List<CourseMemberLimitStrategy> courseMemberLimitStrategyList, MemberLimitStrategy thisCourse, Integer choose);
 
     /**
@@ -227,7 +274,21 @@ public interface TeamDao {
      */
     CompositStrategy getCompositStrategyByStrategyId(BigInteger strategyId, String strategyName)throws StrategyNotFoundException;
 
+    /**
+     * 获得分则的复杂规则（OR AND）
+     * @param courseId
+     * @param strategyId
+     * @param strategyName
+     * @param result
+     */
     void getCompositStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String strategyName,HashMap result);
 
+    /**
+     * 获得原子策略
+     * @param courseId
+     * @param strategyId
+     * @param strategyName
+     * @param result
+     */
     void getSimpleStrategyOnTeam(BigInteger courseId,BigInteger strategyId,String  strategyName,HashMap result);
 }

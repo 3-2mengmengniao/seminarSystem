@@ -17,7 +17,7 @@ import java.util.List;
 public interface StudentService {
 
     /**
-     *
+     *根据Id查找学生
      * @param studentId
      * @return
      * @throws UserNotFoundException
@@ -25,31 +25,38 @@ public interface StudentService {
     Student getStudentByStudentId(BigInteger studentId) throws UserNotFoundException;
 
     /**
-     *
-     * @param student
-     * @throws RepetitiveRecordException
-     */
-    void insertStudent(Student student)throws RepetitiveRecordException;
-
-    /**
-     *
+     *更新学生信息
      * @param student
      * @throws UserNotFoundException
      */
     void updateStudentByStudent(Student student)throws UserNotFoundException;
 
     /**
-     *
+     *删除学生
      * @param studentId
      * @throws UserNotFoundException
      */
     void deleteStudentByStudentId(BigInteger studentId)throws UserNotFoundException;
 
-    List<Student> getStudentByTeamId(BigInteger teamId);
-
+    /**
+     * 根据账号获得学生
+     * @param acoount
+     * @return
+     * @throws UserNotFoundException
+     */
     Student getStudentByAccount(String acoount)throws UserNotFoundException;
 
+    /**
+     * 获得所有学生
+     * @return
+     */
     List<Student> getAllStudent();
 
+    /**
+     * 获得分页
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     PageInfo<Student> selectStudentList(Integer pageNum, Integer pageSize);
 }

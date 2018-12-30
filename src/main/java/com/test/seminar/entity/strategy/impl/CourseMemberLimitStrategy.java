@@ -3,7 +3,7 @@ package com.test.seminar.entity.strategy.impl;
 import com.test.seminar.entity.Course;
 import com.test.seminar.entity.Student;
 import com.test.seminar.entity.Team;
-import com.test.seminar.entity.strategy.Strategy;
+import com.test.seminar.entity.strategy.AbstractStrategy;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author wzw
  * date 2018/12/25
  */
-public class CourseMemberLimitStrategy extends Strategy {
+public class CourseMemberLimitStrategy extends AbstractStrategy {
     private BigInteger id;
     private BigInteger courseId;
     private Integer minMember;

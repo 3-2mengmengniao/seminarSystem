@@ -86,14 +86,14 @@ public interface RoundMapper {
     List<RoundScore> getRoundScoreByRoundId(@Param("roundId")BigInteger roundId);
 
     /**
-     *
+     *获得某队伍所有轮次的成绩
      * @param teamId team id
      * @return List<RoundScore>
      */
     List<RoundScore> getRoundScoreByTeamId(@Param("teamId")BigInteger teamId);
 
     /**
-     *
+     *获得某队伍某轮的成绩
      * @param roundId round id
      * @param teamId team id
      * @return RoundScore
@@ -122,15 +122,46 @@ public interface RoundMapper {
      */
     Integer getMaxRoundSerialByCourseId(@Param("courseId")BigInteger courseId);
 
+    /**
+     * 获得某讨论课所属的轮次
+     * @param seminarControlId
+     * @return
+     */
     Round getRoundBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
+    /**
+     * 删除某轮下的所有成绩
+     * @param roundId
+     */
     void deleteRoundScoreByRoundId(@Param("roundId")BigInteger roundId);
 
+    /**
+     * 获得某班级在某轮下的报名最大次数
+     * @param courseClassId
+     * @param roundId
+     * @return
+     */
     Integer getEnrollNumBycourseClassIdAndRoundId(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
 
+    /**
+     * 更新报名最大次数
+     * @param courseClassId
+     * @param roundId
+     */
     void updateEnrollNum(@Param("courseClassId")BigInteger courseClassId,@Param("roundId")BigInteger roundId);
 
+    /**
+     * 获得讨论课所属的轮次的Id
+     * @param seminarControlId
+     * @return
+     */
     BigInteger getRoundIdBySeminarControlId(@Param("seminarControlId")BigInteger seminarControlId);
 
+    /**
+     * 更新某班在某轮次下的信息
+     * @param roundId
+     * @param courseClassId
+     * @param enrollNumber 最大报名次数
+     */
     void updateCourseClassRound(@Param("roundId")BigInteger roundId,@Param("courseClassId")BigInteger courseClassId,@Param("enrollNumber")Integer enrollNumber);
 }

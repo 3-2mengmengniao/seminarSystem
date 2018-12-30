@@ -119,8 +119,18 @@ public interface TeamMapper {
      */
     void insertTeamValidApplication(@Param("teamValidApplication") TeamValidApplication teamValidApplication, @Param("teamId")BigInteger teamId, @Param("teacherId")BigInteger teacherId);
 
+    /**
+     * 创建队伍和课程的关系
+     * @param courseClassId
+     * @param teamId
+     */
     void insertCourseClassAndTeamRelation(@Param("courseClassId")BigInteger courseClassId,@Param("teamId")BigInteger teamId);
 
+    /**
+     * 创建队伍和学生的关系
+     * @param teamId
+     * @param studentId
+     */
     void insertTeamAndStudentRelation(@Param("teamId")BigInteger teamId,@Param("studentId")BigInteger studentId);
     /**
      *更新组队审核申请
@@ -129,6 +139,11 @@ public interface TeamMapper {
      */
     void updateTeamValidApplication(@Param("teamValidApplication")TeamValidApplication teamValidApplication);
 
+    /**
+     * 根据ID获得共享分组申请
+     * @param applicationId
+     * @return
+     */
     TeamValidApplication getTeamValidApplicationByApplicationId(@Param("applicationId")BigInteger applicationId);
     /**
      * 通过id删除组队审核申请
@@ -137,18 +152,52 @@ public interface TeamMapper {
      */
     void deleteTeamValidApplicationByTeamValidApplicationId(@Param("teamValidApplicationId")BigInteger teamValidApplicationId);
 
+    /**
+     * 删除班级和队伍的关系
+     * @param teamId
+     * @param courseClassId
+     */
     void deleteCourseClassAndTeamRelation(@Param("teamId")BigInteger teamId,@Param("courseClassId")BigInteger courseClassId);
 
+    /**
+     * 删除班级和学生的关系
+     * @param teamId
+     * @param studentId
+     */
     void deleteTeamAndStudentRelation(@Param("teamId")BigInteger teamId,@Param("studentId")BigInteger studentId);
 
+    /**
+     * 某队伍和所有班级的关系
+     * @param teamId
+     */
     void deleteCourseClassAndTeamRelationByTeamId(@Param("teamId")BigInteger teamId);
 
+    /**
+     * 删除某队伍和所有学生的关系
+     * @param teamId
+     */
     void deleteTeamAndStudentRelationByTeamId(@Param("teamId")BigInteger teamId);
 
+    /**
+     * 获得主班级下的第teamserial个队伍
+     * @param courseClassId
+     * @param teamSerial
+     * @return
+     */
     Team getTeamByMainCourseClassIdAndTeamSerial(@Param("courseClassId")BigInteger courseClassId,@Param("teamSerial")Integer teamSerial);
 
+    /**
+     * 获得某班的队伍序列号最大值
+     * @param courseClassId
+     * @return
+     */
     Integer getMaxTeamSerialByCourseClassId(@Param("courseClassId")BigInteger courseClassId);
 
+    /**
+     * 获得某课程下的所有队伍
+     * @param courseId
+     * @return
+     */
     List<Team> getGroupStudentByCourseId(@Param("courseId")BigInteger courseId);
 
     /**
@@ -172,6 +221,10 @@ public interface TeamMapper {
      */
     MemberLimitStrategy getMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 删除人员限制规则
+     * @param strategyId
+     */
     void deleteMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
     /**
      * 通过策略ID获取CourseMemberLimitStrategy
@@ -180,6 +233,11 @@ public interface TeamMapper {
      */
     CourseMemberLimitStrategy getCourseMemberLimitStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 获得策略对
+     * @param teamAndStrategyId
+     * @return
+     */
     List<StrategyPair> getStrategyPairByTeamAndStrategyId(@Param("teamAndStrategyId")BigInteger teamAndStrategyId);
 
     List<StrategyPair> getStrategyPairByTeamOrStrategyId(@Param("teamOrStrategyId")BigInteger teamOrStrategyId);
@@ -203,23 +261,71 @@ public interface TeamMapper {
      */
     BigInteger getMaxConflictCourseStrategyId();
 
+    /**
+     * 创建组队规则
+     * @param courseId
+     * @param strategyName
+     * @param strategyId
+     */
     void insertTeamStrategy(@Param("courseId")BigInteger courseId,@Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 创建组队AND规则
+     * @param id
+     * @param strategyName
+     * @param strategyId
+     */
     void insertTeamAndStrategy(@Param("id")BigInteger id, @Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 创建组队OR规则
+     * @param id
+     * @param strategyName
+     * @param strategyId
+     */
     void insertTeamOrStrategy(@Param("id")BigInteger id, @Param("strategyName")String strategyName,@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 创建冲突课程策略
+     * @param id
+     * @param courseId
+     */
     void insertConflictCourseStrategy(@Param("id")BigInteger id,@Param("courseId")BigInteger courseId);
 
+    /**
+     * 创建选课人数限制
+     * @param courseMemberLimitStrategy
+     */
     void insertCourseMemberLimitStrategy(@Param("courseMemberLimitStrategy")CourseMemberLimitStrategy courseMemberLimitStrategy);
 
+    /**
+     * 创建队伍人员限制
+     * @param memberLimitStrategy
+     */
     void insertMemberLimitStrategy(@Param("memberLimitStrategy")MemberLimitStrategy memberLimitStrategy);
 
+    /**
+     * 获得队伍人员限制策略的ID最大值
+     * @return
+     */
     BigInteger getMaxMemberLimitStrategyId();
 
+    /**
+     * 获得选课人员限制的ID最大值
+     * @return
+     */
     BigInteger getMaxCourseMemberLimitStrategyId();
 
+    /**
+     * 获得冲突课程序列
+     * @param strategyId
+     * @return
+     */
     List<ConflictCourseStrategy> getConflictCourseStrategyByStrategyId(@Param("strategyId")BigInteger strategyId);
 
+    /**
+     * 更新队伍人数限制
+     * @param memberLimitStrategy
+     */
     void updateMemberLimitStrategy(@Param("memberLimitStrategy") MemberLimitStrategy memberLimitStrategy);
 }

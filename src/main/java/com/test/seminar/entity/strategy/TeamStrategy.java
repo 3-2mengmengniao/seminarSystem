@@ -11,7 +11,6 @@ import java.math.BigInteger;
  */
 public class TeamStrategy {
     private Course course;
-    private Integer strategySerial;
     private String strategyName;
     private BigInteger strategyId;
 
@@ -21,14 +20,6 @@ public class TeamStrategy {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public int getStrategySerial() {
-        return strategySerial;
-    }
-
-    public void setStrategySerial(int strategySerial) {
-        this.strategySerial = strategySerial;
     }
 
     public String getStrategyName() {
